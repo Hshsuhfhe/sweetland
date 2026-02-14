@@ -179,3 +179,22 @@ transition:1s;
 opacity:1;
 transform:none;
 }
+/* убираем выделение текста */
+*{
+user-select:none;
+-webkit-user-select:none;
+}
+
+/* кнопки и ссылки — нормальный курсор */
+a,
+button,
+.card,
+.card-box{
+cursor:pointer;
+}
+
+/* убираем выделение при клике */
+a:focus,
+button:focus{
+outline:none;
+}

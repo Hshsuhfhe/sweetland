@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetLand — Территория честной игры</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SweetLand — Твой идеальный мир</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body class="dark">
 
@@ -35,100 +35,88 @@
   </div>
 </nav>
 
-<header class="top-nav">
-  <div class="nav-container">
-    <div class="nav-links-left">
-      <a href="#about">О нас</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://sweet-land.trademc.org">Магазин</a>
-    </div>
-    <button class="play-action" onclick="window.open('https://discord.gg/GqEPBnnSmW')">Начать играть</button>
-  </div>
+<header class="top-oval">
+  <a href="#">Главная</a>
+  <a href="#about">О нас</a>
+  <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+  <a href="https://discord.gg/GqEPBnnSmW" class="play-link">Играть</a>
 </header>
 
-<main>
-    <section class="hero animate">
-        <div class="hero-info">
-            <h1>Мир <span class="accent">SweetLand</span></h1>
-            <p class="hero-text">Чистая ваниль без границ. Мы строим историю, где каждый игрок — главный герой, а честность — единственное правило.</p>
-            <div class="ip-group">
-                <div class="ip-card" onclick="copyIP()">
-                    <span class="label">Айпи сервера</span>
-                    <span class="value">play.sweet-land.fun</span>
-                </div>
-                <div class="ip-card">
-                    <span class="label">Версия</span>
-                    <span class="value">1.21.x</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero animate">
+  <div class="hero-left">
+    <h1 class="title">Sweet<span class="accent">Land</span></h1>
+    <p class="hero-intro">
+      Погрузись в честную ваниль без доната. Мы создали место, где решает только твой скилл и воображение, а не кошелек.
+    </p>
+    <div class="ip-row">
+      <button class="card-ip" onclick="copyIP()">
+        <span class="small-label">Нажми, чтобы скопировать</span>
+        <b>play.sweet-land.fun</b>
+      </button>
+      <button class="card-ver">Версия<br><b>1.21.x</b></button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="images/5opka.png" alt="SweetLand Character">
+  </div>
+</section>
 
-    <section id="features" class="features-section animate">
-        <h2 class="section-title">Наши <span class="accent">приоритеты</span></h2>
-        <div class="features-grid">
-            <div class="f-card">
-                <div class="f-icon">🎭</div>
-                <h3>Живое РП</h3>
-                <p>Развитая политическая система, министерства и парламент. Твой голос реально влияет на законы сервера.</p>
-            </div>
-            <div class="f-card">
-                <div class="f-icon">🛡️</div>
-                <h3>Безопасность</h3>
-                <p>Мощный античит и активная администрация гарантируют защиту от гриферов и нечестных игроков.</p>
-            </div>
-            <div class="f-card">
-                <div class="f-icon">🏆</div>
-                <h3>Ивенты</h3>
-                <p>Уникальные сюжетные события и глобальные квесты, которые не дают заскучать ни на день.</p>
-            </div>
-            <div class="f-card">
-                <div class="f-icon">🤝</div>
-                <h3>Комьюнити</h3>
-                <p>Мы объединяем людей. У нас ты найдешь верных союзников для самых амбициозных строек.</p>
-            </div>
-        </div>
-    </section>
+<section id="about" class="section animate">
+  <h2>О концепции</h2>
+  <div class="glass-box">
+    <p>Мы строим мир, где каждый игрок ценен. Никаких админок за деньги или скрытых преимуществ.</p>
+    <p>Сезоны на SweetLand — это целая эпоха. Обычно они длятся <b>от 8 до 11 месяцев</b>, но если мир активно развивается, мы с радостью продлеваем его на год и более. Старт нового приключения уже совсем скоро!</p>
+  </div>
+</section>
 
-    <section id="about" class="content-block animate">
-        <h2>О концепции</h2>
-        <p>SweetLand — это отказ от донат-систем. Здесь нельзя купить преимущество. Всё, что у тебя есть — результат твоего труда и творчества.</p>
-    </section>
+<section id="features" class="section animate">
+  <h2>Наши <span class="accent">преимущества</span></h2>
+  <div class="features-grid">
+    <div class="f-card">
+      <div class="f-icon">🛡️</div>
+      <h3>Стабильный TPS</h3>
+      <p>Мощное железо гарантирует игру без лагов даже при большом онлайне.</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">🏛️</div>
+      <h3>РП система</h3>
+      <p>У нас работают суды, парламент и министерства. Строй свою карьеру!</p>
+    </div>
+    <div class="f-card">
+      <div class="f-icon">🎉</div>
+      <h3>Ивенты</h3>
+      <p>Глобальные сюжетные повороты и конкурсы каждую неделю.</p>
+    </div>
+  </div>
+</section>
 
-    <section id="faq" class="faq-section animate">
-        <h2>Частые <span class="accent">вопросы</span></h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <div class="faq-q">Когда запуск сезона?</div>
-                <div class="faq-a">Старт сезона запланирован совсем скоро. Мы готовим уникальные механики, чтобы начало было легендарным.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Как долго идет сезон?</div>
-                <div class="faq-a">Мы ориентируемся на комфортную игру. Сезоны длятся от 8 до 11 месяцев, но если мир будет процветать — мы продлим его до года и более.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Платная ли проходка?</div>
-                <div class="faq-a">Мы стремимся к качеству, поэтому вход осуществляется через магазин или по заявкам в дискорде.</div>
-            </div>
-        </div>
-    </section>
+<section id="gameplay" class="section animate">
+  <h2>Геймплей</h2>
+  <div class="section-buttons">
+    <button>Активное комьюнити</button>
+    <button>Надежный античит</button>
+    <button>Высокий TPS</button>
+    <button>Уникальные квесты</button>
+    <button>Свободное РП</button>
+  </div>
+</section>
 
-    <section id="moderation" class="content-block animate">
-        <h2>Модерация и порядок</h2>
-        <div class="btn-group">
-            <button>Строгий отбор</button>
-            <button>24/7 Поддержка</button>
-            <button>Защита построек</button>
-        </div>
-    </section>
-</main>
+<section id="moderation" class="section animate">
+  <h2>Порядок и Модерация</h2>
+  <div class="section-buttons">
+    <button>Тщательный отбор</button>
+    <button>Строгий надзор</button>
+    <button>Поддержка 24/7</button>
+    <button>Справедливые правила</button>
+  </div>
+</section>
 
 <footer>
-    <p>Проект SweetLand не связан с Mojang AB. © 2026</p>
+  SweetLand не связан с Mojang Studios © 2026
 </footer>
 
 <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-<div id="copyNotice">Скопировано в буфер!</div>
+<div id="copyNotice">✔ Адрес скопирован</div>
 
 <script src="script.js"></script>
 </body>

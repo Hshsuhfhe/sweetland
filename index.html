@@ -10,27 +10,24 @@
 
 <body>
 
-<!-- ЛЕВАЯ ПАНЕЛЬ -->
+<!-- Левая панель -->
 <div class="side-trigger"></div>
 
 <nav class="side-panel">
-<div class="burger">≡</div>
+<div class="panel-handle">☰</div>
+
 <a href="#">Главная</a>
 <a href="#about">О нас</a>
 <a href="#features">Возможности</a>
-<a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+<a href="https://sweet-land.trademc.org">Магазин</a>
 </nav>
 
-<!-- ВЕРХ -->
-<header>
+<!-- Верхний овал -->
+<header class="top-oval">
 
-<div class="logo">SWEETLAND</div>
-
-<div class="top-links">
-<a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-<a href="https://discord.gg/GqEPBnnSmW" target="_blank">Играть</a>
+<a href="https://sweet-land.trademc.org">Магазин</a>
 <a href="#about">О нас</a>
-</div>
+<a href="https://discord.gg/GqEPBnnSmW">Играть</a>
 
 </header>
 
@@ -42,8 +39,8 @@
 <h1 class="title animate">SweetLand</h1>
 
 <p class="animate">
-Ванильный Minecraft-проект для честной игры, исследований
-и совместных приключений. Строй, выживай и создавай историю.
+Ванильный Minecraft-мир для честной игры, исследований
+и совместных приключений.
 </p>
 
 <div class="ip-row animate">
@@ -53,7 +50,7 @@
 </div>
 
 <div class="card copy" onclick="copyIP()">
-IP сервера<br><b>play.sweet-land.fun</b>
+IP<br><b>play.sweet-land.fun</b>
 </div>
 
 </div>
@@ -68,27 +65,28 @@ IP сервера<br><b>play.sweet-land.fun</b>
 
 </section>
 
-<!-- КОНТЕНТ -->
-<section id="about" class="content animate">
-<h2>О проекте</h2>
-<p>
-SweetLand — стабильный ванильный мир с дружелюбным сообществом.
-Минимум ограничений — максимум свободы.
-</p>
-</section>
+<!-- Карточки как на скрине -->
+<section id="features" class="cards">
 
-<section id="features" class="content animate">
-<h2>Почему стоит играть</h2>
-<ul>
-<li>Чистый vanilla-геймплей</li>
-<li>Активные игроки</li>
-<li>Стабильный сервер</li>
-<li>Регулярные события</li>
-</ul>
+<div class="card-box animate">
+<h3>Ивенты</h3>
+<p>Регулярные события и активности для игроков.</p>
+</div>
+
+<div class="card-box animate">
+<h3>Сообщество</h3>
+<p>Дружелюбные игроки и атмосфера.</p>
+</div>
+
+<div class="card-box animate">
+<h3>Честная игра</h3>
+<p>Минимум ограничений — максимум свободы.</p>
+</div>
+
 </section>
 
 <footer>
-SweetLand не связан с Mojang Studios. Все права защищены ©
+SweetLand не связан с Mojang Studios ©
 </footer>
 
 <script src="script.js"></script>

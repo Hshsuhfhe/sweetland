@@ -1,125 +1,101 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SweetLand</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetLand — Твой идеальный мир</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="dark">
 
-<!-- снег -->
 <canvas id="snow"></canvas>
 
-<!-- панель триггер (3 линии) -->
-<div class="side-trigger">
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-</div>
-
-<!-- панель -->
-<nav class="side-panel">
-  <div class="panel-handle">☰</div>
-  <h2>SweetLand</h2>
-  <div class="panel-links">
-    <a href="#">Главная</a>
-    <a href="#about">О нас</a>
-    <a href="#gameplay">Геймплей</a>
-    <a href="#moderation">Модерация</a>
-    <a href="#events">Ивенты</a>
-    <a href="#updates">Обновления</a>
-    <a href="#community">Сообщество</a>
-  </div>
-  <!-- соцсети внизу -->
-  <div class="panel-social">
-    <button class="social-btn" onclick="window.open('https://discord.gg/GqEPBnnSmW','_blank')">Discord</button>
-    <button class="social-btn" onclick="window.open('https://t.me/gyraff','_blank')">Telegram</button>
-  </div>
-</nav>
-
-<!-- верхний градиентный овал -->
-<header class="top-oval">
-  <a href="#">Главная</a>
-  <a href="#features">О нас</a>
-  <a href="https://sweet-land.trademc.org">Магазин</a>
-  <a href="https://discord.gg/GqEPBnnSmW">Играть</a>
+<header class="main-header">
+    <div class="logo">🍭 Sweet<span>Land</span></div>
+    <nav class="nav-links">
+        <a href="#features">Преимущества</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+        <a href="https://t.me/gyraff" target="_blank">Telegram</a>
+    </nav>
+    <button class="play-btn-top" onclick="window.open('https://discord.gg/GqEPBnnSmW', '_blank')">Играть сейчас</button>
 </header>
 
-<!-- герой -->
-<section class="hero">
-  <div class="hero-left">
-    <h1 class="title animate neon">SweetLand</h1>
-    <p class="animate hero-intro">
-      Честный ванильный сервер без доната. Простая игра, дружелюбное сообщество.
-    </p>
-    <div class="ip-row animate">
-      <button class="card-ip" onclick="copyIP()">IP<br><b>play.sweet-land.fun</b></button>
-      <button class="card-ip">Версия<br><b>1.21.8</b></button>
-    </div>
-    <div id="copyNotice">✔ IP скопирован</div>
-  </div>
-  <div class="hero-right animate">
-    <img src="images/5opka.png" alt="SweetLand">
-  </div>
-</section>
+<main>
+    <section class="hero-section">
+        <h1 class="animate">Почему <span class="accent">SweetLand?</span></h1>
+        <p class="subtitle animate">Ключевые особенности нашего ванильного мира</p>
 
-<!-- секции -->
-<section id="about" class="section animate">
-  <h2>О нас</h2>
-  <p>Мы создаем честный сервер без доната, где каждый игрок важен.</p>
-  <p>Простая ванильная атмосфера, увлекательные события и исследования.</p>
-  <p>Никаких скрытых механик, только честная игра и творчество.</p>
-</section>
+        <div class="features-grid animate" id="features">
+            <div class="feature-card">
+                <div class="icon-box">🎉</div>
+                <h3>Ивенты</h3>
+                <p>На сервере постоянно проходят разные интересные ивенты для всех игроков.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🏛️</div>
+                <h3>РП и Правительство</h3>
+                <p>На сервере есть политические структуры: от министров до Парламента.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🛡️</div>
+                <h3>Анти-чит и защита</h3>
+                <p>Наслаждайтесь честной игрой благодаря нашей надёжной системе защиты.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">👥</div>
+                <h3>Дружное сообщество</h3>
+                <p>Станьте частью активного и дружелюбного комьюнити игроков.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="gameplay" class="section animate">
-  <h2>Геймплей</h2>
-  <div class="section-buttons">
-    <button>Отличное<br>комьюнити</button>
-    <button>Стабильный<br>античит</button>
-    <button>Хороший<br>TPS</button>
-    <button>Увлекательные<br>квесты</button>
-    <button>РП отыгровка<br>для всех</button>
-  </div>
-</section>
+    <section class="faq-section animate" id="faq">
+        <h2>Ответы на <span class="accent">вопросы</span></h2>
+        
+        <div class="faq-tabs">
+            <button class="tab active">Сезон</button>
+            <button class="tab" onclick="window.open('https://sweet-land.trademc.org', '_blank')">Проходка</button>
+            <button class="tab" onclick="window.open('https://discord.gg/GqEPBnnSmW', '_blank')">Поддержка</button>
+        </div>
 
-<section id="moderation" class="section animate">
-  <h2>Модерация</h2>
-  <div class="section-buttons">
-    <button>Только отбор<br>людей</button>
-    <button>Строгий<br>контроль</button>
-    <button>Поддержка<br>игроков</button>
-    <button>Следим за<br>правилами</button>
-  </div>
-</section>
+        <div class="faq-grid">
+            <div class="faq-card">
+                <div class="faq-icon">📥</div>
+                <h3>Когда был вайп?</h3>
+                <p>Актуальный сезон начался 14 июня 2025 г. Мир еще свежий!</p>
+            </div>
+            <div class="faq-card">
+                <div class="faq-icon">🌐</div>
+                <h3>Когда новый сезон?</h3>
+                <p>Мы предупреждаем о новом сезоне заранее в наших соцсетях.</p>
+            </div>
+            <div class="faq-card">
+                <div class="faq-icon">📅</div>
+                <h3>Сколько длится сезон?</h3>
+                <p>Мы ценим постройки игроков, поэтому сезоны длятся долго — около года.</p>
+            </div>
+        </div>
+    </section>
 
-<section id="events" class="section animate">
-  <h2>Крутые ивенты</h2>
-  <p>Регулярные конкурсы, мини-игры и специальные события с уникальными наградами.</p>
-  <p>Ивенты разработаны для всех игроков: PvP, строительства, квестов и головоломок.</p>
-  <p>Следите за новостями — каждый месяц новые ивенты и активности!</p>
-</section>
-
-<section id="updates" class="section animate">
-  <h2>Обновления</h2>
-  <p>Каждое обновление добавляет новые возможности: новые блоки, механики и задания.</p>
-  <p>Мы тщательно тестируем каждое обновление, чтобы сервер оставался стабильным и честным.</p>
-  <p>Следите за changelog, чтобы не пропустить все новинки!</p>
-</section>
-
-<section id="community" class="section animate">
-  <h2>Сообщество</h2>
-  <p>Активные игроки, веселые ивенты и дружелюбная атмосфера.</p>
-  <p>Вы всегда найдете с кем поиграть или построить что-то вместе.</p>
-  <p>Каждому рады на SweetLand!</p>
-</section>
+    <section class="ip-section animate">
+        <div class="ip-container" onclick="copyIP()">
+            <span>IP: <b>play.sweet-land.fun</b></span>
+            <small>(нажми, чтобы скопировать)</small>
+        </div>
+    </section>
+</main>
 
 <footer>
-  SweetLand не связан с Mojang Studios ©
+    <div class="footer-links">
+        <a href="https://discord.gg/GqEPBnnSmW">Discord</a> | 
+        <a href="https://t.me/gyraff">Telegram</a>
+    </div>
+    <p>SweetLand не связан с Mojang Studios © 2026</p>
 </footer>
 
-<!-- переключатель темы снизу справа -->
-<button class="theme-toggle" onclick="toggleTheme()">ON/OFF</button>
+<div id="copyNotice">✔ IP скопирован!</div>
 
 <script src="script.js"></script>
 </body>

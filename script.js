@@ -62,3 +62,40 @@ function draw(){
     }
 }
 setInterval(draw,30);
+
+// ---------- ПЛАВНАЯ АНИМАЦИЯ ОТКРЫТИЯ/ЗАКРЫТИЯ ----------
+
+function openRules() {
+    const modal = document.getElementById("rules-modal");
+    modal.style.display = "block";
+    setTimeout(() => modal.classList.add("show"), 10);
+    document.body.style.overflow = "hidden";
+    revealOnScroll(); // сразу анимируем элементы видимые вначале
+}
+
+function closeRules() {
+    const modal = document.getElementById("rules-modal");
+    modal.classList.remove("show");
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 500); // ждем пока закончится анимация
+    document.body.style.overflow = "auto";
+}
+
+// ---------- FADE + SLIDE ПРИ ПРОКРУТКЕ ----------
+
+function revealOnScroll() {
+    const elements = document.querySelectorAll(".rules-scroll-area p, .rules-scroll-area h3");
+    const scrollContainer = document.querySelector(".rules-scroll-area");
+    const containerTop = scrollContainer.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(el => {
+        const top = el.getBoundingClientRect().top - containerTop;
+        if(top < scrollContainer.clientHeight - 50) el.classList.add("visible");
+        else el.classList.remove("visible");
+    });
+}
+
+document.querySelector(".rules-scroll-area").addEventListener("scroll", revealOnScroll);
+window.addEventListener("resize", revealOnScroll);

@@ -31,9 +31,8 @@
   </div>
   <!-- соцсети внизу -->
   <div class="panel-social">
-    <h3>Соцсети</h3>
-    <a href="https://discord.gg/GqEPBnnSmW">Discord</a>
-    <a href="https://t.me/gyraff">Telegram</a>
+    <button class="social-btn" onclick="window.open('https://discord.gg/GqEPBnnSmW','_blank')">Discord</button>
+    <button class="social-btn" onclick="window.open('https://t.me/gyraff','_blank')">Telegram</button>
   </div>
 </nav>
 
@@ -53,8 +52,8 @@
       Честный ванильный сервер без доната. Простая игра, дружелюбное сообщество.
     </p>
     <div class="ip-row animate">
-      <div class="card">Версия<br><b>1.21.8</b></div>
-      <div class="card card-ip" onclick="copyIP()">IP<br><b>play.sweet-land.fun</b></div>
+      <button class="card card-ip" onclick="copyIP()">IP<br><b>play.sweet-land.fun</b></button>
+      <button class="card card-ip">Версия<br><b>1.21.8</b></button>
     </div>
     <div id="copyNotice">✔ IP скопирован</div>
   </div>
@@ -96,8 +95,8 @@
   SweetLand не связан с Mojang Studios ©
 </footer>
 
-<!-- переключатель темы слева -->
-<button class="theme-toggle-left" onclick="toggleTheme()">ON/OFF</button>
+<!-- переключатель темы снизу справа -->
+<button class="theme-toggle" onclick="toggleTheme()">ON/OFF</button>
 
 <script src="script.js"></script>
 </body>

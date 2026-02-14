@@ -1,15 +1,14 @@
-// появление элементов
-const observer=new IntersectionObserver(entries=>{
+// анимации
+const obs=new IntersectionObserver(entries=>{
 entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add("show");
-}
+if(e.isIntersecting) e.target.classList.add("show");
 });
 });
 
-document.querySelectorAll(".animate").forEach(el=>observer.observe(el));
+document.querySelectorAll(".animate")
+.forEach(el=>obs.observe(el));
 
-// копирование IP
+// копирование
 function copyIP(){
 navigator.clipboard.writeText("play.sweet-land.fun");
 

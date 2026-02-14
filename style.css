@@ -1,78 +1,64 @@
-/* Базовые настройки */
-:root {
-    --bg: #06060c;
-    --accent: #a366ff;
-    --text: #ffffff;
-    --glass: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 255, 255, 0.08);
+/* Добавь это в начало или замени старое */
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Inter', sans-serif; /* Современный шрифт */
 }
 
-body.light {
-    --bg: #eef2f7;
-    --accent: #7b2cbf;
-    --text: #1a1a1a;
-    --glass: rgba(0, 0, 0, 0.05);
-    --border: rgba(0, 0, 0, 0.1);
+body.dark { background: #06060c; color: #fff; }
+
+/* Твой верхний овал — теперь стеклянный */
+.top-oval {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 10px 30px; border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex; gap: 15px; z-index: 1000;
 }
+.top-oval a { color: #ccc; text-decoration: none; padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
+.top-oval a:hover { color: #fff; background: rgba(163, 102, 255, 0.2); }
+.top-oval .play-btn { background: #a366ff; color: #fff; font-weight: bold; }
 
-* { margin:0; padding:0; box-sizing:border-box; user-select:none; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); transition: 0.5s; overflow-x: hidden; scroll-behavior: smooth; }
+/* Шторка (side-panel) */
+.side-panel {
+  position: fixed; left: -320px; top: 0; width: 300px; height: 100%;
+  background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(15px);
+  padding: 40px 20px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000; border-right: 1px solid rgba(255,255,255,0.1);
+  overflow-y: auto;
+}
+.side-panel.active { left: 0; }
+.side-panel h2 { color: #a366ff; margin-bottom: 30px; }
+.panel-links a { 
+  display: block; padding: 12px 0; color: #aaa; 
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: 0.3s;
+}
+.panel-links a:hover { color: #fff; padding-left: 10px; }
 
-#snow { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; opacity: 0.4; }
-
-/* Шторка */
-.side-trigger { position:fixed; left:25px; top:25px; width:35px; height:25px; display:flex; flex-direction:column; justify-content:space-between; cursor:pointer; z-index:1100; }
-.side-trigger .line { width:100%; height:3px; background: var(--accent); border-radius:10px; transition: 0.3s; }
-
-.side-panel { position:fixed; left:-300px; top:0; width:280px; height:100%; background: rgba(10,10,20,0.9); backdrop-filter: blur(15px); padding:40px; transition:0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index:1200; border-right: 1px solid var(--border); }
-.side-panel.open { left:0; }
-.side-panel h2 { color: var(--accent); margin-bottom: 30px; font-weight: 800; }
-.panel-links a { display:block; margin:20px 0; color: var(--text); text-decoration:none; font-size:18px; transition:0.3s; opacity: 0.7; }
-.panel-links a:hover { opacity: 1; transform: translateX(10px); color: var(--accent); }
-
-/* Верхний овал */
-.top-oval { position:fixed; top:20px; left:50%; transform:translateX(-50%); background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding:8px 30px; border-radius:40px; display:flex; gap:15px; z-index:1000; border: 1px solid var(--border); align-items: center; }
-.top-oval a { color: var(--text); text-decoration:none; padding:8px 15px; border-radius:20px; font-size: 14px; transition:0.3s; }
-.top-oval a:hover { background: rgba(163, 102, 255, 0.2); }
-.play-link { background: var(--accent); color: white !important; font-weight: 600; }
-
-/* Герой и Пятерка */
-.hero { display:flex; justify-content:space-between; align-items:center; min-height:100vh; padding: 0 10%; position: relative; z-index: 2; }
-.hero-left { max-width:600px; }
-.title { font-size: 80px; font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; }
-.accent { color: var(--accent); }
-.hero-intro { font-size: 1.2rem; color: #888; line-height: 1.6; margin-bottom: 40px; }
-
-.hero-right img { width: 45vw; max-width: 800px; filter: drop-shadow(0 0 50px rgba(163, 102, 255, 0.2)); animation: float 6s ease-in-out infinite; }
+/* Твой герой и фото 5opka */
+.hero { display: flex; align-items: center; min-height: 100vh; padding: 0 10%; }
+.hero-right img { 
+  width: 50vw; max-width: 800px; 
+  filter: drop-shadow(0 0 30px rgba(163, 102, 255, 0.3));
+  animation: float 6s ease-in-out infinite;
+}
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-/* Кнопки IP */
-.ip-row { display: flex; gap: 15px; }
-.card-ip, .card-ver { background: var(--glass); border: 1px solid var(--border); color: var(--text); padding: 15px 30px; border-radius: 20px; cursor: pointer; transition: 0.3s; text-align: left; }
-.card-ip b, .card-ver b { font-size: 1.2rem; color: var(--accent); }
-.small-label { display: block; font-size: 10px; text-transform: uppercase; opacity: 0.5; margin-bottom: 5px; }
-.card-ip:hover { background: rgba(163, 102, 255, 0.1); border-color: var(--accent); transform: translateY(-5px); }
+/* Стеклянные карточки (как на фото) */
+.glass-card, .card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px; border-radius: 24px; transition: 0.4s;
+}
+.card:hover { border-color: #a366ff; transform: translateY(-10px); background: rgba(163, 102, 255, 0.05); }
 
-/* Секции */
-.section { padding: 100px 10%; max-width: 1200px; margin: auto; }
-.section h2 { font-size: 40px; margin-bottom: 40px; font-weight: 800; text-align: center; }
-.glass-box { background: var(--glass); padding: 40px; border-radius: 30px; border: 1px solid var(--border); line-height: 1.8; color: #aaa; }
+/* Твои кнопки IP */
+.card-ip {
+  background: linear-gradient(135deg, #a366ff, #6b4cff);
+  border-radius: 20px; border: none; padding: 20px 40px;
+  color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.4s;
+}
+.card-ip:hover { box-shadow: 0 0 30px rgba(163, 102, 255, 0.5); transform: scale(1.05); }
 
-/* Карточки */
-.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.f-card { background: var(--glass); padding: 40px; border-radius: 25px; border: 1px solid var(--border); transition: 0.4s; }
-.f-card:hover { border-color: var(--accent); background: rgba(163, 102, 255, 0.05); transform: translateY(-10px); }
-.f-icon { font-size: 40px; margin-bottom: 20px; }
-
-/* Твои кнопки */
-.section-buttons { display:flex; flex-wrap:wrap; gap:12px; justify-content: center; }
-.section-buttons button { padding:15px 25px; border-radius:15px; border:1px solid var(--border); background: var(--glass); color: var(--text); cursor:pointer; transition:0.3s; }
-.section-buttons button:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
-
-.theme-toggle { position:fixed; bottom:25px; right:25px; width:50px; height:50px; border-radius:50%; border:none; background: var(--accent); color:white; cursor:pointer; z-index:1000; font-size: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-#copyNotice { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background: var(--accent); padding:12px 30px; border-radius:30px; opacity:0; transition:0.4s; z-index:2000; color: white; font-weight: 600; }
-
-.animate { opacity:0; transform:translateY(30px); transition:0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.animate.show { opacity:1; transform:none; }
-
-footer { text-align:center; padding:60px; color:#555; font-size:13px; border-top: 1px solid var(--border); }
+/* Остальные оригинальные стили сохрани из своего файла... */

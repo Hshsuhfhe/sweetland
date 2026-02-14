@@ -1,183 +1,177 @@
-/* ===========================
-   Общие стили
-=========================== */
-body {
-  margin:0;
-  padding:0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #05052a; /* темнее фон */
-  color: #fff;
-  overflow-x: hidden;
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#040421;
+color:white;
+overflow-x:hidden;
 }
 
-/* ===========================
-   Верхняя панель
-=========================== */
-header {
-  display:flex;
-  justify-content:space-between;
-  padding:15px 50px;
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:100;
+/* верх */
+header{
+position:fixed;
+top:10px;
+left:40px;
+right:40px;
+display:flex;
+justify-content:space-between;
+z-index:10;
 }
 
-.header-left {
-  font-weight:bold;
-  font-size:20px; /* меньше шрифт */
-  color:#a066ff;
+.logo{
+font-size:18px;
+color:#a066ff;
 }
 
-.header-right a {
-  margin-left:15px;
-  color: rgba(200,200,200,0.5);
-  text-decoration:none;
-  font-size:14px; /* меньше шрифт */
-  transition: color 0.3s;
+.top-links a{
+margin-left:12px;
+padding:6px 12px;
+font-size:13px;
+border-radius:8px;
+background:rgba(255,255,255,0.08);
+color:#bbb;
+text-decoration:none;
+transition:.3s;
 }
 
-.header-right a:hover {
-  color:#a066ff;
+.top-links a:hover{
+border:1px solid #a066ff;
+color:white;
 }
 
-/* ===========================
-   Hero секция
-=========================== */
-#hero {
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 50px;
+/* левая панель */
+.side-trigger{
+position:fixed;
+left:0;
+top:0;
+width:12px;
+height:100%;
+z-index:20;
 }
 
-.hero-left {
-  max-width:600px;
+.side-panel{
+position:fixed;
+left:-180px;
+top:0;
+width:180px;
+height:100%;
+background:#070733;
+padding:20px;
+transition:.4s;
+z-index:15;
 }
 
-.hero-left h1.rainbow-title {
-  font-size:64px;
-  font-weight:bold;
-  background: linear-gradient(90deg, #1e3fa3, #a066ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom:15px;
-  opacity:0;
-  transform: translateX(-50px);
-  transition: all 1s ease-out;
+.side-trigger:hover + .side-panel,
+.side-panel:hover{
+left:0;
 }
 
-.hero-left p {
-  font-size:18px;
-  line-height:1.4;
-  opacity:0;
-  transform: translateX(-50px);
-  transition: all 1s ease-out;
+.burger{
+margin-bottom:20px;
+font-size:24px;
 }
 
-/* Hero картинка справа */
-.hero-right {
-  flex-shrink:0;
+.side-panel a{
+display:block;
+margin:10px 0;
+color:#aaa;
+text-decoration:none;
+transition:.3s;
 }
 
-.image-box {
-  width:400px;  /* большая картинка */
-  height:400px;
-  background: rgba(255,255,255,0.1);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:12px;
+.side-panel a:hover{
+color:#a066ff;
 }
 
-.image-box img {
-  max-width:100%;
-  max-height:100%;
+/* hero */
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+min-height:100vh;
+padding:80px 60px;
 }
 
-/* ===========================
-   Секции О нас и Магазин
-=========================== */
-section {
-  min-height:60vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:50px;
+.hero-left{
+max-width:520px;
 }
 
-h2 {
-  color:#a066ff;
-  margin-bottom:15px;
-  opacity:0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
+.title{
+font-size:64px;
+background:linear-gradient(90deg,#1e3fa3,#a066ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-section p {
-  color:#fff;
-  max-width:600px;
-  text-align:center;
-  margin-bottom:20px;
-  opacity:0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
+.hero p{
+line-height:1.4;
 }
 
-/* ===========================
-   Соцсети и футер
-=========================== */
-footer {
-  text-align:center;
-  padding:30px 20px;
-  background-color:#05052a;
+.hero-right img{
+width:520px;
 }
 
-footer .socials a {
-  margin:0 10px;
-  color:#a066ff;
-  text-decoration:none;
-  transition: all 0.3s;
+/* IP блок */
+.ip-row{
+display:flex;
+gap:14px;
+margin-top:18px;
 }
 
-footer .socials a:hover {
-  color:#fff;
+.card{
+padding:12px 16px;
+background:rgba(255,255,255,0.08);
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
 }
 
-.footer-text {
-  font-size:12px;
-  margin-top:10px;
-  color:#888;
+.card:hover{
+border:1px solid #a066ff;
 }
 
-/* ===========================
-   Анимации
-=========================== */
-.animate {
-  opacity:0;
-  transition: all 0.8s ease-out;
+#copyNotice{
+position:fixed;
+bottom:30px;
+right:30px;
+background:#0a3;
+padding:10px 16px;
+border-radius:8px;
+opacity:0;
+transform:translateY(20px);
+transition:.4s;
 }
 
-.animate.visible {
-  opacity:1;
-  transform: translate(0,0);
+/* контент */
+.content{
+padding:80px 40px;
+text-align:center;
 }
 
-/* Hero отдельная анимация */
-.hero-left h1.rainbow-title.visible {
-  transform: translateX(0);
+.content ul{
+list-style:none;
+padding:0;
 }
 
-.hero-left p.visible {
-  transform: translateX(0);
+.content li{
+margin:10px 0;
 }
 
-h2.visible {
-  transform: translateY(0);
+/* футер */
+footer{
+text-align:center;
+padding:20px;
+font-size:12px;
+color:#777;
 }
 
-section p.visible {
-  transform: translateY(0);
+/* анимации */
+.animate{
+opacity:0;
+transform:translateY(30px);
+transition:1s;
+}
+
+.animate.show{
+opacity:1;
+transform:none;
 }

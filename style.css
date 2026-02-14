@@ -1,44 +1,63 @@
-/* --- База --- */
-*{margin:0;padding:0;box-sizing:border-box;user-select:none;}
-body{font-family:'Inter',sans-serif;transition:.7s;overflow-x:hidden;}
-body.dark{background:#06060c;color:white;}
-body.light{background:#f0f2f5;color:#111;}
+:root { --accent: #a366ff; --bg: #06060c; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
+body { background: var(--bg); color: white; overflow-x: hidden; }
 
-#snow{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.4;}
+/* Шторка как в начале */
+.side-panel { 
+    position:fixed; left:-350px; top:0; width:320px; height:100%; 
+    background:rgba(10,10,20,0.98); backdrop-filter:blur(30px); 
+    padding:50px 40px; transition:0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+    z-index:2000; border-right: 1px solid rgba(255,255,255,0.05); 
+}
+.side-panel.active { left:0; }
+.panel-links a { display:block; margin:30px 0; color:#888; text-decoration:none; font-size:20px; transition:0.3s; }
+.panel-links a:hover { color: var(--accent); transform: translateX(10px); }
 
-/* --- Овал и Шторка --- */
-.top-oval{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:8px 24px;border-radius:40px;display:flex;gap:10px;z-index:1000;border:1px solid rgba(255,255,255,0.1);align-items:center;}
-.top-oval a{color:#ccc;text-decoration:none;padding:8px 16px;border-radius:20px;font-size:14px;transition:.3s;}
-.play-btn-oval{background:#a366ff;color:white!important;font-weight:700;}
+/* ПРЕИМУЩЕСТВА СТРОГО В РЯД */
+.cards-row { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: stretch;
+    gap: 25px; 
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+.card { 
+    flex: 1; 
+    background: rgba(255,255,255,0.02); 
+    padding: 45px 25px; 
+    border-radius: 28px; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    text-align: center;
+    transition: 0.4s;
+}
+.card:hover { transform: translateY(-15px); border-color: var(--accent); background: rgba(163, 102, 255, 0.05); }
 
-.side-panel{position:fixed;left:-320px;top:0;width:300px;height:100%;background:rgba(10,10,20,0.95);backdrop-filter:blur(20px);padding:40px;transition:.5s;z-index:1200;border-right:1px solid rgba(255,255,255,0.1);}
-.side-panel.active{left:0;}
-.panel-links a{display:block;margin:15px 0;color:#aaa;text-decoration:none;font-size:18px;transition:.3s;}
-.panel-links a:hover{color:#a366ff;transform:translateX(10px);}
+/* ГРОМАДНАЯ МОДАЛКА ПРАВИЛ */
+.modal { display:none; position:fixed; z-index:3000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.96); }
+.modal-content { 
+    background:#08080a; margin:2% auto; padding:50px; border-radius:35px; 
+    width:90%; max-height:90vh; border:1px solid var(--accent); 
+    display: flex; flex-direction: column; box-shadow: 0 0 50px rgba(163, 102, 255, 0.2);
+}
+.rules-scroll-area { overflow-y: auto; padding-right: 20px; }
+.rules-grid { display:grid; grid-template-columns: 1fr 1fr; gap:50px; }
+.rules-column h3 { color: var(--accent); font-size: 26px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+.rules-column p { margin-bottom: 15px; font-size: 15px; color: #aaa; line-height: 1.6; }
+.punish { display: block; color: #ff3333; font-weight: 900; font-size: 12px; margin-top: 5px; text-transform: uppercase; }
 
-/* --- Герой --- */
-.hero{display:flex;justify-content:space-between;align-items:center;min-height:100vh;padding:0 10%;}
-.title{font-size:clamp(40px,8vw,85px);font-weight:900;background:linear-gradient(90deg,#fff,#a366ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-right img{width:40vw;filter:drop-shadow(0 0 30px rgba(163,102,255,0.2));animation:float 6s infinite ease-in-out;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+/* Дизайн Hero */
+.hero { display:flex; align-items:center; justify-content:space-around; min-height:100vh; padding:0 8%; }
+.title { font-size: clamp(60px, 12vw, 120px); font-weight: 900; letter-spacing: -4px; background: linear-gradient(180deg, #fff 30%, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-right img { width:38vw; filter: drop-shadow(0 0 60px rgba(163, 102, 255, 0.3)); animation: float 7s infinite ease-in-out; }
 
-/* --- ПРЕИМУЩЕСТВА В РЯД --- */
-.cards-row{display:flex;gap:20px;justify-content:center;margin-top:40px;overflow-x:auto;padding-bottom:15px;}
-.card{flex:1;min-width:280px;background:rgba(255,255,255,0.03);border-radius:24px;padding:30px;border:1px solid rgba(255,255,255,0.05);transition:.4s;}
-.card:hover{transform:translateY(-10px);border-color:#a366ff;background:rgba(163,102,255,0.06);}
+/* Шапка-овал */
+.top-oval { position:fixed; top:30px; left:50%; transform:translateX(-50%); z-index:1000; }
+.oval-content { background:rgba(255,255,255,0.03); backdrop-filter:blur(20px); padding:12px 40px; border-radius:60px; display:flex; gap:25px; border:1px solid rgba(255,255,255,0.1); align-items: center; }
+.top-oval a { color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; transition: 0.3s; }
+.play-link { background: var(--accent); padding: 8px 25px; border-radius: 30px; }
 
-/* --- ПРАВИЛА --- */
-.rules-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin-top:40px;text-align:left;}
-.rules-block{background:rgba(255,255,255,0.02);padding:30px;border-radius:24px;border:1px solid rgba(255,255,255,0.05);}
-.rules-block h3{margin-bottom:20px;color:#a366ff;}
-.rules-block ul{list-style:none;}
-.rules-block li{margin-bottom:12px;color:#bbb;font-size:14px;line-height:1.5;}
-.punish{color:#ff4d4d;font-size:12px;font-weight:600;display:block;margin-top:2px;}
-.accent{color:#a366ff;}
-
-/* --- Кнопки и UI --- */
-.card-ip, .card-ver{padding:18px 25px;border-radius:18px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#fff;cursor:pointer;transition:.3s;}
-.card-ip b{color:#a366ff;}
-.animate{opacity:0;transform:translateY(30px);transition:.8s ease-out;}
-.animate.show{opacity:1;transform:none;}
-footer{text-align:center;padding:60px;color:#444;}
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-35px) rotate(2deg); } }
+#snow { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }

@@ -1,35 +1,53 @@
-function copyIP(){
-navigator.clipboard.writeText("play.sweet-land.fun");
+/* ===== СНЕГ ===== */
 
-const notice=document.getElementById("copyNotice");
-notice.style.opacity="1";
+const canvas=document.getElementById("snow");
+const ctx=canvas.getContext("2d");
 
-setTimeout(()=>{
-notice.style.opacity="0";
-},2000);
-}
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-function toggleTheme(){
-document.body.classList.toggle("light");
-document.body.classList.toggle("dark");
-}
+let snowflakes=[];
 
-/* повтор анимаций */
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}else{
-entry.target.classList.remove("show");
-}
+for(let i=0;i<120;i++){
+snowflakes.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*3+1,
+d:Math.random()+1
 });
-},{threshold:0.2});
+}
 
-document.querySelectorAll(".animate").forEach(el=>{
-observer.observe(el);
+function drawSnow(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+ctx.beginPath();
+
+snowflakes.forEach(f=>{
+ctx.moveTo(f.x,f.y);
+ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);
 });
 
-/* снег */
+ctx.fill();
+moveSnow();
+}
+
+function moveSnow(){
+snowflakes.forEach(f=>{
+f.y+=f.d;
+if(f.y>canvas.height){
+f.y=0;
+f.x=Math.random()*canvas.width;
+}
+});
+}
+
+setInterval(drawSnow,33);
+
+window.addEventListener("resize",()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});/* ===== СНЕГ ===== */
+
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 

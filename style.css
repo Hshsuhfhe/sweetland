@@ -1,64 +1,130 @@
-/* Добавь это в начало или замени старое */
-* {
-  margin: 0; padding: 0; box-sizing: border-box;
-  font-family: 'Inter', sans-serif; /* Современный шрифт */
+/* --- Общие стили --- */
+*{margin:0;padding:0;box-sizing:border-box;user-select:none;}
+
+body{
+  font-family: 'Inter', sans-serif;
+  transition:.7s ease-in-out;
+  overflow-x:hidden;
 }
 
-body.dark { background: #06060c; color: #fff; }
+body.dark{background:#06060c;color:white;}
+body.light{background:#f0f2f5;color:#111;}
 
-/* Твой верхний овал — теперь стеклянный */
-.top-oval {
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+/* --- Снег --- */
+#snow{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity: 0.5;}
+
+/* --- Верхний овал (прокачанный) --- */
+.top-oval{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 10px 30px; border-radius: 40px;
+  backdrop-filter: blur(12px);
+  padding:8px 24px;
+  border-radius:40px;
+  display:flex;
+  gap:10px;
+  z-index:1000;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex; gap: 15px; z-index: 1000;
+  align-items: center;
 }
-.top-oval a { color: #ccc; text-decoration: none; padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
-.top-oval a:hover { color: #fff; background: rgba(163, 102, 255, 0.2); }
-.top-oval .play-btn { background: #a366ff; color: #fff; font-weight: bold; }
+.top-oval a{
+  color: #ccc;
+  text-decoration:none;
+  padding:10px 18px;
+  border-radius:25px;
+  transition:.3s;
+  font-size: 14px;
+}
+.top-oval a:hover{color: white; background: rgba(163, 102, 255, 0.2);}
+.play-btn-oval { background: #a366ff; color: white !important; font-weight: bold; }
 
-/* Шторка (side-panel) */
-.side-panel {
-  position: fixed; left: -320px; top: 0; width: 300px; height: 100%;
-  background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(15px);
-  padding: 40px 20px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2000; border-right: 1px solid rgba(255,255,255,0.1);
-  overflow-y: auto;
+/* --- Шторка (Side Panel) --- */
+.side-trigger{
+  position:fixed; left:25px; top:25px; width:35px; height:25px;
+  display:flex; flex-direction:column; justify-content:space-around;
+  cursor:pointer; z-index:1100;
+}
+.side-trigger .line{ width:100%; height:3px; background:#a366ff; border-radius:3px; }
+
+.side-panel{
+  position:fixed; left:-320px; top:0; width:300px; height:100%;
+  background: rgba(10, 10, 20, 0.98); backdrop-filter: blur(20px);
+  padding:40px 30px; transition:.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y:auto; z-index:1200; border-right: 1px solid rgba(255,255,255,0.05);
 }
 .side-panel.active { left: 0; }
-.side-panel h2 { color: #a366ff; margin-bottom: 30px; }
-.panel-links a { 
-  display: block; padding: 12px 0; color: #aaa; 
-  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: 0.3s;
+.panel-handle { font-size: 24px; color: #a366ff; cursor: pointer; text-align: right; margin-bottom: 20px; }
+.side-panel h2{ margin-bottom:30px; color: #a366ff; font-weight: 900; }
+.side-panel .panel-links a{
+  display:block; margin:15px 0; color:#aaa;
+  text-decoration:none; transition:.3s; font-size:17px;
 }
-.panel-links a:hover { color: #fff; padding-left: 10px; }
+.side-panel .panel-links a:hover{ color: #fff; padding-left: 10px; }
 
-/* Твой герой и фото 5opka */
-.hero { display: flex; align-items: center; min-height: 100vh; padding: 0 10%; }
-.hero-right img { 
-  width: 50vw; max-width: 800px; 
-  filter: drop-shadow(0 0 30px rgba(163, 102, 255, 0.3));
+.panel-social{ margin-top: 40px; display:flex; flex-direction:column; gap:10px; }
+.social-btn{
+  padding:14px; border:none; border-radius:12px;
+  background: rgba(163, 102, 255, 0.1); color:white;
+  cursor:pointer; transition:0.3s; border: 1px solid rgba(163, 102, 255, 0.2);
+}
+.social-btn:hover{ background: #a366ff; transform: translateY(-3px); }
+
+/* --- Герой --- */
+.hero{
+  display:flex; justify-content:space-between; align-items:center;
+  min-height:100vh; padding: 0 10%;
+}
+.title{
+  font-size: clamp(40px, 8vw, 90px);
+  font-weight: 900;
+  background: linear-gradient(90deg, #fff, #a366ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-intro{ margin-top:20px; font-size:1.1rem; color:#888; max-width: 500px; }
+
+.hero-right img{
+  width: 40vw; 
+  filter: drop-shadow(0 0 40px rgba(163, 102, 255, 0.2));
   animation: float 6s ease-in-out infinite;
 }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-/* Стеклянные карточки (как на фото) */
-.glass-card, .card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 30px; border-radius: 24px; transition: 0.4s;
+/* --- Кнопки IP --- */
+.ip-row { display: flex; gap: 15px; margin-top: 30px; }
+.card-ip, .card-ver {
+  padding:18px 30px; border-radius:18px; border:1px solid rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.05); color:white; cursor:pointer; transition:0.4s;
 }
-.card:hover { border-color: #a366ff; transform: translateY(-10px); background: rgba(163, 102, 255, 0.05); }
+.card-ip b, .card-ver b { color: #a366ff; font-size: 1.1rem; }
+.card-ip:hover { border-color: #a366ff; background: rgba(163, 102, 255, 0.1); transform: translateY(-5px); }
 
-/* Твои кнопки IP */
-.card-ip {
-  background: linear-gradient(135deg, #a366ff, #6b4cff);
-  border-radius: 20px; border: none; padding: 20px 40px;
-  color: #fff; font-size: 1.1rem; cursor: pointer; transition: 0.4s;
+/* --- Секции и карточки --- */
+.section{ padding:80px 10%; max-width:1200px; margin:auto; text-align: center; }
+.section h2 { font-size: 32px; margin-bottom: 30px; }
+.glass-box { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); color: #999; line-height: 1.7; }
+
+.cards-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+.card{
+  background: rgba(255, 255, 255, 0.03); border-radius: 20px; padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.4s;
 }
-.card-ip:hover { box-shadow: 0 0 30px rgba(163, 102, 255, 0.5); transform: scale(1.05); }
+.card:hover{ transform: translateY(-10px); border-color: #a366ff; background: rgba(163, 102, 255, 0.05); }
+.card .icon { font-size: 40px; margin-bottom: 15px; }
 
-/* Остальные оригинальные стили сохрани из своего файла... */
+.section-buttons{ display:flex; flex-wrap:wrap; gap:10px; justify-content: center; }
+.section-buttons button{
+  padding:12px 20px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05); color:#fff; cursor:pointer; transition:0.3s;
+}
+.section-buttons button:hover{ border-color: #a366ff; transform: translateY(-3px); }
+
+/* --- Вспомогательное --- */
+#copyNotice{ position:fixed; bottom:100px; left:50%; transform:translateX(-50%); background:#a366ff; padding:12px 24px; border-radius:30px; opacity:0; transition:.5s; z-index: 2000; }
+.theme-toggle{ position:fixed; bottom:30px; right:30px; width:50px; height:50px; border-radius:50%; border:none; background:#a366ff; color:white; cursor:pointer; z-index:1000; font-size: 20px; }
+.animate{opacity:0; transform:translateY(30px); transition:0.8s ease-out;}
+.animate.show{opacity:1; transform:none;}
+
+footer{text-align:center;padding:50px;color:#444;font-size:12px;}

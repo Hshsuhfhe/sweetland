@@ -1,66 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SweetLand | Vanilla Minecraft Project</title>
-  <link href="style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SweetLand</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <!-- Верхняя панель -->
-  <header>
-    <div class="header-left">SWEETLAND</div>
-    <div class="header-right">
-      <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-      <a href="#about">О нас</a>
-      <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Начать играть</a>
-    </div>
-  </header>
+<!-- Левая выезжающая панель -->
+<div class="side-trigger"></div>
 
-  <!-- Главный экран -->
-  <section id="hero">
-    <div class="hero-left">
-      <h1 class="rainbow-title animate">SweetLand</h1>
-      <p class="animate delay-1">Погрузись в мир уникального Minecraft-проекта! Исследуй, строй и открывай новое вместе с друзьями. Здесь каждый найдет приключение по душе.</p>
-    </div>
-    <div class="hero-right">
-      <div class="image-box">
-        <img src="images/5opka.png" alt="SweetLand Image">
+<nav class="side-panel">
+  <div class="burger">≡</div>
+  <a href="#">Главная</a>
+  <a href="#about">О нас</a>
+  <a href="#features">Возможности</a>
+  <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+</nav>
+
+<!-- Верхняя панель -->
+<header>
+  <div class="logo">SWEETLAND</div>
+
+  <div class="top-links">
+    <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+    <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Начать играть</a>
+    <a href="#about">О нас</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-left">
+
+    <h1 class="title animate">SweetLand</h1>
+
+    <p class="animate">
+      Ванильный Minecraft-проект для тех, кто хочет играть честно,
+      исследовать мир и строить историю вместе с другими игроками.
+    </p>
+
+    <!-- IP блок -->
+    <div class="ip-row animate">
+
+      <div class="card">
+        Версия<br>
+        <b>1.21.8</b>
       </div>
+
+      <div class="card copy" onclick="copyIP()">
+        IP сервера<br>
+        <b>play.sweet-land.fun</b>
+      </div>
+
     </div>
-  </section>
 
-  <!-- О нас -->
-  <section id="about">
-    <h2 class="animate">О SweetLand</h2>
-    <p class="animate delay-1">
-      Мы создаём увлекательный Minecraft-мир, где каждый игрок важен. Vanilla или нет, наш проект дарит свободу, новые идеи и кучу фана. Подключайся и стань частью команды!
-    </p>
-  </section>
+    <div id="copyNotice">✔ Успешно скопировано</div>
 
-  <!-- Магазин -->
-  <section id="shop">
-    <h2 class="animate">Магазин SweetLand</h2>
-    <p class="animate delay-1">
-      Поддержи проект и получи уникальные бонусы! 🌟  
-      Посети наш магазин: <a href="https://sweet-land.trademc.org" target="_blank">sweet-land.trademc.org</a>
-    </p>
-  </section>
+  </div>
 
-  <!-- Соцсети внизу -->
-  <footer>
-    <div class="socials">
-      <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Discord</a>
-      <a href="https://t.me/gyraff" target="_blank">Telegram</a>
-      <a href="https://youtube.com/@gyraffic" target="_blank">YouTube</a>
-    </div>
-    <p class="footer-text">
-      SweetLand не имеет никакого отношения к Mojang Studio. Все права защищены ©
-    </p>
-  </footer>
+  <div class="hero-right animate">
+    <img src="images/5opka.png">
+  </div>
 
-  <script src="script.js"></script>
+</section>
+
+<!-- Доп контент -->
+<section id="about" class="content animate">
+  <h2>О проекте</h2>
+  <p>
+    SweetLand создаётся как стабильный и дружелюбный ванильный мир.
+    Минимум ограничений — максимум свободы и совместных приключений.
+  </p>
+</section>
+
+<section id="features" class="content animate">
+  <h2>Почему стоит играть</h2>
+  <ul>
+    <li>Честный ванильный геймплей</li>
+    <li>Активное сообщество</li>
+    <li>Стабильная работа сервера</li>
+    <li>Развитие и события</li>
+  </ul>
+</section>
+
+<!-- Футер -->
+<footer>
+SweetLand не связан с Mojang Studios. Все права защищены ©
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>

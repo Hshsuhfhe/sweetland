@@ -1,151 +1,122 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetLand — 1.21.8 | Официальный сайт</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SweetLand — ванильный Minecraft сервер</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="dark">
 
 <canvas id="snow"></canvas>
 
-<div class="side-trigger" onclick="togglePanel()">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-</div>
+<header class="main-header">
 
-<nav class="side-panel" id="side-panel">
-    <div class="panel-handle" onclick="togglePanel()">✕</div>
-    <h2 class="panel-logo">SWEETLAND</h2>
-    <div class="panel-links">
-        <a href="#about" onclick="togglePanel()">О сервере</a>
-        <a href="#categories" onclick="togglePanel()">Особенности</a>
-        <a href="javascript:void(0)" onclick="openRules()">Правила</a>
-        <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Discord</a>
-        <a href="https://t.me/gyraff" target="_blank">Telegram</a>
-    </div>
+<div class="logo">SweetLand</div>
+
+<nav class="nav-links">
+<a href="#about">О нас</a>
+<a href="#features">Преимущества</a>
+<a href="https://sweet-land.trademc.org">Магазин</a>
 </nav>
 
-<div id="rules-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeRules()">&times;</span>
-        <h1 class="rules-main-title">ПОЛНЫЙ СВОД ЗАКОНОВ SWEETLAND</h1>
-        <div class="rules-scroll-area">
-            <div class="rules-grid">
-                <div class="rules-column">
-                    <h3>Раздел 1: Глобальные правила</h3>
-                    <p><b>1.0</b> Вход на сервер = согласие с правилами. <span class="punish">Бан 1 день</span></p>
-                    <p><b>1.1</b> Незнание правил не освобождает. <span class="punish">Предупреждение</span></p>
-                    <p><b>1.2</b> Гриферство построек. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.3</b> Кража из сундуков. <span class="punish">Бан 14 дней</span></p>
-                    <p><b>1.4</b> Убийство чужих мобов. <span class="punish">Бан 2 дня</span></p>
-                    <p><b>1.5</b> Расселение без согласия. <span class="punish">Снос + Кик</span></p>
-                    <p><b>1.6</b> Игнор знаков "Вход запрещен". <span class="punish">Смерть без возврата вещей</span></p>
-                    <p><b>1.7</b> Использование чужих ферм. <span class="punish">Бан 3 дня</span></p>
-                    <p><b>1.8 ПОРЧА МИРА (столбы, ямы). <span class="punish">СНОС + БАН 2 ДНЯ</span></b></p>
-                    <p><b>1.9</b> Лагучие механизмы. <span class="punish">Снос + Бан 14 дней</span></p>
-                    <p><b>1.10</b> PVP без согласия. <span class="punish">Бан 7 дней</span></p>
-                    <p><b>1.11</b> Присвоение лута умершего. <span class="punish">Возврат + Бан 1 день</span></p>
-                    <p><b>1.12 ЧИТЫ (Meteor, Wurst и др). <span class="punish">ПЕРМАНЕНТНЫЙ БАН</span></b></p>
-                    <p><b>1.13</b> Сокрытие бага/дюпа. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.14</b> Захват брошенных баз. <span class="punish">Бан 5 дней</span></p>
-                    <p><b>1.15</b> Взлом аккаунта. <span class="punish">Перманентный Бан</span></p>
-                    <p><b>1.16</b> Вред серверу. <span class="punish">Перманент</span></p>
-                    <p><b>1.17</b> Продажа за реал. <span class="punish">ЧС проекта</span></p>
-                    <p><b>1.18</b> Подстрекательство. <span class="punish">Бан 10 дней</span></p>
-                    <p><b>1.19</b> Ответственность за аккаунт на владельце.</p>
-                    <p><b>1.20</b> Мультиаккаунты для обхода бана. <span class="punish">Бан по IP</span></p>
-                </div>
-                <div class="rules-column">
-                    <p><b>1.21</b> Более 4 авто-ферм. <span class="punish">Снос + Бан 5 дней</span></p>
-                    <p><b>1.22</b> Спам, мат, капс. <span class="punish">Мут 24 часа</span></p>
-                    <p><b>1.23</b> Воровство в магазинах. <span class="punish">Бан 10 дней</span></p>
-                    <p><b>1.24</b> Заход в дом без спроса. <span class="punish">Кик</span></p>
-                    <p><b>1.25</b> Угрозы админами. <span class="punish">Бан 14 дней</span></p>
-                    <p><b>1.26</b> Стройка ближе 500 блоков от спавна.</p>
-                    <p><b>1.27</b> Стройка в аду ближе 300 блоков от портала.</p>
-                    <p><b>1.28</b> Смертельные ловушки. <span class="punish">Бан 7 дней</span></p>
-                    <p><b>1.29</b> Отказ снести дом по просьбе админа. <span class="punish">Бан 7 дней</span></p>
-                    <p><b>1.30</b> Автокликеры/автототемы. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.31</b> Раздачи ресурсов. <span class="punish">Бан 14 дней</span></p>
-                    <p><b>1.32 ДЮП ПРЕДМЕТОВ. <span class="punish">ПЕРМАНЕНТНЫЙ БАН</span></b></p>
-                    <p><b>1.33</b> Админ сам выбирает срок наказания.</p>
-                    <p><b>1.34 X-RAY (МОДЫ/ТЕКСТУРЫ). <span class="punish">БАН НА 4 МЕСЯЦА</span></b></p>
-                    <hr>
-                    <h3>Раздел 2: Администрация</h3>
-                    <p><b>2.1</b> Общие правила для всех.</p>
-                    <p><b>2.2</b> Креатив в личных целях. <span class="punish">Снятие</span></p>
-                    <p><b>2.3</b> Преимущество друзьям. <span class="punish">Снятие + ЧС</span></p>
-                    <p><b>2.4</b> Манипуляция банами. <span class="punish">Снятие</span></p>
-                    <p><b>2.5</b> Жалоба на админа разрешена в Discord.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<button class="play-btn-top" onclick="window.open('https://discord.gg/GqEPBnnSmW')">
+Начать играть
+</button>
 
-<header class="top-oval">
-    <a href="#">Главная</a>
-    <a href="#about">Команда</a>
-    <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-    <a href="https://discord.gg/GqEPBnnSmW" class="play-link">Играть</a>
 </header>
 
-<section class="hero">
-    <div class="hero-left">
-        <h1 class="title">SweetLand</h1>
-        <p class="hero-intro">Настоящая ваниль на <b>1.21.8</b>. Мы защищаем ваши данные и строим честное комьюнити.</p>
-        <div class="ip-row">
-            <button class="card-ip" onclick="copyIP()">IP: play.sweet-land.fun</button>
-            <button class="card-ver">Версия: 1.21.8</button>
-        </div>
-        <div id="copyNotice">✔ IP Скопирован!</div>
-    </div>
-    <div class="hero-right">
-        <img src="images/5opka.png" alt="Hero">
-    </div>
+<main>
+
+<section class="hero-section">
+
+<h1 class="animate">
+Добро пожаловать в <span class="accent">SweetLand</span>
+</h1>
+
+<p class="subtitle animate">
+Ванильный Minecraft сервер с честной игрой, стабильным TPS и живым сообществом.
+</p>
+
 </section>
 
-<section class="section" id="categories">
-    <div class="cards-row">
-        <div class="card">
-            <div class="icon">🏛️</div>
-            <h3>Города</h3>
-            <p>Объединяйтесь, стройте мегаполисы и ведите торговлю с соседями.</p>
-        </div>
-        <div class="card">
-            <div class="icon">⚖️</div>
-            <h3>Суд</h3>
-            <p>У нас есть судебная система, где каждый может доказать свою правоту.</p>
-        </div>
-        <div class="card">
-            <div class="icon">💎</div>
-            <h3>Экономика</h3>
-            <p>Валюта — алмазы. Полная свобода рынка без админ-шопов.</p>
-        </div>
-    </div>
+<section id="features" class="features-grid animate">
+
+<div class="feature-card">
+<div class="icon-box">🛡</div>
+<h3>Анти-чит</h3>
+<p>Продвинутая защита обеспечивает честную игру без читеров.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon-box">⚡</div>
+<h3>Стабильный TPS</h3>
+<p>Оптимизированный сервер — плавная игра без лагов.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon-box">🎉</div>
+<h3>Ивенты</h3>
+<p>Регулярные события и активности для игроков.</p>
+</div>
+
+<div class="feature-card">
+<div class="icon-box">👥</div>
+<h3>Сообщество</h3>
+<p>Дружелюбные игроки и активная администрация.</p>
+</div>
+
 </section>
 
-<section id="about" class="section">
-    <div class="about-box">
-        <h2>Команда проекта</h2>
-        <div class="team-grid">
-            <div class="member"><span>gyraffic</span> — Владелец и кодер</div>
-            <div class="member"><span>QLIBRO</span> — Смотрящий</div>
-            <div class="member"><span>BABKA_GAME3434</span> — Стример</div>
-            <div class="member"><span>SkyFall</span> — Модератор</div>
-        </div>
-        <p class="update-info">Все данные обновлены: <b>1.03.2026</b></p>
-        <div class="legal-footer">
-            <p>Все ваши данные надежно защищены. Мы не передаем информацию третьим лицам.</p>
-            <p>SweetLand не аффилирован с Mojang AB. Minecraft принадлежит Mojang AB.</p>
-        </div>
-    </div>
+<section id="about" class="faq-section animate">
+
+<h2>Ответы на <span class="accent">вопросы</span></h2>
+
+<div class="faq-grid">
+
+<div class="faq-card">
+<div class="faq-icon">📅</div>
+<h3>Когда старт?</h3>
+<p>Проект в разработке — следи за новостями в Discord.</p>
+</div>
+
+<div class="faq-card">
+<div class="faq-icon">🎮</div>
+<h3>Какая версия?</h3>
+<p>Сервер работает на версии 1.21.x.</p>
+</div>
+
+<div class="faq-card">
+<div class="faq-icon">💬</div>
+<h3>Где общение?</h3>
+<p>Наш Discord — центр новостей и общения.</p>
+</div>
+
+</div>
+
 </section>
+
+<section class="ip-section animate">
+
+<div class="ip-container" onclick="copyIP()">
+<span>IP: <b>play.sweet-land.fun</b></span>
+<small>нажми чтобы скопировать</small>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+SweetLand не связан с Mojang Studios © 2026
+</footer>
+
+<div id="copyNotice">✔ IP скопирован!</div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

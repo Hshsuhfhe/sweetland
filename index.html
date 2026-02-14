@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SweetLand — Ванильный сервер</title>
+<title>SweetLand — Твой идеальный мир</title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
 </head>
@@ -22,19 +22,13 @@
   <h2>SweetLand</h2>
   <div class="panel-links">
     <a href="#">Главная</a>
-    <a href="#about">О нас</a>
+    <a href="#about">О проекте</a>
     <a href="https://map.sweet-land.fun">Карта мира</a>
-    <a href="#">Правила сервера</a>
-    <a href="#">Вики проекта</a>
-    <a href="#gameplay">Механики</a>
-    <a href="#moderation">Модерация</a>
-    <a href="#updates">Обновления</a>
-    <a href="#community">Статистика</a>
-    <a href="https://discord.gg/GqEPBnnSmW">Тех. поддержка</a>
+    <a href="#rules">Правила</a>
+    <a href="https://discord.gg/GqEPBnnSmW">Поддержка</a>
   </div>
   <div class="panel-social">
-    <button class="social-btn" onclick="window.open('https://discord.gg/GqEPBnnSmW','_blank')">Discord</button>
-    <button class="social-btn" onclick="window.open('https://t.me/gyraff','_blank')">Telegram</button>
+    <button class="social-btn" onclick="window.open('https://t.me/gyraff','_blank')">Наш Telegram</button>
   </div>
 </nav>
 
@@ -49,8 +43,8 @@
   <div class="hero-left">
     <h1 class="title animate neon">SweetLand</h1>
     <p class="animate hero-intro">
-      Честный ванильный сервер без доната. Доступно с <b>любого устройства</b>. 
-      Простая игра, дружелюбное сообщество и полная свобода творчества.
+      Ванильное выживание на версии <b>1.21.8</b>. Поддержка любого устройства. 
+      Мир, где правила создают игроки.
     </p>
     <div class="ip-row animate">
       <button class="card-ip" onclick="copyIP()">IP: <b>play.sweet-land.fun</b></button>
@@ -63,42 +57,53 @@
   </div>
 </section>
 
-<section id="about" class="section animate">
-  <h2>О нашем проекте</h2>
-  <div class="glass-box">
-    <p>Мы создаем честный сервер без доната, где каждый игрок важен. Простая ванильная атмосфера, увлекательные события и исследования.</p>
-    <p><b>О сезонах:</b> Новый сезон уже на подходе! Наши сезоны длятся от <b>8 до 11 месяцев</b>, а при активном развитии мира мы с радостью продлеваем их на год и более.</p>
-  </div>
-</section>
-
 <section class="section animate">
-  <div class="cards-grid">
+  <h2>Наши <span class="accent">преимущества</span></h2>
+  <div class="cards-row">
     <div class="card">
       <div class="icon">🎭</div>
       <h3>RolePlay</h3>
-      <p>Политическая система, министерства и суды.</p>
+      <p>Политика, министерства и суды.</p>
     </div>
     <div class="card">
       <div class="icon">🛡️</div>
       <h3>Защита</h3>
-      <p>Надежный античит и строгая модерация.</p>
+      <p>Надежный античит и модерация.</p>
     </div>
     <div class="card">
       <div class="icon">🚀</div>
       <h3>TPS 20.0</h3>
-      <p>Мощное оборудование для комфортной игры.</p>
+      <p>Мощное железо без лагов.</p>
     </div>
   </div>
 </section>
 
-<section id="gameplay" class="section animate">
-  <h2>Геймплей</h2>
-  <div class="section-buttons">
-    <button>Отличное комьюнити</button>
-    <button>Стабильный античит</button>
-    <button>Хороший TPS</button>
-    <button>Увлекательные квесты</button>
-    <button>РП отыгровка</button>
+<section id="rules" class="section animate">
+  <h2>Кодекс <span class="accent">SweetLand</span></h2>
+  <div class="rules-container">
+    <div class="rules-block">
+      <h3>1. Общие Правила</h3>
+      <p>Заходя на сервер, вы автоматически соглашаетесь с данными правилами. Незнание правил не освобождает от ответственности.</p>
+      <ul>
+        <li><b>1.1 — 1.3:</b> Запрещено гриферство, воровство ресурсов и порча имущества. <span class="punish">(Бан: 7-30 дней)</span></li>
+        <li><b>1.4 — 1.5:</b> Запрещено убийство чужих мобов и расселение на территориях без согласия владельца.</li>
+        <li><b>1.8:</b> Запрещена порча ландшафта (столбы, ямы, неэстетичные коробки). <span class="punish">(Тюрьма или Бан: 1-3 дня)</span></li>
+        <li><b>1.10:</b> Убийство игрока без его согласия запрещено. <span class="punish">(Бан: 3-7 дней)</span></li>
+        <li><b>1.12:</b> Использование читов (X-Ray, Meteor, Impact и др.) и автокликеров. <span class="punish">(Бан: Перманентно)</span></li>
+        <li><b>1.22:</b> Спам, капс, неадекватное поведение в чате. <span class="punish">(Мут: 2-12 часов)</span></li>
+        <li><b>1.38:</b> Запрещено навязчивое попрошайничество ресурсов у игроков или администрации. <span class="punish">(Мут: 1 час / Кик)</span></li>
+      </ul>
+      <p class="small-info">* Полный список правил доступен в нашем Discord.</p>
+    </div>
+    
+    <div class="rules-block">
+      <h3>2. Администрация</h3>
+      <ul>
+        <li><b>2.1:</b> Правила едины для всех.</li>
+        <li><b>2.2:</b> Запрещено использование креатива и выдача преимуществ игрокам.</li>
+        <li><b>2.5:</b> Жалоба на администратора подается в Discord без последствий для игрока.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -106,7 +111,7 @@
   SweetLand не связан с Mojang Studios © 2026
 </footer>
 
-<button class="theme-toggle" onclick="toggleTheme()">Переключить Тему</button>
+<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 
 <script src="script.js"></script>
 </body>

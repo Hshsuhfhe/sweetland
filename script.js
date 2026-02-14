@@ -1,4 +1,3 @@
-// копирование IP
 function copyIP(){
 navigator.clipboard.writeText("play.sweet-land.fun");
 
@@ -10,12 +9,12 @@ notice.style.opacity="0";
 },2000);
 }
 
-// темы
-function setTheme(theme){
-document.body.className=theme;
+function toggleTheme(){
+document.body.classList.toggle("light");
+document.body.classList.toggle("dark");
 }
 
-// повторяющиеся анимации
+// повтор анимаций
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){

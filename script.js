@@ -1,23 +1,28 @@
-// анимации
-const obs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting) e.target.classList.add("show");
-});
-});
-
-document.querySelectorAll(".animate")
-.forEach(el=>obs.observe(el));
-
-// копирование
+// копирование IP
 function copyIP(){
 navigator.clipboard.writeText("play.sweet-land.fun");
 
-const n=document.getElementById("copyNotice");
-n.style.opacity="1";
-n.style.transform="translateY(0)";
+const notice = document.getElementById("copyNotice");
+notice.style.opacity = "1";
 
 setTimeout(()=>{
-n.style.opacity="0";
-n.style.transform="translateY(20px)";
+notice.style.opacity="0";
 },2000);
 }
+
+// scroll анимации повторяемые
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}else{
+entry.target.classList.remove("show");
+}
+});
+},{
+threshold:0.2
+});
+
+document.querySelectorAll(".animate").forEach(el=>{
+observer.observe(el);
+});

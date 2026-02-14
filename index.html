@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetLand — 1.21.8</title>
+    <title>SweetLand | Ванильный сервер 1.21.8</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
 </head>
@@ -21,10 +21,10 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SweetLand</h2>
     <div class="panel-links">
-        <a href="#about" onclick="togglePanel()">О нас</a>
+        <a href="#about" onclick="togglePanel()">О проекте</a>
         <a href="javascript:void(0)" onclick="openRules()">Правила сервера</a>
-        <a href="https://youtube.com" target="_blank">YouTube</a>
-        <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Discord</a>
+        <a href="https://youtube.com" target="_blank">YouTube канал</a>
+        <a href="https://discord.gg/GqEPBnnSmW" target="_blank">Наш Discord</a>
         <a href="https://t.me/gyraff" target="_blank">Telegram</a>
     </div>
 </nav>
@@ -32,59 +32,60 @@
 <div id="rules-modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeRules()">&times;</span>
-        <h1 class="rules-main-title">Полный свод правил SweetLand</h1>
+        <h1 class="rules-main-title">ЗАКОНЫ СЕРВЕРА SWEETLAND</h1>
         <div class="rules-scroll-area">
             <div class="rules-grid">
                 <div class="rules-column">
-                    <h3>1. Общие Правила</h3>
+                    <h3>1. Основной регламент</h3>
                     <p><b>1.0</b> Заходя на сервер вы автоматически соглашаетесь с правилами.</p>
                     <p><b>1.1</b> Незнание Правил не освобождает от ответственности.</p>
-                    <p><b>1.2</b> Запрещена любая порча имущества (гриферство). <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.3</b> Запрещена кража любых ресурсов. <span class="punish">Бан 14-30 дней</span></p>
-                    <p><b>1.4</b> Запрещено убийство любых мобов других игроков.</p>
-                    <p><b>1.5</b> Запрещено селиться в городах без согласия.</p>
-                    <p><b>1.6</b> Запрещено игнорирование запрещающих табличек.</p>
-                    <p><b>1.7</b> Запрещено использовать чужие фермы без согласия.</p>
-                    <p><b>1.8</b> Запрещена порча мира (столбы, ямы). <span class="punish">Бан 7 дней</span></p>
-                    <p><b>1.9</b> Запрещено возводить лагучие механизмы.</p>
-                    <p><b>1.10</b> Запрещено убийство игрока без согласия. <span class="punish">Бан 7 дней</span></p>
-                    <p><b>1.11</b> Запрещено присваивать лут умершего.</p>
-                    <p><b>1.12 ЧИТЫ:</b> Meteor, Wurst, Impact и др. <span class="punish">ПЕРМАНЕНТНЫЙ БАН</span></p>
-                    <p><b>1.13</b> Сокрытие бага/дюпа. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.14</b> Присвоение брошенных баз без админа.</p>
-                    <p><b>1.15</b> Взлом/игра на чужом аккаунте. <span class="punish">Перманент</span></p>
-                    <p><b>1.16</b> Нанесение любого вреда серверу.</p>
-                    <p><b>1.17</b> Коммерция за реальные деньги. <span class="punish">ЧС проекта</span></p>
+                    <p><b>1.2</b> Гриферство чужого имущества. <span class="punish">Бан 30 дней</span></p>
+                    <p><b>1.3</b> Кража любых ресурсов. <span class="punish">Бан 14-30 дней</span></p>
+                    <p><b>1.4</b> Убийство чужих мобов. <span class="punish">Бан 2-5 дней</span></p>
+                    <p><b>1.5</b> Селиться без согласия владельца. <span class="punish">Снос + Кик</span></p>
+                    <p><b>1.6</b> Игнорирование знаков "Вход запрещен". <span class="punish">Смерть без возврата вещей</span></p>
+                    <p><b>1.7</b> Использование чужих ферм без разрешения.</p>
+                    <p><b>1.8</b> Порча мира (столбы, ямы, коробки). <span class="punish">Бан 7 дней + Очистка</span></p>
+                    <p><b>1.9</b> Постройки, вызывающие лаги сервера. <span class="punish">Снос + Бан 14 дней</span></p>
+                    <p><b>1.10</b> Убийство игрока (PVP) без согласия. <span class="punish">Бан 7-10 дней</span></p>
+                    <p><b>1.11</b> Присвоение лута умершего игрока. <span class="punish">Возврат + Бан 3 дня</span></p>
+                    <p><b>1.12 ИСПОЛЬЗОВАНИЕ ЧИТОВ (Meteor, Wurst и т.д.). <span class="punish">ПЕРМАНЕНТНЫЙ БАН</span></b></p>
+                    <p><b>1.13</b> Сокрытие багов или дюпов. <span class="punish">Бан 30 дней</span></p>
+                    <p><b>1.14</b> Захват "брошенных" баз без разрешения админа.</p>
+                    <p><b>1.15</b> Взлом или игра на чужом аккаунте. <span class="punish">Перманентный Бан</span></p>
+                    <p><b>1.16</b> Нанесение вреда серверу/игрокам.</p>
+                    <p><b>1.17</b> Коммерция (продажа за реальные деньги). <span class="punish">Перманент + ЧС</span></p>
                     <p><b>1.18</b> Подстрекательство к нарушениям.</p>
-                    <p><b>1.19</b> Ответственность за аккаунт несет владелец.</p>
+                    <p><b>1.19</b> Владелец аккаунта несет полную ответственность за него.</p>
                 </div>
                 <div class="rules-column">
-                    <p><b>1.20</b> Мультиаккаунты для обхода бана. <span class="punish">Бан по IP</span></p>
-                    <p><b>1.21</b> Более 4 автоматических ферм запрещено.</p>
-                    <p><b>1.22</b> Спам, капс, неадекватность. <span class="punish">Мут 48 часов</span></p>
-                    <p><b>1.23</b> Воровство в магазинах запрещено.</p>
+                    <p><b>1.20</b> Мультиаккаунты для обхода наказания. <span class="punish">Бан по IP</span></p>
+                    <p><b>1.21</b> Более 4 автоматических ферм (кроме еды).</p>
+                    <p><b>1.22</b> Спам, капс, мат, неадекватность. <span class="punish">Мут 48 часов</span></p>
+                    <p><b>1.23</b> Воровство в магазинах.</p>
                     <p><b>1.24</b> Заход на чужую территорию без разрешения.</p>
-                    <p><b>1.25</b> Манипуляция связями с админами. <span class="punish">Бан 14 дней</span></p>
-                    <p><b>1.26</b> Стройка ближе 500 блоков от спавна.</p>
+                    <p><b>1.25</b> Угрозы админами или манипуляция связями. <span class="punish">Бан 14 дней</span></p>
+                    <p><b>1.26</b> Стройка городов ближе 500 блоков от спавна.</p>
                     <p><b>1.27</b> Стройка в аду ближе 300 блоков от спавна.</p>
-                    <p><b>1.28</b> Постройки-ловушки (трапки) запрещены.</p>
-                    <p><b>1.29</b> Обязанность снести дом по просьбе админа.</p>
-                    <p><b>1.30</b> Автокликеры/автототемы. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.31</b> Раздачи ресурсов запрещены.</p>
-                    <p><b>1.32</b> Любой дюп ресурсов. <span class="punish">Перманентный бан</span></p>
-                    <p><b>1.33</b> Админ сам выбирает время наказания.</p>
-                    <p><b>1.34 X-RAY:</b> Текстуры или моды. <span class="punish">БАН НА 4 МЕСЯЦА</span></p>
-                    <p><b>1.35</b> Поиск лазеек в правилах. <span class="punish">Бан 30 дней</span></p>
-                    <p><b>1.36</b> Более 3 заявок в стафф при отказе.</p>
-                    <p><b>1.37</b> Награда за сдачу нарушителя.</p>
-                    <p><b>1.38 ПОПРОШАЙНИЧЕСТВО:</b> <span class="punish">Мут 6 часов</span></p>
+                    <p><b>1.28</b> Создание смертельных ловушек (трапок).</p>
+                    <p><b>1.29</b> Отказ снести дом по просьбе администрации. <span class="punish">Бан 7 дней + Снос</span></p>
+                    <p><b>1.30</b> Автокликеры и автототемы. <span class="punish">Бан 30 дней</span></p>
+                    <p><b>1.31</b> Массовые раздачи ресурсов.</p>
+                    <p><b>1.32</b> Любой вид дюпа предметов. <span class="punish">ПЕРМАНЕНТНЫЙ БАН</span></p>
+                    <p><b>1.33</b> Администрация сама выбирает срок наказания.</p>
+                    <p><b>1.34 ИСПОЛЬЗОВАНИЕ X-RAY (Текстуры/Моды). <span class="punish">БАН НА 4 МЕСЯЦА</span></b></p>
+                    <p><b>1.35</b> Поиск лазеек в данных правилах. <span class="punish">Бан 30 дней</span></p>
+                    <p><b>1.36</b> Более 3 заявок в команду при отказе.</p>
+                    <p><b>1.37</b> Награда за сдачу нарушителя гарантирована.</p>
+                    <p><b>1.38 ПОПРОШАЙНИЧЕСТВО РЕСУРСОВ. <span class="punish">Мут 6 часов</span></b></p>
                     <hr>
                     <h3>2. Администрация</h3>
-                    <p><b>2.1</b> Общие правила для всех.</p>
-                    <p><b>2.2</b> Креатив в личных целях. <span class="punish">Снятие</span></p>
-                    <p><b>2.3</b> Преимущество друзьям. <span class="punish">Снятие</span></p>
-                    <p><b>2.4</b> Манипуляция банами. <span class="punish">Снятие</span></p>
-                    <p><b>2.5</b> Жалоба на админа разрешена.</p>
+                    <p><b>2.0</b> Запрещено превышение полномочий.</p>
+                    <p><b>2.1</b> Общие правила действуют для всех игроков и админов.</p>
+                    <p><b>2.2</b> Креатив в личных целях запрещен. <span class="punish">Снятие</span></p>
+                    <p><b>2.3</b> Давать преимущество друзьям. <span class="punish">Снятие + ЧС</span></p>
+                    <p><b>2.4</b> Манипуляция банами или мутами. <span class="punish">Снятие</span></p>
+                    <p><b>2.5</b> Жалобы на админов принимаются в Discord.</p>
                 </div>
             </div>
         </div>
@@ -102,42 +103,43 @@
 
 <section class="hero">
     <div class="hero-left">
-        <h1 class="title animate">SweetLand</h1>
-        <p class="animate hero-intro">Версия <b>1.21.8</b>. Поддержка любого устройства. Ваниль без границ.</p>
-        <div class="ip-row animate">
+        <h1 class="title">SweetLand</h1>
+        <p class="hero-intro">Версия <b>1.21.8</b>. Доступно с любого устройства. Ваниль без границ и доната.</p>
+        <div class="ip-row">
             <button class="card-ip" onclick="copyIP()">IP: <b>play.sweet-land.fun</b></button>
-            <button class="card-ver">1.21.8 / Любое устр.</button>
+            <button class="card-ver">Java & Bedrock</button>
         </div>
-        <div id="copyNotice">✔ Скопировано!</div>
+        <div id="copyNotice">✔ Адрес скопирован!</div>
     </div>
-    <div class="hero-right animate">
-        <img src="images/5opka.png" alt="Hero">
+    <div class="hero-right">
+        <img src="images/5opka.png" alt="Hero Character">
     </div>
 </section>
 
-<section class="section animate">
+<section class="section benefits">
     <div class="cards-row">
         <div class="card">
             <div class="icon">🛡️</div>
             <h3>Анти-чит</h3>
-            <p>Перманентный бан за софт.</p>
+            <p>Перманентный бан за любой софт.</p>
         </div>
         <div class="card">
             <div class="icon">🎭</div>
             <h3>RolePlay</h3>
-            <p>Честная политика и суды.</p>
+            <p>Живая политика и честные суды.</p>
         </div>
         <div class="card">
             <div class="icon">🚀</div>
             <h3>Стабильность</h3>
-            <p>TPS 20.0 без просадок.</p>
+            <p>TPS 20.0 даже при 100 игроках.</p>
         </div>
     </div>
 </section>
 
-<section id="about" class="section animate">
+<section id="about" class="section">
     <div class="glass-box">
-        <p>Наши сезоны длятся от <b>8 до 11 месяцев</b>. Мы гарантируем стабильность и сохранность ваших проектов.</p>
+        <h2>О нашем сезоне</h2>
+        <p>Наши сезоны длятся от <b>8 до 11 месяцев</b>. Мы создаем пространство для масштабных строек и долгой игры без страха потерять прогресс.</p>
     </div>
 </section>
 

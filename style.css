@@ -1,323 +1,65 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+:root { --accent: #a366ff; --bg: #06060c; --card-bg: rgba(255, 255, 255, 0.03); }
+
+/* ПОЛНЫЙ ЗАПРЕТ ВЫДЕЛЕНИЯ И КОПИРОВАНИЯ */
+.no-select { 
+    user-select: none; 
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-body.dark{
-background:#06060c;
-color:white;
-overflow-x:hidden;
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; scroll-behavior: smooth; }
+body { background: var(--bg); color: white; overflow-x: hidden; }
+
+#snow { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+
+/* Кнопка шторки */
+.side-trigger { position:fixed; top:30px; left:30px; z-index:1500; cursor:pointer; }
+.side-trigger .line { width:32px; height:3px; background:var(--accent); margin:7px 0; border-radius:5px; transition:0.3s; }
+
+.side-panel { position:fixed; left:-350px; top:0; width:300px; height:100%; background:#0a0a0f; z-index:2000; transition:0.5s; padding:80px 30px; border-right:1px solid #222; }
+.side-panel.active { left:0; }
+.panel-links a { display:block; color:#888; text-decoration:none; font-size:22px; margin:30px 0; transition:0.3s; }
+.panel-links a:hover { color:var(--accent); transform:translateX(10px); }
+
+/* Hero */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle, rgba(163,102,255,0.08) 0%, rgba(6,6,12,1) 80%); }
+.title { font-size: 110px; font-weight: 900; background: linear-gradient(#fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-tagline { font-size: 22px; color: #888; margin: 25px 0; }
+
+.ip-container { display: inline-flex; background: var(--card-bg); border: 1px solid #222; border-radius: 20px; padding: 12px; gap: 15px; }
+.btn-ip { background: var(--accent); border: none; padding: 12px 35px; border-radius: 12px; color: white; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 18px; }
+.btn-ip:hover { transform: scale(1.05); filter: brightness(1.2); }
+.btn-version { padding: 12px 15px; font-weight: bold; color: #555; }
+
+/* СЕКЦИИ И КАРТОЧКИ */
+.section { padding: 80px 10%; }
+.cards-grid, .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+.info-card { 
+    background: var(--card-bg); padding: 45px; border-radius: 24px; 
+    border: 1px solid rgba(255,255,255,0.04); transition: 0.4s; position: relative; overflow: hidden;
 }
-
-/* снег */
-
-#snow{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:1;
-opacity:.5;
-}
-
-/* header */
-
-.main-header{
-position:fixed;
-top:0;
-width:100%;
-padding:20px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(6,6,12,.8);
-backdrop-filter:blur(10px);
-z-index:1000;
-border-bottom:1px solid rgba(255,255,255,.05);
-}
-
-.logo{
-font-weight:700;
-font-size:1.3rem;
-color:#a366ff;
-}
-
-.nav-links a{
-color:#999;
-text-decoration:none;
-margin:0 12px;
-font-size:.9rem;
-transition:.3s;
-}
-
-.nav-links a:hover{
-color:white;
-}
-
-.play-btn-top{
-background:transparent;
-border:1px solid rgba(255,255,255,.3);
-color:white;
-padding:8px 18px;
-border-radius:20px;
-cursor:pointer;
-transition:.3s;
-}
-
-.play-btn-top:hover{
-background:#a366ff;
-border-color:#a366ff;
-}
-
-/* hero */
-
-.hero-section{
-padding:160px 10% 80px;
-text-align:center;
-}
-
-h1{
-font-size:3.2rem;
-margin-bottom:10px;
-}
-
-.accent{
-color:#a366ff;
-}
-
-.subtitle{
-color:#777;
-margin-bottom:40px;
-}
-
-/* features */
-
-.features-grid{
-padding:60px 10%;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.feature-card{
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.05);
-padding:35px;
-border-radius:18px;
-transition:.35s;
-}
-
-.feature-card:hover{
-transform:translateY(-6px);
-border-color:rgba(163,102,255,.5);
-background:rgba(163,102,255,.06);
-}
-
-.icon-box{
-font-size:2rem;
-margin-bottom:15px;
-}
-
-/* faq */
-
-.faq-section{
-padding:80px 10%;
-text-align:center;
-}
-
-.faq-grid{
-margin-top:30px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.faq-card{
-background:rgba(255,255,255,.03);
-padding:25px;
-border-radius:15px;
-text-align:left;
-}
-
-.faq-icon{
-font-size:1.5rem;
-margin-bottom:10px;
-color:#a366ff;
-}
-
-/* ip */
-
-.ip-section{
-padding:60px 10%;
-display:flex;
-justify-content:center;
-}
-
-.ip-container{
-background:linear-gradient(90deg,#a366ff,#6b4cff);
-padding:18px 40px;
-border-radius:50px;
-cursor:pointer;
-transition:.3s;
-text-align:center;
-}
-
-.ip-container:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px rgba(163,102,255,.4);
-}
-
-/* footer */
-
-footer{
-padding:40px;
-text-align:center;
-color:#444;
-font-size:.8rem;
-border-top:1px solid rgba(255,255,255,.05);
-}
-
-/* уведомление */
-
-#copyNotice{
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-background:#a366ff;
-padding:10px 30px;
-border-radius:30px;
-opacity:0;
-transition:.5s;
-z-index:2000;
-}
-
-/* scroll animation */
-
-.animate{
-opacity:0;
-transform:translateY(30px);
-transition:1s ease;
-}
-
-.animate.show{
-opacity:1;
-transform:none;
-}
-
-/* =========================
-   МОБИЛЬНАЯ ВЕРСИЯ
-========================= */
-
-@media (max-width: 900px){
-
-/* герой */
-
-.hero{
-flex-direction:column;
-text-align:center;
-padding:120px 20px 40px;
-}
-
-.hero-left{
-max-width:100%;
-}
-
-.title{
-font-size:48px;
-}
-
-.hero-right img{
-width:90%;
-max-width:400px;
-margin-top:20px;
-}
-
-/* карточки */
-
-.cards{
-flex-direction:column;
-align-items:center;
-padding:40px 20px;
-}
-
-.feature{
-width:100%;
-max-width:420px;
-}
-
-/* IP */
-
-.ip-row{
-justify-content:center;
-}
-
-/* секции */
-
-.section{
-padding:60px 20px;
-}
-
-/* верхний овал */
-
-.top-oval{
-gap:6px;
-padding:6px 10px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.top-oval a{
-font-size:13px;
-padding:4px 8px;
-}
-
-/* панель */
-
-.side-panel{
-width:220px;
-}
-
-/* кнопка темы */
-
-.theme-toggle{
-bottom:14px;
-right:14px;
-}
-
-/* текст */
-
-p{
-font-size:15px;
-}
-
-}
-
-/* =========================
-   ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ
-========================= */
-
-@media (max-width: 480px){
-
-.title{
-font-size:36px;
-}
-
-.feature{
-padding:16px;
-}
-
-.card{
-padding:10px 14px;
-font-size:14px;
-}
-
-.top-oval a{
-font-size:12px;
-}
-
-}
+.info-card:hover { border-color: var(--accent); background: rgba(163,102,255,0.04); transform: translateY(-5px); }
+.info-card h3 { margin: 15px 0 12px; font-size: 22px; font-weight: 900; }
+.info-card p { color: #888; line-height: 1.6; font-size: 15px; }
+.info-card .icon { font-size: 28px; color: var(--accent); }
+
+/* FAQ */
+.section-title { text-align: center; font-size: 40px; font-weight: 900; margin-bottom: 60px; }
+.section-title span { color: var(--accent); }
+.faq-card { background: rgba(255,255,255,0.01); border: 1px solid #111; }
+
+/* Команда */
+.team-container { text-align: center; margin-top: 100px; padding: 60px; background: rgba(255,255,255,0.01); border-radius: 40px; }
+.member-list { margin: 40px 0; font-size: 20px; line-height: 2; }
+.member-list b { color: var(--accent); }
+.legal-info { text-align: center; color: #333; font-size: 11px; margin-top: 50px; }
+
+/* Правила Модалка */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:3000; }
+.modal-content { background:#070707; margin:2% auto; padding:60px; width:90%; max-height:85vh; border-radius:30px; border: 1px solid var(--accent); overflow-y:auto; }
+.rules-grid { display:grid; grid-template-columns: 1fr 1fr; gap:60px; }
+.punish { color: #ff4444; font-weight: 900; font-size: 11px; display: block; text-transform: uppercase; margin-top: 4px; }
+
+#copyNotice { position:fixed; bottom:50px; left:50%; transform:translateX(-50%); background:var(--accent); padding:15px 30px; border-radius:15px; opacity:0; transition:0.3s; z-index:4000; font-weight: bold; }

@@ -11,8 +11,8 @@
 
 <canvas id="snow"></canvas>
 
-<!-- БУРГЕР -->
-<div class="burger" onclick="togglePanel()">
+<!-- 3 линии -->
+<div class="burger">
 <span></span>
 <span></span>
 <span></span>
@@ -22,7 +22,7 @@
 <div class="side-trigger"></div>
 
 <!-- панель -->
-<nav class="side-panel" id="sidePanel">
+<nav class="side-panel">
 
 <div class="panel-handle">☰</div>
 
@@ -55,9 +55,9 @@
 
 <h1 class="title animate">SweetLand</h1>
 
-<p class="animate big-text">
-Бесплатный ванильный Minecraft-проект на версии 1.21.8.
-Честная игра без доната и преимуществ.
+<p class="animate">
+Ванильный Minecraft-мир для честной игры, исследований
+и дружелюбного сообщества.
 </p>
 
 <div class="ip-row animate">
@@ -72,6 +72,8 @@ IP<br><b>play.sweet-land.fun</b>
 
 </div>
 
+<div id="copyNotice">✔ IP скопирован</div>
+
 </div>
 
 <div class="hero-right animate">
@@ -80,10 +82,8 @@ IP<br><b>play.sweet-land.fun</b>
 
 </section>
 
-<!-- Центрированное уведомление -->
-<div id="copyNotice">IP СКОПИРОВАН</div>
-
 <section id="features" class="cards">
+
 <div class="feature animate">
 <h3>Ивенты</h3>
 <p>Регулярные события и активности.</p>
@@ -98,23 +98,26 @@ IP<br><b>play.sweet-land.fun</b>
 <h3>Свобода</h3>
 <p>Минимум ограничений — максимум игры.</p>
 </div>
+
 </section>
 
-<section id="performance" class="section performance-box animate">
+<section id="performance" class="section animate">
 <h2>Стабильность сервера</h2>
 <p>
-✔ Мощный античит<br>
-✔ Высокий TPS<br>
-✔ Минимум лагов<br>
-✔ Современное оборудование
+✔ Мощный античит защищает от читеров<br>
+✔ Высокий TPS для плавной игры<br>
+✔ Оптимизированная работа сервера<br>
+✔ Минимальные лаги даже при нагрузке  
 </p>
 </section>
 
 <section id="about" class="section animate">
 <h2>О проекте</h2>
 <p>
-SweetLand — это полностью бесплатный сервер
-для настоящего ванильного выживания.
+SweetLand — это честная ванильная атмосфера,
+где игроки строят, исследуют и играют вместе.
+Мы делаем сервер для удовольствия,
+а не перегруженных механик.
 </p>
 </section>
 
@@ -122,14 +125,9 @@ SweetLand — это полностью бесплатный сервер
 SweetLand не связан с Mojang Studios ©
 </footer>
 
-<!-- КНОПКА ТЕМЫ -->
-<div class="theme-switch" onclick="toggleTheme()">
-<div class="switch-track">
-<div class="switch-thumb"></div>
-</div>
-<span class="theme-label">ТЕМА</span>
-</div>
+<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 
 <script src="script.js"></script>
+
 </body>
 </html>

@@ -15,7 +15,7 @@ function setTheme(theme){
 document.body.className=theme;
 }
 
-// анимации (фикс — один раз)
+// анимации (один раз)
 const observer = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -29,27 +29,31 @@ document.querySelectorAll(".animate").forEach(el=>{
 observer.observe(el);
 });
 
-// снег
+// ❄ снег (полноэкранный)
 const canvas = document.getElementById("snow");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 300;
-canvas.height = 300;
+function resizeSnow(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resizeSnow();
+window.addEventListener("resize", resizeSnow);
 
 let snowflakes = [];
 
-for(let i=0;i<60;i++){
+for(let i=0;i<120;i++){
 snowflakes.push({
-x:Math.random()*300,
-y:Math.random()*300,
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
 r:Math.random()*3+1,
-d:Math.random()+0.5
+speed:Math.random()*1+0.5
 });
 }
 
 function drawSnow(){
-ctx.clearRect(0,0,300,300);
-ctx.fillStyle="white";
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(255,255,255,0.8)";
 ctx.beginPath();
 
 snowflakes.forEach(f=>{
@@ -58,16 +62,17 @@ ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);
 });
 ctx.fill();
 updateSnow();
+requestAnimationFrame(drawSnow);
 }
 
 function updateSnow(){
 snowflakes.forEach(f=>{
-f.y+=f.d;
-if(f.y>300){
+f.y+=f.speed;
+if(f.y>canvas.height){
 f.y=0;
-f.x=Math.random()*300;
+f.x=Math.random()*canvas.width;
 }
 });
 }
 
-setInterval(drawSnow,30);
+drawSnow();

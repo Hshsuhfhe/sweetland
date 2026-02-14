@@ -14,16 +14,16 @@ document.body.classList.toggle("light");
 document.body.classList.toggle("dark");
 }
 
-// повтор анимаций
+/* Фикс анимаций (без бага при краю текста) */
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
-if(entry.isIntersecting){
+if(entry.intersectionRatio>0.25){
 entry.target.classList.add("show");
-}else{
-entry.target.classList.remove("show");
 }
 });
-},{threshold:0.2});
+},{
+threshold:[0.25]
+});
 
 document.querySelectorAll(".animate").forEach(el=>{
 observer.observe(el);

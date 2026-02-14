@@ -3,31 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SweetLand — Твой идеальный мир</title>
+<title>SweetLand</title>
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
 </head>
 <body class="dark">
 
 <canvas id="snow"></canvas>
 
-<div class="side-trigger" onclick="togglePanel()">
+<div class="side-trigger" onclick="document.getElementById('side-panel').classList.toggle('active')">
   <div class="line"></div>
   <div class="line"></div>
   <div class="line"></div>
 </div>
 
-<nav class="side-panel" id="sidePanel">
-  <div class="panel-handle" onclick="togglePanel()">✕</div>
+<nav class="side-panel" id="side-panel">
+  <div class="panel-handle" onclick="document.getElementById('side-panel').classList.remove('active')">✕</div>
   <h2>SweetLand</h2>
   <div class="panel-links">
     <a href="#">Главная</a>
     <a href="#about">О проекте</a>
     <a href="#gameplay">Механики</a>
-    <a href="#moderation">Порядок</a>
-    <a href="#events">События</a>
-    <a href="#updates">Патчи</a>
-    <a href="#community">Люди</a>
+    <a href="#moderation">Модерация</a>
+    <a href="https://map.sweet-land.fun">Карта мира</a>
+    <a href="#">Правила</a>
+    <a href="#">Вики проекта</a>
+    <a href="#updates">Обновления</a>
+    <a href="https://discord.gg/GqEPBnnSmW">Тех. поддержка</a>
+    <a href="#community">Статистика</a>
   </div>
   <div class="panel-social">
     <button class="social-btn" onclick="window.open('https://discord.gg/GqEPBnnSmW','_blank')">Discord</button>
@@ -38,54 +41,52 @@
 <header class="top-oval">
   <a href="#">Главная</a>
   <a href="#about">О нас</a>
-  <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-  <a href="https://discord.gg/GqEPBnnSmW" class="play-link">Играть</a>
+  <a href="https://sweet-land.trademc.org">Магазин</a>
+  <a href="https://discord.gg/GqEPBnnSmW" class="play-btn">Играть</a>
 </header>
 
-<section class="hero animate">
+<section class="hero">
   <div class="hero-left">
-    <h1 class="title">Sweet<span class="accent">Land</span></h1>
-    <p class="hero-intro">
-      Погрузись в честную ваниль без доната. Мы создали место, где решает только твой скилл и воображение, а не кошелек.
+    <h1 class="title animate neon">SweetLand</h1>
+    <p class="animate hero-intro">
+      Честная ваниль без доната. Доступно с <b>любого устройства</b>. Начни свою историю в мире, где решает только творчество.
     </p>
-    <div class="ip-row">
-      <button class="card-ip" onclick="copyIP()">
-        <span class="small-label">Нажми, чтобы скопировать</span>
-        <b>play.sweet-land.fun</b>
-      </button>
-      <button class="card-ver">Версия<br><b>1.21.x</b></button>
+    <div class="ip-row animate">
+      <button class="card-ip" onclick="copyIP()">IP<br><b>play.sweet-land.fun</b></button>
+      <button class="card-ip">Версия<br><b>1.21.8</b></button>
     </div>
+    <div id="copyNotice">✔ IP скопирован</div>
   </div>
-  <div class="hero-right">
-    <img src="images/5opka.png" alt="SweetLand Character">
+  <div class="hero-right animate">
+    <img src="images/5opka.png" alt="SweetLand">
   </div>
 </section>
 
 <section id="about" class="section animate">
-  <h2>О концепции</h2>
-  <div class="glass-box">
-    <p>Мы строим мир, где каждый игрок ценен. Никаких админок за деньги или скрытых преимуществ.</p>
-    <p>Сезоны на SweetLand — это целая эпоха. Обычно они длятся <b>от 8 до 11 месяцев</b>, но если мир активно развивается, мы с радостью продлеваем его на год и более. Старт нового приключения уже совсем скоро!</p>
+  <h2>О проекте</h2>
+  <div class="glass-card">
+    <p>SweetLand — это пространство для тех, кто ценит классическое выживание. Мы против платных преимуществ.</p>
+    <p><b>О сезонах:</b> Мы готовимся к масштабному запуску. Наши сезоны длятся долго — от 8 до 11 месяцев, а при активном развитии мира мы продлеваем их на год и более.</p>
   </div>
 </section>
 
-<section id="features" class="section animate">
+<section class="section animate">
   <h2>Наши <span class="accent">преимущества</span></h2>
-  <div class="features-grid">
-    <div class="f-card">
-      <div class="f-icon">🛡️</div>
-      <h3>Стабильный TPS</h3>
-      <p>Мощное железо гарантирует игру без лагов даже при большом онлайне.</p>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="icon">🎭</div>
+      <h3>RolePlay</h3>
+      <p>Развитая система политики, министерства и суды.</p>
     </div>
-    <div class="f-card">
-      <div class="f-icon">🏛️</div>
-      <h3>РП система</h3>
-      <p>У нас работают суды, парламент и министерства. Строй свою карьеру!</p>
+    <div class="card">
+      <div class="icon">🏛️</div>
+      <h3>Порядок</h3>
+      <p>Тщательный отбор игроков через заявки и проходки.</p>
     </div>
-    <div class="f-card">
-      <div class="f-icon">🎉</div>
-      <h3>Ивенты</h3>
-      <p>Глобальные сюжетные повороты и конкурсы каждую неделю.</p>
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>Стабильность</h3>
+      <p>Мощное ядро сервера гарантирует высокий TPS 20/20.</p>
     </div>
   </div>
 </section>
@@ -93,21 +94,11 @@
 <section id="gameplay" class="section animate">
   <h2>Геймплей</h2>
   <div class="section-buttons">
-    <button>Активное комьюнити</button>
-    <button>Надежный античит</button>
-    <button>Высокий TPS</button>
-    <button>Уникальные квесты</button>
-    <button>Свободное РП</button>
-  </div>
-</section>
-
-<section id="moderation" class="section animate">
-  <h2>Порядок и Модерация</h2>
-  <div class="section-buttons">
-    <button>Тщательный отбор</button>
-    <button>Строгий надзор</button>
-    <button>Поддержка 24/7</button>
-    <button>Справедливые правила</button>
+    <button>Живое комьюнити</button>
+    <button>Античит нового поколения</button>
+    <button>Плавная игра</button>
+    <button>Авторские квесты</button>
+    <button>РП для каждого</button>
   </div>
 </section>
 
@@ -116,7 +107,6 @@
 </footer>
 
 <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-<div id="copyNotice">✔ Адрес скопирован</div>
 
 <script src="script.js"></script>
 </body>

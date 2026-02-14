@@ -14,22 +14,17 @@ function openRules() {
     const modal = document.getElementById("rules-modal");
     modal.classList.add('show');
     document.body.style.overflow = "hidden";
+    revealOnScroll();
 }
 function closeRules() {
     const modal = document.getElementById("rules-modal");
-    modal.querySelector('.modal-content').style.transform='scale(0.9)';
-    modal.style.opacity='0';
-    setTimeout(()=>{
-        modal.classList.remove('show');
-        modal.querySelector('.modal-content').style.transform='';
-        modal.style.opacity='';
-        document.body.style.overflow="auto";
-    },300);
+    modal.classList.remove('show');
+    setTimeout(()=>{ modal.style.display='none'; document.body.style.overflow="auto"; }, 500);
 }
 
 // Copy IP
 function copyIP() {
-    const el = document.createElement('textarea');
+    const el=document.createElement('textarea');
     el.value='play.sweet-land.fun';
     document.body.appendChild(el);
     el.select();
@@ -46,7 +41,7 @@ const ctx=canvas.getContext('2d');
 let W=canvas.width=window.innerWidth;
 let H=canvas.height=window.innerHeight;
 let particles=[];
-for(let i=0;i<150;i++) particles.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*3+1, d:Math.random()*1});
+for(let i=0;i<150;i++) particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1,d:Math.random()*1});
 function draw(){
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle='white';
@@ -56,46 +51,21 @@ function draw(){
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
     }
     ctx.fill();
-    for(let p of particles){
-        p.y+=1.6;
-        if(p.y>H) p.y=-10;
-    }
+    for(let p of particles){ p.y+=1.6; if(p.y>H)p.y=-10; }
 }
 setInterval(draw,30);
 
-// ---------- ПЛАВНАЯ АНИМАЦИЯ ОТКРЫТИЯ/ЗАКРЫТИЯ ----------
-
-function openRules() {
-    const modal = document.getElementById("rules-modal");
-    modal.style.display = "block";
-    setTimeout(() => modal.classList.add("show"), 10);
-    document.body.style.overflow = "hidden";
-    revealOnScroll(); // сразу анимируем элементы видимые вначале
-}
-
-function closeRules() {
-    const modal = document.getElementById("rules-modal");
-    modal.classList.remove("show");
-    setTimeout(() => {
-        modal.style.display = "none";
-    }, 500); // ждем пока закончится анимация
-    document.body.style.overflow = "auto";
-}
-
-// ---------- FADE + SLIDE ПРИ ПРОКРУТКЕ ----------
-
+// Fade+slide при скролле модалки
 function revealOnScroll() {
     const elements = document.querySelectorAll(".rules-scroll-area p, .rules-scroll-area h3");
     const scrollContainer = document.querySelector(".rules-scroll-area");
+    if(!scrollContainer) return;
     const containerTop = scrollContainer.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
     elements.forEach(el => {
         const top = el.getBoundingClientRect().top - containerTop;
         if(top < scrollContainer.clientHeight - 50) el.classList.add("visible");
         else el.classList.remove("visible");
     });
 }
-
-document.querySelector(".rules-scroll-area").addEventListener("scroll", revealOnScroll);
+document.querySelector(".rules-scroll-area")?.addEventListener("scroll", revealOnScroll);
 window.addEventListener("resize", revealOnScroll);

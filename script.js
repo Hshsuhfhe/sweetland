@@ -21,13 +21,13 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 document.querySelectorAll(".animate").forEach(el=>observer.observe(el));
 
-// снег
+// снег густой
 const canvas=document.getElementById('snow');
 const ctx=canvas.getContext('2d');
 let W=canvas.width=window.innerWidth;
 let H=canvas.height=window.innerHeight;
 let particles=[];
-for(let i=0;i<150;i++){particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*4+1,d:Math.random()*1});}
+for(let i=0;i<300;i++){particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*5+1,d:Math.random()*2});}
 function draw(){
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='white';
@@ -44,5 +44,5 @@ function update(){
     if(p.x>W+5||p.x<0||p.y>H){p.x=Math.random()*W;p.y=-10;}
   }
 }
-setInterval(draw,33);
+setInterval(draw,25);
 window.addEventListener('resize',()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;});

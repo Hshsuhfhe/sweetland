@@ -208,3 +208,116 @@ transition:1s ease;
 opacity:1;
 transform:none;
 }
+
+/* =========================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
+
+@media (max-width: 900px){
+
+/* герой */
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:120px 20px 40px;
+}
+
+.hero-left{
+max-width:100%;
+}
+
+.title{
+font-size:48px;
+}
+
+.hero-right img{
+width:90%;
+max-width:400px;
+margin-top:20px;
+}
+
+/* карточки */
+
+.cards{
+flex-direction:column;
+align-items:center;
+padding:40px 20px;
+}
+
+.feature{
+width:100%;
+max-width:420px;
+}
+
+/* IP */
+
+.ip-row{
+justify-content:center;
+}
+
+/* секции */
+
+.section{
+padding:60px 20px;
+}
+
+/* верхний овал */
+
+.top-oval{
+gap:6px;
+padding:6px 10px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.top-oval a{
+font-size:13px;
+padding:4px 8px;
+}
+
+/* панель */
+
+.side-panel{
+width:220px;
+}
+
+/* кнопка темы */
+
+.theme-toggle{
+bottom:14px;
+right:14px;
+}
+
+/* текст */
+
+p{
+font-size:15px;
+}
+
+}
+
+/* =========================
+   ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ
+========================= */
+
+@media (max-width: 480px){
+
+.title{
+font-size:36px;
+}
+
+.feature{
+padding:16px;
+}
+
+.card{
+padding:10px 14px;
+font-size:14px;
+}
+
+.top-oval a{
+font-size:12px;
+}
+
+}

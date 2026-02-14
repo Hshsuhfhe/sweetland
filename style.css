@@ -22,11 +22,14 @@ body.light{background:#cceeff;color:#111;}
 .side-trigger .line{width:100%;height:5px;background:#ff00ff;border-radius:3px;}
 .side-panel{position:fixed;left:-260px;top:0;width:260px;height:100%;background:#3b1a5c;padding:30px;transition:.5s ease;overflow:auto;z-index:60;}
 .side-trigger:hover + .side-panel, .side-panel:hover{left:0;}
-.side-panel h2{margin-bottom:30px;background:linear-gradient(90deg,#3f5fff,#a066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.side-panel h2{margin-bottom:30px;background:linear-gradient(90deg,#3f5fff,#ff00ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .side-panel .panel-links a{display:block;margin:22px 0;color:#eee;text-decoration:none;letter-spacing:4px;transition:.4s;font-size:20px;}
 .side-panel .panel-links a:hover{color:#ff88ff;transform:translateY(-6px);}
-.panel-social{position:absolute;bottom:30px;}
-.panel-social a{display:block;margin:10px 0;letter-spacing:3px;}
+
+/* соцсети внизу панели */
+.panel-social{position:absolute;bottom:30px;display:flex;flex-direction:column;gap:12px;width:100%;}
+.social-btn{padding:14px; font-size:18px; border:none; border-radius:12px; background:rgba(255,0,255,0.15); color:white; cursor:pointer; transition:.4s;}
+.social-btn:hover{background:rgba(255,0,255,0.4); transform:translateY(-4px);}
 
 /* герой */
 .hero{display:flex;justify-content:space-between;align-items:center;min-height:90vh;padding:120px;}
@@ -48,8 +51,8 @@ body.light{background:#cceeff;color:#111;}
 /* уведомление */
 #copyNotice{position:fixed;bottom:30px;right:30px;background:#0a3;padding:12px 16px;border-radius:10px;opacity:0;transition:.5s;}
 
-/* тема кнопка слева */
-.theme-toggle-left{position:fixed;top:20px;left:70px;padding:14px 20px;border:none;border-radius:12px;background:#111;color:white;cursor:pointer;z-index:70;transition:.4s;}
+/* переключатель темы справа внизу */
+.theme-toggle{position:fixed;bottom:20px;right:20px;padding:14px 20px;border:none;border-radius:12px;background:#111;color:white;cursor:pointer;z-index:70;transition:.4s;}
 
 /* анимация появления */
 .animate{opacity:0;transform:translateY(20px);transition:.8s cubic-bezier(.2,.7,.2,1);}

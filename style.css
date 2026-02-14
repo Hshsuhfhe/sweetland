@@ -57,3 +57,72 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
 .punish { color:#ff4444; font-weight:900; font-size:11px; display:block; text-transform:uppercase; margin-top:4px; }
 
 #copyNotice { position:fixed; bottom:50px; left:50%; transform:translateX(-50%); background:var(--accent); padding:15px 30px; border-radius:15px; opacity:0; transition:0.3s; z-index:4000; font-weight:bold; }
+
+/* ---------- ДЛЯ ПРАВИЛ МОДАЛКА С КАРТИНКОЙ И АНИМАЦИЕЙ ---------- */
+
+.modal-content {
+    display: flex;
+    flex-direction: row; /* чтобы картинка справа */
+    gap: 40px;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 0.5s ease;
+}
+
+.modal.show .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.close-modal {
+    font-size: 48px;
+    font-weight: 900;
+    color: #ff66ff;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+/* Картинка справа с неоном */
+.rules-image {
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    background: url('5opka.png') center/cover no-repeat;
+    border-radius: 20px;
+    box-shadow: 0 0 40px #a366ff, 0 0 80px #ff66ff, 0 0 120px #a366ff;
+    animation: neonGlow 2s infinite alternate;
+}
+
+@keyframes neonGlow {
+    0% { box-shadow: 0 0 40px #a366ff, 0 0 80px #ff66ff, 0 0 120px #a366ff; }
+    100% { box-shadow: 0 0 60px #ff66ff, 0 0 120px #a366ff, 0 0 180px #ff66ff; }
+}
+
+/* Колонка с текстом */
+.rules-column {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Fade+slide анимация для текста */
+.rules-scroll-area p,
+.rules-scroll-area h3 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.rules-scroll-area p.visible,
+.rules-scroll-area h3.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

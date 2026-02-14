@@ -1,16 +1,10 @@
-// Появление элементов при скролле
-const animatedElements = document.querySelectorAll('.animate');
+// Анимация появления элементов с плавным выездом
+document.addEventListener("DOMContentLoaded", () => {
+  const animatedElements = document.querySelectorAll(".animate");
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.style.animationPlayState = 'running';
-      observer.unobserve(entry.target);
-    }
+  animatedElements.forEach((el, index) => {
+    setTimeout(() => {
+      el.classList.add("visible");
+    }, index * 200); // задержка между элементами
   });
-}, {threshold: 0.1});
-
-animatedElements.forEach(el => {
-  observer.observe(el);
 });
-

@@ -1,4 +1,4 @@
-// Копирование IP
+// --- Копирование IP ---
 function copyIP(){
   navigator.clipboard.writeText("play.sweet-land.fun");
   const notice=document.getElementById("copyNotice");
@@ -6,13 +6,13 @@ function copyIP(){
   setTimeout(()=>{ notice.style.opacity="0"; },2000);
 }
 
-// Переключатель темы
+// --- Переключатель темы ---
 function toggleTheme(){
   document.body.classList.toggle("light");
   document.body.classList.toggle("dark");
 }
 
-// Анимация появления при скролле
+// --- Анимация появления ---
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){entry.target.classList.add("show");}
@@ -21,7 +21,7 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 document.querySelectorAll(".animate").forEach(el=>observer.observe(el));
 
-// Снег
+// --- Снег ---
 const canvas=document.getElementById('snow');
 const ctx=canvas.getContext('2d');
 let W=canvas.width=window.innerWidth;

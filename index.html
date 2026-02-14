@@ -9,10 +9,16 @@
 
 <body class="dark">
 
-<div class="side-trigger"></div>
+<canvas id="snow"></canvas>
 
-<nav class="side-panel">
-<div class="panel-handle">☰</div>
+<!-- БУРГЕР КНОПКА -->
+<div class="burger" onclick="togglePanel()">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<nav class="side-panel" id="sidePanel">
 
 <h2>SweetLand</h2>
 
@@ -27,6 +33,7 @@
 <a href="https://discord.gg/GqEPBnnSmW">Discord</a>
 <a href="https://t.me/gyraff">Telegram</a>
 </div>
+
 </nav>
 
 <header class="top-oval">
@@ -40,9 +47,20 @@
 <div class="hero-left">
 <h1 class="title animate">SweetLand</h1>
 
+<p class="animate big-text">
+Бесплатный ванильный Minecraft-проект на версии 1.21.8.
+Без донат-преимуществ. Без pay-to-win.
+Только честная игра, строительство, исследования
+и сильное дружелюбное сообщество.
+</p>
+
 <p class="animate">
-Ванильный Minecraft-мир для честной игры, исследований
-и дружелюбного сообщества.
+Наш сервер создан для игроков, которые хотят
+настоящую атмосферу выживания:
+• Честная экономика  
+• Отсутствие лишних плагинов  
+• Минимум ограничений  
+• Максимум свободы  
 </p>
 
 <div class="ip-row animate">
@@ -66,17 +84,17 @@ IP<br><b>play.sweet-land.fun</b>
 <section id="features" class="cards">
 <div class="feature animate">
 <h3>Ивенты</h3>
-<p>Регулярные события и активности.</p>
+<p>Регулярные события, PvP-турниры, квесты и сезонные активности.</p>
 </div>
 
 <div class="feature animate">
 <h3>Экономика</h3>
-<p>Честная система торговли игроков.</p>
+<p>Честная торговля между игроками без искусственной инфляции.</p>
 </div>
 
 <div class="feature animate">
 <h3>Свобода</h3>
-<p>Минимум ограничений — максимум игры.</p>
+<p>Стройте города, базы, фермы и создавайте историю сервера.</p>
 </div>
 </section>
 
@@ -85,18 +103,20 @@ IP<br><b>play.sweet-land.fun</b>
 <p>
 ✔ Мощный античит защищает от читеров<br>
 ✔ Высокий TPS для плавной игры<br>
-✔ Оптимизированная работа сервера<br>
-✔ Минимальные лаги даже при нагрузке
+✔ Современное серверное оборудование<br>
+✔ Минимальные лаги даже при высокой нагрузке<br>
+✔ Регулярные обновления и поддержка
 </p>
 </section>
 
 <section id="about" class="section animate">
-<h2>О проекте</h2>
+<h2>Почему стоит выбрать SweetLand?</h2>
 <p>
-SweetLand — это честная ванильная атмосфера,
-где игроки строят, исследуют и играют вместе.
-Мы делаем сервер для удовольствия,
-а не перегруженных механик.
+Мы создаём атмосферу настоящего ванильного Minecraft.
+Без лишней нагрузки. Без токсичности.
+Только честная игра и удовольствие от выживания.
+Проект полностью бесплатный и развивается
+благодаря активному сообществу.
 </p>
 </section>
 
@@ -104,11 +124,11 @@ SweetLand — это честная ванильная атмосфера,
 SweetLand не связан с Mojang Studios ©
 </footer>
 
-<!-- Новый переключатель -->
 <div class="theme-switch" onclick="toggleTheme()">
 <div class="switch-track">
 <div class="switch-thumb"></div>
 </div>
+<span class="theme-label">DARK</span>
 </div>
 
 <script src="script.js"></script>

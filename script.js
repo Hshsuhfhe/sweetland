@@ -1,61 +1,64 @@
-// ПОЛНЫЙ ЗАПРЕТ ПРАВОЙ КНОПКИ МЫШИ
+// Запрет правой кнопки мыши
 document.addEventListener('contextmenu', e => e.preventDefault());
 
-// ЗАПРЕТ ГОРЯЧИХ КЛАВИШ КОПИРОВАНИЯ И ВЫДЕЛЕНИЯ
+// Запрет горячих клавиш (Ctrl+C, Ctrl+U, Ctrl+S и т.д.)
 document.addEventListener('keydown', e => {
-    if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'a' || e.key === 'i' || e.key === 'p')) {
-        e.preventDefault();
-    }
+    if(e.ctrlKey && ['c','u','s','a','i','p'].includes(e.key.toLowerCase())) e.preventDefault();
 });
 
-function togglePanel() {
-    document.getElementById("side-panel").classList.toggle("active");
-}
+// Side panel
+function togglePanel() { document.getElementById("side-panel").classList.toggle("active"); }
 
+// Rules modal с анимацией
 function openRules() {
-    document.getElementById("rules-modal").style.display = "block";
+    const modal = document.getElementById("rules-modal");
+    modal.classList.add('show');
     document.body.style.overflow = "hidden";
 }
-
 function closeRules() {
-    document.getElementById("rules-modal").style.display = "none";
-    document.body.style.overflow = "auto";
+    const modal = document.getElementById("rules-modal");
+    modal.querySelector('.modal-content').style.transform='scale(0.9)';
+    modal.style.opacity='0';
+    setTimeout(()=>{
+        modal.classList.remove('show');
+        modal.querySelector('.modal-content').style.transform='';
+        modal.style.opacity='';
+        document.body.style.overflow="auto";
+    },300);
 }
 
+// Copy IP
 function copyIP() {
-    // Временный элемент для обхода блокировок
     const el = document.createElement('textarea');
-    el.value = 'play.sweet-land.fun';
+    el.value='play.sweet-land.fun';
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    
-    let note = document.getElementById("copyNotice");
-    note.style.opacity = "1";
-    setTimeout(() => note.style.opacity = "0", 2000);
+    let note=document.getElementById("copyNotice");
+    note.style.opacity="1";
+    setTimeout(()=>note.style.opacity="0",2000);
 }
 
-// Снег
-const canvas = document.getElementById('snow');
-const ctx = canvas.getContext('2d');
-let W = canvas.width = window.innerWidth;
-let H = canvas.height = window.innerHeight;
-let particles = [];
-for(let i=0; i<150; i++) particles.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*3+1, d:Math.random()*1});
-
-function draw() {
+// Snow effect
+const canvas=document.getElementById('snow');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=window.innerWidth;
+let H=canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<150;i++) particles.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*3+1, d:Math.random()*1});
+function draw(){
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle='white';
     ctx.beginPath();
-    for(let p of particles) {
-        ctx.moveTo(p.x, p.y);
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, true);
+    for(let p of particles){
+        ctx.moveTo(p.x,p.y);
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
     }
     ctx.fill();
-    for(let p of particles) {
-        p.y += 1.6;
-        if(p.y > H) p.y = -10;
+    for(let p of particles){
+        p.y+=1.6;
+        if(p.y>H) p.y=-10;
     }
 }
-setInterval(draw, 30);
+setInterval(draw,30);

@@ -7,31 +7,43 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="dark">
 
-<!-- Логотип -->
-<div class="logo">SweetLand</div>
-
-<!-- Левая панель -->
+<!-- триггер панели -->
 <div class="side-trigger"></div>
 
+<!-- панель -->
 <nav class="side-panel">
-<div class="panel-handle">☰</div>
+
+<h2>SweetLand</h2>
 
 <a href="#">Главная</a>
-<a href="#features">О нас</a>
-<a href="https://sweet-land.trademc.org">Магазин</a>
-<a href="https://discord.gg/GqEPBnnSmW">Играть</a>
+<a href="#about">О проекте</a>
+<a href="#features">Возможности</a>
+<a href="#rules">Правила</a>
+<a href="#community">Сообщество</a>
+<a href="#join">Как начать играть</a>
+
+<div class="panel-section">
+
+<h3>Соцсети</h3>
+
+<a href="https://discord.gg/GqEPBnnSmW">Discord</a>
+<a href="https://t.me/gyraff">Telegram</a>
+<a href="#">YouTube</a>
+
+</div>
+
+<div class="theme-switch">
+
+<button onclick="setTheme('dark')">🌙 Тёмная</button>
+<button onclick="setTheme('light')">☀ Светлая</button>
+
+</div>
+
 </nav>
 
-<!-- Верхняя овальная панель -->
-<header class="top-oval">
-<a href="https://sweet-land.trademc.org">Магазин</a>
-<a href="#features">О нас</a>
-<a href="https://discord.gg/GqEPBnnSmW">Играть</a>
-</header>
-
-<!-- HERO -->
+<!-- герой -->
 <section class="hero">
 
 <div class="hero-left">
@@ -39,8 +51,10 @@
 <h1 class="title animate">SweetLand</h1>
 
 <p class="animate">
-Ванильный Minecraft-проект для честной игры, исследований
-и дружеского сообщества.
+SweetLand — ванильный Minecraft-проект для честной игры,
+исследований и дружеского общения.
+Мы создаём мир, где игроки могут строить,
+развиваться и играть без лишних ограничений.
 </p>
 
 <div class="ip-row animate">
@@ -49,13 +63,13 @@
 Версия<br><b>1.21.8</b>
 </div>
 
-<div class="card copy" onclick="copyIP()">
+<div class="card" onclick="copyIP()">
 IP<br><b>play.sweet-land.fun</b>
 </div>
 
 </div>
 
-<div id="copyNotice">✔ Успешно скопировано</div>
+<div id="copyNotice">✔ IP скопирован</div>
 
 </div>
 
@@ -65,24 +79,45 @@ IP<br><b>play.sweet-land.fun</b>
 
 </section>
 
-<!-- Карточки -->
-<section id="features" class="cards">
+<!-- секции -->
 
-<div class="card-box animate">
-<h3>Ивенты</h3>
-<p>Регулярные события и активности для игроков.</p>
-</div>
+<section id="about" class="section animate">
+<h2>О проекте</h2>
+<p>
+SweetLand — это классическая ванильная атмосфера,
+где ценится честная игра и взаимодействие между игроками.
+Здесь нет перегруженных механик —
+только вы, мир и возможности.
+</p>
+</section>
 
-<div class="card-box animate">
-<h3>Сообщество</h3>
-<p>Дружелюбная атмосфера и новые знакомства.</p>
-</div>
+<section id="features" class="section animate">
+<h2>Возможности</h2>
+<p>
+✔ Свободное строительство  
+✔ Игровые ивенты  
+✔ Активное сообщество  
+✔ Стабильный сервер  
+✔ Честная экономика  
+</p>
+</section>
 
-<div class="card-box animate">
-<h3>Свобода</h3>
-<p>Минимум ограничений — максимум приключений.</p>
-</div>
+<section id="rules" class="section animate">
+<h2>Правила</h2>
+<p>
+Мы поддерживаем дружелюбную атмосферу.
+Запрещены гриферство, токсичность и читы.
+Главное — уважение к другим игрокам.
+</p>
+</section>
 
+<section id="community" class="section animate">
+<h2>Сообщество</h2>
+<p>
+SweetLand — это люди.
+Мы строим мир вместе,
+проводим события и просто наслаждаемся игрой.
+</p>
 </section>
 
 <footer>

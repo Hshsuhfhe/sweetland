@@ -1,4 +1,4 @@
-// копирование IP
+// Копирование IP
 function copyIP(){
   navigator.clipboard.writeText("play.sweet-land.fun");
   const notice=document.getElementById("copyNotice");
@@ -6,13 +6,13 @@ function copyIP(){
   setTimeout(()=>{ notice.style.opacity="0"; },2000);
 }
 
-// переключатель темы
+// Переключатель темы
 function toggleTheme(){
   document.body.classList.toggle("light");
   document.body.classList.toggle("dark");
 }
 
-// анимация появления при скролле
+// Анимация появления при скролле
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){entry.target.classList.add("show");}
@@ -21,19 +21,22 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 document.querySelectorAll(".animate").forEach(el=>observer.observe(el));
 
-// снег густой
+// Снег
 const canvas=document.getElementById('snow');
 const ctx=canvas.getContext('2d');
 let W=canvas.width=window.innerWidth;
 let H=canvas.height=window.innerHeight;
 let particles=[];
-for(let i=0;i<300;i++){particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*5+1,d:Math.random()*2});}
+for(let i=0;i<300;i++){
+  particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*5+1,d:Math.random()*2});
+}
 function draw(){
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='white';
   ctx.beginPath();
   for(let p of particles){ctx.moveTo(p.x,p.y);ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);}
-  ctx.fill();update();
+  ctx.fill();
+  update();
 }
 let angle=0;
 function update(){

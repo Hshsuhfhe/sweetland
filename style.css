@@ -183,7 +183,7 @@ body.light{background:#d0f0ff;color:#111;}
 /* Секции с кнопками */
 .section-buttons{
   display:flex;
-  flex-wrap:wrap;
+  flex-wrap:wrap; /* перенос на новую строку */
   gap:16px;
   margin-top:20px;
 }
@@ -196,6 +196,9 @@ body.light{background:#d0f0ff;color:#111;}
   cursor:pointer;
   color:#fff;
   transition:0.4s;
+  white-space:normal; /* разрешаем перенос текста */
+  text-align:center;
+  line-height:1.4;
 }
 .section-buttons button:hover{
   border:2px solid #00ffff;

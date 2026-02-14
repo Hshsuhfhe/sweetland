@@ -1,4 +1,4 @@
-// Переключение боковой панели
+// Открытие/закрытие панели
 function togglePanel() {
     document.getElementById("sidePanel").classList.toggle("open");
 }
@@ -8,10 +8,10 @@ function copyIP() {
     navigator.clipboard.writeText("play.sweet-land.fun");
     const notice = document.getElementById("copyNotice");
     notice.style.opacity = "1";
-    setTimeout(() => notice.style.opacity = "0", 2000);
+    setTimeout(() => { notice.style.opacity = "0"; }, 2000);
 }
 
-// Переключатель темы
+// Тема
 function toggleTheme() {
     document.body.classList.toggle("light");
 }
@@ -19,13 +19,15 @@ function toggleTheme() {
 // Анимация при скролле
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("show");
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
     });
 }, { threshold: 0.1 });
 
 document.querySelectorAll(".animate").forEach(el => observer.observe(el));
 
-// Оптимизированный снег
+// Снег (плавный)
 const canvas = document.getElementById('snow');
 const ctx = canvas.getContext('2d');
 let W = window.innerWidth, H = window.innerHeight;
@@ -43,7 +45,7 @@ for(let i = 0; i < 100; i++) {
 
 function draw() {
     ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = document.body.classList.contains('light') ? "rgba(0,0,0,0.1)" : "rgba(255, 255, 255, 0.3)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.beginPath();
     for(let p of particles) {
         ctx.moveTo(p.x, p.y);
@@ -64,4 +66,7 @@ function update() {
 function loop() { draw(); requestAnimationFrame(loop); }
 loop();
 
-window.onresize = () => { W = window.innerWidth; H = window.innerHeight; canvas.width = W; canvas.height = H; };
+window.onresize = () => {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+};

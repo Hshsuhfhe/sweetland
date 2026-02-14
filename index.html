@@ -9,39 +9,40 @@
 
 <body class="dark">
 
-<!-- панель триггер -->
+<canvas id="snow"></canvas>
+
 <div class="side-trigger"></div>
 
-<!-- панель -->
-<nav class="side-panel">
+<div class="burger">
+<span></span>
+<span></span>
+<span></span>
+</div>
 
-<div class="panel-handle">☰</div>
+<nav class="side-panel">
 
 <h2>SweetLand</h2>
 
 <a href="#">Главная</a>
 <a href="#about">О проекте</a>
 <a href="#features">Возможности</a>
-<a href="#performance">Стабильность</a>
+<a href="#rules">Правила</a>
 <a href="#community">Сообщество</a>
 
-<div class="panel-social">
+<div class="panel-section">
 <h3>Соцсети</h3>
 <a href="https://discord.gg/GqEPBnnSmW">Discord</a>
 <a href="https://t.me/gyraff">Telegram</a>
+<a href="#">YouTube</a>
+</div>
+
+<div class="theme-switch">
+<button onclick="setTheme('dark')">🌙 Тёмная</button>
+<button onclick="setTheme('light')">☀ Светлая</button>
 </div>
 
 </nav>
 
-<!-- верхний овал -->
-<header class="top-oval">
-<a href="#">Главная</a>
-<a href="#features">О нас</a>
-<a href="https://sweet-land.trademc.org">Магазин</a>
-<a href="https://discord.gg/GqEPBnnSmW">Играть</a>
-</header>
-
-<!-- герой -->
 <section class="hero">
 
 <div class="hero-left">
@@ -49,8 +50,13 @@
 <h1 class="title animate">SweetLand</h1>
 
 <p class="animate">
-Ванильный Minecraft-мир для честной игры, исследований
-и дружелюбного сообщества.
+SweetLand — это ванильный Minecraft-мир,
+где важны честность, дружелюбие и настоящая атмосфера выживания.
+Здесь нет донатных привилегий и перегруженных механик.
+Только стабильный TPS, надёжный античит
+и уважение к каждому игроку.
+Проект только готовится к старту —
+и именно ты можешь стать частью его истории.
 </p>
 
 <div class="ip-row animate">
@@ -75,54 +81,53 @@ IP<br><b>play.sweet-land.fun</b>
 
 </section>
 
-<!-- карточки -->
-<section id="features" class="cards">
-
-<div class="feature animate">
-<h3>Ивенты</h3>
-<p>Регулярные события и активности.</p>
-</div>
-
-<div class="feature animate">
-<h3>Экономика</h3>
-<p>Честная система торговли игроков.</p>
-</div>
-
-<div class="feature animate">
-<h3>Свобода</h3>
-<p>Минимум ограничений — максимум игры.</p>
-</div>
-
-</section>
-
-<!-- стабильность -->
-<section id="performance" class="section animate">
-<h2>Стабильность сервера</h2>
-<p>
-✔ Мощный античит защищает от читеров  
-✔ Высокий TPS для плавной игры  
-✔ Оптимизированная работа сервера  
-✔ Минимальные лаги даже при нагрузке  
-</p>
-</section>
-
-<!-- о проекте -->
 <section id="about" class="section animate">
 <h2>О проекте</h2>
 <p>
-SweetLand — это честная ванильная атмосфера,
-где игроки строят, исследуют и играют вместе.
-Мы делаем сервер для удовольствия,
-а не перегруженных механик.
+SweetLand — это классическая ванильная атмосфера,
+где ценится честная игра и взаимодействие между игроками.
+Мы создаём уютный мир без гриферства,
+с честной экономикой и активным сообществом.
+Если ты ищешь стабильный сервер без токсичности —
+ты нашёл его.
+</p>
+</section>
+
+<section id="features" class="section animate">
+<h2>Возможности</h2>
+<p>
+✔ Свободное строительство<br>
+✔ Игровые ивенты<br>
+✔ Активное сообщество<br>
+✔ Стабильный сервер<br>
+✔ Честная экономика<br>
+✔ Надёжный античит
+</p>
+</section>
+
+<section id="rules" class="section animate">
+<h2>Правила</h2>
+<p>
+Мы поддерживаем дружелюбную атмосферу.
+Запрещены гриферство, токсичность и читы.
+Главное правило — уважение к другим игрокам.
+</p>
+</section>
+
+<section id="community" class="section animate">
+<h2>Сообщество</h2>
+<p>
+SweetLand — это не просто сервер.
+Это люди, которые любят строить,
+развиваться и создавать историю вместе.
+Если хочешь стабильный ванильный проект —
+тебе точно сюда.
 </p>
 </section>
 
 <footer>
 SweetLand не связан с Mojang Studios ©
 </footer>
-
-<!-- переключатель темы -->
-<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
 
 <script src="script.js"></script>
 

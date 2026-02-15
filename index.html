@@ -11,12 +11,16 @@
 
 <div class="nav-oval-container">
     <div class="shop-banner">
-        <span class="banner-star">⭐</span>
-        <span class="banner-title">SweetLand</span>
-        <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-        <a href="https://t.me/gyraff" target="_blank">Связь с нами</a>
-        <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
-        <a href="https://discord.gg/GUKrAmY7bp" target="_blank" class="play-now">Играть сейчас</a>
+        <div class="banner-left">
+            <span class="banner-star">⭐</span>
+            <span class="banner-title">SweetLand</span>
+        </div>
+        <div class="banner-links">
+            <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
+            <a href="https://t.me/gyraff" target="_blank">Связь с нами</a>
+            <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
+            <a href="https://discord.gg/GUKrAmY7bp" target="_blank" class="play-now">Играть сейчас</a>
+        </div>
     </div>
 </div>
 
@@ -277,24 +281,35 @@
         const modal = document.getElementById('rules-modal');
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
+            rulesElements.forEach(el => {
+                el.classList.add('visible');
+            });
+        }, 300);
     }
     
     function closeRules() {
         const modal = document.getElementById('rules-modal');
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
+        
+        const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
+        rulesElements.forEach(el => {
+            el.classList.remove('visible');
+        });
     }
     
     // ========== КОПИРОВАНИЕ IP ==========
     function copyIP() {
         const ip = 'play.sweet-land.fun';
         
-        // Современный способ с Clipboard API
-        if (navigator.clipboard && window.isSecureContext) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(ip).then(() => {
                 showCopyNotice();
             }).catch(err => {
-                console.error('Clipboard API error:', err);
+                console.error('Ошибка копирования: ', err);
                 fallbackCopy();
             });
         } else {
@@ -313,15 +328,11 @@
             textarea.select();
             
             try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showCopyNotice();
-                } else {
-                    alert('Нажми Ctrl+C чтобы скопировать: ' + ip);
-                }
+                document.execCommand('copy');
+                showCopyNotice();
             } catch (err) {
-                console.error('Fallback error:', err);
-                alert('Скопируй вручную: ' + ip);
+                console.error('Ошибка копирования: ', err);
+                alert('Не удалось скопировать IP. Скопируй вручную: play.sweet-land.fun');
             }
             
             document.body.removeChild(textarea);
@@ -376,6 +387,11 @@
             const modal = document.getElementById('rules-modal');
             if (modal.classList.contains('show')) {
                 closeRules();
+            }
+            
+            const panel = document.getElementById('side-panel');
+            if (panel.classList.contains('active')) {
+                togglePanel();
             }
         }
     });

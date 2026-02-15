@@ -69,3 +69,28 @@ function revealOnScroll() {
 }
 document.querySelector(".rules-scroll-area")?.addEventListener("scroll", revealOnScroll);
 window.addEventListener("resize", revealOnScroll);
+
+
+// Анимация появления (повторяющаяся)
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementBottom = reveals[i].getBoundingClientRect().bottom;
+        var elementVisible = 100; // Порог появления
+
+        // Если верхняя граница элемента вошла в экран
+        if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
+            reveals[i].classList.add("active");
+        } 
+        // НОВОЕ: Если элемент полностью ушел вверх или вниз, убираем класс
+        else {
+            reveals[i].classList.remove("active");
+        }
+    }
+}
+
+window.addEventListener("scroll", reveal);
+document.addEventListener("DOMContentLoaded", reveal);

@@ -204,6 +204,157 @@
     </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+    // ========== СНЕГ (CANVAS) ==========
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    
+    function initCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    
+    function createParticles(count) {
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 3 + 1,
+                speed: Math.random() * 1 + 0.5,
+                opacity: Math.random() * 0.5 + 0.3
+            });
+        }
+    }
+    
+    function drawSnow() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'white';
+        
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+            ctx.fill();
+            
+            p.y += p.speed;
+            
+            if (p.y > height) {
+                p.y = 0;
+                p.x = Math.random() * width;
+            }
+        }
+        
+        requestAnimationFrame(drawSnow);
+    }
+    
+    window.addEventListener('resize', () => {
+        initCanvas();
+    });
+    
+    initCanvas();
+    createParticles(150);
+    drawSnow();
+    
+    // ========== БОКОВАЯ ПАНЕЛЬ ==========
+    function togglePanel() {
+        const panel = document.getElementById('side-panel');
+        panel.classList.toggle('active');
+    }
+    
+    // ========== МОДАЛЬНОЕ ОКНО ПРАВИЛ ==========
+    function openRules() {
+        const modal = document.getElementById('rules-modal');
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Анимация появления текста правил
+        setTimeout(() => {
+            const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
+            rulesElements.forEach(el => {
+                el.classList.add('visible');
+            });
+        }, 300);
+    }
+    
+    function closeRules() {
+        const modal = document.getElementById('rules-modal');
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        
+        // Сбрасываем анимацию
+        const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
+        rulesElements.forEach(el => {
+            el.classList.remove('visible');
+        });
+    }
+    
+    // ========== КОПИРОВАНИЕ IP ==========
+    function copyIP() {
+        const ip = 'play.sweet-land.fun';
+        navigator.clipboard.writeText(ip).then(() => {
+            const notice = document.getElementById('copyNotice');
+            notice.style.opacity = '1';
+            setTimeout(() => {
+                notice.style.opacity = '0';
+            }, 2000);
+        }).catch(err => {
+            console.error('Ошибка копирования: ', err);
+            // Фолбэк для старых браузеров
+            const textarea = document.createElement('textarea');
+            textarea.value = ip;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            const notice = document.getElementById('copyNotice');
+            notice.style.opacity = '1';
+            setTimeout(() => {
+                notice.style.opacity = '0';
+            }, 2000);
+        });
+    }
+    
+    // ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ==========
+    function reveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add('active');
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+    
+    // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        if (body.classList.contains('dark')) {
+            body.classList.remove('dark');
+            body.classList.add('light-theme');
+            themeIcon.textContent = '☀️';
+        } else {
+            body.classList.remove('light-theme');
+            body.classList.add('dark');
+            themeIcon.textContent = '🌙';
+        }
+    }
+</script>
+
 </body>
 </html>

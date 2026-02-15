@@ -72,3 +72,89 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
 
 /* Copy notice */
 #copyNotice { position:fixed; bottom:50px; left:50%; transform:translateX(-50%); background:var(--accent); padding:15px 30px; border-radius:15px; opacity:0; transition:0.3s; z-index:4000; font-weight:bold; }
+
+/* Магазин-овал */
+.shop-banner {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    padding: 12px 40px;
+    border-radius: 50px;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(163, 102, 255, 0.5);
+    z-index: 2500;
+    transition: 0.3s;
+}
+.shop-banner a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.shop-banner:hover {
+    box-shadow: 0 0 30px var(--accent);
+    transform: translateX(-50%) scale(1.05);
+}
+
+/* Макет главного экрана */
+.hero-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-image-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-img {
+    width: 600px; /* Размер картинки */
+    height: auto;
+    z-index: 10;
+    animation: floating 4s ease-in-out infinite;
+}
+
+/* Неон под картинкой */
+.neon-circle {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    filter: blur(100px);
+    opacity: 0.3;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Анимация парения */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Анимации появления (Reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Адаптация для телефонов */
+@media (max-width: 1024px) {
+    .hero-layout { flex-direction: column; text-align: center; }
+    .hero-content { text-align: center; margin-bottom: 50px; }
+    .main-img { width: 300px; }
+}

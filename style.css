@@ -55,10 +55,6 @@ body.light-theme .info-card p {
     color: #555;
 }
 
-body.light-theme .team-container {
-    background: rgba(255, 255, 255, 0.5);
-}
-
 body.light-theme .hero {
     background: radial-gradient(circle, rgba(138, 91, 224, 0.08) 0%, #f0f0f5 80%);
 }
@@ -67,6 +63,12 @@ body.light-theme .title {
     background: linear-gradient(#333, var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .footer-bottom {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .no-select { 
@@ -155,7 +157,7 @@ body {
     box-shadow: 0 0 30px rgba(163, 102, 255, 0.4);
     display: flex;
     align-items: center;
-    padding: 0 5px;
+    padding: 5px 10px;
     overflow: hidden;
     width: 100%;
     gap: 5px;
@@ -164,7 +166,7 @@ body {
 .banner-star {
     font-size: 20px;
     color: gold;
-    margin-left: 20px;
+    margin-left: 15px;
     filter: drop-shadow(0 0 10px gold);
     animation: starTwinkle 2s ease-in-out infinite;
 }
@@ -185,7 +187,7 @@ body {
 }
 
 .shop-banner a {
-    padding: 12px 20px;
+    padding: 10px 18px;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -199,6 +201,18 @@ body {
     background: var(--accent);
     color: #000 !important;
     transform: translateY(-2px);
+}
+
+.shop-banner .play-now {
+    background: var(--accent);
+    color: #000 !important;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.shop-banner .play-now:hover {
+    background: white;
+    color: var(--accent) !important;
 }
 
 /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
@@ -552,30 +566,14 @@ body {
     border: 1px solid var(--border-color); 
 }
 
-/* ========== КОМАНДА ========== */
-.team-container { 
-    text-align: center; 
-    margin-top: 100px; 
-    padding: 60px; 
-    background: var(--card-bg); 
-    border-radius: 40px; 
-}
-
-.member-list { 
-    margin: 40px 0; 
-    font-size: 20px; 
-    line-height: 2; 
-}
-
-.member-list b { 
-    color: var(--accent); 
-}
-
-.last-update { 
-    text-align: center; 
-    color: var(--text-tertiary); 
-    font-size: 11px; 
-    margin-top: 50px; 
+/* ========== ФУТЕР ========== */
+.footer-bottom {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 50px;
 }
 
 /* ========== МОДАЛЬНОЕ ОКНО ПРАВИЛ ========== */
@@ -604,4 +602,13 @@ body {
     width: 90%; 
     max-height: 85vh; 
     border-radius: 30px; 
-    border: 1px
+    border: 1px solid var(--accent); 
+    overflow-y: auto; 
+    transform: translateY(-50px); 
+    opacity: 0; 
+    transition: all 0.5s ease; 
+    position: relative;
+}
+
+.modal.show .modal-content { 
+   

@@ -4,8 +4,1049 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SweetLand | 1.21.8</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
+        :root {
+            --accent: #a366ff;
+            --accent-light: #b57aff;
+            --accent-dark: #8a4cdd;
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.6);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --text-tertiary: #70707a;
+            --border-color: rgba(163, 102, 255, 0.2);
+            --border-hover: rgba(163, 102, 255, 0.5);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.2);
+            --glow: 0 0 20px rgba(163, 102, 255, 0.3);
+            --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            --snow-opacity: 1;
+        }
+
+        /* ========== СВЕТЛАЯ ТЕМА ========== */
+        body.light-theme {
+            --accent: #8a5be0;
+            --accent-light: #9b6ff0;
+            --accent-dark: #6b3fc0;
+            --bg: #f5f5fa;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #1a1a24;
+            --text-secondary: #4a4a5a;
+            --text-tertiary: #8a8a9a;
+            --border-color: rgba(138, 91, 224, 0.15);
+            --border-hover: rgba(138, 91, 224, 0.4);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-accent: 0 8px 32px rgba(138, 91, 224, 0.15);
+            --glow: 0 0 20px rgba(138, 91, 224, 0.2);
+            --snow-opacity: 0.2;
+        }
+
+        body.light-theme .shop-banner {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-theme .info-card,
+        body.light-theme .faq-card,
+        body.light-theme .privacy-card,
+        body.light-theme .detailed-faq-item {
+            background: white;
+        }
+
+        /* ========== ГЛОБАЛЬНЫЕ СТИЛИ ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.2s ease;
+            line-height: 1.5;
+        }
+
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* ========== СНЕГ ========== */
+        #snow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: var(--snow-opacity);
+            transition: opacity 0.3s ease;
+        }
+
+        /* ========== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ========== */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 2500;
+            cursor: pointer;
+        }
+
+        .theme-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+        }
+
+        .theme-icon:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        /* ========== НАВИГАЦИОННЫЙ ОВАЛ ========== */
+        .nav-oval-container {
+            position: fixed;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2500;
+            width: 90%;
+            max-width: 1400px;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .shop-banner {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 100px;
+            border: 2px solid var(--accent);
+            box-shadow: var(--shadow-accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            width: 100%;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .banner-star {
+            font-size: 20px;
+            color: gold;
+            filter: drop-shadow(0 0 10px gold);
+            animation: starGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes starGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px gold); }
+            50% { filter: drop-shadow(0 0 20px gold); }
+        }
+
+        .banner-title {
+            font-weight: 900;
+            font-size: 18px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .banner-center {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .banner-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .shop-banner a {
+            padding: 8px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .shop-banner a:not(.play-now):hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .shop-banner .play-now {
+            background: var(--accent);
+            color: white !important;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(163, 102, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 12px rgba(163, 102, 255, 0.3); }
+            50% { box-shadow: 0 4px 20px rgba(163, 102, 255, 0.6); }
+        }
+
+        .shop-banner .play-now:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(163, 102, 255, 0.8);
+        }
+
+        /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
+        .side-trigger {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 1500;
+            cursor: pointer;
+        }
+
+        .side-trigger .line {
+            width: 32px;
+            height: 3px;
+            background: var(--accent);
+            margin: 7px 0;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .side-trigger:hover .line:nth-child(1) {
+            transform: translateY(-2px);
+        }
+
+        .side-trigger:hover .line:nth-child(3) {
+            transform: translateY(2px);
+        }
+
+        .side-panel {
+            position: fixed;
+            left: -350px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: var(--bg-secondary);
+            z-index: 2000;
+            transition: left 0.3s ease;
+            padding: 80px 24px;
+            border-right: 2px solid var(--accent);
+            box-shadow: 10px 0 40px rgba(163, 102, 255, 0.2);
+        }
+
+        .side-panel.active {
+            left: 0;
+        }
+
+        .panel-handle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(163, 102, 255, 0.1);
+            color: var(--accent);
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .panel-handle:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .panel-logo {
+            color: var(--accent);
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .panel-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 20px;
+            margin: 20px 0;
+            transition: all 0.2s ease;
+            padding-left: 12px;
+            border-left: 2px solid transparent;
+        }
+
+        .panel-links a:hover {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            padding-left: 16px;
+            transform: translateX(4px);
+        }
+
+        .panel-social {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: rgba(163, 102, 255, 0.08);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-link span {
+            font-size: 18px;
+        }
+
+        .social-link:hover {
+            transform: translateX(4px);
+            border-color: transparent;
+        }
+
+        .social-link.discord:hover {
+            background: #5865F2;
+            color: white;
+        }
+
+        .social-link.telegram:hover {
+            background: #0088cc;
+            color: white;
+        }
+
+        .social-link.youtube:hover {
+            background: #FF0000;
+            color: white;
+        }
+
+        /* ========== ГЕРОЙ ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 5%;
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(circle at 50% 50%, rgba(163, 102, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 700px;
+        }
+
+        .hero-image-box {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            font-size: clamp(60px, 10vw, 120px);
+            font-weight: 900;
+            line-height: 0.9;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); }
+            50% { filter: drop-shadow(0 0 40px var(--accent)); }
+        }
+
+        .hero-tagline {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .ip-container {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-ip {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(163, 102, 255, 0.3);
+        }
+
+        .btn-ip:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(163, 102, 255, 0.4);
+            background: var(--accent-light);
+        }
+
+        .btn-version {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 2px solid var(--border-color);
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: default;
+            backdrop-filter: blur(10px);
+        }
+
+        .giant-img {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            filter: drop-shadow(0 0 40px rgba(163, 102, 255, 0.3));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .large-neon {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            max-width: 500px;
+            max-height: 500px;
+            background: var(--accent);
+            filter: blur(120px);
+            opacity: 0.15;
+            border-radius: 50%;
+            z-index: -1;
+            animation: neonPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.15; transform: scale(1); }
+            50% { opacity: 0.25; transform: scale(1.1); }
+        }
+
+        #copyNotice {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 4000;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(163, 102, 255, 0.3);
+            pointer-events: none;
+        }
+
+        /* ========== СЕКЦИИ ========== */
+        .section {
+            padding: 80px 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 800;
+            margin-bottom: 50px;
+            color: var(--text-primary);
+        }
+
+        .section-title span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .section-title:hover span::after {
+            transform: scaleX(1);
+        }
+
+        /* ========== КАРТОЧКИ ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 24px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(163, 102, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .info-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .info-card:hover::before {
+            opacity: 1;
+        }
+
+        .info-card .icon {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ========== FAQ ========== */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .faq-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 24px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .faq-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .faq-card .icon {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .faq-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .faq-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ========== ЗАЩИТА ДАННЫХ ========== */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .privacy-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 24px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .privacy-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .privacy-card .icon {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .privacy-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .privacy-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ========== ДЕТАЛЬНЫЙ FAQ ========== */
+        .detailed-faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .detailed-faq-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .detailed-faq-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .detailed-faq-item h3 {
+            background: rgba(163, 102, 255, 0.1);
+            padding: 20px 24px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .faq-answer {
+            padding: 24px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ========== МОДАЛЬНОЕ ОКНО ПРАВИЛ ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            margin: 2% auto;
+            padding: 40px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 90vh;
+            border-radius: 30px;
+            border: 2px solid var(--accent);
+            overflow-y: auto;
+            transform: translateY(-30px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 50px rgba(163, 102, 255, 0.3);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff4c4c;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 76, 76, 0.1);
+        }
+
+        .close-modal:hover {
+            background: #ff4c4c;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .rules-column {
+            flex: 1;
+        }
+
+        .rules-main-title {
+            color: var(--accent);
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .rules-scroll-area {
+            padding-right: 10px;
+        }
+
+        .rules-scroll-area p {
+            color: var(--text-primary) !important;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .rules-scroll-area p:last-child {
+            border-bottom: none;
+        }
+
+        .rules-scroll-area b {
+            color: var(--accent);
+            font-size: 16px;
+        }
+
+        .rules-scroll-area h3 {
+            color: gold;
+            margin: 20px 0 10px;
+            font-size: 22px;
+        }
+
+        .punish {
+            color: #ff6666;
+            font-weight: 600;
+            font-size: 12px;
+            display: inline-block;
+            margin-left: 8px;
+            background: rgba(255, 68, 68, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 15px 0;
+        }
+
+        /* ========== ФУТЕР ========== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            padding: 60px 5% 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .footer-note {
+            color: var(--accent) !important;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
+            color: var(--text-tertiary);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .privacy-note {
+            color: var(--text-secondary) !important;
+            font-size: 12px !important;
+        }
+
+        /* ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== АДАПТАЦИЯ ========== */
+        @media (max-width: 1024px) {
+            .hero-layout {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ip-container {
+                justify-content: center;
+            }
+
+            .banner-center {
+                display: none;
+            }
+
+            .shop-banner {
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-oval-container {
+                width: 95%;
+            }
+
+            .banner-title {
+                font-size: 16px;
+            }
+
+            .shop-banner a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .banner-left {
+                gap: 4px;
+            }
+
+            .btn-ip, .btn-version {
+                padding: 12px 24px !important;
+                font-size: 16px !important;
+            }
+
+            .section {
+                padding: 40px 5%;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+
+            .rules-main-title {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner-right .play-now {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body class="dark no-select">
 
@@ -48,7 +1089,6 @@
         <a href="javascript:void(0)" onclick="openRules()">Правила</a>
     </div>
     
-    <!-- СОЦСЕТИ ВНИЗУ -->
     <div class="panel-social">
         <a href="https://discord.gg/GUKrAmY7bp" target="_blank" class="social-link discord">
             <span>💬</span> Discord
@@ -62,6 +1102,7 @@
     </div>
 </nav>
 
+<!-- ========== МОДАЛЬНОЕ ОКНО ПРАВИЛ ========== -->
 <div id="rules-modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeRules()">&times;</span>
@@ -119,25 +1160,28 @@
     </div>
 </div>
 
+<!-- ========== ГЕРОЙ ========== -->
 <header class="hero">
     <div class="hero-layout">
         <div class="hero-content reveal">
-            <h1 class="title large-title">SweetLand</h1>
-            <p class="hero-tagline large-tagline">Ванильное выживание на версии 1.21.8 без границ. <br> Твой мир — твои правила.</p>
+            <h1 class="title">SweetLand</h1>
+            <p class="hero-tagline">Ванильное выживание на версии 1.21.8 без границ. <br> Твой мир — твои правила.</p>
             <div class="ip-container">
-                <button class="btn-ip main-ip" onclick="copyIP()">play.sweet-land.fun</button>
-                <span class="btn-version main-ver">1.21.8</span>
+                <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
+                <span class="btn-version">1.21.8</span>
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <div class="neon-circle large-neon"></div>
-            <img src="images/5opka.png" alt="5opka" class="main-img giant-img">
+            <div class="large-neon"></div>
+            <img src="images/5opka.png" alt="5opka" class="giant-img">
         </div>
     </div>
     <div id="copyNotice">✔ IP Скопирован!</div>
 </header>
 
+<!-- ========== ОСОБЕННОСТИ ========== -->
 <section class="section reveal" id="features">
+    <h2 class="section-title">Особенности <span>сервера</span></h2>
     <div class="cards-grid">
         <div class="info-card">
             <div class="icon">🛡️</div>
@@ -162,9 +1206,10 @@
     </div>
 </section>
 
+<!-- ========== КАК НАЧАТЬ ========== -->
 <section class="section reveal" id="how-to-play">
     <h2 class="section-title">Как начать <span>играть</span>?</h2>
-    <div class="faq-grid">
+    <div class="cards-grid">
         <div class="info-card">
             <div class="icon">🚀</div>
             <h3>Версия 1.21.8</h3>
@@ -183,30 +1228,31 @@
     </div>
 </section>
 
-<section class="section faq-section reveal" id="faq">
+<!-- ========== FAQ ========== -->
+<section class="section reveal" id="faq">
     <h2 class="section-title">Ответы на <span>вопросы</span></h2>
     <div class="faq-grid">
-        <div class="info-card faq-card">
+        <div class="faq-card">
             <div class="icon">📅</div>
             <h3>Когда старт?</h3>
             <p>Проект в разработке — следи за новостями в Discord.</p>
         </div>
-        <div class="info-card faq-card">
+        <div class="faq-card">
             <div class="icon">🎮</div>
             <h3>Какая версия?</h3>
             <p>Сервер работает на актуальной версии 1.21.8.</p>
         </div>
-        <div class="info-card faq-card">
+        <div class="faq-card">
             <div class="icon">💬</div>
             <h3>Где общение?</h3>
             <p>Наш Discord — центр новостей и общения.</p>
         </div>
-        <div class="info-card faq-card">
+        <div class="faq-card">
             <div class="icon">🌙</div>
             <h3>Работает ли белая тема?</h3>
             <p>Да, нажми на луну в правом верхнем углу и увидишь!</p>
         </div>
-        <div class="info-card faq-card">
+        <div class="faq-card">
             <div class="icon">🔒</div>
             <h3>Как защищен аккаунт?</h3>
             <p>Мы используем современные методы защиты и шифрование данных.</p>
@@ -214,43 +1260,45 @@
     </div>
 </section>
 
-<section class="section privacy-section reveal">
+<!-- ========== ЗАЩИТА ДАННЫХ ========== -->
+<section class="section reveal">
     <h2 class="section-title">Защита <span>данных</span></h2>
     <div class="privacy-grid">
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">🔐</div>
             <h3>Шифрование данных</h3>
             <p>Все ваши личные данные защищены современными протоколами шифрования. Мы никогда не передаём информацию третьим лицам.</p>
         </div>
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">🛡️</div>
             <h3>Защита аккаунта</h3>
-            <p>Каждый аккаунт находится под надежной защитой. Система анти-чита и анти-ддос обеспечивают безопасность.</p>
+            <p>Каждый аккаунт находится под надежной защитой. Система анти-чита обеспечивает безопасность.</p>
         </div>
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">⚖️</div>
             <h3>Права владения</h3>
-            <p>Все ваши постройки и ресурсы принадлежат только вам. Администрация не вмешивается без веской причины.</p>
+            <p>Все ваши постройки и ресурсы принадлежат только вам. Администрация не вмешивается без причины.</p>
         </div>
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">📋</div>
             <h3>Политика конфиденциальности</h3>
-            <p>Мы не собираем лишнюю информацию. Только никнейм и статистика игры для работы сервера.</p>
+            <p>Мы не собираем лишнюю информацию. Только никнейм и статистика игры.</p>
         </div>
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">🌍</div>
             <h3>GDPR соответствие</h3>
-            <p>Сервер соответствует европейским стандартам защиты данных. Вы можете запросить удаление своих данных.</p>
+            <p>Сервер соответствует европейским стандартам защиты данных.</p>
         </div>
-        <div class="info-card privacy-card">
+        <div class="privacy-card">
             <div class="icon">⏰</div>
             <h3>Хранение данных</h3>
-            <p>Данные хранятся на защищенных серверах в Европе. Резервное копирование происходит каждые 24 часа.</p>
+            <p>Данные хранятся на защищенных серверах с резервным копированием.</p>
         </div>
     </div>
 </section>
 
-<section class="section detailed-faq reveal">
+<!-- ========== ДЕТАЛЬНЫЙ FAQ ========== -->
+<section class="section reveal">
     <h2 class="section-title">Часто <span>задаваемые</span> вопросы</h2>
     <div class="detailed-faq-grid">
         <div class="detailed-faq-item">
@@ -299,6 +1347,7 @@
     </div>
 </section>
 
+<!-- ========== ФУТЕР ========== -->
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-section">
@@ -331,7 +1380,7 @@
 </footer>
 
 <script>
-    // ========== СНЕГ (CANVAS) ==========
+    // ========== СНЕГ ==========
     const canvas = document.getElementById('snow');
     const ctx = canvas.getContext('2d');
     
@@ -397,24 +1446,12 @@
         const modal = document.getElementById('rules-modal');
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
-        
-        setTimeout(() => {
-            const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
-            rulesElements.forEach(el => {
-                el.classList.add('visible');
-            });
-        }, 300);
     }
     
     function closeRules() {
         const modal = document.getElementById('rules-modal');
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
-        
-        const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
-        rulesElements.forEach(el => {
-            el.classList.remove('visible');
-        });
     }
     
     // ========== КОПИРОВАНИЕ IP ==========
@@ -424,8 +1461,7 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(ip).then(() => {
                 showCopyNotice();
-            }).catch(err => {
-                console.error('Ошибка копирования: ', err);
+            }).catch(() => {
                 fallbackCopy();
             });
         } else {
@@ -438,20 +1474,11 @@
             textarea.style.position = 'fixed';
             textarea.style.opacity = '0';
             textarea.style.left = '-9999px';
-            textarea.style.top = '0';
             document.body.appendChild(textarea);
-            textarea.focus();
             textarea.select();
-            
-            try {
-                document.execCommand('copy');
-                showCopyNotice();
-            } catch (err) {
-                console.error('Ошибка копирования: ', err);
-                alert('Не удалось скопировать IP. Скопируй вручную: play.sweet-land.fun');
-            }
-            
+            document.execCommand('copy');
             document.body.removeChild(textarea);
+            showCopyNotice();
         }
         
         function showCopyNotice() {
@@ -497,7 +1524,7 @@
         }
     }
     
-    // ========== ЗАКРЫТИЕ МОДАЛКИ ПО ESC ==========
+    // ========== ЗАКРЫТИЕ ПО ESC ==========
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             const modal = document.getElementById('rules-modal');

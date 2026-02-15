@@ -239,7 +239,6 @@
     
     function drawSnow() {
         ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = 'white';
         
         for (let i = 0; i < particles.length; i++) {
             const p = particles[i];
@@ -278,35 +277,24 @@
         const modal = document.getElementById('rules-modal');
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
-        
-        setTimeout(() => {
-            const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
-            rulesElements.forEach(el => {
-                el.classList.add('visible');
-            });
-        }, 300);
     }
     
     function closeRules() {
         const modal = document.getElementById('rules-modal');
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
-        
-        const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
-        rulesElements.forEach(el => {
-            el.classList.remove('visible');
-        });
     }
     
     // ========== КОПИРОВАНИЕ IP ==========
     function copyIP() {
         const ip = 'play.sweet-land.fun';
         
-        if (navigator.clipboard && navigator.clipboard.writeText) {
+        // Современный способ с Clipboard API
+        if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(ip).then(() => {
                 showCopyNotice();
             }).catch(err => {
-                console.error('Ошибка копирования: ', err);
+                console.error('Clipboard API error:', err);
                 fallbackCopy();
             });
         } else {
@@ -318,16 +306,22 @@
             textarea.value = ip;
             textarea.style.position = 'fixed';
             textarea.style.opacity = '0';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
             document.body.appendChild(textarea);
+            textarea.focus();
             textarea.select();
-            textarea.setSelectionRange(0, 99999);
             
             try {
-                document.execCommand('copy');
-                showCopyNotice();
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyNotice();
+                } else {
+                    alert('Нажми Ctrl+C чтобы скопировать: ' + ip);
+                }
             } catch (err) {
-                console.error('Ошибка копирования: ', err);
-                alert('Не удалось скопировать IP. Попробуй вручную: play.sweet-land.fun');
+                console.error('Fallback error:', err);
+                alert('Скопируй вручную: ' + ip);
             }
             
             document.body.removeChild(textarea);
@@ -383,15 +377,10 @@
             if (modal.classList.contains('show')) {
                 closeRules();
             }
-            
-            const panel = document.getElementById('side-panel');
-            if (panel.classList.contains('active')) {
-                togglePanel();
-            }
         }
     });
     
-    // ========== ЗАКРЫТИЕ ПАНЕЛИ ПРИ КЛИКЕ ВНЕ ЕЁ ==========
+    // ========== ЗАКРЫТИЕ ПАНЕЛИ ПРИ КЛИКЕ ВНЕ ==========
     document.addEventListener('click', function(e) {
         const panel = document.getElementById('side-panel');
         const trigger = document.querySelector('.side-trigger');

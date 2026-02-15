@@ -74,12 +74,12 @@
         }
 
         body.light-theme .hero {
-            background: radial-gradient(circle at 50% 50%, rgba(255, 123, 92, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 30%, rgba(255, 123, 92, 0.15) 0%, transparent 70%);
         }
 
         body.light-theme .large-neon {
             background: var(--neon-color);
-            opacity: 0.15;
+            opacity: 0.2;
         }
 
         body.light-theme .title {
@@ -301,7 +301,7 @@
             background: var(--accent);
             color: white !important;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(163, 102, 255, 0.3);
+            box-shadow: 0 4px 12px var(--accent);
             animation: pulse 2s infinite;
         }
 
@@ -501,7 +501,7 @@
             padding: 100px 5%;
             position: relative;
             z-index: 2;
-            background: radial-gradient(circle at 50% 30%, var(--neon-color) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 30%, var(--neon-color) 0%, transparent 70%);
             transition: background 0.3s ease;
             overflow: hidden;
         }
@@ -530,7 +530,7 @@
         }
 
         .title {
-            font-size: clamp(40px, 10vw, 120px);
+            font-size: clamp(40px, 10vw, 110px);
             font-weight: 900;
             line-height: 0.9;
             background: linear-gradient(135deg, var(--text-primary), var(--accent));
@@ -541,12 +541,12 @@
         }
 
         @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); transform: scale(1); }
-            50% { filter: drop-shadow(0 0 50px var(--accent)); transform: scale(1.02); }
+            0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); }
+            50% { filter: drop-shadow(0 0 40px var(--accent)); }
         }
 
         .hero-tagline {
-            font-size: clamp(16px, 3vw, 24px);
+            font-size: clamp(16px, 3vw, 22px);
             color: var(--text-secondary);
             margin-bottom: 30px;
             line-height: 1.4;
@@ -633,7 +633,7 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
 
         .large-neon {
@@ -694,7 +694,7 @@
 
         .section-title {
             text-align: center;
-            font-size: clamp(28px, 5vw, 42px);
+            font-size: clamp(28px, 5vw, 40px);
             font-weight: 800;
             margin-bottom: 40px;
             color: var(--text-primary);
@@ -1118,7 +1118,13 @@
             }
 
             .shop-banner {
-                padding: 6px 10px;
+                padding: 6px 12px;
+                justify-content: flex-start;
+                gap: 10px;
+            }
+
+            .banner-left {
+                flex-shrink: 0;
             }
 
             .banner-title {
@@ -1129,19 +1135,41 @@
                 font-size: 16px;
             }
 
+            /* Показываем центральную часть на телефонах */
             .banner-center {
+                display: flex;
+                flex: 1;
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 4px;
+                padding: 2px 0;
+            }
+
+            .banner-center::-webkit-scrollbar {
                 display: none;
             }
 
+            .banner-center a {
+                padding: 4px 8px;
+                font-size: 11px;
+                white-space: nowrap;
+                background: rgba(163, 102, 255, 0.1);
+            }
+
+            .banner-right {
+                flex-shrink: 0;
+            }
+
             .shop-banner a {
-                padding: 6px 12px;
-                font-size: 12px;
+                padding: 6px 10px;
+                font-size: 11px;
             }
 
             .banner-right .play-now {
-                display: block;
                 padding: 6px 12px;
-                font-size: 12px;
+                font-size: 11px;
             }
 
             .theme-toggle {
@@ -1165,10 +1193,14 @@
                 margin: 5px 0;
             }
 
+            .hero {
+                padding: 80px 4%;
+            }
+
             .hero-layout {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 30px;
             }
 
             .hero-content {
@@ -1196,12 +1228,12 @@
             }
 
             .giant-img {
-                max-width: 300px;
+                max-width: 280px;
             }
 
             .large-neon {
-                max-width: 400px;
-                max-height: 400px;
+                max-width: 350px;
+                max-height: 350px;
             }
 
             .section {
@@ -1233,7 +1265,7 @@
 
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
             }
 
             .footer-section {
@@ -1266,7 +1298,7 @@
 
         @media (max-width: 480px) {
             .title {
-                font-size: 36px;
+                font-size: 40px;
             }
 
             .hero-tagline {
@@ -1274,29 +1306,17 @@
             }
 
             .giant-img {
-                max-width: 250px;
+                max-width: 220px;
             }
 
             .large-neon {
-                max-width: 300px;
-                max-height: 300px;
+                max-width: 280px;
+                max-height: 280px;
             }
 
-            .banner-left {
-                gap: 4px;
-            }
-
-            .banner-title {
-                font-size: 12px;
-            }
-
-            .banner-star {
-                font-size: 14px;
-            }
-
-            .shop-banner a {
-                padding: 4px 8px;
-                font-size: 11px;
+            .banner-center a {
+                padding: 4px 6px;
+                font-size: 10px;
             }
 
             .btn-ip, .btn-version {
@@ -1306,7 +1326,7 @@
 
             .section-title {
                 font-size: 24px;
-                margin-bottom: 30px;
+                margin-bottom: 25px;
             }
         }
     </style>

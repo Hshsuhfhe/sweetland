@@ -501,9 +501,30 @@
             padding: 100px 5%;
             position: relative;
             z-index: 2;
-            background: radial-gradient(circle at 50% 30%, var(--neon-color) 0%, transparent 70%);
             transition: background 0.3s ease;
             overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: var(--neon-color);
+            filter: blur(120px);
+            opacity: 0.15;
+            border-radius: 50%;
+            z-index: -1;
+            animation: neonPulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.15; width: 800px; height: 800px; }
+            50% { opacity: 0.25; width: 900px; height: 900px; }
         }
 
         .hero-layout {
@@ -514,6 +535,8 @@
             max-width: 1400px;
             margin: 0 auto;
             gap: 40px;
+            position: relative;
+            z-index: 3;
         }
 
         .hero-content {
@@ -541,8 +564,8 @@
         }
 
         @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); }
-            50% { filter: drop-shadow(0 0 40px var(--accent)); }
+            0%, 100% { filter: drop-shadow(0 0 15px var(--accent)); }
+            50% { filter: drop-shadow(0 0 30px var(--accent)); }
         }
 
         .hero-tagline {
@@ -629,33 +652,13 @@
             height: auto;
             filter: drop-shadow(0 0 40px var(--accent));
             animation: float 4s ease-in-out infinite;
+            position: relative;
+            z-index: 3;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
-        }
-
-        .large-neon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            max-width: 600px;
-            max-height: 600px;
-            background: var(--neon-color);
-            filter: blur(100px);
-            opacity: 0.2;
-            border-radius: 50%;
-            z-index: -1;
-            animation: neonPulse 4s ease-in-out infinite;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { opacity: 0.2; width: 100%; height: 100%; }
-            50% { opacity: 0.3; width: 110%; height: 110%; }
         }
 
         #copyNotice {
@@ -876,7 +879,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 3000;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -890,34 +893,34 @@
         .modal-content {
             background: var(--bg-secondary);
             margin: 2% auto;
-            padding: 30px 20px;
+            padding: 40px;
             width: 95%;
             max-width: 1000px;
             max-height: 90vh;
-            border-radius: 20px;
+            border-radius: 30px;
             border: 2px solid var(--accent);
             overflow-y: auto;
-            transform: translateY(-50px) scale(0.9);
+            transform: translateY(-30px);
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             position: relative;
             box-shadow: 0 0 50px var(--accent);
         }
 
         .modal.show .modal-content {
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             opacity: 1;
         }
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 25px;
             font-size: 2rem;
             font-weight: 700;
             color: #ff4c4c;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             z-index: 10;
             width: 40px;
             height: 40px;
@@ -931,7 +934,7 @@
         .close-modal:hover {
             background: #ff4c4c;
             color: white;
-            transform: rotate(360deg) scale(1.1);
+            transform: rotate(90deg);
         }
 
         .rules-column {
@@ -941,8 +944,8 @@
         .rules-main-title {
             color: var(--accent);
             text-align: center;
-            font-size: clamp(24px, 5vw, 32px);
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 30px;
             font-weight: 900;
         }
 
@@ -952,18 +955,11 @@
 
         .rules-scroll-area p {
             color: var(--text-primary) !important;
-            margin-bottom: 10px;
-            line-height: 1.4;
+            margin-bottom: 15px;
+            line-height: 1.6;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
-
-        .rules-scroll-area p:hover {
-            border-bottom-color: var(--accent);
-            padding-left: 5px;
-            transform: translateX(2px);
+            padding-bottom: 12px;
+            font-size: 15px;
         }
 
         .rules-scroll-area p:last-child {
@@ -972,44 +968,32 @@
 
         .rules-scroll-area b {
             color: var(--accent);
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .rules-scroll-area h3 {
-            color: gold;
-            margin: 15px 0 8px;
-            font-size: 20px;
+            color: #ffd700;
+            margin: 20px 0 15px;
+            font-size: 22px;
         }
 
         .punish {
             color: #ff6666;
             font-weight: 600;
-            font-size: 11px;
-            display: inline-block;
-            margin-left: 8px;
-            background: rgba(255, 68, 68, 0.15);
-            padding: 2px 6px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .punish:hover {
-            background: #ff6666;
-            color: white;
-            transform: scale(1.05);
+            font-size: 13px;
+            display: block;
+            margin-top: 5px;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            width: fit-content;
         }
 
         hr {
             border: none;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            margin: 15px 0;
-            animation: linePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes linePulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            margin: 20px 0;
         }
 
         /* ========== ФУТЕР ========== */
@@ -1135,7 +1119,6 @@
                 font-size: 16px;
             }
 
-            /* Показываем центральную часть на телефонах */
             .banner-center {
                 display: flex;
                 flex: 1;
@@ -1197,6 +1180,16 @@
                 padding: 80px 4%;
             }
 
+            .hero::before {
+                width: 400px;
+                height: 400px;
+            }
+
+            @keyframes neonPulse {
+                0%, 100% { opacity: 0.15; width: 400px; height: 400px; }
+                50% { opacity: 0.25; width: 450px; height: 450px; }
+            }
+
             .hero-layout {
                 flex-direction: column;
                 text-align: center;
@@ -1229,11 +1222,6 @@
 
             .giant-img {
                 max-width: 280px;
-            }
-
-            .large-neon {
-                max-width: 350px;
-                max-height: 350px;
             }
 
             .section {
@@ -1283,20 +1271,29 @@
             }
 
             .modal-content {
-                padding: 20px 15px;
-                margin: 5% auto;
+                padding: 30px 20px;
             }
 
             .rules-main-title {
-                font-size: 22px;
+                font-size: 24px;
             }
 
             .rules-scroll-area p {
-                font-size: 13px;
+                font-size: 14px;
             }
         }
 
         @media (max-width: 480px) {
+            .hero::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            @keyframes neonPulse {
+                0%, 100% { opacity: 0.15; width: 300px; height: 300px; }
+                50% { opacity: 0.25; width: 350px; height: 350px; }
+            }
+
             .title {
                 font-size: 40px;
             }
@@ -1307,11 +1304,6 @@
 
             .giant-img {
                 max-width: 220px;
-            }
-
-            .large-neon {
-                max-width: 280px;
-                max-height: 280px;
             }
 
             .banner-center a {
@@ -1455,7 +1447,6 @@
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <div class="large-neon"></div>
             <img src="images/5opka.png" alt="5opka" class="giant-img">
         </div>
     </div>

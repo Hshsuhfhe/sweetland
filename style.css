@@ -72,7 +72,6 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
 
 /* Copy notice */
 #copyNotice { position:fixed; bottom:50px; left:50%; transform:translateX(-50%); background:var(--accent); padding:15px 30px; border-radius:15px; opacity:0; transition:0.3s; z-index:4000; font-weight:bold; }
-
 /* Магазин-овал */
 .shop-banner {
     position: fixed;
@@ -80,22 +79,22 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
     left: 50%;
     transform: translateX(-50%);
     background: #000;
-    padding: 12px 40px;
+    padding: 12px 45px;
     border-radius: 50px;
     border: 2px solid var(--accent);
-    box-shadow: 0 0 20px rgba(163, 102, 255, 0.5);
+    box-shadow: 0 0 20px rgba(163, 102, 255, 0.4);
     z-index: 2500;
-    transition: 0.3s;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .shop-banner a {
     color: #fff;
     text-decoration: none;
     font-weight: 900;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 1px;
 }
 .shop-banner:hover {
-    box-shadow: 0 0 30px var(--accent);
+    box-shadow: 0 0 35px var(--accent);
     transform: translateX(-50%) scale(1.05);
 }
 
@@ -107,6 +106,7 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
     width: 90%;
     max-width: 1400px;
     margin: 0 auto;
+    padding-top: 50px;
 }
 
 .hero-image-box {
@@ -117,44 +117,45 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
 }
 
 .main-img {
-    width: 600px; /* Размер картинки */
+    width: 600px; 
     height: auto;
     z-index: 10;
-    animation: floating 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(163,102,255,0.3));
+    animation: floating 5s ease-in-out infinite;
 }
 
-/* Неон под картинкой */
+/* Неон под Пятеркой */
 .neon-circle {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     background: var(--accent);
-    filter: blur(100px);
-    opacity: 0.3;
+    filter: blur(130px);
+    opacity: 0.35;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* Анимация парения */
 @keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(2deg); }
 }
 
-/* Анимации появления (Reveal) */
+/* БЕСКОНЕЧНАЯ АНИМАЦИЯ ПРИ СКРОЛЛЕ */
 .reveal {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-out;
+    transform: translateY(60px);
+    transition: all 0.9s cubic-bezier(0.2, 1, 0.3, 1);
 }
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Адаптация для телефонов */
-@media (max-width: 1024px) {
+/* Адаптация под мобилки */
+@media (max-width: 1100px) {
     .hero-layout { flex-direction: column; text-align: center; }
-    .hero-content { text-align: center; margin-bottom: 50px; }
-    .main-img { width: 300px; }
+    .hero-content { text-align: center; margin-bottom: 60px; }
+    .main-img { width: 320px; }
+    .neon-circle { width: 250px; height: 250px; }
 }

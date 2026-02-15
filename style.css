@@ -144,8 +144,8 @@ body {
     transform: translateX(-50%);
     z-index: 2500;
     width: auto;
-    min-width: 600px;
-    max-width: 90%;
+    min-width: 700px;
+    max-width: 95%;
 }
 
 .shop-banner {
@@ -157,44 +157,64 @@ body {
     box-shadow: 0 0 30px rgba(163, 102, 255, 0.4);
     display: flex;
     align-items: center;
-    padding: 5px 10px;
+    padding: 8px 20px;
     overflow: hidden;
     width: 100%;
-    gap: 5px;
+    gap: 10px;
 }
 
 .banner-star {
-    font-size: 20px;
+    font-size: 22px;
     color: gold;
-    margin-left: 15px;
+    margin-left: 10px;
     filter: drop-shadow(0 0 10px gold);
     animation: starTwinkle 2s ease-in-out infinite;
 }
 
 @keyframes starTwinkle {
     0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 15px gold); }
+    50% { opacity: 1; transform: scale(1.2); }
 }
 
 .banner-title {
     font-weight: 900;
-    font-size: 18px;
+    font-size: 20px;
     background: linear-gradient(45deg, #fff, var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-right: 20px;
+    margin-right: 30px;
     letter-spacing: 2px;
 }
 
 .shop-banner a {
-    padding: 10px 18px;
+    padding: 10px 20px;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     border-radius: 100px;
     white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-banner a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.shop-banner a:hover::before {
+    width: 200px;
+    height: 200px;
 }
 
 .shop-banner a:hover {
@@ -207,7 +227,13 @@ body {
     background: var(--accent);
     color: #000 !important;
     font-weight: 900;
-    margin-left: 10px;
+    margin-left: 15px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 var(--accent); }
+    50% { box-shadow: 0 0 20px 5px var(--accent); }
 }
 
 .shop-banner .play-now:hover {
@@ -233,6 +259,18 @@ body {
     transition: 0.3s; 
 }
 
+.side-trigger:hover .line:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.side-trigger:hover .line:nth-child(2) {
+    opacity: 0;
+}
+
+.side-trigger:hover .line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 .side-panel { 
     position: fixed; 
     left: -350px; 
@@ -241,7 +279,7 @@ body {
     height: 100%; 
     background: var(--panel-bg);
     z-index: 2000; 
-    transition: 0.5s; 
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
     padding: 80px 30px; 
     border-right: 2px solid var(--accent);
     font-size: 20px; 
@@ -274,7 +312,7 @@ body {
 .panel-handle:hover {
     background: var(--accent);
     color: #000;
-    transform: rotate(90deg);
+    transform: rotate(360deg) scale(1.1);
 }
 
 .panel-logo {
@@ -285,6 +323,12 @@ body {
     font-weight: 900;
     letter-spacing: 3px;
     text-shadow: 0 0 20px var(--accent);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px var(--accent); }
+    50% { text-shadow: 0 0 40px var(--accent), 0 0 60px var(--accent); }
 }
 
 .panel-links a { 
@@ -297,6 +341,21 @@ body {
     letter-spacing: 1.5px;
     position: relative;
     padding-left: 15px;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.panel-links a:nth-child(1) { animation-delay: 0.1s; }
+.panel-links a:nth-child(2) { animation-delay: 0.2s; }
+.panel-links a:nth-child(3) { animation-delay: 0.3s; }
+.panel-links a:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .panel-links a::before {
@@ -345,15 +404,34 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.social-link:nth-child(1) { animation-delay: 0.5s; }
+.social-link:nth-child(2) { animation-delay: 0.6s; }
+.social-link:nth-child(3) { animation-delay: 0.7s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .social-link span {
     font-size: 20px;
+    transition: transform 0.3s ease;
 }
 
 .social-link:hover {
-    transform: translateX(5px);
+    transform: translateX(5px) scale(1.05);
     border-color: transparent;
+}
+
+.social-link:hover span {
+    transform: rotate(360deg);
 }
 
 .social-link.discord:hover {
@@ -412,6 +490,12 @@ body {
     background: linear-gradient(var(--text-primary), var(--accent)); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
+    animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); }
+    50% { filter: drop-shadow(0 0 50px var(--accent)); }
 }
 
 .large-title { 
@@ -440,31 +524,55 @@ body {
     margin-top: 20px; 
 }
 
+/* ========== КНОПКИ IP И ВЕРСИИ ========== */
 .btn-ip, .btn-version { 
     border: none; 
     padding: 12px 25px; 
     border-radius: 12px; 
     font-weight: 900; 
-    cursor: pointer; 
     font-size: 18px; 
-    transition: 0.3s; 
+    transition: all 0.3s ease; 
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-ip { 
     background: var(--accent); 
     color: white; 
+    cursor: pointer; 
+    box-shadow: 0 0 15px rgba(163, 102, 255, 0.3);
 }
 
 .btn-ip:hover { 
     transform: scale(1.05); 
     filter: brightness(1.2); 
+    box-shadow: 0 0 30px var(--accent);
+}
+
+.btn-ip::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ip:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-version { 
-    background: var(--accent) !important; 
-    color: white !important; 
-    opacity: 0.9;
-    pointer-events: none; 
+    background: rgba(255, 255, 255, 0.1) !important; 
+    color: #ccc !important; 
+    cursor: default !important;
+    pointer-events: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .main-ip {
@@ -495,11 +603,41 @@ body {
     opacity: 0.35;
     border-radius: 50%;
     z-index: 1;
+    animation: neonPulse 3s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
 }
 
 @keyframes floating {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-30px) rotate(2deg); }
+}
+
+#copyNotice { 
+    position: fixed; 
+    bottom: 50px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    background: var(--accent); 
+    color: white;
+    padding: 15px 30px; 
+    border-radius: 15px; 
+    opacity: 0; 
+    transition: 0.3s; 
+    z-index: 4000; 
+    font-weight: bold; 
+    box-shadow: 0 0 30px var(--accent);
+    animation: bounceIn 0.5s;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3) translateX(-50%); opacity: 0; }
+    50% { transform: scale(1.05) translateX(-50%); }
+    70% { transform: scale(0.9) translateX(-50%); }
+    100% { transform: scale(1) translateX(-50%); opacity: 1; }
 }
 
 /* ========== СЕКЦИИ ========== */
@@ -525,10 +663,28 @@ body {
     overflow: hidden; 
 }
 
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(163, 102, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.8s, height 0.8s;
+}
+
+.info-card:hover::before {
+    width: 500px;
+    height: 500px;
+}
+
 .info-card:hover { 
     border-color: var(--accent); 
-    background: rgba(163,102,255,0.04); 
-    transform: translateY(-5px); 
+    transform: translateY(-10px) scale(1.02); 
+    box-shadow: 0 10px 30px rgba(163, 102, 255, 0.2);
 }
 
 .info-card h3 { 
@@ -536,17 +692,33 @@ body {
     font-size: 22px; 
     font-weight: 900; 
     color: var(--text-primary);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover h3 {
+    transform: translateX(5px);
+    color: var(--accent);
 }
 
 .info-card p { 
     color: var(--text-secondary); 
     line-height: 1.6; 
     font-size: 15px; 
+    transition: color 0.3s ease;
+}
+
+.info-card:hover p {
+    color: var(--text-primary);
 }
 
 .info-card .icon { 
     font-size: 28px; 
     color: var(--accent); 
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover .icon {
+    transform: scale(1.2) rotate(360deg);
 }
 
 .section-title { 
@@ -559,11 +731,65 @@ body {
 
 .section-title span { 
     color: var(--accent); 
+    position: relative;
+    display: inline-block;
+}
+
+.section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.section-title:hover span::after {
+    transform: scaleX(1);
 }
 
 .faq-card { 
     background: rgba(255,255,255,0.01); 
     border: 1px solid var(--border-color); 
+}
+
+/* ========== КОМАНДА ========== */
+.team-container { 
+    text-align: center; 
+    margin-top: 100px; 
+    padding: 60px; 
+    background: var(--card-bg); 
+    border-radius: 40px; 
+    border: 1px solid var(--border-color);
+}
+
+.member-list { 
+    margin: 40px 0; 
+    font-size: 20px; 
+    line-height: 2; 
+}
+
+.member-list p {
+    transition: transform 0.3s ease;
+}
+
+.member-list p:hover {
+    transform: translateX(10px);
+    color: var(--accent);
+}
+
+.member-list b { 
+    color: var(--accent); 
+}
+
+.last-update { 
+    text-align: center; 
+    color: var(--text-tertiary); 
+    font-size: 11px; 
+    margin-top: 50px; 
 }
 
 /* ========== ФУТЕР ========== */
@@ -608,7 +834,220 @@ body {
     opacity: 0; 
     transition: all 0.5s ease; 
     position: relative;
+    box-shadow: 0 0 50px rgba(163, 102, 255, 0.3);
 }
 
 .modal.show .modal-content { 
-   
+    transform: translateY(0); 
+    opacity: 1; 
+}
+
+.close-modal { 
+    position: absolute; 
+    top: 20px; 
+    right: 25px; 
+    font-size: 3rem; 
+    font-weight: 900; 
+    color: #ff4c4c; 
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 76, 76, 0.1);
+}
+
+.close-modal:hover { 
+    transform: scale(1.2) rotate(90deg); 
+    background: #ff4c4c;
+    color: white;
+}
+
+.rules-column { 
+    flex: 1; 
+    overflow-y: auto; 
+    max-height: 80vh; 
+}
+
+.rules-main-title {
+    color: var(--accent);
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.rules-scroll-area { 
+    padding-right: 20px;
+}
+
+.rules-scroll-area p { 
+    color: #ffffff !important; 
+    margin-bottom: 15px; 
+    line-height: 1.6; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    padding-bottom: 10px; 
+    font-size: 15px;
+}
+
+.rules-scroll-area p:last-child {
+    border-bottom: none;
+}
+
+.rules-scroll-area b { 
+    color: var(--accent); 
+    font-size: 16px;
+}
+
+.rules-scroll-area h3 { 
+    color: #ffd700; 
+    margin: 20px 0 10px; 
+    font-size: 24px;
+}
+
+.punish { 
+    color: #ff4444; 
+    font-weight: 900; 
+    font-size: 12px; 
+    display: inline-block; 
+    text-transform: uppercase; 
+    margin-left: 8px;
+    background: rgba(255, 68, 68, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 20px 0;
+}
+
+/* Анимация появления текста правил */
+.rules-scroll-area p,
+.rules-scroll-area h3 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.rules-scroll-area p.visible,
+.rules-scroll-area h3.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ========== */
+.reveal {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== АДАПТАЦИЯ ========== */
+@media (max-width: 1200px) {
+    .nav-oval-container {
+        min-width: 90%;
+    }
+    
+    .large-title { 
+        font-size: 80px !important; 
+    }
+    
+    .giant-img { 
+        width: 400px !important; 
+    }
+    
+    .hero-layout { 
+        flex-direction: column; 
+        text-align: center; 
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .ip-container {
+        justify-content: center;
+    }
+    
+    .large-neon {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .shop-banner {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+    }
+    
+    .banner-title {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-oval-container {
+        min-width: 95%;
+    }
+    
+    .shop-banner a {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .banner-star {
+        font-size: 18px;
+        margin-left: 5px;
+    }
+    
+    .banner-title {
+        font-size: 16px;
+        margin-right: 5px;
+    }
+    
+    .shop-banner .play-now {
+        margin-left: 5px;
+    }
+    
+    .large-title {
+        font-size: 50px !important;
+    }
+    
+    .large-tagline {
+        font-size: 20px !important;
+    }
+    
+    .main-ip, .main-ver {
+        padding: 15px 25px !important;
+        font-size: 18px !important;
+    }
+    
+    .section {
+        padding: 40px 5%;
+    }
+    
+    .panel-social {
+        padding: 0 15px;
+    }
+    
+    .modal-content {
+        padding: 30px;
+    }
+    
+    .rules-main-title {
+        font-size: 24px;
+    }
+}

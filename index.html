@@ -9,6 +9,10 @@
 </head>
 <body class="dark no-select">
 
+<div class="shop-banner">
+    <a href="https://sweet-land.trademc.org" target="_blank">SWEET-LAND.TRADEMC.ORG</a>
+</div>
+
 <canvas id="snow"></canvas>
 
 <div class="start-image"></div>
@@ -90,18 +94,24 @@
 </div>
 
 <header class="hero">
-    <div class="hero-content">
-        <h1 class="title">SweetLand</h1>
-        <p class="hero-tagline">Ванильное выживание на версии 1.21.8 без границ.</p>
-        <div class="ip-container">
-            <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
-            <span class="btn-version">1.21.8</span>
+    <div class="hero-layout">
+        <div class="hero-content reveal">
+            <h1 class="title">SweetLand</h1>
+            <p class="hero-tagline">Ванильное выживание на версии 1.21.8 без границ.</p>
+            <div class="ip-container">
+                <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
+                <span class="btn-version">1.21.8</span>
+            </div>
         </div>
-        <div id="copyNotice">✔ IP Скопирован!</div>
+        <div class="hero-image-box reveal">
+            <div class="neon-circle"></div>
+            <img src="images/5opka.png" alt="5opka" class="main-img">
+        </div>
     </div>
+    <div id="copyNotice">✔ IP Скопирован!</div>
 </header>
 
-<section class="section" id="features">
+<section class="section reveal" id="features">
     <div class="cards-grid">
         <div class="info-card">
             <div class="icon">🛡️</div>
@@ -126,7 +136,7 @@
     </div>
 </section>
 
-<section class="section" id="how-to-play">
+<section class="section reveal" id="how-to-play">
     <h2 class="section-title">Как начать <span>играть</span>?</h2>
     <div class="faq-grid">
         <div class="info-card">
@@ -147,7 +157,7 @@
     </div>
 </section>
 
-<section class="section faq-section" id="faq">
+<section class="section faq-section reveal" id="faq">
     <h2 class="section-title">Ответы на <span>вопросы</span></h2>
     <div class="faq-grid">
         <div class="info-card faq-card">
@@ -168,7 +178,7 @@
     </div>
 </section>
 
-<section class="section" id="values">
+<section class="section reveal" id="values">
     <h2 class="section-title">Наши <span>ценности</span></h2>
     <div class="faq-grid">
         <div class="info-card faq-card">
@@ -189,7 +199,7 @@
     </div>
 </section>
 
-<section class="section team-section" id="about">
+<section class="section team-section reveal" id="about">
     <div class="team-container">
         <h2>Команда проекта</h2>
         <div class="member-list">

@@ -131,7 +131,7 @@ body {
 }
 
 .theme-icon:hover {
-    transform: rotate(180deg) scale(1.1);
+    transform: scale(1.1);
     background: var(--accent);
     color: #000;
 }
@@ -143,9 +143,8 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 2500;
-    width: auto;
-    min-width: 700px;
-    max-width: 95%;
+    width: 75%; /* 3/4 экрана */
+    max-width: 1400px;
 }
 
 .shop-banner {
@@ -157,88 +156,72 @@ body {
     box-shadow: 0 0 30px rgba(163, 102, 255, 0.4);
     display: flex;
     align-items: center;
-    padding: 8px 20px;
-    overflow: hidden;
+    justify-content: space-between;
+    padding: 5px 10px 5px 20px;
     width: 100%;
+}
+
+.banner-left {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
 .banner-star {
-    font-size: 22px;
+    font-size: 20px;
     color: gold;
-    margin-left: 10px;
     filter: drop-shadow(0 0 10px gold);
-    animation: starTwinkle 2s ease-in-out infinite;
-}
-
-@keyframes starTwinkle {
-    0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
 }
 
 .banner-title {
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
     background: linear-gradient(45deg, #fff, var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-right: 30px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+}
+
+.banner-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .shop-banner a {
-    padding: 10px 20px;
+    padding: 8px 16px;
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     border-radius: 100px;
     white-space: nowrap;
-    position: relative;
-    overflow: hidden;
 }
 
-.shop-banner a::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.shop-banner a:hover::before {
-    width: 200px;
-    height: 200px;
-}
-
-.shop-banner a:hover {
-    background: var(--accent);
-    color: #000 !important;
-    transform: translateY(-2px);
+.shop-banner a:not(.play-now):hover {
+    background: rgba(163, 102, 255, 0.2);
+    color: var(--accent);
 }
 
 .shop-banner .play-now {
     background: var(--accent);
     color: #000 !important;
     font-weight: 900;
-    margin-left: 15px;
-    animation: pulse 2s infinite;
+    padding: 8px 24px;
+    margin-left: 5px;
+    animation: softPulse 2s infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 var(--accent); }
-    50% { box-shadow: 0 0 20px 5px var(--accent); }
+@keyframes softPulse {
+    0%, 100% { box-shadow: 0 0 5px var(--accent); }
+    50% { box-shadow: 0 0 15px var(--accent); }
 }
 
 .shop-banner .play-now:hover {
     background: white;
     color: var(--accent) !important;
+    transform: translateY(-1px);
 }
 
 /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
@@ -256,19 +239,15 @@ body {
     background: var(--accent); 
     margin: 7px 0; 
     border-radius: 5px; 
-    transition: 0.3s; 
+    transition: 0.2s; 
 }
 
 .side-trigger:hover .line:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-
-.side-trigger:hover .line:nth-child(2) {
-    opacity: 0;
+    transform: translateY(-2px);
 }
 
 .side-trigger:hover .line:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: translateY(2px);
 }
 
 .side-panel { 
@@ -279,7 +258,7 @@ body {
     height: 100%; 
     background: var(--panel-bg);
     z-index: 2000; 
-    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+    transition: 0.4s ease; 
     padding: 80px 30px; 
     border-right: 2px solid var(--accent);
     font-size: 20px; 
@@ -306,13 +285,13 @@ body {
     font-size: 24px;
     font-weight: 900;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .panel-handle:hover {
     background: var(--accent);
     color: #000;
-    transform: rotate(360deg) scale(1.1);
+    transform: scale(1.1);
 }
 
 .panel-logo {
@@ -323,12 +302,6 @@ body {
     font-weight: 900;
     letter-spacing: 3px;
     text-shadow: 0 0 20px var(--accent);
-    animation: glow 2s ease-in-out infinite;
-}
-
-@keyframes glow {
-    0%, 100% { text-shadow: 0 0 20px var(--accent); }
-    50% { text-shadow: 0 0 40px var(--accent), 0 0 60px var(--accent); }
 }
 
 .panel-links a { 
@@ -337,25 +310,10 @@ body {
     text-decoration: none; 
     font-size: 22px; 
     margin: 25px 0; 
-    transition: 0.3s; 
-    letter-spacing: 1.5px;
+    transition: 0.2s; 
+    letter-spacing: 1px;
     position: relative;
     padding-left: 15px;
-    animation: slideIn 0.5s ease forwards;
-    opacity: 0;
-    transform: translateX(-20px);
-}
-
-.panel-links a:nth-child(1) { animation-delay: 0.1s; }
-.panel-links a:nth-child(2) { animation-delay: 0.2s; }
-.panel-links a:nth-child(3) { animation-delay: 0.3s; }
-.panel-links a:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes slideIn {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 .panel-links a::before {
@@ -367,16 +325,16 @@ body {
     width: 0;
     height: 2px;
     background: var(--accent);
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
 }
 
 .panel-links a:hover::before {
-    width: 10px;
+    width: 8px;
 }
 
 .panel-links a:hover { 
     color: var(--accent); 
-    transform: translateX(10px); 
+    transform: translateX(5px); 
 }
 
 /* Соцсети в боковой панели */
@@ -388,50 +346,31 @@ body {
     padding: 0 30px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .social-link {
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 10px 15px;
     border-radius: 30px;
     background: rgba(163, 102, 255, 0.1);
-    border: 1px solid rgba(163, 102, 255, 0.3);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(163, 102, 255, 0.2);
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     gap: 10px;
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.social-link:nth-child(1) { animation-delay: 0.5s; }
-.social-link:nth-child(2) { animation-delay: 0.6s; }
-.social-link:nth-child(3) { animation-delay: 0.7s; }
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .social-link span {
-    font-size: 20px;
-    transition: transform 0.3s ease;
+    font-size: 18px;
 }
 
 .social-link:hover {
-    transform: translateX(5px) scale(1.05);
+    transform: translateX(3px);
     border-color: transparent;
-}
-
-.social-link:hover span {
-    transform: rotate(360deg);
 }
 
 .social-link.discord:hover {
@@ -490,12 +429,6 @@ body {
     background: linear-gradient(var(--text-primary), var(--accent)); 
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent; 
-    animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px var(--accent)); }
-    50% { filter: drop-shadow(0 0 50px var(--accent)); }
 }
 
 .large-title { 
@@ -531,48 +464,28 @@ body {
     border-radius: 12px; 
     font-weight: 900; 
     font-size: 18px; 
-    transition: all 0.3s ease; 
-    position: relative;
-    overflow: hidden;
+    transition: all 0.2s ease; 
 }
 
 .btn-ip { 
     background: var(--accent); 
     color: white; 
     cursor: pointer; 
-    box-shadow: 0 0 15px rgba(163, 102, 255, 0.3);
+    box-shadow: 0 0 10px rgba(163, 102, 255, 0.3);
 }
 
 .btn-ip:hover { 
-    transform: scale(1.05); 
-    filter: brightness(1.2); 
-    box-shadow: 0 0 30px var(--accent);
-}
-
-.btn-ip::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn-ip:hover::before {
-    width: 300px;
-    height: 300px;
+    transform: scale(1.03); 
+    filter: brightness(1.1); 
+    box-shadow: 0 0 20px var(--accent);
 }
 
 .btn-version { 
     background: rgba(255, 255, 255, 0.1) !important; 
-    color: #ccc !important; 
+    color: #aaa !important; 
     cursor: default !important;
     pointer-events: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .main-ip {
@@ -589,9 +502,14 @@ body {
     width: 850px !important;
     height: auto;
     filter: drop-shadow(0 0 50px rgba(163, 102, 255, 0.4));
-    animation: floating 5s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
     position: relative;
     z-index: 2;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 .large-neon {
@@ -603,17 +521,6 @@ body {
     opacity: 0.35;
     border-radius: 50%;
     z-index: 1;
-    animation: neonPulse 3s ease-in-out infinite;
-}
-
-@keyframes neonPulse {
-    0%, 100% { opacity: 0.35; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.1); }
-}
-
-@keyframes floating {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-30px) rotate(2deg); }
 }
 
 #copyNotice { 
@@ -626,18 +533,10 @@ body {
     padding: 15px 30px; 
     border-radius: 15px; 
     opacity: 0; 
-    transition: 0.3s; 
+    transition: 0.2s; 
     z-index: 4000; 
     font-weight: bold; 
-    box-shadow: 0 0 30px var(--accent);
-    animation: bounceIn 0.5s;
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0.3) translateX(-50%); opacity: 0; }
-    50% { transform: scale(1.05) translateX(-50%); }
-    70% { transform: scale(0.9) translateX(-50%); }
-    100% { transform: scale(1) translateX(-50%); opacity: 1; }
+    box-shadow: 0 0 20px var(--accent);
 }
 
 /* ========== СЕКЦИИ ========== */
@@ -658,33 +557,15 @@ body {
     padding: 45px; 
     border-radius: 24px; 
     border: 1px solid var(--border-color); 
-    transition: 0.4s; 
+    transition: 0.3s; 
     position: relative; 
     overflow: hidden; 
 }
 
-.info-card::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(163, 102, 255, 0.1);
-    transform: translate(-50%, -50%);
-    transition: width 0.8s, height 0.8s;
-}
-
-.info-card:hover::before {
-    width: 500px;
-    height: 500px;
-}
-
 .info-card:hover { 
     border-color: var(--accent); 
-    transform: translateY(-10px) scale(1.02); 
-    box-shadow: 0 10px 30px rgba(163, 102, 255, 0.2);
+    background: rgba(163,102,255,0.04); 
+    transform: translateY(-3px); 
 }
 
 .info-card h3 { 
@@ -692,33 +573,17 @@ body {
     font-size: 22px; 
     font-weight: 900; 
     color: var(--text-primary);
-    transition: transform 0.3s ease;
-}
-
-.info-card:hover h3 {
-    transform: translateX(5px);
-    color: var(--accent);
 }
 
 .info-card p { 
     color: var(--text-secondary); 
     line-height: 1.6; 
     font-size: 15px; 
-    transition: color 0.3s ease;
-}
-
-.info-card:hover p {
-    color: var(--text-primary);
 }
 
 .info-card .icon { 
     font-size: 28px; 
     color: var(--accent); 
-    transition: transform 0.3s ease;
-}
-
-.info-card:hover .icon {
-    transform: scale(1.2) rotate(360deg);
 }
 
 .section-title { 
@@ -731,24 +596,6 @@ body {
 
 .section-title span { 
     color: var(--accent); 
-    position: relative;
-    display: inline-block;
-}
-
-.section-title span::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.section-title:hover span::after {
-    transform: scaleX(1);
 }
 
 .faq-card { 
@@ -770,15 +617,6 @@ body {
     margin: 40px 0; 
     font-size: 20px; 
     line-height: 2; 
-}
-
-.member-list p {
-    transition: transform 0.3s ease;
-}
-
-.member-list p:hover {
-    transform: translateX(10px);
-    color: var(--accent);
 }
 
 .member-list b { 
@@ -813,7 +651,7 @@ body {
     background: rgba(0,0,0,0.95); 
     z-index: 3000; 
     opacity: 0; 
-    transition: opacity 0.4s ease; 
+    transition: opacity 0.3s ease; 
 }
 
 .modal.show { 
@@ -824,17 +662,18 @@ body {
 .modal-content { 
     background: var(--bg-secondary); 
     margin: 2% auto; 
-    padding: 60px; 
+    padding: 40px; 
     width: 90%; 
+    max-width: 900px;
     max-height: 85vh; 
     border-radius: 30px; 
     border: 1px solid var(--accent); 
     overflow-y: auto; 
-    transform: translateY(-50px); 
+    transform: translateY(-30px); 
     opacity: 0; 
-    transition: all 0.5s ease; 
+    transition: all 0.3s ease; 
     position: relative;
-    box-shadow: 0 0 50px rgba(163, 102, 255, 0.3);
+    box-shadow: 0 0 40px rgba(163, 102, 255, 0.3);
 }
 
 .modal.show .modal-content { 
@@ -846,14 +685,14 @@ body {
     position: absolute; 
     top: 20px; 
     right: 25px; 
-    font-size: 3rem; 
+    font-size: 2.5rem; 
     font-weight: 900; 
     color: #ff4c4c; 
     cursor: pointer; 
-    transition: transform 0.3s ease; 
+    transition: 0.2s; 
     z-index: 10;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -862,15 +701,13 @@ body {
 }
 
 .close-modal:hover { 
-    transform: scale(1.2) rotate(90deg); 
     background: #ff4c4c;
     color: white;
+    transform: scale(1.1);
 }
 
 .rules-column { 
     flex: 1; 
-    overflow-y: auto; 
-    max-height: 80vh; 
 }
 
 .rules-main-title {
@@ -879,19 +716,19 @@ body {
     font-size: 32px;
     margin-bottom: 30px;
     font-weight: 900;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .rules-scroll-area { 
-    padding-right: 20px;
+    padding-right: 10px;
 }
 
 .rules-scroll-area p { 
     color: #ffffff !important; 
-    margin-bottom: 15px; 
-    line-height: 1.6; 
+    margin-bottom: 12px; 
+    line-height: 1.5; 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-    padding-bottom: 10px; 
+    padding-bottom: 8px; 
     font-size: 15px;
 }
 
@@ -907,17 +744,16 @@ body {
 .rules-scroll-area h3 { 
     color: #ffd700; 
     margin: 20px 0 10px; 
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .punish { 
-    color: #ff4444; 
-    font-weight: 900; 
+    color: #ff6666; 
+    font-weight: 700; 
     font-size: 12px; 
     display: inline-block; 
-    text-transform: uppercase; 
     margin-left: 8px;
-    background: rgba(255, 68, 68, 0.1);
+    background: rgba(255, 68, 68, 0.15);
     padding: 2px 8px;
     border-radius: 4px;
 }
@@ -926,28 +762,14 @@ hr {
     border: none;
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    margin: 20px 0;
-}
-
-/* Анимация появления текста правил */
-.rules-scroll-area p,
-.rules-scroll-area h3 {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-}
-
-.rules-scroll-area p.visible,
-.rules-scroll-area h3.visible {
-    opacity: 1;
-    transform: translateY(0);
+    margin: 15px 0;
 }
 
 /* ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ========== */
 .reveal {
     opacity: 0;
-    transform: translateY(80px);
-    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+    transform: translateY(40px);
+    transition: all 0.8s ease;
 }
 
 .reveal.active {
@@ -957,10 +779,6 @@ hr {
 
 /* ========== АДАПТАЦИЯ ========== */
 @media (max-width: 1200px) {
-    .nav-oval-container {
-        min-width: 90%;
-    }
-    
     .large-title { 
         font-size: 80px !important; 
     }
@@ -987,39 +805,38 @@ hr {
         height: 300px;
     }
     
+    .nav-oval-container {
+        width: 90%;
+    }
+    
     .shop-banner {
         flex-wrap: wrap;
         justify-content: center;
-        padding: 10px;
+        padding: 8px 15px;
     }
     
-    .banner-title {
-        margin-right: 10px;
+    .banner-links {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 
 @media (max-width: 768px) {
     .nav-oval-container {
-        min-width: 95%;
-    }
-    
-    .shop-banner a {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-    
-    .banner-star {
-        font-size: 18px;
-        margin-left: 5px;
+        width: 95%;
     }
     
     .banner-title {
         font-size: 16px;
-        margin-right: 5px;
+    }
+    
+    .shop-banner a {
+        padding: 6px 12px;
+        font-size: 13px;
     }
     
     .shop-banner .play-now {
-        margin-left: 5px;
+        padding: 6px 18px;
     }
     
     .large-title {
@@ -1039,12 +856,8 @@ hr {
         padding: 40px 5%;
     }
     
-    .panel-social {
-        padding: 0 15px;
-    }
-    
     .modal-content {
-        padding: 30px;
+        padding: 30px 20px;
     }
     
     .rules-main-title {

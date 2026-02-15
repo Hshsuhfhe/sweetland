@@ -46,7 +46,7 @@
             z-index: 1; 
         }
 
-        /* ========== НАВИГАЦИОННЫЙ ОВАЛ (3/4 ЭКРАНА, ПРОЗРАЧНЫЙ С БЛЮРОМ) ========== */
+        /* ========== НАВИГАЦИОННЫЙ ОВАЛ ========== */
         .nav-oval-container {
             position: fixed;
             top: 25px;
@@ -58,11 +58,11 @@
         }
 
         .shop-banner {
-            background: rgba(20, 20, 30, 0.3); /* Полупрозрачный фон */
-            backdrop-filter: blur(15px); /* Эффект блюра */
+            background: rgba(10, 10, 15, 0.4); /* Прозрачный фон */
+            backdrop-filter: blur(15px); /* Блюр */
             -webkit-backdrop-filter: blur(15px);
             border-radius: 100px;
-            border: 2px solid rgba(163, 102, 255, 0.6);
+            border: 2px solid var(--accent);
             box-shadow: 0 0 30px rgba(163, 102, 255, 0.3);
             display: flex;
             padding: 0;
@@ -71,19 +71,16 @@
         }
 
         .shop-banner a {
-            padding: 18px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1; /* Равномерное распределение ширины */
+            padding: 15px 0;
+            flex: 1;
+            text-align: center;
             color: #fff;
             text-decoration: none;
             font-weight: 900;
-            font-size: 18px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: 0.3s;
             border-right: 1px solid rgba(163, 102, 255, 0.3);
-            text-align: center;
         }
 
         .shop-banner a:last-child {
@@ -93,7 +90,7 @@
         .shop-banner a:hover {
             background: var(--accent);
             color: #000 !important;
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
 
         /* ========== БОКОВАЯ ПАНЕЛЬ ========== */
@@ -171,7 +168,7 @@
             transform: translateX(10px); 
         }
 
-        /* ========== ГЛАВНЫЙ ЭКРАН (HERO) ========== */
+        /* ========== ГЛАВНЫЙ ЭКРАН ========== */
         .hero { 
             height: 100vh; 
             display: flex; 
@@ -179,6 +176,8 @@
             justify-content: center; 
             text-align: center; 
             background: radial-gradient(circle, rgba(163,102,255,0.08) 0%, rgba(6,6,12,1) 80%); 
+            position: relative;
+            z-index: 2;
         }
 
         .hero-layout {
@@ -192,6 +191,7 @@
 
         .hero-content {
             flex: 1;
+            text-align: left;
         }
 
         .hero-image-box {
@@ -202,27 +202,33 @@
             align-items: center;
         }
 
-        .large-title { 
-            font-size: 140px !important;
+        .title { 
+            font-size: 110px; 
             font-weight: 900; 
-            line-height: 0.9;
             background: linear-gradient(#fff, var(--accent)); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
-            margin-bottom: 25px;
+        }
+
+        .large-title { 
+            font-size: 140px !important;
+        }
+
+        .hero-tagline { 
+            font-size: 22px; 
+            color: #888; 
+            margin: 25px 0; 
         }
 
         .large-tagline { 
             font-size: 32px !important;
             max-width: 700px;
-            color: #bbb; 
-            margin: 25px 0 40px; 
         }
 
         .ip-container { 
             display: flex; 
             gap: 20px; 
-            justify-content: center; 
+            justify-content: flex-start; 
             margin-top: 20px; 
         }
 
@@ -295,9 +301,11 @@
             font-weight: bold; 
         }
 
-        /* ========== СЕКЦИИ И КАРТОЧКИ ========== */
+        /* ========== СЕКЦИИ ========== */
         .section { 
-            padding: 80px 10%; 
+            padding: 80px 10%;
+            position: relative;
+            z-index: 2;
         }
 
         .cards-grid, .faq-grid { 
@@ -503,7 +511,7 @@
             transform: translateY(0);
         }
 
-        /* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+        /* ========== АДАПТАЦИЯ ========== */
         @media (max-width: 1200px) {
             .nav-oval-container {
                 width: 90%;
@@ -522,6 +530,14 @@
                 text-align: center; 
             }
             
+            .hero-content {
+                text-align: center;
+            }
+            
+            .ip-container {
+                justify-content: center;
+            }
+            
             .large-neon {
                 width: 300px;
                 height: 300px;
@@ -530,13 +546,8 @@
 
         @media (max-width: 768px) {
             .shop-banner a {
-                font-size: 14px;
+                font-size: 12px;
                 padding: 12px 0;
-            }
-            
-            .side-trigger {
-                top: 15px;
-                left: 15px;
             }
             
             .large-title {
@@ -811,6 +822,10 @@
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
         
-        // Анимация появления текста правил
         setTimeout(() => {
-            const rulesElements = document.querySelectorAll('.rules-scroll
+            const rulesElements = document.querySelectorAll('.rules-scroll-area p, .rules-scroll-area h3');
+            rulesElements.forEach(el => {
+                el.classList.add('visible');
+            });
+        }, 300);
+    }

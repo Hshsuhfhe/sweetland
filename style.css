@@ -73,89 +73,124 @@ body { background: var(--bg); color: white; overflow-x: hidden; }
 /* Copy notice */
 #copyNotice { position:fixed; bottom:50px; left:50%; transform:translateX(-50%); background:var(--accent); padding:15px 30px; border-radius:15px; opacity:0; transition:0.3s; z-index:4000; font-weight:bold; }
 /* Магазин-овал */
-.shop-banner {
+/* --- НОВЫЕ СТИЛИ: ОВАЛ, ГИГАНТСКИЙ ТЕКСТ И ПЯТЕРКА --- */
+
+/* Новое меню-овал сверху */
+.nav-oval-container {
     position: fixed;
-    top: 20px;
+    top: 25px;
     left: 50%;
     transform: translateX(-50%);
-    background: #000;
-    padding: 12px 45px;
-    border-radius: 50px;
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 20px rgba(163, 102, 255, 0.4);
     z-index: 2500;
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
+.shop-banner {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 15px 45px;
+    border-radius: 100px;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 30px rgba(163, 102, 255, 0.5);
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
 .shop-banner a {
     color: #fff;
     text-decoration: none;
     font-weight: 900;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-.shop-banner:hover {
-    box-shadow: 0 0 35px var(--accent);
-    transform: translateX(-50%) scale(1.05);
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: 0.3s;
 }
 
-/* Макет главного экрана */
+.shop-banner a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.shop-banner .separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Гигантские размеры для главного экрана */
 .hero-layout {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 90%;
-    max-width: 1400px;
+    max-width: 1700px;
     margin: 0 auto;
-    padding-top: 50px;
 }
 
-.hero-image-box {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.large-title {
+    font-size: 140px !important; /* Экстремально большой заголовок */
+    line-height: 0.9;
+    background: linear-gradient(#fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
 }
 
-.main-img {
-    width: 600px; 
+.large-tagline {
+    font-size: 32px !important; /* Увеличенный подзаголовок */
+    max-width: 700px;
+    color: #bbb;
+    margin-bottom: 40px;
+}
+
+/* Огромная картинка Пятерки */
+.giant-img {
+    width: 850px !important;
     height: auto;
-    z-index: 10;
-    filter: drop-shadow(0 0 15px rgba(163,102,255,0.3));
+    filter: drop-shadow(0 0 50px rgba(163, 102, 255, 0.4));
     animation: floating 5s ease-in-out infinite;
 }
 
-/* Неон под Пятеркой */
-.neon-circle {
+.large-neon {
     position: absolute;
-    width: 450px;
-    height: 450px;
+    width: 600px;
+    height: 600px;
     background: var(--accent);
-    filter: blur(130px);
+    filter: blur(150px);
     opacity: 0.35;
     border-radius: 50%;
     z-index: 1;
 }
 
-@keyframes floating {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-25px) rotate(2deg); }
+/* Кнопки IP и Версии */
+.main-ip {
+    padding: 25px 50px !important;
+    font-size: 26px !important;
 }
 
-/* БЕСКОНЕЧНАЯ АНИМАЦИЯ ПРИ СКРОЛЛЕ */
+.main-ver {
+    padding: 25px 35px !important;
+    font-size: 26px !important;
+}
+
+/* Анимация парения */
+@keyframes floating {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(2deg); }
+}
+
+/* Бесконечная анимация при скролле */
 .reveal {
     opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.9s cubic-bezier(0.2, 1, 0.3, 1);
+    transform: translateY(80px);
+    transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
 }
+
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Адаптация под мобилки */
-@media (max-width: 1100px) {
+/* Адаптация для маленьких экранов */
+@media (max-width: 1200px) {
+    .large-title { font-size: 80px !important; }
+    .giant-img { width: 400px !important; }
     .hero-layout { flex-direction: column; text-align: center; }
-    .hero-content { text-align: center; margin-bottom: 60px; }
-    .main-img { width: 320px; }
-    .neon-circle { width: 250px; height: 250px; }
 }

@@ -77,9 +77,8 @@
             background: radial-gradient(circle at 50% 30%, rgba(255, 123, 92, 0.15) 0%, transparent 70%);
         }
 
-        body.light-theme .large-neon {
+        body.light-theme .hero::before {
             background: var(--neon-color);
-            opacity: 0.2;
         }
 
         body.light-theme .title {
@@ -969,6 +968,7 @@
         .rules-scroll-area b {
             color: var(--accent);
             font-size: 16px;
+            font-weight: 700;
         }
 
         .rules-scroll-area h3 {
@@ -982,9 +982,9 @@
             font-weight: 600;
             font-size: 13px;
             display: block;
-            margin-top: 5px;
+            margin-top: 6px;
             background: rgba(255, 68, 68, 0.1);
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             width: fit-content;
         }
@@ -1102,21 +1102,21 @@
             }
 
             .shop-banner {
-                padding: 6px 12px;
-                justify-content: flex-start;
-                gap: 10px;
+                padding: 6px 10px;
+                gap: 6px;
             }
 
             .banner-left {
-                flex-shrink: 0;
-            }
-
-            .banner-title {
-                font-size: 14px;
+                gap: 4px;
             }
 
             .banner-star {
-                font-size: 16px;
+                font-size: 14px;
+            }
+
+            .banner-title {
+                font-size: 12px;
+                white-space: nowrap;
             }
 
             .banner-center {
@@ -1126,7 +1126,7 @@
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
-                gap: 4px;
+                gap: 3px;
                 padding: 2px 0;
             }
 
@@ -1135,24 +1135,27 @@
             }
 
             .banner-center a {
-                padding: 4px 8px;
-                font-size: 11px;
+                padding: 4px 6px;
+                font-size: 9px;
                 white-space: nowrap;
-                background: rgba(163, 102, 255, 0.1);
+                background: rgba(163, 102, 255, 0.15);
+                border-radius: 30px;
             }
 
             .banner-right {
-                flex-shrink: 0;
+                display: flex;
+                gap: 3px;
             }
 
             .shop-banner a {
-                padding: 6px 10px;
-                font-size: 11px;
+                padding: 4px 8px;
+                font-size: 9px;
             }
 
             .banner-right .play-now {
-                padding: 6px 12px;
-                font-size: 11px;
+                padding: 4px 10px;
+                font-size: 9px;
+                white-space: nowrap;
             }
 
             .theme-toggle {
@@ -1161,9 +1164,9 @@
             }
 
             .theme-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
             }
 
             .side-trigger {
@@ -1172,28 +1175,29 @@
             }
 
             .side-trigger .line {
-                width: 25px;
-                margin: 5px 0;
+                width: 22px;
+                height: 2px;
+                margin: 4px 0;
             }
 
             .hero {
-                padding: 80px 4%;
+                padding: 70px 4%;
             }
 
             .hero::before {
-                width: 400px;
-                height: 400px;
+                width: 350px;
+                height: 350px;
             }
 
             @keyframes neonPulse {
-                0%, 100% { opacity: 0.15; width: 400px; height: 400px; }
-                50% { opacity: 0.25; width: 450px; height: 450px; }
+                0%, 100% { opacity: 0.15; width: 350px; height: 350px; }
+                50% { opacity: 0.25; width: 400px; height: 400px; }
             }
 
             .hero-layout {
                 flex-direction: column;
                 text-align: center;
-                gap: 30px;
+                gap: 25px;
             }
 
             .hero-content {
@@ -1201,31 +1205,37 @@
             }
 
             .title {
-                font-size: 48px;
+                font-size: 42px;
             }
 
             .hero-tagline {
-                font-size: 16px;
+                font-size: 14px;
+                margin-bottom: 20px;
             }
 
             .ip-container {
                 justify-content: center;
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
             }
 
             .btn-ip, .btn-version {
                 width: 100%;
-                padding: 14px 20px !important;
-                font-size: 16px !important;
+                padding: 12px 16px !important;
+                font-size: 14px !important;
             }
 
             .giant-img {
-                max-width: 280px;
+                max-width: 220px;
             }
 
             .section {
-                padding: 40px 4%;
+                padding: 30px 4%;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 25px;
             }
 
             .cards-grid,
@@ -1233,27 +1243,51 @@
             .privacy-grid,
             .detailed-faq-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 12px;
             }
 
             .info-card,
             .faq-card,
             .privacy-card {
-                padding: 20px;
+                padding: 16px;
+            }
+
+            .info-card .icon,
+            .faq-card .icon,
+            .privacy-card .icon {
+                font-size: 26px;
+                margin-bottom: 10px;
+            }
+
+            .info-card h3,
+            .faq-card h3,
+            .privacy-card h3 {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .info-card p,
+            .faq-card p,
+            .privacy-card p {
+                font-size: 13px;
             }
 
             .detailed-faq-item h3 {
-                padding: 14px 16px;
-                font-size: 15px;
+                padding: 12px 14px;
+                font-size: 14px;
             }
 
             .faq-answer {
-                padding: 16px;
+                padding: 14px;
+            }
+
+            .faq-answer p {
+                font-size: 13px;
             }
 
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 20px;
             }
 
             .footer-section {
@@ -1262,7 +1296,8 @@
 
             .footer-section a {
                 display: inline-block;
-                margin: 5px 10px;
+                margin: 4px 8px;
+                font-size: 12px;
             }
 
             .footer-section h4::after {
@@ -1270,55 +1305,81 @@
                 width: 50%;
             }
 
+            .footer-bottom p {
+                font-size: 11px;
+            }
+
             .modal-content {
-                padding: 30px 20px;
+                padding: 25px 15px;
+                margin: 5% auto;
             }
 
             .rules-main-title {
-                font-size: 24px;
+                font-size: 22px;
+                margin-bottom: 20px;
             }
 
             .rules-scroll-area p {
-                font-size: 14px;
+                font-size: 13px;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+            }
+
+            .punish {
+                font-size: 11px;
+                padding: 3px 8px;
             }
         }
 
         @media (max-width: 480px) {
             .hero::before {
-                width: 300px;
-                height: 300px;
+                width: 280px;
+                height: 280px;
             }
 
             @keyframes neonPulse {
-                0%, 100% { opacity: 0.15; width: 300px; height: 300px; }
-                50% { opacity: 0.25; width: 350px; height: 350px; }
+                0%, 100% { opacity: 0.15; width: 280px; height: 280px; }
+                50% { opacity: 0.25; width: 320px; height: 320px; }
             }
 
             .title {
-                font-size: 40px;
+                font-size: 36px;
             }
 
             .hero-tagline {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .giant-img {
-                max-width: 220px;
+                max-width: 180px;
             }
 
             .banner-center a {
-                padding: 4px 6px;
+                padding: 3px 5px;
+                font-size: 8px;
+            }
+
+            .shop-banner a {
+                padding: 3px 6px;
+                font-size: 8px;
+            }
+
+            .banner-right .play-now {
+                padding: 3px 8px;
+                font-size: 8px;
+            }
+
+            .banner-title {
                 font-size: 10px;
             }
 
-            .btn-ip, .btn-version {
-                padding: 12px 16px !important;
-                font-size: 14px !important;
+            .banner-star {
+                font-size: 12px;
             }
 
-            .section-title {
-                font-size: 24px;
-                margin-bottom: 25px;
+            .btn-ip, .btn-version {
+                padding: 10px 14px !important;
+                font-size: 13px !important;
             }
         }
     </style>
@@ -1333,11 +1394,11 @@
         </div>
         <div class="banner-center">
             <a href="https://sweet-land.trademc.org" target="_blank">Магазин</a>
-            <a href="https://t.me/gyraff" target="_blank">Связь с нами</a>
+            <a href="https://t.me/gyraff" target="_blank">Связь</a>
             <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
         </div>
         <div class="banner-right">
-            <a href="https://discord.gg/GUKrAmY7bp" target="_blank" class="play-now">Играть сейчас</a>
+            <a href="https://discord.gg/GUKrAmY7bp" target="_blank" class="play-now">Играть</a>
         </div>
     </div>
 </div>

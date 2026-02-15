@@ -9,8 +9,14 @@
 </head>
 <body class="dark no-select">
 
-<div class="shop-banner">
-    <a href="https://sweet-land.trademc.org" target="_blank">🛒 МАГАЗИН: SWEET-LAND.TRADEMC.ORG</a>
+<div class="nav-oval-container">
+    <div class="shop-banner">
+        <a href="https://sweet-land.trademc.org" target="_blank">🛒 Магазин</a>
+        <span class="separator">|</span>
+        <a href="https://t.me/gyraff" target="_blank">📱 Связь с нами</a>
+        <span class="separator">|</span>
+        <a href="https://discord.gg/GUKrAmY7bp" target="_blank">🚀 Начать играть</a>
+    </div>
 </div>
 
 <canvas id="snow"></canvas>
@@ -93,16 +99,16 @@
 <header class="hero">
     <div class="hero-layout">
         <div class="hero-content reveal">
-            <h1 class="title">SweetLand</h1>
-            <p class="hero-tagline">Ванильное выживание на версии 1.21.8 без границ.</p>
+            <h1 class="title large-title">SweetLand</h1>
+            <p class="hero-tagline large-tagline">Ванильное выживание на версии 1.21.8 без границ. <br> Твой мир — твои правила.</p>
             <div class="ip-container">
-                <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
-                <span class="btn-version">1.21.8</span>
+                <button class="btn-ip main-ip" onclick="copyIP()">play.sweet-land.fun</button>
+                <span class="btn-version main-ver">1.21.8</span>
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <div class="neon-circle"></div>
-            <img src="images/5opka.png" alt="5opka" class="main-img">
+            <div class="neon-circle large-neon"></div>
+            <img src="images/5opka.png" alt="5opka" class="main-img giant-img">
         </div>
     </div>
     <div id="copyNotice">✔ IP Скопирован!</div>
@@ -139,17 +145,17 @@
         <div class="info-card">
             <div class="icon">🚀</div>
             <h3>Версия 1.21.8</h3>
-            <p>Убедись, что у тебя установлена последняя версия игры для стабильного входа.</p>
+            <p>Убедись, что у тебя установлена последняя версия игры.</p>
         </div>
         <div class="info-card">
             <div class="icon">📝</div>
             <h3>Читай правила</h3>
-            <p>Ознакомься с правилами в боковом меню, чтобы избежать случайного бана.</p>
+            <p>Ознакомься с правилами в боковом меню.</p>
         </div>
         <div class="info-card">
             <div class="icon">🔌</div>
             <h3>Подключение</h3>
-            <p>Скопируй наш IP и добавь его в список серверов. Мы ждем тебя!</p>
+            <p>Скопируй наш IP и добавь его в список серверов.</p>
         </div>
     </div>
 </section>
@@ -175,42 +181,17 @@
     </div>
 </section>
 
-<section class="section reveal" id="values">
-    <h2 class="section-title">Наши <span>ценности</span></h2>
-    <div class="faq-grid">
-        <div class="info-card faq-card">
-            <div class="icon">💎</div>
-            <h3>Без доната</h3>
-            <p>У нас нет продажи прав администратора, креатива или ресурсов за деньги.</p>
-        </div>
-        <div class="info-card faq-card">
-            <div class="icon">🗺️</div>
-            <h3>Свобода</h3>
-            <p>Строй города, создавай кланы и живи так, как хочется тебе в ванильном мире.</p>
-        </div>
-        <div class="info-card faq-card">
-            <div class="icon">🤝</div>
-            <h3>Честность</h3>
-            <p>Любое нарушение фиксируется логами. Твои постройки под защитой правил.</p>
-        </div>
-    </div>
-</section>
-
-<section class="section team-section reveal" id="about">
+<footer class="section team-section reveal">
     <div class="team-container">
         <h2>Команда проекта</h2>
         <div class="member-list">
             <p><b>gyraffic</b> — Владелец / Разработчик</p>
             <p><b>QLIBRO</b> — Старший Администратор</p>
             <p><b>BABKA_GAME3434</b> — Контент-мейкер</p>
-            <p><b>SkyFall</b> — Модератор сообщества</p>
         </div>
-        <p class="last-update">Данные актуальны на 2026 год.</p>
+        <p class="last-update">2026 год.</p>
     </div>
-    <footer class="legal-info">
-        <p>SweetLand не связан с Mojang AB. Все права на Minecraft принадлежат правообладателям.</p>
-    </footer>
-</section>
+</footer>
 
 <script src="script.js"></script>
 </body>

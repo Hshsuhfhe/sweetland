@@ -12,63 +12,118 @@
     --theme-icon: '🌙';
 }
 
+/* ========== УЛУЧШЕННАЯ БЕЛАЯ ТЕМА ========== */
 body.light-theme {
     --accent: #8a5be0;
-    --bg: #f0f0f5;
-    --bg-secondary: #e8e8f0;
-    --card-bg: rgba(0, 0, 0, 0.02);
-    --text-primary: #222;
-    --text-secondary: #555;
-    --text-tertiary: #999;
-    --border-color: rgba(0, 0, 0, 0.1);
-    --panel-bg: linear-gradient(135deg, #f0f0fa 0%, #e0e0f0 100%);
-    --snow-opacity: 0.3;
+    --bg: #f8f9ff;
+    --bg-secondary: #ffffff;
+    --card-bg: rgba(138, 91, 224, 0.03);
+    --text-primary: #2d2d3a;
+    --text-secondary: #5a5a6e;
+    --text-tertiary: #8a8aa0;
+    --border-color: rgba(138, 91, 224, 0.15);
+    --panel-bg: linear-gradient(135deg, #ffffff 0%, #f5f5ff 100%);
+    --snow-opacity: 0.2;
 }
 
 body.light-theme .shop-banner {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.7);
     border: 2px solid var(--accent);
+    box-shadow: 0 0 30px rgba(138, 91, 224, 0.2);
 }
 
 body.light-theme .shop-banner a {
-    color: #333;
+    color: var(--text-primary);
 }
 
 body.light-theme .shop-banner a:hover {
-    color: #000 !important;
+    background: var(--accent);
+    color: white !important;
+}
+
+body.light-theme .shop-banner .play-now {
+    background: var(--accent);
+    color: white !important;
+}
+
+body.light-theme .shop-banner .play-now:hover {
+    background: #6b3fc0;
+    color: white !important;
 }
 
 body.light-theme .side-panel {
+    background: white;
     border-right: 2px solid var(--accent);
+    box-shadow: 10px 0 50px rgba(138, 91, 224, 0.15);
 }
 
 body.light-theme .side-panel .panel-links a {
-    color: #555;
+    color: var(--text-secondary);
+}
+
+body.light-theme .side-panel .panel-links a:hover {
+    color: var(--accent);
 }
 
 body.light-theme .info-card {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: white;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .info-card:hover {
+    background: white;
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(138, 91, 224, 0.15);
 }
 
 body.light-theme .info-card p {
-    color: #555;
+    color: var(--text-secondary);
+}
+
+body.light-theme .info-card:hover p {
+    color: var(--text-primary);
 }
 
 body.light-theme .hero {
-    background: radial-gradient(circle, rgba(138, 91, 224, 0.08) 0%, #f0f0f5 80%);
+    background: radial-gradient(circle, rgba(138, 91, 224, 0.1) 0%, #f8f9ff 80%);
 }
 
 body.light-theme .title {
-    background: linear-gradient(#333, var(--accent));
+    background: linear-gradient(var(--text-primary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+body.light-theme .btn-version {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .team-container {
+    background: white;
+    border: 1px solid var(--border-color);
+}
+
 body.light-theme .footer-bottom {
-    background: rgba(0, 0, 0, 0.05);
-    color: #333;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border-color);
+}
+
+body.light-theme .modal-content {
+    background: white;
+}
+
+body.light-theme .rules-scroll-area p {
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--border-color);
+}
+
+body.light-theme .social-link {
+    background: rgba(138, 91, 224, 0.05);
+    border-color: rgba(138, 91, 224, 0.2);
+    color: var(--text-secondary);
 }
 
 .no-select { 
@@ -90,7 +145,7 @@ body {
     background: var(--bg); 
     color: var(--text-primary); 
     overflow-x: hidden; 
-    transition: background 0.5s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.2s ease;
 }
 
 #snow { 
@@ -102,7 +157,7 @@ body {
     pointer-events: none; 
     z-index: 1;
     opacity: var(--snow-opacity);
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 /* ========== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ========== */
@@ -126,7 +181,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: 0 0 20px rgba(163, 102, 255, 0.3);
 }
 
@@ -143,7 +198,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 2500;
-    width: 75%; /* 3/4 экрана */
+    width: 75%;
     max-width: 1400px;
 }
 
@@ -157,20 +212,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px 5px 20px;
+    padding: 5px 5px 5px 20px;
     width: 100%;
 }
 
 .banner-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .banner-star {
     font-size: 20px;
     color: gold;
     filter: drop-shadow(0 0 10px gold);
+    animation: starGlow 2s ease-in-out infinite;
+}
+
+@keyframes starGlow {
+    0%, 100% { filter: drop-shadow(0 0 5px gold); }
+    50% { filter: drop-shadow(0 0 15px gold); }
 }
 
 .banner-title {
@@ -185,7 +246,7 @@ body {
 .banner-links {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
 }
 
 .shop-banner a {
@@ -210,10 +271,10 @@ body {
     font-weight: 900;
     padding: 8px 24px;
     margin-left: 5px;
-    animation: softPulse 2s infinite;
+    animation: softGlow 2s infinite;
 }
 
-@keyframes softPulse {
+@keyframes softGlow {
     0%, 100% { box-shadow: 0 0 5px var(--accent); }
     50% { box-shadow: 0 0 15px var(--accent); }
 }
@@ -258,7 +319,7 @@ body {
     height: 100%; 
     background: var(--panel-bg);
     z-index: 2000; 
-    transition: 0.4s ease; 
+    transition: 0.3s ease; 
     padding: 80px 30px; 
     border-right: 2px solid var(--accent);
     font-size: 20px; 
@@ -398,7 +459,7 @@ body {
     background: radial-gradient(circle, rgba(163,102,255,0.08) 0%, var(--bg) 80%); 
     position: relative;
     z-index: 2;
-    transition: background 0.5s ease;
+    transition: background 0.3s ease;
 }
 
 .hero-layout {
@@ -584,6 +645,11 @@ body {
 .info-card .icon { 
     font-size: 28px; 
     color: var(--accent); 
+    transition: transform 0.2s ease;
+}
+
+.info-card:hover .icon {
+    transform: scale(1.1);
 }
 
 .section-title { 

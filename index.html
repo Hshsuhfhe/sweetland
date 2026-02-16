@@ -522,6 +522,7 @@
         .panel-links a:nth-child(6) { animation-delay: 0.6s; }
         .panel-links a:nth-child(7) { animation-delay: 0.7s; }
         .panel-links a:nth-child(8) { animation-delay: 0.8s; }
+        .panel-links a:nth-child(9) { animation-delay: 0.9s; }
 
         @keyframes slideIn {
             to {
@@ -1056,6 +1057,81 @@
             gap: 20px;
             color: var(--accent);
             font-weight: 600;
+        }
+
+        /* ========== СТРИМЕРЫ ========== */
+        .streamer-card {
+            background: linear-gradient(135deg, var(--bg-card), rgba(255, 68, 68, 0.15));
+            border: 2px solid #ff4444;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .streamer-card::before {
+            content: '🔴 LIVE';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: #ff4444;
+            color: white;
+            padding: 4px 30px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .streamer-link {
+            display: inline-block;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .streamer-link:hover {
+            background: white;
+            color: #ff4444;
+            border-color: #ff4444;
+            transform: scale(1.05);
+        }
+        
+        .streamer-card .community-icon {
+            color: #ff4444;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .footer-section a[href*="Babka3434"] {
+            color: #ff4444;
+            font-weight: 600;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .footer-section a[href*="Babka3434"]::before {
+            content: '▶️';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+        
+        .footer-section a[href*="Babka3434"]:hover {
+            color: #ff6666;
+            transform: translateX(8px);
         }
 
         /* ========== КАРТОЧКИ ========== */
@@ -2214,84 +2290,6 @@
     </div>
 </footer>
 
-<style>
-    /* ========== СТИЛИ ДЛЯ СТРИМЕРОВ ========== */
-    .streamer-card {
-        background: linear-gradient(135deg, var(--bg-card), rgba(255, 0, 0, 0.1));
-        border: 2px solid #ff4444;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .streamer-card::before {
-        content: '🔴 LIVE';
-        position: absolute;
-        top: 10px;
-        right: -30px;
-        background: #ff4444;
-        color: white;
-        padding: 4px 30px;
-        font-size: 12px;
-        font-weight: 700;
-        transform: rotate(45deg);
-        box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
-        animation: pulse 2s infinite;
-    }
-    
-    .streamer-link {
-        display: inline-block;
-        background: #ff4444;
-        color: white;
-        text-decoration: none;
-        padding: 8px 20px;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 14px;
-        margin: 10px 0;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-    }
-    
-    .streamer-link:hover {
-        background: white;
-        color: #ff4444;
-        border-color: #ff4444;
-        transform: scale(1.05);
-    }
-    
-    .streamer-card .community-icon {
-        color: #ff4444;
-        animation: bounce 2s infinite;
-    }
-    
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-    }
-    
-    /* ========== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ========== */
-    .footer-section a[href*="Babka3434"] {
-        color: #ff4444;
-        font-weight: 600;
-        position: relative;
-        padding-left: 20px;
-    }
-    
-    .footer-section a[href*="Babka3434"]::before {
-        content: '▶️';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 12px;
-    }
-    
-    .footer-section a[href*="Babka3434"]:hover {
-        color: #ff6666;
-        transform: translateX(8px);
-    }
-</style>
-
 <script>
     // ========== СНЕГ/ДОЖДЬ ==========
     const weatherContainer = document.getElementById('weather');
@@ -2362,4 +2360,103 @@
         const ip = 'play.sweet-land.fun';
         
         if (navigator.clipboard && navigator.clipboard.writeText) {
-           
+            navigator.clipboard.writeText(ip).then(() => {
+                showCopyNotice();
+            }).catch(() => {
+                fallbackCopy();
+            });
+        } else {
+            fallbackCopy();
+        }
+        
+        function fallbackCopy() {
+            const textarea = document.createElement('textarea');
+            textarea.value = ip;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopyNotice();
+        }
+        
+        function showCopyNotice() {
+            const notice = document.getElementById('copyNotice');
+            notice.style.opacity = '1';
+            setTimeout(() => {
+                notice.style.opacity = '0';
+            }, 2000);
+        }
+    }
+    
+    // ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ==========
+    function reveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementBottom = reveals[i].getBoundingClientRect().bottom;
+            const elementVisible = 100;
+            
+            if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
+                reveals[i].classList.add('active');
+            } else {
+                reveals[i].classList.remove('active');
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+    
+    // ========== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ==========
+    function toggleTheme() {
+        const body = document.body;
+        const themeIcon = document.querySelector('.theme-icon');
+        
+        if (body.classList.contains('dark')) {
+            body.classList.remove('dark');
+            body.classList.add('light-theme');
+            themeIcon.textContent = '☀️';
+        } else {
+            body.classList.remove('light-theme');
+            body.classList.add('dark');
+            themeIcon.textContent = '🌙';
+        }
+        
+        createWeather();
+    }
+    
+    // ========== ЗАКРЫТИЕ ПО ESC ==========
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('rules-modal');
+            if (modal.classList.contains('show')) {
+                closeRules();
+            }
+            
+            const panel = document.getElementById('side-panel');
+            if (panel.classList.contains('active')) {
+                togglePanel();
+            }
+        }
+    });
+    
+    // ========== ЗАКРЫТИЕ ПАНЕЛИ ПРИ КЛИКЕ ВНЕ ==========
+    document.addEventListener('click', function(e) {
+        const panel = document.getElementById('side-panel');
+        const trigger = document.querySelector('.side-trigger');
+        
+        if (panel.classList.contains('active') && 
+            !panel.contains(e.target) && 
+            !trigger.contains(e.target)) {
+            togglePanel();
+        }
+    });
+</script>
+
+</body>
+</html>

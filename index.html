@@ -1088,7 +1088,7 @@
         }
         
         .streamer-card.babka::before {
-            content: '🔴 BABKA3434';
+            content: '🔴 LIVE';
             position: absolute;
             top: 10px;
             right: -30px;
@@ -1103,7 +1103,7 @@
         }
 
         .streamer-card.gyraffic::before {
-            content: '🔴 GYRAFFIC';
+            content: '🔴 LIVE';
             position: absolute;
             top: 10px;
             right: -30px;
@@ -1729,8 +1729,8 @@
             }
 
             .side-panel {
-                width: 280px;
-                padding: 60px 20px;
+                width: 260px;
+                padding: 60px 15px;
             }
 
             .panel-links {
@@ -1742,9 +1742,13 @@
                 margin: 15px 0;
             }
 
+            .panel-links a:nth-child(n+4) {
+                display: none;
+            }
+
             .panel-social {
                 bottom: 20px;
-                padding: 0 20px;
+                padding: 0 15px;
             }
 
             .social-link {
@@ -1917,8 +1921,8 @@
             }
 
             .side-panel {
-                width: 260px;
-                padding: 50px 15px;
+                width: 240px;
+                padding: 50px 12px;
             }
 
             .panel-links a {
@@ -1968,15 +1972,22 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links">
-        <a href="#stats">Статистика</a>
-        <a href="#features">Особенности</a>
-        <a href="#how-to-play">Как начать</a>
-        <a href="#faq">Вопросы</a>
-        <a href="#community">Сообщество</a>
-        <a href="#streamers">Стримеры</a>
-        <a href="#privacy">Защита данных</a>
-        <a href="#detailed-faq">Частые вопросы</a>
-        <a href="javascript:void(0)" onclick="openRules()">Правила</a>
+        <!-- Для ПК показываем все ссылки -->
+        <a href="#stats" class="desktop-link">Статистика</a>
+        <a href="#features" class="desktop-link">Особенности</a>
+        <a href="#how-to-play" class="desktop-link">Как начать</a>
+        <a href="#faq" class="desktop-link">Вопросы</a>
+        <a href="#community" class="desktop-link">Сообщество</a>
+        <a href="#streamers" class="desktop-link">Стримеры</a>
+        <a href="#privacy" class="desktop-link">Защита данных</a>
+        <a href="#detailed-faq" class="desktop-link">Частые вопросы</a>
+        <a href="javascript:void(0)" onclick="openRules()" class="desktop-link">Правила</a>
+        
+        <!-- Для телефонов только основные -->
+        <a href="#stats" class="mobile-link">Главная</a>
+        <a href="#stats" class="mobile-link">Статистика</a>
+        <a href="#streamers" class="mobile-link">Стримеры</a>
+        <a href="javascript:void(0)" onclick="openRules()" class="mobile-link">Правила</a>
     </div>
     
     <div class="panel-social">
@@ -1991,6 +2002,23 @@
         </a>
     </div>
 </nav>
+
+<style>
+    @media (min-width: 769px) {
+        .mobile-link {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .desktop-link {
+            display: none;
+        }
+        .mobile-link {
+            display: block;
+        }
+    }
+</style>
 
 <!-- ========== МОДАЛЬНОЕ ОКНО ПРАВИЛ ========== -->
 <div id="rules-modal" class="modal">

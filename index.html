@@ -1102,21 +1102,21 @@
             }
 
             .shop-banner {
-                padding: 6px 10px;
-                gap: 6px;
+                padding: 6px 8px;
+                gap: 4px;
+                border-radius: 50px;
             }
 
             .banner-left {
-                gap: 4px;
+                display: none; /* Убираем SweetLand на телефонах */
             }
 
             .banner-star {
-                font-size: 14px;
+                display: none;
             }
 
             .banner-title {
-                font-size: 12px;
-                white-space: nowrap;
+                display: none;
             }
 
             .banner-center {
@@ -1135,11 +1135,12 @@
             }
 
             .banner-center a {
-                padding: 4px 6px;
-                font-size: 9px;
+                padding: 4px 8px;
+                font-size: 10px;
                 white-space: nowrap;
                 background: rgba(163, 102, 255, 0.15);
                 border-radius: 30px;
+                flex-shrink: 0;
             }
 
             .banner-right {
@@ -1148,14 +1149,16 @@
             }
 
             .shop-banner a {
-                padding: 4px 8px;
-                font-size: 9px;
+                padding: 4px 10px;
+                font-size: 10px;
+                border-radius: 30px;
             }
 
             .banner-right .play-now {
-                padding: 4px 10px;
-                font-size: 9px;
+                padding: 4px 12px;
+                font-size: 10px;
                 white-space: nowrap;
+                flex-shrink: 0;
             }
 
             .theme-toggle {
@@ -1175,7 +1178,7 @@
             }
 
             .side-trigger .line {
-                width: 22px;
+                width: 20px;
                 height: 2px;
                 margin: 4px 0;
             }
@@ -1185,19 +1188,19 @@
             }
 
             .hero::before {
-                width: 350px;
-                height: 350px;
+                width: 300px;
+                height: 300px;
             }
 
             @keyframes neonPulse {
-                0%, 100% { opacity: 0.15; width: 350px; height: 350px; }
-                50% { opacity: 0.25; width: 400px; height: 400px; }
+                0%, 100% { opacity: 0.15; width: 300px; height: 300px; }
+                50% { opacity: 0.25; width: 350px; height: 350px; }
             }
 
             .hero-layout {
                 flex-direction: column;
                 text-align: center;
-                gap: 25px;
+                gap: 20px;
             }
 
             .hero-content {
@@ -1205,12 +1208,13 @@
             }
 
             .title {
-                font-size: 42px;
+                font-size: 38px;
+                margin-bottom: 10px;
             }
 
             .hero-tagline {
-                font-size: 14px;
-                margin-bottom: 20px;
+                font-size: 13px;
+                margin-bottom: 15px;
             }
 
             .ip-container {
@@ -1221,12 +1225,13 @@
 
             .btn-ip, .btn-version {
                 width: 100%;
-                padding: 12px 16px !important;
-                font-size: 14px !important;
+                padding: 10px 14px !important;
+                font-size: 13px !important;
+                border-radius: 12px;
             }
 
             .giant-img {
-                max-width: 220px;
+                max-width: 180px;
             }
 
             .section {
@@ -1234,8 +1239,8 @@
             }
 
             .section-title {
-                font-size: 24px;
-                margin-bottom: 25px;
+                font-size: 22px;
+                margin-bottom: 20px;
             }
 
             .cards-grid,
@@ -1250,30 +1255,35 @@
             .faq-card,
             .privacy-card {
                 padding: 16px;
+                border-radius: 16px;
             }
 
             .info-card .icon,
             .faq-card .icon,
             .privacy-card .icon {
-                font-size: 26px;
-                margin-bottom: 10px;
+                font-size: 24px;
+                margin-bottom: 8px;
             }
 
             .info-card h3,
             .faq-card h3,
             .privacy-card h3 {
-                font-size: 16px;
+                font-size: 15px;
                 margin-bottom: 6px;
             }
 
             .info-card p,
             .faq-card p,
             .privacy-card p {
-                font-size: 13px;
+                font-size: 12px;
+            }
+
+            .detailed-faq-item {
+                border-radius: 16px;
             }
 
             .detailed-faq-item h3 {
-                padding: 12px 14px;
+                padding: 10px 14px;
                 font-size: 14px;
             }
 
@@ -1282,7 +1292,7 @@
             }
 
             .faq-answer p {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .footer-content {
@@ -1296,8 +1306,12 @@
 
             .footer-section a {
                 display: inline-block;
-                margin: 4px 8px;
+                margin: 4px 6px;
                 font-size: 12px;
+            }
+
+            .footer-section h4 {
+                font-size: 15px;
             }
 
             .footer-section h4::after {
@@ -1306,80 +1320,72 @@
             }
 
             .footer-bottom p {
-                font-size: 11px;
+                font-size: 10px;
             }
 
             .modal-content {
-                padding: 25px 15px;
+                padding: 20px 12px;
                 margin: 5% auto;
             }
 
             .rules-main-title {
-                font-size: 22px;
-                margin-bottom: 20px;
+                font-size: 20px;
+                margin-bottom: 15px;
             }
 
             .rules-scroll-area p {
-                font-size: 13px;
-                margin-bottom: 12px;
-                padding-bottom: 10px;
+                font-size: 12px;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
             }
 
             .punish {
-                font-size: 11px;
-                padding: 3px 8px;
+                font-size: 10px;
+                padding: 3px 6px;
             }
         }
 
         @media (max-width: 480px) {
             .hero::before {
-                width: 280px;
-                height: 280px;
+                width: 250px;
+                height: 250px;
             }
 
             @keyframes neonPulse {
-                0%, 100% { opacity: 0.15; width: 280px; height: 280px; }
-                50% { opacity: 0.25; width: 320px; height: 320px; }
+                0%, 100% { opacity: 0.15; width: 250px; height: 250px; }
+                50% { opacity: 0.25; width: 280px; height: 280px; }
             }
 
             .title {
-                font-size: 36px;
+                font-size: 32px;
             }
 
             .hero-tagline {
-                font-size: 13px;
-            }
-
-            .giant-img {
-                max-width: 180px;
-            }
-
-            .banner-center a {
-                padding: 3px 5px;
-                font-size: 8px;
-            }
-
-            .shop-banner a {
-                padding: 3px 6px;
-                font-size: 8px;
-            }
-
-            .banner-right .play-now {
-                padding: 3px 8px;
-                font-size: 8px;
-            }
-
-            .banner-title {
-                font-size: 10px;
-            }
-
-            .banner-star {
                 font-size: 12px;
             }
 
+            .giant-img {
+                max-width: 150px;
+            }
+
+            .banner-center a {
+                padding: 3px 6px;
+                font-size: 9px;
+            }
+
+            .shop-banner a {
+                padding: 3px 8px;
+                font-size: 9px;
+            }
+
+            .banner-right .play-now {
+                padding: 3px 10px;
+                font-size: 9px;
+            }
+
             .btn-ip, .btn-version {
-                padding: 10px 14px !important;
-                font-size: 13px !important;
+                padding: 8px 12px !important;
+                font-size: 12px !important;
             }
         }
     </style>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>SweetLand | 1.21.8</title>
+    <title>SweetLand | Ванильный Minecraft сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
         /* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
@@ -28,7 +28,7 @@
             --card-blur: 12px;
         }
 
-        /* ========== СВЕТЛАЯ ТЕМА (ОПТИМИЗИРОВАННАЯ) ========== */
+        /* ========== СВЕТЛАЯ ТЕМА ========== */
         body.light-theme {
             --accent: #ff7b5c;
             --accent-light: #ff9b7c;
@@ -169,46 +169,46 @@
 
         .snow-particle {
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: white;
             border-radius: 50%;
             opacity: 0;
-            filter: blur(1px);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            filter: blur(1.5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
             animation: snowfall linear infinite;
         }
 
         .rain-particle {
             position: absolute;
-            width: 2px;
-            height: 20px;
-            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.2));
+            width: 3px;
+            height: 35px;
+            background: linear-gradient(to bottom, rgba(74, 144, 226, 1), rgba(74, 144, 226, 0.3));
             opacity: 0;
-            filter: blur(1px);
-            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+            filter: blur(0.5px);
+            box-shadow: 0 0 12px rgba(74, 144, 226, 0.9);
             animation: rainfall linear infinite;
         }
 
         @keyframes snowfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.8;
+                opacity: 0.9;
             }
             100% {
                 transform: translateY(110vh) translateX(30px);
-                opacity: 0.2;
+                opacity: 0.3;
             }
         }
 
         @keyframes rainfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.6;
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(110vh) translateX(-10px);
-                opacity: 0.1;
+                transform: translateY(110vh) translateX(-15px);
+                opacity: 0.2;
             }
         }
 
@@ -1746,7 +1746,7 @@
                 font-size: 13px !important;
             }
         }
-</style>
+    </style>
 </head>
 <body class="dark no-select">
 
@@ -1788,6 +1788,8 @@
         <a href="#how-to-play">Как начать</a>
         <a href="#faq">Вопросы</a>
         <a href="#community">Сообщество</a>
+        <a href="#privacy">Защита данных</a>
+        <a href="#detailed-faq">Частые вопросы</a>
         <a href="javascript:void(0)" onclick="openRules()">Правила</a>
     </div>
     
@@ -1947,16 +1949,16 @@
         <div class="feature-card">
             <div class="feature-icon">🚀</div>
             <h3>Версия 1.21.8</h3>
-            <p>Убедись, что у тебя она уже установлена.</p>
+            <p>Убедись, что у тебя установлена последняя версия.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📝</div>
-            <h3>Подай заявку в дискорд и прочитай правила</h3>
+            <h3>Подай заявку в Discord</h3>
             <p>Ознакомься с правилами в боковом меню.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🔌</div>
-            <h3>Дождись пока тебя приймут, потом скопируй IP</h3>
+            <h3>Дождись принятия</h3>
             <p>play.sweet-land.fun - добавь в список серверов.</p>
         </div>
         <div class="feature-card">
@@ -1984,7 +1986,7 @@
         <div class="faq-card">
             <div class="icon">📅</div>
             <h3>Когда старт?</h3>
-            <p>Сервер еще не работает! Присоединяйся прямо сейчас.</p>
+            <p>Сервер еще не работает! Присоединяйся к ожиданию.</p>
         </div>
         <div class="faq-card">
             <div class="icon">🎮</div>
@@ -2014,12 +2016,12 @@
         <div class="faq-card">
             <div class="icon">📊</div>
             <h3>Какой онлайн?</h3>
-            <p>Сервер только открылся - будь первым!</p>
+            <p>Сервер готовится к открытию - будь первым!</p>
         </div>
         <div class="faq-card">
             <div class="icon">🔄</div>
             <h3>Будут вайпы?</h3>
-            <p>Вайпы планируються от 8-11 месяцев игры.</p>
+            <p>Вайпы планируются раз в 8-11 месяцев.</p>
         </div>
     </div>
 </section>
@@ -2103,8 +2105,8 @@
             <h3>📌 Как начать играть?</h3>
             <div class="faq-answer">
                 <p>1. Скачай Minecraft версии <strong>1.21.8</strong></p>
-                <p>2. Скопируй IP <strong>play.sweet-land.fun</strong></p>
-                <p>3. Добавь сервер и заходи!</p>
+                <p>2. Подай заявку в Discord</p>
+                <p>3. После принятия добавь сервер <strong>play.sweet-land.fun</strong></p>
             </div>
         </div>
         
@@ -2118,14 +2120,14 @@
         <div class="detailed-faq-item">
             <h3>📊 Сколько игроков?</h3>
             <div class="faq-answer">
-                <p>Сервер только открылся. Присоединяйся и стань одним из первых!</p>
+                <p>Сервер готовится к открытию. Присоединяйся в Discord, чтобы стать одним из первых!</p>
             </div>
         </div>
         
         <div class="detailed-faq-item">
             <h3>🔄 Будут вайпы?</h3>
             <div class="faq-answer">
-                <p>Вайпов не планируется. Мир будет развиваться постоянно, все постройки сохранятся навсегда.</p>
+                <p>Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
             </div>
         </div>
         
@@ -2192,7 +2194,7 @@
         weatherParticles = [];
         
         const isLightTheme = document.body.classList.contains('light-theme');
-        const count = window.innerWidth < 768 ? 60 : 120;
+        const count = window.innerWidth < 768 ? 80 : 200;
         
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
@@ -2203,16 +2205,16 @@
                 particle.style.top = Math.random() * 100 + '%';
                 particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
                 particle.style.animationDelay = Math.random() * -2 + 's';
-                particle.style.opacity = Math.random() * 0.3 + 0.3;
+                particle.style.opacity = Math.random() * 0.3 + 0.5;
             } else {
                 particle.className = 'snow-particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.width = Math.random() * 6 + 3 + 'px';
                 particle.style.height = particle.style.width;
-                particle.style.animationDuration = Math.random() * 4 + 2 + 's';
+                particle.style.animationDuration = Math.random() * 4 + 3 + 's';
                 particle.style.animationDelay = Math.random() * -3 + 's';
-                particle.style.opacity = Math.random() * 0.4 + 0.3;
+                particle.style.opacity = Math.random() * 0.4 + 0.4;
             }
             
             weatherContainer.appendChild(particle);

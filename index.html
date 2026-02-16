@@ -87,6 +87,22 @@
             -webkit-text-fill-color: transparent;
         }
 
+        body.light-theme .panel-links a {
+            color: #555;
+        }
+
+        body.light-theme .panel-links a:hover {
+            color: var(--accent);
+        }
+
+        body.light-theme .footer-section a {
+            color: #666;
+        }
+
+        body.light-theme .footer-section a:hover {
+            color: var(--accent);
+        }
+
         /* ========== ГЛОБАЛЬНЫЕ СТИЛИ ========== */
         * {
             margin: 0;
@@ -132,42 +148,46 @@
 
         .snow-particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 6px;
+            height: 6px;
             background: white;
             border-radius: 50%;
-            opacity: 0.6;
+            opacity: 0.8;
+            filter: blur(1px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             animation: snowfall linear infinite;
         }
 
         .rain-particle {
             position: absolute;
             width: 2px;
-            height: 15px;
-            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.6), transparent);
-            opacity: 0.4;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.3));
+            opacity: 0.7;
+            filter: blur(1px);
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
             animation: rainfall linear infinite;
         }
 
         @keyframes snowfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.6;
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(110vh) translateX(20px);
-                opacity: 0.2;
+                transform: translateY(110vh) translateX(30px);
+                opacity: 0.3;
             }
         }
 
         @keyframes rainfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.4;
+                opacity: 0.7;
             }
             100% {
-                transform: translateY(110vh) translateX(-10px);
-                opacity: 0.1;
+                transform: translateY(110vh) translateX(-15px);
+                opacity: 0.2;
             }
         }
 
@@ -465,9 +485,24 @@
             text-decoration: none;
             font-size: 20px;
             margin: 20px 0;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             padding-left: 12px;
             border-left: 2px solid transparent;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .panel-links a:nth-child(1) { animation-delay: 0.1s; }
+        .panel-links a:nth-child(2) { animation-delay: 0.2s; }
+        .panel-links a:nth-child(3) { animation-delay: 0.3s; }
+        .panel-links a:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .panel-links a:hover {
@@ -491,25 +526,42 @@
         .social-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
-            padding: 10px 16px;
-            border-radius: 12px;
+            padding: 12px 16px;
+            border-radius: 30px;
             background: rgba(163, 102, 255, 0.08);
             border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .social-link:nth-child(1) { animation-delay: 0.5s; }
+        .social-link:nth-child(2) { animation-delay: 0.6s; }
+        .social-link:nth-child(3) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .social-link span {
-            font-size: 18px;
-            transition: transform 0.2s ease;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            min-width: 24px;
+            text-align: center;
         }
 
         .social-link:hover {
-            transform: translateX(4px) scale(1.02);
+            transform: translateX(5px) scale(1.02);
             border-color: transparent;
         }
 
@@ -1090,11 +1142,17 @@
 
         .footer-section h4 {
             color: var(--accent);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             position: relative;
             display: inline-block;
+            animation: sectionTitlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes sectionTitlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .footer-section h4::after {
@@ -1115,8 +1173,8 @@
 
         .footer-section p {
             color: var(--text-secondary);
-            font-size: 13px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.6;
             margin-bottom: 10px;
         }
 
@@ -1124,37 +1182,40 @@
             display: block;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 13px;
-            margin-bottom: 8px;
-            transition: all 0.2s ease;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
         }
 
         .footer-section a:hover {
             color: var(--accent);
-            transform: translateX(4px);
+            transform: translateX(8px);
         }
 
         .footer-note {
             color: var(--accent) !important;
             font-weight: 500;
-            margin-top: 10px;
+            margin-top: 12px;
+            font-size: 14px;
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid var(--border-color);
         }
 
         .footer-bottom p {
             color: var(--text-tertiary);
-            font-size: 12px;
-            margin-bottom: 6px;
+            font-size: 13px;
+            margin-bottom: 8px;
         }
 
         .privacy-note {
             color: var(--text-secondary) !important;
-            font-size: 11px !important;
+            font-size: 12px !important;
         }
 
         /* ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ========== */
@@ -1320,7 +1381,7 @@
 
             .footer-section a {
                 display: inline-block;
-                margin: 4px 8px;
+                margin: 5px 10px;
             }
 
             .footer-section h4::after {
@@ -1505,7 +1566,6 @@
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <div class="large-neon"></div>
             <img src="images/5opka.png" alt="5opka" class="giant-img">
         </div>
     </div>
@@ -1723,7 +1783,7 @@
         weatherParticles = [];
         
         const isLightTheme = document.body.classList.contains('light-theme');
-        const count = window.innerWidth < 768 ? 50 : 100;
+        const count = window.innerWidth < 768 ? 80 : 150;
         
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
@@ -1731,15 +1791,17 @@
             if (isLightTheme) {
                 particle.className = 'rain-particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDuration = Math.random() * 1 + 0.5 + 's';
+                particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
                 particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.opacity = Math.random() * 0.4 + 0.5;
             } else {
                 particle.className = 'snow-particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
+                particle.style.width = Math.random() * 6 + 3 + 'px';
                 particle.style.height = particle.style.width;
-                particle.style.animationDuration = Math.random() * 3 + 2 + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDuration = Math.random() * 4 + 3 + 's';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.opacity = Math.random() * 0.4 + 0.5;
             }
             
             weatherContainer.appendChild(particle);

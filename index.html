@@ -56,7 +56,8 @@
         body.light-theme .info-card,
         body.light-theme .faq-card,
         body.light-theme .privacy-card,
-        body.light-theme .detailed-faq-item {
+        body.light-theme .detailed-faq-item,
+        body.light-theme .feature-card {
             background: white;
             border-color: var(--border-color);
             box-shadow: 0 4px 20px rgba(255, 123, 92, 0.05);
@@ -136,10 +137,10 @@
         /* ========== СНЕГ/ДОЖДЬ ========== */
         #weather {
             position: fixed;
-            top: 0;
+            top: -20vh;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 120vh;
             pointer-events: none;
             z-index: 1;
             opacity: 1;
@@ -152,7 +153,7 @@
             height: 6px;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
+            opacity: 0;
             filter: blur(1px);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             animation: snowfall linear infinite;
@@ -163,7 +164,7 @@
             width: 2px;
             height: 20px;
             background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.3));
-            opacity: 0.7;
+            opacity: 0;
             filter: blur(1px);
             box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
             animation: rainfall linear infinite;
@@ -781,6 +782,118 @@
         }
 
         /* ========== ОСОБЕННОСТИ ========== */
+        .section {
+            padding: 60px 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(28px, 5vw, 40px);
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .section-title span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+            animation: titleWave 2s ease-in-out infinite;
+        }
+
+        @keyframes titleWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .section-title:hover span::after {
+            transform: scaleX(1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: var(--shadow-accent);
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ========== ОСОБЕННОСТИ ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -829,6 +942,7 @@
             color: var(--accent);
             margin-bottom: 16px;
             transition: transform 0.3s ease;
+            display: inline-block;
         }
 
         .info-card:hover .icon {
@@ -877,6 +991,12 @@
             font-size: 32px;
             color: var(--accent);
             margin-bottom: 16px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .faq-card:hover .icon {
+            transform: scale(1.2);
         }
 
         .faq-card h3 {
@@ -922,6 +1042,12 @@
             font-size: 40px;
             color: var(--accent);
             margin-bottom: 16px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .privacy-card:hover .icon {
+            transform: scale(1.2);
         }
 
         .privacy-card h3 {
@@ -1350,14 +1476,16 @@
             .cards-grid,
             .faq-grid,
             .privacy-grid,
-            .detailed-faq-grid {
+            .detailed-faq-grid,
+            .features-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
 
             .info-card,
             .faq-card,
-            .privacy-card {
+            .privacy-card,
+            .feature-card {
                 padding: 20px;
             }
 
@@ -1478,8 +1606,10 @@
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links">
         <a href="#features">Особенности</a>
-        <a href="#faq">Вопросы</a>
         <a href="#how-to-play">Как начать</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#privacy">Защита данных</a>
+        <a href="#detailed-faq">Частые вопросы</a>
         <a href="javascript:void(0)" onclick="openRules()">Правила</a>
     </div>
     
@@ -1572,105 +1702,100 @@
     <div id="copyNotice">✔ IP Скопирован!</div>
 </header>
 
-<!-- ========== ОСОБЕННОСТИ ========== -->
+<!-- ========== ОСОБЕННОСТИ СЕРВЕРА ========== -->
 <section class="section reveal" id="features">
     <h2 class="section-title">Особенности <span>сервера</span></h2>
-    <div class="cards-grid">
-        <div class="info-card">
-            <div class="icon">🛡️</div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
             <h3>Анти-чит</h3>
             <p>Продвинутая защита обеспечивает честную игру без читеров.</p>
         </div>
-        <div class="info-card">
-            <div class="icon">⚡</div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
             <h3>Стабильный TPS</h3>
             <p>Оптимизированный сервер — плавная игра без лагов.</p>
         </div>
-        <div class="info-card">
-            <div class="icon">🎉</div>
+        <div class="feature-card">
+            <div class="feature-icon">🎉</div>
             <h3>Ивенты</h3>
-            <p>Регулярные события и активности для игроков.</p>
-        </div>
-        <div class="info-card">
-            <div class="icon">👥</div>
-            <h3>Сообщество</h3>
-            <p>Дружелюбные игроки и активная администрация.</p>
+            <p>Регулярные события и активности для всех игроков.</p>
         </div>
     </div>
 </section>
 
-<!-- ========== КАК НАЧАТЬ ========== -->
+<!-- ========== КАК НАЧАТЬ ИГРАТЬ ========== -->
 <section class="section reveal" id="how-to-play">
     <h2 class="section-title">Как начать <span>играть</span>?</h2>
-    <div class="cards-grid">
-        <div class="info-card">
-            <div class="icon">🚀</div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
             <h3>Версия 1.21.8</h3>
             <p>Убедись, что у тебя установлена последняя версия игры.</p>
         </div>
-        <div class="info-card">
-            <div class="icon">📝</div>
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
             <h3>Читай правила</h3>
             <p>Ознакомься с правилами в боковом меню.</p>
         </div>
-        <div class="info-card">
-            <div class="icon">🔌</div>
+        <div class="feature-card">
+            <div class="feature-icon">🔌</div>
             <h3>Подключение</h3>
-            <p>Скопируй наш IP и добавь его в список серверов.</p>
+            <p>Скопируй IP и добавь сервер в список.</p>
         </div>
     </div>
 </section>
 
-<!-- ========== FAQ ========== -->
+<!-- ========== ОТВЕТЫ НА ВОПРОСЫ ========== -->
 <section class="section reveal" id="faq">
     <h2 class="section-title">Ответы на <span>вопросы</span></h2>
-    <div class="faq-grid">
-        <div class="faq-card">
-            <div class="icon">📅</div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
             <h3>Когда старт?</h3>
             <p>Проект в разработке — следи за новостями в Discord.</p>
         </div>
-        <div class="faq-card">
-            <div class="icon">🎮</div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
             <h3>Какая версия?</h3>
             <p>Сервер работает на актуальной версии 1.21.8.</p>
         </div>
-        <div class="faq-card">
-            <div class="icon">💬</div>
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
             <h3>Где общение?</h3>
             <p>Наш Discord — центр новостей и общения.</p>
         </div>
-        <div class="faq-card">
-            <div class="icon">🌙</div>
-            <h3>Работает ли белая тема?</h3>
+        <div class="feature-card">
+            <div class="feature-icon">🌙</div>
+            <h3>Белая тема?</h3>
             <p>Да, нажми на луну и увидишь дождик!</p>
         </div>
-        <div class="faq-card">
-            <div class="icon">🔒</div>
-            <h3>Как защищен аккаунт?</h3>
-            <p>Мы используем современные методы защиты и шифрование данных.</p>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Защита аккаунта?</h3>
+            <p>Современные методы шифрования данных.</p>
         </div>
     </div>
 </section>
 
 <!-- ========== ЗАЩИТА ДАННЫХ ========== -->
-<section class="section reveal">
+<section class="section reveal" id="privacy">
     <h2 class="section-title">Защита <span>данных</span></h2>
     <div class="privacy-grid">
         <div class="privacy-card">
             <div class="icon">🔐</div>
             <h3>Шифрование данных</h3>
-            <p>Все ваши личные данные защищены современными протоколами шифрования.</p>
+            <p>Все личные данные защищены современными протоколами.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">🛡️</div>
             <h3>Защита аккаунта</h3>
-            <p>Каждый аккаунт находится под надежной защитой анти-чита.</p>
+            <p>Анти-чит и система безопасности.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">⚖️</div>
             <h3>Права владения</h3>
-            <p>Все ваши постройки и ресурсы принадлежат только вам.</p>
+            <p>Постройки и ресурсы принадлежат только вам.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">📋</div>
@@ -1680,18 +1805,18 @@
         <div class="privacy-card">
             <div class="icon">🌍</div>
             <h3>GDPR соответствие</h3>
-            <p>Сервер соответствует стандартам защиты данных.</p>
+            <p>Стандарты защиты данных.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">⏰</div>
             <h3>Хранение данных</h3>
-            <p>Данные хранятся на защищенных серверах.</p>
+            <p>На защищенных серверах.</p>
         </div>
     </div>
 </section>
 
-<!-- ========== ДЕТАЛЬНЫЙ FAQ ========== -->
-<section class="section reveal">
+<!-- ========== ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ ========== -->
+<section class="section reveal" id="detailed-faq">
     <h2 class="section-title">Часто <span>задаваемые</span> вопросы</h2>
     <div class="detailed-faq-grid">
         <div class="detailed-faq-item">
@@ -1706,7 +1831,7 @@
         <div class="detailed-faq-item">
             <h3>⚔️ Есть ли кланы?</h3>
             <div class="faq-answer">
-                <p>Да, ты можешь создавать кланы и строить вместе.</p>
+                <p>Да, ты можешь создавать кланы и строить вместе с друзьями.</p>
             </div>
         </div>
         
@@ -1720,7 +1845,7 @@
         <div class="detailed-faq-item">
             <h3>🔄 Есть ли вайп?</h3>
             <div class="faq-answer">
-                <p>Вайпов не планируется. Все постройки сохранятся.</p>
+                <p>Вайпов не планируется. Все постройки сохранятся навсегда.</p>
             </div>
         </div>
         
@@ -1751,8 +1876,10 @@
         <div class="footer-section">
             <h4>Быстрые ссылки</h4>
             <a href="#features">Особенности</a>
-            <a href="#faq">FAQ</a>
             <a href="#how-to-play">Как начать</a>
+            <a href="#faq">Вопросы</a>
+            <a href="#privacy">Защита данных</a>
+            <a href="#detailed-faq">Частые вопросы</a>
             <a href="javascript:void(0)" onclick="openRules()">Правила</a>
         </div>
         <div class="footer-section">
@@ -1783,7 +1910,7 @@
         weatherParticles = [];
         
         const isLightTheme = document.body.classList.contains('light-theme');
-        const count = window.innerWidth < 768 ? 80 : 150;
+        const count = window.innerWidth < 768 ? 80 : 200;
         
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
@@ -1791,16 +1918,18 @@
             if (isLightTheme) {
                 particle.className = 'rain-particle';
                 particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
                 particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDelay = Math.random() * -2 + 's';
                 particle.style.opacity = Math.random() * 0.4 + 0.5;
             } else {
                 particle.className = 'snow-particle';
                 particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
                 particle.style.width = Math.random() * 6 + 3 + 'px';
                 particle.style.height = particle.style.width;
                 particle.style.animationDuration = Math.random() * 4 + 3 + 's';
-                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.animationDelay = Math.random() * -3 + 's';
                 particle.style.opacity = Math.random() * 0.4 + 0.5;
             }
             

@@ -13,73 +13,89 @@
             --accent-dark: #8a4cdd;
             --bg: #0a0a0f;
             --bg-secondary: #12121a;
-            --bg-card: rgba(20, 20, 30, 0.6);
+            --bg-card: rgba(20, 20, 30, 0.7);
             --text-primary: #ffffff;
             --text-secondary: #b0b0c0;
             --text-tertiary: #70707a;
-            --border-color: rgba(163, 102, 255, 0.2);
+            --border-color: rgba(163, 102, 255, 0.25);
             --border-hover: rgba(163, 102, 255, 0.5);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.2);
+            --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.25);
             --glow: 0 0 20px rgba(163, 102, 255, 0.3);
             --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             --snow-opacity: 1;
             --neon-color: var(--accent);
+            --card-blur: 12px;
         }
 
-        /* ========== СВЕТЛАЯ ТЕМА ========== */
+        /* ========== СВЕТЛАЯ ТЕМА (ОПТИМИЗИРОВАННАЯ) ========== */
         body.light-theme {
             --accent: #ff7b5c;
             --accent-light: #ff9b7c;
             --accent-dark: #e05b3c;
-            --bg: #fff9f5;
+            --bg: #faf7f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 245, 240, 0.9);
-            --text-primary: #2d2d2d;
-            --text-secondary: #666666;
-            --text-tertiary: #999999;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --text-primary: #2a2a2a;
+            --text-secondary: #5a5a5a;
+            --text-tertiary: #8a8a8a;
             --border-color: rgba(255, 123, 92, 0.2);
             --border-hover: rgba(255, 123, 92, 0.4);
-            --shadow: 0 8px 32px rgba(255, 123, 92, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
             --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15);
-            --glow: 0 0 20px rgba(255, 123, 92, 0.2);
+            --glow: 0 0 20px rgba(255, 123, 92, 0.15);
             --snow-opacity: 1;
             --neon-color: #ff9b7c;
+            --card-blur: 8px;
         }
 
         body.light-theme .shop-banner {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.8);
             border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(255, 123, 92, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 123, 92, 0.15);
+        }
+
+        body.light-theme .shop-banner a {
+            color: var(--text-primary);
+        }
+
+        body.light-theme .shop-banner a:hover {
+            background: var(--accent);
+            color: white !important;
         }
 
         body.light-theme .info-card,
         body.light-theme .faq-card,
         body.light-theme .privacy-card,
         body.light-theme .detailed-faq-item,
-        body.light-theme .feature-card {
-            background: white;
+        body.light-theme .feature-card,
+        body.light-theme .stat-card,
+        body.light-theme .rule-card,
+        body.light-theme .community-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(var(--card-blur));
             border-color: var(--border-color);
-            box-shadow: 0 4px 20px rgba(255, 123, 92, 0.05);
+            box-shadow: 0 4px 16px rgba(255, 123, 92, 0.08);
         }
 
         body.light-theme .btn-ip {
             background: var(--accent);
             color: white;
-            box-shadow: 0 4px 16px rgba(255, 123, 92, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 123, 92, 0.25);
         }
 
         body.light-theme .btn-ip:hover {
             background: var(--accent-light);
-            box-shadow: 0 8px 24px rgba(255, 123, 92, 0.4);
+            box-shadow: 0 8px 24px rgba(255, 123, 92, 0.3);
         }
 
         body.light-theme .hero {
-            background: radial-gradient(circle at 50% 30%, rgba(255, 123, 92, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle at 50% 30%, rgba(255, 123, 92, 0.1) 0%, transparent 70%);
         }
 
         body.light-theme .hero::before {
             background: var(--neon-color);
+            opacity: 0.1;
         }
 
         body.light-theme .title {
@@ -89,7 +105,7 @@
         }
 
         body.light-theme .panel-links a {
-            color: #555;
+            color: #5a5a5a;
         }
 
         body.light-theme .panel-links a:hover {
@@ -101,6 +117,10 @@
         }
 
         body.light-theme .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        body.light-theme .stat-number {
             color: var(--accent);
         }
 
@@ -163,7 +183,7 @@
             position: absolute;
             width: 2px;
             height: 20px;
-            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.3));
+            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.2));
             opacity: 0;
             filter: blur(1px);
             box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
@@ -177,18 +197,18 @@
             }
             100% {
                 transform: translateY(110vh) translateX(30px);
-                opacity: 0.3;
+                opacity: 0.2;
             }
         }
 
         @keyframes rainfall {
             0% {
                 transform: translateY(-10vh) translateX(0);
-                opacity: 0.7;
+                opacity: 0.6;
             }
             100% {
-                transform: translateY(110vh) translateX(-15px);
-                opacity: 0.2;
+                transform: translateY(110vh) translateX(-10px);
+                opacity: 0.1;
             }
         }
 
@@ -498,6 +518,10 @@
         .panel-links a:nth-child(2) { animation-delay: 0.2s; }
         .panel-links a:nth-child(3) { animation-delay: 0.3s; }
         .panel-links a:nth-child(4) { animation-delay: 0.4s; }
+        .panel-links a:nth-child(5) { animation-delay: 0.5s; }
+        .panel-links a:nth-child(6) { animation-delay: 0.6s; }
+        .panel-links a:nth-child(7) { animation-delay: 0.7s; }
+        .panel-links a:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes slideIn {
             to {
@@ -781,6 +805,43 @@
             100% { transform: scale(1) translateX(-50%); opacity: 1; }
         }
 
+        /* ========== СТАТИСТИКА ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
+            padding: 30px 20px;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
         /* ========== ОСОБЕННОСТИ ========== */
         .section {
             padding: 60px 5%;
@@ -835,10 +896,10 @@
 
         .feature-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 24px;
             border: 2px solid var(--border-color);
             transition: all 0.3s ease;
             position: relative;
@@ -869,7 +930,7 @@
         }
 
         .feature-icon {
-            font-size: 32px;
+            font-size: 36px;
             color: var(--accent);
             margin-bottom: 16px;
             transition: transform 0.3s ease;
@@ -893,7 +954,111 @@
             line-height: 1.6;
         }
 
-        /* ========== ОСОБЕННОСТИ ========== */
+        /* ========== ПРАВИЛА ========== */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .rule-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .rule-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .rule-number {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .rule-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .rule-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .rule-punish {
+            color: #ff6666;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* ========== СООБЩЕСТВО ========== */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .community-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
+            padding: 30px;
+            border-radius: 24px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .community-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .community-icon {
+            font-size: 48px;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .community-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .community-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ========== КАРТОЧКИ ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -904,8 +1069,8 @@
 
         .info-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
             padding: 25px;
             border-radius: 20px;
             border: 2px solid var(--border-color);
@@ -973,8 +1138,8 @@
 
         .faq-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
             padding: 25px;
             border-radius: 20px;
             border: 2px solid var(--border-color);
@@ -1023,8 +1188,8 @@
 
         .privacy-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
             padding: 25px;
             border-radius: 20px;
             border: 2px solid var(--border-color);
@@ -1074,8 +1239,8 @@
 
         .detailed-faq-item {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--card-blur));
+            -webkit-backdrop-filter: blur(var(--card-blur));
             border-radius: 20px;
             border: 2px solid var(--border-color);
             overflow: hidden;
@@ -1473,19 +1638,32 @@
                 margin-bottom: 25px;
             }
 
+            .stats-grid,
+            .features-grid,
+            .rules-grid,
+            .community-grid,
             .cards-grid,
             .faq-grid,
             .privacy-grid,
-            .detailed-faq-grid,
-            .features-grid {
+            .detailed-faq-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
 
+            .stat-card {
+                padding: 20px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .feature-card,
             .info-card,
             .faq-card,
             .privacy-card,
-            .feature-card {
+            .rule-card,
+            .community-card {
                 padding: 20px;
             }
 
@@ -1605,12 +1783,14 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links">
+        <a href="#stats">Статистика</a>
         <a href="#features">Особенности</a>
+        <a href="#rules">Правила</a>
+        <a href="#community">Сообщество</a>
         <a href="#how-to-play">Как начать</a>
         <a href="#faq">Вопросы</a>
         <a href="#privacy">Защита данных</a>
         <a href="#detailed-faq">Частые вопросы</a>
-        <a href="javascript:void(0)" onclick="openRules()">Правила</a>
     </div>
     
     <div class="panel-social">
@@ -1702,24 +1882,139 @@
     <div id="copyNotice">✔ IP Скопирован!</div>
 </header>
 
+<!-- ========== СТАТИСТИКА ========== -->
+<section class="section reveal" id="stats">
+    <h2 class="section-title">Статистика <span>сервера</span></h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Игроков онлайн</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Работа сервера</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1.21.8</div>
+            <div class="stat-label">Актуальная версия</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Ванильный геймплей</div>
+        </div>
+    </div>
+</section>
+
 <!-- ========== ОСОБЕННОСТИ СЕРВЕРА ========== -->
 <section class="section reveal" id="features">
     <h2 class="section-title">Особенности <span>сервера</span></h2>
     <div class="features-grid">
         <div class="feature-card">
             <div class="feature-icon">🛡️</div>
-            <h3>Анти-чит</h3>
-            <p>Продвинутая защита обеспечивает честную игру без читеров.</p>
+            <h3>Анти-чит система</h3>
+            <p>Продвинутая защита от читеров и недобросовестных игроков. Честная игра для всех.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">⚡</div>
             <h3>Стабильный TPS</h3>
-            <p>Оптимизированный сервер — плавная игра без лагов.</p>
+            <p>Оптимизированный сервер на мощном железе. Никаких лагов и зависаний.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🎉</div>
-            <h3>Ивенты</h3>
-            <p>Регулярные события и активности для всех игроков.</p>
+            <h3>Регулярные ивенты</h3>
+            <p>Еженедельные события, конкурсы и активности с призами для всех игроков.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Бесконечный мир</h3>
+            <p>Огромный procedurally сгенерированный мир для исследований и строительства.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔨</div>
+            <h3>Защита построек</h3>
+            <p>Ваши постройки под надежной защитой. Никто не сможет их разрушить.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Активное сообщество</h3>
+            <p>Дружелюбные игроки и отзывчивая администрация всегда готовые помочь.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ОСНОВНЫЕ ПРАВИЛА ========== -->
+<section class="section reveal" id="rules">
+    <h2 class="section-title">Основные <span>правила</span></h2>
+    <div class="rules-grid">
+        <div class="rule-card">
+            <div class="rule-number">1</div>
+            <h3>Гриферство</h3>
+            <p>Разрушение чужих построек запрещено</p>
+            <span class="rule-punish">Бан 30 дней</span>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">2</div>
+            <h3>Кража ресурсов</h3>
+            <p>Воровство из сундуков и ферм</p>
+            <span class="rule-punish">Бан 14 дней</span>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">3</div>
+            <h3>Читы</h3>
+            <p>Использование любых читов</p>
+            <span class="rule-punish">Перманентный бан</span>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">4</div>
+            <h3>PVP без согласия</h3>
+            <p>Убийство без договоренности</p>
+            <span class="rule-punish">Бан 7 дней</span>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">5</div>
+            <h3>Спам в чате</h3>
+            <p>Чрезмерный флуд и капс</p>
+            <span class="rule-punish">Мут 24 часа</span>
+        </div>
+        <div class="rule-card">
+            <div class="rule-number">6</div>
+            <h3>Дюп предметов</h3>
+            <p>Использование багов</p>
+            <span class="rule-punish">Перманентный бан</span>
+        </div>
+    </div>
+</section>
+
+<!-- ========== СООБЩЕСТВО ========== -->
+<section class="section reveal" id="community">
+    <h2 class="section-title">Наше <span>сообщество</span></h2>
+    <div class="community-grid">
+        <div class="community-card">
+            <div class="community-icon">💬</div>
+            <h3>Discord сервер</h3>
+            <p>Общайся с игроками, участвуй в ивентах, получай поддержку</p>
+            <div class="community-stats">
+                <span>👥 500+</span>
+                <span>📊 24/7</span>
+            </div>
+        </div>
+        <div class="community-card">
+            <div class="community-icon">📱</div>
+            <h3>Telegram канал</h3>
+            <p>Новости, обновления, анонсы ивентов и конкурсов</p>
+            <div class="community-stats">
+                <span>📢 300+</span>
+                <span>⚡ Активно</span>
+            </div>
+        </div>
+        <div class="community-card">
+            <div class="community-icon">▶️</div>
+            <h3>YouTube канал</h3>
+            <p>Обзоры, гайды, записи ивентов и стримы</p>
+            <div class="community-stats">
+                <span>🎥 1000+</span>
+                <span>⭐ Новое</span>
+            </div>
         </div>
     </div>
 </section>
@@ -1731,17 +2026,32 @@
         <div class="feature-card">
             <div class="feature-icon">🚀</div>
             <h3>Версия 1.21.8</h3>
-            <p>Убедись, что у тебя установлена последняя версия игры.</p>
+            <p>Убедись, что у тебя установлена последняя версия Minecraft для входа на сервер.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">📝</div>
-            <h3>Читай правила</h3>
-            <p>Ознакомься с правилами в боковом меню.</p>
+            <h3>Ознакомься с правилами</h3>
+            <p>Прочитай основные правила, чтобы избежать недоразумений и наказаний.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">🔌</div>
-            <h3>Подключение</h3>
-            <p>Скопируй IP и добавь сервер в список.</p>
+            <h3>Подключение к серверу</h3>
+            <p>Скопируй IP play.sweet-land.fun и добавь сервер в список.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Начинай играть</h3>
+            <p>Выбирай место для базы, строй, исследуй и общайся с игроками!</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>Присоединяйся в Discord</h3>
+            <p>Заходи в наш Discord, знакомься и участвуй в жизни сообщества.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>Приглашай друзей</h3>
+            <p>Играть вместе веселее! Приглашай друзей и строй общие проекты.</p>
         </div>
     </div>
 </section>
@@ -1749,31 +2059,36 @@
 <!-- ========== ОТВЕТЫ НА ВОПРОСЫ ========== -->
 <section class="section reveal" id="faq">
     <h2 class="section-title">Ответы на <span>вопросы</span></h2>
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">📅</div>
+    <div class="faq-grid">
+        <div class="faq-card">
+            <div class="icon">📅</div>
             <h3>Когда старт?</h3>
-            <p>Проект в разработке — следи за новостями в Discord.</p>
+            <p>Сервер уже работает! Присоединяйся прямо сейчас и начинай играть.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">🎮</div>
+        <div class="faq-card">
+            <div class="icon">🎮</div>
             <h3>Какая версия?</h3>
             <p>Сервер работает на актуальной версии 1.21.8.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">💬</div>
+        <div class="faq-card">
+            <div class="icon">💬</div>
             <h3>Где общение?</h3>
-            <p>Наш Discord — центр новостей и общения.</p>
+            <p>Основное общение в Discord. Там же новости и ивенты.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">🌙</div>
+        <div class="faq-card">
+            <div class="icon">🌙</div>
             <h3>Белая тема?</h3>
-            <p>Да, нажми на луну и увидишь дождик!</p>
+            <p>Да, нажми на луну в правом углу и увидишь дождик!</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">🔒</div>
+        <div class="faq-card">
+            <div class="icon">🔒</div>
             <h3>Защита аккаунта?</h3>
-            <p>Современные методы шифрования данных.</p>
+            <p>Современные методы шифрования и анти-чит система.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🎁</div>
+            <h3>Есть донат?</h3>
+            <p>Нет, это полностью ванильный сервер. Только чистое выживание!</p>
         </div>
     </div>
 </section>
@@ -1784,33 +2099,33 @@
     <div class="privacy-grid">
         <div class="privacy-card">
             <div class="icon">🔐</div>
-            <h3>Шифрование данных</h3>
-            <p>Все личные данные защищены современными протоколами.</p>
+            <h3>Шифрование</h3>
+            <p>Все данные защищены современными протоколами шифрования.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">🛡️</div>
-            <h3>Защита аккаунта</h3>
-            <p>Анти-чит и система безопасности.</p>
+            <h3>Анти-чит</h3>
+            <p>Защита от недобросовестных игроков и читеров.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">⚖️</div>
             <h3>Права владения</h3>
-            <p>Постройки и ресурсы принадлежат только вам.</p>
+            <p>Ваши постройки и ресурсы принадлежат только вам.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">📋</div>
-            <h3>Политика конфиденциальности</h3>
-            <p>Мы не собираем лишнюю информацию.</p>
+            <h3>Конфиденциальность</h3>
+            <p>Мы не собираем лишнюю информацию о игроках.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">🌍</div>
-            <h3>GDPR соответствие</h3>
-            <p>Стандарты защиты данных.</p>
+            <h3>GDPR</h3>
+            <p>Соответствие европейским стандартам защиты данных.</p>
         </div>
         <div class="privacy-card">
             <div class="icon">⏰</div>
-            <h3>Хранение данных</h3>
-            <p>На защищенных серверах.</p>
+            <h3>Хранение</h3>
+            <p>Данные на защищенных серверах с бэкапами.</p>
         </div>
     </div>
 </section>
@@ -1831,35 +2146,35 @@
         <div class="detailed-faq-item">
             <h3>⚔️ Есть ли кланы?</h3>
             <div class="faq-answer">
-                <p>Да, ты можешь создавать кланы и строить вместе с друзьями.</p>
+                <p>Да, ты можешь создавать кланы, приглашать друзей и строить вместе. В разработке клановые войны!</p>
             </div>
         </div>
         
         <div class="detailed-faq-item">
             <h3>📊 Какой онлайн?</h3>
             <div class="faq-answer">
-                <p>Сервер новый, присоединяйся и будь первым!</p>
+                <p>Сервер новый, но уже набирает игроков. Присоединяйся и будь первым!</p>
             </div>
         </div>
         
         <div class="detailed-faq-item">
             <h3>🔄 Есть ли вайп?</h3>
             <div class="faq-answer">
-                <p>Вайпов не планируется. Все постройки сохранятся навсегда.</p>
+                <p>Вайпов не планируется. Мир будет развиваться постоянно, все постройки сохранятся навсегда.</p>
             </div>
         </div>
         
         <div class="detailed-faq-item">
             <h3>🎁 Бонусы для новичков?</h3>
             <div class="faq-answer">
-                <p>Нет, это полностью ванильный сервер. Чистое выживание.</p>
+                <p>Нет, это полностью ванильный сервер. Никаких донатов и стартовых наборов — чистое выживание как с друзьями.</p>
             </div>
         </div>
         
         <div class="detailed-faq-item">
             <h3>📞 Связь с поддержкой?</h3>
             <div class="faq-answer">
-                <p>Пиши в Telegram или Discord. Администрация онлайн 24/7.</p>
+                <p>По всем вопросам пиши в Telegram или Discord. Администрация онлайн 24/7 и всегда готова помочь.</p>
             </div>
         </div>
     </div>
@@ -1870,17 +2185,19 @@
     <div class="footer-content">
         <div class="footer-section">
             <h4>SweetLand</h4>
-            <p>Ванильное выживание без границ с дружным сообществом.</p>
-            <p class="footer-note">Никаких донатов — чистый ванильный геймплей</p>
+            <p>Ванильное выживание без границ с дружным сообществом и активной администрацией.</p>
+            <p class="footer-note">Никаких донатов — только чистый ванильный геймплей</p>
         </div>
         <div class="footer-section">
             <h4>Быстрые ссылки</h4>
+            <a href="#stats">Статистика</a>
             <a href="#features">Особенности</a>
+            <a href="#rules">Правила</a>
+            <a href="#community">Сообщество</a>
             <a href="#how-to-play">Как начать</a>
-            <a href="#faq">Вопросы</a>
+            <a href="#faq">FAQ</a>
             <a href="#privacy">Защита данных</a>
             <a href="#detailed-faq">Частые вопросы</a>
-            <a href="javascript:void(0)" onclick="openRules()">Правила</a>
         </div>
         <div class="footer-section">
             <h4>Соцсети</h4>
@@ -1890,12 +2207,12 @@
         </div>
         <div class="footer-section">
             <h4>Защита данных</h4>
-            <p>Все данные защищены и не передаются третьим лицам.</p>
+            <p>Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p>
         </div>
     </div>
     <div class="footer-bottom">
         <p>© 2026 SweetLand. Ванильный Minecraft сервер.</p>
-        <p class="privacy-note">Ваши данные под надежной защитой.</p>
+        <p class="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p>
     </div>
 </footer>
 
@@ -1921,7 +2238,7 @@
                 particle.style.top = Math.random() * 100 + '%';
                 particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
                 particle.style.animationDelay = Math.random() * -2 + 's';
-                particle.style.opacity = Math.random() * 0.4 + 0.5;
+                particle.style.opacity = Math.random() * 0.4 + 0.4;
             } else {
                 particle.className = 'snow-particle';
                 particle.style.left = Math.random() * 100 + '%';
@@ -1930,7 +2247,7 @@
                 particle.style.height = particle.style.width;
                 particle.style.animationDuration = Math.random() * 4 + 3 + 's';
                 particle.style.animationDelay = Math.random() * -3 + 's';
-                particle.style.opacity = Math.random() * 0.4 + 0.5;
+                particle.style.opacity = Math.random() * 0.4 + 0.4;
             }
             
             weatherContainer.appendChild(particle);

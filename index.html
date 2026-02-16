@@ -500,6 +500,26 @@
             50% { text-shadow: 0 0 30px var(--accent); }
         }
 
+        .panel-links {
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .panel-links::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .panel-links::-webkit-scrollbar-track {
+            background: rgba(163, 102, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .panel-links::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
         .panel-links a {
             display: block;
             color: var(--text-secondary);
@@ -1067,8 +1087,8 @@
             overflow: hidden;
         }
         
-        .streamer-card::before {
-            content: '🔴 LIVE';
+        .streamer-card.babka::before {
+            content: '🔴 BABKA3434';
             position: absolute;
             top: 10px;
             right: -30px;
@@ -1079,6 +1099,21 @@
             font-weight: 700;
             transform: rotate(45deg);
             box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .streamer-card.gyraffic::before {
+            content: '🔴 GYRAFFIC';
+            position: absolute;
+            top: 10px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 30px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px var(--accent);
             animation: pulse 2s infinite;
         }
         
@@ -1095,6 +1130,10 @@
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
+
+        .streamer-card.gyraffic .streamer-link {
+            background: var(--accent);
+        }
         
         .streamer-link:hover {
             background: white;
@@ -1102,10 +1141,20 @@
             border-color: #ff4444;
             transform: scale(1.05);
         }
+
+        .streamer-card.gyraffic .streamer-link:hover {
+            background: white;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
         
         .streamer-card .community-icon {
             color: #ff4444;
             animation: bounce 2s infinite;
+        }
+
+        .streamer-card.gyraffic .community-icon {
+            color: var(--accent);
         }
         
         @keyframes bounce {
@@ -1131,6 +1180,27 @@
         
         .footer-section a[href*="Babka3434"]:hover {
             color: #ff6666;
+            transform: translateX(8px);
+        }
+
+        .footer-section a[href*="gyraffic"] {
+            color: var(--accent);
+            font-weight: 600;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .footer-section a[href*="gyraffic"]::before {
+            content: '▶️';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+        
+        .footer-section a[href*="gyraffic"]:hover {
+            color: var(--accent-light);
             transform: translateX(8px);
         }
 
@@ -1658,6 +1728,30 @@
                 margin: 4px 0;
             }
 
+            .side-panel {
+                width: 280px;
+                padding: 60px 20px;
+            }
+
+            .panel-links {
+                max-height: calc(100vh - 200px);
+            }
+
+            .panel-links a {
+                font-size: 18px;
+                margin: 15px 0;
+            }
+
+            .panel-social {
+                bottom: 20px;
+                padding: 0 20px;
+            }
+
+            .social-link {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
             .hero {
                 padding: 70px 4%;
             }
@@ -1820,6 +1914,21 @@
             .btn-ip, .btn-version {
                 padding: 10px 14px !important;
                 font-size: 13px !important;
+            }
+
+            .side-panel {
+                width: 260px;
+                padding: 50px 15px;
+            }
+
+            .panel-links a {
+                font-size: 16px;
+                margin: 12px 0;
+            }
+
+            .social-link {
+                padding: 6px 10px;
+                font-size: 13px;
             }
         }
     </style>
@@ -2060,7 +2169,7 @@
 <section class="section reveal" id="streamers">
     <h2 class="section-title">Стримеры <span>на сервере</span></h2>
     <div class="community-grid">
-        <div class="community-card streamer-card">
+        <div class="community-card streamer-card babka">
             <div class="community-icon">🎥</div>
             <h3>Babka3434</h3>
             <p>Известная стримерша, которая будет играть на нашем сервере! Следи за её стримами.</p>
@@ -2069,6 +2178,18 @@
             </a>
             <div class="community-stats">
                 <span>📺 Скоро стримы</span>
+                <span>⭐ 100k+</span>
+            </div>
+        </div>
+        <div class="community-card streamer-card gyraffic">
+            <div class="community-icon">🎮</div>
+            <h3>Gyraffic</h3>
+            <p>Владелец сервера и стример. Играет вместе с вами и развивает проект!</p>
+            <a href="https://youtube.com/@gyraffic" target="_blank" class="streamer-link">
+                <span>▶️ YouTube канал</span>
+            </a>
+            <div class="community-stats">
+                <span>📺 Регулярно</span>
                 <span>⭐ Подпишись</span>
             </div>
         </div>
@@ -2276,7 +2397,7 @@
             <h4>Соцсети</h4>
             <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
             <a href="https://t.me/gyraff" target="_blank">Telegram</a>
-            <a href="https://youtube.com/@gyraffic" target="_blank">YouTube</a>
+            <a href="https://youtube.com/@gyraffic" target="_blank">Gyraffic YouTube</a>
             <a href="https://www.youtube.com/@Babka3434offical" target="_blank">Babka3434 YouTube</a>
         </div>
         <div class="footer-section">

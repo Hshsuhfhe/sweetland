@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetLand — ванильний майнкрафт сервер</title>
+    <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== ОСНОВНІ ЗМІННІ ===== */
+        /* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ===== */
         :root {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -27,7 +27,7 @@
             --blur: 12px;
         }
 
-        /* ===== ТЕМНА ТЕМА (ОСНОВНА) ===== */
+        /* ===== ТЕМНАЯ ТЕМА (ОСНОВНАЯ) ===== */
         body.dark {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -46,7 +46,7 @@
             --neon: var(--accent);
         }
 
-        /* ===== СВІТЛА ТЕМА ===== */
+        /* ===== СВЕТЛАЯ ТЕМА ===== */
         body.light {
             --accent: #ff7b5c;
             --accent-light: #ff9b7c;
@@ -65,7 +65,7 @@
             --neon: #ff9b7c;
         }
 
-        /* ===== РОЖЕВА ТЕМА ===== */
+        /* ===== РОЗОВАЯ ТЕМА ===== */
         body.pink {
             --accent: #ff66b2;
             --accent-light: #ff85c2;
@@ -84,7 +84,7 @@
             --neon: #ff66b2;
         }
 
-        /* ===== БЛАКИТНА ТЕМА ===== */
+        /* ===== ГОЛУБАЯ ТЕМА ===== */
         body.blue {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -103,7 +103,7 @@
             --neon: #4d9eff;
         }
 
-        /* ===== ЗЕЛЕНА ТЕМА ===== */
+        /* ===== ЗЕЛЕНАЯ ТЕМА ===== */
         body.green {
             --accent: #4caf50;
             --accent-light: #6ec071;
@@ -122,7 +122,7 @@
             --neon: #4caf50;
         }
 
-        /* ===== ОРАНЖЕВА ТЕМА ===== */
+        /* ===== ОРАНЖЕВАЯ ТЕМА ===== */
         body.orange {
             --accent: #ff9800;
             --accent-light: #ffb74d;
@@ -141,7 +141,7 @@
             --neon: #ff9800;
         }
 
-        /* ===== ФІОЛЕТОВА ТЕМА ===== */
+        /* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
         body.purple {
             --accent: #9c27b0;
             --accent-light: #ba68c8;
@@ -160,7 +160,7 @@
             --neon: #9c27b0;
         }
 
-        /* ===== ЖОВТА ТЕМА ===== */
+        /* ===== ЖЕЛТАЯ ТЕМА ===== */
         body.yellow {
             --accent: #ffd700;
             --accent-light: #ffe44d;
@@ -179,7 +179,7 @@
             --neon: #ffd700;
         }
 
-        /* ===== ЧЕРВОНА ТЕМА ===== */
+        /* ===== КРАСНАЯ ТЕМА ===== */
         body.red {
             --accent: #ff4444;
             --accent-light: #ff6666;
@@ -198,7 +198,7 @@
             --neon: #ff4444;
         }
 
-        /* ===== БІРЮЗОВА ТЕМА ===== */
+        /* ===== БИРЮЗОВАЯ ТЕМА ===== */
         body.teal {
             --accent: #008080;
             --accent-light: #20b2aa;
@@ -217,7 +217,7 @@
             --neon: #008080;
         }
 
-        /* ===== ГЛОБАЛЬНІ СТИЛІ ===== */
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -305,7 +305,7 @@
             }
         }
 
-        /* ===== ПАНЕЛЬ УПРАВЛІННЯ ===== */
+        /* ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== */
         .control-panel {
             position: fixed;
             top: 30px;
@@ -313,6 +313,8 @@
             z-index: 2500;
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .theme-toggle {
@@ -550,7 +552,7 @@
             display: none;
             flex-direction: column;
             gap: 10px;
-            min-width: 140px;
+            min-width: 160px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             z-index: 2600;
         }
@@ -644,7 +646,7 @@
             font-size: 16px;
         }
 
-        /* ===== НАВІГАЦІЙНИЙ ОВАЛ ===== */
+        /* ===== НАВИГАЦИОННЫЙ ОВАЛ ===== */
         .nav-oval-container {
             position: fixed;
             top: 25px;
@@ -778,7 +780,7 @@
             box-shadow: 0 8px 25px var(--accent);
         }
 
-        /* ===== БОКОВА ПАНЕЛЬ ===== */
+        /* ===== БОКОВАЯ ПАНЕЛЬ ===== */
         .side-trigger {
             position: fixed;
             top: 30px;
@@ -928,6 +930,10 @@
         .panel-links a:nth-child(8) { animation-delay: 0.8s; }
         .panel-links a:nth-child(9) { animation-delay: 0.9s; }
         .panel-links a:nth-child(10) { animation-delay: 1.0s; }
+        .panel-links a:nth-child(11) { animation-delay: 1.1s; }
+        .panel-links a:nth-child(12) { animation-delay: 1.2s; }
+        .panel-links a:nth-child(13) { animation-delay: 1.3s; }
+        .panel-links a:nth-child(14) { animation-delay: 1.4s; }
 
         @keyframes slideIn {
             to {
@@ -1312,7 +1318,7 @@
             font-size: 16px;
         }
 
-        /* ===== ОСОБЛИВОСТІ ===== */
+        /* ===== ОСОБЕННОСТИ ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1381,7 +1387,7 @@
             line-height: 1.6;
         }
 
-        /* ===== СТРІМЕРИ ===== */
+        /* ===== СТРИМЕРЫ ===== */
         .community-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1434,31 +1440,26 @@
         }
 
         .streamer-card {
-            background: linear-gradient(135deg, var(--bg-card), rgba(156, 39, 176, 0.2));
-            border: 2px solid var(--accent);
+            background: linear-gradient(135deg, var(--bg-card), rgba(255, 68, 68, 0.15));
+            border: 2px solid #ff4444;
             position: relative;
             overflow: hidden;
         }
         
-        .streamer-card .live-badge {
+        .streamer-card::before {
+            content: 'LIVE';
             position: absolute;
             top: 10px;
-            right: 15px;
-            background: var(--accent);
+            right: -30px;
+            background: #ff4444;
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 4px 30px;
             font-size: 12px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 2px 10px var(--accent);
+            transform: rotate(45deg);
+            box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
             animation: pulse 2s infinite;
-        }
-
-        .streamer-card .live-badge span {
-            font-size: 14px;
+            z-index: 10;
         }
 
         @keyframes pulse {
@@ -1473,7 +1474,7 @@
         
         .streamer-link {
             display: inline-block;
-            background: var(--accent);
+            background: #ff4444;
             color: white;
             text-decoration: none;
             padding: 8px 20px;
@@ -1486,13 +1487,15 @@
         }
         
         .streamer-link:hover {
-            background: var(--accent-light);
+            background: white;
+            color: #ff4444;
+            border-color: #ff4444;
             transform: scale(1.05);
-            box-shadow: 0 4px 15px var(--accent);
+            box-shadow: 0 4px 15px #ff4444;
         }
         
         .streamer-card .community-icon {
-            color: var(--accent);
+            color: #ff4444;
             animation: bounce 2s infinite;
         }
 
@@ -1505,7 +1508,7 @@
             }
         }
 
-        /* ===== ТОП ГРАВЦІВ ===== */
+        /* ===== ТОП ИГРОКОВ ===== */
         .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1569,7 +1572,7 @@
             margin-top: 20px;
         }
 
-        /* ===== ДОСЯГНЕННЯ ===== */
+        /* ===== ДОСТИЖЕНИЯ ===== */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1647,7 +1650,7 @@
             margin-top: 8px;
         }
 
-        /* ===== ІВЕНТИ ===== */
+        /* ===== ИВЕНТЫ ===== */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1785,7 +1788,7 @@
             font-size: 12px;
         }
 
-        /* ===== ЯК ПОЧАТИ ===== */
+        /* ===== КАК НАЧАТЬ ===== */
         .how-to-play-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1843,7 +1846,7 @@
             line-height: 1.5;
         }
 
-        /* ===== ЗАХИСТ ДАНИХ ===== */
+        /* ===== ЗАЩИТА ДАННЫХ ===== */
         .privacy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1893,7 +1896,7 @@
             line-height: 1.5;
         }
 
-        /* ===== ДЕТАЛЬНИЙ FAQ ===== */
+        /* ===== ДЕТАЛЬНЫЙ FAQ ===== */
         .detailed-faq-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1953,7 +1956,7 @@
             font-weight: 600;
         }
 
-        /* ===== МОДАЛЬНЕ ВІКНО ПРАВИЛ ===== */
+        /* ===== МОДАЛЬНОЕ ОКНО ПРАВИЛ ===== */
         .modal {
             display: none;
             position: fixed;
@@ -2178,7 +2181,7 @@
             font-size: 12px !important;
         }
 
-        /* ===== АНІМАЦІЯ ПРИ СКРОЛІ ===== */
+        /* ===== АНИМАЦИЯ ПРИ СКРОЛЛЕ ===== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -2190,7 +2193,13 @@
             transform: translateY(0);
         }
 
-        /* ===== АДАПТАЦІЯ ДЛЯ ТЕЛЕФОНІВ ===== */
+        /* ===== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ===== */
+        @media (max-width: 1200px) {
+            .panel-links a:nth-child(n+8) {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-oval-container {
                 min-width: auto;
@@ -2254,6 +2263,10 @@
             .panel-links a {
                 font-size: 16px;
                 margin: 12px 0;
+            }
+
+            .panel-links a:nth-child(n+4) {
+                display: none;
             }
 
             .panel-social {
@@ -2473,7 +2486,7 @@
 </head>
 <body class="dark no-select">
 
-<!-- ===== НАВІГАЦІЙНИЙ ОВАЛ ===== -->
+<!-- ===== НАВИГАЦИОННЫЙ ОВАЛ ===== -->
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
@@ -2481,12 +2494,14 @@
             SweetLand
         </div>
         <div class="banner-center">
-            <a href="#features">Особливості</a>
-            <a href="#how-to-play">Як почати</a>
-            <a href="#streamers">Стрімери</a>
+            <a href="#features">Особенности</a>
+            <a href="#how-to-play">Как начать</a>
+            <a href="#streamers">Стримеры</a>
+            <a href="#faq">FAQ</a>
+            <a href="#community">Сообщество</a>
         </div>
         <div class="banner-right">
-            <a href="#community" class="play-now">Грати зараз</a>
+            <a href="#community" class="play-now">Играть сейчас</a>
         </div>
     </div>
 </div>
@@ -2494,61 +2509,61 @@
 <!-- ===== ПОГОДА ===== -->
 <div id="weather"></div>
 
-<!-- ===== ПАНЕЛЬ УПРАВЛІННЯ ===== -->
+<!-- ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== -->
 <div class="control-panel">
-    <!-- Кнопка зміни теми (тільки темна/світла) -->
+    <!-- Кнопка смены темы (только тёмная/светлая) -->
     <div class="theme-toggle" onclick="toggleDarkLight()">
         <div class="theme-icon" id="themeIcon">🌙</div>
     </div>
     
-    <!-- Меню вибору кольору (всі теми) -->
+    <!-- Меню выбора цвета (все темы) -->
     <div class="color-picker">
         <div class="color-btn" onclick="toggleColorMenu()">🎨</div>
         <div class="color-menu" id="colorMenu">
             <div class="color-option" onclick="setTheme('dark')">
                 <div class="color-dot dark"></div>
-                <span>Темна</span>
+                <span>Тёмная</span>
             </div>
             <div class="color-option" onclick="setTheme('light')">
                 <div class="color-dot light"></div>
-                <span>Світла</span>
+                <span>Светлая</span>
             </div>
             <div class="color-option" onclick="setTheme('pink')">
                 <div class="color-dot pink"></div>
-                <span>Рожева</span>
+                <span>Розовая</span>
             </div>
             <div class="color-option" onclick="setTheme('blue')">
                 <div class="color-dot blue"></div>
-                <span>Блакитна</span>
+                <span>Голубая</span>
             </div>
             <div class="color-option" onclick="setTheme('green')">
                 <div class="color-dot green"></div>
-                <span>Зелена</span>
+                <span>Зелёная</span>
             </div>
             <div class="color-option" onclick="setTheme('orange')">
                 <div class="color-dot orange"></div>
-                <span>Помаранчева</span>
+                <span>Оранжевая</span>
             </div>
             <div class="color-option" onclick="setTheme('purple')">
                 <div class="color-dot purple"></div>
-                <span>Фіолетова</span>
+                <span>Фиолетовая</span>
             </div>
             <div class="color-option" onclick="setTheme('yellow')">
                 <div class="color-dot yellow"></div>
-                <span>Жовта</span>
+                <span>Жёлтая</span>
             </div>
             <div class="color-option" onclick="setTheme('red')">
                 <div class="color-dot red"></div>
-                <span>Червона</span>
+                <span>Красная</span>
             </div>
             <div class="color-option" onclick="setTheme('teal')">
                 <div class="color-dot teal"></div>
-                <span>Бірюзова</span>
+                <span>Бирюзовая</span>
             </div>
         </div>
     </div>
     
-    <!-- Меню вибору мови -->
+    <!-- Меню выбора языка -->
     <div class="lang-picker">
         <div class="lang-btn" onclick="toggleLangMenu()">🌐</div>
         <div class="lang-menu" id="langMenu">
@@ -2579,54 +2594,54 @@
         </div>
     </div>
     
-    <!-- Меню вибору погоди -->
+    <!-- Меню выбора погоды -->
     <div class="weather-picker">
         <div class="weather-btn" onclick="toggleWeatherMenu()">🌧️</div>
         <div class="weather-menu" id="weatherMenu">
             <div class="weather-option" onclick="setWeather('auto')">
                 <span>🌍</span>
-                <span>Авто (за темою)</span>
+                <span>Авто (по теме)</span>
             </div>
             <div class="weather-option" onclick="setWeather('snow')">
                 <span>❄️</span>
-                <span>Сніг</span>
+                <span>Снег</span>
             </div>
             <div class="weather-option" onclick="setWeather('rain')">
                 <span>☔</span>
-                <span>Дощ</span>
+                <span>Дождь</span>
             </div>
             <div class="weather-option" onclick="setWeather('none')">
                 <span>☀️</span>
-                <span>Вимкнути</span>
+                <span>Выключить</span>
             </div>
         </div>
     </div>
     
-    <!-- Меню налаштувань -->
+    <!-- Меню настроек -->
     <div class="settings-picker">
         <div class="settings-btn" onclick="toggleSettingsMenu()">⚙️</div>
         <div class="settings-menu" id="settingsMenu">
             <div class="settings-option" onclick="toggleParticles()">
                 <span>❄️</span>
-                <span id="particlesText">Частинки: вкл</span>
+                <span id="particlesText">Частицы: вкл</span>
             </div>
             <div class="settings-option" onclick="toggleBlur()">
                 <span>🌀</span>
-                <span id="blurText">Розмиття: вкл</span>
+                <span id="blurText">Размытие: вкл</span>
             </div>
             <div class="settings-option" onclick="toggleAnimations()">
                 <span>✨</span>
-                <span id="animationsText">Анімації: вкл</span>
+                <span id="animationsText">Анимации: вкл</span>
             </div>
             <div class="settings-option" onclick="resetSettings()">
                 <span>🔄</span>
-                <span>Скинути</span>
+                <span>Сброс настроек</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ===== БОКОВА ПАНЕЛЬ ===== -->
+<!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -2637,7 +2652,7 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
-        <!-- Посилання будуть додані через JavaScript -->
+        <!-- Ссылки будут добавлены через JavaScript -->
     </div>
     
     <div class="panel-social">
@@ -2653,46 +2668,63 @@
     </div>
 </nav>
 
-<!-- ===== МОДАЛЬНЕ ВІКНО ПРАВИЛ ===== -->
+<!-- ===== МОДАЛЬНОЕ ОКНО ПРАВИЛ ===== -->
 <div id="rules-modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeRules()">&times;</span>
         <div class="rules-column">
             <h1 class="rules-main-title">ПРАВИЛА СЕРВЕРА</h1>
             <div class="rules-scroll-area">
-                <p><b>1.0</b> Заходячи на сервер, ви автоматично погоджуєтеся з усіма правилами проєкту. <span class="punish">Бан 1 день</span></p>
-                <p><b>1.1</b> Незнання правил не звільняє вас від відповідальності. <span class="punish">Попередження</span></p>
-                <p><b>1.2</b> Гріферство (псування або знищення чужих будівель). <span class="punish">Бан 30 днів</span></p>
-                <p><b>1.3</b> Крадіжка ресурсів з чужих скринь, бочок, вирв. <span class="punish">Бан 14 днів</span></p>
-                <p><b>1.4</b> Навмисне вбивство чужих домашніх тварин або іменних мобів. <span class="punish">Бан 2 дні</span></p>
-                <p><b>1.5</b> Заселення на чужу територію або будівництво впритул без згоди власника. <span class="punish">Знесення + Кік</span></p>
-                <p><b>1.6</b> Ігнорування табличок «Вхід заборонено». <span class="punish">Вбивство без повернення речей</span></p>
-                <p><b>1.7</b> Використання чужих автоматичних або ручних ферм без дозволу. <span class="punish">Бан 3 дні</span></p>
-                <p><b>1.8</b> Псування світу (розлиття лави, води тощо). <span class="punish">Знесення + Бан 2 дні</span></p>
-                <p><b>1.9</b> Створення механізмів, що навмисно викликають лаги або падіння сервера. <span class="punish">Знесення + Бан 14 днів</span></p>
-                <p><b>1.10</b> Вбивство гравця без його попередньої згоди на PVP. <span class="punish">Бан 7 днів</span></p>
-                <p><b>1.11</b> Підбір та привласнення чужих речей після смерті гравця (якщо він просить повернути). <span class="punish">Бан 1 день + повернення речей</span></p>
-                <p><b>1.12</b> Використання будь-яких видів читів. <span class="punish">ПЕРМАНЕНТНИЙ БАН</span></p>
-                <p><b>1.13</b> Приховування інформації про баги або дюпи. <span class="punish">Бан 30 днів</span></p>
-                <p><b>1.14</b> Привласнення занедбаних баз без узгодження з адміністрацією. <span class="punish">Бан 5 днів</span></p>
-                <p><b>1.15</b> Злам або вхід на чужий акаунт. <span class="punish">Перманентний бан</span></p>
-                <p><b>1.16</b> Нанесення шкоди репутації або технічній частині сервера. <span class="punish">Бан назавжди</span></p>
-                <p><b>1.17</b> Продаж ігрових ресурсів за реальні гроші. <span class="punish">ЧС проєкту</span></p>
-                <p><b>1.18</b> Підбурювання інших гравців до порушення правил. <span class="punish">Бан 10 днів</span></p>
-                <p><b>1.19</b> Відповідальність за безпеку акаунта несе тільки його власник.</p>
-                <p><b>1.20</b> Створення додаткових акаунтів для обходу бана. <span class="punish">Бан по IP</span></p>
+                <p><b>1.0</b> Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта. <span class="punish">Наказание: Бан 1 день</span></p>
+                <p><b>1.1</b> Незнание правил не освобождает вас от ответственности. <span class="punish">Наказание: Предупреждение</span></p>
+                <p><b>1.2</b> Гриферство (порча или уничтожение чужих построек). <span class="punish">Наказание: Бан 30 дней</span></p>
+                <p><b>1.3</b> Кража ресурсов из чужих сундуков, бочек, воронок. <span class="punish">Наказание: Бан 14 дней</span></p>
+                <p><b>1.4</b> Умышленное убийство чужих домашних животных или именных мобов. <span class="punish">Наказание: Бан 2 дня</span></p>
+                <p><b>1.5</b> Заселение на чужую территорию или постройка вплотную без согласия владельца. <span class="punish">Наказание: Снос + Кик</span></p>
+                <p><b>1.6</b> Игнорирование табличек «Вход запрещен». <span class="punish">Наказание: Убийство без возврата вещей</span></p>
+                <p><b>1.7</b> Использование чужих автоматических или ручных ферм без разрешения. <span class="punish">Наказание: Бан 3 дня</span></p>
+                <p><b>1.8</b> Порча мира (разлитие лавы, воды и тому подобное). <span class="punish">Наказание: Снос + Бан 2 дня</span></p>
+                <p><b>1.9</b> Создание механизмов, намеренно вызывающих лаги или падение сервера. <span class="punish">Наказание: Снос + Бан 14 дней</span></p>
+                <p><b>1.10</b> Убийство игрока без его предварительного согласия на PVP. <span class="punish">Наказание: Бан 7 дней</span></p>
+                <p><b>1.11</b> Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть). <span class="punish">Наказание: Бан 1 день + возврат вещей</span></p>
+                <p><b>1.12</b> Использование любых видов читов (METEOR, WURST, IMPACT и другие). <span class="punish">Наказание: ПЕРМАНЕНТНЫЙ БАН</span></p>
+                <p><b>1.13</b> Сокрытие информации о багах, дюпах или недоработках экономики. <span class="punish">Наказание: Бан 30 дней</span></p>
+                <p><b>1.14</b> Присвоение заброшенных баз без согласования с администрацией. <span class="punish">Наказание: Бан 5 дней</span></p>
+                <p><b>1.15</b> Взлом, попытка взлома или вход на чужой аккаунт. <span class="punish">Наказание: Перманентный бан</span></p>
+                <p><b>1.16</b> Нанесение любого вреда репутации или технической части сервера. <span class="punish">Наказание: Бан навсегда</span></p>
+                <p><b>1.17</b> Продажа игровых ресурсов или услуг за реальные деньги. <span class="punish">Наказание: ЧС проекта</span></p>
+                <p><b>1.18</b> Подстрекательство других игроков к нарушению правил. <span class="punish">Наказание: Бан 10 дней</span></p>
+                <p><b>1.19</b> Ответственность за безопасность аккаунта несет только его владелец.</p>
+                <p><b>1.20</b> Создание дополнительных аккаунтов (твинков) для обхода активного бана. <span class="punish">Наказание: Бан по IP</span></p>
+                <p><b>1.21</b> Установка более 4 масштабных автоматических ферм на одного игрока или клан. <span class="punish">Наказание: Снос + Бан 5 дней</span></p>
+                <p><b>1.22</b> Чрезмерный спам, маты, капс и неадекватное поведение в общем чате. <span class="punish">Наказание: Мут 24 часа</span></p>
+                <p><b>1.23</b> Воровство товаров или обман в торговых зонах и магазинах игроков. <span class="punish">Наказание: Бан 10 дней</span></p>
+                <p><b>1.24</b> Постоянное преследование игрока и заход в его дом без приглашения. <span class="punish">Наказание: Кик</span></p>
+                <p><b>1.25</b> Угрозы баном, связями с администрацией или попытки шантажа. <span class="punish">Наказание: Бан 14 дней</span></p>
+                <p><b>1.26</b> Постройка любых сооружений ближе 500 блоков от нулевых координат (спавна). <span class="punish">Наказание: Перенос или снос</span></p>
+                <p><b>1.27</b> Создание построек в Незере ближе 300 блоков от центрального портала. <span class="punish">Наказание: Снос</span></p>
+                <p><b>1.28</b> Строительство ловушек, убивающих игрока при входе (трапки). <span class="punish">Наказание: Бан 7 дней</span></p>
+                <p><b>1.29</b> Отказ снести незаконную постройку по официальному требованию администрации. <span class="punish">Наказание: Бан 7 дней</span></p>
+                <p><b>1.30</b> Использование автокликеров, автопианино или автототемов. <span class="punish">Наказание: Бан 30 дней</span></p>
+                <p><b>1.31</b> Организация массовых раздач ценных ресурсов, ломающих экономику. <span class="punish">Наказание: Бан 14 дней</span></p>
+                <p><b>1.32</b> Любой вид дюпа предметов (включая ковры или тнт). <span class="punish">НАКАЗАНИЕ: ПЕРМАНЕНТНЫЙ БАН</span></p>
+                <p><b>1.33</b> Администрация имеет право выносить приговор, основываясь на ситуации, даже если её нет в правилах.</p>
+                <p><b>1.34</b> Использование x-ray (моды или текстур-паки). <span class="punish">НАКАЗАНИЕ: БАН НА 4 МЕСЯЦА</span></p>
+                <p><b>1.35</b> Поиск и использование лазеек в правилах. <span class="punish">Наказание: Бан 30 дней</span></p>
+                <p><b>1.36</b> Попрошайничество к Администрации или Игрокам. <span class="punish">Наказание: Мут 6 часов потом Бан 2 дня</span></p>
+                <p><b>1.37</b> Деструктивные действия в сторону сервера или его онлайна. <span class="punish">Наказание: Перманент</span></p>
                 
                 <hr>
                 
-                <h3>Розділ 2: Адміністрація</h3>
+                <h3>Раздел 2: Администрация</h3>
                 
                 <hr>
                 
-                <p><b>2.1</b> Правила сервера обов'язкові для всіх членів персоналу.</p>
-                <p><b>2.2</b> Використання творчого режиму для допомоги гравцям. <span class="punish">Зняття</span></p>
-                <p><b>2.3</b> Надання переваг своїм друзям. <span class="punish">Зняття + ЧС</span></p>
-                <p><b>2.4</b> Необґрунтовані покарання без доказів. <span class="punish">Зняття</span></p>
-                <p><b>2.5</b> Оскарження дій адміністрації в Discord.</p>
+                <p><b>2.1</b> Правила сервера обязательны для исполнения всеми членами персонала.</p>
+                <p><b>2.2</b> Использование творческого режима для личного выживания или помощи игрокам. <span class="punish">Наказание: Снятие</span></p>
+                <p><b>2.3</b> Предоставление игровых преимуществ своим друзьям. <span class="punish">Наказание: Снятие + ЧС</span></p>
+                <p><b>2.4</b> Выдача необоснованных наказаний (банов, мутов) без наличия доказательств. <span class="punish">Наказание: Снятие</span></p>
+                <p><b>2.5</b> Игрок имеет право обжаловать любое действие администратора в Discord-канале.</p>
             </div>
         </div>
     </div>
@@ -2703,7 +2735,7 @@
     <div class="hero-layout">
         <div class="hero-content reveal">
             <h1 class="title">SweetLand</h1>
-            <p class="hero-tagline">Ванільне виживання на версії 1.21.8. Твій світ — твої правила.</p>
+            <p class="hero-tagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p>
             <div class="ip-container">
                 <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
                 <span class="btn-version">1.21.8</span>
@@ -2713,7 +2745,7 @@
             <img src="images/5opka.png" alt="5opka" class="giant-img">
         </div>
     </div>
-    <div id="copyNotice">IP скопійовано</div>
+    <div id="copyNotice">IP скопирован</div>
 </header>
 
 <!-- ===== СТАТИСТИКА ===== -->
@@ -2722,28 +2754,979 @@
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-number">24/7</div>
-            <div class="stat-label">Робота сервера</div>
+            <div class="stat-label">Работа сервера</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">1.21.8</div>
-            <div class="stat-label">Актуальна версія</div>
+            <div class="stat-label">Актуальная версия</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">100%</div>
-            <div class="stat-label">Ванільний геймплей</div>
+            <div class="stat-label">Ванильный геймплей</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">0%</div>
-            <div class="stat-label">Донату</div>
+            <div class="stat-label">Доната</div>
         </div>
     </div>
 </section>
 
-<!-- ===== ОСОБЛИВОСТІ ===== -->
+<!-- ===== ОСОБЕННОСТИ ===== -->
 <section class="section reveal" id="features">
-    <h2 class="section-title">Особливості <span>сервера</span></h2>
+    <h2 class="section-title">Особенности <span>сервера</span></h2>
     <div class="features-grid">
         <div class="feature-card">
             <div class="feature-icon">🛡️</div>
             <h3>Анти-чит система</h3>
-            <p>Просунутий захист від читів. Че
+            <p>Продвинутая защита от читеров. Честная игра для всех.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Стабильный TPS</h3>
+            <p>Оптимизированный сервер на мощном железе. Никаких лагов.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎉</div>
+            <h3>Регулярные ивенты</h3>
+            <p>Еженедельные события и конкурсы с призами для игроков.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Чистый ванильный мир</h3>
+            <p>Никаких плагинов, только чистый Minecraft как задумано.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔨</div>
+            <h3>Защита построек</h3>
+            <p>Ваши постройки под надежной защитой от гриферов.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Дружное сообщество</h3>
+            <p>Первые игроки уже здесь. Присоединяйся к нам.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== СТРИМЕРЫ ===== -->
+<section class="section reveal" id="streamers">
+    <h2 class="section-title">Стримеры <span>на сервере</span></h2>
+    <div class="community-grid">
+        <div class="community-card streamer-card">
+            <div class="community-icon">🎥</div>
+            <h3>Babka3434</h3>
+            <p>Популярная стримерша, будет играть на сервере. Следи за стримами!</p>
+            <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link">
+                Babka3434 YouTube
+            </a>
+            <div class="community-stats">
+                <span>подпишись</span>
+                <span>скоро</span>
+            </div>
+        </div>
+        <div class="community-card streamer-card">
+            <div class="community-icon">🎮</div>
+            <h3>Gyraffic</h3>
+            <p>Владелец сервера и стример. Играет вместе с вами.</p>
+            <a href="https://youtube.com/@gyraffic" target="_blank" class="streamer-link">
+                Gyraffic YouTube
+            </a>
+            <div class="community-stats">
+                <span>подпишись</span>
+                <span>live</span>
+            </div>
+        </div>
+        <div class="community-card">
+            <div class="community-icon">🎮</div>
+            <h3>Скоро будут другие</h3>
+            <p>Список стримеров будет пополняться. Следи за новостями в Discord.</p>
+            <div class="community-stats">
+                <span>анонсы</span>
+                <span>новости</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ТОП ИГРОКОВ ===== -->
+<section class="section reveal" id="top-players">
+    <h2 class="section-title">Топ <span>игроков</span></h2>
+    <div class="top-players-grid">
+        <div class="player-card">
+            <div class="player-rank">1</div>
+            <div class="player-info">
+                <h4>Gyraffic</h4>
+                <p>Владелец сервера</p>
+            </div>
+            <div class="player-score">19 часов</div>
+        </div>
+        <div class="player-card">
+            <div class="player-rank">2</div>
+            <div class="player-info">
+                <h4>Babka3434</h4>
+                <p>Стримерша</p>
+            </div>
+            <div class="player-score">8 часов</div>
+        </div>
+        <div class="player-card">
+            <div class="player-rank">3</div>
+            <div class="player-info">
+                <h4>QLIBRO</h4>
+                <p>Старший администратор</p>
+            </div>
+            <div class="player-score">7 часов</div>
+        </div>
+    </div>
+    <p class="update-date">Данные обновлены 17 февраля 2026 года</p>
+</section>
+
+<!-- ===== ДОСТИЖЕНИЯ ===== -->
+<section class="section reveal" id="achievements">
+    <h2 class="section-title">Достижения <span>игроков</span></h2>
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <div class="achievement-icon">🏆</div>
+            <h3>Первооткрыватель</h3>
+            <p>Зайти на сервер в первый день открытия</p>
+            <div class="achievement-progress">
+                <div class="achievement-progress-bar" style="width: 0%"></div>
+            </div>
+            <div class="achievement-stats">0% игроков получили</div>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon">⚒️</div>
+            <h3>Мастер-строитель</h3>
+            <p>Построить дом с более чем 1000 блоков</p>
+            <div class="achievement-progress">
+                <div class="achievement-progress-bar" style="width: 0%"></div>
+            </div>
+            <div class="achievement-stats">0% игроков получили</div>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon">🗺️</div>
+            <h3>Исследователь</h3>
+            <p>Посетить все биомы в мире</p>
+            <div class="achievement-progress">
+                <div class="achievement-progress-bar" style="width: 0%"></div>
+            </div>
+            <div class="achievement-stats">0% игроков получили</div>
+        </div>
+        <div class="achievement-card">
+            <div class="achievement-icon">🤝</div>
+            <h3>Друзья навеки</h3>
+            <p>Играть в одной команде более 100 часов</p>
+            <div class="achievement-progress">
+                <div class="achievement-progress-bar" style="width: 0%"></div>
+            </div>
+            <div class="achievement-stats">0% игроков получили</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ИВЕНТЫ ===== -->
+<section class="section reveal" id="events">
+    <h2 class="section-title">Будущие <span>ивенты</span></h2>
+    <div class="events-grid">
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">⚔️</div>
+            <h3>PVP Арена</h3>
+            <p>Сражения на арене 1 на 1 и 2 на 2. Победители получат титулы и призы.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">🏗️</div>
+            <h3>Конкурс построек</h3>
+            <p>Лучшие постройки на разные темы. Голосование в Discord.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">💰</div>
+            <h3>Аукцион</h3>
+            <p>Торги редкими предметами и ресурсами между игроками.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">🏁</div>
+            <h3>Скоростное выживание</h3>
+            <p>Кто быстрее добудет редкие ресурсы и построит базу.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">🎯</div>
+            <h3>Охота за сокровищами</h3>
+            <p>Поиск спрятанных сундуков с редкими предметами по всему миру.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+        <div class="event-card">
+            <div class="event-status">Скоро</div>
+            <div class="event-icon">👑</div>
+            <h3>Королевская битва</h3>
+            <p>Последний выживший получает королевский титул и призы.</p>
+            <div class="event-info">
+                <span>после открытия</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== РОУДМАП ===== -->
+<section class="section reveal" id="roadmap">
+    <h2 class="section-title">План <span>развития</span></h2>
+    <div class="roadmap-grid">
+        <div class="roadmap-item">
+            <span class="roadmap-status completed">Завершено</span>
+            <h3>Создание сервера</h3>
+            <p>Настройка и оптимизация ванильного мира</p>
+            <span class="roadmap-date">Февраль 2026</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="roadmap-status planned">Планируется</span>
+            <h3>Клановая система</h3>
+            <p>Создание кланов и совместные постройки</p>
+            <span class="roadmap-date">После открытия</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="roadmap-status planned">Планируется</span>
+            <h3>Экономика</h3>
+            <p>Внутриигровая торговля и магазины игроков</p>
+            <span class="roadmap-date">После открытия</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="roadmap-status planned">Планируется</span>
+            <h3>Клановые войны</h3>
+            <p>Сражения между кланами за территории</p>
+            <span class="roadmap-date">После открытия</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="roadmap-status planned">Планируется</span>
+            <h3>Система достижений</h3>
+            <p>Награды за особые действия в игре</p>
+            <span class="roadmap-date">После открытия</span>
+        </div>
+        <div class="roadmap-item">
+            <span class="roadmap-status planned">Планируется</span>
+            <h3>Регулярные ивенты</h3>
+            <p>Еженедельные события для всех игроков</p>
+            <span class="roadmap-date">После открытия</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== КАК НАЧАТЬ ===== -->
+<section class="section reveal" id="how-to-play">
+    <h2 class="section-title">Как начать <span>играть</span></h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>Версия 1.21.8</h3>
+            <p>Убедись, что у тебя установлена последняя версия Minecraft.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Подай заявку в Discord</h3>
+            <p>Заполни анкету и ознакомься с правилами сервера.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔌</div>
+            <h3>Дождись принятия</h3>
+            <p>После одобрения добавь сервер play.sweet-land.fun в список.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <h3>Заходи и играй</h3>
+            <p>Выбирай место для базы, строй и исследуй мир.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>Общайся в Discord</h3>
+            <p>Знакомься с игроками, участвуй в жизни сообщества.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Приглашай друзей</h3>
+            <p>Вместе строить веселее. Создавай кланы и команды.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section reveal" id="faq">
+    <h2 class="section-title">Ответы на <span>вопросы</span></h2>
+    <div class="faq-grid">
+        <div class="faq-card">
+            <div class="icon">📅</div>
+            <h3>Когда старт?</h3>
+            <p>Сервер готовится к открытию. Следи за новостями в Discord.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🎮</div>
+            <h3>Какая версия?</h3>
+            <p>Сервер будет работать на актуальной версии 1.21.8.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">💬</div>
+            <h3>Где общение?</h3>
+            <p>Основное общение в Discord. Там же новости и ивенты.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🌙</div>
+            <h3>Белая тема?</h3>
+            <p>Да, нажми на луну в правом углу и увидишь дождик.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🔒</div>
+            <h3>Защита аккаунта?</h3>
+            <p>Анти-чит система и шифрование данных игроков.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🎁</div>
+            <h3>Есть донат?</h3>
+            <p>Нет, это полностью ванильный сервер. Никаких привилегий.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">📊</div>
+            <h3>Какой онлайн?</h3>
+            <p>Сервер скоро открывается. Будь первым.</p>
+        </div>
+        <div class="faq-card">
+            <div class="icon">🔄</div>
+            <h3>Будут вайпы?</h3>
+            <p>Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== СООБЩЕСТВО ===== -->
+<section class="section reveal" id="community">
+    <h2 class="section-title">Наше <span>сообщество</span></h2>
+    <div class="community-grid">
+        <div class="community-card">
+            <div class="community-icon">💬</div>
+            <h3>Discord сервер</h3>
+            <p>Присоединяйся к первым игрокам, участвуй в развитии сервера</p>
+            <div class="community-stats">
+                <span>более 50 участников</span>
+                <span>активно</span>
+            </div>
+        </div>
+        <div class="community-card">
+            <div class="community-icon">📱</div>
+            <h3>Telegram канал</h3>
+            <p>Новости, обновления и анонсы в удобном формате</p>
+            <div class="community-stats">
+                <span>более 30 подписчиков</span>
+                <span>ежедневно</span>
+            </div>
+        </div>
+        <div class="community-card">
+            <div class="community-icon">▶️</div>
+            <h3>YouTube каналы</h3>
+            <p>Обзоры, гайды и стримы от наших стримеров</p>
+            <div class="community-stats">
+                <span>2 канала</span>
+                <span>подпишись</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ЗАЩИТА ДАННЫХ ===== -->
+<section class="section reveal" id="privacy">
+    <h2 class="section-title">Защита <span>данных</span></h2>
+    <div class="privacy-grid">
+        <div class="privacy-card">
+            <div class="icon">🔐</div>
+            <h3>Шифрование</h3>
+            <p>Все данные защищены современными протоколами.</p>
+        </div>
+        <div class="privacy-card">
+            <div class="icon">🛡️</div>
+            <h3>Анти-чит</h3>
+            <p>Защита от недобросовестных игроков.</p>
+        </div>
+        <div class="privacy-card">
+            <div class="icon">⚖️</div>
+            <h3>Права владения</h3>
+            <p>Постройки и ресурсы принадлежат только вам.</p>
+        </div>
+        <div class="privacy-card">
+            <div class="icon">📋</div>
+            <h3>Конфиденциальность</h3>
+            <p>Мы не собираем лишнюю информацию.</p>
+        </div>
+        <div class="privacy-card">
+            <div class="icon">🌍</div>
+            <h3>GDPR</h3>
+            <p>Соответствие стандартам защиты данных.</p>
+        </div>
+        <div class="privacy-card">
+            <div class="icon">⏰</div>
+            <h3>Хранение</h3>
+            <p>Данные на защищенных серверах.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ЧАСТЫЕ ВОПРОСЫ ===== -->
+<section class="section reveal" id="detailed-faq">
+    <h2 class="section-title">Часто <span>задаваемые вопросы</span></h2>
+    <div class="detailed-faq-grid">
+        <div class="detailed-faq-item">
+            <h3>📌 Как начать играть?</h3>
+            <div class="faq-answer">
+                <p>1. Скачай Minecraft версии 1.21.8</p>
+                <p>2. Подай заявку в Discord</p>
+                <p>3. После принятия добавь сервер play.sweet-land.fun</p>
+            </div>
+        </div>
+        
+        <div class="detailed-faq-item">
+            <h3>⚔️ Есть ли кланы?</h3>
+            <div class="faq-answer">
+                <p>Да, ты можешь создавать кланы и строить вместе с друзьями. В будущем появятся клановые войны.</p>
+            </div>
+        </div>
+        
+        <div class="detailed-faq-item">
+            <h3>📊 Сколько игроков?</h3>
+            <div class="faq-answer">
+                <p>Сервер готовится к открытию. Присоединяйся в Discord, чтобы стать одним из первых.</p>
+            </div>
+        </div>
+        
+        <div class="detailed-faq-item">
+            <h3>🔄 Будут вайпы?</h3>
+            <div class="faq-answer">
+                <p>Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
+            </div>
+        </div>
+        
+        <div class="detailed-faq-item">
+            <h3>🎁 Есть донат?</h3>
+            <div class="faq-answer">
+                <p>Нет, это полностью ванильный сервер. Никаких донатов и привилегий — чистое выживание.</p>
+            </div>
+        </div>
+        
+        <div class="detailed-faq-item">
+            <h3>📞 Связь с админами?</h3>
+            <div class="faq-answer">
+                <p>Пиши в Telegram или Discord. Администрация всегда на связи.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ФУТЕР ===== -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>SweetLand</h4>
+            <p>Ванильное выживание без границ с дружным сообществом и активной администрацией.</p>
+            <p class="footer-note">Никаких донатов — только чистый ванильный геймплей</p>
+        </div>
+        <div class="footer-section">
+            <h4>Быстрые ссылки</h4>
+            <a href="#stats">Статистика</a>
+            <a href="#features">Особенности</a>
+            <a href="#streamers">Стримеры</a>
+            <a href="#top-players">Топ игроков</a>
+            <a href="#achievements">Достижения</a>
+            <a href="#events">Ивенты</a>
+            <a href="#roadmap">Роудмап</a>
+            <a href="#how-to-play">Как начать</a>
+            <a href="#faq">FAQ</a>
+            <a href="#community">Сообщество</a>
+            <a href="#privacy">Защита данных</a>
+            <a href="#detailed-faq">Частые вопросы</a>
+            <a href="javascript:void(0)" onclick="openRules()">Правила</a>
+        </div>
+        <div class="footer-section">
+            <h4>Соцсети</h4>
+            <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
+            <a href="https://t.me/gyraff" target="_blank">Telegram</a>
+            <a href="https://youtube.com/@gyraffic" target="_blank">Gyraffic</a>
+            <a href="https://www.youtube.com/@Babka3434offical" target="_blank">Babka3434</a>
+        </div>
+        <div class="footer-section">
+            <h4>Защита данных</h4>
+            <p>Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 SweetLand. Ванильный Minecraft сервер.</p>
+        <p class="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p>
+    </div>
+</footer>
+
+<script>
+    // ===== ПЕРЕМЕННЫЕ =====
+    let currentTheme = 'dark';
+    let currentLang = 'ru';
+    let colorMenuOpen = false;
+    let langMenuOpen = false;
+    let weatherMenuOpen = false;
+    let settingsMenuOpen = false;
+    let particlesEnabled = true;
+    let blurEnabled = true;
+    let animationsEnabled = true;
+    let currentWeather = 'auto';
+    
+    // ===== ФУНКЦИИ =====
+    function togglePanel() {
+        const panel = document.getElementById('side-panel');
+        panel.classList.toggle('active');
+    }
+
+    function openRules() {
+        const modal = document.getElementById('rules-modal');
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeRules() {
+        const modal = document.getElementById('rules-modal');
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+
+    function copyIP() {
+        const ip = 'play.sweet-land.fun';
+        
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(ip).then(function() {
+                showCopyNotice();
+            }).catch(function() {
+                fallbackCopy();
+            });
+        } else {
+            fallbackCopy();
+        }
+        
+        function fallbackCopy() {
+            const textarea = document.createElement('textarea');
+            textarea.value = ip;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopyNotice();
+        }
+        
+        function showCopyNotice() {
+            const notice = document.getElementById('copyNotice');
+            notice.style.opacity = '1';
+            setTimeout(function() {
+                notice.style.opacity = '0';
+            }, 2000);
+        }
+    }
+
+    function reveal() {
+        if (!animationsEnabled) return;
+        
+        const reveals = document.querySelectorAll('.reveal');
+        
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementBottom = reveals[i].getBoundingClientRect().bottom;
+            const elementVisible = 100;
+            
+            if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
+                reveals[i].classList.add('active');
+            } else {
+                reveals[i].classList.remove('active');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+
+    // ===== ПОГОДА =====
+    const weatherContainer = document.getElementById('weather');
+    let weatherParticles = [];
+    let weatherInterval;
+    
+    function createWeather() {
+        weatherContainer.innerHTML = '';
+        weatherParticles = [];
+        
+        let weatherType = currentWeather;
+        if (weatherType === 'auto') {
+            weatherType = document.body.classList.contains('light') ? 'rain' : 'snow';
+        }
+        
+        if (weatherType === 'none') return;
+        
+        const isRain = weatherType === 'rain';
+        const count = window.innerWidth < 768 ? 80 : 200;
+        
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('div');
+            
+            if (isRain) {
+                particle.className = 'rain-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
+                particle.style.animationDelay = Math.random() * -2 + 's';
+                particle.style.opacity = Math.random() * 0.3 + 0.5;
+            } else {
+                particle.className = 'snow-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 6 + 3 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = Math.random() * 4 + 3 + 's';
+                particle.style.animationDelay = Math.random() * -3 + 's';
+                particle.style.opacity = Math.random() * 0.4 + 0.4;
+            }
+            
+            weatherContainer.appendChild(particle);
+            weatherParticles.push(particle);
+        }
+    }
+    
+    createWeather();
+    
+    window.addEventListener('resize', function() {
+        clearTimeout(weatherInterval);
+        weatherInterval = setTimeout(createWeather, 200);
+    });
+
+    // ===== ТЕМЫ =====
+    function setTheme(theme) {
+        const body = document.body;
+        const themeIcon = document.getElementById('themeIcon');
+        
+        body.classList.remove('dark', 'light', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal');
+        body.classList.add(theme);
+        currentTheme = theme;
+        
+        if (theme === 'light') {
+            themeIcon.textContent = '☀️';
+        } else if (theme === 'dark') {
+            themeIcon.textContent = '🌙';
+        } else if (theme === 'pink') {
+            themeIcon.textContent = '🌸';
+        } else if (theme === 'blue') {
+            themeIcon.textContent = '💙';
+        } else if (theme === 'green') {
+            themeIcon.textContent = '💚';
+        } else if (theme === 'orange') {
+            themeIcon.textContent = '🧡';
+        } else if (theme === 'purple') {
+            themeIcon.textContent = '💜';
+        } else if (theme === 'yellow') {
+            themeIcon.textContent = '💛';
+        } else if (theme === 'red') {
+            themeIcon.textContent = '❤️';
+        } else if (theme === 'teal') {
+            themeIcon.textContent = '💙';
+        }
+        
+        if (currentWeather === 'auto') {
+            createWeather();
+        }
+        closeColorMenu();
+    }
+
+    function toggleDarkLight() {
+        if (currentTheme === 'dark' || currentTheme === 'light') {
+            if (currentTheme === 'dark') {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        } else {
+            setTheme('dark');
+        }
+    }
+
+    function toggleColorMenu() {
+        const menu = document.getElementById('colorMenu');
+        colorMenuOpen = !colorMenuOpen;
+        menu.classList.toggle('active', colorMenuOpen);
+        if (colorMenuOpen) {
+            document.getElementById('langMenu').classList.remove('active');
+            langMenuOpen = false;
+            document.getElementById('weatherMenu').classList.remove('active');
+            weatherMenuOpen = false;
+            document.getElementById('settingsMenu').classList.remove('active');
+            settingsMenuOpen = false;
+        }
+    }
+
+    function closeColorMenu() {
+        document.getElementById('colorMenu').classList.remove('active');
+        colorMenuOpen = false;
+    }
+
+    function toggleLangMenu() {
+        const menu = document.getElementById('langMenu');
+        langMenuOpen = !langMenuOpen;
+        menu.classList.toggle('active', langMenuOpen);
+        if (langMenuOpen) {
+            document.getElementById('colorMenu').classList.remove('active');
+            colorMenuOpen = false;
+            document.getElementById('weatherMenu').classList.remove('active');
+            weatherMenuOpen = false;
+            document.getElementById('settingsMenu').classList.remove('active');
+            settingsMenuOpen = false;
+        }
+    }
+
+    function closeLangMenu() {
+        document.getElementById('langMenu').classList.remove('active');
+        langMenuOpen = false;
+    }
+
+    function toggleWeatherMenu() {
+        const menu = document.getElementById('weatherMenu');
+        weatherMenuOpen = !weatherMenuOpen;
+        menu.classList.toggle('active', weatherMenuOpen);
+        if (weatherMenuOpen) {
+            document.getElementById('colorMenu').classList.remove('active');
+            colorMenuOpen = false;
+            document.getElementById('langMenu').classList.remove('active');
+            langMenuOpen = false;
+            document.getElementById('settingsMenu').classList.remove('active');
+            settingsMenuOpen = false;
+        }
+    }
+
+    function closeWeatherMenu() {
+        document.getElementById('weatherMenu').classList.remove('active');
+        weatherMenuOpen = false;
+    }
+
+    function setWeather(type) {
+        currentWeather = type;
+        createWeather();
+        closeWeatherMenu();
+    }
+
+    function toggleSettingsMenu() {
+        const menu = document.getElementById('settingsMenu');
+        settingsMenuOpen = !settingsMenuOpen;
+        menu.classList.toggle('active', settingsMenuOpen);
+        if (settingsMenuOpen) {
+            document.getElementById('colorMenu').classList.remove('active');
+            colorMenuOpen = false;
+            document.getElementById('langMenu').classList.remove('active');
+            langMenuOpen = false;
+            document.getElementById('weatherMenu').classList.remove('active');
+            weatherMenuOpen = false;
+        }
+    }
+
+    function closeSettingsMenu() {
+        document.getElementById('settingsMenu').classList.remove('active');
+        settingsMenuOpen = false;
+    }
+
+    // ===== ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ =====
+    function toggleParticles() {
+        particlesEnabled = !particlesEnabled;
+        const weather = document.getElementById('weather');
+        const particlesText = document.getElementById('particlesText');
+        
+        if (particlesEnabled) {
+            weather.style.opacity = '1';
+            particlesText.textContent = 'Частицы: вкл';
+        } else {
+            weather.style.opacity = '0';
+            particlesText.textContent = 'Частицы: выкл';
+        }
+    }
+
+    function toggleBlur() {
+        blurEnabled = !blurEnabled;
+        const cards = document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item');
+        const blurText = document.getElementById('blurText');
+        
+        cards.forEach(card => {
+            if (blurEnabled) {
+                card.style.backdropFilter = 'blur(var(--blur))';
+                card.style.webkitBackdropFilter = 'blur(var(--blur))';
+            } else {
+                card.style.backdropFilter = 'none';
+                card.style.webkitBackdropFilter = 'none';
+            }
+        });
+        
+        blurText.textContent = blurEnabled ? 'Размытие: вкл' : 'Размытие: выкл';
+    }
+
+    function toggleAnimations() {
+        animationsEnabled = !animationsEnabled;
+        const animated = document.querySelectorAll('.reveal, .banner-star, .streamer-card::before, .feature-card::before, .community-icon, .title, .hero::before');
+        const animationsText = document.getElementById('animationsText');
+        
+        animated.forEach(el => {
+            if (animationsEnabled) {
+                el.style.animation = '';
+            } else {
+                el.style.animation = 'none';
+            }
+        });
+        
+        if (animationsEnabled) {
+            document.querySelector('.banner-star').style.animation = 'starGlow 2s ease-in-out infinite';
+            document.querySelector('.title').style.animation = 'titleGlow 3s ease-in-out infinite';
+            document.querySelector('.hero::before').style.animation = 'neonPulse 4s ease-in-out infinite';
+        }
+        
+        animationsText.textContent = animationsEnabled ? 'Анимации: вкл' : 'Анимации: выкл';
+    }
+
+    function resetSettings() {
+        particlesEnabled = true;
+        blurEnabled = true;
+        animationsEnabled = true;
+        currentWeather = 'auto';
+        
+        document.getElementById('weather').style.opacity = '1';
+        
+        const cards = document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item');
+        cards.forEach(card => {
+            card.style.backdropFilter = '';
+            card.style.webkitBackdropFilter = '';
+        });
+        
+        const animated = document.querySelectorAll('.reveal, .banner-star, .streamer-card::before, .feature-card::before, .community-icon, .title, .hero::before');
+        animated.forEach(el => {
+            el.style.animation = '';
+        });
+        
+        document.querySelector('.banner-star').style.animation = 'starGlow 2s ease-in-out infinite';
+        document.querySelector('.title').style.animation = 'titleGlow 3s ease-in-out infinite';
+        document.querySelector('.hero::before').style.animation = 'neonPulse 4s ease-in-out infinite';
+        
+        document.getElementById('particlesText').textContent = 'Частицы: вкл';
+        document.getElementById('blurText').textContent = 'Размытие: вкл';
+        document.getElementById('animationsText').textContent = 'Анимации: вкл';
+        
+        createWeather();
+        closeSettingsMenu();
+    }
+
+    // ===== ЯЗЫКИ (заглушка, для полноценной реализации нужны переводы) =====
+    function setLanguage(lang) {
+        currentLang = lang;
+        // Здесь можно добавить логику смены языка
+        closeLangMenu();
+        alert('Смена языка на ' + lang + ' (в демо-версии)');
+    }
+
+    // ===== ЗАКРЫТИЕ ПО КЛИКУ ВНЕ =====
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.color-picker')) {
+            closeColorMenu();
+        }
+        if (!e.target.closest('.lang-picker')) {
+            closeLangMenu();
+        }
+        if (!e.target.closest('.weather-picker')) {
+            closeWeatherMenu();
+        }
+        if (!e.target.closest('.settings-picker')) {
+            closeSettingsMenu();
+        }
+    });
+
+    // ===== ЗАКРЫТИЕ ПО ESC =====
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('rules-modal');
+            if (modal.classList.contains('show')) {
+                closeRules();
+            }
+            closeColorMenu();
+            closeLangMenu();
+            closeWeatherMenu();
+            closeSettingsMenu();
+            
+            const panel = document.getElementById('side-panel');
+            if (panel.classList.contains('active')) {
+                togglePanel();
+            }
+        }
+    });
+
+    // ===== АДАПТИВНОЕ МЕНЮ =====
+    function updateMenu() {
+        const panelLinks = document.getElementById('panel-links');
+        const width = window.innerWidth;
+        
+        const allLinks = [
+            { href: "#", text: "🏠 Главная" },
+            { href: "#stats", text: "📊 Статистика" },
+            { href: "#features", text: "✨ Особенности" },
+            { href: "#streamers", text: "🔴 Стримеры" },
+            { href: "#top-players", text: "🏆 Топ игроков" },
+            { href: "#achievements", text: "🎯 Достижения" },
+            { href: "#events", text: "🎮 Ивенты" },
+            { href: "#roadmap", text: "🗺️ Роудмап" },
+            { href: "#how-to-play", text: "🚀 Как начать" },
+            { href: "#faq", text: "❓ Вопросы" },
+            { href: "#community", text: "👥 Сообщество" },
+            { href: "#privacy", text: "🔒 Защита данных" },
+            { href: "#detailed-faq", text: "📝 Частые вопросы" },
+            { href: "javascript:void(0)", text: "📜 Правила", onclick: "openRules()" }
+        ];
+        
+        let itemsToShow = 14; // максимум
+        if (width <= 480) {
+            itemsToShow = 3;
+        } else if (width <= 768) {
+            itemsToShow = 4;
+        } else if (width <= 1200) {
+            itemsToShow = 7;
+        } else {
+            itemsToShow = 10;
+        }
+        
+        panelLinks.innerHTML = '';
+        
+        for (let i = 0; i < itemsToShow && i < allLinks.length; i++) {
+            const link = allLinks[i];
+            const a = document.createElement('a');
+            a.href = link.href;
+            a.textContent = link.text;
+            if (link.onclick) {
+                a.setAttribute('onclick', link.onclick);
+            }
+            panelLinks.appendChild(a);
+        }
+    }
+    
+    window.addEventListener('load', function() {
+        updateMenu();
+    });
+    
+    window.addEventListener('resize', updateMenu);
+</script>
+
+</body>
+</html>

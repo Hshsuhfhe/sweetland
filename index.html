@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetLand — ванильный майнкрафт сервер</title>
+    <title>SweetLand — ванильний майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ===== */
+        /* ===== ОСНОВНІ ЗМІННІ ===== */
         :root {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -25,10 +25,9 @@
             --snow-opacity: 1;
             --neon: var(--accent);
             --blur: 12px;
-            --live: #ff4444;
         }
 
-        /* ===== ТЕМНАЯ ТЕМА (ОСНОВНАЯ) ===== */
+        /* ===== ТЕМНА ТЕМА (ОСНОВНА) ===== */
         body.dark {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -45,10 +44,9 @@
             --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.25);
             --glow: 0 0 20px rgba(163, 102, 255, 0.3);
             --neon: var(--accent);
-            --live: #ff4444;
         }
 
-        /* ===== СВЕТЛАЯ ТЕМА ===== */
+        /* ===== СВІТЛА ТЕМА ===== */
         body.light {
             --accent: #ff7b5c;
             --accent-light: #ff9b7c;
@@ -65,10 +63,9 @@
             --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15);
             --glow: 0 0 20px rgba(255, 123, 92, 0.15);
             --neon: #ff9b7c;
-            --live: #ff4444;
         }
 
-        /* ===== РОЗОВАЯ ТЕМА ===== */
+        /* ===== РОЖЕВА ТЕМА ===== */
         body.pink {
             --accent: #ff66b2;
             --accent-light: #ff85c2;
@@ -85,10 +82,9 @@
             --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.3);
             --glow: 0 0 20px rgba(255, 102, 178, 0.3);
             --neon: #ff66b2;
-            --live: #ff4444;
         }
 
-        /* ===== ГОЛУБАЯ ТЕМА ===== */
+        /* ===== БЛАКИТНА ТЕМА ===== */
         body.blue {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -105,10 +101,9 @@
             --shadow-accent: 0 8px 32px rgba(77, 158, 255, 0.3);
             --glow: 0 0 20px rgba(77, 158, 255, 0.3);
             --neon: #4d9eff;
-            --live: #ff4444;
         }
 
-        /* ===== ЗЕЛЕНАЯ ТЕМА ===== */
+        /* ===== ЗЕЛЕНА ТЕМА ===== */
         body.green {
             --accent: #4caf50;
             --accent-light: #6ec071;
@@ -125,10 +120,9 @@
             --shadow-accent: 0 8px 32px rgba(76, 175, 80, 0.3);
             --glow: 0 0 20px rgba(76, 175, 80, 0.3);
             --neon: #4caf50;
-            --live: #ff4444;
         }
 
-        /* ===== ОРАНЖЕВАЯ ТЕМА ===== */
+        /* ===== ОРАНЖЕВА ТЕМА ===== */
         body.orange {
             --accent: #ff9800;
             --accent-light: #ffb74d;
@@ -145,10 +139,9 @@
             --shadow-accent: 0 8px 32px rgba(255, 152, 0, 0.3);
             --glow: 0 0 20px rgba(255, 152, 0, 0.3);
             --neon: #ff9800;
-            --live: #ff4444;
         }
 
-        /* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
+        /* ===== ФІОЛЕТОВА ТЕМА ===== */
         body.purple {
             --accent: #9c27b0;
             --accent-light: #ba68c8;
@@ -165,10 +158,66 @@
             --shadow-accent: 0 8px 32px rgba(156, 39, 176, 0.3);
             --glow: 0 0 20px rgba(156, 39, 176, 0.3);
             --neon: #9c27b0;
-            --live: #ff4444;
         }
 
-        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        /* ===== ЖОВТА ТЕМА ===== */
+        body.yellow {
+            --accent: #ffd700;
+            --accent-light: #ffe44d;
+            --accent-dark: #e6c300;
+            --bg: #1a1a0f;
+            --bg-secondary: #2a2a1a;
+            --bg-card: rgba(255, 215, 0, 0.15);
+            --text: #fffff0;
+            --text-secondary: #fff3b0;
+            --text-tertiary: #e6d88c;
+            --border: rgba(255, 215, 0, 0.3);
+            --border-hover: rgba(255, 215, 0, 0.6);
+            --shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+            --shadow-accent: 0 8px 32px rgba(255, 215, 0, 0.3);
+            --glow: 0 0 20px rgba(255, 215, 0, 0.3);
+            --neon: #ffd700;
+        }
+
+        /* ===== ЧЕРВОНА ТЕМА ===== */
+        body.red {
+            --accent: #ff4444;
+            --accent-light: #ff6666;
+            --accent-dark: #cc3333;
+            --bg: #1a0f0f;
+            --bg-secondary: #2a1a1a;
+            --bg-card: rgba(255, 68, 68, 0.15);
+            --text: #fff0f0;
+            --text-secondary: #ffb0b0;
+            --text-tertiary: #e68c8c;
+            --border: rgba(255, 68, 68, 0.3);
+            --border-hover: rgba(255, 68, 68, 0.6);
+            --shadow: 0 8px 32px rgba(255, 68, 68, 0.2);
+            --shadow-accent: 0 8px 32px rgba(255, 68, 68, 0.3);
+            --glow: 0 0 20px rgba(255, 68, 68, 0.3);
+            --neon: #ff4444;
+        }
+
+        /* ===== БІРЮЗОВА ТЕМА ===== */
+        body.teal {
+            --accent: #008080;
+            --accent-light: #20b2aa;
+            --accent-dark: #006666;
+            --bg: #0f1a1a;
+            --bg-secondary: #1a2a2a;
+            --bg-card: rgba(0, 128, 128, 0.15);
+            --text: #e0ffff;
+            --text-secondary: #b0e0e0;
+            --text-tertiary: #8cd8d8;
+            --border: rgba(0, 128, 128, 0.3);
+            --border-hover: rgba(0, 128, 128, 0.6);
+            --shadow: 0 8px 32px rgba(0, 128, 128, 0.2);
+            --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.3);
+            --glow: 0 0 20px rgba(0, 128, 128, 0.3);
+            --neon: #008080;
+        }
+
+        /* ===== ГЛОБАЛЬНІ СТИЛІ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -256,7 +305,7 @@
             }
         }
 
-        /* ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== */
+        /* ===== ПАНЕЛЬ УПРАВЛІННЯ ===== */
         .control-panel {
             position: fixed;
             top: 30px;
@@ -266,7 +315,6 @@
             gap: 10px;
         }
 
-        /* Кнопка смены темы (только тёмная/светлая) */
         .theme-toggle {
             cursor: pointer;
         }
@@ -282,9 +330,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             transition: all 0.3s ease;
             box-shadow: var(--glow);
+            color: var(--text);
         }
 
         .theme-icon:hover {
@@ -294,7 +343,6 @@
             box-shadow: 0 0 30px var(--accent);
         }
 
-        /* Меню выбора цвета (остальные темы) */
         .color-picker {
             position: relative;
         }
@@ -338,10 +386,26 @@
             min-width: 180px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             z-index: 2600;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .color-menu.active {
             display: flex;
+        }
+
+        .color-menu::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .color-menu::-webkit-scrollbar-track {
+            background: rgba(163, 102, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .color-menu::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
 
         .color-option {
@@ -366,37 +430,17 @@
             border-radius: 50%;
         }
 
-        .color-dot.dark {
-            background: #0a0a0f;
-            border: 2px solid #a366ff;
-        }
+        .color-dot.dark { background: #0a0a0f; border: 2px solid #a366ff; }
+        .color-dot.light { background: #faf7f5; border: 2px solid #ff7b5c; }
+        .color-dot.pink { background: #ff66b2; }
+        .color-dot.blue { background: #4d9eff; }
+        .color-dot.green { background: #4caf50; }
+        .color-dot.orange { background: #ff9800; }
+        .color-dot.purple { background: #9c27b0; }
+        .color-dot.yellow { background: #ffd700; }
+        .color-dot.red { background: #ff4444; }
+        .color-dot.teal { background: #008080; }
 
-        .color-dot.light {
-            background: #faf7f5;
-            border: 2px solid #ff7b5c;
-        }
-
-        .color-dot.pink {
-            background: #ff66b2;
-        }
-
-        .color-dot.blue {
-            background: #4d9eff;
-        }
-
-        .color-dot.green {
-            background: #4caf50;
-        }
-
-        .color-dot.orange {
-            background: #ff9800;
-        }
-
-        .color-dot.purple {
-            background: #9c27b0;
-        }
-
-        /* Меню выбора языка */
         .lang-picker {
             position: relative;
         }
@@ -412,8 +456,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: var(--glow);
@@ -467,8 +510,11 @@
             font-size: 20px;
         }
 
-        /* Кнопка для дополнительных фишек */
-        .features-btn {
+        .weather-picker {
+            position: relative;
+        }
+
+        .weather-btn {
             width: 45px;
             height: 45px;
             background: var(--bg-card);
@@ -486,14 +532,14 @@
             color: var(--text);
         }
 
-        .features-btn:hover {
+        .weather-btn:hover {
             transform: scale(1.1);
             background: var(--accent);
             color: white;
             box-shadow: 0 0 30px var(--accent);
         }
 
-        .features-menu {
+        .weather-menu {
             position: absolute;
             top: 55px;
             right: 0;
@@ -504,16 +550,16 @@
             display: none;
             flex-direction: column;
             gap: 10px;
-            min-width: 200px;
+            min-width: 140px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             z-index: 2600;
         }
 
-        .features-menu.active {
+        .weather-menu.active {
             display: flex;
         }
 
-        .feature-option {
+        .weather-option {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -524,16 +570,81 @@
             color: var(--text);
         }
 
-        .feature-option:hover {
+        .weather-option:hover {
             background: var(--accent);
             color: white;
         }
 
-        .feature-option span {
-            font-size: 18px;
+        .settings-picker {
+            position: relative;
         }
 
-        /* ===== НАВИГАЦИОННЫЙ ОВАЛ ===== */
+        .settings-btn {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+            color: var(--text);
+        }
+
+        .settings-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 30px var(--accent);
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 2600;
+        }
+
+        .settings-menu.active {
+            display: flex;
+        }
+
+        .settings-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
+        }
+
+        .settings-option:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .settings-option span {
+            font-size: 16px;
+        }
+
+        /* ===== НАВІГАЦІЙНИЙ ОВАЛ ===== */
         .nav-oval-container {
             position: fixed;
             top: 25px;
@@ -667,7 +778,7 @@
             box-shadow: 0 8px 25px var(--accent);
         }
 
-        /* ===== БОКОВАЯ ПАНЕЛЬ ===== */
+        /* ===== БОКОВА ПАНЕЛЬ ===== */
         .side-trigger {
             position: fixed;
             top: 30px;
@@ -807,45 +918,16 @@
             transform: translateX(-20px);
         }
 
-        .panel-links a:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .panel-links a:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .panel-links a:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .panel-links a:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .panel-links a:nth-child(5) {
-            animation-delay: 0.5s;
-        }
-
-        .panel-links a:nth-child(6) {
-            animation-delay: 0.6s;
-        }
-
-        .panel-links a:nth-child(7) {
-            animation-delay: 0.7s;
-        }
-
-        .panel-links a:nth-child(8) {
-            animation-delay: 0.8s;
-        }
-
-        .panel-links a:nth-child(9) {
-            animation-delay: 0.9s;
-        }
-
-        .panel-links a:nth-child(10) {
-            animation-delay: 1.0s;
-        }
+        .panel-links a:nth-child(1) { animation-delay: 0.1s; }
+        .panel-links a:nth-child(2) { animation-delay: 0.2s; }
+        .panel-links a:nth-child(3) { animation-delay: 0.3s; }
+        .panel-links a:nth-child(4) { animation-delay: 0.4s; }
+        .panel-links a:nth-child(5) { animation-delay: 0.5s; }
+        .panel-links a:nth-child(6) { animation-delay: 0.6s; }
+        .panel-links a:nth-child(7) { animation-delay: 0.7s; }
+        .panel-links a:nth-child(8) { animation-delay: 0.8s; }
+        .panel-links a:nth-child(9) { animation-delay: 0.9s; }
+        .panel-links a:nth-child(10) { animation-delay: 1.0s; }
 
         @keyframes slideIn {
             to {
@@ -891,17 +973,9 @@
             transform: translateY(20px);
         }
 
-        .social-link:nth-child(1) {
-            animation-delay: 0.5s;
-        }
-
-        .social-link:nth-child(2) {
-            animation-delay: 0.6s;
-        }
-
-        .social-link:nth-child(3) {
-            animation-delay: 0.7s;
-        }
+        .social-link:nth-child(1) { animation-delay: 0.5s; }
+        .social-link:nth-child(2) { animation-delay: 0.6s; }
+        .social-link:nth-child(3) { animation-delay: 0.7s; }
 
         @keyframes fadeInUp {
             to {
@@ -1238,7 +1312,7 @@
             font-size: 16px;
         }
 
-        /* ===== ОСОБЕННОСТИ ===== */
+        /* ===== ОСОБЛИВОСТІ ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1307,7 +1381,7 @@
             line-height: 1.6;
         }
 
-        /* ===== СООБЩЕСТВО ===== */
+        /* ===== СТРІМЕРИ ===== */
         .community-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1359,7 +1433,6 @@
             font-weight: 500;
         }
 
-        /* ===== СТРИМЕРЫ ===== */
         .streamer-card {
             background: linear-gradient(135deg, var(--bg-card), rgba(156, 39, 176, 0.2));
             border: 2px solid var(--accent);
@@ -1431,28 +1504,8 @@
                 transform: translateY(-5px);
             }
         }
-        
-        .footer-section a[href*="Babka3434"],
-        .footer-section a[href*="gyraffic"] {
-            color: var(--accent);
-            font-weight: 600;
-            position: relative;
-            padding-left: 20px;
-        }
-        
-        .footer-section a[href*="Babka3434"]::before,
-        .footer-section a[href*="gyraffic"]::before {
-            content: '●';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 14px;
-            color: var(--accent);
-            animation: pulse 2s infinite;
-        }
 
-        /* ===== ТОП ИГРОКОВ ===== */
+        /* ===== ТОП ГРАВЦІВ ===== */
         .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1516,7 +1569,7 @@
             margin-top: 20px;
         }
 
-        /* ===== ДОСТИЖЕНИЯ ===== */
+        /* ===== ДОСЯГНЕННЯ ===== */
         .achievements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1594,7 +1647,7 @@
             margin-top: 8px;
         }
 
-        /* ===== ИВЕНТЫ ===== */
+        /* ===== ІВЕНТИ ===== */
         .events-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1732,7 +1785,7 @@
             font-size: 12px;
         }
 
-        /* ===== КАК НАЧАТЬ ===== */
+        /* ===== ЯК ПОЧАТИ ===== */
         .how-to-play-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1790,7 +1843,7 @@
             line-height: 1.5;
         }
 
-        /* ===== ЗАЩИТА ДАННЫХ ===== */
+        /* ===== ЗАХИСТ ДАНИХ ===== */
         .privacy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1840,7 +1893,7 @@
             line-height: 1.5;
         }
 
-        /* ===== ДЕТАЛЬНЫЙ FAQ ===== */
+        /* ===== ДЕТАЛЬНИЙ FAQ ===== */
         .detailed-faq-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1900,7 +1953,7 @@
             font-weight: 600;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО ПРАВИЛ ===== */
+        /* ===== МОДАЛЬНЕ ВІКНО ПРАВИЛ ===== */
         .modal {
             display: none;
             position: fixed;
@@ -2125,7 +2178,7 @@
             font-size: 12px !important;
         }
 
-        /* ===== АНИМАЦИЯ ПРИ СКРОЛЛЕ ===== */
+        /* ===== АНІМАЦІЯ ПРИ СКРОЛІ ===== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -2137,7 +2190,7 @@
             transform: translateY(0);
         }
 
-        /* ===== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ===== */
+        /* ===== АДАПТАЦІЯ ДЛЯ ТЕЛЕФОНІВ ===== */
         @media (max-width: 768px) {
             .nav-oval-container {
                 min-width: auto;
@@ -2172,7 +2225,7 @@
                 gap: 5px;
             }
 
-            .theme-icon, .color-btn, .lang-btn, .features-btn {
+            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn {
                 width: 35px;
                 height: 35px;
                 font-size: 16px;
@@ -2420,7 +2473,7 @@
 </head>
 <body class="dark no-select">
 
-<!-- ===== НАВИГАЦИОННЫЙ ОВАЛ ===== -->
+<!-- ===== НАВІГАЦІЙНИЙ ОВАЛ ===== -->
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
@@ -2428,12 +2481,12 @@
             SweetLand
         </div>
         <div class="banner-center">
-            <a href="#features" data-key="map">Карта</a>
-            <a href="#how-to-play" data-key="wiki">Вики</a>
-            <a href="#streamers" data-key="shop">Магазин</a>
+            <a href="#features">Особливості</a>
+            <a href="#how-to-play">Як почати</a>
+            <a href="#streamers">Стрімери</a>
         </div>
         <div class="banner-right">
-            <a href="#community" class="play-now" data-key="play">Играть сейчас</a>
+            <a href="#community" class="play-now">Грати зараз</a>
         </div>
     </div>
 </div>
@@ -2441,108 +2494,139 @@
 <!-- ===== ПОГОДА ===== -->
 <div id="weather"></div>
 
-<!-- ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== -->
+<!-- ===== ПАНЕЛЬ УПРАВЛІННЯ ===== -->
 <div class="control-panel">
-    <!-- Кнопка смены темы (только тёмная/светлая) -->
+    <!-- Кнопка зміни теми (тільки темна/світла) -->
     <div class="theme-toggle" onclick="toggleDarkLight()">
         <div class="theme-icon" id="themeIcon">🌙</div>
     </div>
     
-    <!-- Меню выбора цвета (остальные темы) -->
+    <!-- Меню вибору кольору (всі теми) -->
     <div class="color-picker">
         <div class="color-btn" onclick="toggleColorMenu()">🎨</div>
         <div class="color-menu" id="colorMenu">
             <div class="color-option" onclick="setTheme('dark')">
                 <div class="color-dot dark"></div>
-                <span data-key="dark">Темная (основная)</span>
+                <span>Темна</span>
             </div>
             <div class="color-option" onclick="setTheme('light')">
                 <div class="color-dot light"></div>
-                <span data-key="light">Светлая</span>
+                <span>Світла</span>
             </div>
             <div class="color-option" onclick="setTheme('pink')">
                 <div class="color-dot pink"></div>
-                <span data-key="pink">Розовая</span>
+                <span>Рожева</span>
             </div>
             <div class="color-option" onclick="setTheme('blue')">
                 <div class="color-dot blue"></div>
-                <span data-key="blue">Голубая</span>
+                <span>Блакитна</span>
             </div>
             <div class="color-option" onclick="setTheme('green')">
                 <div class="color-dot green"></div>
-                <span data-key="green">Зеленая</span>
+                <span>Зелена</span>
             </div>
             <div class="color-option" onclick="setTheme('orange')">
                 <div class="color-dot orange"></div>
-                <span data-key="orange">Оранжевая</span>
+                <span>Помаранчева</span>
             </div>
             <div class="color-option" onclick="setTheme('purple')">
                 <div class="color-dot purple"></div>
-                <span data-key="purple">Фиолетовая</span>
+                <span>Фіолетова</span>
+            </div>
+            <div class="color-option" onclick="setTheme('yellow')">
+                <div class="color-dot yellow"></div>
+                <span>Жовта</span>
+            </div>
+            <div class="color-option" onclick="setTheme('red')">
+                <div class="color-dot red"></div>
+                <span>Червона</span>
+            </div>
+            <div class="color-option" onclick="setTheme('teal')">
+                <div class="color-dot teal"></div>
+                <span>Бірюзова</span>
             </div>
         </div>
     </div>
     
-    <!-- Меню выбора языка -->
+    <!-- Меню вибору мови -->
     <div class="lang-picker">
         <div class="lang-btn" onclick="toggleLangMenu()">🌐</div>
         <div class="lang-menu" id="langMenu">
             <div class="lang-option" onclick="setLanguage('ru')">
                 <span class="lang-flag">🇷🇺</span>
-                <span data-key="russian">Русский</span>
+                <span>Русский</span>
             </div>
             <div class="lang-option" onclick="setLanguage('uk')">
                 <span class="lang-flag">🇺🇦</span>
-                <span data-key="ukrainian">Українська</span>
+                <span>Українська</span>
             </div>
             <div class="lang-option" onclick="setLanguage('en')">
                 <span class="lang-flag">🇬🇧</span>
-                <span data-key="english">English</span>
+                <span>English</span>
             </div>
             <div class="lang-option" onclick="setLanguage('de')">
                 <span class="lang-flag">🇩🇪</span>
-                <span data-key="german">Deutsch</span>
+                <span>Deutsch</span>
             </div>
             <div class="lang-option" onclick="setLanguage('fr')">
                 <span class="lang-flag">🇫🇷</span>
-                <span data-key="french">Français</span>
+                <span>Français</span>
             </div>
             <div class="lang-option" onclick="setLanguage('es')">
                 <span class="lang-flag">🇪🇸</span>
-                <span data-key="spanish">Español</span>
+                <span>Español</span>
             </div>
         </div>
     </div>
     
-    <!-- Меню дополнительных фишек -->
-    <div class="color-picker" style="position: relative;">
-        <div class="features-btn" onclick="toggleFeaturesMenu()">✨</div>
-        <div class="features-menu" id="featuresMenu">
-            <div class="feature-option" onclick="toggleParticles()">
+    <!-- Меню вибору погоди -->
+    <div class="weather-picker">
+        <div class="weather-btn" onclick="toggleWeatherMenu()">🌧️</div>
+        <div class="weather-menu" id="weatherMenu">
+            <div class="weather-option" onclick="setWeather('auto')">
+                <span>🌍</span>
+                <span>Авто (за темою)</span>
+            </div>
+            <div class="weather-option" onclick="setWeather('snow')">
                 <span>❄️</span>
-                <span id="particlesText" data-key="particles">Частицы: вкл</span>
+                <span>Сніг</span>
             </div>
-            <div class="feature-option" onclick="toggleBlur()">
+            <div class="weather-option" onclick="setWeather('rain')">
+                <span>☔</span>
+                <span>Дощ</span>
+            </div>
+            <div class="weather-option" onclick="setWeather('none')">
+                <span>☀️</span>
+                <span>Вимкнути</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Меню налаштувань -->
+    <div class="settings-picker">
+        <div class="settings-btn" onclick="toggleSettingsMenu()">⚙️</div>
+        <div class="settings-menu" id="settingsMenu">
+            <div class="settings-option" onclick="toggleParticles()">
+                <span>❄️</span>
+                <span id="particlesText">Частинки: вкл</span>
+            </div>
+            <div class="settings-option" onclick="toggleBlur()">
                 <span>🌀</span>
-                <span id="blurText" data-key="blur">Размытие: вкл</span>
+                <span id="blurText">Розмиття: вкл</span>
             </div>
-            <div class="feature-option" onclick="toggleAnimations()">
+            <div class="settings-option" onclick="toggleAnimations()">
                 <span>✨</span>
-                <span id="animationsText" data-key="animations">Анимации: вкл</span>
+                <span id="animationsText">Анімації: вкл</span>
             </div>
-            <div class="feature-option" onclick="toggleSound()">
-                <span>🔊</span>
-                <span id="soundText" data-key="sound">Звук: вкл</span>
-            </div>
-            <div class="feature-option" onclick="resetSettings()">
+            <div class="settings-option" onclick="resetSettings()">
                 <span>🔄</span>
-                <span data-key="reset">Сброс настроек</span>
+                <span>Скинути</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ===== БОКОВАЯ ПАНЕЛЬ ===== -->
+<!-- ===== БОКОВА ПАНЕЛЬ ===== -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -2553,7 +2637,7 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
-        <!-- Ссылки будут добавлены через JavaScript -->
+        <!-- Посилання будуть додані через JavaScript -->
     </div>
     
     <div class="panel-social">
@@ -2569,46 +2653,46 @@
     </div>
 </nav>
 
-<!-- ===== МОДАЛЬНОЕ ОКНО ПРАВИЛ ===== -->
+<!-- ===== МОДАЛЬНЕ ВІКНО ПРАВИЛ ===== -->
 <div id="rules-modal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeRules()">&times;</span>
         <div class="rules-column">
-            <h1 class="rules-main-title" data-key="rules-title">ПРАВИЛА СЕРВЕРА</h1>
+            <h1 class="rules-main-title">ПРАВИЛА СЕРВЕРА</h1>
             <div class="rules-scroll-area">
-                <p><b>1.0</b> <span data-key="rule1">Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.</span> <span class="punish" data-key="punish1">Наказание: Бан 1 день</span></p>
-                <p><b>1.1</b> <span data-key="rule2">Незнание правил не освобождает вас от ответственности.</span> <span class="punish" data-key="punish2">Наказание: Предупреждение</span></p>
-                <p><b>1.2</b> <span data-key="rule3">Гриферство (порча или уничтожение чужих построек).</span> <span class="punish" data-key="punish3">Наказание: Бан 30 дней</span></p>
-                <p><b>1.3</b> <span data-key="rule4">Кража ресурсов из чужих сундуков, бочек, воронок.</span> <span class="punish" data-key="punish4">Наказание: Бан 14 дней</span></p>
-                <p><b>1.4</b> <span data-key="rule5">Умышленное убийство чужих домашних животных или именных мобов.</span> <span class="punish" data-key="punish5">Наказание: Бан 2 дня</span></p>
-                <p><b>1.5</b> <span data-key="rule6">Заселение на чужую территорию или постройка вплотную без согласия владельца.</span> <span class="punish" data-key="punish6">Наказание: Снос + Кик</span></p>
-                <p><b>1.6</b> <span data-key="rule7">Игнорирование табличек «Вход запрещен».</span> <span class="punish" data-key="punish7">Наказание: Убийство без возврата вещей</span></p>
-                <p><b>1.7</b> <span data-key="rule8">Использование чужих автоматических или ручных ферм без разрешения.</span> <span class="punish" data-key="punish8">Наказание: Бан 3 дня</span></p>
-                <p><b>1.8</b> <span data-key="rule9">Порча мира (разлитие лавы, воды и тому подобное).</span> <span class="punish" data-key="punish9">Наказание: Снос + Бан 2 дня</span></p>
-                <p><b>1.9</b> <span data-key="rule10">Создание механизмов, намеренно вызывающих лаги или падение сервера.</span> <span class="punish" data-key="punish10">Наказание: Снос + Бан 14 дней</span></p>
-                <p><b>1.10</b> <span data-key="rule11">Убийство игрока без его предварительного согласия на PVP.</span> <span class="punish" data-key="punish11">Наказание: Бан 7 дней</span></p>
-                <p><b>1.11</b> <span data-key="rule12">Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть).</span> <span class="punish" data-key="punish12">Наказание: Бан 1 день + возврат вещей</span></p>
-                <p><b>1.12</b> <span data-key="rule13">Использование любых видов читов (METEOR, WURST, IMPACT и другие).</span> <span class="punish" data-key="punish13">Наказание: ПЕРМАНЕНТНЫЙ БАН</span></p>
-                <p><b>1.13</b> <span data-key="rule14">Сокрытие информации о багах, дюпах или недоработках экономики.</span> <span class="punish" data-key="punish14">Наказание: Бан 30 дней</span></p>
-                <p><b>1.14</b> <span data-key="rule15">Присвоение заброшенных баз без согласования с администрацией.</span> <span class="punish" data-key="punish15">Наказание: Бан 5 дней</span></p>
-                <p><b>1.15</b> <span data-key="rule16">Взлом, попытка взлома или вход на чужой аккаунт.</span> <span class="punish" data-key="punish16">Наказание: Перманентный бан</span></p>
-                <p><b>1.16</b> <span data-key="rule17">Нанесение любого вреда репутации или технической части сервера.</span> <span class="punish" data-key="punish17">Наказание: Бан навсегда</span></p>
-                <p><b>1.17</b> <span data-key="rule18">Продажа игровых ресурсов или услуг за реальные деньги.</span> <span class="punish" data-key="punish18">Наказание: ЧС проекта</span></p>
-                <p><b>1.18</b> <span data-key="rule19">Подстрекательство других игроков к нарушению правил.</span> <span class="punish" data-key="punish19">Наказание: Бан 10 дней</span></p>
-                <p><b>1.19</b> <span data-key="rule20">Ответственность за безопасность аккаунта несет только его владелец.</span></p>
-                <p><b>1.20</b> <span data-key="rule21">Создание дополнительных аккаунтов (твинков) для обхода активного бана.</span> <span class="punish" data-key="punish21">Наказание: Бан по IP</span></p>
+                <p><b>1.0</b> Заходячи на сервер, ви автоматично погоджуєтеся з усіма правилами проєкту. <span class="punish">Бан 1 день</span></p>
+                <p><b>1.1</b> Незнання правил не звільняє вас від відповідальності. <span class="punish">Попередження</span></p>
+                <p><b>1.2</b> Гріферство (псування або знищення чужих будівель). <span class="punish">Бан 30 днів</span></p>
+                <p><b>1.3</b> Крадіжка ресурсів з чужих скринь, бочок, вирв. <span class="punish">Бан 14 днів</span></p>
+                <p><b>1.4</b> Навмисне вбивство чужих домашніх тварин або іменних мобів. <span class="punish">Бан 2 дні</span></p>
+                <p><b>1.5</b> Заселення на чужу територію або будівництво впритул без згоди власника. <span class="punish">Знесення + Кік</span></p>
+                <p><b>1.6</b> Ігнорування табличок «Вхід заборонено». <span class="punish">Вбивство без повернення речей</span></p>
+                <p><b>1.7</b> Використання чужих автоматичних або ручних ферм без дозволу. <span class="punish">Бан 3 дні</span></p>
+                <p><b>1.8</b> Псування світу (розлиття лави, води тощо). <span class="punish">Знесення + Бан 2 дні</span></p>
+                <p><b>1.9</b> Створення механізмів, що навмисно викликають лаги або падіння сервера. <span class="punish">Знесення + Бан 14 днів</span></p>
+                <p><b>1.10</b> Вбивство гравця без його попередньої згоди на PVP. <span class="punish">Бан 7 днів</span></p>
+                <p><b>1.11</b> Підбір та привласнення чужих речей після смерті гравця (якщо він просить повернути). <span class="punish">Бан 1 день + повернення речей</span></p>
+                <p><b>1.12</b> Використання будь-яких видів читів. <span class="punish">ПЕРМАНЕНТНИЙ БАН</span></p>
+                <p><b>1.13</b> Приховування інформації про баги або дюпи. <span class="punish">Бан 30 днів</span></p>
+                <p><b>1.14</b> Привласнення занедбаних баз без узгодження з адміністрацією. <span class="punish">Бан 5 днів</span></p>
+                <p><b>1.15</b> Злам або вхід на чужий акаунт. <span class="punish">Перманентний бан</span></p>
+                <p><b>1.16</b> Нанесення шкоди репутації або технічній частині сервера. <span class="punish">Бан назавжди</span></p>
+                <p><b>1.17</b> Продаж ігрових ресурсів за реальні гроші. <span class="punish">ЧС проєкту</span></p>
+                <p><b>1.18</b> Підбурювання інших гравців до порушення правил. <span class="punish">Бан 10 днів</span></p>
+                <p><b>1.19</b> Відповідальність за безпеку акаунта несе тільки його власник.</p>
+                <p><b>1.20</b> Створення додаткових акаунтів для обходу бана. <span class="punish">Бан по IP</span></p>
                 
                 <hr>
                 
-                <h3 data-key="section2">Раздел 2: Администрация</h3>
+                <h3>Розділ 2: Адміністрація</h3>
                 
                 <hr>
                 
-                <p><b>2.1</b> <span data-key="rule22">Правила сервера обязательны для исполнения всеми членами персонала.</span></p>
-                <p><b>2.2</b> <span data-key="rule23">Использование творческого режима для личного выживания или помощи игрокам.</span> <span class="punish" data-key="punish23">Наказание: Снятие</span></p>
-                <p><b>2.3</b> <span data-key="rule24">Предоставление игровых преимуществ своим друзьям.</span> <span class="punish" data-key="punish24">Наказание: Снятие + ЧС</span></p>
-                <p><b>2.4</b> <span data-key="rule25">Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.</span> <span class="punish" data-key="punish25">Наказание: Снятие</span></p>
-                <p><b>2.5</b> <span data-key="rule26">Игрок имеет право обжаловать любое действие администратора в Discord-канале.</span></p>
+                <p><b>2.1</b> Правила сервера обов'язкові для всіх членів персоналу.</p>
+                <p><b>2.2</b> Використання творчого режиму для допомоги гравцям. <span class="punish">Зняття</span></p>
+                <p><b>2.3</b> Надання переваг своїм друзям. <span class="punish">Зняття + ЧС</span></p>
+                <p><b>2.4</b> Необґрунтовані покарання без доказів. <span class="punish">Зняття</span></p>
+                <p><b>2.5</b> Оскарження дій адміністрації в Discord.</p>
             </div>
         </div>
     </div>
@@ -2619,7 +2703,7 @@
     <div class="hero-layout">
         <div class="hero-content reveal">
             <h1 class="title">SweetLand</h1>
-            <p class="hero-tagline" data-key="hero-text">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p>
+            <p class="hero-tagline">Ванільне виживання на версії 1.21.8. Твій світ — твої правила.</p>
             <div class="ip-container">
                 <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
                 <span class="btn-version">1.21.8</span>
@@ -2629,2324 +2713,37 @@
             <img src="images/5opka.png" alt="5opka" class="giant-img">
         </div>
     </div>
-    <div id="copyNotice">IP скопирован</div>
+    <div id="copyNotice">IP скопійовано</div>
 </header>
 
 <!-- ===== СТАТИСТИКА ===== -->
 <section class="section reveal" id="stats">
-    <h2 class="section-title"><span data-key="stats">Статистика</span> <span data-key="server">сервера</span></h2>
+    <h2 class="section-title">Статистика <span>сервера</span></h2>
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-number">24/7</div>
-            <div class="stat-label" data-key="uptime">Работа сервера</div>
+            <div class="stat-label">Робота сервера</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">1.21.8</div>
-            <div class="stat-label" data-key="version">Актуальная версия</div>
+            <div class="stat-label">Актуальна версія</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">100%</div>
-            <div class="stat-label" data-key="vanilla">Ванильный геймплей</div>
+            <div class="stat-label">Ванільний геймплей</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">0%</div>
-            <div class="stat-label" data-key="donate">Доната</div>
+            <div class="stat-label">Донату</div>
         </div>
     </div>
 </section>
 
-<!-- ===== ОСОБЕННОСТИ ===== -->
+<!-- ===== ОСОБЛИВОСТІ ===== -->
 <section class="section reveal" id="features">
-    <h2 class="section-title"><span data-key="features">Особенности</span> <span data-key="server">сервера</span></h2>
+    <h2 class="section-title">Особливості <span>сервера</span></h2>
     <div class="features-grid">
         <div class="feature-card">
             <div class="feature-icon">🛡️</div>
-            <h3 data-key="anticheat">Анти-чит система</h3>
-            <p data-key="anticheat-desc">Продвинутая защита от читеров. Честная игра для всех.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3 data-key="tps">Стабильный TPS</h3>
-            <p data-key="tps-desc">Оптимизированный сервер на мощном железе. Никаких лагов.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🎉</div>
-            <h3 data-key="events">Регулярные ивенты</h3>
-            <p data-key="events-desc">Еженедельные события и конкурсы с призами для игроков.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🌍</div>
-            <h3 data-key="world">Чистый ванильный мир</h3>
-            <p data-key="world-desc">Никаких плагинов, только чистый Minecraft как задумано.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🔨</div>
-            <h3 data-key="protection">Защита построек</h3>
-            <p data-key="protection-desc">Ваши постройки под надежной защитой от гриферов.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h3 data-key="community">Дружное сообщество</h3>
-            <p data-key="community-desc">Первые игроки уже здесь. Присоединяйся к нам.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== СТРИМЕРЫ ===== -->
-<section class="section reveal" id="streamers">
-    <h2 class="section-title"><span data-key="streamers">Стримеры</span> <span data-key="on-server">на сервере</span></h2>
-    <div class="community-grid">
-        <div class="community-card streamer-card">
-            <div class="live-badge"><span>●</span> LIVE</div>
-            <div class="community-icon">🎥</div>
-            <h3>Babka3434</h3>
-            <p data-key="babka-desc">Популярная стримерша, будет играть на сервере.</p>
-            <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link">
-                Babka3434 YouTube
-            </a>
-            <div class="community-stats">
-                <span data-key="subscribe">подпишись</span>
-                <span data-key="soon">скоро</span>
-            </div>
-        </div>
-        <div class="community-card streamer-card">
-            <div class="live-badge"><span>●</span> LIVE</div>
-            <div class="community-icon">🎮</div>
-            <h3>Gyraffic</h3>
-            <p data-key="gyraffic-desc">Владелец сервера и стример. Играет с вами.</p>
-            <a href="https://youtube.com/@gyraffic" target="_blank" class="streamer-link">
-                Gyraffic YouTube
-            </a>
-            <div class="community-stats">
-                <span data-key="subscribe">подпишись</span>
-                <span data-key="live">live</span>
-            </div>
-        </div>
-        <div class="community-card">
-            <div class="community-icon">🎮</div>
-            <h3 data-key="more-soon">Скоро будут другие</h3>
-            <p data-key="more-desc">Список стримеров будет пополняться.</p>
-            <div class="community-stats">
-                <span data-key="announcements">анонсы</span>
-                <span data-key="news">новости</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ТОП ИГРОКОВ ===== -->
-<section class="section reveal" id="top-players">
-    <h2 class="section-title"><span data-key="top">Топ</span> <span data-key="players">игроков</span></h2>
-    <div class="top-players-grid">
-        <div class="player-card">
-            <div class="player-rank">1</div>
-            <div class="player-info">
-                <h4>Gyraffic</h4>
-                <p data-key="owner">Владелец сервера</p>
-            </div>
-            <div class="player-score">19 <span data-key="hours">часов</span></div>
-        </div>
-        <div class="player-card">
-            <div class="player-rank">2</div>
-            <div class="player-info">
-                <h4>Babka3434</h4>
-                <p data-key="streamer">Стримерша</p>
-            </div>
-            <div class="player-score">8 <span data-key="hours">часов</span></div>
-        </div>
-        <div class="player-card">
-            <div class="player-rank">3</div>
-            <div class="player-info">
-                <h4>QLIBRO</h4>
-                <p data-key="admin">Старший администратор</p>
-            </div>
-            <div class="player-score">7 <span data-key="hours">часов</span></div>
-        </div>
-    </div>
-    <p class="update-date" data-key="updated">Данные обновлены 17 февраля 2026 года</p>
-</section>
-
-<!-- ===== ДОСТИЖЕНИЯ ===== -->
-<section class="section reveal" id="achievements">
-    <h2 class="section-title"><span data-key="achievements">Достижения</span> <span data-key="players">игроков</span></h2>
-    <div class="achievements-grid">
-        <div class="achievement-card">
-            <div class="achievement-icon">🏆</div>
-            <h3 data-key="achievement1">Первооткрыватель</h3>
-            <p data-key="achievement1-desc">Зайти на сервер в первый день открытия</p>
-            <div class="achievement-progress">
-                <div class="achievement-progress-bar" style="width: 0%"></div>
-            </div>
-            <div class="achievement-stats" data-key="achievement1-stats">0% игроков получили</div>
-        </div>
-        <div class="achievement-card">
-            <div class="achievement-icon">⚒️</div>
-            <h3 data-key="achievement2">Мастер-строитель</h3>
-            <p data-key="achievement2-desc">Построить дом с более чем 1000 блоков</p>
-            <div class="achievement-progress">
-                <div class="achievement-progress-bar" style="width: 0%"></div>
-            </div>
-            <div class="achievement-stats" data-key="achievement2-stats">0% игроков получили</div>
-        </div>
-        <div class="achievement-card">
-            <div class="achievement-icon">🗺️</div>
-            <h3 data-key="achievement3">Исследователь</h3>
-            <p data-key="achievement3-desc">Посетить все биомы в мире</p>
-            <div class="achievement-progress">
-                <div class="achievement-progress-bar" style="width: 0%"></div>
-            </div>
-            <div class="achievement-stats" data-key="achievement3-stats">0% игроков получили</div>
-        </div>
-        <div class="achievement-card">
-            <div class="achievement-icon">🤝</div>
-            <h3 data-key="achievement4">Друзья навеки</h3>
-            <p data-key="achievement4-desc">Играть в одной команде более 100 часов</p>
-            <div class="achievement-progress">
-                <div class="achievement-progress-bar" style="width: 0%"></div>
-            </div>
-            <div class="achievement-stats" data-key="achievement4-stats">0% игроков получили</div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ИВЕНТЫ ===== -->
-<section class="section reveal" id="events">
-    <h2 class="section-title"><span data-key="upcoming">Будущие</span> <span data-key="events">ивенты</span></h2>
-    <div class="events-grid">
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">⚔️</div>
-            <h3 data-key="event1">PVP Арена</h3>
-            <p data-key="event1-desc">Сражения на арене 1 на 1 и 2 на 2. Победители получат титулы и призы.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">🏗️</div>
-            <h3 data-key="event2">Конкурс построек</h3>
-            <p data-key="event2-desc">Лучшие постройки на разные темы. Голосование в Discord.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">💰</div>
-            <h3 data-key="event3">Аукцион</h3>
-            <p data-key="event3-desc">Торги редкими предметами и ресурсами между игроками.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">🏁</div>
-            <h3 data-key="event4">Скоростное выживание</h3>
-            <p data-key="event4-desc">Кто быстрее добудет редкие ресурсы и построит базу.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">🎯</div>
-            <h3 data-key="event5">Охота за сокровищами</h3>
-            <p data-key="event5-desc">Поиск спрятанных сундуков с редкими предметами по всему миру.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-        <div class="event-card">
-            <div class="event-status" data-key="soon">Скоро</div>
-            <div class="event-icon">👑</div>
-            <h3 data-key="event6">Королевская битва</h3>
-            <p data-key="event6-desc">Последний выживший получает королевский титул и призы.</p>
-            <div class="event-info">
-                <span data-key="after-opening">после открытия</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== РОУДМАП ===== -->
-<section class="section reveal" id="roadmap">
-    <h2 class="section-title"><span data-key="roadmap">План</span> <span data-key="development">развития</span></h2>
-    <div class="roadmap-grid">
-        <div class="roadmap-item">
-            <span class="roadmap-status completed" data-key="completed">Завершено</span>
-            <h3 data-key="roadmap1">Создание сервера</h3>
-            <p data-key="roadmap1-desc">Настройка и оптимизация ванильного мира</p>
-            <span class="roadmap-date" data-key="feb2026">Февраль 2026 года</span>
-        </div>
-        <div class="roadmap-item">
-            <span class="roadmap-status planned" data-key="planned">Планируется</span>
-            <h3 data-key="roadmap2">Клановая система</h3>
-            <p data-key="roadmap2-desc">Создание кланов и совместные постройки</p>
-            <span class="roadmap-date" data-key="after-opening">После открытия</span>
-        </div>
-        <div class="roadmap-item">
-            <span class="roadmap-status planned" data-key="planned">Планируется</span>
-            <h3 data-key="roadmap3">Экономика</h3>
-            <p data-key="roadmap3-desc">Внутриигровая торговля и магазины игроков</p>
-            <span class="roadmap-date" data-key="after-opening">После открытия</span>
-        </div>
-        <div class="roadmap-item">
-            <span class="roadmap-status planned" data-key="planned">Планируется</span>
-            <h3 data-key="roadmap4">Клановые войны</h3>
-            <p data-key="roadmap4-desc">Сражения между кланами за территории</p>
-            <span class="roadmap-date" data-key="after-opening">После открытия</span>
-        </div>
-        <div class="roadmap-item">
-            <span class="roadmap-status planned" data-key="planned">Планируется</span>
-            <h3 data-key="roadmap5">Система достижений</h3>
-            <p data-key="roadmap5-desc">Награды за особые действия в игре</p>
-            <span class="roadmap-date" data-key="after-opening">После открытия</span>
-        </div>
-        <div class="roadmap-item">
-            <span class="roadmap-status planned" data-key="planned">Планируется</span>
-            <h3 data-key="roadmap6">Регулярные ивенты</h3>
-            <p data-key="roadmap6-desc">Еженедельные события для всех игроков</p>
-            <span class="roadmap-date" data-key="after-opening">После открытия</span>
-        </div>
-    </div>
-</section>
-
-<!-- ===== КАК НАЧАТЬ ===== -->
-<section class="section reveal" id="how-to-play">
-    <h2 class="section-title"><span data-key="how-to">Как начать</span> <span data-key="play">играть</span></h2>
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">🚀</div>
-            <h3 data-key="step1">Версия 1.21.8</h3>
-            <p data-key="step1-desc">Убедись, что у тебя установлена последняя версия Minecraft.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">📝</div>
-            <h3 data-key="step2">Подай заявку в Discord</h3>
-            <p data-key="step2-desc">Заполни анкету и ознакомься с правилами сервера.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🔌</div>
-            <h3 data-key="step3">Дождись принятия</h3>
-            <p data-key="step3-desc">После одобрения добавь сервер play.sweet-land.fun в список.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">🎮</div>
-            <h3 data-key="step4">Заходи и играй</h3>
-            <p data-key="step4-desc">Выбирай место для базы, строй и исследуй мир.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">💬</div>
-            <h3 data-key="step5">Общайся в Discord</h3>
-            <p data-key="step5-desc">Знакомься с игроками, участвуй в жизни сообщества.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h3 data-key="step6">Приглашай друзей</h3>
-            <p data-key="step6-desc">Вместе строить веселее. Создавай кланы и команды.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section class="section reveal" id="faq">
-    <h2 class="section-title"><span data-key="answers">Ответы на</span> <span data-key="questions">вопросы</span></h2>
-    <div class="faq-grid">
-        <div class="faq-card">
-            <div class="icon">📅</div>
-            <h3 data-key="faq1">Когда старт</h3>
-            <p data-key="faq1-desc">Сервер готовится к открытию. Следи за новостями в Discord.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">🎮</div>
-            <h3 data-key="faq2">Какая версия</h3>
-            <p data-key="faq2-desc">Сервер будет работать на актуальной версии 1.21.8.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">💬</div>
-            <h3 data-key="faq3">Где общение</h3>
-            <p data-key="faq3-desc">Основное общение в Discord. Там же новости и ивенты.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">🌙</div>
-            <h3 data-key="faq4">Белая тема</h3>
-            <p data-key="faq4-desc">Да, нажми на луну в правом углу и увидишь дождик.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">🔒</div>
-            <h3 data-key="faq5">Защита аккаунта</h3>
-            <p data-key="faq5-desc">Анти-чит система и шифрование данных игроков.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">🎁</div>
-            <h3 data-key="faq6">Есть донат</h3>
-            <p data-key="faq6-desc">Нет, это полностью ванильный сервер. Никаких привилегий.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">📊</div>
-            <h3 data-key="faq7">Какой онлайн</h3>
-            <p data-key="faq7-desc">Сервер скоро открывается. Будь первым.</p>
-        </div>
-        <div class="faq-card">
-            <div class="icon">🔄</div>
-            <h3 data-key="faq8">Будут вайпы</h3>
-            <p data-key="faq8-desc">Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== СООБЩЕСТВО ===== -->
-<section class="section reveal" id="community">
-    <h2 class="section-title"><span data-key="our">Наше</span> <span data-key="community">сообщество</span></h2>
-    <div class="community-grid">
-        <div class="community-card">
-            <div class="community-icon">💬</div>
-            <h3 data-key="discord">Discord сервер</h3>
-            <p data-key="discord-desc">Присоединяйся к первым игрокам, участвуй в развитии сервера</p>
-            <div class="community-stats">
-                <span data-key="members">более 50 участников</span>
-                <span data-key="active">активно</span>
-            </div>
-        </div>
-        <div class="community-card">
-            <div class="community-icon">📱</div>
-            <h3 data-key="telegram">Telegram канал</h3>
-            <p data-key="telegram-desc">Новости, обновления и анонсы в удобном формате</p>
-            <div class="community-stats">
-                <span data-key="subscribers">более 30 подписчиков</span>
-                <span data-key="daily">ежедневно</span>
-            </div>
-        </div>
-        <div class="community-card">
-            <div class="community-icon">▶️</div>
-            <h3 data-key="youtube">YouTube каналы</h3>
-            <p data-key="youtube-desc">Обзоры, гайды и стримы от наших стримеров</p>
-            <div class="community-stats">
-                <span data-key="channels">2 канала</span>
-                <span data-key="subscribe">подпишись</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ЗАЩИТА ДАННЫХ ===== -->
-<section class="section reveal" id="privacy">
-    <h2 class="section-title"><span data-key="protection">Защита</span> <span data-key="data">данных</span></h2>
-    <div class="privacy-grid">
-        <div class="privacy-card">
-            <div class="icon">🔐</div>
-            <h3 data-key="encryption">Шифрование</h3>
-            <p data-key="encryption-desc">Все данные защищены современными протоколами.</p>
-        </div>
-        <div class="privacy-card">
-            <div class="icon">🛡️</div>
-            <h3 data-key="anticheat-short">Анти-чит</h3>
-            <p data-key="anticheat-short-desc">Защита от недобросовестных игроков.</p>
-        </div>
-        <div class="privacy-card">
-            <div class="icon">⚖️</div>
-            <h3 data-key="ownership">Права владения</h3>
-            <p data-key="ownership-desc">Постройки и ресурсы принадлежат только вам.</p>
-        </div>
-        <div class="privacy-card">
-            <div class="icon">📋</div>
-            <h3 data-key="confidentiality">Конфиденциальность</h3>
-            <p data-key="confidentiality-desc">Мы не собираем лишнюю информацию.</p>
-        </div>
-        <div class="privacy-card">
-            <div class="icon">🌍</div>
-            <h3 data-key="gdpr">GDPR</h3>
-            <p data-key="gdpr-desc">Соответствие стандартам защиты данных.</p>
-        </div>
-        <div class="privacy-card">
-            <div class="icon">⏰</div>
-            <h3 data-key="storage">Хранение</h3>
-            <p data-key="storage-desc">Данные на защищенных серверах.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ЧАСТЫЕ ВОПРОСЫ ===== -->
-<section class="section reveal" id="detailed-faq">
-    <h2 class="section-title"><span data-key="frequently">Часто</span> <span data-key="asked">задаваемые вопросы</span></h2>
-    <div class="detailed-faq-grid">
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed1">📌 Как начать играть</h3>
-            <div class="faq-answer">
-                <p data-key="detailed1-answer1">1. Скачай Minecraft версии 1.21.8</p>
-                <p data-key="detailed1-answer2">2. Подай заявку в Discord</p>
-                <p data-key="detailed1-answer3">3. После принятия добавь сервер play.sweet-land.fun</p>
-            </div>
-        </div>
-        
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed2">⚔️ Есть ли кланы</h3>
-            <div class="faq-answer">
-                <p data-key="detailed2-answer">Да, ты можешь создавать кланы и строить вместе с друзьями. В будущем появятся клановые войны.</p>
-            </div>
-        </div>
-        
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed3">📊 Сколько игроков</h3>
-            <div class="faq-answer">
-                <p data-key="detailed3-answer">Сервер готовится к открытию. Присоединяйся в Discord, чтобы стать одним из первых.</p>
-            </div>
-        </div>
-        
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed4">🔄 Будут вайпы</h3>
-            <div class="faq-answer">
-                <p data-key="detailed4-answer">Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
-            </div>
-        </div>
-        
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed5">🎁 Есть донат</h3>
-            <div class="faq-answer">
-                <p data-key="detailed5-answer">Нет, это полностью ванильный сервер. Никаких донатов и привилегий — чистое выживание как задумано Mojang.</p>
-            </div>
-        </div>
-        
-        <div class="detailed-faq-item">
-            <h3 data-key="detailed6">📞 Связь с админами</h3>
-            <div class="faq-answer">
-                <p data-key="detailed6-answer">Пиши в Telegram или Discord. Администрация всегда на связи и готова помочь.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== ФУТЕР ===== -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h4>SweetLand</h4>
-            <p data-key="footer-desc">Ванильное выживание без границ с дружным сообществом и активной администрацией.</p>
-            <p class="footer-note" data-key="no-donate">Никаких донатов — только чистый ванильный геймплей</p>
-        </div>
-        <div class="footer-section">
-            <h4 data-key="quick-links">Быстрые ссылки</h4>
-            <a href="#stats" data-key="stats">Статистика</a>
-            <a href="#features" data-key="features">Особенности</a>
-            <a href="#streamers" data-key="streamers">Стримеры</a>
-            <a href="#top-players" data-key="top-players">Топ игроков</a>
-            <a href="#achievements" data-key="achievements">Достижения</a>
-            <a href="#events" data-key="events">Ивенты</a>
-            <a href="#roadmap" data-key="roadmap">Роудмап</a>
-            <a href="#how-to-play" data-key="how-to">Как начать</a>
-            <a href="#faq" data-key="faq">FAQ</a>
-            <a href="#community" data-key="community">Сообщество</a>
-            <a href="#privacy" data-key="privacy">Защита данных</a>
-            <a href="#detailed-faq" data-key="detailed-faq">Частые вопросы</a>
-            <a href="javascript:void(0)" onclick="openRules()" data-key="rules">Правила</a>
-        </div>
-        <div class="footer-section">
-            <h4 data-key="social">Соцсети</h4>
-            <a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a>
-            <a href="https://t.me/gyraff" target="_blank">Telegram</a>
-            <a href="https://youtube.com/@gyraffic" target="_blank">Gyraffic</a>
-            <a href="https://www.youtube.com/@Babka3434offical" target="_blank">Babka3434</a>
-        </div>
-        <div class="footer-section">
-            <h4 data-key="privacy">Защита данных</h4>
-            <p data-key="privacy-desc">Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© 2026 SweetLand. <span data-key="vanilla-server">Ванильный Minecraft сервер.</span></p>
-        <p class="privacy-note" data-key="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p>
-    </div>
-</footer>
-
-<script>
-    // ===== ПЕРЕМЕННЫЕ =====
-    let currentTheme = 'dark';
-    let currentLang = 'ru';
-    let colorMenuOpen = false;
-    let langMenuOpen = false;
-    let featuresMenuOpen = false;
-    let particlesEnabled = true;
-    let blurEnabled = true;
-    let animationsEnabled = true;
-    let soundEnabled = true;
-    
-    // ===== ПЕРЕВОДЫ =====
-    const translations = {
-        ru: {
-            // Основные
-            'map': 'Карта',
-            'wiki': 'Вики',
-            'shop': 'Магазин',
-            'play': 'Играть сейчас',
-            'stats': 'Статистика',
-            'server': 'сервера',
-            'features': 'Особенности',
-            'streamers': 'Стримеры',
-            'on-server': 'на сервере',
-            'top': 'Топ',
-            'players': 'игроков',
-            'hero-text': 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
-            'uptime': 'Работа сервера',
-            'version': 'Актуальная версия',
-            'vanilla': 'Ванильный геймплей',
-            'donate': 'Доната',
-            'anticheat': 'Анти-чит система',
-            'anticheat-desc': 'Продвинутая защита от читеров. Честная игра для всех.',
-            'tps': 'Стабильный TPS',
-            'tps-desc': 'Оптимизированный сервер на мощном железе. Никаких лагов.',
-            'events': 'Регулярные ивенты',
-            'events-desc': 'Еженедельные события и конкурсы с призами для игроков.',
-            'world': 'Чистый ванильный мир',
-            'world-desc': 'Никаких плагинов, только чистый Minecraft как задумано.',
-            'protection': 'Защита построек',
-            'protection-desc': 'Ваши постройки под надежной защитой от гриферов.',
-            'community': 'Дружное сообщество',
-            'community-desc': 'Первые игроки уже здесь. Присоединяйся к нам.',
-            'babka-desc': 'Популярная стримерша, будет играть на сервере.',
-            'gyraffic-desc': 'Владелец сервера и стример. Играет с вами.',
-            'more-soon': 'Скоро будут другие',
-            'more-desc': 'Список стримеров будет пополняться.',
-            'subscribe': 'подпишись',
-            'soon': 'скоро',
-            'live': 'live',
-            'announcements': 'анонсы',
-            'news': 'новости',
-            'owner': 'Владелец сервера',
-            'streamer': 'Стримерша',
-            'admin': 'Старший администратор',
-            'hours': 'часов',
-            'updated': 'Данные обновлены 17 февраля 2026 года',
-            'footer-desc': 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
-            'no-donate': 'Никаких донатов — только чистый ванильный геймплей',
-            'quick-links': 'Быстрые ссылки',
-            'top-players': 'Топ игроков',
-            'rules': 'Правила',
-            'social': 'Соцсети',
-            'privacy': 'Защита данных',
-            'privacy-desc': 'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',
-            'vanilla-server': 'Ванильный Minecraft сервер',
-            'privacy-note': 'Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.',
-            'dark': 'Темная (основная)',
-            'light': 'Светлая',
-            'pink': 'Розовая',
-            'blue': 'Голубая',
-            'green': 'Зеленая',
-            'orange': 'Оранжевая',
-            'purple': 'Фиолетовая',
-            'russian': 'Русский',
-            'ukrainian': 'Українська',
-            'english': 'English',
-            'german': 'Deutsch',
-            'french': 'Français',
-            'spanish': 'Español',
-            
-            // Достижения
-            'achievements': 'Достижения',
-            'achievement1': 'Первооткрыватель',
-            'achievement1-desc': 'Зайти на сервер в первый день открытия',
-            'achievement1-stats': '0% игроков получили',
-            'achievement2': 'Мастер-строитель',
-            'achievement2-desc': 'Построить дом с более чем 1000 блоков',
-            'achievement2-stats': '0% игроков получили',
-            'achievement3': 'Исследователь',
-            'achievement3-desc': 'Посетить все биомы в мире',
-            'achievement3-stats': '0% игроков получили',
-            'achievement4': 'Друзья навеки',
-            'achievement4-desc': 'Играть в одной команде более 100 часов',
-            'achievement4-stats': '0% игроков получили',
-            
-            // Ивенты
-            'upcoming': 'Будущие',
-            'event1': 'PVP Арена',
-            'event1-desc': 'Сражения на арене 1 на 1 и 2 на 2. Победители получат титулы и призы.',
-            'event2': 'Конкурс построек',
-            'event2-desc': 'Лучшие постройки на разные темы. Голосование в Discord.',
-            'event3': 'Аукцион',
-            'event3-desc': 'Торги редкими предметами и ресурсами между игроками.',
-            'event4': 'Скоростное выживание',
-            'event4-desc': 'Кто быстрее добудет редкие ресурсы и построит базу.',
-            'event5': 'Охота за сокровищами',
-            'event5-desc': 'Поиск спрятанных сундуков с редкими предметами по всему миру.',
-            'event6': 'Королевская битва',
-            'event6-desc': 'Последний выживший получает королевский титул и призы.',
-            'after-opening': 'после открытия',
-            
-            // Роудмап
-            'roadmap': 'План',
-            'development': 'развития',
-            'completed': 'Завершено',
-            'planned': 'Планируется',
-            'roadmap1': 'Создание сервера',
-            'roadmap1-desc': 'Настройка и оптимизация ванильного мира',
-            'roadmap2': 'Клановая система',
-            'roadmap2-desc': 'Создание кланов и совместные постройки',
-            'roadmap3': 'Экономика',
-            'roadmap3-desc': 'Внутриигровая торговля и магазины игроков',
-            'roadmap4': 'Клановые войны',
-            'roadmap4-desc': 'Сражения между кланами за территории',
-            'roadmap5': 'Система достижений',
-            'roadmap5-desc': 'Награды за особые действия в игре',
-            'roadmap6': 'Регулярные ивенты',
-            'roadmap6-desc': 'Еженедельные события для всех игроков',
-            'feb2026': 'Февраль 2026 года',
-            
-            // Как начать
-            'how-to': 'Как начать',
-            'step1': 'Версия 1.21.8',
-            'step1-desc': 'Убедись, что у тебя установлена последняя версия Minecraft.',
-            'step2': 'Подай заявку в Discord',
-            'step2-desc': 'Заполни анкету и ознакомься с правилами сервера.',
-            'step3': 'Дождись принятия',
-            'step3-desc': 'После одобрения добавь сервер play.sweet-land.fun в список.',
-            'step4': 'Заходи и играй',
-            'step4-desc': 'Выбирай место для базы, строй и исследуй мир.',
-            'step5': 'Общайся в Discord',
-            'step5-desc': 'Знакомься с игроками, участвуй в жизни сообщества.',
-            'step6': 'Приглашай друзей',
-            'step6-desc': 'Вместе строить веселее. Создавай кланы и команды.',
-            
-            // FAQ
-            'answers': 'Ответы на',
-            'questions': 'вопросы',
-            'faq1': 'Когда старт',
-            'faq1-desc': 'Сервер готовится к открытию. Следи за новостями в Discord.',
-            'faq2': 'Какая версия',
-            'faq2-desc': 'Сервер будет работать на актуальной версии 1.21.8.',
-            'faq3': 'Где общение',
-            'faq3-desc': 'Основное общение в Discord. Там же новости и ивенты.',
-            'faq4': 'Белая тема',
-            'faq4-desc': 'Да, нажми на луну в правом углу и увидишь дождик.',
-            'faq5': 'Защита аккаунта',
-            'faq5-desc': 'Анти-чит система и шифрование данных игроков.',
-            'faq6': 'Есть донат',
-            'faq6-desc': 'Нет, это полностью ванильный сервер. Никаких привилегий.',
-            'faq7': 'Какой онлайн',
-            'faq7-desc': 'Сервер скоро открывается. Будь первым.',
-            'faq8': 'Будут вайпы',
-            'faq8-desc': 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
-            
-            // Сообщество
-            'our': 'Наше',
-            'discord': 'Discord сервер',
-            'discord-desc': 'Присоединяйся к первым игрокам, участвуй в развитии сервера',
-            'members': 'более 50 участников',
-            'active': 'активно',
-            'telegram': 'Telegram канал',
-            'telegram-desc': 'Новости, обновления и анонсы в удобном формате',
-            'subscribers': 'более 30 подписчиков',
-            'daily': 'ежедневно',
-            'youtube': 'YouTube каналы',
-            'youtube-desc': 'Обзоры, гайды и стримы от наших стримеров',
-            'channels': '2 канала',
-            
-            // Защита данных
-            'data': 'данных',
-            'encryption': 'Шифрование',
-            'encryption-desc': 'Все данные защищены современными протоколами.',
-            'anticheat-short': 'Анти-чит',
-            'anticheat-short-desc': 'Защита от недобросовестных игроков.',
-            'ownership': 'Права владения',
-            'ownership-desc': 'Постройки и ресурсы принадлежат только вам.',
-            'confidentiality': 'Конфиденциальность',
-            'confidentiality-desc': 'Мы не собираем лишнюю информацию.',
-            'gdpr': 'GDPR',
-            'gdpr-desc': 'Соответствие стандартам защиты данных.',
-            'storage': 'Хранение',
-            'storage-desc': 'Данные на защищенных серверах.',
-            
-            // Детальный FAQ
-            'frequently': 'Часто',
-            'asked': 'задаваемые вопросы',
-            'detailed1': '📌 Как начать играть',
-            'detailed1-answer1': '1. Скачай Minecraft версии 1.21.8',
-            'detailed1-answer2': '2. Подай заявку в Discord',
-            'detailed1-answer3': '3. После принятия добавь сервер play.sweet-land.fun',
-            'detailed2': '⚔️ Есть ли кланы',
-            'detailed2-answer': 'Да, ты можешь создавать кланы и строить вместе с друзьями. В будущем появятся клановые войны.',
-            'detailed3': '📊 Сколько игроков',
-            'detailed3-answer': 'Сервер готовится к открытию. Присоединяйся в Discord, чтобы стать одним из первых.',
-            'detailed4': '🔄 Будут вайпы',
-            'detailed4-answer': 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
-            'detailed5': '🎁 Есть донат',
-            'detailed5-answer': 'Нет, это полностью ванильный сервер. Никаких донатов и привилегий — чистое выживание как задумано Mojang.',
-            'detailed6': '📞 Связь с админами',
-            'detailed6-answer': 'Пиши в Telegram или Discord. Администрация всегда на связи и готова помочь.',
-            
-            // Правила
-            'rules-title': 'ПРАВИЛА СЕРВЕРА',
-            'rule1': 'Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.',
-            'punish1': 'Наказание: Бан 1 день',
-            'rule2': 'Незнание правил не освобождает вас от ответственности.',
-            'punish2': 'Наказание: Предупреждение',
-            'rule3': 'Гриферство (порча или уничтожение чужих построек).',
-            'punish3': 'Наказание: Бан 30 дней',
-            'rule4': 'Кража ресурсов из чужих сундуков, бочек, воронок.',
-            'punish4': 'Наказание: Бан 14 дней',
-            'rule5': 'Умышленное убийство чужих домашних животных или именных мобов.',
-            'punish5': 'Наказание: Бан 2 дня',
-            'rule6': 'Заселение на чужую территорию или постройка вплотную без согласия владельца.',
-            'punish6': 'Наказание: Снос + Кик',
-            'rule7': 'Игнорирование табличек «Вход запрещен».',
-            'punish7': 'Наказание: Убийство без возврата вещей',
-            'rule8': 'Использование чужих автоматических или ручных ферм без разрешения.',
-            'punish8': 'Наказание: Бан 3 дня',
-            'rule9': 'Порча мира (разлитие лавы, воды и тому подобное).',
-            'punish9': 'Наказание: Снос + Бан 2 дня',
-            'rule10': 'Создание механизмов, намеренно вызывающих лаги или падение сервера.',
-            'punish10': 'Наказание: Снос + Бан 14 дней',
-            'rule11': 'Убийство игрока без его предварительного согласия на PVP.',
-            'punish11': 'Наказание: Бан 7 дней',
-            'rule12': 'Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть).',
-            'punish12': 'Наказание: Бан 1 день + возврат вещей',
-            'rule13': 'Использование любых видов читов (METEOR, WURST, IMPACT и другие).',
-            'punish13': 'Наказание: ПЕРМАНЕНТНЫЙ БАН',
-            'rule14': 'Сокрытие информации о багах, дюпах или недоработках экономики.',
-            'punish14': 'Наказание: Бан 30 дней',
-            'rule15': 'Присвоение заброшенных баз без согласования с администрацией.',
-            'punish15': 'Наказание: Бан 5 дней',
-            'rule16': 'Взлом, попытка взлома или вход на чужой аккаунт.',
-            'punish16': 'Наказание: Перманентный бан',
-            'rule17': 'Нанесение любого вреда репутации или технической части сервера.',
-            'punish17': 'Наказание: Бан навсегда',
-            'rule18': 'Продажа игровых ресурсов или услуг за реальные деньги.',
-            'punish18': 'Наказание: ЧС проекта',
-            'rule19': 'Подстрекательство других игроков к нарушению правил.',
-            'punish19': 'Наказание: Бан 10 дней',
-            'rule20': 'Ответственность за безопасность аккаунта несет только его владелец.',
-            'rule21': 'Создание дополнительных аккаунтов (твинков) для обхода активного бана.',
-            'punish21': 'Наказание: Бан по IP',
-            'section2': 'Раздел 2: Администрация',
-            'rule22': 'Правила сервера обязательны для исполнения всеми членами персонала.',
-            'rule23': 'Использование творческого режима для личного выживания или помощи игрокам.',
-            'punish23': 'Наказание: Снятие',
-            'rule24': 'Предоставление игровых преимуществ своим друзьям.',
-            'punish24': 'Наказание: Снятие + ЧС',
-            'rule25': 'Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.',
-            'punish25': 'Наказание: Снятие',
-            'rule26': 'Игрок имеет право обжаловать любое действие администратора в Discord-канале.',
-            
-            // Дополнительные фишки
-            'particles': 'Частицы: вкл',
-            'particles-off': 'Частицы: выкл',
-            'blur': 'Размытие: вкл',
-            'blur-off': 'Размытие: выкл',
-            'animations': 'Анимации: вкл',
-            'animations-off': 'Анимации: выкл',
-            'sound': 'Звук: вкл',
-            'sound-off': 'Звук: выкл',
-            'reset': 'Сброс настроек'
-        },
-        uk: {
-            'map': 'Карта',
-            'wiki': 'Вікі',
-            'shop': 'Магазин',
-            'play': 'Грати зараз',
-            'stats': 'Статистика',
-            'server': 'сервера',
-            'features': 'Особливості',
-            'streamers': 'Стрімери',
-            'on-server': 'на сервері',
-            'top': 'Топ',
-            'players': 'гравців',
-            'hero-text': 'Ванільне виживання на версії 1.21.8. Твій світ — твої правила.',
-            'uptime': 'Робота сервера',
-            'version': 'Актуальна версія',
-            'vanilla': 'Ванільний геймплей',
-            'donate': 'Донату',
-            'anticheat': 'Анти-чит система',
-            'anticheat-desc': 'Просунутий захист від читів. Чесна гра для всіх.',
-            'tps': 'Стабільний TPS',
-            'tps-desc': 'Оптимізований сервер на потужному залозі. Жодних лагів.',
-            'events': 'Регулярні івенти',
-            'events-desc': 'Щотижневі події та конкурси з призами для гравців.',
-            'world': 'Чистий ванільний світ',
-            'world-desc': 'Жодних плагінів, тільки чистий Minecraft як задумано.',
-            'protection': 'Захист будівель',
-            'protection-desc': 'Ваші будівлі під надійним захистом від гриферів.',
-            'community': 'Дружня спільнота',
-            'community-desc': 'Перші гравці вже тут. Приєднуйся до нас.',
-            'babka-desc': 'Популярна стрімерша, буде грати на сервері.',
-            'gyraffic-desc': 'Власник сервера та стрімер. Грає з вами.',
-            'more-soon': 'Незабаром будуть інші',
-            'more-desc': 'Список стрімерів буде поповнюватися.',
-            'subscribe': 'підпишись',
-            'soon': 'скоро',
-            'live': 'live',
-            'announcements': 'анонси',
-            'news': 'новини',
-            'owner': 'Власник сервера',
-            'streamer': 'Стрімерка',
-            'admin': 'Старший адміністратор',
-            'hours': 'годин',
-            'updated': 'Дані оновлено 17 лютого 2026 року',
-            'footer-desc': 'Ванільне виживання без кордонів з дружньою спільнотою та активною адміністрацією.',
-            'no-donate': 'Жодних донатів — тільки чистий ванільний геймплей',
-            'quick-links': 'Швидкі посилання',
-            'top-players': 'Топ гравців',
-            'rules': 'Правила',
-            'social': 'Соцмережі',
-            'privacy': 'Захист даних',
-            'privacy-desc': 'Всі дані захищені та не передаються третім особам. Сервер відповідає стандартам безпеки.',
-            'vanilla-server': 'Ванільний Minecraft сервер',
-            'privacy-note': 'Ваші дані під надійним захистом. Використовуючи сервер, ви погоджуєтесь з політикою конфіденційності.',
-            'dark': 'Темна (основна)',
-            'light': 'Світла',
-            'pink': 'Рожева',
-            'blue': 'Блакитна',
-            'green': 'Зелена',
-            'orange': 'Помаранчева',
-            'purple': 'Фіолетова',
-            'russian': 'Русский',
-            'ukrainian': 'Українська',
-            'english': 'English',
-            'german': 'Deutsch',
-            'french': 'Français',
-            'spanish': 'Español',
-            'achievements': 'Досягнення',
-            'achievement1': 'Першовідкривач',
-            'achievement1-desc': 'Зайти на сервер у перший день відкриття',
-            'achievement1-stats': '0% гравців отримали',
-            'achievement2': 'Майстер-будівельник',
-            'achievement2-desc': 'Побудувати будинок з більш ніж 1000 блоків',
-            'achievement2-stats': '0% гравців отримали',
-            'achievement3': 'Дослідник',
-            'achievement3-desc': 'Відвідати всі біоми у світі',
-            'achievement3-stats': '0% гравців отримали',
-            'achievement4': 'Друзі навіки',
-            'achievement4-desc': 'Грати в одній команді більше 100 годин',
-            'achievement4-stats': '0% гравців отримали',
-            'upcoming': 'Майбутні',
-            'event1': 'PVP Арена',
-            'event1-desc': 'Бої на арені 1 на 1 та 2 на 2. Переможці отримають титули та призи.',
-            'event2': 'Конкурс будівель',
-            'event2-desc': 'Кращі будівлі на різні теми. Голосування в Discord.',
-            'event3': 'Аукціон',
-            'event3-desc': 'Торги рідкісними предметами та ресурсами між гравцями.',
-            'event4': 'Швидкісне виживання',
-            'event4-desc': 'Хто швидше добуде рідкісні ресурси та збудує базу.',
-            'event5': 'Полювання за скарбами',
-            'event5-desc': 'Пошук схованих скринь з рідкісними предметами по всьому світу.',
-            'event6': 'Королівська битва',
-            'event6-desc': 'Останній виживший отримує королівський титул та призи.',
-            'after-opening': 'після відкриття',
-            'roadmap': 'План',
-            'development': 'розвитку',
-            'completed': 'Завершено',
-            'planned': 'Планується',
-            'roadmap1': 'Створення сервера',
-            'roadmap1-desc': 'Налаштування та оптимізація ванільного світу',
-            'roadmap2': 'Кланова система',
-            'roadmap2-desc': 'Створення кланів та спільні будівлі',
-            'roadmap3': 'Економіка',
-            'roadmap3-desc': 'Внутрішньоігрова торгівля та магазини гравців',
-            'roadmap4': 'Кланові війни',
-            'roadmap4-desc': 'Битви між кланами за території',
-            'roadmap5': 'Система досягнень',
-            'roadmap5-desc': 'Нагороди за особливі дії в грі',
-            'roadmap6': 'Регулярні івенти',
-            'roadmap6-desc': 'Щотижневі події для всіх гравців',
-            'feb2026': 'Лютий 2026 року',
-            'how-to': 'Як почати',
-            'step1': 'Версія 1.21.8',
-            'step1-desc': 'Переконайся, що у тебе встановлена остання версія Minecraft.',
-            'step2': 'Подай заявку в Discord',
-            'step2-desc': 'Заповни анкету та ознайомся з правилами сервера.',
-            'step3': 'Дочекайся прийняття',
-            'step3-desc': 'Після схвалення додай сервер play.sweet-land.fun до списку.',
-            'step4': 'Заходь і грай',
-            'step4-desc': 'Обирай місце для бази, будуй та досліджуй світ.',
-            'step5': 'Спілкуйся в Discord',
-            'step5-desc': 'Знайомся з гравцями, беру участь у житті спільноти.',
-            'step6': 'Запрошуй друзів',
-            'step6-desc': 'Разом будувати веселіше. Створюй клани та команди.',
-            
-            // FAQ
-            'answers': 'Відповіді на',
-            'questions': 'запитання',
-            'faq1': 'Коли старт',
-            'faq1-desc': 'Сервер готується до відкриття. Слідкуй за новинами в Discord.',
-            'faq2': 'Яка версія',
-            'faq2-desc': 'Сервер буде працювати на актуальній версії 1.21.8.',
-            'faq3': 'Де спілкування',
-            'faq3-desc': 'Основне спілкування в Discord. Там же новини та івенти.',
-            'faq4': 'Біла тема',
-            'faq4-desc': 'Так, натисни на місяць у правому кутку і побачиш дощик.',
-            'faq5': 'Захист акаунта',
-            'faq5-desc': 'Анти-чит система та шифрування даних гравців.',
-            'faq6': 'Чи є донат',
-            'faq6-desc': 'Ні, це повністю ванільний сервер. Жодних привілеїв.',
-            'faq7': 'Який онлайн',
-            'faq7-desc': 'Сервер скоро відкривається. Будь першим.',
-            'faq8': 'Чи будуть вайпи',
-            'faq8-desc': 'Вайпи плануються раз на 8-11 місяців. Всі споруди зберігаються надовго.',
-            
-            // Спільнота
-            'our': 'Наша',
-            'discord': 'Discord сервер',
-            'discord-desc': 'Приєднуйся до перших гравців, беру участь у розвитку сервера',
-            'members': 'понад 50 учасників',
-            'active': 'активно',
-            'telegram': 'Telegram канал',
-            'telegram-desc': 'Новини, оновлення та анонси у зручному форматі',
-            'subscribers': 'понад 30 підписників',
-            'daily': 'щодня',
-            'youtube': 'YouTube канали',
-            'youtube-desc': 'Огляди, гайди та стріми від наших стрімерів',
-            'channels': '2 канали',
-            
-            // Захист даних
-            'data': 'даних',
-            'encryption': 'Шифрування',
-            'encryption-desc': 'Всі дані захищені сучасними протоколами.',
-            'anticheat-short': 'Анти-чит',
-            'anticheat-short-desc': 'Захист від недобросовісних гравців.',
-            'ownership': 'Права володіння',
-            'ownership-desc': 'Споруди та ресурси належать тільки вам.',
-            'confidentiality': 'Конфіденційність',
-            'confidentiality-desc': 'Ми не збираємо зайву інформацію.',
-            'gdpr': 'GDPR',
-            'gdpr-desc': 'Відповідність стандартам захисту даних.',
-            'storage': 'Зберігання',
-            'storage-desc': 'Дані на захищених серверах.',
-            
-            // Детальний FAQ
-            'frequently': 'Часті',
-            'asked': 'запитання',
-            'detailed1': '📌 Як почати грати',
-            'detailed1-answer1': '1. Скачай Minecraft версії 1.21.8',
-            'detailed1-answer2': '2. Подай заявку в Discord',
-            'detailed1-answer3': '3. Після прийняття додай сервер play.sweet-land.fun',
-            'detailed2': '⚔️ Чи є клани',
-            'detailed2-answer': 'Так, ти можеш створювати клани та будувати разом з друзями. У майбутньому з\'являться кланові війни.',
-            'detailed3': '📊 Скільки гравців',
-            'detailed3-answer': 'Сервер готується до відкриття. Приєднуйся в Discord, щоб стати одним з перших.',
-            'detailed4': '🔄 Чи будуть вайпи',
-            'detailed4-answer': 'Вайпи плануються раз на 8-11 місяців. Всі споруди зберігаються надовго.',
-            'detailed5': '🎁 Чи є донат',
-            'detailed5-answer': 'Ні, це повністю ванільний сервер. Жодних донатів та привілеїв — чисте виживання як задумано Mojang.',
-            'detailed6': '📞 Зв\'язок з адмінами',
-            'detailed6-answer': 'Пиши в Telegram або Discord. Адміністрація завжди на зв\'язку та готова допомогти.',
-            
-            // Правила
-            'rules-title': 'ПРАВИЛА СЕРВЕРА',
-            'rule1': 'Заходячи на сервер, ви автоматично погоджуєтеся з усіма правилами проєкту.',
-            'punish1': 'Покарання: Бан 1 день',
-            'rule2': 'Незнання правил не звільняє вас від відповідальності.',
-            'punish2': 'Покарання: Попередження',
-            'rule3': 'Гріферство (псування або знищення чужих будівель).',
-            'punish3': 'Покарання: Бан 30 днів',
-            'rule4': 'Крадіжка ресурсів з чужих скринь, бочок, вирв.',
-            'punish4': 'Покарання: Бан 14 днів',
-            'rule5': 'Навмисне вбивство чужих домашніх тварин або іменних мобів.',
-            'punish5': 'Покарання: Бан 2 дні',
-            'rule6': 'Заселення на чужу територію або будівництво впритул без згоди власника.',
-            'punish6': 'Покарання: Знесення + Кік',
-            'rule7': 'Ігнорування табличок «Вхід заборонено».',
-            'punish7': 'Покарання: Вбивство без повернення речей',
-            'rule8': 'Використання чужих автоматичних або ручних ферм без дозволу.',
-            'punish8': 'Покарання: Бан 3 дні',
-            'rule9': 'Псування світу (розлиття лави, води тощо).',
-            'punish9': 'Покарання: Знесення + Бан 2 дні',
-            'rule10': 'Створення механізмів, що навмисно викликають лаги або падіння сервера.',
-            'punish10': 'Покарання: Знесення + Бан 14 днів',
-            'rule11': 'Вбивство гравця без його попередньої згоди на PVP.',
-            'punish11': 'Покарання: Бан 7 днів',
-            'rule12': 'Підбір та привласнення чужих речей після смерті гравця (якщо він просить повернути).',
-            'punish12': 'Покарання: Бан 1 день + повернення речей',
-            'rule13': 'Використання будь-яких видів читів (METEOR, WURST, IMPACT та інші).',
-            'punish13': 'Покарання: ПЕРМАНЕНТНИЙ БАН',
-            'rule14': 'Приховування інформації про баги, дюпи або недоробки економіки.',
-            'punish14': 'Покарання: Бан 30 днів',
-            'rule15': 'Привласнення занедбаних баз без узгодження з адміністрацією.',
-            'punish15': 'Покарання: Бан 5 днів',
-            'rule16': 'Злам, спроба зламу або вхід на чужий акаунт.',
-            'punish16': 'Покарання: Перманентний бан',
-            'rule17': 'Нанесення будь-якої шкоди репутації або технічній частині сервера.',
-            'punish17': 'Покарання: Бан назавжди',
-            'rule18': 'Продаж ігрових ресурсів або послуг за реальні гроші.',
-            'punish18': 'Покарання: ЧС проєкту',
-            'rule19': 'Підбурювання інших гравців до порушення правил.',
-            'punish19': 'Покарання: Бан 10 днів',
-            'rule20': 'Відповідальність за безпеку акаунта несе тільки його власник.',
-            'rule21': 'Створення додаткових акаунтів (твінків) для обходу активного бана.',
-            'punish21': 'Покарання: Бан по IP',
-            'section2': 'Розділ 2: Адміністрація',
-            'rule22': 'Правила сервера обов\'язкові для виконання всіма членами персоналу.',
-            'rule23': 'Використання творчого режиму для особистого виживання або допомоги гравцям.',
-            'punish23': 'Покарання: Зняття',
-            'rule24': 'Надання ігрових переваг своїм друзям.',
-            'punish24': 'Покарання: Зняття + ЧС',
-            'rule25': 'Видача необґрунтованих покарань (банів, мутів) без наявності доказів.',
-            'punish25': 'Покарання: Зняття',
-            'rule26': 'Гравець має право оскаржити будь-яку дію адміністратора в Discord-каналі.',
-            
-            // Додаткові фішки
-            'particles': 'Частинки: вкл',
-            'particles-off': 'Частинки: викл',
-            'blur': 'Розмиття: вкл',
-            'blur-off': 'Розмиття: викл',
-            'animations': 'Анімації: вкл',
-            'animations-off': 'Анімації: викл',
-            'sound': 'Звук: вкл',
-            'sound-off': 'Звук: викл',
-            'reset': 'Скидання налаштувань'
-        },
-        en: {
-            // English translations (same as before but we'll add the new keys)
-            'map': 'Map',
-            'wiki': 'Wiki',
-            'shop': 'Shop',
-            'play': 'Play now',
-            'stats': 'Statistics',
-            'server': 'server',
-            'features': 'Features',
-            'streamers': 'Streamers',
-            'on-server': 'on the server',
-            'top': 'Top',
-            'players': 'players',
-            'hero-text': 'Vanilla survival on version 1.21.8. Your world — your rules.',
-            'uptime': 'Server uptime',
-            'version': 'Current version',
-            'vanilla': 'Vanilla gameplay',
-            'donate': 'Donate',
-            'anticheat': 'Anti-cheat system',
-            'anticheat-desc': 'Advanced protection against cheaters. Fair game for everyone.',
-            'tps': 'Stable TPS',
-            'tps-desc': 'Optimized server on powerful hardware. No lags.',
-            'events': 'Regular events',
-            'events-desc': 'Weekly events and contests with prizes for players.',
-            'world': 'Pure vanilla world',
-            'world-desc': 'No plugins, just pure Minecraft as intended.',
-            'protection': 'Build protection',
-            'protection-desc': 'Your builds are protected from griefers.',
-            'community': 'Friendly community',
-            'community-desc': 'First players are already here. Join us.',
-            'babka-desc': 'Popular streamer, will play on the server.',
-            'gyraffic-desc': 'Server owner and streamer. Plays with you.',
-            'more-soon': 'More coming soon',
-            'more-desc': 'The list of streamers will be updated.',
-            'subscribe': 'subscribe',
-            'soon': 'soon',
-            'live': 'live',
-            'announcements': 'announcements',
-            'news': 'news',
-            'owner': 'Server owner',
-            'streamer': 'Streamer',
-            'admin': 'Senior admin',
-            'hours': 'hours',
-            'updated': 'Data updated February 17, 2026',
-            'footer-desc': 'Vanilla survival without borders with a friendly community and active administration.',
-            'no-donate': 'No donate — only pure vanilla gameplay',
-            'quick-links': 'Quick links',
-            'top-players': 'Top players',
-            'rules': 'Rules',
-            'social': 'Social',
-            'privacy': 'Privacy',
-            'privacy-desc': 'All data is protected and not shared with third parties. The server complies with security standards.',
-            'vanilla-server': 'Vanilla Minecraft server',
-            'privacy-note': 'Your data is under reliable protection. By using the server, you agree to the privacy policy.',
-            'dark': 'Dark (main)',
-            'light': 'Light',
-            'pink': 'Pink',
-            'blue': 'Blue',
-            'green': 'Green',
-            'orange': 'Orange',
-            'purple': 'Purple',
-            'russian': 'Russian',
-            'ukrainian': 'Ukrainian',
-            'english': 'English',
-            'german': 'German',
-            'french': 'French',
-            'spanish': 'Spanish',
-            
-            // Achievements
-            'achievements': 'Achievements',
-            'achievement1': 'Pioneer',
-            'achievement1-desc': 'Join the server on the first day of opening',
-            'achievement1-stats': '0% of players achieved',
-            'achievement2': 'Master builder',
-            'achievement2-desc': 'Build a house with more than 1000 blocks',
-            'achievement2-stats': '0% of players achieved',
-            'achievement3': 'Explorer',
-            'achievement3-desc': 'Visit all biomes in the world',
-            'achievement3-stats': '0% of players achieved',
-            'achievement4': 'Friends forever',
-            'achievement4-desc': 'Play in one team for more than 100 hours',
-            'achievement4-stats': '0% of players achieved',
-            
-            // Events
-            'upcoming': 'Upcoming',
-            'event1': 'PVP Arena',
-            'event1-desc': '1v1 and 2v2 arena battles. Winners receive titles and prizes.',
-            'event2': 'Build contest',
-            'event2-desc': 'Best builds on different themes. Voting in Discord.',
-            'event3': 'Auction',
-            'event3-desc': 'Bidding on rare items and resources between players.',
-            'event4': 'Speed survival',
-            'event4-desc': 'Who will get rare resources and build a base faster.',
-            'event5': 'Treasure hunt',
-            'event5-desc': 'Search for hidden chests with rare items around the world.',
-            'event6': 'Battle royale',
-            'event6-desc': 'The last survivor gets a royal title and prizes.',
-            'after-opening': 'after opening',
-            
-            // Roadmap
-            'roadmap': 'Roadmap',
-            'development': 'development',
-            'completed': 'Completed',
-            'planned': 'Planned',
-            'roadmap1': 'Server creation',
-            'roadmap1-desc': 'Setting up and optimizing the vanilla world',
-            'roadmap2': 'Clan system',
-            'roadmap2-desc': 'Creating clans and collaborative builds',
-            'roadmap3': 'Economy',
-            'roadmap3-desc': 'In-game trading and player shops',
-            'roadmap4': 'Clan wars',
-            'roadmap4-desc': 'Battles between clans for territories',
-            'roadmap5': 'Achievement system',
-            'roadmap5-desc': 'Rewards for special in-game actions',
-            'roadmap6': 'Regular events',
-            'roadmap6-desc': 'Weekly events for all players',
-            'feb2026': 'February 2026',
-            
-            // How to start
-            'how-to': 'How to start',
-            'step1': 'Version 1.21.8',
-            'step1-desc': 'Make sure you have the latest version of Minecraft installed.',
-            'step2': 'Apply in Discord',
-            'step2-desc': 'Fill out the application and read the server rules.',
-            'step3': 'Wait for approval',
-            'step3-desc': 'After approval, add the server play.sweet-land.fun to your list.',
-            'step4': 'Join and play',
-            'step4-desc': 'Choose a place for your base, build and explore the world.',
-            'step5': 'Chat in Discord',
-            'step5-desc': 'Meet players, participate in community life.',
-            'step6': 'Invite friends',
-            'step6-desc': 'Building together is more fun. Create clans and teams.',
-            
-            // FAQ
-            'answers': 'Answers to',
-            'questions': 'questions',
-            'faq1': 'When is the start',
-            'faq1-desc': 'The server is preparing to open. Follow the news in Discord.',
-            'faq2': 'Which version',
-            'faq2-desc': 'The server will run on the current version 1.21.8.',
-            'faq3': 'Where to chat',
-            'faq3-desc': 'Main communication in Discord. News and events there too.',
-            'faq4': 'Light theme',
-            'faq4-desc': 'Yes, click on the moon in the right corner and you\'ll see rain.',
-            'faq5': 'Account protection',
-            'faq5-desc': 'Anti-cheat system and player data encryption.',
-            'faq6': 'Is there donate',
-            'faq6-desc': 'No, this is a completely vanilla server. No privileges.',
-            'faq7': 'What\'s the online',
-            'faq7-desc': 'The server is opening soon. Be the first.',
-            'faq8': 'Will there be wipes',
-            'faq8-desc': 'Wipes are planned every 8-11 months. All builds are preserved for a long time.',
-            
-            // Community
-            'our': 'Our',
-            'discord': 'Discord server',
-            'discord-desc': 'Join the first players, participate in server development',
-            'members': '50+ members',
-            'active': 'active',
-            'telegram': 'Telegram channel',
-            'telegram-desc': 'News, updates and announcements in a convenient format',
-            'subscribers': '30+ subscribers',
-            'daily': 'daily',
-            'youtube': 'YouTube channels',
-            'youtube-desc': 'Reviews, guides and streams from our streamers',
-            'channels': '2 channels',
-            
-            // Privacy
-            'data': 'data',
-            'encryption': 'Encryption',
-            'encryption-desc': 'All data is protected by modern protocols.',
-            'anticheat-short': 'Anti-cheat',
-            'anticheat-short-desc': 'Protection from dishonest players.',
-            'ownership': 'Ownership rights',
-            'ownership-desc': 'Builds and resources belong only to you.',
-            'confidentiality': 'Confidentiality',
-            'confidentiality-desc': 'We do not collect unnecessary information.',
-            'gdpr': 'GDPR',
-            'gdpr-desc': 'Compliance with data protection standards.',
-            'storage': 'Storage',
-            'storage-desc': 'Data on secure servers.',
-            
-            // Detailed FAQ
-            'frequently': 'Frequently',
-            'asked': 'asked questions',
-            'detailed1': '📌 How to start playing',
-            'detailed1-answer1': '1. Download Minecraft version 1.21.8',
-            'detailed1-answer2': '2. Apply in Discord',
-            'detailed1-answer3': '3. After approval, add the server play.sweet-land.fun',
-            'detailed2': '⚔️ Are there clans',
-            'detailed2-answer': 'Yes, you can create clans and build together with friends. Clan wars will appear in the future.',
-            'detailed3': '📊 How many players',
-            'detailed3-answer': 'The server is preparing to open. Join Discord to be one of the first.',
-            'detailed4': '🔄 Will there be wipes',
-            'detailed4-answer': 'Wipes are planned every 8-11 months. All builds are preserved for a long time.',
-            'detailed5': '🎁 Is there donate',
-            'detailed5-answer': 'No, this is a completely vanilla server. No donations or privileges — pure survival as intended by Mojang.',
-            'detailed6': '📞 Contact admins',
-            'detailed6-answer': 'Write in Telegram or Discord. Administration is always available and ready to help.',
-            
-            // Rules
-            'rules-title': 'SERVER RULES',
-            'rule1': 'By entering the server, you automatically agree to all project rules.',
-            'punish1': 'Punishment: 1 day ban',
-            'rule2': 'Ignorance of the rules does not exempt you from responsibility.',
-            'punish2': 'Punishment: Warning',
-            'rule3': 'Griefing (damaging or destroying other people\'s buildings).',
-            'punish3': 'Punishment: 30 day ban',
-            'rule4': 'Stealing resources from other people\'s chests, barrels, hoppers.',
-            'punish4': 'Punishment: 14 day ban',
-            'rule5': 'Deliberate killing of other people\'s pets or named mobs.',
-            'punish5': 'Punishment: 2 day ban',
-            'rule6': 'Settling on someone else\'s territory or building adjacent without the owner\'s consent.',
-            'punish6': 'Punishment: Demolition + Kick',
-            'rule7': 'Ignoring «No Entry» signs.',
-            'punish7': 'Punishment: Kill without item return',
-            'rule8': 'Using other people\'s automatic or manual farms without permission.',
-            'punish8': 'Punishment: 3 day ban',
-            'rule9': 'World damage (spilling lava, water, etc.).',
-            'punish9': 'Punishment: Demolition + 2 day ban',
-            'rule10': 'Creating mechanisms that intentionally cause lag or server crashes.',
-            'punish10': 'Punishment: Demolition + 14 day ban',
-            'rule11': 'Killing a player without their prior consent to PVP.',
-            'punish11': 'Punishment: 7 day ban',
-            'rule12': 'Picking up and appropriating other people\'s items after a player\'s death (if they ask to return).',
-            'punish12': 'Punishment: 1 day ban + item return',
-            'rule13': 'Using any kind of cheats (METEOR, WURST, IMPACT, etc.).',
-            'punish13': 'Punishment: PERMANENT BAN',
-            'rule14': 'Concealing information about bugs, dupes, or economic flaws.',
-            'punish14': 'Punishment: 30 day ban',
-            'rule15': 'Appropriating abandoned bases without coordination with the administration.',
-            'punish15': 'Punishment: 5 day ban',
-            'rule16': 'Hacking, attempted hacking, or logging into someone else\'s account.',
-            'punish16': 'Punishment: Permanent ban',
-            'rule17': 'Causing any harm to the reputation or technical part of the server.',
-            'punish17': 'Punishment: Forever ban',
-            'rule18': 'Selling game resources or services for real money.',
-            'punish18': 'Punishment: Project blacklist',
-            'rule19': 'Inciting other players to break the rules.',
-            'punish19': 'Punishment: 10 day ban',
-            'rule20': 'Account security responsibility lies solely with its owner.',
-            'rule21': 'Creating additional accounts (alts) to bypass an active ban.',
-            'punish21': 'Punishment: IP ban',
-            'section2': 'Section 2: Administration',
-            'rule22': 'Server rules are mandatory for all staff members.',
-            'rule23': 'Using creative mode for personal survival or helping players.',
-            'punish23': 'Punishment: Removal',
-            'rule24': 'Providing game advantages to friends.',
-            'punish24': 'Punishment: Removal + Blacklist',
-            'rule25': 'Issuing unjustified punishments (bans, mutes) without evidence.',
-            'punish25': 'Punishment: Removal',
-            'rule26': 'The player has the right to appeal any administrator action in the Discord channel.',
-            
-            // Additional features
-            'particles': 'Particles: on',
-            'particles-off': 'Particles: off',
-            'blur': 'Blur: on',
-            'blur-off': 'Blur: off',
-            'animations': 'Animations: on',
-            'animations-off': 'Animations: off',
-            'sound': 'Sound: on',
-            'sound-off': 'Sound: off',
-            'reset': 'Reset settings'
-        },
-        de: {
-            // German translations (simplified for brevity, but would be fully translated in real implementation)
-            'map': 'Karte',
-            'wiki': 'Wiki',
-            'shop': 'Shop',
-            'play': 'Jetzt spielen',
-            'stats': 'Statistiken',
-            'server': 'Server',
-            'features': 'Funktionen',
-            'streamers': 'Streamer',
-            'on-server': 'auf dem Server',
-            'top': 'Top',
-            'players': 'Spieler',
-            'hero-text': 'Vanilla-Überleben auf Version 1.21.8. Deine Welt — deine Regeln.',
-            'uptime': 'Server-Betriebszeit',
-            'version': 'Aktuelle Version',
-            'vanilla': 'Vanilla-Gameplay',
-            'donate': 'Spenden',
-            'anticheat': 'Anti-Cheat-System',
-            'anticheat-desc': 'Fortschrittlicher Schutz vor Cheatern. Faires Spiel für alle.',
-            'tps': 'Stabile TPS',
-            'tps-desc': 'Optimierter Server auf leistungsstarker Hardware. Keine Verzögerungen.',
-            'events': 'Regelmäßige Events',
-            'events-desc': 'Wöchentliche Events und Wettbewerbe mit Preisen für Spieler.',
-            'world': 'Reine Vanilla-Welt',
-            'world-desc': 'Keine Plugins, nur reines Minecraft wie beabsichtigt.',
-            'protection': 'Bau-Schutz',
-            'protection-desc': 'Ihre Bauten sind vor Griefern geschützt.',
-            'community': 'Freundliche Gemeinschaft',
-            'community-desc': 'Erste Spieler sind bereits hier. Komm dazu.',
-            'babka-desc': 'Beliebte Streamerin, wird auf dem Server spielen.',
-            'gyraffic-desc': 'Serverbesitzer und Streamer. Spielt mit dir.',
-            'more-soon': 'Mehr folgt bald',
-            'more-desc': 'Die Liste der Streamer wird aktualisiert.',
-            'subscribe': 'abonnieren',
-            'soon': 'bald',
-            'live': 'live',
-            'announcements': 'Ankündigungen',
-            'news': 'Neuigkeiten',
-            'owner': 'Serverbesitzer',
-            'streamer': 'Streamerin',
-            'admin': 'Senior-Admin',
-            'hours': 'Stunden',
-            'updated': 'Daten aktualisiert am 17. Februar 2026',
-            'footer-desc': 'Vanilla-Überleben ohne Grenzen mit einer freundlichen Gemeinschaft und aktiver Verwaltung.',
-            'no-donate': 'Keine Spenden — nur reines Vanilla-Gameplay',
-            'quick-links': 'Schnelllinks',
-            'top-players': 'Top-Spieler',
-            'rules': 'Regeln',
-            'social': 'Sozial',
-            'privacy': 'Datenschutz',
-            'privacy-desc': 'Alle Daten sind geschützt und werden nicht an Dritte weitergegeben. Der Server entspricht den Sicherheitsstandards.',
-            'vanilla-server': 'Vanilla Minecraft Server',
-            'privacy-note': 'Ihre Daten sind zuverlässig geschützt. Durch die Nutzung des Servers stimmen Sie der Datenschutzerklärung zu.',
-            'dark': 'Dunkel (Haupt)',
-            'light': 'Hell',
-            'pink': 'Rosa',
-            'blue': 'Blau',
-            'green': 'Grün',
-            'orange': 'Orange',
-            'purple': 'Violett',
-            'russian': 'Russisch',
-            'ukrainian': 'Ukrainisch',
-            'english': 'Englisch',
-            'german': 'Deutsch',
-            'french': 'Französisch',
-            'spanish': 'Spanisch',
-            'achievements': 'Errungenschaften',
-            'achievement1': 'Pionier',
-            'achievement1-desc': 'Trete am ersten Tag der Eröffnung dem Server bei',
-            'achievement1-stats': '0% der Spieler erreicht',
-            'achievement2': 'Meisterbauer',
-            'achievement2-desc': 'Baue ein Haus mit mehr als 1000 Blöcken',
-            'achievement2-stats': '0% der Spieler erreicht',
-            'achievement3': 'Entdecker',
-            'achievement3-desc': 'Besuche alle Biome der Welt',
-            'achievement3-stats': '0% der Spieler erreicht',
-            'achievement4': 'Für immer Freunde',
-            'achievement4-desc': 'Spiele mehr als 100 Stunden in einem Team',
-            'achievement4-stats': '0% der Spieler erreicht',
-            'upcoming': 'Bevorstehende',
-            'event1': 'PVP Arena',
-            'event1-desc': '1v1 und 2v2 Arenakämpfe. Gewinner erhalten Titel und Preise.',
-            'event2': 'Bauwettbewerb',
-            'event2-desc': 'Beste Bauten zu verschiedenen Themen. Abstimmung in Discord.',
-            'event3': 'Auktion',
-            'event3-desc': 'Gebote auf seltene Gegenstände und Ressourcen zwischen Spielern.',
-            'event4': 'Geschwindigkeits-Überleben',
-            'event4-desc': 'Wer schneller seltene Ressourcen beschafft und eine Basis baut.',
-            'event5': 'Schatzsuche',
-            'event5-desc': 'Suche nach versteckten Truhen mit seltenen Gegenständen auf der ganzen Welt.',
-            'event6': 'Battle Royale',
-            'event6-desc': 'Der letzte Überlebende erhält einen königlichen Titel und Preise.',
-            'after-opening': 'nach der Eröffnung',
-            'roadmap': 'Fahrplan',
-            'development': 'Entwicklung',
-            'completed': 'Abgeschlossen',
-            'planned': 'Geplant',
-            'roadmap1': 'Servererstellung',
-            'roadmap1-desc': 'Einrichtung und Optimierung der Vanilla-Welt',
-            'roadmap2': 'Clan-System',
-            'roadmap2-desc': 'Clans erstellen und gemeinsam bauen',
-            'roadmap3': 'Wirtschaft',
-            'roadmap3-desc': 'In-Game-Handel und Spielerläden',
-            'roadmap4': 'Clankriege',
-            'roadmap4-desc': 'Kämpfe zwischen Clans um Territorien',
-            'roadmap5': 'Errungenschaftssystem',
-            'roadmap5-desc': 'Belohnungen für besondere Aktionen im Spiel',
-            'roadmap6': 'Regelmäßige Events',
-            'roadmap6-desc': 'Wöchentliche Events für alle Spieler',
-            'feb2026': 'Februar 2026',
-            'how-to': 'Wie man',
-            'step1': 'Version 1.21.8',
-            'step1-desc': 'Stelle sicher, dass du die neueste Version von Minecraft installiert hast.',
-            'step2': 'Bewirb dich in Discord',
-            'step2-desc': 'Fülle das Bewerbungsformular aus und lies die Serverregeln.',
-            'step3': 'Warte auf Genehmigung',
-            'step3-desc': 'Füge nach der Genehmigung den Server play.sweet-land.fun zu deiner Liste hinzu.',
-            'step4': 'Tritt ein und spiele',
-            'step4-desc': 'Wähle einen Ort für deine Basis, baue und erkunde die Welt.',
-            'step5': 'Chatte in Discord',
-            'step5-desc': 'Lerne Spieler kennen, nimm am Gemeinschaftsleben teil.',
-            'step6': 'Lade Freunde ein',
-            'step6-desc': 'Gemeinsam bauen macht mehr Spaß. Erstelle Clans und Teams.',
-            'answers': 'Antworten auf',
-            'questions': 'Fragen',
-            'faq1': 'Wann ist der Start',
-            'faq1-desc': 'Der Server bereitet sich auf die Eröffnung vor. Folge den Neuigkeiten in Discord.',
-            'faq2': 'Welche Version',
-            'faq2-desc': 'Der Server läuft auf der aktuellen Version 1.21.8.',
-            'faq3': 'Wo chatten',
-            'faq3-desc': 'Hauptkommunikation in Discord. Dort auch Neuigkeiten und Events.',
-            'faq4': 'Helles Thema',
-            'faq4-desc': 'Ja, klicke auf den Mond in der rechten Ecke und du siehst Regen.',
-            'faq5': 'Kontoschutz',
-            'faq5-desc': 'Anti-Cheat-System und Spielerdatenverschlüsselung.',
-            'faq6': 'Gibt es Spenden',
-            'faq6-desc': 'Nein, das ist ein komplett Vanilla-Server. Keine Privilegien.',
-            'faq7': 'Wie ist die Spielerzahl',
-            'faq7-desc': 'Der Server öffnet bald. Sei der Erste.',
-            'faq8': 'Wird es Wipes geben',
-            'faq8-desc': 'Wipes sind alle 8-11 Monate geplant. Alle Bauten bleiben lange erhalten.',
-            'our': 'Unsere',
-            'discord': 'Discord Server',
-            'discord-desc': 'Schließe dich den ersten Spielern an, nimm an der Serverentwicklung teil',
-            'members': '50+ Mitglieder',
-            'active': 'aktiv',
-            'telegram': 'Telegram Kanal',
-            'telegram-desc': 'Neuigkeiten, Updates und Ankündigungen in praktischem Format',
-            'subscribers': '30+ Abonnenten',
-            'daily': 'täglich',
-            'youtube': 'YouTube Kanäle',
-            'youtube-desc': 'Rezensionen, Anleitungen und Streams von unseren Streamern',
-            'channels': '2 Kanäle',
-            'data': 'Daten',
-            'encryption': 'Verschlüsselung',
-            'encryption-desc': 'Alle Daten sind durch moderne Protokolle geschützt.',
-            'anticheat-short': 'Anti-Cheat',
-            'anticheat-short-desc': 'Schutz vor unfairen Spielern.',
-            'ownership': 'Eigentumsrechte',
-            'ownership-desc': 'Bauten und Ressourcen gehören nur dir.',
-            'confidentiality': 'Vertraulichkeit',
-            'confidentiality-desc': 'Wir sammeln keine unnötigen Informationen.',
-            'gdpr': 'DSGVO',
-            'gdpr-desc': 'Einhaltung der Datenschutzstandards.',
-            'storage': 'Speicherung',
-            'storage-desc': 'Daten auf sicheren Servern.',
-            'frequently': 'Häufig',
-            'asked': 'gestellte Fragen',
-            'detailed1': '📌 Wie fange ich an zu spielen',
-            'detailed1-answer1': '1. Lade Minecraft Version 1.21.8 herunter',
-            'detailed1-answer2': '2. Bewirb dich in Discord',
-            'detailed1-answer3': '3. Füge nach Genehmigung den Server play.sweet-land.fun hinzu',
-            'detailed2': '⚔️ Gibt es Clans',
-            'detailed2-answer': 'Ja, du kannst Clans erstellen und mit Freunden bauen. In Zukunft wird es Clan-Kriege geben.',
-            'detailed3': '📊 Wie viele Spieler',
-            'detailed3-answer': 'Der Server bereitet sich auf die Eröffnung vor. Tritt Discord bei, um einer der Ersten zu sein.',
-            'detailed4': '🔄 Wird es Wipes geben',
-            'detailed4-answer': 'Wipes sind alle 8-11 Monate geplant. Alle Bauten bleiben lange erhalten.',
-            'detailed5': '🎁 Gibt es Spenden',
-            'detailed5-answer': 'Nein, das ist ein komplett Vanilla-Server. Keine Spenden oder Privilegien — reines Überleben, wie von Mojang beabsichtigt.',
-            'detailed6': '📞 Kontakt zu Admins',
-            'detailed6-answer': 'Schreibe in Telegram oder Discord. Die Administration ist immer erreichbar und bereit zu helfen.',
-            'rules-title': 'SERVERREGELN',
-            'particles': 'Partikel: an',
-            'particles-off': 'Partikel: aus',
-            'blur': 'Unschärfe: an',
-            'blur-off': 'Unschärfe: aus',
-            'animations': 'Animationen: an',
-            'animations-off': 'Animationen: aus',
-            'sound': 'Ton: an',
-            'sound-off': 'Ton: aus',
-            'reset': 'Einstellungen zurücksetzen'
-        },
-        fr: {
-            // French translations (simplified for brevity)
-            'map': 'Carte',
-            'wiki': 'Wiki',
-            'shop': 'Boutique',
-            'play': 'Jouer maintenant',
-            'stats': 'Statistiques',
-            'server': 'serveur',
-            'features': 'Caractéristiques',
-            'streamers': 'Streameurs',
-            'on-server': 'sur le serveur',
-            'top': 'Top',
-            'players': 'joueurs',
-            'hero-text': 'Survie vanilla sur la version 1.21.8. Ton monde — tes règles.',
-            'uptime': 'Temps de fonctionnement',
-            'version': 'Version actuelle',
-            'vanilla': 'Gameplay vanilla',
-            'donate': 'Don',
-            'anticheat': 'Système anti-triche',
-            'anticheat-desc': 'Protection avancée contre les tricheurs. Jeu équitable pour tous.',
-            'tps': 'TPS stable',
-            'tps-desc': 'Serveur optimisé sur matériel puissant. Pas de lags.',
-            'events': 'Événements réguliers',
-            'events-desc': 'Événements hebdomadaires et concours avec des prix pour les joueurs.',
-            'world': 'Monde vanilla pur',
-            'world-desc': 'Pas de plugins, seulement du Minecraft pur comme prévu.',
-            'protection': 'Protection des constructions',
-            'protection-desc': 'Vos constructions sont protégées des griefeurs.',
-            'community': 'Communauté amicale',
-            'community-desc': 'Les premiers joueurs sont déjà là. Rejoins-nous.',
-            'babka-desc': 'Streameuse populaire, jouera sur le serveur.',
-            'gyraffic-desc': 'Propriétaire du serveur et streameur. Joue avec toi.',
-            'more-soon': 'Bientôt d\'autres',
-            'more-desc': 'La liste des streameurs sera mise à jour.',
-            'subscribe': 'abonne-toi',
-            'soon': 'bientôt',
-            'live': 'en direct',
-            'announcements': 'annonces',
-            'news': 'nouvelles',
-            'owner': 'Propriétaire',
-            'streamer': 'Streameuse',
-            'admin': 'Admin principal',
-            'hours': 'heures',
-            'updated': 'Données mises à jour le 17 février 2026',
-            'footer-desc': 'Survie vanilla sans frontières avec une communauté amicale et une administration active.',
-            'no-donate': 'Pas de don — seulement du pur gameplay vanilla',
-            'quick-links': 'Liens rapides',
-            'top-players': 'Top joueurs',
-            'rules': 'Règles',
-            'social': 'Social',
-            'privacy': 'Confidentialité',
-            'privacy-desc': 'Toutes les données sont protégées et ne sont pas partagées avec des tiers. Le serveur est conforme aux normes de sécurité.',
-            'vanilla-server': 'Serveur Minecraft vanilla',
-            'privacy-note': 'Vos données sont sous protection fiable. En utilisant le serveur, vous acceptez la politique de confidentialité.',
-            'dark': 'Sombre (principal)',
-            'light': 'Clair',
-            'pink': 'Rose',
-            'blue': 'Bleu',
-            'green': 'Vert',
-            'orange': 'Orange',
-            'purple': 'Violet',
-            'russian': 'Russe',
-            'ukrainian': 'Ukrainien',
-            'english': 'Anglais',
-            'german': 'Allemand',
-            'french': 'Français',
-            'spanish': 'Espagnol',
-            'achievements': 'Réalisations',
-            'achievement1': 'Pionnier',
-            'achievement1-desc': 'Rejoindre le serveur le premier jour d\'ouverture',
-            'achievement1-stats': '0% des joueurs ont obtenu',
-            'achievement2': 'Maître constructeur',
-            'achievement2-desc': 'Construire une maison avec plus de 1000 blocs',
-            'achievement2-stats': '0% des joueurs ont obtenu',
-            'achievement3': 'Explorateur',
-            'achievement3-desc': 'Visiter tous les biomes du monde',
-            'achievement3-stats': '0% des joueurs ont obtenu',
-            'achievement4': 'Amis pour toujours',
-            'achievement4-desc': 'Jouer dans une même équipe pendant plus de 100 heures',
-            'achievement4-stats': '0% des joueurs ont obtenu',
-            'upcoming': 'À venir',
-            'event1': 'Arène PVP',
-            'event1-desc': 'Combats en arène 1c1 et 2c2. Les gagnants reçoivent des titres et des prix.',
-            'event2': 'Concours de construction',
-            'event2-desc': 'Meilleures constructions sur différents thèmes. Vote sur Discord.',
-            'event3': 'Enchères',
-            'event3-desc': 'Enchères sur des objets rares et des ressources entre joueurs.',
-            'event4': 'Survie rapide',
-            'event4-desc': 'Qui obtiendra des ressources rares et construira une base plus rapidement.',
-            'event5': 'Chasse au trésor',
-            'event5-desc': 'Recherche de coffres cachés avec des objets rares à travers le monde.',
-            'event6': 'Battle royale',
-            'event6-desc': 'Le dernier survivant reçoit un titre royal et des prix.',
-            'after-opening': 'après l\'ouverture',
-            'roadmap': 'Feuille de route',
-            'development': 'développement',
-            'completed': 'Terminé',
-            'planned': 'Prévu',
-            'roadmap1': 'Création du serveur',
-            'roadmap1-desc': 'Configuration et optimisation du monde vanilla',
-            'roadmap2': 'Système de clans',
-            'roadmap2-desc': 'Création de clans et constructions collaboratives',
-            'roadmap3': 'Économie',
-            'roadmap3-desc': 'Commerce en jeu et magasins de joueurs',
-            'roadmap4': 'Guerres de clans',
-            'roadmap4-desc': 'Batailles entre clans pour les territoires',
-            'roadmap5': 'Système de réalisations',
-            'roadmap5-desc': 'Récompenses pour des actions spéciales en jeu',
-            'roadmap6': 'Événements réguliers',
-            'roadmap6-desc': 'Événements hebdomadaires pour tous les joueurs',
-            'feb2026': 'Février 2026',
-            'how-to': 'Comment',
-            'step1': 'Version 1.21.8',
-            'step1-desc': 'Assure-toi d\'avoir la dernière version de Minecraft installée.',
-            'step2': 'Fais une demande sur Discord',
-            'step2-desc': 'Remplis le formulaire et lis les règles du serveur.',
-            'step3': 'Attends l\'approbation',
-            'step3-desc': 'Après approbation, ajoute le serveur play.sweet-land.fun à ta liste.',
-            'step4': 'Rejoins et joue',
-            'step4-desc': 'Choisis un endroit pour ta base, construis et explore le monde.',
-            'step5': 'Discute sur Discord',
-            'step5-desc': 'Rencontre des joueurs, participe à la vie de la communauté.',
-            'step6': 'Invite des amis',
-            'step6-desc': 'Construire ensemble est plus amusant. Crée des clans et des équipes.',
-            'answers': 'Réponses aux',
-            'questions': 'questions',
-            'faq1': 'Quand est le début',
-            'faq1-desc': 'Le serveur se prépare à ouvrir. Suis les nouvelles sur Discord.',
-            'faq2': 'Quelle version',
-            'faq2-desc': 'Le serveur fonctionnera sur la version actuelle 1.21.8.',
-            'faq3': 'Où discuter',
-            'faq3-desc': 'Communication principale sur Discord. Nouvelles et événements aussi.',
-            'faq4': 'Thème clair',
-            'faq4-desc': 'Oui, clique sur la lune dans le coin droit et tu verras la pluie.',
-            'faq5': 'Protection du compte',
-            'faq5-desc': 'Système anti-triche et chiffrement des données des joueurs.',
-            'faq6': 'Y a-t-il un don',
-            'faq6-desc': 'Non, c\'est un serveur entièrement vanilla. Pas de privilèges.',
-            'faq7': 'Quel est le nombre de joueurs',
-            'faq7-desc': 'Le serveur ouvre bientôt. Sois le premier.',
-            'faq8': 'Y aura-t-il des wipes',
-            'faq8-desc': 'Les wipes sont prévus tous les 8-11 mois. Toutes les constructions sont conservées longtemps.',
-            'our': 'Notre',
-            'discord': 'Serveur Discord',
-            'discord-desc': 'Rejoins les premiers joueurs, participe au développement du serveur',
-            'members': '50+ membres',
-            'active': 'actif',
-            'telegram': 'Chaîne Telegram',
-            'telegram-desc': 'Nouvelles, mises à jour et annonces dans un format pratique',
-            'subscribers': '30+ abonnés',
-            'daily': 'quotidien',
-            'youtube': 'Chaînes YouTube',
-            'youtube-desc': 'Avis, guides et streams de nos streameurs',
-            'channels': '2 chaînes',
-            'data': 'données',
-            'encryption': 'Chiffrement',
-            'encryption-desc': 'Toutes les données sont protégées par des protocoles modernes.',
-            'anticheat-short': 'Anti-triche',
-            'anticheat-short-desc': 'Protection contre les joueurs malhonnêtes.',
-            'ownership': 'Droits de propriété',
-            'ownership-desc': 'Les constructions et ressources vous appartiennent uniquement.',
-            'confidentiality': 'Confidentialité',
-            'confidentiality-desc': 'Nous ne collectons pas d\'informations inutiles.',
-            'gdpr': 'RGPD',
-            'gdpr-desc': 'Conformité aux normes de protection des données.',
-            'storage': 'Stockage',
-            'storage-desc': 'Données sur des serveurs sécurisés.',
-            'frequently': 'Foire aux',
-            'asked': 'questions',
-            'detailed1': '📌 Comment commencer à jouer',
-            'detailed1-answer1': '1. Télécharge Minecraft version 1.21.8',
-            'detailed1-answer2': '2. Fais une demande sur Discord',
-            'detailed1-answer3': '3. Après approbation, ajoute le serveur play.sweet-land.fun',
-            'detailed2': '⚔️ Y a-t-il des clans',
-            'detailed2-answer': 'Oui, tu peux créer des clans et construire avec des amis. Des guerres de clans apparaîtront à l\'avenir.',
-            'detailed3': '📊 Combien de joueurs',
-            'detailed3-answer': 'Le serveur se prépare à ouvrir. Rejoins Discord pour être l\'un des premiers.',
-            'detailed4': '🔄 Y aura-t-il des wipes',
-            'detailed4-answer': 'Les wipes sont prévus tous les 8-11 mois. Toutes les constructions sont conservées longtemps.',
-            'detailed5': '🎁 Y a-t-il un don',
-            'detailed5-answer': 'Non, c\'est un serveur entièrement vanilla. Pas de dons ou de privilèges — pure survie comme prévu par Mojang.',
-            'detailed6': '📞 Contacter les admins',
-            'detailed6-answer': 'Écris sur Telegram ou Discord. L\'administration est toujours disponible et prête à aider.',
-            'rules-title': 'RÈGLES DU SERVEUR',
-            'particles': 'Particules: on',
-            'particles-off': 'Particules: off',
-            'blur': 'Flou: on',
-            'blur-off': 'Flou: off',
-            'animations': 'Animations: on',
-            'animations-off': 'Animations: off',
-            'sound': 'Son: on',
-            'sound-off': 'Son: off',
-            'reset': 'Réinitialiser'
-        },
-        es: {
-            // Spanish translations (simplified for brevity)
-            'map': 'Mapa',
-            'wiki': 'Wiki',
-            'shop': 'Tienda',
-            'play': 'Jugar ahora',
-            'stats': 'Estadísticas',
-            'server': 'servidor',
-            'features': 'Características',
-            'streamers': 'Streamers',
-            'on-server': 'en el servidor',
-            'top': 'Top',
-            'players': 'jugadores',
-            'hero-text': 'Supervivencia vanilla en la versión 1.21.8. Tu mundo — tus reglas.',
-            'uptime': 'Tiempo de actividad',
-            'version': 'Versión actual',
-            'vanilla': 'Juego vanilla',
-            'donate': 'Donación',
-            'anticheat': 'Sistema anti-trampas',
-            'anticheat-desc': 'Protección avanzada contra tramposos. Juego justo para todos.',
-            'tps': 'TPS estable',
-            'tps-desc': 'Servidor optimizado en hardware potente. Sin lags.',
-            'events': 'Eventos regulares',
-            'events-desc': 'Eventos semanales y concursos con premios para jugadores.',
-            'world': 'Mundo vanilla puro',
-            'world-desc': 'Sin plugins, solo Minecraft puro como se pretende.',
-            'protection': 'Protección de construcciones',
-            'protection-desc': 'Tus construcciones están protegidas de griefers.',
-            'community': 'Comunidad amigable',
-            'community-desc': 'Los primeros jugadores ya están aquí. Únete.',
-            'babka-desc': 'Streamer popular, jugará en el servidor.',
-            'gyraffic-desc': 'Dueño del servidor y streamer. Juega contigo.',
-            'more-soon': 'Más pronto',
-            'more-desc': 'La lista de streamers se actualizará.',
-            'subscribe': 'suscríbete',
-            'soon': 'pronto',
-            'live': 'en vivo',
-            'announcements': 'anuncios',
-            'news': 'noticias',
-            'owner': 'Dueño',
-            'streamer': 'Streamer',
-            'admin': 'Admin principal',
-            'hours': 'horas',
-            'updated': 'Datos actualizados el 17 de febrero de 2026',
-            'footer-desc': 'Supervivencia vanilla sin fronteras con una comunidad amigable y administración activa.',
-            'no-donate': 'Sin donaciones — solo juego vanilla puro',
-            'quick-links': 'Enlaces rápidos',
-            'top-players': 'Top jugadores',
-            'rules': 'Reglas',
-            'social': 'Social',
-            'privacy': 'Privacidad',
-            'privacy-desc': 'Todos los datos están protegidos y no se comparten con terceros. El servidor cumple con los estándares de seguridad.',
-            'vanilla-server': 'Servidor Minecraft vanilla',
-            'privacy-note': 'Tus datos están bajo protección confiable. Al usar el servidor, aceptas la política de privacidad.',
-            'dark': 'Oscuro (principal)',
-            'light': 'Claro',
-            'pink': 'Rosa',
-            'blue': 'Azul',
-            'green': 'Verde',
-            'orange': 'Naranja',
-            'purple': 'Púrpura',
-            'russian': 'Ruso',
-            'ukrainian': 'Ucraniano',
-            'english': 'Inglés',
-            'german': 'Alemán',
-            'french': 'Francés',
-            'spanish': 'Español',
-            'achievements': 'Logros',
-            'achievement1': 'Pionero',
-            'achievement1-desc': 'Unirse al servidor el primer día de apertura',
-            'achievement1-stats': '0% de jugadores lo obtuvieron',
-            'achievement2': 'Maestro constructor',
-            'achievement2-desc': 'Construir una casa con más de 1000 bloques',
-            'achievement2-stats': '0% de jugadores lo obtuvieron',
-            'achievement3': 'Explorador',
-            'achievement3-desc': 'Visitar todos los biomas del mundo',
-            'achievement3-stats': '0% de jugadores lo obtuvieron',
-            'achievement4': 'Amigos para siempre',
-            'achievement4-desc': 'Jugar en un mismo equipo durante más de 100 horas',
-            'achievement4-stats': '0% de jugadores lo obtuvieron',
-            'upcoming': 'Próximos',
-            'event1': 'Arena PVP',
-            'event1-desc': 'Combates en arena 1c1 y 2c2. Los ganadores reciben títulos y premios.',
-            'event2': 'Concurso de construcción',
-            'event2-desc': 'Mejores construcciones sobre diferentes temas. Votación en Discord.',
-            'event3': 'Subasta',
-            'event3-desc': 'Pujas por objetos raros y recursos entre jugadores.',
-            'event4': 'Supervivencia rápida',
-            'event4-desc': 'Quién conseguirá recursos raros y construirá una base más rápido.',
-            'event5': 'Búsqueda del tesoro',
-            'event5-desc': 'Búsqueda de cofres escondidos con objetos raros por todo el mundo.',
-            'event6': 'Battle royale',
-            'event6-desc': 'El último superviviente recibe un título real y premios.',
-            'after-opening': 'después de la apertura',
-            'roadmap': 'Hoja de ruta',
-            'development': 'desarrollo',
-            'completed': 'Completado',
-            'planned': 'Planeado',
-            'roadmap1': 'Creación del servidor',
-            'roadmap1-desc': 'Configuración y optimización del mundo vanilla',
-            'roadmap2': 'Sistema de clanes',
-            'roadmap2-desc': 'Creación de clanes y construcciones colaborativas',
-            'roadmap3': 'Economía',
-            'roadmap3-desc': 'Comercio en el juego y tiendas de jugadores',
-            'roadmap4': 'Guerras de clanes',
-            'roadmap4-desc': 'Batallas entre clanes por territorios',
-            'roadmap5': 'Sistema de logros',
-            'roadmap5-desc': 'Recompensas por acciones especiales en el juego',
-            'roadmap6': 'Eventos regulares',
-            'roadmap6-desc': 'Eventos semanales para todos los jugadores',
-            'feb2026': 'Febrero 2026',
-            'how-to': 'Cómo',
-            'step1': 'Versión 1.21.8',
-            'step1-desc': 'Asegúrate de tener la última versión de Minecraft instalada.',
-            'step2': 'Solicita en Discord',
-            'step2-desc': 'Completa el formulario y lee las reglas del servidor.',
-            'step3': 'Espera la aprobación',
-            'step3-desc': 'Después de la aprobación, añade el servidor play.sweet-land.fun a tu lista.',
-            'step4': 'Entra y juega',
-            'step4-desc': 'Elige un lugar para tu base, construye y explora el mundo.',
-            'step5': 'Chatea en Discord',
-            'step5-desc': 'Conoce jugadores, participa en la vida de la comunidad.',
-            'step6': 'Invita amigos',
-            'step6-desc': 'Construir juntos es más divertido. Crea clanes y equipos.',
-            'answers': 'Respuestas a',
-            'questions': 'preguntas',
-            'faq1': 'Cuándo es el inicio',
-            'faq1-desc': 'El servidor se prepara para abrir. Sigue las noticias en Discord.',
-            'faq2': 'Qué versión',
-            'faq2-desc': 'El servidor funcionará en la versión actual 1.21.8.',
-            'faq3': 'Dónde chatear',
-            'faq3-desc': 'Comunicación principal en Discord. Noticias y eventos también.',
-            'faq4': 'Tema claro',
-            'faq4-desc': 'Sí, haz clic en la luna en la esquina derecha y verás lluvia.',
-            'faq5': 'Protección de cuenta',
-            'faq5-desc': 'Sistema anti-trampas y cifrado de datos de jugadores.',
-            'faq6': 'Hay donación',
-            'faq6-desc': 'No, es un servidor completamente vanilla. Sin privilegios.',
-            'faq7': 'Cuál es el online',
-            'faq7-desc': 'El servidor abre pronto. Sé el primero.',
-            'faq8': 'Habrá wipes',
-            'faq8-desc': 'Los wipes están planeados cada 8-11 meses. Todas las construcciones se conservan durante mucho tiempo.',
-            'our': 'Nuestra',
-            'discord': 'Servidor de Discord',
-            'discord-desc': 'Únete a los primeros jugadores, participa en el desarrollo del servidor',
-            'members': 'más de 50 miembros',
-            'active': 'activo',
-            'telegram': 'Canal de Telegram',
-            'telegram-desc': 'Noticias, actualizaciones y anuncios en formato conveniente',
-            'subscribers': 'más de 30 suscriptores',
-            'daily': 'diario',
-            'youtube': 'Canales de YouTube',
-            'youtube-desc': 'Reseñas, guías y streams de nuestros streamers',
-            'channels': '2 canales',
-            'data': 'datos',
-            'encryption': 'Cifrado',
-            'encryption-desc': 'Todos los datos están protegidos por protocolos modernos.',
-            'anticheat-short': 'Anti-trampas',
-            'anticheat-short-desc': 'Protección contra jugadores deshonestos.',
-            'ownership': 'Derechos de propiedad',
-            'ownership-desc': 'Las construcciones y recursos te pertenecen solo a ti.',
-            'confidentiality': 'Confidencialidad',
-            'confidentiality-desc': 'No recopilamos información innecesaria.',
-            'gdpr': 'GDPR',
-            'gdpr-desc': 'Cumplimiento de estándares de protección de datos.',
-            'storage': 'Almacenamiento',
-            'storage-desc': 'Datos en servidores seguros.',
-            'frequently': 'Preguntas',
-            'asked': 'frecuentes',
-            'detailed1': '📌 Cómo empezar a jugar',
-            'detailed1-answer1': '1. Descarga Minecraft versión 1.21.8',
-            'detailed1-answer2': '2. Solicita en Discord',
-            'detailed1-answer3': '3. Después de la aprobación, añade el servidor play.sweet-land.fun',
-            'detailed2': '⚔️ Hay clanes',
-            'detailed2-answer': 'Sí, puedes crear clanes y construir con amigos. En el futuro aparecerán guerras de clanes.',
-            'detailed3': '📊 Cuántos jugadores',
-            'detailed3-answer': 'El servidor se prepara para abrir. Únete a Discord para ser uno de los primeros.',
-            'detailed4': '🔄 Habrá wipes',
-            'detailed4-answer': 'Los wipes están planeados cada 8-11 meses. Todas las construcciones se conservan durante mucho tiempo.',
-            'detailed5': '🎁 Hay donación',
-            'detailed5-answer': 'No, es un servidor completamente vanilla. Sin donaciones ni privilegios — pura supervivencia como lo concibió Mojang.',
-            'detailed6': '📞 Contactar con admins',
-            'detailed6-answer': 'Escribe en Telegram o Discord. La administración siempre está disponible y lista para ayudar.',
-            'rules-title': 'REGLAS DEL SERVIDOR',
-            'particles': 'Partículas: on',
-            'particles-off': 'Partículas: off',
-            'blur': 'Desenfoque: on',
-            'blur-off': 'Desenfoque: off',
-            'animations': 'Animaciones: on',
-            'animations-off': 'Animaciones: off',
-            'sound': 'Sonido: on',
-            'sound-off': 'Sonido: off',
-            'reset': 'Restablecer'
-        }
-    };
-
-    // ===== ФУНКЦИИ =====
-    function togglePanel() {
-        const panel = document.getElementById('side-panel');
-        panel.classList.toggle('active');
-    }
-
-    function openRules() {
-        const modal = document.getElementById('rules-modal');
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeRules() {
-        const modal = document.getElementById('rules-modal');
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
-    }
-
-    function copyIP() {
-        const ip = 'play.sweet-land.fun';
-        
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(ip).then(function() {
-                showCopyNotice();
-            }).catch(function() {
-                fallbackCopy();
-            });
-        } else {
-            fallbackCopy();
-        }
-        
-        function fallbackCopy() {
-            const textarea = document.createElement('textarea');
-            textarea.value = ip;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            showCopyNotice();
-        }
-        
-        function showCopyNotice() {
-            const notice = document.getElementById('copyNotice');
-            notice.style.opacity = '1';
-            setTimeout(function() {
-                notice.style.opacity = '0';
-            }, 2000);
-        }
-    }
-
-    function reveal() {
-        const reveals = document.querySelectorAll('.reveal');
-        
-        for (let i = 0; i < reveals.length; i++) {
-            const windowHeight = window.innerHeight;
-            const elementTop = reveals[i].getBoundingClientRect().top;
-            const elementBottom = reveals[i].getBoundingClientRect().bottom;
-            const elementVisible = 100;
-            
-            if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
-                reveals[i].classList.add('active');
-            } else {
-                reveals[i].classList.remove('active');
-            }
-        }
-    }
-
-    window.addEventListener('scroll', reveal);
-    window.addEventListener('load', reveal);
-
-    // ===== ПОГОДА =====
-    const weatherContainer = document.getElementById('weather');
-    let weatherParticles = [];
-    let weatherInterval;
-    
-    function createWeather() {
-        weatherContainer.innerHTML = '';
-        weatherParticles = [];
-        
-        const isLightTheme = document.body.classList.contains('light');
-        const count = window.innerWidth < 768 ? 80 : 200;
-        
-        for (let i = 0; i < count; i++) {
-            const particle = document.createElement('div');
-            
-            if (isLightTheme) {
-                particle.className = 'rain-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
-                particle.style.animationDelay = Math.random() * -2 + 's';
-                particle.style.opacity = Math.random() * 0.3 + 0.5;
-            } else {
-                particle.className = 'snow-particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 6 + 3 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDuration = Math.random() * 4 + 3 + 's';
-                particle.style.animationDelay = Math.random() * -3 + 's';
-                particle.style.opacity = Math.random() * 0.4 + 0.4;
-            }
-            
-            weatherContainer.appendChild(particle);
-            weatherParticles.push(particle);
-        }
-    }
-    
-    createWeather();
-    
-    window.addEventListener('resize', function() {
-        clearTimeout(weatherInterval);
-        weatherInterval = setTimeout(createWeather, 200);
-    });
-
-    // ===== ТЕМЫ =====
-    function setTheme(theme) {
-        const body = document.body;
-        const themeIcon = document.getElementById('themeIcon');
-        
-        body.classList.remove('dark', 'light', 'pink', 'blue', 'green', 'orange', 'purple');
-        body.classList.add(theme);
-        currentTheme = theme;
-        
-        if (theme === 'light') {
-            themeIcon.textContent = '☀️';
-        } else if (theme === 'dark') {
-            themeIcon.textContent = '🌙';
-        } else if (theme === 'pink') {
-            themeIcon.textContent = '🌸';
-        } else if (theme === 'blue') {
-            themeIcon.textContent = '💙';
-        } else if (theme === 'green') {
-            themeIcon.textContent = '💚';
-        } else if (theme === 'orange') {
-            themeIcon.textContent = '🧡';
-        } else if (theme === 'purple') {
-            themeIcon.textContent = '💜';
-        }
-        
-        createWeather();
-        closeColorMenu();
-    }
-
-    function toggleDarkLight() {
-        if (currentTheme === 'dark' || currentTheme === 'light') {
-            // Переключаем только между тёмной и светлой
-            if (currentTheme === 'dark') {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
-        } else {
-            // Если текущая тема цветная, переключаем на тёмную
-            setTheme('dark');
-        }
-    }
-
-    function toggleColorMenu() {
-        const menu = document.getElementById('colorMenu');
-        colorMenuOpen = !colorMenuOpen;
-        menu.classList.toggle('active', colorMenuOpen);
-        if (colorMenuOpen) {
-            document.getElementById('langMenu').classList.remove('active');
-            langMenuOpen = false;
-            document.getElementById('featuresMenu').classList.remove('active');
-            featuresMenuOpen = false;
-        }
-    }
-
-    function closeColorMenu() {
-        document.getElementById('colorMenu').classList.remove('active');
-        colorMenuOpen = false;
-    }
-
-    function toggleLangMenu() {
-        const menu = document.getElementById('langMenu');
-        langMenuOpen = !langMenuOpen;
-        menu.classList.toggle('active', langMenuOpen);
-        if (langMenuOpen) {
-            document.getElementById('colorMenu').classList.remove('active');
-            colorMenuOpen = false;
-            document.getElementById('featuresMenu').classList.remove('active');
-            featuresMenuOpen = false;
-        }
-    }
-
-    function closeLangMenu() {
-        document.getElementById('langMenu').classList.remove('active');
-        langMenuOpen = false;
-    }
-
-    function toggleFeaturesMenu() {
-        const menu = document.getElementById('featuresMenu');
-        featuresMenuOpen = !featuresMenuOpen;
-        menu.classList.toggle('active', featuresMenuOpen);
-        if (featuresMenuOpen) {
-            document.getElementById('colorMenu').classList.remove('active');
-            colorMenuOpen = false;
-            document.getElementById('langMenu').classList.remove('active');
-            langMenuOpen = false;
-        }
-    }
-
-    function closeFeaturesMenu() {
-        document.getElementById('featuresMenu').classList.remove('active');
-        featuresMenuOpen = false;
-    }
-
-    // ===== ДОПОЛНИТЕЛЬНЫЕ ФИШКИ =====
-    function toggleParticles() {
-        particlesEnabled = !particlesEnabled;
-        const weather = document.getElementById('weather');
-        const particlesText = document.getElementById('particlesText');
-        
-        if (particlesEnabled) {
-            weather.style.opacity = '1';
-            particlesText.textContent = translations[currentLang]['particles'];
-        } else {
-            weather.style.opacity = '0';
-            particlesText.textContent = translations[currentLang]['particles-off'];
-        }
-    }
-
-    function toggleBlur() {
-        blurEnabled = !blurEnabled;
-        const cards = document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item');
-        const blurText = document.getElementById('blurText');
-        
-        cards.forEach(card => {
-            if (blurEnabled) {
-                card.style.backdropFilter = 'blur(var(--blur))';
-                card.style.webkitBackdropFilter = 'blur(var(--blur))';
-            } else {
-                card.style.backdropFilter = 'none';
-                card.style.webkitBackdropFilter = 'none';
-            }
-        });
-        
-        blurText.textContent = blurEnabled ? translations[currentLang]['blur'] : translations[currentLang]['blur-off'];
-    }
-
-    function toggleAnimations() {
-        animationsEnabled = !animationsEnabled;
-        const animated = document.querySelectorAll('.reveal, .banner-star, .streamer-card .live-badge, .feature-card::before, .community-icon, .title, .hero::before');
-        const animationsText = document.getElementById('animationsText');
-        
-        animated.forEach(el => {
-            if (animationsEnabled) {
-                el.style.animation = '';
-            } else {
-                el.style.animation = 'none';
-            }
-        });
-        
-        animationsText.textContent = animationsEnabled ? translations[currentLang]['animations'] : translations[currentLang]['animations-off'];
-    }
-
-    function toggleSound() {
-        soundEnabled = !soundEnabled;
-        const soundText = document.getElementById('soundText');
-        
-        // Здесь можно добавить звуковые эффекты позже
-        
-        soundText.textContent = soundEnabled ? translations[currentLang]['sound'] : translations[currentLang]['sound-off'];
-    }
-
-    function resetSettings() {
-        // Сброс всех настроек
-        particlesEnabled = true;
-        blurEnabled = true;
-        animationsEnabled = true;
-        soundEnabled = true;
-        
-        // Применяем сброс
-        document.getElementById('weather').style.opacity = '1';
-        
-        const cards = document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item');
-        cards.forEach(card => {
-            card.style.backdropFilter = '';
-            card.style.webkitBackdropFilter = '';
-        });
-        
-        const animated = document.querySelectorAll('.reveal, .banner-star, .streamer-card .live-badge, .feature-card::before, .community-icon, .title, .hero::before');
-        animated.forEach(el => {
-            el.style.animation = '';
-        });
-        
-        // Обновляем тексты
-        document.getElementById('particlesText').textContent = translations[currentLang]['particles'];
-        document.getElementById('blurText').textContent = translations[currentLang]['blur'];
-        document.getElementById('animationsText').textContent = translations[currentLang]['animations'];
-        document.getElementById('soundText').textContent = translations[currentLang]['sound'];
-        
-        // Закрываем меню
-        closeFeaturesMenu();
-    }
-
-    // ===== ЯЗЫКИ =====
-    function setLanguage(lang) {
-        currentLang = lang;
-        updateTexts();
-        closeLangMenu();
-    }
-
-    function updateTexts() {
-        const elements = document.querySelectorAll('[data-key]');
-        elements.forEach(function(element) {
-            const key = element.getAttribute('data-key');
-            if (translations[currentLang] && translations[currentLang][key]) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.placeholder = translations[currentLang][key];
-                } else {
-                    element.textContent = translations[currentLang][key];
-                }
-            }
-        });
-        
-        // Обновляем тексты в меню фишек
-        document.getElementById('particlesText').textContent = particlesEnabled ? translations[currentLang]['particles'] : translations[currentLang]['particles-off'];
-        document.getElementById('blurText').textContent = blurEnabled ? translations[currentLang]['blur'] : translations[currentLang]['blur-off'];
-        document.getElementById('animationsText').textContent = animationsEnabled ? translations[currentLang]['animations'] : translations[currentLang]['animations-off'];
-        document.getElementById('soundText').textContent = soundEnabled ? translations[currentLang]['sound'] : translations[currentLang]['sound-off'];
-    }
-
-    // ===== ЗАКРЫТИЕ ПО КЛИКУ ВНЕ =====
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.color-picker')) {
-            closeColorMenu();
-        }
-        if (!e.target.closest('.lang-picker')) {
-            closeLangMenu();
-        }
-        if (!e.target.closest('.features-btn') && !e.target.closest('#featuresMenu')) {
-            closeFeaturesMenu();
-        }
-    });
-
-    // ===== ЗАКРЫТИЕ ПО ESC =====
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const modal = document.getElementById('rules-modal');
-            if (modal.classList.contains('show')) {
-                closeRules();
-            }
-            closeColorMenu();
-            closeLangMenu();
-            closeFeaturesMenu();
-        }
-    });
-
-    // ===== АДАПТИВНОЕ МЕНЮ =====
-    function updateMenu() {
-        const panelLinks = document.getElementById('panel-links');
-        const width = window.innerWidth;
-        
-        const allLinks = [
-            { href: "#", text: "🏠 Главная" },
-            { href: "#stats", text: "📊 Статистика" },
-            { href: "#features", text: "✨ Особенности" },
-            { href: "#streamers", text: "🔴 Стримеры" },
-            { href: "#top-players", text: "🏆 Топ игроков" },
-            { href: "#achievements", text: "🎯 Достижения" },
-            { href: "#events", text: "🎮 Ивенты" },
-            { href: "#roadmap", text: "🗺️ Роудмап" },
-            { href: "#how-to-play", text: "🚀 Как начать" },
-            { href: "#faq", text: "❓ Вопросы" },
-            { href: "#community", text: "👥 Сообщество" },
-            { href: "#privacy", text: "🔒 Защита данных" },
-            { href: "#detailed-faq", text: "📝 Частые вопросы" },
-            { href: "javascript:void(0)", text: "📜 Правила", onclick: "openRules()" }
-        ];
-        
-        let itemsToShow = 10;
-        if (width <= 768) {
-            itemsToShow = 3;
-        } else if (width <= 1366) {
-            itemsToShow = 5;
-        } else {
-            itemsToShow = 8;
-        }
-        
-        panelLinks.innerHTML = '';
-        
-        for (let i = 0; i < itemsToShow && i < allLinks.length; i++) {
-            const link = allLinks[i];
-            const a = document.createElement('a');
-            a.href = link.href;
-            a.textContent = link.text;
-            if (link.onclick) {
-                a.setAttribute('onclick', link.onclick);
-            }
-            panelLinks.appendChild(a);
-        }
-    }
-    
-    window.addEventListener('load', function() {
-        updateMenu();
-        updateTexts();
-    });
-    
-    window.addEventListener('resize', updateMenu);
-</script>
-
-</body>
-</html>
+            <h3>Анти-чит система</h3>
+            <p>Просунутий захист від читів. Че

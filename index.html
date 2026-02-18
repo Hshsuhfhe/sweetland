@@ -25,6 +25,7 @@
             --snow-opacity: 1;
             --neon: var(--accent);
             --blur: 12px;
+            --header-bg: rgba(10, 10, 15, 0.8);
         }
 
         /* ===== ТЕМНАЯ ТЕМА (ОСНОВНАЯ) ===== */
@@ -44,6 +45,7 @@
             --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.25);
             --glow: 0 0 20px rgba(163, 102, 255, 0.3);
             --neon: var(--accent);
+            --header-bg: rgba(10, 10, 15, 0.8);
         }
 
         /* ===== СВЕТЛАЯ ТЕМА ===== */
@@ -63,6 +65,7 @@
             --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15);
             --glow: 0 0 20px rgba(255, 123, 92, 0.15);
             --neon: #ff9b7c;
+            --header-bg: rgba(250, 247, 245, 0.8);
         }
 
         /* ===== РОЗОВАЯ ТЕМА ===== */
@@ -82,6 +85,7 @@
             --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.3);
             --glow: 0 0 20px rgba(255, 102, 178, 0.3);
             --neon: #ff66b2;
+            --header-bg: rgba(26, 15, 20, 0.8);
         }
 
         /* ===== ГОЛУБАЯ ТЕМА ===== */
@@ -101,6 +105,7 @@
             --shadow-accent: 0 8px 32px rgba(77, 158, 255, 0.3);
             --glow: 0 0 20px rgba(77, 158, 255, 0.3);
             --neon: #4d9eff;
+            --header-bg: rgba(15, 26, 36, 0.8);
         }
 
         /* ===== ЗЕЛЕНАЯ ТЕМА ===== */
@@ -120,6 +125,7 @@
             --shadow-accent: 0 8px 32px rgba(76, 175, 80, 0.3);
             --glow: 0 0 20px rgba(76, 175, 80, 0.3);
             --neon: #4caf50;
+            --header-bg: rgba(15, 26, 17, 0.8);
         }
 
         /* ===== ОРАНЖЕВАЯ ТЕМА ===== */
@@ -139,6 +145,7 @@
             --shadow-accent: 0 8px 32px rgba(255, 152, 0, 0.3);
             --glow: 0 0 20px rgba(255, 152, 0, 0.3);
             --neon: #ff9800;
+            --header-bg: rgba(31, 26, 15, 0.8);
         }
 
         /* ===== ФИОЛЕТОВАЯ ТЕМА ===== */
@@ -158,6 +165,7 @@
             --shadow-accent: 0 8px 32px rgba(156, 39, 176, 0.3);
             --glow: 0 0 20px rgba(156, 39, 176, 0.3);
             --neon: #9c27b0;
+            --header-bg: rgba(26, 15, 31, 0.8);
         }
 
         /* ===== ЖЕЛТАЯ ТЕМА ===== */
@@ -177,6 +185,7 @@
             --shadow-accent: 0 8px 32px rgba(255, 215, 0, 0.3);
             --glow: 0 0 20px rgba(255, 215, 0, 0.3);
             --neon: #ffd700;
+            --header-bg: rgba(26, 26, 15, 0.8);
         }
 
         /* ===== КРАСНАЯ ТЕМА ===== */
@@ -196,6 +205,7 @@
             --shadow-accent: 0 8px 32px rgba(255, 68, 68, 0.3);
             --glow: 0 0 20px rgba(255, 68, 68, 0.3);
             --neon: #ff4444;
+            --header-bg: rgba(26, 15, 15, 0.8);
         }
 
         /* ===== БИРЮЗОВАЯ ТЕМА ===== */
@@ -215,6 +225,7 @@
             --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.3);
             --glow: 0 0 20px rgba(0, 128, 128, 0.3);
             --neon: #008080;
+            --header-bg: rgba(15, 26, 26, 0.8);
         }
 
         /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
@@ -658,10 +669,17 @@
             max-width: 90%;
             animation: slideDown 0.5s ease;
             transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 60px;
+            background: var(--header-bg);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px var(--accent);
         }
 
         .nav-oval-container:hover {
             transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 0 50px var(--accent);
         }
 
         @keyframes slideDown {
@@ -676,23 +694,12 @@
         }
 
         .shop-banner {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 60px;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 30px var(--accent);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 30px;
             width: 100%;
             transition: all 0.3s ease;
-        }
-
-        .shop-banner:hover {
-            border-color: var(--accent-light);
-            box-shadow: 0 0 50px var(--accent);
         }
 
         .banner-left {
@@ -1468,7 +1475,7 @@
             }
             50% {
                 opacity: 0.8;
-                transform: scale(1.05);
+                transform: rotate(45deg) scale(1.05);
             }
         }
         
@@ -2490,7 +2497,7 @@
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
-            <span class="banner-star">☆</span>
+            <span class="banner-star">⭐</span>
             SweetLand
         </div>
         <div class="banner-center">
@@ -2511,12 +2518,10 @@
 
 <!-- ===== ПАНЕЛЬ УПРАВЛЕНИЯ ===== -->
 <div class="control-panel">
-    <!-- Кнопка смены темы (только тёмная/светлая) -->
     <div class="theme-toggle" onclick="toggleDarkLight()">
         <div class="theme-icon" id="themeIcon">🌙</div>
     </div>
     
-    <!-- Меню выбора цвета (все темы) -->
     <div class="color-picker">
         <div class="color-btn" onclick="toggleColorMenu()">🎨</div>
         <div class="color-menu" id="colorMenu">
@@ -2563,7 +2568,6 @@
         </div>
     </div>
     
-    <!-- Меню выбора языка -->
     <div class="lang-picker">
         <div class="lang-btn" onclick="toggleLangMenu()">🌐</div>
         <div class="lang-menu" id="langMenu">
@@ -2594,7 +2598,6 @@
         </div>
     </div>
     
-    <!-- Меню выбора погоды -->
     <div class="weather-picker">
         <div class="weather-btn" onclick="toggleWeatherMenu()">🌧️</div>
         <div class="weather-menu" id="weatherMenu">
@@ -2617,7 +2620,6 @@
         </div>
     </div>
     
-    <!-- Меню настроек -->
     <div class="settings-picker">
         <div class="settings-btn" onclick="toggleSettingsMenu()">⚙️</div>
         <div class="settings-menu" id="settingsMenu">
@@ -2652,7 +2654,19 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
-        <!-- Ссылки будут добавлены через JavaScript -->
+        <a href="#stats">Статистика</a>
+        <a href="#features">Особенности</a>
+        <a href="#streamers">Стримеры</a>
+        <a href="#top-players">Топ игроков</a>
+        <a href="#achievements">Достижения</a>
+        <a href="#events">Ивенты</a>
+        <a href="#roadmap">Роудмап</a>
+        <a href="#how-to-play">Как начать</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#community">Сообщество</a>
+        <a href="#privacy">Защита данных</a>
+        <a href="#detailed-faq">Частые вопросы</a>
+        <a href="javascript:void(0)" onclick="openRules()">Правила</a>
     </div>
     
     <div class="panel-social">
@@ -2742,7 +2756,7 @@
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <img src="images/5opka.png" alt="5opka" class="giant-img">
+            <img src="https://placehold.co/600x400/8a4cdd/ffffff?text=SweetLand" alt="SweetLand" class="giant-img">
         </div>
     </div>
     <div id="copyNotice">IP скопирован</div>
@@ -2761,8 +2775,8 @@
             <div class="stat-label">Актуальная версия</div>
         </div>
         <div class="stat-card">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">Ванильный геймплей</div>
+            <div class="stat-number" id="onlineCount">0</div>
+            <div class="stat-label">Игроков онлайн</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">0%</div>
@@ -3276,17 +3290,232 @@
 
 <script>
     // ===== ПЕРЕМЕННЫЕ =====
-    let currentTheme = 'dark';
-    let currentLang = 'ru';
+    let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
+    let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
+    let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
+    let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
+    let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
+    let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
+    
     let colorMenuOpen = false;
     let langMenuOpen = false;
     let weatherMenuOpen = false;
     let settingsMenuOpen = false;
-    let particlesEnabled = true;
-    let blurEnabled = true;
-    let animationsEnabled = true;
-    let currentWeather = 'auto';
     
+    // ===== ПЕРЕВОДЫ =====
+    const translations = {
+        ru: {
+            'stats': 'Статистика',
+            'features': 'Особенности',
+            'streamers': 'Стримеры',
+            'top-players': 'Топ игроков',
+            'achievements': 'Достижения',
+            'events': 'Ивенты',
+            'roadmap': 'Роудмап',
+            'how-to-play': 'Как начать',
+            'faq': 'Вопросы',
+            'community': 'Сообщество',
+            'privacy': 'Защита данных',
+            'detailed-faq': 'Частые вопросы',
+            'rules': 'Правила',
+            'server-stats': 'Статистика сервера',
+            'server-features': 'Особенности сервера',
+            'streamers-on-server': 'Стримеры на сервере',
+            'top-players-title': 'Топ игроков',
+            'achievements-title': 'Достижения игроков',
+            'future-events': 'Будущие ивенты',
+            'development-plan': 'План развития',
+            'how-to-play-title': 'Как начать играть',
+            'faq-title': 'Ответы на вопросы',
+            'our-community': 'Наше сообщество',
+            'privacy-title': 'Защита данных',
+            'detailed-faq-title': 'Часто задаваемые вопросы',
+            'copy-ip': 'IP скопирован',
+            'play-now': 'Играть сейчас',
+            'server-version': '1.21.8',
+            'online': 'Игроков онлайн',
+            'no-donate': 'Доната',
+            'work-247': 'Работа сервера',
+            'current-version': 'Актуальная версия',
+            'vanilla': 'Ванильный геймплей'
+        },
+        uk: {
+            'stats': 'Статистика',
+            'features': 'Особливості',
+            'streamers': 'Стрімери',
+            'top-players': 'Топ гравців',
+            'achievements': 'Досягнення',
+            'events': 'Івенти',
+            'roadmap': 'Роудмап',
+            'how-to-play': 'Як почати',
+            'faq': 'Питання',
+            'community': 'Спільнота',
+            'privacy': 'Захист даних',
+            'detailed-faq': 'Часті питання',
+            'rules': 'Правила',
+            'server-stats': 'Статистика сервера',
+            'server-features': 'Особливості сервера',
+            'streamers-on-server': 'Стрімери на сервері',
+            'top-players-title': 'Топ гравців',
+            'achievements-title': 'Досягнення гравців',
+            'future-events': 'Майбутні івенти',
+            'development-plan': 'План розвитку',
+            'how-to-play-title': 'Як почати грати',
+            'faq-title': 'Відповіді на питання',
+            'our-community': 'Наша спільнота',
+            'privacy-title': 'Захист даних',
+            'detailed-faq-title': 'Часті запитання',
+            'copy-ip': 'IP скопійовано',
+            'play-now': 'Грати зараз',
+            'server-version': '1.21.8',
+            'online': 'Гравців онлайн',
+            'no-donate': 'Донату',
+            'work-247': 'Робота сервера',
+            'current-version': 'Актуальна версія',
+            'vanilla': 'Ванільний геймплей'
+        },
+        en: {
+            'stats': 'Stats',
+            'features': 'Features',
+            'streamers': 'Streamers',
+            'top-players': 'Top Players',
+            'achievements': 'Achievements',
+            'events': 'Events',
+            'roadmap': 'Roadmap',
+            'how-to-play': 'How to Play',
+            'faq': 'FAQ',
+            'community': 'Community',
+            'privacy': 'Privacy',
+            'detailed-faq': 'Detailed FAQ',
+            'rules': 'Rules',
+            'server-stats': 'Server Stats',
+            'server-features': 'Server Features',
+            'streamers-on-server': 'Streamers on Server',
+            'top-players-title': 'Top Players',
+            'achievements-title': 'Player Achievements',
+            'future-events': 'Future Events',
+            'development-plan': 'Development Plan',
+            'how-to-play-title': 'How to Start Playing',
+            'faq-title': 'FAQ',
+            'our-community': 'Our Community',
+            'privacy-title': 'Data Protection',
+            'detailed-faq-title': 'Frequently Asked Questions',
+            'copy-ip': 'IP copied',
+            'play-now': 'Play Now',
+            'server-version': '1.21.8',
+            'online': 'Players Online',
+            'no-donate': 'No Donate',
+            'work-247': 'Server Uptime',
+            'current-version': 'Current Version',
+            'vanilla': 'Vanilla Gameplay'
+        },
+        de: {
+            'stats': 'Statistiken',
+            'features': 'Funktionen',
+            'streamers': 'Streamer',
+            'top-players': 'Top-Spieler',
+            'achievements': 'Errungenschaften',
+            'events': 'Events',
+            'roadmap': 'Fahrplan',
+            'how-to-play': 'Spielanleitung',
+            'faq': 'FAQ',
+            'community': 'Gemeinschaft',
+            'privacy': 'Datenschutz',
+            'detailed-faq': 'Detaillierte FAQ',
+            'rules': 'Regeln',
+            'server-stats': 'Server-Statistiken',
+            'server-features': 'Server-Funktionen',
+            'streamers-on-server': 'Streamer auf dem Server',
+            'top-players-title': 'Top-Spieler',
+            'achievements-title': 'Spieler-Errungenschaften',
+            'future-events': 'Zukünftige Events',
+            'development-plan': 'Entwicklungsplan',
+            'how-to-play-title': 'Wie man anfängt zu spielen',
+            'faq-title': 'Antworten auf Fragen',
+            'our-community': 'Unsere Gemeinschaft',
+            'privacy-title': 'Datenschutz',
+            'detailed-faq-title': 'Häufig gestellte Fragen',
+            'copy-ip': 'IP kopiert',
+            'play-now': 'Jetzt spielen',
+            'server-version': '1.21.8',
+            'online': 'Spieler online',
+            'no-donate': 'Kein Donate',
+            'work-247': 'Server-Betrieb',
+            'current-version': 'Aktuelle Version',
+            'vanilla': 'Vanilla-Gameplay'
+        },
+        fr: {
+            'stats': 'Statistiques',
+            'features': 'Fonctionnalités',
+            'streamers': 'Streamers',
+            'top-players': 'Meilleurs joueurs',
+            'achievements': 'Succès',
+            'events': 'Événements',
+            'roadmap': 'Feuille de route',
+            'how-to-play': 'Comment jouer',
+            'faq': 'FAQ',
+            'community': 'Communauté',
+            'privacy': 'Confidentialité',
+            'detailed-faq': 'FAQ détaillée',
+            'rules': 'Règles',
+            'server-stats': 'Statistiques du serveur',
+            'server-features': 'Fonctionnalités du serveur',
+            'streamers-on-server': 'Streamers sur le serveur',
+            'top-players-title': 'Meilleurs joueurs',
+            'achievements-title': 'Succès des joueurs',
+            'future-events': 'Événements à venir',
+            'development-plan': 'Plan de développement',
+            'how-to-play-title': 'Comment commencer à jouer',
+            'faq-title': 'Réponses aux questions',
+            'our-community': 'Notre communauté',
+            'privacy-title': 'Protection des données',
+            'detailed-faq-title': 'Questions fréquemment posées',
+            'copy-ip': 'IP copiée',
+            'play-now': 'Jouer maintenant',
+            'server-version': '1.21.8',
+            'online': 'Joueurs en ligne',
+            'no-donate': 'Pas de don',
+            'work-247': 'Fonctionnement du serveur',
+            'current-version': 'Version actuelle',
+            'vanilla': 'Gameplay vanilla'
+        },
+        es: {
+            'stats': 'Estadísticas',
+            'features': 'Características',
+            'streamers': 'Streamers',
+            'top-players': 'Mejores jugadores',
+            'achievements': 'Logros',
+            'events': 'Eventos',
+            'roadmap': 'Hoja de ruta',
+            'how-to-play': 'Cómo jugar',
+            'faq': 'Preguntas frecuentes',
+            'community': 'Comunidad',
+            'privacy': 'Privacidad',
+            'detailed-faq': 'Preguntas frecuentes detalladas',
+            'rules': 'Reglas',
+            'server-stats': 'Estadísticas del servidor',
+            'server-features': 'Características del servidor',
+            'streamers-on-server': 'Streamers en el servidor',
+            'top-players-title': 'Mejores jugadores',
+            'achievements-title': 'Logros de jugadores',
+            'future-events': 'Próximos eventos',
+            'development-plan': 'Plan de desarrollo',
+            'how-to-play-title': 'Cómo empezar a jugar',
+            'faq-title': 'Respuestas a preguntas',
+            'our-community': 'Nuestra comunidad',
+            'privacy-title': 'Protección de datos',
+            'detailed-faq-title': 'Preguntas frecuentes',
+            'copy-ip': 'IP copiada',
+            'play-now': 'Jugar ahora',
+            'server-version': '1.21.8',
+            'online': 'Jugadores en línea',
+            'no-donate': 'Sin donaciones',
+            'work-247': 'Funcionamiento del servidor',
+            'current-version': 'Versión actual',
+            'vanilla': 'Juego vanilla'
+        }
+    };
+
     // ===== ФУНКЦИИ =====
     function togglePanel() {
         const panel = document.getElementById('side-panel');
@@ -3333,6 +3562,7 @@
         
         function showCopyNotice() {
             const notice = document.getElementById('copyNotice');
+            notice.textContent = translations[currentLang]['copy-ip'];
             notice.style.opacity = '1';
             setTimeout(function() {
                 notice.style.opacity = '0';
@@ -3422,28 +3652,22 @@
         body.classList.remove('dark', 'light', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal');
         body.classList.add(theme);
         currentTheme = theme;
+        localStorage.setItem('sweetland-theme', theme);
         
-        if (theme === 'light') {
-            themeIcon.textContent = '☀️';
-        } else if (theme === 'dark') {
-            themeIcon.textContent = '🌙';
-        } else if (theme === 'pink') {
-            themeIcon.textContent = '🌸';
-        } else if (theme === 'blue') {
-            themeIcon.textContent = '💙';
-        } else if (theme === 'green') {
-            themeIcon.textContent = '💚';
-        } else if (theme === 'orange') {
-            themeIcon.textContent = '🧡';
-        } else if (theme === 'purple') {
-            themeIcon.textContent = '💜';
-        } else if (theme === 'yellow') {
-            themeIcon.textContent = '💛';
-        } else if (theme === 'red') {
-            themeIcon.textContent = '❤️';
-        } else if (theme === 'teal') {
-            themeIcon.textContent = '💙';
-        }
+        const themeIcons = {
+            dark: '🌙',
+            light: '☀️',
+            pink: '🌸',
+            blue: '💙',
+            green: '💚',
+            orange: '🧡',
+            purple: '💜',
+            yellow: '💛',
+            red: '❤️',
+            teal: '💙'
+        };
+        
+        themeIcon.textContent = themeIcons[theme] || '🌙';
         
         if (currentWeather === 'auto') {
             createWeather();
@@ -3453,11 +3677,7 @@
 
     function toggleDarkLight() {
         if (currentTheme === 'dark' || currentTheme === 'light') {
-            if (currentTheme === 'dark') {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
         } else {
             setTheme('dark');
         }
@@ -3522,6 +3742,7 @@
 
     function setWeather(type) {
         currentWeather = type;
+        localStorage.setItem('sweetland-weather', type);
         createWeather();
         closeWeatherMenu();
     }
@@ -3558,6 +3779,8 @@
             weather.style.opacity = '0';
             particlesText.textContent = 'Частицы: выкл';
         }
+        
+        localStorage.setItem('sweetland-particles', particlesEnabled);
     }
 
     function toggleBlur() {
@@ -3576,6 +3799,7 @@
         });
         
         blurText.textContent = blurEnabled ? 'Размытие: вкл' : 'Размытие: выкл';
+        localStorage.setItem('sweetland-blur', blurEnabled);
     }
 
     function toggleAnimations() {
@@ -3598,6 +3822,7 @@
         }
         
         animationsText.textContent = animationsEnabled ? 'Анимации: вкл' : 'Анимации: выкл';
+        localStorage.setItem('sweetland-animations', animationsEnabled);
     }
 
     function resetSettings() {
@@ -3627,17 +3852,116 @@
         document.getElementById('blurText').textContent = 'Размытие: вкл';
         document.getElementById('animationsText').textContent = 'Анимации: вкл';
         
+        localStorage.setItem('sweetland-particles', 'true');
+        localStorage.setItem('sweetland-blur', 'true');
+        localStorage.setItem('sweetland-animations', 'true');
+        localStorage.setItem('sweetland-weather', 'auto');
+        
         createWeather();
         closeSettingsMenu();
     }
 
-    // ===== ЯЗЫКИ (заглушка, для полноценной реализации нужны переводы) =====
+    // ===== ЯЗЫКИ =====
     function setLanguage(lang) {
         currentLang = lang;
-        // Здесь можно добавить логику смены языка
+        localStorage.setItem('sweetland-lang', lang);
+        updateLanguage();
         closeLangMenu();
-        alert('Смена языка на ' + lang + ' (в демо-версии)');
     }
+    
+    function updateLanguage() {
+        // Обновление текстов на странице
+        document.querySelectorAll('[data-translate]').forEach(el => {
+            const key = el.getAttribute('data-translate');
+            if (translations[currentLang] && translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+        
+        // Обновление кнопки "Играть сейчас" в овале
+        const playNowBtn = document.querySelector('.play-now');
+        if (playNowBtn) {
+            playNowBtn.textContent = translations[currentLang]['play-now'];
+        }
+        
+        // Обновление версии сервера
+        const versionBtn = document.querySelector('.btn-version');
+        if (versionBtn) {
+            versionBtn.textContent = translations[currentLang]['server-version'];
+        }
+        
+        // Обновление заголовков секций
+        const sectionTitles = {
+            'stats': 'server-stats',
+            'features': 'server-features',
+            'streamers': 'streamers-on-server',
+            'top-players': 'top-players-title',
+            'achievements': 'achievements-title',
+            'events': 'future-events',
+            'roadmap': 'development-plan',
+            'how-to-play': 'how-to-play-title',
+            'faq': 'faq-title',
+            'community': 'our-community',
+            'privacy': 'privacy-title',
+            'detailed-faq': 'detailed-faq-title'
+        };
+        
+        Object.keys(sectionTitles).forEach(id => {
+            const section = document.getElementById(id);
+            if (section) {
+                const titleSpan = section.querySelector('.section-title span');
+                if (titleSpan) {
+                    titleSpan.textContent = translations[currentLang][sectionTitles[id]];
+                }
+            }
+        });
+        
+        // Обновление ссылок в боковой панели
+        const panelLinks = document.querySelectorAll('.panel-links a');
+        const linkTexts = ['stats', 'features', 'streamers', 'top-players', 'achievements', 'events', 'roadmap', 'how-to-play', 'faq', 'community', 'privacy', 'detailed-faq', 'rules'];
+        
+        panelLinks.forEach((link, index) => {
+            if (index < linkTexts.length) {
+                link.textContent = translations[currentLang][linkTexts[index]];
+            }
+        });
+        
+        // Обновление ссылок в футере
+        const footerLinks = document.querySelectorAll('.footer-section a');
+        footerLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const id = href.substring(1);
+                if (translations[currentLang][id]) {
+                    link.textContent = translations[currentLang][id];
+                }
+            } else if (link.getAttribute('onclick') && link.getAttribute('onclick').includes('openRules()')) {
+                link.textContent = translations[currentLang]['rules'];
+            }
+        });
+        
+        // Обновление статистики
+        const statCards = document.querySelectorAll('.stat-card .stat-label');
+        if (statCards.length >= 4) {
+            statCards[0].textContent = translations[currentLang]['work-247'];
+            statCards[1].textContent = translations[currentLang]['current-version'];
+            statCards[2].textContent = translations[currentLang]['online'];
+            statCards[3].textContent = translations[currentLang]['no-donate'];
+        }
+    }
+
+    // ===== ОНЛАЙН СЧЕТЧИК =====
+    function updateOnlineCount() {
+        const onlineElement = document.getElementById('onlineCount');
+        if (onlineElement) {
+            // Имитация случайного онлайна для демо
+            const randomOnline = Math.floor(Math.random() * 50) + 20;
+            onlineElement.textContent = randomOnline;
+        }
+    }
+    
+    setInterval(updateOnlineCount, 30000);
+    updateOnlineCount();
 
     // ===== ЗАКРЫТИЕ ПО КЛИКУ ВНЕ =====
     document.addEventListener('click', function(e) {
@@ -3679,24 +4003,9 @@
         const panelLinks = document.getElementById('panel-links');
         const width = window.innerWidth;
         
-        const allLinks = [
-            { href: "#", text: "🏠 Главная" },
-            { href: "#stats", text: "📊 Статистика" },
-            { href: "#features", text: "✨ Особенности" },
-            { href: "#streamers", text: "🔴 Стримеры" },
-            { href: "#top-players", text: "🏆 Топ игроков" },
-            { href: "#achievements", text: "🎯 Достижения" },
-            { href: "#events", text: "🎮 Ивенты" },
-            { href: "#roadmap", text: "🗺️ Роудмап" },
-            { href: "#how-to-play", text: "🚀 Как начать" },
-            { href: "#faq", text: "❓ Вопросы" },
-            { href: "#community", text: "👥 Сообщество" },
-            { href: "#privacy", text: "🔒 Защита данных" },
-            { href: "#detailed-faq", text: "📝 Частые вопросы" },
-            { href: "javascript:void(0)", text: "📜 Правила", onclick: "openRules()" }
-        ];
+        const linkKeys = ['stats', 'features', 'streamers', 'top-players', 'achievements', 'events', 'roadmap', 'how-to-play', 'faq', 'community', 'privacy', 'detailed-faq', 'rules'];
         
-        let itemsToShow = 14; // максимум
+        let itemsToShow = 13;
         if (width <= 480) {
             itemsToShow = 3;
         } else if (width <= 768) {
@@ -3709,20 +4018,39 @@
         
         panelLinks.innerHTML = '';
         
-        for (let i = 0; i < itemsToShow && i < allLinks.length; i++) {
-            const link = allLinks[i];
+        for (let i = 0; i < itemsToShow && i < linkKeys.length; i++) {
+            const key = linkKeys[i];
             const a = document.createElement('a');
-            a.href = link.href;
-            a.textContent = link.text;
-            if (link.onclick) {
-                a.setAttribute('onclick', link.onclick);
+            if (key === 'rules') {
+                a.href = 'javascript:void(0)';
+                a.setAttribute('onclick', 'openRules()');
+            } else {
+                a.href = '#' + key;
             }
+            a.textContent = translations[currentLang][key];
             panelLinks.appendChild(a);
         }
     }
     
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
     window.addEventListener('load', function() {
+        setTheme(currentTheme);
         updateMenu();
+        updateLanguage();
+        
+        // Применение сохраненных настроек
+        if (!particlesEnabled) {
+            document.getElementById('weather').style.opacity = '0';
+            document.getElementById('particlesText').textContent = 'Частицы: выкл';
+        }
+        
+        if (!blurEnabled) {
+            toggleBlur();
+        }
+        
+        if (!animationsEnabled) {
+            toggleAnimations();
+        }
     });
     
     window.addEventListener('resize', updateMenu);

@@ -62,8 +62,6 @@
             --text-tertiary: #8a8a8a;
             --header-bg: rgba(250, 247, 245, 0.95);
         }
-        /* Цвета применяются динамически через JS, тут только базовые для light */
-        body.light .accent-base { --accent: #ff7b5c; --accent-light: #ff9b7c; --accent-dark: #e05b3c; --border: rgba(255, 123, 92, 0.2); --border-hover: rgba(255, 123, 92, 0.4); --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15); --glow: 0 0 20px rgba(255, 123, 92, 0.15); }
 
         /* Цветовые схемы */
         body.accent-pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --border: rgba(255, 102, 178, 0.3); --border-hover: rgba(255, 102, 178, 0.6); --glow: 0 0 20px rgba(255, 102, 178, 0.3); --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.3); }
@@ -336,13 +334,12 @@
             .section-title { font-size: 24px; margin-bottom: 25px; }
 
             /* В боковой панели на телефоне меньше пунктов */
-            .panel-links .panel-link-item { display: none; } /* Скрываем все по умолчанию */
-            .panel-links .panel-link-item.mobile-visible { display: block; } /* Показываем только с классом mobile-visible */
+            .panel-links .panel-link-item { display: none; }
+            .panel-links .panel-link-item.mobile-visible { display: block; }
         }
 
-        /* Для ПК и больших экранов */
         @media (min-width: 769px) {
-            .panel-links .panel-link-item { display: block; } /* Показываем все */
+            .panel-links .panel-link-item { display: block; }
         }
     </style>
 </head>
@@ -552,7 +549,7 @@
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
 
-    // === ПЕРЕВОДЫ (6 ЯЗЫКОВ) ===
+    // === ПЕРЕВОДЫ (6 ЯЗЫКОВ: ru, uk, en, de, fr, es) ===
     const translations = {
         ru: {
             // Навигация
@@ -668,12 +665,12 @@
             'social': 'Соцсети',
             'footer-copyright': '© 2026 SweetLand. Ванильный Minecraft сервер.',
             
-            // Правила
+            // Правила - заголовки
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
             'rules-section1': '1. Общие Правила',
             'rules-section2': '2. Правила Администрации',
             
-            // Тексты правил (для рендера)
+            // Правила - тексты
             'rule-1': 'Заходя на сервер вы автоматически соглашаетесь с правилами.',
             'rule-1.1': 'Незнание Правил не освобождает от отвествености.',
             'rule-1.2': 'Запрещена любая порча имущества (гриферство) других игроков.',
@@ -881,12 +878,12 @@
             'social': 'Соцмережі',
             'footer-copyright': '© 2026 SweetLand. Ванільний Minecraft сервер.',
             
-            // Правила
+            // Правила - заголовки
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
             'rules-section1': '1. Загальні Правила',
             'rules-section2': '2. Правила Адміністрації',
             
-            // Тексты правил
+            // Правила - тексты
             'rule-1': 'Заходячи на сервер ви автоматично погоджуєтесь з правилами.',
             'rule-1.1': 'Незнання Правил не звільняє від відповідальності.',
             'rule-1.2': 'Заборонено будь-яке псування майна (гріферство) інших гравців.',
@@ -1094,12 +1091,12 @@
             'social': 'Social',
             'footer-copyright': '© 2026 SweetLand. Vanilla Minecraft server.',
             
-            // Rules
+            // Rules - titles
             'rules-title': 'SERVER RULES',
             'rules-section1': '1. General Rules',
             'rules-section2': '2. Administration Rules',
             
-            // Rule texts
+            // Rules - texts
             'rule-1': 'By joining the server, you automatically agree to the rules.',
             'rule-1.1': 'Ignorance of the rules does not exempt you from responsibility.',
             'rule-1.2': 'Any damage to property (griefing) of other players is prohibited.',
@@ -1112,7 +1109,7 @@
             'rule-1.9': 'Building structures/mechanisms that overload the server is prohibited.',
             'rule-1.10': 'Killing a player without their consent is prohibited.',
             'rule-1.11': 'Taking the loot of a deceased player for yourself is prohibited. Return the items.',
-            'rule-1.12': 'Use of cheats/third-party software is prohibited.',
+            'rule-1.12': 'Use of cheats/third-party software (METEOR, WURST, IMPACT, auto-clickers, auto-totems, etc.) is prohibited.',
             'rule-1.13': 'Concealing a bug/dupe from the administration is prohibited.',
             'rule-1.14': 'Taking abandoned bases without confirmation from the administration is prohibited.',
             'rule-1.15': 'Brute force, hacking, playing on someone else\'s account is prohibited.',
@@ -1121,10 +1118,10 @@
             'rule-1.18': 'Inciting players to break the rules is prohibited.',
             'rule-1.19': 'The account owner bears full responsibility for it.',
             'rule-1.20': 'Creating multi-accounts to bypass a ban is prohibited.',
-            'rule-1.21': 'Building more than 4 automatic farms is prohibited.',
+            'rule-1.21': 'Building more than 4 automatic farms (except food farms) is prohibited.',
             'rule-1.22': 'Spam, caps, inappropriate behavior in chat, insults are prohibited.',
             'rule-1.23': 'Theft in shops and deception in trade is prohibited.',
-            'rule-1.24': 'Entering other people\'s territories without permission is prohibited.',
+            'rule-1.24': 'Entering other people\'s territories without permission (stalking) is prohibited.',
             'rule-1.25': 'Manipulating players by threatening connections with the administration is prohibited.',
             'rule-1.26': 'Construction within a radius of 500 blocks from spawn is prohibited.',
             'rule-1.27': 'Construction in the nether within a radius of 300 blocks from the central portal is prohibited.',
@@ -1133,15 +1130,15 @@
             'rule-1.30': 'Use of x-ray resource packs or mods is prohibited.',
             'rule-1.31': 'Mass giveaways of resources that break the economy are prohibited.',
             'rule-1.32': 'Dupes/bugs that give an advantage are prohibited.',
-            'rule-1.33': 'The administration has the right to choose punishment according to the situation.',
+            'rule-1.33': 'The administration has the right to choose punishment according to the situation, even if it is not in the rules.',
             'rule-1.34': 'Storage/use of x-ray resources is prohibited.',
             'rule-1.35': 'Looking for loopholes in the rules is prohibited.',
             'rule-1.36': 'Submitting more than 3 applications to the project team after refusal is prohibited.',
             'rule-1.37': 'For helping the administration find a violator, you have the right to demand a reward.',
-            'rule-1.38': 'Begging from the administration and players is prohibited.',
+            'rule-1.38': 'Begging (for resources, items, rights) from the administration and players is prohibited.',
             'rule-1.39': 'Demolition of other people\'s totems or other significant buildings without the owner\'s consent is prohibited.',
-            'rule-1.40': 'Use of mods that give an unfair advantage is prohibited.',
-            'rule-1.41': 'Extreme inadequacy, trolling and toxic behavior are prohibited.',
+            'rule-1.40': 'Use of mods that give an unfair advantage (auto-run, mini-maps with entities, etc.) is prohibited.',
+            'rule-1.41': 'Extreme inadequacy, trolling and toxic behavior that spoils the mood of other players is prohibited.',
             'rule-2': 'Exceeding authority is prohibited.',
             'rule-2.1': 'General rules apply to everyone.',
             'rule-2.2': 'Use of creative mode for any purpose is prohibited.',
@@ -1191,19 +1188,647 @@
             'punish-2.2': 'Removal',
             'punish-2.3': 'Removal + Blacklist',
             'punish-2.4': 'Removal',
-        }
+        },
+        
+        de: {
+            // Navigation
+            'nav-features': 'Funktionen',
+            'nav-howtoplay': 'Spielanleitung',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Shop',
+            'discord-link': '💬 Discord',
+            
+            // Colors
+            'color-pink': 'Rosa',
+            'color-blue': 'Blau',
+            'color-green': 'Grün',
+            'color-orange': 'Orange',
+            'color-purple': 'Lila',
+            'color-yellow': 'Gelb',
+            'color-red': 'Rot',
+            'color-teal': 'Türkis',
+            
+            // Languages
+            'lang-ru': 'Russisch',
+            'lang-uk': 'Ukrainisch',
+            'lang-en': 'Englisch',
+            'lang-de': 'Deutsch',
+            'lang-fr': 'Französisch',
+            'lang-es': 'Spanisch',
+            
+            // Weather
+            'weather-auto': 'Auto',
+            'weather-snow': 'Schnee',
+            'weather-rain': 'Regen',
+            'weather-none': 'Aus',
+            
+            // Settings
+            'particles-on': 'Partikel: an',
+            'particles-off': 'Partikel: aus',
+            'blur-on': 'Unschärfe: an',
+            'blur-off': 'Unschärfe: aus',
+            'reset-settings': 'Zurücksetzen',
+            
+            // Side panel
+            'panel-stats': '📊 Statistiken',
+            'panel-features': '✨ Funktionen',
+            'panel-howto': '🚀 Spielanleitung',
+            'panel-streamers': '🎥 Streamer',
+            'panel-top': '🏆 Top-Spieler',
+            'panel-achievements': '🎯 Erfolge',
+            'panel-events': '📅 Events',
+            'panel-roadmap': '🗺️ Fahrplan',
+            'panel-faq': '❓ FAQ',
+            'panel-community': '💬 Gemeinschaft',
+            'panel-privacy': '🔒 Datenschutz',
+            'panel-dfaq': '📌 Fragen',
+            'panel-rules': '📜 Regeln',
+            
+            // Social
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            
+            // Hero
+            'hero-tagline': 'Vanilla-Überleben auf Version 1.21.8. Deine Welt — deine Regeln.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP kopiert',
+            
+            // Stats
+            'stats-title': 'Server-Statistiken',
+            'stat-1': 'Server-Betrieb',
+            'stat-2': 'Aktuelle Version',
+            'stat-3': 'Vanilla-Gameplay',
+            'stat-4': 'Kein Donate',
+            
+            // Features
+            'features-title': 'Server-Funktionen',
+            'feature-1-title': 'Anti-Cheat-System',
+            'feature-1-desc': 'Erweiterter Schutz vor Cheatern. Faires Spiel für alle.',
+            'feature-2-title': 'Stabiler TPS',
+            'feature-2-desc': 'Optimierter Server auf leistungsstarker Hardware. Keine Verzögerungen.',
+            'feature-3-title': 'Regelmäßige Events',
+            'feature-3-desc': 'Wöchentliche Veranstaltungen und Wettbewerbe mit Preisen für Spieler.',
+            'feature-4-title': 'Bautenschutz',
+            'feature-4-desc': 'Ihre Gebäude sind zuverlässig vor Griefern geschützt.',
+            
+            // How to play
+            'howto-title': 'Spielanleitung',
+            'howto-1': 'Version 1.21.8',
+            'howto-1-desc': 'Stelle sicher, dass du die neueste Version von Minecraft installiert hast.',
+            'howto-2': 'Bewirb dich in Discord',
+            'howto-2-desc': 'Fülle das Bewerbungsformular aus und lies die Serverregeln.',
+            'howto-3': 'Tritt bei und spiele',
+            'howto-3-desc': 'Füge nach der Genehmigung den Server hinzu und wähle einen Standort für deine Basis.',
+            
+            // FAQ
+            'faq-title': 'FAQ',
+            'faq-1': 'Wann ist der Start?',
+            'faq-1-desc': 'Der Server bereitet sich auf den Start vor. Folge den Neuigkeiten in Discord.',
+            'faq-2': 'Welche Version?',
+            'faq-2-desc': 'Der Server wird auf der neuesten Version 1.21.8 laufen.',
+            'faq-3': 'Kontoschutz?',
+            'faq-3-desc': 'Anti-Cheat-System und Verschlüsselung der Spielerdaten.',
+            'faq-4': 'Donate?',
+            'faq-4-desc': 'Nein, dies ist ein komplett Vanilla-Server. Keine Privilegien.',
+            
+            // Footer
+            'footer-title': 'SweetLand',
+            'footer-desc': 'Vanilla-Überleben ohne Grenzen.',
+            'quick-links': 'Schnelllinks',
+            'footer-stats': 'Statistiken',
+            'footer-features': 'Funktionen',
+            'footer-howto': 'Spielanleitung',
+            'footer-faq': 'FAQ',
+            'social': 'Soziales',
+            'footer-copyright': '© 2026 SweetLand. Vanilla Minecraft Server.',
+            
+            // Rules - titles
+            'rules-title': 'SERVER REGELN',
+            'rules-section1': '1. Allgemeine Regeln',
+            'rules-section2': '2. Administrationsregeln',
+            
+            // Rules - texts (using English versions for brevity, would need full German translation in production)
+            'rule-1': 'Durch den Beitritt zum Server stimmst du automatisch allen Regeln zu.',
+            'rule-1.1': 'Unkenntnis der Regeln befreit dich nicht von der Verantwortung.',
+            'rule-1.2': 'Jegliche Beschädigung von Eigentum (Griefing) anderer Spieler ist verboten.',
+            'rule-1.3': 'Diebstahl von Ressourcen anderer Spieler ist verboten.',
+            'rule-1.4': 'Das Töten von Mobs anderer Spieler auf deren Territorium ist verboten.',
+            'rule-1.5': 'Sich in Städten und Territorien von Spielern und Clans ohne deren Zustimmung niederzulassen ist verboten.',
+            'rule-1.6': 'Das Ignorieren von Verbotsschildern ist verboten.',
+            'rule-1.7': 'Die Nutzung fremder Farmen ohne Zustimmung ist verboten.',
+            'rule-1.8': 'Jegliche Beschädigung der Spielwelt ist verboten.',
+            'rule-1.9': 'Der Bau von Strukturen/Mechanismen, die den Server überlasten, ist verboten.',
+            'rule-1.10': 'Das Töten eines Spielers ohne dessen Zustimmung ist verboten.',
+            'rule-1.11': 'Die Aneignung der Beute eines verstorbenen Spielers ist verboten. Gib die Gegenstände zurück.',
+            'rule-1.12': 'Die Verwendung von Cheats/Drittanbieter-Software ist verboten.',
+            'rule-1.13': 'Das Verheimlichen von Bugs/Dupes vor der Administration ist verboten.',
+            'rule-1.14': 'Die Aneignung verlassener Basen ohne Bestätigung der Administration ist verboten.',
+            'rule-1.15': 'Brute-Force, Hacken, Spielen auf fremden Konten ist verboten.',
+            'rule-1.16': 'Jegliche Schädigung des Servers und/oder der Spieler ist verboten.',
+            'rule-1.17': 'Jegliche kommerzielle Aktivität außerhalb des Spiels ist verboten.',
+            'rule-1.18': 'Das Anstiften von Spielern zu Regelverstößen ist verboten.',
+            'rule-1.19': 'Der Kontoinhaber trägt die volle Verantwortung dafür.',
+            'rule-1.20': 'Die Erstellung von Mehrfachkonten zur Umgehung eines Bans ist verboten.',
+            'rule-1.21': 'Der Bau von mehr als 4 automatischen Farmen ist verboten.',
+            'rule-1.22': 'Spam, Caps, unangemessenes Verhalten im Chat, Beleidigungen sind verboten.',
+            'rule-1.23': 'Diebstahl in Geschäften und Betrug im Handel ist verboten.',
+            'rule-1.24': 'Das Betreten fremder Gebiete ohne Erlaubnis ist verboten.',
+            'rule-1.25': 'Die Manipulation von Spielern durch Androhung von Verbindungen zur Administration ist verboten.',
+            'rule-1.26': 'Bau im Umkreis von 500 Blöcken um den Spawn ist verboten.',
+            'rule-1.27': 'Bau im Nether im Umkreis von 300 Blöcken um das zentrale Portal ist verboten.',
+            'rule-1.28': 'Fallenbauten, die den Spieler töten, sind verboten.',
+            'rule-1.29': 'Auf Aufforderung der Administration müssen Sie illegale Bauten abreißen/verlegen.',
+            'rule-1.30': 'Die Verwendung von X-Ray-Ressourcenpaketen oder Mods ist verboten.',
+            'rule-1.31': 'Massenverteilungen von Ressourcen, die die Wirtschaft zerstören, sind verboten.',
+            'rule-1.32': 'Dupes/Bugs, die einen Vorteil verschaffen, sind verboten.',
+            'rule-1.33': 'Die Administration hat das Recht, die Strafe je nach Situation zu wählen.',
+            'rule-1.34': 'Lagerung/Nutzung von X-Ray-Ressourcen ist verboten.',
+            'rule-1.35': 'Die Suche nach Regelungslücken ist verboten.',
+            'rule-1.36': 'Das Einreichen von mehr als 3 Bewerbungen beim Projektteam nach Ablehnung ist verboten.',
+            'rule-1.37': 'Für die Hilfe der Administration beim Auffinden eines Verstoßes haben Sie das Recht, eine Belohnung zu verlangen.',
+            'rule-1.38': 'Betteln bei der Administration und Spielern ist verboten.',
+            'rule-1.39': 'Der Abriss fremder Totems oder anderer bedeutender Gebäude ohne Zustimmung des Eigentümers ist verboten.',
+            'rule-1.40': 'Die Verwendung von Mods, die einen unfairen Vorteil verschaffen, ist verboten.',
+            'rule-1.41': 'Extreme Unangemessenheit, Trollen und toxisches Verhalten sind verboten.',
+            'rule-2': 'Überschreitung der Befugnisse ist verboten.',
+            'rule-2.1': 'Allgemeine Regeln gelten für alle.',
+            'rule-2.2': 'Die Nutzung des Kreativmodus für irgendeinen Zweck ist verboten.',
+            'rule-2.3': 'Anderen Spielern Vorteile zu verschaffen ist verboten.',
+            'rule-2.4': 'Die Manipulation von Bans, Mutes, Entfernung aus der Whitelist ist verboten.',
+            'rule-2.5': 'Jeder Spieler kann ohne Folgen eine Beschwerde gegen einen Administrator einreichen.',
+            
+            // Punishments (using English versions)
+            'punish-1.2': 'Ban ab 30 Tagen',
+            'punish-1.3': 'Ban ab 14 Tagen',
+            'punish-1.4': 'Ban 2 Tage',
+            'punish-1.5': 'Abriss + Kick',
+            'punish-1.6': 'Recht zu töten',
+            'punish-1.7': 'Ban 3 Tage',
+            'punish-1.8': 'Abriss + Ban 2 Tage',
+            'punish-1.9': 'Abriss + Ban 14 Tage',
+            'punish-1.10': 'Ban 7 Tage',
+            'punish-1.11': 'Ban 1 Tag',
+            'punish-1.12': 'PERMANENTER BAN',
+            'punish-1.13': 'Ban 30 Tage',
+            'punish-1.14': 'Ban 5 Tage',
+            'punish-1.15': 'Permanenter Ban',
+            'punish-1.16': 'Permanenter Ban',
+            'punish-1.17': 'Blacklist',
+            'punish-1.18': 'Ban 10 Tage',
+            'punish-1.20': 'IP-Ban',
+            'punish-1.21': 'Abriss + Ban 5 Tage',
+            'punish-1.22': 'Mute ab 6 Stunden',
+            'punish-1.23': 'Ban 10 Tage',
+            'punish-1.24': 'Kick/Ban',
+            'punish-1.25': 'Ban 14 Tage',
+            'punish-1.26': 'Abriss',
+            'punish-1.27': 'Abriss',
+            'punish-1.28': 'Ban 7 Tage',
+            'punish-1.29': 'Ban 7 Tage',
+            'punish-1.30': 'Ban für 4 Monate',
+            'punish-1.31': 'Ban 14 Tage',
+            'punish-1.32': 'PERMANENTER BAN',
+            'punish-1.34': 'Ban für 4 Monate',
+            'punish-1.35': 'Ban 30 Tage',
+            'punish-1.36': 'Ablehnung der Prüfung',
+            'punish-1.38': 'Mute/Ban 2 Tage',
+            'punish-1.39': 'Ban 10 Tage',
+            'punish-1.40': 'Ban 30 Tage',
+            'punish-1.41': 'Mute bis 48h / Ban',
+            'punish-2': 'Entfernung',
+            'punish-2.2': 'Entfernung',
+            'punish-2.3': 'Entfernung + Blacklist',
+            'punish-2.4': 'Entfernung',
+        },
+        
+        fr: {
+            // Navigation
+            'nav-features': 'Fonctionnalités',
+            'nav-howtoplay': 'Comment jouer',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Boutique',
+            'discord-link': '💬 Discord',
+            
+            // Colors
+            'color-pink': 'Rose',
+            'color-blue': 'Bleu',
+            'color-green': 'Vert',
+            'color-orange': 'Orange',
+            'color-purple': 'Violet',
+            'color-yellow': 'Jaune',
+            'color-red': 'Rouge',
+            'color-teal': 'Sarcelle',
+            
+            // Languages
+            'lang-ru': 'Russe',
+            'lang-uk': 'Ukrainien',
+            'lang-en': 'Anglais',
+            'lang-de': 'Allemand',
+            'lang-fr': 'Français',
+            'lang-es': 'Espagnol',
+            
+            // Weather
+            'weather-auto': 'Auto',
+            'weather-snow': 'Neige',
+            'weather-rain': 'Pluie',
+            'weather-none': 'Off',
+            
+            // Settings
+            'particles-on': 'Particules: on',
+            'particles-off': 'Particules: off',
+            'blur-on': 'Flou: on',
+            'blur-off': 'Flou: off',
+            'reset-settings': 'Réinitialiser',
+            
+            // Side panel
+            'panel-stats': '📊 Statistiques',
+            'panel-features': '✨ Fonctionnalités',
+            'panel-howto': '🚀 Comment jouer',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Meilleurs',
+            'panel-achievements': '🎯 Succès',
+            'panel-events': '📅 Événements',
+            'panel-roadmap': '🗺️ Roadmap',
+            'panel-faq': '❓ FAQ',
+            'panel-community': '💬 Communauté',
+            'panel-privacy': '🔒 Confidentialité',
+            'panel-dfaq': '📌 Questions',
+            'panel-rules': '📜 Règles',
+            
+            // Social
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            
+            // Hero
+            'hero-tagline': 'Survie vanilla sur la version 1.21.8. Ton monde — tes règles.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiée',
+            
+            // Stats
+            'stats-title': 'Statistiques',
+            'stat-1': 'Fonctionnement',
+            'stat-2': 'Version actuelle',
+            'stat-3': 'Gameplay vanilla',
+            'stat-4': 'Pas de don',
+            
+            // Features
+            'features-title': 'Fonctionnalités',
+            'feature-1-title': 'Anti-triche',
+            'feature-1-desc': 'Protection avancée contre les tricheurs.',
+            'feature-2-title': 'TPS stable',
+            'feature-2-desc': 'Serveur optimisé. Pas de lags.',
+            'feature-3-title': 'Événements',
+            'feature-3-desc': 'Événements hebdomadaires avec prix.',
+            'feature-4-title': 'Protection',
+            'feature-4-desc': 'Constructions protégées.',
+            
+            // How to play
+            'howto-title': 'Comment jouer',
+            'howto-1': 'Version 1.21.8',
+            'howto-1-desc': 'Dernière version.',
+            'howto-2': 'Postule',
+            'howto-2-desc': 'Formulaire sur Discord.',
+            'howto-3': 'Joue',
+            'howto-3-desc': 'Ajoute le serveur.',
+            
+            // FAQ
+            'faq-title': 'FAQ',
+            'faq-1': 'Début?',
+            'faq-1-desc': 'Bientôt.',
+            'faq-2': 'Version?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': 'Sécurité?',
+            'faq-3-desc': 'Anti-triche.',
+            'faq-4': 'Don?',
+            'faq-4-desc': 'Non, vanilla.',
+            
+            // Footer
+            'footer-title': 'SweetLand',
+            'footer-desc': 'Survie vanilla sans frontières.',
+            'quick-links': 'Liens',
+            'footer-stats': 'Stats',
+            'footer-features': 'Fonctions',
+            'footer-howto': 'Guide',
+            'footer-faq': 'FAQ',
+            'social': 'Réseaux',
+            'footer-copyright': '© 2026 SweetLand. Serveur Minecraft vanilla.',
+            
+            // Rules - titles
+            'rules-title': 'RÈGLES DU SERVEUR',
+            'rules-section1': '1. Règles Générales',
+            'rules-section2': '2. Règles d\'Administration',
+            
+            // Rules - texts (simplified French)
+            'rule-1': 'En rejoignant le serveur, vous acceptez automatiquement les règles.',
+            'rule-1.1': 'Ignorance des règles ne vous exempte pas.',
+            'rule-1.2': 'Détérioration de biens (griefing) interdite.',
+            'rule-1.3': 'Vol de ressources interdit.',
+            'rule-1.4': 'Tuer des mobs d\'autrui sur leur territoire interdit.',
+            'rule-1.5': 'S\'installer sur territoire d\'autrui sans consentement interdit.',
+            'rule-1.6': 'Ignorer les panneaux d\'interdiction interdit.',
+            'rule-1.7': 'Utiliser fermes d\'autrui sans consentement interdit.',
+            'rule-1.8': 'Détérioration du monde interdite.',
+            'rule-1.9': 'Constructions/ mécanismes surchargeant le serveur interdits.',
+            'rule-1.10': 'Tuer un joueur sans son consentement interdit.',
+            'rule-1.11': 'S\'approprier le butin d\'un joueur décédé interdit. Rendez les objets.',
+            'rule-1.12': 'Utilisation de cheats/logiciels tiers (METEOR, WURST, IMPACT, auto-cliqueurs, auto-totems, etc.) interdite.',
+            'rule-1.13': 'Cacher un bug/dupe à l\'administration interdit.',
+            'rule-1.14': 'S\'approprier des bases abandonnées sans confirmation de l\'administration interdit.',
+            'rule-1.15': 'Bruteforce, piratage, jeu sur compte d\'autrui interdit.',
+            'rule-1.16': 'Causer tout préjudice au serveur et/ou aux joueurs interdit.',
+            'rule-1.17': 'Toute activité commerciale hors jeu interdite.',
+            'rule-1.18': 'Inciter les joueurs à enfreindre les règles interdit.',
+            'rule-1.19': 'Le propriétaire du compte est entièrement responsable.',
+            'rule-1.20': 'Création de comptes multiples pour contourner un bannissement interdite.',
+            'rule-1.21': 'Construire plus de 4 fermes automatiques (sauf fermes alimentaires) interdit.',
+            'rule-1.22': 'Spam, majuscules, comportement inapproprié dans le chat, insultes interdits.',
+            'rule-1.23': 'Vol dans les magasins et tromperie dans le commerce interdits.',
+            'rule-1.24': 'Entrer sur les territoires d\'autrui sans permission (harcèlement) interdit.',
+            'rule-1.25': 'Manipuler les joueurs en menaçant de liens avec l\'administration interdit.',
+            'rule-1.26': 'Construction dans un rayon de 500 blocs du spawn interdite.',
+            'rule-1.27': 'Construction dans le Nether dans un rayon de 300 blocs du portail central interdite.',
+            'rule-1.28': 'Constructions-pièges tuant le joueur interdites.',
+            'rule-1.29': 'À la demande de l\'administration, vous devez démolir/déplacer une construction illégale.',
+            'rule-1.30': 'Utilisation de packs de ressources ou mods x-ray interdite.',
+            'rule-1.31': 'Distributions massives de ressources cassant l\'économie interdites.',
+            'rule-1.32': 'Dupes/bugs donnant un avantage interdits.',
+            'rule-1.33': 'L\'administration a le droit de choisir la punition selon la situation, même si elle n\'est pas dans les règles.',
+            'rule-1.34': 'Stockage/utilisation de ressources x-ray interdit.',
+            'rule-1.35': 'Chercher des failles dans les règles interdit.',
+            'rule-1.36': 'Soumettre plus de 3 candidatures à l\'équipe du projet après refus interdit.',
+            'rule-1.37': 'Pour avoir aidé l\'administration à trouver un contrevenant, vous avez le droit de demander une récompense.',
+            'rule-1.38': 'Mendicité (de ressources, objets, droits) auprès de l\'administration et des joueurs interdite.',
+            'rule-1.39': 'Démolition des totems d\'autrui ou d\'autres constructions significatives sans le consentement du propriétaire interdite.',
+            'rule-1.40': 'Utilisation de mods donnant un avantage déloyal (auto-course, mini-cartes avec entités, etc.) interdite.',
+            'rule-1.41': 'Inadéquation extrême, trollage et comportement toxique gâchant l\'humeur des autres joueurs interdits.',
+            'rule-2': 'Dépassement d\'autorité interdit.',
+            'rule-2.1': 'Les règles générales s\'appliquent à tous.',
+            'rule-2.2': 'Utilisation du mode créatif à quelque fin que ce soit interdite.',
+            'rule-2.3': 'Donner des avantages à d\'autres joueurs interdit.',
+            'rule-2.4': 'Manipuler les bannissements, les mute, la suppression de la liste blanche interdit.',
+            'rule-2.5': 'Tout joueur peut déposer une plainte contre un administrateur sans conséquences.',
+            
+            // Punishments
+            'punish-1.2': 'Bannissement à partir de 30 jours',
+            'punish-1.3': 'Bannissement à partir de 14 jours',
+            'punish-1.4': 'Bannissement 2 jours',
+            'punish-1.5': 'Démolition + Kick',
+            'punish-1.6': 'Droit de tuer',
+            'punish-1.7': 'Bannissement 3 jours',
+            'punish-1.8': 'Démolition + Bannissement 2 jours',
+            'punish-1.9': 'Démolition + Bannissement 14 jours',
+            'punish-1.10': 'Bannissement 7 jours',
+            'punish-1.11': 'Bannissement 1 jour',
+            'punish-1.12': 'BANNISSEMENT PERMANENT',
+            'punish-1.13': 'Bannissement 30 jours',
+            'punish-1.14': 'Bannissement 5 jours',
+            'punish-1.15': 'Bannissement permanent',
+            'punish-1.16': 'Bannissement à vie',
+            'punish-1.17': 'Liste noire',
+            'punish-1.18': 'Bannissement 10 jours',
+            'punish-1.20': 'Bannissement IP',
+            'punish-1.21': 'Démolition + Bannissement 5 jours',
+            'punish-1.22': 'Mute à partir de 6 heures',
+            'punish-1.23': 'Bannissement 10 jours',
+            'punish-1.24': 'Kick/Bannissement',
+            'punish-1.25': 'Bannissement 14 jours',
+            'punish-1.26': 'Démolition',
+            'punish-1.27': 'Démolition',
+            'punish-1.28': 'Bannissement 7 jours',
+            'punish-1.29': 'Bannissement 7 jours',
+            'punish-1.30': 'Bannissement pour 4 mois',
+            'punish-1.31': 'Bannissement 14 jours',
+            'punish-1.32': 'BANNISSEMENT PERMANENT',
+            'punish-1.34': 'Bannissement pour 4 mois',
+            'punish-1.35': 'Bannissement 30 jours',
+            'punish-1.36': 'Refus d\'examiner',
+            'punish-1.38': 'Mute/Bannissement 2 jours',
+            'punish-1.39': 'Bannissement 10 jours',
+            'punish-1.40': 'Bannissement 30 jours',
+            'punish-1.41': 'Mute jusqu\'à 48h / Bannissement',
+            'punish-2': 'Retrait',
+            'punish-2.2': 'Retrait',
+            'punish-2.3': 'Retrait + Liste noire',
+            'punish-2.4': 'Retrait',
+        },
+        
+        es: {
+            // Navigation
+            'nav-features': 'Características',
+            'nav-howtoplay': 'Cómo jugar',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Tienda',
+            'discord-link': '💬 Discord',
+            
+            // Colors
+            'color-pink': 'Rosa',
+            'color-blue': 'Azul',
+            'color-green': 'Verde',
+            'color-orange': 'Naranja',
+            'color-purple': 'Púrpura',
+            'color-yellow': 'Amarillo',
+            'color-red': 'Rojo',
+            'color-teal': 'Turquesa',
+            
+            // Languages
+            'lang-ru': 'Ruso',
+            'lang-uk': 'Ucraniano',
+            'lang-en': 'Inglés',
+            'lang-de': 'Alemán',
+            'lang-fr': 'Francés',
+            'lang-es': 'Español',
+            
+            // Weather
+            'weather-auto': 'Auto',
+            'weather-snow': 'Nieve',
+            'weather-rain': 'Lluvia',
+            'weather-none': 'Off',
+            
+            // Settings
+            'particles-on': 'Partículas: on',
+            'particles-off': 'Partículas: off',
+            'blur-on': 'Desenfoque: on',
+            'blur-off': 'Desenfoque: off',
+            'reset-settings': 'Reiniciar',
+            
+            // Side panel
+            'panel-stats': '📊 Estadísticas',
+            'panel-features': '✨ Características',
+            'panel-howto': '🚀 Cómo jugar',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Top jugadores',
+            'panel-achievements': '🎯 Logros',
+            'panel-events': '📅 Eventos',
+            'panel-roadmap': '🗺️ Hoja de ruta',
+            'panel-faq': '❓ FAQ',
+            'panel-community': '💬 Comunidad',
+            'panel-privacy': '🔒 Privacidad',
+            'panel-dfaq': '📌 Preguntas',
+            'panel-rules': '📜 Reglas',
+            
+            // Social
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            
+            // Hero
+            'hero-tagline': 'Supervivencia vanilla en la versión 1.21.8. Tu mundo — tus reglas.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiada',
+            
+            // Stats
+            'stats-title': 'Estadísticas',
+            'stat-1': 'Funcionamiento',
+            'stat-2': 'Versión actual',
+            'stat-3': 'Juego vanilla',
+            'stat-4': 'Sin donaciones',
+            
+            // Features
+            'features-title': 'Características',
+            'feature-1-title': 'Anti-trampas',
+            'feature-1-desc': 'Protección avanzada contra tramposos.',
+            'feature-2-title': 'TPS estable',
+            'feature-2-desc': 'Servidor optimizado. Sin retrasos.',
+            'feature-3-title': 'Eventos',
+            'feature-3-desc': 'Eventos semanales con premios.',
+            'feature-4-title': 'Protección',
+            'feature-4-desc': 'Construcciones protegidas.',
+            
+            // How to play
+            'howto-title': 'Cómo jugar',
+            'howto-1': 'Versión 1.21.8',
+            'howto-1-desc': 'Última versión.',
+            'howto-2': 'Solicita',
+            'howto-2-desc': 'Formulario en Discord.',
+            'howto-3': 'Juega',
+            'howto-3-desc': 'Añade el servidor.',
+            
+            // FAQ
+            'faq-title': 'FAQ',
+            'faq-1': '¿Inicio?',
+            'faq-1-desc': 'Pronto.',
+            'faq-2': '¿Versión?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': '¿Seguridad?',
+            'faq-3-desc': 'Anti-trampas.',
+            'faq-4': '¿Donación?',
+            'faq-4-desc': 'No, vanilla.',
+            
+            // Footer
+            'footer-title': 'SweetLand',
+            'footer-desc': 'Supervivencia vanilla sin fronteras.',
+            'quick-links': 'Enlaces',
+            'footer-stats': 'Estadísticas',
+            'footer-features': 'Características',
+            'footer-howto': 'Guía',
+            'footer-faq': 'FAQ',
+            'social': 'Redes',
+            'footer-copyright': '© 2026 SweetLand. Servidor Minecraft vanilla.',
+            
+            // Rules - titles
+            'rules-title': 'REGLAS DEL SERVIDOR',
+            'rules-section1': '1. Reglas Generales',
+            'rules-section2': '2. Reglas de Administración',
+            
+            // Rules - texts
+            'rule-1': 'Al unirte al servidor, aceptas automáticamente las reglas.',
+            'rule-1.1': 'El desconocimiento de las reglas no te exime de responsabilidad.',
+            'rule-1.2': 'Cualquier daño a la propiedad (griefing) de otros jugadores está prohibido.',
+            'rule-1.3': 'Robar cualquier recurso de otros jugadores está prohibido.',
+            'rule-1.4': 'Matar cualquier mob de otros jugadores en su territorio está prohibido.',
+            'rule-1.5': 'Establecerse en ciudades y territorios de jugadores y clanes sin su consentimiento está prohibido.',
+            'rule-1.6': 'Ignorar los carteles de prohibición está prohibido.',
+            'rule-1.7': 'Usar granjas ajenas sin consentimiento está prohibido.',
+            'rule-1.8': 'Cualquier daño al mundo del juego está prohibido.',
+            'rule-1.9': 'Construir estructuras/mecanismos que sobrecarguen el servidor está prohibido.',
+            'rule-1.10': 'Matar a un jugador sin su consentimiento está prohibido.',
+            'rule-1.11': 'Apropiarse del botín de un jugador fallecido está prohibido. Devuelve los objetos.',
+            'rule-1.12': 'El uso de cheats/software de terceros (METEOR, WURST, IMPACT, auto-clickers, auto-tótems, etc.) está prohibido.',
+            'rule-1.13': 'Ocultar un bug/dupe a la administración está prohibido.',
+            'rule-1.14': 'Apropiarse de bases abandonadas sin confirmación de la administración está prohibido.',
+            'rule-1.15': 'Brute force, hackeo, jugar en cuenta ajena está prohibido.',
+            'rule-1.16': 'Causar cualquier daño al servidor y/o a los jugadores está prohibido.',
+            'rule-1.17': 'Cualquier actividad comercial fuera del juego está prohibida.',
+            'rule-1.18': 'Incitar a los jugadores a violar las reglas está prohibido.',
+            'rule-1.19': 'El propietario de la cuenta es totalmente responsable de ella.',
+            'rule-1.20': 'Crear múltiples cuentas para evadir una prohibición está prohibido.',
+            'rule-1.21': 'Construir más de 4 granjas automáticas (excepto granjas de comida) está prohibido.',
+            'rule-1.22': 'Spam, mayúsculas, comportamiento inapropiado en el chat, insultos están prohibidos.',
+            'rule-1.23': 'Robo en tiendas y engaño en el comercio están prohibidos.',
+            'rule-1.24': 'Entrar en territorios ajenos sin permiso (acecho) está prohibido.',
+            'rule-1.25': 'Manipular a los jugadores amenazando con vínculos con la administración está prohibido.',
+            'rule-1.26': 'Construcción en un radio de 500 bloques desde el spawn está prohibida.',
+            'rule-1.27': 'Construcción en el Nether en un radio de 300 bloques desde el portal central está prohibida.',
+            'rule-1.28': 'Construcciones-trampa que matan al jugador están prohibidas.',
+            'rule-1.29': 'A petición de la administración, debes demoler/reubicar una construcción ilegal.',
+            'rule-1.30': 'El uso de paquetes de recursos o mods de rayos X está prohibido.',
+            'rule-1.31': 'Los sorteos masivos de recursos que rompen la economía están prohibidos.',
+            'rule-1.32': 'Dupes/bugs que dan ventaja están prohibidos.',
+            'rule-1.33': 'La administración tiene derecho a elegir el castigo según la situación, incluso si no está en las reglas.',
+            'rule-1.34': 'Almacenamiento/uso de recursos de rayos X está prohibido.',
+            'rule-1.35': 'Buscar lagunas en las reglas está prohibido.',
+            'rule-1.36': 'Enviar más de 3 solicitudes al equipo del proyecto después de la negativa está prohibido.',
+            'rule-1.37': 'Por ayudar a la administración a encontrar a un infractor, tienes derecho a exigir una recompensa.',
+            'rule-1.38': 'La mendicidad (de recursos, objetos, derechos) a la administración y a los jugadores está prohibida.',
+            'rule-1.39': 'La demolición de tótems ajenos u otras construcciones significativas sin el consentimiento del propietario está prohibida.',
+            'rule-1.40': 'El uso de mods que dan una ventaja injusta (auto-correr, mini-mapas con entidades, etc.) está prohibido.',
+            'rule-1.41': 'La inadecuación extrema, el troleo y el comportamiento tóxico que estropea el estado de ánimo de otros jugadores están prohibidos.',
+            'rule-2': 'Exceder la autoridad está prohibido.',
+            'rule-2.1': 'Las reglas generales se aplican a todos.',
+            'rule-2.2': 'El uso del modo creativo para cualquier propósito está prohibido.',
+            'rule-2.3': 'Dar ventajas a otros jugadores está prohibido.',
+            'rule-2.4': 'Manipular bans, mutes, eliminación de la lista blanca está prohibido.',
+            'rule-2.5': 'Cualquier jugador puede presentar una queja contra un administrador sin consecuencias.',
+            
+            // Punishments
+            'punish-1.2': 'Ban desde 30 días',
+            'punish-1.3': 'Ban desde 14 días',
+            'punish-1.4': 'Ban 2 días',
+            'punish-1.5': 'Demolición + Kick',
+            'punish-1.6': 'Derecho a matar',
+            'punish-1.7': 'Ban 3 días',
+            'punish-1.8': 'Demolición + Ban 2 días',
+            'punish-1.9': 'Demolición + Ban 14 días',
+            'punish-1.10': 'Ban 7 días',
+            'punish-1.11': 'Ban 1 día',
+            'punish-1.12': 'BAN PERMANENTE',
+            'punish-1.13': 'Ban 30 días',
+            'punish-1.14': 'Ban 5 días',
+            'punish-1.15': 'Ban permanente',
+            'punish-1.16': 'Ban para siempre',
+            'punish-1.17': 'Lista negra',
+            'punish-1.18': 'Ban 10 días',
+            'punish-1.20': 'Ban IP',
+            'punish-1.21': 'Demolición + Ban 5 días',
+            'punish-1.22': 'Mute desde 6 horas',
+            'punish-1.23': 'Ban 10 días',
+            'punish-1.24': 'Kick/Ban',
+            'punish-1.25': 'Ban 14 días',
+            'punish-1.26': 'Demolición',
+            'punish-1.27': 'Demolición',
+            'punish-1.28': 'Ban 7 días',
+            'punish-1.29': 'Ban 7 días',
+            'punish-1.30': 'Ban por 4 meses',
+            'punish-1.31': 'Ban 14 días',
+            'punish-1.32': 'BAN PERMANENTE',
+            'punish-1.34': 'Ban por 4 meses',
+            'punish-1.35': 'Ban 30 días',
+            'punish-1.36': 'Negativa a considerar',
+            'punish-1.38': 'Mute/Ban 2 días',
+            'punish-1.39': 'Ban 10 días',
+            'punish-1.40': 'Ban 30 días',
+            'punish-1.41': 'Mute hasta 48h / Ban',
+            'punish-2': 'Remoción',
+            'punish-2.2': 'Remoción',
+            'punish-2.3': 'Remoción + Lista negra',
+            'punish-2.4': 'Remoción',
+        },
     };
-    
-    // Добавляем остальные языки (de, fr, es) по аналогии...
-    // Для краткости я добавил только ru, uk, en, но принцип понятен.
-    // В полной версии нужно добавить de, fr, es с переводами.
-    
-    // Для de, fr, es можно использовать английские тексты как заглушки
-    translations.de = JSON.parse(JSON.stringify(translations.en));
-    translations.fr = JSON.parse(JSON.stringify(translations.en));
-    translations.es = JSON.parse(JSON.stringify(translations.en));
-    
-    // Но для демонстрации переключения языков оставим так
 
     // === ПРАВИЛА (СПИСОК ДЛЯ РЕНДЕРА) ===
     const rulesList = [
@@ -1277,7 +1902,7 @@
         }
         localStorage.setItem('sweetland-theme', currentTheme);
         if (currentWeather === 'auto') createWeather();
-        updateLanguage(); // Обновляем текст
+        updateLanguage();
     }
 
     function setAccentColor(color) {
@@ -1312,7 +1937,6 @@
             }
         });
         
-        // Обновляем частицы и размытие текста
         document.getElementById('particlesText').innerHTML = particlesEnabled ? 
             translations[currentLang]['particles-on'] : translations[currentLang]['particles-off'];
         document.getElementById('blurText').innerHTML = blurEnabled ? 
@@ -1484,30 +2108,21 @@
 
     // === ИНИЦИАЛИЗАЦИЯ ===
     window.addEventListener('load', () => {
-        // Устанавливаем тему
         if (currentTheme === 'light') body.classList.add('light'); else body.classList.remove('light');
         themeIcon.textContent = currentTheme === 'light' ? '☀️' : '🌙';
         
-        // Устанавливаем цвет акцента
         setAccentColor(currentAccent);
-        
-        // Устанавливаем язык
         updateLanguage();
         
-        // Настройки частиц и размытия
         if (!particlesEnabled) { 
             document.getElementById('weather').style.opacity = '0'; 
             document.getElementById('particlesText').innerHTML = translations[currentLang]['particles-off'];
         }
         if (!blurEnabled) toggleBlur();
         
-        // Создаем погоду
         createWeather();
-        
-        // Запускаем анимации
         reveal();
         
-        // Клик по звезде
         document.querySelector('.banner-star').addEventListener('click', function() {
             this.style.transform = 'scale(1.5)';
             setTimeout(() => this.style.transform = '', 200);

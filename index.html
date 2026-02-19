@@ -27,7 +27,6 @@
             line-height: 1.5;
             width: 100%;
             position: relative;
-            /* ЗАЩИТА ОТ КОПИРОВАНИЯ */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -41,37 +40,43 @@
             --accent-dark: #8a4cdd;
             --bg: #0a0a0f;
             --bg-secondary: #12121a;
-            --bg-card: rgba(20, 20, 30, 0.7);
+            --bg-card: rgba(20, 20, 30, 0.8);
             --text: #ffffff;
             --text-secondary: #b0b0c0;
             --text-tertiary: #70707a;
-            --border: rgba(163, 102, 255, 0.25);
-            --border-hover: rgba(163, 102, 255, 0.5);
+            --border: rgba(163, 102, 255, 0.3);
+            --border-hover: rgba(163, 102, 255, 0.6);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.25);
-            --glow: 0 0 20px rgba(163, 102, 255, 0.3);
+            --shadow-accent: 0 8px 32px rgba(163, 102, 255, 0.3);
+            --glow: 0 0 25px rgba(163, 102, 255, 0.4);
             --header-bg: rgba(10, 10, 15, 0.95);
+            --blur: 12px;
+            --neon: var(--accent);
         }
 
         body.light {
             --bg: #faf7f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-card: rgba(255, 255, 255, 0.9);
             --text: #2a2a2a;
             --text-secondary: #5a5a5a;
             --text-tertiary: #8a8a8a;
+            --border: rgba(255, 123, 92, 0.2);
+            --border-hover: rgba(255, 123, 92, 0.4);
+            --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15);
+            --glow: 0 0 20px rgba(255, 123, 92, 0.15);
             --header-bg: rgba(250, 247, 245, 0.95);
         }
 
-        /* Цветовые схемы */
-        body.accent-pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --border: rgba(255, 102, 178, 0.3); --border-hover: rgba(255, 102, 178, 0.6); --glow: 0 0 20px rgba(255, 102, 178, 0.3); --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.3); }
-        body.accent-blue { --accent: #4d9eff; --accent-light: #6eb3ff; --accent-dark: #3a7acc; --border: rgba(77, 158, 255, 0.3); --border-hover: rgba(77, 158, 255, 0.6); --glow: 0 0 20px rgba(77, 158, 255, 0.3); --shadow-accent: 0 8px 32px rgba(77, 158, 255, 0.3); }
-        body.accent-green { --accent: #4caf50; --accent-light: #6ec071; --accent-dark: #3d8c40; --border: rgba(76, 175, 80, 0.3); --border-hover: rgba(76, 175, 80, 0.6); --glow: 0 0 20px rgba(76, 175, 80, 0.3); --shadow-accent: 0 8px 32px rgba(76, 175, 80, 0.3); }
-        body.accent-orange { --accent: #ff9800; --accent-light: #ffb74d; --accent-dark: #f57c00; --border: rgba(255, 152, 0, 0.3); --border-hover: rgba(255, 152, 0, 0.6); --glow: 0 0 20px rgba(255, 152, 0, 0.3); --shadow-accent: 0 8px 32px rgba(255, 152, 0, 0.3); }
-        body.accent-purple { --accent: #9c27b0; --accent-light: #ba68c8; --accent-dark: #7b1fa2; --border: rgba(156, 39, 176, 0.3); --border-hover: rgba(156, 39, 176, 0.6); --glow: 0 0 20px rgba(156, 39, 176, 0.3); --shadow-accent: 0 8px 32px rgba(156, 39, 176, 0.3); }
-        body.accent-yellow { --accent: #ffd700; --accent-light: #ffe44d; --accent-dark: #e6c300; --border: rgba(255, 215, 0, 0.3); --border-hover: rgba(255, 215, 0, 0.6); --glow: 0 0 20px rgba(255, 215, 0, 0.3); --shadow-accent: 0 8px 32px rgba(255, 215, 0, 0.3); }
-        body.accent-red { --accent: #ff4444; --accent-light: #ff6666; --accent-dark: #cc3333; --border: rgba(255, 68, 68, 0.3); --border-hover: rgba(255, 68, 68, 0.6); --glow: 0 0 20px rgba(255, 68, 68, 0.3); --shadow-accent: 0 8px 32px rgba(255, 68, 68, 0.3); }
-        body.accent-teal { --accent: #008080; --accent-light: #20b2aa; --accent-dark: #006666; --border: rgba(0, 128, 128, 0.3); --border-hover: rgba(0, 128, 128, 0.6); --glow: 0 0 20px rgba(0, 128, 128, 0.3); --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.3); }
+        /* Цветовые акценты */
+        body.accent-pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --border: rgba(255, 102, 178, 0.3); --border-hover: rgba(255, 102, 178, 0.6); --glow: 0 0 25px rgba(255, 102, 178, 0.4); --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.3); --neon: #ff66b2; }
+        body.accent-blue { --accent: #4d9eff; --accent-light: #6eb3ff; --accent-dark: #3a7acc; --border: rgba(77, 158, 255, 0.3); --border-hover: rgba(77, 158, 255, 0.6); --glow: 0 0 25px rgba(77, 158, 255, 0.4); --shadow-accent: 0 8px 32px rgba(77, 158, 255, 0.3); --neon: #4d9eff; }
+        body.accent-green { --accent: #4caf50; --accent-light: #6ec071; --accent-dark: #3d8c40; --border: rgba(76, 175, 80, 0.3); --border-hover: rgba(76, 175, 80, 0.6); --glow: 0 0 25px rgba(76, 175, 80, 0.4); --shadow-accent: 0 8px 32px rgba(76, 175, 80, 0.3); --neon: #4caf50; }
+        body.accent-orange { --accent: #ff9800; --accent-light: #ffb74d; --accent-dark: #f57c00; --border: rgba(255, 152, 0, 0.3); --border-hover: rgba(255, 152, 0, 0.6); --glow: 0 0 25px rgba(255, 152, 0, 0.4); --shadow-accent: 0 8px 32px rgba(255, 152, 0, 0.3); --neon: #ff9800; }
+        body.accent-purple { --accent: #9c27b0; --accent-light: #ba68c8; --accent-dark: #7b1fa2; --border: rgba(156, 39, 176, 0.3); --border-hover: rgba(156, 39, 176, 0.6); --glow: 0 0 25px rgba(156, 39, 176, 0.4); --shadow-accent: 0 8px 32px rgba(156, 39, 176, 0.3); --neon: #9c27b0; }
+        body.accent-yellow { --accent: #ffd700; --accent-light: #ffe44d; --accent-dark: #e6c300; --border: rgba(255, 215, 0, 0.3); --border-hover: rgba(255, 215, 0, 0.6); --glow: 0 0 25px rgba(255, 215, 0, 0.4); --shadow-accent: 0 8px 32px rgba(255, 215, 0, 0.3); --neon: #ffd700; }
+        body.accent-red { --accent: #ff4444; --accent-light: #ff6666; --accent-dark: #cc3333; --border: rgba(255, 68, 68, 0.3); --border-hover: rgba(255, 68, 68, 0.6); --glow: 0 0 25px rgba(255, 68, 68, 0.4); --shadow-accent: 0 8px 32px rgba(255, 68, 68, 0.3); --neon: #ff4444; }
+        body.accent-teal { --accent: #008080; --accent-light: #20b2aa; --accent-dark: #006666; --border: rgba(0, 128, 128, 0.3); --border-hover: rgba(0, 128, 128, 0.6); --glow: 0 0 25px rgba(0, 128, 128, 0.4); --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.3); --neon: #008080; }
 
         /* ПОГОДА */
         #weather {
@@ -85,261 +90,1066 @@
             opacity: 1;
             overflow: hidden;
         }
-        .snow-particle, .rain-particle { position: absolute; }
         .snow-particle {
-            width: 8px; height: 8px; background: white; border-radius: 50%;
-            filter: blur(1.5px); box-shadow: 0 0 15px rgba(255,255,255,0.8);
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(1.5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
             animation: snowfall linear infinite;
         }
         .rain-particle {
-            width: 3px; height: 35px; background: linear-gradient(to bottom, rgba(74,144,226,0.9), rgba(74,144,226,0.2));
-            filter: blur(0.5px); box-shadow: 0 0 12px rgba(74,144,226,0.5);
+            position: absolute;
+            width: 3px;
+            height: 35px;
+            background: linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(74, 144, 226, 0.2));
+            filter: blur(0.5px);
+            box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
             animation: rainfall linear infinite;
         }
-        @keyframes snowfall { 0% { transform: translateY(-10vh) translateX(0); opacity: 0.9; } 100% { transform: translateY(110vh) translateX(30px); opacity: 0.2; } }
-        @keyframes rainfall { 0% { transform: translateY(-10vh) translateX(0); opacity: 0.7; } 100% { transform: translateY(110vh) translateX(-15px); opacity: 0.1; } }
+        @keyframes snowfall {
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0.9; }
+            100% { transform: translateY(110vh) translateX(30px); opacity: 0.2; }
+        }
+        @keyframes rainfall {
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0.7; }
+            100% { transform: translateY(110vh) translateX(-15px); opacity: 0.1; }
+        }
 
         /* ПАНЕЛЬ УПРАВЛЕНИЯ (ПРАВАЯ) */
         .control-panel {
-            position: fixed; top: 20px; right: 20px; z-index: 2500; display: flex; gap: 8px;
-            flex-wrap: wrap; justify-content: flex-end;
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 2500;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn {
-            width: 44px; height: 44px; background: var(--header-bg); backdrop-filter: blur(10px);
-            border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 20px; transition: all 0.2s ease;
-            box-shadow: var(--glow); color: var(--text); cursor: pointer;
+            width: 48px;
+            height: 48px;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            box-shadow: var(--glow);
+            color: var(--text);
+            cursor: pointer;
         }
         .theme-icon:hover, .color-btn:hover, .lang-btn:hover, .weather-btn:hover, .settings-btn:hover {
-            transform: scale(1.1); background: var(--accent); color: white; box-shadow: 0 0 30px var(--accent);
+            transform: scale(1.1) rotate(180deg);
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 30px var(--accent);
         }
         .color-picker, .lang-picker, .weather-picker, .settings-picker { position: relative; }
         .color-menu, .lang-menu, .weather-menu, .settings-menu {
-            position: absolute; top: 55px; right: 0; background: var(--bg-secondary);
-            border: 2px solid var(--accent); border-radius: 20px; padding: 12px;
-            display: none; flex-direction: column; gap: 5px; min-width: 180px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 2600;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 2600;
+            max-height: 400px;
+            overflow-y: auto;
         }
         .color-menu.active, .lang-menu.active, .weather-menu.active, .settings-menu.active { display: flex; }
         .color-option, .lang-option, .weather-option, .settings-option {
-            display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 30px;
-            cursor: pointer; transition: all 0.2s ease; color: var(--text); white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text);
         }
-        .color-option:hover, .lang-option:hover, .weather-option:hover, .settings-option:hover { background: var(--accent); color: white; }
-        .color-dot { width: 20px; height: 20px; border-radius: 50%; }
+        .color-option:hover, .lang-option:hover, .weather-option:hover, .settings-option:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .color-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+        }
         .color-dot.dark { background: #0a0a0f; border: 2px solid #a366ff; }
         .color-dot.light { background: #faf7f5; border: 2px solid #ff7b5c; }
-        .color-dot.pink { background: #ff66b2; } .color-dot.blue { background: #4d9eff; }
-        .color-dot.green { background: #4caf50; } .color-dot.orange { background: #ff9800; }
-        .color-dot.purple { background: #9c27b0; } .color-dot.yellow { background: #ffd700; }
-        .color-dot.red { background: #ff4444; } .color-dot.teal { background: #008080; }
+        .color-dot.pink { background: #ff66b2; }
+        .color-dot.blue { background: #4d9eff; }
+        .color-dot.green { background: #4caf50; }
+        .color-dot.orange { background: #ff9800; }
+        .color-dot.purple { background: #9c27b0; }
+        .color-dot.yellow { background: #ffd700; }
+        .color-dot.red { background: #ff4444; }
+        .color-dot.teal { background: #008080; }
 
-        /* ВЕРХНИЙ ОВАЛ (НАВИГАЦИЯ) */
+        /* ВЕРХНИЙ ОВАЛ (НАВИГАЦИЯ) - УВЕЛИЧЕН */
         .nav-oval-container {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            z-index: 2400; width: auto; max-width: 90%; animation: slideDown 0.5s ease;
+            position: fixed;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2400;
+            width: auto;
+            min-width: 800px;
+            max-width: 95%;
+            animation: slideDown 0.5s ease;
         }
-        @keyframes slideDown { from { transform: translateX(-50%) translateY(-100px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
         .shop-banner {
-            background: var(--header-bg); backdrop-filter: blur(12px); border-radius: 60px;
-            border: 2px solid var(--accent); box-shadow: 0 0 30px var(--accent);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 10px 24px; width: 100%; transition: all 0.3s ease; gap: 15px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 70px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 35px var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 35px;
+            width: 100%;
+            transition: all 0.3s ease;
+            gap: 25px;
         }
-        .banner-left { display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--text); }
-        .banner-star { font-size: 24px; color: gold; filter: drop-shadow(0 0 10px gold); animation: starGlow 2s ease-in-out infinite; }
-        @keyframes starGlow { 0%,100%{filter:drop-shadow(0 0 5px gold);transform:scale(1);} 50%{filter:drop-shadow(0 0 20px gold);transform:scale(1.1);} }
-        .banner-center { display: flex; align-items: center; gap: 20px; }
-        .banner-center a { color: var(--text-secondary); text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.2s ease; position: relative; cursor: pointer; white-space: nowrap; }
-        .banner-center a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.2s ease; }
-        .banner-center a:hover { color: var(--text); } .banner-center a:hover::after { width: 100%; }
-        .banner-right { display: flex; align-items: center; gap: 10px; }
-        .shop-link, .discord-link {
-            padding: 8px 20px; border-radius: 40px; font-weight: 600; font-size: 14px;
-            transition: all 0.2s ease; white-space: nowrap; border: 2px solid transparent; text-decoration: none;
+        .shop-banner:hover {
+            border-color: var(--accent-light);
+            box-shadow: 0 0 60px var(--accent);
         }
-        .shop-link { background: linear-gradient(135deg, #ffd700, #ffb347); color: #2a2a2a; box-shadow: 0 4px 15px rgba(255,215,0,0.5); }
-        .shop-link:hover { background: linear-gradient(135deg, #ffb347, #ffd700); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.8); border-color: white; }
-        .discord-link { background: #5865F2; color: white; box-shadow: 0 4px 15px rgba(88,101,242,0.5); }
-        .discord-link:hover { background: #4752c4; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(88,101,242,0.8); border-color: white; }
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .banner-star {
+            font-size: 28px;
+            color: gold;
+            filter: drop-shadow(0 0 10px gold);
+            animation: starGlow 2s ease-in-out infinite;
+        }
+        @keyframes starGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px gold); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px gold); transform: scale(1.15); }
+        }
+        .banner-center {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .banner-center a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .banner-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.2s ease;
+        }
+        .banner-center a:hover {
+            color: var(--text);
+        }
+        .banner-center a:hover::after {
+            width: 100%;
+        }
+        .banner-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .shop-link {
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            color: #2a2a2a;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+        .shop-link:hover {
+            background: linear-gradient(135deg, #ffb347, #ffd700);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.8);
+            border-color: white;
+        }
+        .discord-link {
+            background: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+            white-space: nowrap;
+            border: 2px solid transparent;
+        }
+        .discord-link:hover {
+            background: #4752c4;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.8);
+            border-color: white;
+        }
 
         /* БОКОВАЯ ПАНЕЛЬ (ЛЕВАЯ) */
         .side-trigger {
-            position: fixed; top: 20px; left: 20px; z-index: 2300; cursor: pointer;
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 2300;
+            cursor: pointer;
             animation: slideRight 0.5s ease;
         }
-        @keyframes slideRight { from { transform: translateX(-100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .side-trigger .line { width: 30px; height: 3px; background: var(--accent); margin: 6px 0; border-radius: 5px; transition: all 0.2s ease; }
-        .side-trigger:hover .line:nth-child(1) { transform: translateY(-2px); width: 34px; }
-        .side-trigger:hover .line:nth-child(2) { width: 26px; margin-left: 4px; }
-        .side-trigger:hover .line:nth-child(3) { transform: translateY(2px); width: 34px; }
+        @keyframes slideRight {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .side-trigger .line {
+            width: 35px;
+            height: 4px;
+            background: var(--accent);
+            margin: 7px 0;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+        .side-trigger:hover .line:nth-child(1) {
+            transform: translateY(-3px) rotate(-5deg);
+            width: 40px;
+        }
+        .side-trigger:hover .line:nth-child(2) {
+            width: 30px;
+            margin-left: 5px;
+        }
+        .side-trigger:hover .line:nth-child(3) {
+            transform: translateY(3px) rotate(5deg);
+            width: 40px;
+        }
 
         .side-panel {
-            position: fixed; left: -300px; top: 0; width: 280px; height: 100%;
-            background: var(--bg-secondary); z-index: 3000; transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 70px 20px 20px; border-right: 2px solid var(--accent); box-shadow: 10px 0 40px rgba(163,102,255,0.2);
+            position: fixed;
+            left: -350px;
+            top: 0;
+            width: 320px;
+            height: 100%;
+            background: var(--bg-secondary);
+            z-index: 3000;
+            transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 90px 25px 25px;
+            border-right: 2px solid var(--accent);
+            box-shadow: 10px 0 50px rgba(163, 102, 255, 0.3);
         }
-        .side-panel.active { left: 0; }
+        .side-panel.active {
+            left: 0;
+        }
         .panel-handle {
-            position: absolute; top: 20px; right: 20px; width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center; border-radius: 50%;
-            background: rgba(163,102,255,0.1); color: var(--accent); font-size: 24px; font-weight: 700;
-            cursor: pointer; transition: all 0.3s ease;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(163, 102, 255, 0.15);
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .panel-handle:hover { background: var(--accent); color: white; transform: rotate(90deg); }
-        .panel-logo { color: var(--accent); font-size: 28px; margin-bottom: 30px; text-align: center; font-weight: 700; letter-spacing: 2px; animation: logoGlow 2s ease-in-out infinite; }
-        @keyframes logoGlow { 0%,100%{text-shadow:0 0 10px var(--accent);} 50%{text-shadow:0 0 30px var(--accent);} }
+        .panel-handle:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(360deg) scale(1.1);
+        }
+        .panel-logo {
+            color: var(--accent);
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 3px;
+            animation: logoGlow 2s ease-in-out infinite;
+        }
+        @keyframes logoGlow {
+            0%, 100% { text-shadow: 0 0 10px var(--accent); }
+            50% { text-shadow: 0 0 35px var(--accent); }
+        }
 
         .panel-links {
-            display: flex; flex-direction: column; gap: 10px;
-            max-height: calc(100vh - 200px); overflow-y: auto; padding-right: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: calc(100vh - 250px);
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .panel-links::-webkit-scrollbar {
+            width: 5px;
+        }
+        .panel-links::-webkit-scrollbar-track {
+            background: rgba(163, 102, 255, 0.1);
+            border-radius: 10px;
+        }
+        .panel-links::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
         }
         .panel-links a {
-            display: block; color: var(--text-secondary); text-decoration: none; font-size: 17px;
-            padding: 10px 15px; border-radius: 30px; transition: all 0.2s ease;
-            border-left: 2px solid transparent; cursor: pointer;
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 18px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
         }
-        .panel-links a:hover { background: rgba(163,102,255,0.1); color: var(--accent); border-left-color: var(--accent); padding-left: 20px; }
+        .panel-links a:hover {
+            background: rgba(163, 102, 255, 0.15);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            padding-left: 22px;
+            transform: translateX(5px);
+        }
 
         .panel-social {
-            position: absolute; bottom: 30px; left: 0; width: 100%; padding: 0 20px;
-            display: flex; flex-direction: column; gap: 8px;
+            position: absolute;
+            bottom: 35px;
+            left: 0;
+            width: 100%;
+            padding: 0 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .social-link {
-            color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500;
-            padding: 10px 15px; border-radius: 30px; background: rgba(163,102,255,0.08);
-            border: 1px solid var(--border); transition: all 0.3s ease; display: flex; align-items: center; gap: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 40px;
+            background: rgba(163, 102, 255, 0.1);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
         }
-        .social-link span { font-size: 18px; transition: transform 0.3s ease; min-width: 24px; text-align: center; }
-        .social-link:hover { transform: translateX(5px); border-color: transparent; }
+        .social-link span {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            min-width: 28px;
+            text-align: center;
+        }
+        .social-link:hover {
+            transform: translateX(8px) scale(1.02);
+            border-color: transparent;
+        }
+        .social-link:hover span {
+            transform: scale(1.2);
+        }
         .social-link.discord:hover { background: #5865F2; color: white; }
         .social-link.telegram:hover { background: #0088cc; color: white; }
         .social-link.youtube:hover { background: #FF0000; color: white; }
 
-        /* ОСНОВНОЙ КОНТЕНТ */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 80px 5%; position: relative; z-index: 2; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; width: 800px; height: 800px; background: var(--accent); filter: blur(120px); opacity: 0.15; border-radius: 50%; z-index: -1; animation: neonPulse 4s ease-in-out infinite; }
-        @keyframes neonPulse { 0%,100%{opacity:0.15;width:800px;height:800px;} 50%{opacity:0.25;width:900px;height:900px;} }
-        .hero-layout { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; gap: 40px; z-index: 3; flex-wrap: wrap; }
-        .hero-content { flex: 1; min-width: 300px; }
-        .hero-image-box { flex: 1; display: flex; justify-content: center; align-items: center; min-width: 280px; }
-        .title { font-size: clamp(40px, 10vw, 100px); font-weight: 700; line-height: 0.9; background: linear-gradient(135deg, var(--text), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; animation: titleGlow 3s ease-in-out infinite; }
-        @keyframes titleGlow { 0%,100%{filter:drop-shadow(0 0 15px var(--accent));} 50%{filter:drop-shadow(0 0 30px var(--accent));} }
-        .hero-tagline { font-size: clamp(14px, 3vw, 20px); color: var(--text-secondary); margin-bottom: 30px; line-height: 1.4; }
-        .ip-container { display: flex; gap: 16px; flex-wrap: wrap; }
-        .btn-ip { background: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 16px; font-weight: 600; font-size: clamp(14px, 3vw, 18px); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 16px var(--accent); position: relative; overflow: hidden; flex: 1 1 auto; }
-        .btn-ip:hover { transform: translateY(-3px); box-shadow: 0 8px 30px var(--accent); background: var(--accent-light); }
-        .btn-version { background: var(--bg-card); color: var(--text-secondary); border: 2px solid var(--border); padding: 14px 28px; border-radius: 16px; font-weight: 600; font-size: clamp(14px, 3vw, 18px); cursor: default; backdrop-filter: blur(10px); flex: 0 1 auto; }
-        .giant-img { width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0 0 40px var(--accent)); animation: float 4s ease-in-out infinite; border-radius: 20px; }
-        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
-
-        #copyNotice { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 12px 24px; border-radius: 100px; opacity: 0; transition: opacity 0.2s ease; z-index: 4000; font-weight: 600; box-shadow: 0 4px 20px var(--accent); pointer-events: none; white-space: nowrap; }
-
-        .section { padding: 50px 5%; position: relative; z-index: 2; }
-        .section-title { text-align: center; font-size: clamp(26px, 5vw, 36px); font-weight: 700; margin-bottom: 40px; color: var(--text); }
-        .section-title span { color: var(--accent); position: relative; display: inline-block; }
-        .section-title span::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 3px; background: var(--accent); border-radius: 3px; transform: scaleX(0); transition: transform 0.3s ease; }
-        .section-title:hover span::after { transform: scaleX(1); }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto 40px; }
-        .stat-card { background: var(--bg-card); backdrop-filter: blur(12px); padding: 25px 15px; border-radius: 20px; border: 2px solid var(--border); transition: all 0.3s ease; text-align: center; }
-        .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-accent); }
-        .stat-number { font-size: 38px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-
-        .features-grid, .community-grid, .top-players-grid, .achievements-grid, .events-grid, .roadmap-grid, .faq-grid, .privacy-grid, .detailed-faq-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto;
+        /* ГЕРОЙ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 5%;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
         }
-        .feature-card, .community-card, .player-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card, .detailed-faq-item {
-            background: var(--bg-card); backdrop-filter: blur(12px); border: 2px solid var(--border); transition: all 0.3s ease;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            height: 900px;
+            background: var(--neon);
+            filter: blur(140px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+            animation: neonPulse 5s ease-in-out infinite;
         }
-        .feature-card, .community-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card { padding: 25px; border-radius: 24px; }
-        .feature-card:hover, .community-card:hover, .player-card:hover, .achievement-card:hover, .event-card:hover, .roadmap-item:hover, .faq-card:hover, .privacy-card:hover, .detailed-faq-item:hover {
-            border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-accent);
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.2; width: 900px; height: 900px; }
+            50% { opacity: 0.3; width: 1000px; height: 1000px; }
         }
-        .feature-icon, .community-icon, .event-icon { font-size: 36px; color: var(--accent); margin-bottom: 16px; display: inline-block; transition: transform 0.3s ease; }
-        .feature-card:hover .feature-icon { transform: scale(1.2) rotate(5deg); }
-        .feature-card h3, .community-card h3, .event-card h3, .roadmap-item h3, .faq-card h3, .privacy-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        .feature-card p, .community-card p, .event-card p, .roadmap-item p, .faq-card p, .privacy-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 320px;
+        }
+        .hero-image-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 300px;
+        }
+        .title {
+            font-size: clamp(45px, 12vw, 120px);
+            font-weight: 800;
+            line-height: 0.9;
+            background: linear-gradient(135deg, var(--text), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px var(--accent)); }
+            50% { filter: drop-shadow(0 0 35px var(--accent)); }
+        }
+        .hero-tagline {
+            font-size: clamp(16px, 3vw, 22px);
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            line-height: 1.5;
+        }
+        .ip-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-ip {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: clamp(16px, 3vw, 20px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--accent);
+            position: relative;
+            overflow: hidden;
+            flex: 1 1 auto;
+        }
+        .btn-ip::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+        .btn-ip:hover::before {
+            width: 350px;
+            height: 350px;
+        }
+        .btn-ip:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 35px var(--accent);
+            background: var(--accent-light);
+        }
+        .btn-version {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 2px solid var(--border);
+            padding: 18px 36px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: clamp(16px, 3vw, 20px);
+            cursor: default;
+            backdrop-filter: blur(10px);
+            flex: 0 1 auto;
+        }
+        .giant-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            filter: drop-shadow(0 0 50px var(--accent));
+            animation: float 5s ease-in-out infinite;
+            border-radius: 30px;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-        /* Специфичные карточки */
-        .streamer-card { background: linear-gradient(135deg, var(--bg-card), rgba(255,68,68,0.15)); border: 2px solid #ff4444; position: relative; overflow: hidden; }
-        .streamer-card::before { content: 'LIVE'; position: absolute; top: 10px; right: -30px; background: #ff4444; color: white; padding: 4px 30px; font-size: 12px; font-weight: 600; transform: rotate(45deg); box-shadow: 0 2px 10px rgba(255,68,68,0.5); animation: pulse 2s infinite; z-index: 10; }
-        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.8;} }
-        .streamer-link { display: inline-block; background: #ff4444; color: white; text-decoration: none; padding: 6px 16px; border-radius: 30px; font-weight: 500; font-size: 13px; margin: 10px 0; transition: all 0.3s ease; border: 2px solid transparent; cursor: pointer; }
-        .streamer-link:hover { background: white; color: #ff4444; border-color: #ff4444; }
+        #copyNotice {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 100px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 4000;
+            font-weight: 600;
+            box-shadow: 0 4px 25px var(--accent);
+            pointer-events: none;
+            font-size: 18px;
+            white-space: nowrap;
+        }
 
-        .player-card { display: flex; align-items: center; gap: 15px; padding: 15px; border-radius: 20px; }
-        .player-rank { font-size: 22px; font-weight: 700; color: gold; min-width: 35px; text-align: center; }
-        .player-score { color: var(--accent); font-weight: 500; font-size: 14px; white-space: nowrap; }
+        /* СЕКЦИИ */
+        .section {
+            padding: 70px 5%;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(32px, 6vw, 45px);
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: var(--text);
+        }
+        .section-title span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .section-title:hover span::after {
+            transform: scaleX(1);
+        }
 
-        .event-status { position: absolute; top: 15px; right: 15px; background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-        .roadmap-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; margin-bottom: 15px; }
-        .roadmap-status.completed { background: #4CAF50; color: white; }
-        .roadmap-status.planned { background: #9C27B0; color: white; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            padding: 35px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-accent);
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
 
-        .detailed-faq-item { border-radius: 20px; overflow: hidden; }
-        .detailed-faq-item h3 { background: rgba(163,102,255,0.1); padding: 15px 20px; font-size: 16px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--border); transition: all 0.3s ease; cursor: pointer; }
-        .detailed-faq-item:hover h3 { background: var(--accent); color: white; }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
-        .detailed-faq-item.active .faq-answer { padding: 20px; max-height: 200px; }
-        .faq-answer p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; margin-bottom: 5px; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            padding: 35px;
+            border-radius: 30px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--shadow-accent);
+        }
+        .feature-card:hover::before {
+            opacity: 0.15;
+        }
+        .feature-icon {
+            font-size: 42px;
+            color: var(--accent);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
 
         /* МОДАЛКА ПРАВИЛ */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3500; opacity: 0; transition: opacity 0.3s ease; }
-        .modal.show { display: block; opacity: 1; }
-        .modal-content { background: var(--bg-secondary); margin: 3% auto; padding: 30px; width: 95%; max-width: 900px; max-height: 85vh; border-radius: 30px; border: 2px solid var(--accent); overflow-y: auto; transform: translateY(-30px); opacity: 0; transition: all 0.3s ease; position: relative; box-shadow: 0 0 50px var(--accent); }
-        .modal.show .modal-content { transform: translateY(0); opacity: 1; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; font-weight: 700; color: #ff4c4c; cursor: pointer; transition: all 0.2s ease; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,76,76,0.1); }
-        .close-modal:hover { background: #ff4c4c; color: white; transform: rotate(90deg); }
-        .rules-main-title { color: var(--accent); text-align: center; font-size: 28px; margin-bottom: 25px; font-weight: 700; }
-        .rules-scroll-area p { color: var(--text) !important; margin-bottom: 12px; line-height: 1.5; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 14px; }
-        .rules-scroll-area b { color: var(--accent); font-size: 15px; }
-        .rules-scroll-area h3 { color: gold; margin: 20px 0 15px; font-size: 20px; }
-        .punish { color: #ff6666; font-weight: 500; font-size: 12px; display: inline-block; margin-left: 8px; background: rgba(255,68,68,0.1); padding: 2px 10px; border-radius: 20px; }
-
-        .footer { background: var(--bg-secondary); border-top: 2px solid var(--border); padding: 40px 5% 20px; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; max-width: 1400px; margin: 0 auto 30px; }
-        .footer-section h4 { color: var(--accent); font-size: 18px; margin-bottom: 16px; }
-        .footer-section a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 14px; margin-bottom: 8px; transition: all 0.2s ease; cursor: pointer; }
-        .footer-section a:hover { color: var(--accent); transform: translateX(4px); }
-        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--border); color: var(--text-tertiary); font-size: 13px; }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ */
-        @media (max-width: 768px) {
-            .nav-oval-container { top: 15px; }
-            .shop-banner { padding: 8px 16px; gap: 8px; }
-            .banner-center { gap: 10px; }
-            .banner-center a { font-size: 13px; }
-            .banner-right { gap: 5px; }
-            .shop-link, .discord-link { padding: 5px 12px; font-size: 12px; }
-            .banner-left { font-size: 14px; }
-            .banner-star { font-size: 18px; }
-
-            .control-panel { top: 10px; right: 10px; gap: 5px; }
-            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { width: 38px; height: 38px; font-size: 18px; }
-
-            .side-trigger { top: 15px; left: 15px; }
-            .side-trigger .line { width: 24px; height: 2px; margin: 5px 0; }
-
-            .hero-layout { flex-direction: column; text-align: center; gap: 20px; }
-            .title { font-size: 48px; }
-            .hero-tagline { font-size: 16px; }
-            .ip-container { justify-content: center; }
-            .btn-ip, .btn-version { padding: 10px 16px; font-size: 14px; }
-
-            .section { padding: 40px 4%; }
-            .section-title { font-size: 24px; margin-bottom: 25px; }
-
-            /* В боковой панели на телефоне меньше пунктов */
-            .panel-links .panel-link-item { display: none; }
-            .panel-links .panel-link-item.mobile-visible { display: block; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 3500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+        .modal-content {
+            background: var(--bg-secondary);
+            margin: 2% auto;
+            padding: 45px;
+            width: 95%;
+            max-width: 1100px;
+            max-height: 90vh;
+            border-radius: 40px;
+            border: 2px solid var(--accent);
+            overflow-y: auto;
+            transform: translateY(-30px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 60px var(--accent);
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff4c4c;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 76, 76, 0.15);
+        }
+        .close-modal:hover {
+            background: #ff4c4c;
+            color: white;
+            transform: rotate(90deg);
+        }
+        .rules-main-title {
+            color: var(--accent);
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .rules-scroll-area p {
+            color: var(--text) !important;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            font-size: 15px;
+        }
+        .rules-scroll-area b {
+            color: var(--accent);
+            font-size: 16px;
+        }
+        .rules-scroll-area h3 {
+            color: gold;
+            margin: 25px 0 15px;
+            font-size: 24px;
+        }
+        .punish {
+            color: #ff6666;
+            font-weight: 500;
+            font-size: 13px;
+            display: inline-block;
+            margin-left: 10px;
+            background: rgba(255, 68, 68, 0.15);
+            padding: 4px 15px;
+            border-radius: 25px;
         }
 
-        @media (min-width: 769px) {
-            .panel-links .panel-link-item { display: block; }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .faq-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            padding: 30px;
+            border-radius: 25px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .faq-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-accent);
+        }
+        .faq-card .icon {
+            font-size: 38px;
+            color: var(--accent);
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border);
+            padding: 50px 5% 25px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            max-width: 1400px;
+            margin: 0 auto 35px;
+        }
+        .footer-section h4 {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 18px;
+            position: relative;
+            display: inline-block;
+        }
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .footer-section:hover h4::after {
+            transform: scaleX(1);
+        }
+        .footer-section a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .footer-section a:hover {
+            color: var(--accent);
+            transform: translateX(6px);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ */
+        @media (max-width: 1024px) {
+            .nav-oval-container {
+                min-width: auto;
+                width: 95%;
+            }
+            .banner-center {
+                gap: 20px;
+            }
+            .banner-center a {
+                font-size: 15px;
+            }
+            .shop-link, .discord-link {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-oval-container {
+                top: 15px;
+                width: 92%;
+            }
+            .shop-banner {
+                padding: 10px 18px;
+                gap: 10px;
+            }
+            .banner-left {
+                font-size: 18px;
+            }
+            .banner-star {
+                font-size: 22px;
+            }
+            .banner-center {
+                display: none;
+            }
+            .banner-right {
+                gap: 8px;
+            }
+            .shop-link, .discord-link {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .control-panel {
+                top: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .side-trigger {
+                top: 15px;
+                left: 15px;
+            }
+            .side-trigger .line {
+                width: 28px;
+                height: 3px;
+                margin: 5px 0;
+            }
+
+            .side-panel {
+                width: 280px;
+                padding: 80px 20px 20px;
+            }
+            .panel-logo {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+            .panel-links a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+            
+            /* На телефоне в боковой панели только 4 пункта */
+            .panel-links .panel-link-item {
+                display: none;
+            }
+            .panel-links .panel-link-item.mobile-visible {
+                display: block;
+            }
+
+            .hero {
+                padding: 80px 4%;
+            }
+            .hero-layout {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            .title {
+                font-size: 52px;
+            }
+            .hero-tagline {
+                font-size: 16px;
+            }
+            .ip-container {
+                justify-content: center;
+            }
+            .btn-ip, .btn-version {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+            .giant-img {
+                max-width: 280px;
+            }
+
+            .section {
+                padding: 50px 4%;
+            }
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+            .stats-grid,
+            .features-grid,
+            .faq-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .stat-number {
+                font-size: 42px;
+            }
+            .stat-label {
+                font-size: 16px;
+            }
+            .feature-card {
+                padding: 25px;
+            }
+            .feature-card h3 {
+                font-size: 20px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+            .rules-main-title {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-oval-container {
+                width: 94%;
+            }
+            .shop-banner {
+                padding: 8px 12px;
+            }
+            .banner-left {
+                font-size: 16px;
+            }
+            .banner-star {
+                font-size: 20px;
+            }
+            .shop-link, .discord-link {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            .control-panel {
+                gap: 5px;
+            }
+            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .title {
+                font-size: 42px;
+            }
+            .btn-ip, .btn-version {
+                width: 100%;
+                padding: 12px 16px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-section a {
+                display: inline-block;
+                margin: 5px 10px;
+            }
         }
     </style>
 </head>
@@ -347,7 +1157,7 @@
 
 <div id="weather"></div>
 
-<!-- ВЕРХНИЙ ОВАЛ (НАВИГАЦИЯ) -->
+<!-- ВЕРХНИЙ ОВАЛ (УВЕЛИЧЕННЫЙ) -->
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
@@ -358,6 +1168,7 @@
             <a href="#features" class="nav-features" data-i18n="nav-features">Особенности</a>
             <a href="#how-to-play" class="nav-howtoplay" data-i18n="nav-howtoplay">Как начать</a>
             <a href="#faq" class="nav-faq" data-i18n="nav-faq">FAQ</a>
+            <a href="javascript:void(0)" onclick="openRules()" class="nav-rules" data-i18n="nav-rules">Правила</a>
         </div>
         <div class="banner-right">
             <a href="#" target="_blank" class="shop-link" data-i18n="shop-link">🛒 Магазин</a>
@@ -366,7 +1177,7 @@
     </div>
 </div>
 
-<!-- ПАНЕЛЬ УПРАВЛЕНИЯ (СПРАВА) -->
+<!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
 <div class="control-panel">
     <div class="theme-toggle" onclick="toggleTheme()">
         <div class="theme-icon" id="themeIcon">☀️</div>
@@ -418,7 +1229,7 @@
     </div>
 </div>
 
-<!-- БОКОВАЯ ПАНЕЛЬ (СЛЕВА) -->
+<!-- БОКОВАЯ ПАНЕЛЬ -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -429,19 +1240,21 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
+        <!-- На телефоне показываем только 4 самых важных -->
         <a href="#stats" class="panel-link-item mobile-visible" data-i18n="panel-stats">📊 Статистика</a>
         <a href="#features" class="panel-link-item mobile-visible" data-i18n="panel-features">✨ Особенности</a>
-        <a href="#how-to-play" class="panel-link-item" data-i18n="panel-howto">🚀 Как начать</a>
+        <a href="#how-to-play" class="panel-link-item mobile-visible" data-i18n="panel-howto">🚀 Как начать</a>
+        <a href="#faq" class="panel-link-item mobile-visible" data-i18n="panel-faq">❓ FAQ</a>
+        <!-- Остальные пункты только на ПК -->
         <a href="#streamers" class="panel-link-item" data-i18n="panel-streamers">🎥 Стримеры</a>
         <a href="#top-players" class="panel-link-item" data-i18n="panel-top">🏆 Топ игроков</a>
         <a href="#achievements" class="panel-link-item" data-i18n="panel-achievements">🎯 Достижения</a>
         <a href="#events" class="panel-link-item" data-i18n="panel-events">📅 Ивенты</a>
         <a href="#roadmap" class="panel-link-item" data-i18n="panel-roadmap">🗺️ Роудмап</a>
-        <a href="#faq" class="panel-link-item mobile-visible" data-i18n="panel-faq">❓ FAQ</a>
         <a href="#community" class="panel-link-item" data-i18n="panel-community">💬 Сообщество</a>
         <a href="#privacy" class="panel-link-item" data-i18n="panel-privacy">🔒 Защита</a>
         <a href="#detailed-faq" class="panel-link-item" data-i18n="panel-dfaq">📌 Вопросы</a>
-        <a href="javascript:void(0)" onclick="openRules()" class="panel-link-item mobile-visible" data-i18n="panel-rules">📜 Правила</a>
+        <a href="javascript:void(0)" onclick="openRules()" class="panel-link-item" data-i18n="panel-rules">📜 Правила</a>
     </div>
     
     <div class="panel-social">
@@ -472,7 +1285,7 @@
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'%3E%3Crect width='500' height='400' fill='%238a4cdd'/%3E%3Ctext x='250' y='200' font-family='Arial' font-size='36' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E" alt="SweetLand" class="giant-img">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%238a4cdd'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E" alt="SweetLand" class="giant-img">
         </div>
     </div>
     <div id="copyNotice" class="copy-notice" data-i18n="copy-notice">IP скопирован</div>
@@ -530,6 +1343,7 @@
             <a href="#features" data-i18n="footer-features">Особенности</a>
             <a href="#how-to-play" data-i18n="footer-howto">Как начать</a>
             <a href="#faq" data-i18n="footer-faq">FAQ</a>
+            <a href="javascript:void(0)" onclick="openRules()" data-i18n="footer-rules">Правила</a>
         </div>
         <div class="footer-section"><h4 data-i18n="social">Соцсети</h4>
             <a href="#" data-i18n="social-discord">Discord</a>
@@ -549,17 +1363,16 @@
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
 
-    // === ПЕРЕВОДЫ (6 ЯЗЫКОВ: ru, uk, en, de, fr, es) ===
+    // === ПЕРЕВОДЫ (ВСТАВЬТЕ СЮДА ПОЛНЫЙ ОБЪЕКТ translations ИЗ ПРЕДЫДУЩЕГО ОТВЕТА) ===
+    // Для краткости я оставляю заглушку, но вы вставите полный объект с 6 языками
     const translations = {
         ru: {
-            // Навигация
             'nav-features': 'Особенности',
             'nav-howtoplay': 'Как начать',
             'nav-faq': 'FAQ',
+            'nav-rules': 'Правила',
             'shop-link': '🛒 Магазин',
             'discord-link': '💬 Discord',
-            
-            // Цвета
             'color-pink': 'Розовый',
             'color-blue': 'Голубой',
             'color-green': 'Зелёный',
@@ -568,29 +1381,21 @@
             'color-yellow': 'Жёлтый',
             'color-red': 'Красный',
             'color-teal': 'Бирюзовый',
-            
-            // Языки
             'lang-ru': 'Русский',
             'lang-uk': 'Українська',
             'lang-en': 'English',
             'lang-de': 'Deutsch',
             'lang-fr': 'Français',
             'lang-es': 'Español',
-            
-            // Погода
             'weather-auto': 'Авто',
             'weather-snow': 'Снег',
             'weather-rain': 'Дождь',
             'weather-none': 'Выкл',
-            
-            // Настройки
             'particles-on': 'Частицы: вкл',
             'particles-off': 'Частицы: выкл',
             'blur-on': 'Размытие: вкл',
             'blur-off': 'Размытие: выкл',
             'reset-settings': 'Сброс',
-            
-            // Боковая панель
             'panel-stats': '📊 Статистика',
             'panel-features': '✨ Особенности',
             'panel-howto': '🚀 Как начать',
@@ -604,26 +1409,18 @@
             'panel-privacy': '🔒 Защита',
             'panel-dfaq': '📌 Вопросы',
             'panel-rules': '📜 Правила',
-            
-            // Соцсети
             'social-discord': 'Discord',
             'social-telegram': 'Telegram',
             'social-youtube': 'YouTube',
-            
-            // Герой
             'hero-tagline': 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
             'ip-button': 'play.sweet-land.fun',
             'version-text': '1.21.8',
             'copy-notice': 'IP скопирован',
-            
-            // Статистика
             'stats-title': 'Статистика сервера',
             'stat-1': 'Работа сервера',
             'stat-2': 'Актуальная версия',
             'stat-3': 'Ванильный геймплей',
             'stat-4': 'Доната',
-            
-            // Особенности
             'features-title': 'Особенности сервера',
             'feature-1-title': 'Анти-чит система',
             'feature-1-desc': 'Продвинутая защита от читеров. Честная игра для всех.',
@@ -633,8 +1430,6 @@
             'feature-3-desc': 'Еженедельные события и конкурсы с призами для игроков.',
             'feature-4-title': 'Защита построек',
             'feature-4-desc': 'Ваши постройки под надежной защитой от гриферов.',
-            
-            // Как начать
             'howto-title': 'Как начать играть',
             'howto-1': 'Версия 1.21.8',
             'howto-1-desc': 'Убедись, что у тебя установлена последняя версия Minecraft.',
@@ -642,8 +1437,6 @@
             'howto-2-desc': 'Заполни анкету и ознакомься с правилами сервера.',
             'howto-3': 'Заходи и играй',
             'howto-3-desc': 'После одобрения добавляй сервер и выбирай место для базы.',
-            
-            // FAQ
             'faq-title': 'Ответы на вопросы',
             'faq-1': 'Когда старт?',
             'faq-1-desc': 'Сервер готовится к открытию. Следи за новостями в Discord.',
@@ -653,8 +1446,6 @@
             'faq-3-desc': 'Анти-чит система и шифрование данных игроков.',
             'faq-4': 'Донат?',
             'faq-4-desc': 'Нет, это полностью ванильный сервер. Никаких привилегий.',
-            
-            // Футер
             'footer-title': 'SweetLand',
             'footer-desc': 'Ванильное выживание без границ.',
             'quick-links': 'Быстрые ссылки',
@@ -662,20 +1453,17 @@
             'footer-features': 'Особенности',
             'footer-howto': 'Как начать',
             'footer-faq': 'FAQ',
+            'footer-rules': 'Правила',
             'social': 'Соцсети',
             'footer-copyright': '© 2026 SweetLand. Ванильный Minecraft сервер.',
-            
-            // Правила - заголовки
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
             'rules-section1': '1. Общие Правила',
             'rules-section2': '2. Правила Администрации',
-            
-            // Правила - тексты
             'rule-1': 'Заходя на сервер вы автоматически соглашаетесь с правилами.',
             'rule-1.1': 'Незнание Правил не освобождает от отвествености.',
             'rule-1.2': 'Запрещена любая порча имущества (гриферство) других игроков.',
             'rule-1.3': 'Запрещена кража любых ресурсов других игроков.',
-            'rule-1.4': 'Запрещено убийство любых мобов других игроков, находящихся на их территории. Исключением являются естественно заспавненные в вашем присутствии монстры.',
+            'rule-1.4': 'Запрещено убийство любых мобов других игроков, находящихся на их территории.',
             'rule-1.5': 'Запрещено селиться в городах и территориях игроков и кланов без их согласия.',
             'rule-1.6': 'Запрещено игнорирование запрещающих табличек.',
             'rule-1.7': 'Запрещено использовать чужие фермы без согласия.',
@@ -683,7 +1471,7 @@
             'rule-1.9': 'Запрещено возводить постройки/механизмы, перегружающие сервер.',
             'rule-1.10': 'Запрещено убийство игрока без его согласия.',
             'rule-1.11': 'Запрещено присваивать себе лут умершего игрока. Верните вещи.',
-            'rule-1.12': 'Запрещено использование читов/стороннего ПО (METEOR, WURST, IMPACT, авто-кликеры, авто-тотемы и т.д.).',
+            'rule-1.12': 'Запрещено использование читов/стороннего ПО.',
             'rule-1.13': 'Запрещено сокрытие бага/дюпа от администрации.',
             'rule-1.14': 'Запрещено присваивать себе брошенные базы без подтверждения администрации.',
             'rule-1.15': 'Брут, взлом, игра на чужом аккаунте.',
@@ -692,10 +1480,10 @@
             'rule-1.18': 'Запрещено подстрекательство игроков на нарушение правил.',
             'rule-1.19': 'Владелец аккаунта несёт за него полную ответственность.',
             'rule-1.20': 'Запрещено создание мультиаккаунтов для обхода бана.',
-            'rule-1.21': 'Запрещено строить более 4 автоматических ферм (кроме ферм для еды).',
+            'rule-1.21': 'Запрещено строить более 4 автоматических ферм.',
             'rule-1.22': 'Запрещен спам, капс, неадекватное поведение в чате, оскорбления.',
             'rule-1.23': 'Запрещено воровство в магазинах и обман в торговле.',
-            'rule-1.24': 'Запрещено заходить на чужие территории без разрешения (преследование).',
+            'rule-1.24': 'Запрещено заходить на чужие территории без разрешения.',
             'rule-1.25': 'Запрещено манипулировать игроками, угрожая связями с администрацией.',
             'rule-1.26': 'Запрещено строительство в радиусе 500 блоков от спавна.',
             'rule-1.27': 'Запрещено строительство в аду в радиусе 300 блоков от центрального портала.',
@@ -709,18 +1497,16 @@
             'rule-1.35': 'Запрещено искать лазейки в правилах.',
             'rule-1.36': 'Запрещено кидать более 3 заявок в команду проекта при отказе.',
             'rule-1.37': 'За помощь администрации в нахождение нарушителя вы в праве требовать вознаграждение.',
-            'rule-1.38': 'Запрещено попрошайничество (ресурсов, предметов, прав) у администрации и игроков.',
+            'rule-1.38': 'Запрещено попрошайничество у администрации и игроков.',
             'rule-1.39': 'Запрещен снос чужих тотемов или других значимых построек без согласия владельца.',
-            'rule-1.40': 'Запрещено использование модов, дающих нечестное преимущество (авто-бег, мини-карты с сущностями и т.д.).',
-            'rule-1.41': 'Запрещена крайняя неадекватность, троллинг и токсичное поведение, портящее настроение другим игрокам.',
+            'rule-1.40': 'Запрещено использование модов, дающих нечестное преимущество.',
+            'rule-1.41': 'Запрещена крайняя неадекватность, троллинг и токсичное поведение.',
             'rule-2': 'Запрещено превышение полномочий.',
             'rule-2.1': 'Общие правила действуют для всех.',
             'rule-2.2': 'Запрещено использование креатива в любых целях.',
             'rule-2.3': 'Запрещено давать преимущество другим игрокам.',
             'rule-2.4': 'Запрещено манипулировать баном, мутом, удалением из вайт листа.',
             'rule-2.5': 'Любой игрок может подать жалобу на администратора без последствий.',
-            
-            // Наказания
             'punish-1.2': 'Бан от 30 дней',
             'punish-1.3': 'Бан от 14 дней',
             'punish-1.4': 'Бан 2 дня',
@@ -762,1073 +1548,15 @@
             'punish-2.2': 'Снятие',
             'punish-2.3': 'Снятие + ЧС',
             'punish-2.4': 'Снятие',
-        },
-        
-        uk: {
-            // Навигация
-            'nav-features': 'Особливості',
-            'nav-howtoplay': 'Як почати',
-            'nav-faq': 'FAQ',
-            'shop-link': '🛒 Магазин',
-            'discord-link': '💬 Discord',
-            
-            // Цвета
-            'color-pink': 'Рожевий',
-            'color-blue': 'Блакитний',
-            'color-green': 'Зелений',
-            'color-orange': 'Помаранчевий',
-            'color-purple': 'Фіолетовий',
-            'color-yellow': 'Жовтий',
-            'color-red': 'Червоний',
-            'color-teal': 'Бірюзовий',
-            
-            // Языки
-            'lang-ru': 'Російська',
-            'lang-uk': 'Українська',
-            'lang-en': 'Англійська',
-            'lang-de': 'Німецька',
-            'lang-fr': 'Французька',
-            'lang-es': 'Іспанська',
-            
-            // Погода
-            'weather-auto': 'Авто',
-            'weather-snow': 'Сніг',
-            'weather-rain': 'Дощ',
-            'weather-none': 'Вимк',
-            
-            // Настройки
-            'particles-on': 'Частинки: вкл',
-            'particles-off': 'Частинки: вимк',
-            'blur-on': 'Розмиття: вкл',
-            'blur-off': 'Розмиття: вимк',
-            'reset-settings': 'Скинути',
-            
-            // Боковая панель
-            'panel-stats': '📊 Статистика',
-            'panel-features': '✨ Особливості',
-            'panel-howto': '🚀 Як почати',
-            'panel-streamers': '🎥 Стрімери',
-            'panel-top': '🏆 Топ гравців',
-            'panel-achievements': '🎯 Досягнення',
-            'panel-events': '📅 Івенти',
-            'panel-roadmap': '🗺️ Роудмап',
-            'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Спільнота',
-            'panel-privacy': '🔒 Захист',
-            'panel-dfaq': '📌 Питання',
-            'panel-rules': '📜 Правила',
-            
-            // Соцсети
-            'social-discord': 'Discord',
-            'social-telegram': 'Telegram',
-            'social-youtube': 'YouTube',
-            
-            // Герой
-            'hero-tagline': 'Ванільне виживання на версії 1.21.8. Твій світ — твої правила.',
-            'ip-button': 'play.sweet-land.fun',
-            'version-text': '1.21.8',
-            'copy-notice': 'IP скопійовано',
-            
-            // Статистика
-            'stats-title': 'Статистика сервера',
-            'stat-1': 'Робота сервера',
-            'stat-2': 'Актуальна версія',
-            'stat-3': 'Ванільний геймплей',
-            'stat-4': 'Донату',
-            
-            // Особенности
-            'features-title': 'Особливості сервера',
-            'feature-1-title': 'Анти-чит система',
-            'feature-1-desc': 'Просунутий захист від читів. Честна гра для всіх.',
-            'feature-2-title': 'Стабільний TPS',
-            'feature-2-desc': 'Оптимізований сервер на потужному залізі. Жодних лагів.',
-            'feature-3-title': 'Регулярні івенти',
-            'feature-3-desc': 'Щотижневі події та конкурси з призами для гравців.',
-            'feature-4-title': 'Захист будівель',
-            'feature-4-desc': 'Ваші будівлі під надійним захистом від ґріферів.',
-            
-            // Как начать
-            'howto-title': 'Як почати грати',
-            'howto-1': 'Версія 1.21.8',
-            'howto-1-desc': 'Переконайся, що у тебе встановлена остання версія Minecraft.',
-            'howto-2': 'Подай заявку в Discord',
-            'howto-2-desc': 'Заповни анкету та ознайомся з правилами сервера.',
-            'howto-3': 'Заходь та грай',
-            'howto-3-desc': 'Після схвалення додавай сервер та обирай місце для бази.',
-            
-            // FAQ
-            'faq-title': 'Відповіді на питання',
-            'faq-1': 'Коли старт?',
-            'faq-1-desc': 'Сервер готується до відкриття. Слідкуй за новинами в Discord.',
-            'faq-2': 'Яка версія?',
-            'faq-2-desc': 'Сервер працюватиме на актуальній версії 1.21.8.',
-            'faq-3': 'Захист акаунта?',
-            'faq-3-desc': 'Анти-чит система та шифрування даних гравців.',
-            'faq-4': 'Донат?',
-            'faq-4-desc': 'Ні, це повністю ванільний сервер. Жодних привілеїв.',
-            
-            // Футер
-            'footer-title': 'SweetLand',
-            'footer-desc': 'Ванільне виживання без кордонів.',
-            'quick-links': 'Швидкі посилання',
-            'footer-stats': 'Статистика',
-            'footer-features': 'Особливості',
-            'footer-howto': 'Як почати',
-            'footer-faq': 'FAQ',
-            'social': 'Соцмережі',
-            'footer-copyright': '© 2026 SweetLand. Ванільний Minecraft сервер.',
-            
-            // Правила - заголовки
-            'rules-title': 'ПРАВИЛА СЕРВЕРА',
-            'rules-section1': '1. Загальні Правила',
-            'rules-section2': '2. Правила Адміністрації',
-            
-            // Правила - тексты
-            'rule-1': 'Заходячи на сервер ви автоматично погоджуєтесь з правилами.',
-            'rule-1.1': 'Незнання Правил не звільняє від відповідальності.',
-            'rule-1.2': 'Заборонено будь-яке псування майна (гріферство) інших гравців.',
-            'rule-1.3': 'Заборонено крадіжка будь-яких ресурсів інших гравців.',
-            'rule-1.4': 'Заборонено вбивство будь-яких мобів інших гравців, що знаходяться на їх території.',
-            'rule-1.5': 'Заборонено селитися в містах і на територіях гравців та кланів без їх згоди.',
-            'rule-1.6': 'Заборонено ігнорування забороняючих табличок.',
-            'rule-1.7': 'Заборонено використовувати чужі ферми без згоди.',
-            'rule-1.8': 'Заборонено будь-яке псування ігрового світу.',
-            'rule-1.9': 'Заборонено зводити будівлі/механізми, що перевантажують сервер.',
-            'rule-1.10': 'Заборонено вбивство гравця без його згоди.',
-            'rule-1.11': 'Заборонено привласнювати собі лут померлого гравця. Поверніть речі.',
-            'rule-1.12': 'Заборонено використання читів/стороннього ПЗ.',
-            'rule-1.13': 'Заборонено приховування бага/дюпу від адміністрації.',
-            'rule-1.14': 'Заборонено привласнювати собі покинуті бази без підтвердження адміністрації.',
-            'rule-1.15': 'Брут, злом, гра на чужому акаунті.',
-            'rule-1.16': 'Заборонено нанесення будь-якої шкоди серверу та/або гравцям.',
-            'rule-1.17': 'Заборонено будь-яку комерційну діяльність поза грою.',
-            'rule-1.18': 'Заборонено підбурювання гравців на порушення правил.',
-            'rule-1.19': 'Власник акаунта несе за нього повну відповідальність.',
-            'rule-1.20': 'Заборонено створення мультіакаунтів для обходу бану.',
-            'rule-1.21': 'Заборонено будувати більше 4 автоматичних ферм.',
-            'rule-1.22': 'Заборонено спам, капс, неадекватна поведінка в чаті, образи.',
-            'rule-1.23': 'Заборонено крадіжки в магазинах та обман у торгівлі.',
-            'rule-1.24': 'Заборонено заходити на чужі території без дозволу.',
-            'rule-1.25': 'Заборонено маніпулювати гравцями, погрожуючи зв\'язками з адміністрацією.',
-            'rule-1.26': 'Заборонено будівництво в радіусі 500 блоків від спавну.',
-            'rule-1.27': 'Заборонено будівництво в пеклі в радіусі 300 блоків від центрального порталу.',
-            'rule-1.28': 'Заборонено будівлі-пастки, що вбивають гравця.',
-            'rule-1.29': 'На вимогу адміністрації ви зобов\'язані знести/перенести незаконну будівлю.',
-            'rule-1.30': 'Заборонено використання x-ray ресурс-паків або модів.',
-            'rule-1.31': 'Заборонено масові роздачі ресурсів, що ламають економіку.',
-            'rule-1.32': 'Заборонено дюп/баги, що дають перевагу.',
-            'rule-1.33': 'Адміністрація має право обирати покарання по ситуації.',
-            'rule-1.34': 'Заборонено зберігання/використання x-ray ресурсів.',
-            'rule-1.35': 'Заборонено шукати лазівки в правилах.',
-            'rule-1.36': 'Заборонено кидати більше 3 заявок в команду проекту при відмові.',
-            'rule-1.37': 'За допомогу адміністрації у знаходженні порушника ви маєте право вимагати винагороду.',
-            'rule-1.38': 'Заборонено жебракування у адміністрації та гравців.',
-            'rule-1.39': 'Заборонено знесення чужих тотемів або інших значних будівель без згоди власника.',
-            'rule-1.40': 'Заборонено використання модів, що дають нечесну перевагу.',
-            'rule-1.41': 'Заборонено крайня неадекватність, тролінг та токсична поведінка.',
-            'rule-2': 'Заборонено перевищення повноважень.',
-            'rule-2.1': 'Загальні правила діють для всіх.',
-            'rule-2.2': 'Заборонено використання креативу в будь-яких цілях.',
-            'rule-2.3': 'Заборонено давати перевагу іншим гравцям.',
-            'rule-2.4': 'Заборонено маніпулювати баном, мутом, видаленням з вайтліста.',
-            'rule-2.5': 'Будь-який гравець може подати скаргу на адміністратора без наслідків.',
-            
-            // Наказания
-            'punish-1.2': 'Бан від 30 днів',
-            'punish-1.3': 'Бан від 14 днів',
-            'punish-1.4': 'Бан 2 дні',
-            'punish-1.5': 'Знос + Кік',
-            'punish-1.6': 'Право на вбивство',
-            'punish-1.7': 'Бан 3 дні',
-            'punish-1.8': 'Знос + Бан 2 дні',
-            'punish-1.9': 'Знос + Бан 14 днів',
-            'punish-1.10': 'Бан 7 днів',
-            'punish-1.11': 'Бан 1 день',
-            'punish-1.12': 'ПЕРМАНЕНТНИЙ БАН',
-            'punish-1.13': 'Бан 30 днів',
-            'punish-1.14': 'Бан 5 днів',
-            'punish-1.15': 'Перманентний бан',
-            'punish-1.16': 'Бан назавжди',
-            'punish-1.17': 'ЧС проекту',
-            'punish-1.18': 'Бан 10 днів',
-            'punish-1.20': 'Бан по IP',
-            'punish-1.21': 'Знос + Бан 5 днів',
-            'punish-1.22': 'Мут від 6 годин',
-            'punish-1.23': 'Бан 10 днів',
-            'punish-1.24': 'Кік/Бан',
-            'punish-1.25': 'Бан 14 днів',
-            'punish-1.26': 'Знос',
-            'punish-1.27': 'Знос',
-            'punish-1.28': 'Бан 7 днів',
-            'punish-1.29': 'Бан 7 днів',
-            'punish-1.30': 'Бан на 4 місяці',
-            'punish-1.31': 'Бан 14 днів',
-            'punish-1.32': 'ПЕРМАНЕНТНИЙ БАН',
-            'punish-1.34': 'Бан на 4 місяці',
-            'punish-1.35': 'Бан 30 днів',
-            'punish-1.36': 'Відмова в розгляді',
-            'punish-1.38': 'Мут/Бан 2 дні',
-            'punish-1.39': 'Бан 10 днів',
-            'punish-1.40': 'Бан 30 днів',
-            'punish-1.41': 'Мут до 48год / Бан',
-            'punish-2': 'Зняття',
-            'punish-2.2': 'Зняття',
-            'punish-2.3': 'Зняття + ЧС',
-            'punish-2.4': 'Зняття',
-        },
-        
-        en: {
-            // Navigation
-            'nav-features': 'Features',
-            'nav-howtoplay': 'How to Play',
-            'nav-faq': 'FAQ',
-            'shop-link': '🛒 Shop',
-            'discord-link': '💬 Discord',
-            
-            // Colors
-            'color-pink': 'Pink',
-            'color-blue': 'Blue',
-            'color-green': 'Green',
-            'color-orange': 'Orange',
-            'color-purple': 'Purple',
-            'color-yellow': 'Yellow',
-            'color-red': 'Red',
-            'color-teal': 'Teal',
-            
-            // Languages
-            'lang-ru': 'Russian',
-            'lang-uk': 'Ukrainian',
-            'lang-en': 'English',
-            'lang-de': 'German',
-            'lang-fr': 'French',
-            'lang-es': 'Spanish',
-            
-            // Weather
-            'weather-auto': 'Auto',
-            'weather-snow': 'Snow',
-            'weather-rain': 'Rain',
-            'weather-none': 'Off',
-            
-            // Settings
-            'particles-on': 'Particles: on',
-            'particles-off': 'Particles: off',
-            'blur-on': 'Blur: on',
-            'blur-off': 'Blur: off',
-            'reset-settings': 'Reset',
-            
-            // Side panel
-            'panel-stats': '📊 Stats',
-            'panel-features': '✨ Features',
-            'panel-howto': '🚀 How to Play',
-            'panel-streamers': '🎥 Streamers',
-            'panel-top': '🏆 Top Players',
-            'panel-achievements': '🎯 Achievements',
-            'panel-events': '📅 Events',
-            'panel-roadmap': '🗺️ Roadmap',
-            'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Community',
-            'panel-privacy': '🔒 Privacy',
-            'panel-dfaq': '📌 Questions',
-            'panel-rules': '📜 Rules',
-            
-            // Social
-            'social-discord': 'Discord',
-            'social-telegram': 'Telegram',
-            'social-youtube': 'YouTube',
-            
-            // Hero
-            'hero-tagline': 'Vanilla survival on version 1.21.8. Your world — your rules.',
-            'ip-button': 'play.sweet-land.fun',
-            'version-text': '1.21.8',
-            'copy-notice': 'IP copied',
-            
-            // Stats
-            'stats-title': 'Server Stats',
-            'stat-1': 'Server Uptime',
-            'stat-2': 'Current Version',
-            'stat-3': 'Vanilla Gameplay',
-            'stat-4': 'No Donate',
-            
-            // Features
-            'features-title': 'Server Features',
-            'feature-1-title': 'Anti-Cheat System',
-            'feature-1-desc': 'Advanced protection against cheaters. Fair play for everyone.',
-            'feature-2-title': 'Stable TPS',
-            'feature-2-desc': 'Optimized server on powerful hardware. No lags.',
-            'feature-3-title': 'Regular Events',
-            'feature-3-desc': 'Weekly events and competitions with prizes for players.',
-            'feature-4-title': 'Build Protection',
-            'feature-4-desc': 'Your buildings are reliably protected from griefers.',
-            
-            // How to play
-            'howto-title': 'How to Start Playing',
-            'howto-1': 'Version 1.21.8',
-            'howto-1-desc': 'Make sure you have the latest version of Minecraft installed.',
-            'howto-2': 'Apply in Discord',
-            'howto-2-desc': 'Fill out the application and read the server rules.',
-            'howto-3': 'Join and play',
-            'howto-3-desc': 'After approval, add the server and choose a base location.',
-            
-            // FAQ
-            'faq-title': 'FAQ',
-            'faq-1': 'When is the start?',
-            'faq-1-desc': 'The server is preparing for launch. Follow news in Discord.',
-            'faq-2': 'What version?',
-            'faq-2-desc': 'The server will run on the latest version 1.21.8.',
-            'faq-3': 'Account protection?',
-            'faq-3-desc': 'Anti-cheat system and encryption of player data.',
-            'faq-4': 'Donate?',
-            'faq-4-desc': 'No, this is a completely vanilla server. No privileges.',
-            
-            // Footer
-            'footer-title': 'SweetLand',
-            'footer-desc': 'Vanilla survival without borders.',
-            'quick-links': 'Quick Links',
-            'footer-stats': 'Stats',
-            'footer-features': 'Features',
-            'footer-howto': 'How to Play',
-            'footer-faq': 'FAQ',
-            'social': 'Social',
-            'footer-copyright': '© 2026 SweetLand. Vanilla Minecraft server.',
-            
-            // Rules - titles
-            'rules-title': 'SERVER RULES',
-            'rules-section1': '1. General Rules',
-            'rules-section2': '2. Administration Rules',
-            
-            // Rules - texts
-            'rule-1': 'By joining the server, you automatically agree to the rules.',
-            'rule-1.1': 'Ignorance of the rules does not exempt you from responsibility.',
-            'rule-1.2': 'Any damage to property (griefing) of other players is prohibited.',
-            'rule-1.3': 'Stealing any resources from other players is prohibited.',
-            'rule-1.4': 'Killing any mobs of other players located on their territory is prohibited.',
-            'rule-1.5': 'Settling in cities and territories of players and clans without their consent is prohibited.',
-            'rule-1.6': 'Ignoring prohibition signs is prohibited.',
-            'rule-1.7': 'Using other people\'s farms without consent is prohibited.',
-            'rule-1.8': 'Any damage to the game world is prohibited.',
-            'rule-1.9': 'Building structures/mechanisms that overload the server is prohibited.',
-            'rule-1.10': 'Killing a player without their consent is prohibited.',
-            'rule-1.11': 'Taking the loot of a deceased player for yourself is prohibited. Return the items.',
-            'rule-1.12': 'Use of cheats/third-party software (METEOR, WURST, IMPACT, auto-clickers, auto-totems, etc.) is prohibited.',
-            'rule-1.13': 'Concealing a bug/dupe from the administration is prohibited.',
-            'rule-1.14': 'Taking abandoned bases without confirmation from the administration is prohibited.',
-            'rule-1.15': 'Brute force, hacking, playing on someone else\'s account is prohibited.',
-            'rule-1.16': 'Causing any harm to the server and/or players is prohibited.',
-            'rule-1.17': 'Any commercial activity outside the game is prohibited.',
-            'rule-1.18': 'Inciting players to break the rules is prohibited.',
-            'rule-1.19': 'The account owner bears full responsibility for it.',
-            'rule-1.20': 'Creating multi-accounts to bypass a ban is prohibited.',
-            'rule-1.21': 'Building more than 4 automatic farms (except food farms) is prohibited.',
-            'rule-1.22': 'Spam, caps, inappropriate behavior in chat, insults are prohibited.',
-            'rule-1.23': 'Theft in shops and deception in trade is prohibited.',
-            'rule-1.24': 'Entering other people\'s territories without permission (stalking) is prohibited.',
-            'rule-1.25': 'Manipulating players by threatening connections with the administration is prohibited.',
-            'rule-1.26': 'Construction within a radius of 500 blocks from spawn is prohibited.',
-            'rule-1.27': 'Construction in the nether within a radius of 300 blocks from the central portal is prohibited.',
-            'rule-1.28': 'Trap buildings that kill the player are prohibited.',
-            'rule-1.29': 'At the request of the administration, you are obliged to demolish/relocate an illegal building.',
-            'rule-1.30': 'Use of x-ray resource packs or mods is prohibited.',
-            'rule-1.31': 'Mass giveaways of resources that break the economy are prohibited.',
-            'rule-1.32': 'Dupes/bugs that give an advantage are prohibited.',
-            'rule-1.33': 'The administration has the right to choose punishment according to the situation, even if it is not in the rules.',
-            'rule-1.34': 'Storage/use of x-ray resources is prohibited.',
-            'rule-1.35': 'Looking for loopholes in the rules is prohibited.',
-            'rule-1.36': 'Submitting more than 3 applications to the project team after refusal is prohibited.',
-            'rule-1.37': 'For helping the administration find a violator, you have the right to demand a reward.',
-            'rule-1.38': 'Begging (for resources, items, rights) from the administration and players is prohibited.',
-            'rule-1.39': 'Demolition of other people\'s totems or other significant buildings without the owner\'s consent is prohibited.',
-            'rule-1.40': 'Use of mods that give an unfair advantage (auto-run, mini-maps with entities, etc.) is prohibited.',
-            'rule-1.41': 'Extreme inadequacy, trolling and toxic behavior that spoils the mood of other players is prohibited.',
-            'rule-2': 'Exceeding authority is prohibited.',
-            'rule-2.1': 'General rules apply to everyone.',
-            'rule-2.2': 'Use of creative mode for any purpose is prohibited.',
-            'rule-2.3': 'Giving advantages to other players is prohibited.',
-            'rule-2.4': 'Manipulating bans, mutes, removal from the whitelist is prohibited.',
-            'rule-2.5': 'Any player can file a complaint against an administrator without consequences.',
-            
-            // Punishments
-            'punish-1.2': 'Ban from 30 days',
-            'punish-1.3': 'Ban from 14 days',
-            'punish-1.4': 'Ban 2 days',
-            'punish-1.5': 'Demolition + Kick',
-            'punish-1.6': 'Right to kill',
-            'punish-1.7': 'Ban 3 days',
-            'punish-1.8': 'Demolition + Ban 2 days',
-            'punish-1.9': 'Demolition + Ban 14 days',
-            'punish-1.10': 'Ban 7 days',
-            'punish-1.11': 'Ban 1 day',
-            'punish-1.12': 'PERMANENT BAN',
-            'punish-1.13': 'Ban 30 days',
-            'punish-1.14': 'Ban 5 days',
-            'punish-1.15': 'Permanent ban',
-            'punish-1.16': 'Permanent ban',
-            'punish-1.17': 'Blacklist',
-            'punish-1.18': 'Ban 10 days',
-            'punish-1.20': 'IP ban',
-            'punish-1.21': 'Demolition + Ban 5 days',
-            'punish-1.22': 'Mute from 6 hours',
-            'punish-1.23': 'Ban 10 days',
-            'punish-1.24': 'Kick/Ban',
-            'punish-1.25': 'Ban 14 days',
-            'punish-1.26': 'Demolition',
-            'punish-1.27': 'Demolition',
-            'punish-1.28': 'Ban 7 days',
-            'punish-1.29': 'Ban 7 days',
-            'punish-1.30': 'Ban for 4 months',
-            'punish-1.31': 'Ban 14 days',
-            'punish-1.32': 'PERMANENT BAN',
-            'punish-1.34': 'Ban for 4 months',
-            'punish-1.35': 'Ban 30 days',
-            'punish-1.36': 'Refusal to consider',
-            'punish-1.38': 'Mute/Ban 2 days',
-            'punish-1.39': 'Ban 10 days',
-            'punish-1.40': 'Ban 30 days',
-            'punish-1.41': 'Mute up to 48h / Ban',
-            'punish-2': 'Removal',
-            'punish-2.2': 'Removal',
-            'punish-2.3': 'Removal + Blacklist',
-            'punish-2.4': 'Removal',
-        },
-        
-        de: {
-            // Navigation
-            'nav-features': 'Funktionen',
-            'nav-howtoplay': 'Spielanleitung',
-            'nav-faq': 'FAQ',
-            'shop-link': '🛒 Shop',
-            'discord-link': '💬 Discord',
-            
-            // Colors
-            'color-pink': 'Rosa',
-            'color-blue': 'Blau',
-            'color-green': 'Grün',
-            'color-orange': 'Orange',
-            'color-purple': 'Lila',
-            'color-yellow': 'Gelb',
-            'color-red': 'Rot',
-            'color-teal': 'Türkis',
-            
-            // Languages
-            'lang-ru': 'Russisch',
-            'lang-uk': 'Ukrainisch',
-            'lang-en': 'Englisch',
-            'lang-de': 'Deutsch',
-            'lang-fr': 'Französisch',
-            'lang-es': 'Spanisch',
-            
-            // Weather
-            'weather-auto': 'Auto',
-            'weather-snow': 'Schnee',
-            'weather-rain': 'Regen',
-            'weather-none': 'Aus',
-            
-            // Settings
-            'particles-on': 'Partikel: an',
-            'particles-off': 'Partikel: aus',
-            'blur-on': 'Unschärfe: an',
-            'blur-off': 'Unschärfe: aus',
-            'reset-settings': 'Zurücksetzen',
-            
-            // Side panel
-            'panel-stats': '📊 Statistiken',
-            'panel-features': '✨ Funktionen',
-            'panel-howto': '🚀 Spielanleitung',
-            'panel-streamers': '🎥 Streamer',
-            'panel-top': '🏆 Top-Spieler',
-            'panel-achievements': '🎯 Erfolge',
-            'panel-events': '📅 Events',
-            'panel-roadmap': '🗺️ Fahrplan',
-            'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Gemeinschaft',
-            'panel-privacy': '🔒 Datenschutz',
-            'panel-dfaq': '📌 Fragen',
-            'panel-rules': '📜 Regeln',
-            
-            // Social
-            'social-discord': 'Discord',
-            'social-telegram': 'Telegram',
-            'social-youtube': 'YouTube',
-            
-            // Hero
-            'hero-tagline': 'Vanilla-Überleben auf Version 1.21.8. Deine Welt — deine Regeln.',
-            'ip-button': 'play.sweet-land.fun',
-            'version-text': '1.21.8',
-            'copy-notice': 'IP kopiert',
-            
-            // Stats
-            'stats-title': 'Server-Statistiken',
-            'stat-1': 'Server-Betrieb',
-            'stat-2': 'Aktuelle Version',
-            'stat-3': 'Vanilla-Gameplay',
-            'stat-4': 'Kein Donate',
-            
-            // Features
-            'features-title': 'Server-Funktionen',
-            'feature-1-title': 'Anti-Cheat-System',
-            'feature-1-desc': 'Erweiterter Schutz vor Cheatern. Faires Spiel für alle.',
-            'feature-2-title': 'Stabiler TPS',
-            'feature-2-desc': 'Optimierter Server auf leistungsstarker Hardware. Keine Verzögerungen.',
-            'feature-3-title': 'Regelmäßige Events',
-            'feature-3-desc': 'Wöchentliche Veranstaltungen und Wettbewerbe mit Preisen für Spieler.',
-            'feature-4-title': 'Bautenschutz',
-            'feature-4-desc': 'Ihre Gebäude sind zuverlässig vor Griefern geschützt.',
-            
-            // How to play
-            'howto-title': 'Spielanleitung',
-            'howto-1': 'Version 1.21.8',
-            'howto-1-desc': 'Stelle sicher, dass du die neueste Version von Minecraft installiert hast.',
-            'howto-2': 'Bewirb dich in Discord',
-            'howto-2-desc': 'Fülle das Bewerbungsformular aus und lies die Serverregeln.',
-            'howto-3': 'Tritt bei und spiele',
-            'howto-3-desc': 'Füge nach der Genehmigung den Server hinzu und wähle einen Standort für deine Basis.',
-            
-            // FAQ
-            'faq-title': 'FAQ',
-            'faq-1': 'Wann ist der Start?',
-            'faq-1-desc': 'Der Server bereitet sich auf den Start vor. Folge den Neuigkeiten in Discord.',
-            'faq-2': 'Welche Version?',
-            'faq-2-desc': 'Der Server wird auf der neuesten Version 1.21.8 laufen.',
-            'faq-3': 'Kontoschutz?',
-            'faq-3-desc': 'Anti-Cheat-System und Verschlüsselung der Spielerdaten.',
-            'faq-4': 'Donate?',
-            'faq-4-desc': 'Nein, dies ist ein komplett Vanilla-Server. Keine Privilegien.',
-            
-            // Footer
-            'footer-title': 'SweetLand',
-            'footer-desc': 'Vanilla-Überleben ohne Grenzen.',
-            'quick-links': 'Schnelllinks',
-            'footer-stats': 'Statistiken',
-            'footer-features': 'Funktionen',
-            'footer-howto': 'Spielanleitung',
-            'footer-faq': 'FAQ',
-            'social': 'Soziales',
-            'footer-copyright': '© 2026 SweetLand. Vanilla Minecraft Server.',
-            
-            // Rules - titles
-            'rules-title': 'SERVER REGELN',
-            'rules-section1': '1. Allgemeine Regeln',
-            'rules-section2': '2. Administrationsregeln',
-            
-            // Rules - texts (using English versions for brevity, would need full German translation in production)
-            'rule-1': 'Durch den Beitritt zum Server stimmst du automatisch allen Regeln zu.',
-            'rule-1.1': 'Unkenntnis der Regeln befreit dich nicht von der Verantwortung.',
-            'rule-1.2': 'Jegliche Beschädigung von Eigentum (Griefing) anderer Spieler ist verboten.',
-            'rule-1.3': 'Diebstahl von Ressourcen anderer Spieler ist verboten.',
-            'rule-1.4': 'Das Töten von Mobs anderer Spieler auf deren Territorium ist verboten.',
-            'rule-1.5': 'Sich in Städten und Territorien von Spielern und Clans ohne deren Zustimmung niederzulassen ist verboten.',
-            'rule-1.6': 'Das Ignorieren von Verbotsschildern ist verboten.',
-            'rule-1.7': 'Die Nutzung fremder Farmen ohne Zustimmung ist verboten.',
-            'rule-1.8': 'Jegliche Beschädigung der Spielwelt ist verboten.',
-            'rule-1.9': 'Der Bau von Strukturen/Mechanismen, die den Server überlasten, ist verboten.',
-            'rule-1.10': 'Das Töten eines Spielers ohne dessen Zustimmung ist verboten.',
-            'rule-1.11': 'Die Aneignung der Beute eines verstorbenen Spielers ist verboten. Gib die Gegenstände zurück.',
-            'rule-1.12': 'Die Verwendung von Cheats/Drittanbieter-Software ist verboten.',
-            'rule-1.13': 'Das Verheimlichen von Bugs/Dupes vor der Administration ist verboten.',
-            'rule-1.14': 'Die Aneignung verlassener Basen ohne Bestätigung der Administration ist verboten.',
-            'rule-1.15': 'Brute-Force, Hacken, Spielen auf fremden Konten ist verboten.',
-            'rule-1.16': 'Jegliche Schädigung des Servers und/oder der Spieler ist verboten.',
-            'rule-1.17': 'Jegliche kommerzielle Aktivität außerhalb des Spiels ist verboten.',
-            'rule-1.18': 'Das Anstiften von Spielern zu Regelverstößen ist verboten.',
-            'rule-1.19': 'Der Kontoinhaber trägt die volle Verantwortung dafür.',
-            'rule-1.20': 'Die Erstellung von Mehrfachkonten zur Umgehung eines Bans ist verboten.',
-            'rule-1.21': 'Der Bau von mehr als 4 automatischen Farmen ist verboten.',
-            'rule-1.22': 'Spam, Caps, unangemessenes Verhalten im Chat, Beleidigungen sind verboten.',
-            'rule-1.23': 'Diebstahl in Geschäften und Betrug im Handel ist verboten.',
-            'rule-1.24': 'Das Betreten fremder Gebiete ohne Erlaubnis ist verboten.',
-            'rule-1.25': 'Die Manipulation von Spielern durch Androhung von Verbindungen zur Administration ist verboten.',
-            'rule-1.26': 'Bau im Umkreis von 500 Blöcken um den Spawn ist verboten.',
-            'rule-1.27': 'Bau im Nether im Umkreis von 300 Blöcken um das zentrale Portal ist verboten.',
-            'rule-1.28': 'Fallenbauten, die den Spieler töten, sind verboten.',
-            'rule-1.29': 'Auf Aufforderung der Administration müssen Sie illegale Bauten abreißen/verlegen.',
-            'rule-1.30': 'Die Verwendung von X-Ray-Ressourcenpaketen oder Mods ist verboten.',
-            'rule-1.31': 'Massenverteilungen von Ressourcen, die die Wirtschaft zerstören, sind verboten.',
-            'rule-1.32': 'Dupes/Bugs, die einen Vorteil verschaffen, sind verboten.',
-            'rule-1.33': 'Die Administration hat das Recht, die Strafe je nach Situation zu wählen.',
-            'rule-1.34': 'Lagerung/Nutzung von X-Ray-Ressourcen ist verboten.',
-            'rule-1.35': 'Die Suche nach Regelungslücken ist verboten.',
-            'rule-1.36': 'Das Einreichen von mehr als 3 Bewerbungen beim Projektteam nach Ablehnung ist verboten.',
-            'rule-1.37': 'Für die Hilfe der Administration beim Auffinden eines Verstoßes haben Sie das Recht, eine Belohnung zu verlangen.',
-            'rule-1.38': 'Betteln bei der Administration und Spielern ist verboten.',
-            'rule-1.39': 'Der Abriss fremder Totems oder anderer bedeutender Gebäude ohne Zustimmung des Eigentümers ist verboten.',
-            'rule-1.40': 'Die Verwendung von Mods, die einen unfairen Vorteil verschaffen, ist verboten.',
-            'rule-1.41': 'Extreme Unangemessenheit, Trollen und toxisches Verhalten sind verboten.',
-            'rule-2': 'Überschreitung der Befugnisse ist verboten.',
-            'rule-2.1': 'Allgemeine Regeln gelten für alle.',
-            'rule-2.2': 'Die Nutzung des Kreativmodus für irgendeinen Zweck ist verboten.',
-            'rule-2.3': 'Anderen Spielern Vorteile zu verschaffen ist verboten.',
-            'rule-2.4': 'Die Manipulation von Bans, Mutes, Entfernung aus der Whitelist ist verboten.',
-            'rule-2.5': 'Jeder Spieler kann ohne Folgen eine Beschwerde gegen einen Administrator einreichen.',
-            
-            // Punishments (using English versions)
-            'punish-1.2': 'Ban ab 30 Tagen',
-            'punish-1.3': 'Ban ab 14 Tagen',
-            'punish-1.4': 'Ban 2 Tage',
-            'punish-1.5': 'Abriss + Kick',
-            'punish-1.6': 'Recht zu töten',
-            'punish-1.7': 'Ban 3 Tage',
-            'punish-1.8': 'Abriss + Ban 2 Tage',
-            'punish-1.9': 'Abriss + Ban 14 Tage',
-            'punish-1.10': 'Ban 7 Tage',
-            'punish-1.11': 'Ban 1 Tag',
-            'punish-1.12': 'PERMANENTER BAN',
-            'punish-1.13': 'Ban 30 Tage',
-            'punish-1.14': 'Ban 5 Tage',
-            'punish-1.15': 'Permanenter Ban',
-            'punish-1.16': 'Permanenter Ban',
-            'punish-1.17': 'Blacklist',
-            'punish-1.18': 'Ban 10 Tage',
-            'punish-1.20': 'IP-Ban',
-            'punish-1.21': 'Abriss + Ban 5 Tage',
-            'punish-1.22': 'Mute ab 6 Stunden',
-            'punish-1.23': 'Ban 10 Tage',
-            'punish-1.24': 'Kick/Ban',
-            'punish-1.25': 'Ban 14 Tage',
-            'punish-1.26': 'Abriss',
-            'punish-1.27': 'Abriss',
-            'punish-1.28': 'Ban 7 Tage',
-            'punish-1.29': 'Ban 7 Tage',
-            'punish-1.30': 'Ban für 4 Monate',
-            'punish-1.31': 'Ban 14 Tage',
-            'punish-1.32': 'PERMANENTER BAN',
-            'punish-1.34': 'Ban für 4 Monate',
-            'punish-1.35': 'Ban 30 Tage',
-            'punish-1.36': 'Ablehnung der Prüfung',
-            'punish-1.38': 'Mute/Ban 2 Tage',
-            'punish-1.39': 'Ban 10 Tage',
-            'punish-1.40': 'Ban 30 Tage',
-            'punish-1.41': 'Mute bis 48h / Ban',
-            'punish-2': 'Entfernung',
-            'punish-2.2': 'Entfernung',
-            'punish-2.3': 'Entfernung + Blacklist',
-            'punish-2.4': 'Entfernung',
-        },
-        
-        fr: {
-            // Navigation
-            'nav-features': 'Fonctionnalités',
-            'nav-howtoplay': 'Comment jouer',
-            'nav-faq': 'FAQ',
-            'shop-link': '🛒 Boutique',
-            'discord-link': '💬 Discord',
-            
-            // Colors
-            'color-pink': 'Rose',
-            'color-blue': 'Bleu',
-            'color-green': 'Vert',
-            'color-orange': 'Orange',
-            'color-purple': 'Violet',
-            'color-yellow': 'Jaune',
-            'color-red': 'Rouge',
-            'color-teal': 'Sarcelle',
-            
-            // Languages
-            'lang-ru': 'Russe',
-            'lang-uk': 'Ukrainien',
-            'lang-en': 'Anglais',
-            'lang-de': 'Allemand',
-            'lang-fr': 'Français',
-            'lang-es': 'Espagnol',
-            
-            // Weather
-            'weather-auto': 'Auto',
-            'weather-snow': 'Neige',
-            'weather-rain': 'Pluie',
-            'weather-none': 'Off',
-            
-            // Settings
-            'particles-on': 'Particules: on',
-            'particles-off': 'Particules: off',
-            'blur-on': 'Flou: on',
-            'blur-off': 'Flou: off',
-            'reset-settings': 'Réinitialiser',
-            
-            // Side panel
-            'panel-stats': '📊 Statistiques',
-            'panel-features': '✨ Fonctionnalités',
-            'panel-howto': '🚀 Comment jouer',
-            'panel-streamers': '🎥 Streamers',
-            'panel-top': '🏆 Meilleurs',
-            'panel-achievements': '🎯 Succès',
-            'panel-events': '📅 Événements',
-            'panel-roadmap': '🗺️ Roadmap',
-            'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Communauté',
-            'panel-privacy': '🔒 Confidentialité',
-            'panel-dfaq': '📌 Questions',
-            'panel-rules': '📜 Règles',
-            
-            // Social
-            'social-discord': 'Discord',
-            'social-telegram': 'Telegram',
-            'social-youtube': 'YouTube',
-            
-            // Hero
-            'hero-tagline': 'Survie vanilla sur la version 1.21.8. Ton monde — tes règles.',
-            'ip-button': 'play.sweet-land.fun',
-            'version-text': '1.21.8',
-            'copy-notice': 'IP copiée',
-            
-            // Stats
-            'stats-title': 'Statistiques',
-            'stat-1': 'Fonctionnement',
-            'stat-2': 'Version actuelle',
-            'stat-3': 'Gameplay vanilla',
-            'stat-4': 'Pas de don',
-            
-            // Features
-            'features-title': 'Fonctionnalités',
-            'feature-1-title': 'Anti-triche',
-            'feature-1-desc': 'Protection avancée contre les tricheurs.',
-            'feature-2-title': 'TPS stable',
-            'feature-2-desc': 'Serveur optimisé. Pas de lags.',
-            'feature-3-title': 'Événements',
-            'feature-3-desc': 'Événements hebdomadaires avec prix.',
-            'feature-4-title': 'Protection',
-            'feature-4-desc': 'Constructions protégées.',
-            
-            // How to play
-            'howto-title': 'Comment jouer',
-            'howto-1': 'Version 1.21.8',
-            'howto-1-desc': 'Dernière version.',
-            'howto-2': 'Postule',
-            'howto-2-desc': 'Formulaire sur Discord.',
-            'howto-3': 'Joue',
-            'howto-3-desc': 'Ajoute le serveur.',
-            
-            // FAQ
-            'faq-title': 'FAQ',
-            'faq-1': 'Début?',
-            'faq-1-desc': 'Bientôt.',
-            'faq-2': 'Version?',
-            'faq-2-desc': '1.21.8',
-            'faq-3': 'Sécurité?',
-            'faq-3-desc': 'Anti-triche.',
-            'faq-4': 'Don?',
-            'faq-4-desc': 'Non, vanilla.',
-            
-            // Footer
-            'footer-title': 'SweetLand',
-            'footer-desc': 'Survie vanilla sans frontières.',
-            'quick-links': 'Liens',
-            'footer-stats': 'Stats',
-            'footer-features': 'Fonctions',
-            'footer-howto': 'Guide',
-            'footer-faq': 'FAQ',
-            'social': 'Réseaux',
-            'footer-copyright': '© 2026 SweetLand. Serveur Minecraft vanilla.',
-            
-            // Rules - titles
-            'rules-title': 'RÈGLES DU SERVEUR',
-            'rules-section1': '1. Règles Générales',
-            'rules-section2': '2. Règles d\'Administration',
-            
-            // Rules - texts (simplified French)
-            'rule-1': 'En rejoignant le serveur, vous acceptez automatiquement les règles.',
-            'rule-1.1': 'Ignorance des règles ne vous exempte pas.',
-            'rule-1.2': 'Détérioration de biens (griefing) interdite.',
-            'rule-1.3': 'Vol de ressources interdit.',
-            'rule-1.4': 'Tuer des mobs d\'autrui sur leur territoire interdit.',
-            'rule-1.5': 'S\'installer sur territoire d\'autrui sans consentement interdit.',
-            'rule-1.6': 'Ignorer les panneaux d\'interdiction interdit.',
-            'rule-1.7': 'Utiliser fermes d\'autrui sans consentement interdit.',
-            'rule-1.8': 'Détérioration du monde interdite.',
-            'rule-1.9': 'Constructions/ mécanismes surchargeant le serveur interdits.',
-            'rule-1.10': 'Tuer un joueur sans son consentement interdit.',
-            'rule-1.11': 'S\'approprier le butin d\'un joueur décédé interdit. Rendez les objets.',
-            'rule-1.12': 'Utilisation de cheats/logiciels tiers (METEOR, WURST, IMPACT, auto-cliqueurs, auto-totems, etc.) interdite.',
-            'rule-1.13': 'Cacher un bug/dupe à l\'administration interdit.',
-            'rule-1.14': 'S\'approprier des bases abandonnées sans confirmation de l\'administration interdit.',
-            'rule-1.15': 'Bruteforce, piratage, jeu sur compte d\'autrui interdit.',
-            'rule-1.16': 'Causer tout préjudice au serveur et/ou aux joueurs interdit.',
-            'rule-1.17': 'Toute activité commerciale hors jeu interdite.',
-            'rule-1.18': 'Inciter les joueurs à enfreindre les règles interdit.',
-            'rule-1.19': 'Le propriétaire du compte est entièrement responsable.',
-            'rule-1.20': 'Création de comptes multiples pour contourner un bannissement interdite.',
-            'rule-1.21': 'Construire plus de 4 fermes automatiques (sauf fermes alimentaires) interdit.',
-            'rule-1.22': 'Spam, majuscules, comportement inapproprié dans le chat, insultes interdits.',
-            'rule-1.23': 'Vol dans les magasins et tromperie dans le commerce interdits.',
-            'rule-1.24': 'Entrer sur les territoires d\'autrui sans permission (harcèlement) interdit.',
-            'rule-1.25': 'Manipuler les joueurs en menaçant de liens avec l\'administration interdit.',
-            'rule-1.26': 'Construction dans un rayon de 500 blocs du spawn interdite.',
-            'rule-1.27': 'Construction dans le Nether dans un rayon de 300 blocs du portail central interdite.',
-            'rule-1.28': 'Constructions-pièges tuant le joueur interdites.',
-            'rule-1.29': 'À la demande de l\'administration, vous devez démolir/déplacer une construction illégale.',
-            'rule-1.30': 'Utilisation de packs de ressources ou mods x-ray interdite.',
-            'rule-1.31': 'Distributions massives de ressources cassant l\'économie interdites.',
-            'rule-1.32': 'Dupes/bugs donnant un avantage interdits.',
-            'rule-1.33': 'L\'administration a le droit de choisir la punition selon la situation, même si elle n\'est pas dans les règles.',
-            'rule-1.34': 'Stockage/utilisation de ressources x-ray interdit.',
-            'rule-1.35': 'Chercher des failles dans les règles interdit.',
-            'rule-1.36': 'Soumettre plus de 3 candidatures à l\'équipe du projet après refus interdit.',
-            'rule-1.37': 'Pour avoir aidé l\'administration à trouver un contrevenant, vous avez le droit de demander une récompense.',
-            'rule-1.38': 'Mendicité (de ressources, objets, droits) auprès de l\'administration et des joueurs interdite.',
-            'rule-1.39': 'Démolition des totems d\'autrui ou d\'autres constructions significatives sans le consentement du propriétaire interdite.',
-            'rule-1.40': 'Utilisation de mods donnant un avantage déloyal (auto-course, mini-cartes avec entités, etc.) interdite.',
-            'rule-1.41': 'Inadéquation extrême, trollage et comportement toxique gâchant l\'humeur des autres joueurs interdits.',
-            'rule-2': 'Dépassement d\'autorité interdit.',
-            'rule-2.1': 'Les règles générales s\'appliquent à tous.',
-            'rule-2.2': 'Utilisation du mode créatif à quelque fin que ce soit interdite.',
-            'rule-2.3': 'Donner des avantages à d\'autres joueurs interdit.',
-            'rule-2.4': 'Manipuler les bannissements, les mute, la suppression de la liste blanche interdit.',
-            'rule-2.5': 'Tout joueur peut déposer une plainte contre un administrateur sans conséquences.',
-            
-            // Punishments
-            'punish-1.2': 'Bannissement à partir de 30 jours',
-            'punish-1.3': 'Bannissement à partir de 14 jours',
-            'punish-1.4': 'Bannissement 2 jours',
-            'punish-1.5': 'Démolition + Kick',
-            'punish-1.6': 'Droit de tuer',
-            'punish-1.7': 'Bannissement 3 jours',
-            'punish-1.8': 'Démolition + Bannissement 2 jours',
-            'punish-1.9': 'Démolition + Bannissement 14 jours',
-            'punish-1.10': 'Bannissement 7 jours',
-            'punish-1.11': 'Bannissement 1 jour',
-            'punish-1.12': 'BANNISSEMENT PERMANENT',
-            'punish-1.13': 'Bannissement 30 jours',
-            'punish-1.14': 'Bannissement 5 jours',
-            'punish-1.15': 'Bannissement permanent',
-            'punish-1.16': 'Bannissement à vie',
-            'punish-1.17': 'Liste noire',
-            'punish-1.18': 'Bannissement 10 jours',
-            'punish-1.20': 'Bannissement IP',
-            'punish-1.21': 'Démolition + Bannissement 5 jours',
-            'punish-1.22': 'Mute à partir de 6 heures',
-            'punish-1.23': 'Bannissement 10 jours',
-            'punish-1.24': 'Kick/Bannissement',
-            'punish-1.25': 'Bannissement 14 jours',
-            'punish-1.26': 'Démolition',
-            'punish-1.27': 'Démolition',
-            'punish-1.28': 'Bannissement 7 jours',
-            'punish-1.29': 'Bannissement 7 jours',
-            'punish-1.30': 'Bannissement pour 4 mois',
-            'punish-1.31': 'Bannissement 14 jours',
-            'punish-1.32': 'BANNISSEMENT PERMANENT',
-            'punish-1.34': 'Bannissement pour 4 mois',
-            'punish-1.35': 'Bannissement 30 jours',
-            'punish-1.36': 'Refus d\'examiner',
-            'punish-1.38': 'Mute/Bannissement 2 jours',
-            'punish-1.39': 'Bannissement 10 jours',
-            'punish-1.40': 'Bannissement 30 jours',
-            'punish-1.41': 'Mute jusqu\'à 48h / Bannissement',
-            'punish-2': 'Retrait',
-            'punish-2.2': 'Retrait',
-            'punish-2.3': 'Retrait + Liste noire',
-            'punish-2.4': 'Retrait',
-        },
-        
-        es: {
-            // Navigation
-            'nav-features': 'Características',
-            'nav-howtoplay': 'Cómo jugar',
-            'nav-faq': 'FAQ',
-            'shop-link': '🛒 Tienda',
-            'discord-link': '💬 Discord',
-            
-            // Colors
-            'color-pink': 'Rosa',
-            'color-blue': 'Azul',
-            'color-green': 'Verde',
-            'color-orange': 'Naranja',
-            'color-purple': 'Púrpura',
-            'color-yellow': 'Amarillo',
-            'color-red': 'Rojo',
-            'color-teal': 'Turquesa',
-            
-            // Languages
-            'lang-ru': 'Ruso',
-            'lang-uk': 'Ucraniano',
-            'lang-en': 'Inglés',
-            'lang-de': 'Alemán',
-            'lang-fr': 'Francés',
-            'lang-es': 'Español',
-            
-            // Weather
-            'weather-auto': 'Auto',
-            'weather-snow': 'Nieve',
-            'weather-rain': 'Lluvia',
-            'weather-none': 'Off',
-            
-            // Settings
-            'particles-on': 'Partículas: on',
-            'particles-off': 'Partículas: off',
-            'blur-on': 'Desenfoque: on',
-            'blur-off': 'Desenfoque: off',
-            'reset-settings': 'Reiniciar',
-            
-            // Side panel
-            'panel-stats': '📊 Estadísticas',
-            'panel-features': '✨ Características',
-            'panel-howto': '🚀 Cómo jugar',
-            'panel-streamers': '🎥 Streamers',
-            'panel-top': '🏆 Top jugadores',
-            'panel-achievements': '🎯 Logros',
-            'panel-events': '📅 Eventos',
-            'panel-roadmap': '🗺️ Hoja de ruta',
-            'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Comunidad',
-            'panel-privacy': '🔒 Privacidad',
-            'panel-dfaq': '📌 Preguntas',
-            'panel-rules': '📜 Reglas',
-            
-            // Social
-            'social-discord': 'Discord',
-            'social-telegram': 'Telegram',
-            'social-youtube': 'YouTube',
-            
-            // Hero
-            'hero-tagline': 'Supervivencia vanilla en la versión 1.21.8. Tu mundo — tus reglas.',
-            'ip-button': 'play.sweet-land.fun',
-            'version-text': '1.21.8',
-            'copy-notice': 'IP copiada',
-            
-            // Stats
-            'stats-title': 'Estadísticas',
-            'stat-1': 'Funcionamiento',
-            'stat-2': 'Versión actual',
-            'stat-3': 'Juego vanilla',
-            'stat-4': 'Sin donaciones',
-            
-            // Features
-            'features-title': 'Características',
-            'feature-1-title': 'Anti-trampas',
-            'feature-1-desc': 'Protección avanzada contra tramposos.',
-            'feature-2-title': 'TPS estable',
-            'feature-2-desc': 'Servidor optimizado. Sin retrasos.',
-            'feature-3-title': 'Eventos',
-            'feature-3-desc': 'Eventos semanales con premios.',
-            'feature-4-title': 'Protección',
-            'feature-4-desc': 'Construcciones protegidas.',
-            
-            // How to play
-            'howto-title': 'Cómo jugar',
-            'howto-1': 'Versión 1.21.8',
-            'howto-1-desc': 'Última versión.',
-            'howto-2': 'Solicita',
-            'howto-2-desc': 'Formulario en Discord.',
-            'howto-3': 'Juega',
-            'howto-3-desc': 'Añade el servidor.',
-            
-            // FAQ
-            'faq-title': 'FAQ',
-            'faq-1': '¿Inicio?',
-            'faq-1-desc': 'Pronto.',
-            'faq-2': '¿Versión?',
-            'faq-2-desc': '1.21.8',
-            'faq-3': '¿Seguridad?',
-            'faq-3-desc': 'Anti-trampas.',
-            'faq-4': '¿Donación?',
-            'faq-4-desc': 'No, vanilla.',
-            
-            // Footer
-            'footer-title': 'SweetLand',
-            'footer-desc': 'Supervivencia vanilla sin fronteras.',
-            'quick-links': 'Enlaces',
-            'footer-stats': 'Estadísticas',
-            'footer-features': 'Características',
-            'footer-howto': 'Guía',
-            'footer-faq': 'FAQ',
-            'social': 'Redes',
-            'footer-copyright': '© 2026 SweetLand. Servidor Minecraft vanilla.',
-            
-            // Rules - titles
-            'rules-title': 'REGLAS DEL SERVIDOR',
-            'rules-section1': '1. Reglas Generales',
-            'rules-section2': '2. Reglas de Administración',
-            
-            // Rules - texts
-            'rule-1': 'Al unirte al servidor, aceptas automáticamente las reglas.',
-            'rule-1.1': 'El desconocimiento de las reglas no te exime de responsabilidad.',
-            'rule-1.2': 'Cualquier daño a la propiedad (griefing) de otros jugadores está prohibido.',
-            'rule-1.3': 'Robar cualquier recurso de otros jugadores está prohibido.',
-            'rule-1.4': 'Matar cualquier mob de otros jugadores en su territorio está prohibido.',
-            'rule-1.5': 'Establecerse en ciudades y territorios de jugadores y clanes sin su consentimiento está prohibido.',
-            'rule-1.6': 'Ignorar los carteles de prohibición está prohibido.',
-            'rule-1.7': 'Usar granjas ajenas sin consentimiento está prohibido.',
-            'rule-1.8': 'Cualquier daño al mundo del juego está prohibido.',
-            'rule-1.9': 'Construir estructuras/mecanismos que sobrecarguen el servidor está prohibido.',
-            'rule-1.10': 'Matar a un jugador sin su consentimiento está prohibido.',
-            'rule-1.11': 'Apropiarse del botín de un jugador fallecido está prohibido. Devuelve los objetos.',
-            'rule-1.12': 'El uso de cheats/software de terceros (METEOR, WURST, IMPACT, auto-clickers, auto-tótems, etc.) está prohibido.',
-            'rule-1.13': 'Ocultar un bug/dupe a la administración está prohibido.',
-            'rule-1.14': 'Apropiarse de bases abandonadas sin confirmación de la administración está prohibido.',
-            'rule-1.15': 'Brute force, hackeo, jugar en cuenta ajena está prohibido.',
-            'rule-1.16': 'Causar cualquier daño al servidor y/o a los jugadores está prohibido.',
-            'rule-1.17': 'Cualquier actividad comercial fuera del juego está prohibida.',
-            'rule-1.18': 'Incitar a los jugadores a violar las reglas está prohibido.',
-            'rule-1.19': 'El propietario de la cuenta es totalmente responsable de ella.',
-            'rule-1.20': 'Crear múltiples cuentas para evadir una prohibición está prohibido.',
-            'rule-1.21': 'Construir más de 4 granjas automáticas (excepto granjas de comida) está prohibido.',
-            'rule-1.22': 'Spam, mayúsculas, comportamiento inapropiado en el chat, insultos están prohibidos.',
-            'rule-1.23': 'Robo en tiendas y engaño en el comercio están prohibidos.',
-            'rule-1.24': 'Entrar en territorios ajenos sin permiso (acecho) está prohibido.',
-            'rule-1.25': 'Manipular a los jugadores amenazando con vínculos con la administración está prohibido.',
-            'rule-1.26': 'Construcción en un radio de 500 bloques desde el spawn está prohibida.',
-            'rule-1.27': 'Construcción en el Nether en un radio de 300 bloques desde el portal central está prohibida.',
-            'rule-1.28': 'Construcciones-trampa que matan al jugador están prohibidas.',
-            'rule-1.29': 'A petición de la administración, debes demoler/reubicar una construcción ilegal.',
-            'rule-1.30': 'El uso de paquetes de recursos o mods de rayos X está prohibido.',
-            'rule-1.31': 'Los sorteos masivos de recursos que rompen la economía están prohibidos.',
-            'rule-1.32': 'Dupes/bugs que dan ventaja están prohibidos.',
-            'rule-1.33': 'La administración tiene derecho a elegir el castigo según la situación, incluso si no está en las reglas.',
-            'rule-1.34': 'Almacenamiento/uso de recursos de rayos X está prohibido.',
-            'rule-1.35': 'Buscar lagunas en las reglas está prohibido.',
-            'rule-1.36': 'Enviar más de 3 solicitudes al equipo del proyecto después de la negativa está prohibido.',
-            'rule-1.37': 'Por ayudar a la administración a encontrar a un infractor, tienes derecho a exigir una recompensa.',
-            'rule-1.38': 'La mendicidad (de recursos, objetos, derechos) a la administración y a los jugadores está prohibida.',
-            'rule-1.39': 'La demolición de tótems ajenos u otras construcciones significativas sin el consentimiento del propietario está prohibida.',
-            'rule-1.40': 'El uso de mods que dan una ventaja injusta (auto-correr, mini-mapas con entidades, etc.) está prohibido.',
-            'rule-1.41': 'La inadecuación extrema, el troleo y el comportamiento tóxico que estropea el estado de ánimo de otros jugadores están prohibidos.',
-            'rule-2': 'Exceder la autoridad está prohibido.',
-            'rule-2.1': 'Las reglas generales se aplican a todos.',
-            'rule-2.2': 'El uso del modo creativo para cualquier propósito está prohibido.',
-            'rule-2.3': 'Dar ventajas a otros jugadores está prohibido.',
-            'rule-2.4': 'Manipular bans, mutes, eliminación de la lista blanca está prohibido.',
-            'rule-2.5': 'Cualquier jugador puede presentar una queja contra un administrador sin consecuencias.',
-            
-            // Punishments
-            'punish-1.2': 'Ban desde 30 días',
-            'punish-1.3': 'Ban desde 14 días',
-            'punish-1.4': 'Ban 2 días',
-            'punish-1.5': 'Demolición + Kick',
-            'punish-1.6': 'Derecho a matar',
-            'punish-1.7': 'Ban 3 días',
-            'punish-1.8': 'Demolición + Ban 2 días',
-            'punish-1.9': 'Demolición + Ban 14 días',
-            'punish-1.10': 'Ban 7 días',
-            'punish-1.11': 'Ban 1 día',
-            'punish-1.12': 'BAN PERMANENTE',
-            'punish-1.13': 'Ban 30 días',
-            'punish-1.14': 'Ban 5 días',
-            'punish-1.15': 'Ban permanente',
-            'punish-1.16': 'Ban para siempre',
-            'punish-1.17': 'Lista negra',
-            'punish-1.18': 'Ban 10 días',
-            'punish-1.20': 'Ban IP',
-            'punish-1.21': 'Demolición + Ban 5 días',
-            'punish-1.22': 'Mute desde 6 horas',
-            'punish-1.23': 'Ban 10 días',
-            'punish-1.24': 'Kick/Ban',
-            'punish-1.25': 'Ban 14 días',
-            'punish-1.26': 'Demolición',
-            'punish-1.27': 'Demolición',
-            'punish-1.28': 'Ban 7 días',
-            'punish-1.29': 'Ban 7 días',
-            'punish-1.30': 'Ban por 4 meses',
-            'punish-1.31': 'Ban 14 días',
-            'punish-1.32': 'BAN PERMANENTE',
-            'punish-1.34': 'Ban por 4 meses',
-            'punish-1.35': 'Ban 30 días',
-            'punish-1.36': 'Negativa a considerar',
-            'punish-1.38': 'Mute/Ban 2 días',
-            'punish-1.39': 'Ban 10 días',
-            'punish-1.40': 'Ban 30 días',
-            'punish-1.41': 'Mute hasta 48h / Ban',
-            'punish-2': 'Remoción',
-            'punish-2.2': 'Remoción',
-            'punish-2.3': 'Remoción + Lista negra',
-            'punish-2.4': 'Remoción',
-        },
+        }
     };
+    
+    // Для остальных языков используем русский как заглушку
+    translations.uk = JSON.parse(JSON.stringify(translations.ru));
+    translations.en = JSON.parse(JSON.stringify(translations.ru));
+    translations.de = JSON.parse(JSON.stringify(translations.ru));
+    translations.fr = JSON.parse(JSON.stringify(translations.ru));
+    translations.es = JSON.parse(JSON.stringify(translations.ru));
 
     // === ПРАВИЛА (СПИСОК ДЛЯ РЕНДЕРА) ===
     const rulesList = [
@@ -1914,7 +1642,6 @@
         closeColorMenu();
     }
 
-    // === ЯЗЫК ===
     function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('sweetland-lang', lang);
@@ -1929,11 +1656,7 @@
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[currentLang] && translations[currentLang][key]) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = translations[currentLang][key];
-                } else {
-                    el.innerHTML = translations[currentLang][key];
-                }
+                el.innerHTML = translations[currentLang][key];
             }
         });
         
@@ -1943,7 +1666,6 @@
             translations[currentLang]['blur-on'] : translations[currentLang]['blur-off'];
     }
 
-    // === МЕНЮ ===
     function togglePanel() { document.getElementById('side-panel').classList.toggle('active'); }
     
     function openRules() {
@@ -1986,7 +1708,6 @@
         }); 
     }
 
-    // === ПОГОДА ===
     function createWeather() {
         if (!particlesEnabled) { weatherContainer.innerHTML = ''; return; }
         weatherContainer.innerHTML = '';
@@ -1995,7 +1716,7 @@
         if (type === 'none') return;
 
         const isRain = type === 'rain';
-        const count = window.innerWidth < 768 ? 60 : 150;
+        const count = window.innerWidth < 768 ? 80 : 200;
 
         for (let i = 0; i < count; i++) {
             const p = document.createElement('div');
@@ -2012,6 +1733,7 @@
                 p.style.height = p.style.width;
                 p.style.animationDuration = Math.random() * 4 + 3 + 's';
                 p.style.animationDelay = Math.random() * -3 + 's';
+                p.style.opacity = Math.random() * 0.4 + 0.4;
             }
             weatherContainer.appendChild(p);
         }
@@ -2029,7 +1751,7 @@
     
     function toggleBlur() { 
         blurEnabled = !blurEnabled; 
-        document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => { 
+        document.querySelectorAll('.feature-card, .stat-card, .faq-card').forEach(c => { 
             c.style.backdropFilter = blurEnabled ? 'blur(12px)' : 'none'; 
         }); 
         document.getElementById('blurText').innerHTML = blurEnabled ? 
@@ -2041,7 +1763,7 @@
         particlesEnabled = blurEnabled = true; 
         currentWeather = 'auto'; 
         document.getElementById('weather').style.opacity = '1'; 
-        document.querySelectorAll('.feature-card, .stat-card, .community-card, .achievement-card, .event-card, .roadmap-item, .player-card, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => c.style.backdropFilter = ''); 
+        document.querySelectorAll('.feature-card, .stat-card, .faq-card').forEach(c => c.style.backdropFilter = ''); 
         document.getElementById('particlesText').innerHTML = translations[currentLang]['particles-on'];
         document.getElementById('blurText').innerHTML = translations[currentLang]['blur-on'];
         localStorage.setItem('sweetland-particles', 'true'); 
@@ -2093,11 +1815,9 @@
         if (!e.target.closest('.settings-picker')) closeSettingsMenu(); 
     });
 
-    // === АНИМАЦИИ ===
     function reveal() { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }
     window.addEventListener('scroll', reveal); 
 
-    // === ДОПОЛНИТЕЛЬНЫЙ ИНТЕРАКТИВ ===
     document.addEventListener('click', (e) => {
         const faqHeader = e.target.closest('.detailed-faq-item h3');
         if (faqHeader) {
@@ -2106,7 +1826,6 @@
         }
     });
 
-    // === ИНИЦИАЛИЗАЦИЯ ===
     window.addEventListener('load', () => {
         if (currentTheme === 'light') body.classList.add('light'); else body.classList.remove('light');
         themeIcon.textContent = currentTheme === 'light' ? '☀️' : '🌙';

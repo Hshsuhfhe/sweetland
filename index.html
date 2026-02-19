@@ -201,7 +201,7 @@
         .color-dot.red { background: #ff4444; }
         .color-dot.teal { background: #008080; }
 
-        /* ВЕРХНИЙ ОВАЛ (НАВИГАЦИЯ) - УВЕЛИЧЕН */
+        /* ВЕРХНИЙ ОВАЛ */
         .nav-oval-container {
             position: fixed;
             top: 25px;
@@ -328,7 +328,7 @@
             border-color: white;
         }
 
-        /* БОКОВАЯ ПАНЕЛЬ (ЛЕВАЯ) */
+        /* БОКОВАЯ ПАНЕЛЬ - ОПТИМИЗИРОВАННАЯ */
         .side-trigger {
             position: fixed;
             top: 30px;
@@ -494,7 +494,7 @@
         .social-link.telegram:hover { background: #0088cc; color: white; }
         .social-link.youtube:hover { background: #FF0000; color: white; }
 
-        /* ГЕРОЙ */
+        /* ГЕРОЙ С КАРТИНКОЙ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -962,7 +962,7 @@
             transform: translateY(0);
         }
 
-        /* АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ */
+        /* АДАПТАЦИЯ */
         @media (max-width: 1024px) {
             .nav-oval-container {
                 min-width: auto;
@@ -1040,7 +1040,7 @@
                 padding: 10px 15px;
             }
             
-            /* На телефоне в боковой панели только 4 пункта */
+            /* На телефоне в боковой панели только 5 пунктов */
             .panel-links .panel-link-item {
                 display: none;
             }
@@ -1157,7 +1157,7 @@
 
 <div id="weather"></div>
 
-<!-- ВЕРХНИЙ ОВАЛ (УВЕЛИЧЕННЫЙ) -->
+<!-- ВЕРХНИЙ ОВАЛ -->
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
@@ -1229,7 +1229,7 @@
     </div>
 </div>
 
-<!-- БОКОВАЯ ПАНЕЛЬ -->
+<!-- БОКОВАЯ ПАНЕЛЬ - ТОЛЬКО РАБОЧИЕ ССЫЛКИ -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -1240,21 +1240,15 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
-        <!-- На телефоне показываем только 4 самых важных -->
+        <!-- На телефоне 5 пунктов, на ПК все 7 -->
         <a href="#stats" class="panel-link-item mobile-visible" data-i18n="panel-stats">📊 Статистика</a>
         <a href="#features" class="panel-link-item mobile-visible" data-i18n="panel-features">✨ Особенности</a>
         <a href="#how-to-play" class="panel-link-item mobile-visible" data-i18n="panel-howto">🚀 Как начать</a>
         <a href="#faq" class="panel-link-item mobile-visible" data-i18n="panel-faq">❓ FAQ</a>
-        <!-- Остальные пункты только на ПК -->
+        <a href="javascript:void(0)" onclick="openRules()" class="panel-link-item mobile-visible" data-i18n="panel-rules">📜 Правила</a>
+        <!-- Эти пункты только на ПК -->
         <a href="#streamers" class="panel-link-item" data-i18n="panel-streamers">🎥 Стримеры</a>
-        <a href="#top-players" class="panel-link-item" data-i18n="panel-top">🏆 Топ игроков</a>
-        <a href="#achievements" class="panel-link-item" data-i18n="panel-achievements">🎯 Достижения</a>
-        <a href="#events" class="panel-link-item" data-i18n="panel-events">📅 Ивенты</a>
-        <a href="#roadmap" class="panel-link-item" data-i18n="panel-roadmap">🗺️ Роудмап</a>
         <a href="#community" class="panel-link-item" data-i18n="panel-community">💬 Сообщество</a>
-        <a href="#privacy" class="panel-link-item" data-i18n="panel-privacy">🔒 Защита</a>
-        <a href="#detailed-faq" class="panel-link-item" data-i18n="panel-dfaq">📌 Вопросы</a>
-        <a href="javascript:void(0)" onclick="openRules()" class="panel-link-item" data-i18n="panel-rules">📜 Правила</a>
     </div>
     
     <div class="panel-social">
@@ -1273,7 +1267,7 @@
     </div>
 </div>
 
-<!-- ГЕРОЙ -->
+<!-- ГЕРОЙ С КАРТИНКОЙ 5OPKA.PNG -->
 <header class="hero">
     <div class="hero-layout">
         <div class="hero-content reveal">
@@ -1285,7 +1279,7 @@
             </div>
         </div>
         <div class="hero-image-box reveal">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%238a4cdd'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E" alt="SweetLand" class="giant-img">
+            <img src="5opka.png" alt="5opka" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%238a4cdd\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Arial\' font-size=\'48\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3E5opka%3C/text%3E%3C/svg%3E'">
         </div>
     </div>
     <div id="copyNotice" class="copy-notice" data-i18n="copy-notice">IP скопирован</div>
@@ -1320,6 +1314,25 @@
         <div class="feature-card"><div class="feature-icon">🚀</div><h3 data-i18n="howto-1">Версия 1.21.8</h3><p data-i18n="howto-1-desc">Убедись, что у тебя установлена последняя версия Minecraft.</p></div>
         <div class="feature-card"><div class="feature-icon">📝</div><h3 data-i18n="howto-2">Подай заявку в Discord</h3><p data-i18n="howto-2-desc">Заполни анкету и ознакомься с правилами сервера.</p></div>
         <div class="feature-card"><div class="feature-icon">🎮</div><h3 data-i18n="howto-3">Заходи и играй</h3><p data-i18n="howto-3-desc">После одобрения добавляй сервер и выбирай место для базы.</p></div>
+    </div>
+</section>
+
+<!-- СТРИМЕРЫ -->
+<section class="section reveal" id="streamers">
+    <h2 class="section-title"><span data-i18n="streamers-title">Стримеры на сервере</span></h2>
+    <div class="features-grid">
+        <div class="feature-card streamer-card"><div class="feature-icon">🎥</div><h3>Babka3434</h3><p data-i18n="streamer-1-desc">Популярная стримерша, будет играть на сервере.</p></div>
+        <div class="feature-card streamer-card"><div class="feature-icon">🎮</div><h3>Gyraffic</h3><p data-i18n="streamer-2-desc">Владелец сервера и стример. Играет вместе с вами.</p></div>
+    </div>
+</section>
+
+<!-- СООБЩЕСТВО -->
+<section class="section reveal" id="community">
+    <h2 class="section-title"><span data-i18n="community-title">Наше сообщество</span></h2>
+    <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">💬</div><h3>Discord</h3><p data-i18n="community-1-desc">Присоединяйся к первым игрокам.</p></div>
+        <div class="feature-card"><div class="feature-icon">📱</div><h3>Telegram</h3><p data-i18n="community-2-desc">Новости и обновления.</p></div>
+        <div class="feature-card"><div class="feature-icon">▶️</div><h3>YouTube</h3><p data-i18n="community-3-desc">Обзоры и стримы.</p></div>
     </div>
 </section>
 
@@ -1363,8 +1376,7 @@
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
 
-    // === ПЕРЕВОДЫ (ВСТАВЬТЕ СЮДА ПОЛНЫЙ ОБЪЕКТ translations ИЗ ПРЕДЫДУЩЕГО ОТВЕТА) ===
-    // Для краткости я оставляю заглушку, но вы вставите полный объект с 6 языками
+    // === ПЕРЕВОДЫ ===
     const translations = {
         ru: {
             'nav-features': 'Особенности',
@@ -1400,15 +1412,9 @@
             'panel-features': '✨ Особенности',
             'panel-howto': '🚀 Как начать',
             'panel-streamers': '🎥 Стримеры',
-            'panel-top': '🏆 Топ игроков',
-            'panel-achievements': '🎯 Достижения',
-            'panel-events': '📅 Ивенты',
-            'panel-roadmap': '🗺️ Роудмап',
             'panel-faq': '❓ FAQ',
-            'panel-community': '💬 Сообщество',
-            'panel-privacy': '🔒 Защита',
-            'panel-dfaq': '📌 Вопросы',
             'panel-rules': '📜 Правила',
+            'panel-community': '💬 Сообщество',
             'social-discord': 'Discord',
             'social-telegram': 'Telegram',
             'social-youtube': 'YouTube',
@@ -1437,6 +1443,13 @@
             'howto-2-desc': 'Заполни анкету и ознакомься с правилами сервера.',
             'howto-3': 'Заходи и играй',
             'howto-3-desc': 'После одобрения добавляй сервер и выбирай место для базы.',
+            'streamers-title': 'Стримеры на сервере',
+            'streamer-1-desc': 'Популярная стримерша, будет играть на сервере.',
+            'streamer-2-desc': 'Владелец сервера и стример. Играет вместе с вами.',
+            'community-title': 'Наше сообщество',
+            'community-1-desc': 'Присоединяйся к первым игрокам.',
+            'community-2-desc': 'Новости и обновления.',
+            'community-3-desc': 'Обзоры и стримы.',
             'faq-title': 'Ответы на вопросы',
             'faq-1': 'Когда старт?',
             'faq-1-desc': 'Сервер готовится к открытию. Следи за новостями в Discord.',
@@ -1550,15 +1563,15 @@
             'punish-2.4': 'Снятие',
         }
     };
-    
-    // Для остальных языков используем русский как заглушку
+
+    // Копируем переводы для других языков
     translations.uk = JSON.parse(JSON.stringify(translations.ru));
     translations.en = JSON.parse(JSON.stringify(translations.ru));
     translations.de = JSON.parse(JSON.stringify(translations.ru));
     translations.fr = JSON.parse(JSON.stringify(translations.ru));
     translations.es = JSON.parse(JSON.stringify(translations.ru));
 
-    // === ПРАВИЛА (СПИСОК ДЛЯ РЕНДЕРА) ===
+    // === ПРАВИЛА ===
     const rulesList = [
         { section: "rules-section1", isHeader: true },
         { num: "1", ruleKey: "rule-1", punishKey: null },
@@ -1617,7 +1630,7 @@
     const themeIcon = document.getElementById('themeIcon');
     const weatherContainer = document.getElementById('weather');
 
-    // === ФУНКЦИИ НАСТРОЕК ===
+    // === ФУНКЦИИ ===
     function toggleTheme() {
         if (body.classList.contains('light')) {
             body.classList.remove('light');
@@ -1817,14 +1830,6 @@
 
     function reveal() { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }
     window.addEventListener('scroll', reveal); 
-
-    document.addEventListener('click', (e) => {
-        const faqHeader = e.target.closest('.detailed-faq-item h3');
-        if (faqHeader) {
-            const item = faqHeader.closest('.detailed-faq-item');
-            if (item) item.classList.toggle('active');
-        }
-    });
 
     window.addEventListener('load', () => {
         if (currentTheme === 'light') body.classList.add('light'); else body.classList.remove('light');

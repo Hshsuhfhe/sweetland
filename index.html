@@ -527,7 +527,7 @@
         .social-link.telegram:hover { background: #0088cc; color: white; }
         .social-link.youtube:hover { background: #FF0000; color: white; }
 
-        /* ГЕРОЙ С КАРТИНКОЙ */
+        /* ГЕРОЙ */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -809,31 +809,98 @@
             line-height: 1.6;
         }
 
-        /* СТРИМЕРЫ */
+        /* КАРТОЧКИ СТРИМЕРОВ - ИСПРАВЛЕНО */
+        .streamers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
         .streamer-card {
-            background: linear-gradient(135deg, var(--bg-card), rgba(255, 68, 68, 0.15));
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            padding: 30px;
+            border-radius: 30px;
             border: 2px solid #ff4444;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
         .streamer-card::before {
             content: 'LIVE';
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: -30px;
             background: #ff4444;
             color: white;
-            padding: 4px 30px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 5px 40px;
+            font-size: 14px;
+            font-weight: 700;
             transform: rotate(45deg);
-            box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
+            box-shadow: 0 2px 15px rgba(255, 68, 68, 0.5);
             animation: pulse 2s infinite;
             z-index: 10;
+            letter-spacing: 1px;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        .streamer-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(255, 68, 68, 0.3);
+        }
+        .streamer-icon {
+            font-size: 64px;
+            color: #ff4444;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .streamer-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .streamer-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .streamer-link {
+            display: inline-block;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            margin: 5px 0;
+        }
+        .streamer-link:hover {
+            background: white;
+            color: #ff4444;
+            border-color: #ff4444;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px #ff4444;
+        }
+        .streamer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 14px;
         }
 
         /* ТОП ИГРОКОВ */
@@ -869,9 +936,10 @@
             text-align: center;
         }
         .player-info { flex: 1; }
-        .player-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-        .player-info p { color: var(--text-secondary); font-size: 13px; }
-        .player-score { color: var(--accent); font-weight: 500; font-size: 14px; }
+        .player-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .player-info p { color: var(--text-secondary); font-size: 14px; }
+        .player-score { color: var(--accent); font-weight: 600; font-size: 16px; }
+        .update-date { text-align: center; color: var(--text-tertiary); font-size: 14px; margin-top: 20px; }
 
         /* ДОСТИЖЕНИЯ */
         .achievements-grid {
@@ -897,7 +965,7 @@
             box-shadow: var(--shadow-accent);
         }
         .achievement-icon {
-            font-size: 40px;
+            font-size: 48px;
             color: gold;
             margin-bottom: 15px;
             animation: achievementGlow 2s ease-in-out infinite;
@@ -906,11 +974,11 @@
             0%, 100% { filter: drop-shadow(0 0 5px gold); }
             50% { filter: drop-shadow(0 0 20px gold); }
         }
-        .achievement-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        .achievement-card p { color: var(--text-secondary); font-size: 13px; margin-bottom: 15px; }
-        .achievement-progress { width: 100%; height: 6px; background: rgba(163, 102, 255, 0.1); border-radius: 10px; overflow: hidden; }
+        .achievement-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
+        .achievement-card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
+        .achievement-progress { width: 100%; height: 8px; background: rgba(163, 102, 255, 0.1); border-radius: 10px; overflow: hidden; }
         .achievement-progress-bar { height: 100%; background: var(--accent); border-radius: 10px; width: 0%; transition: width 0.3s ease; }
-        .achievement-stats { color: var(--text-tertiary); font-size: 12px; margin-top: 8px; }
+        .achievement-stats { color: var(--text-tertiary); font-size: 13px; margin-top: 8px; }
 
         /* ИВЕНТЫ */
         .events-grid {
@@ -941,16 +1009,16 @@
             right: 15px;
             background: var(--accent);
             color: white;
-            padding: 4px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
         }
-        .event-icon { font-size: 36px; color: var(--accent); margin-bottom: 15px; }
-        .event-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; padding-right: 60px; }
+        .event-icon { font-size: 42px; color: var(--accent); margin-bottom: 15px; }
+        .event-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; padding-right: 70px; }
         .event-card p { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
-        .event-info { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 13px; margin-top: 10px; }
-        .event-info span { color: var(--accent); font-weight: 500; }
+        .event-info { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 14px; margin-top: 10px; }
+        .event-info span { color: var(--accent); font-weight: 600; }
 
         /* РОУДМАП */
         .roadmap-grid {
@@ -977,17 +1045,43 @@
         }
         .roadmap-status {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 15px;
         }
         .roadmap-status.completed { background: #4CAF50; color: white; }
         .roadmap-status.planned { background: #9C27B0; color: white; }
-        .roadmap-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .roadmap-item h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
         .roadmap-item p { color: var(--text-secondary); font-size: 14px; margin-bottom: 15px; }
-        .roadmap-date { color: var(--text-tertiary); font-size: 12px; }
+        .roadmap-date { color: var(--text-tertiary); font-size: 13px; }
+
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .faq-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .faq-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-accent);
+        }
+        .faq-card .icon { font-size: 42px; color: var(--accent); margin-bottom: 15px; display: inline-block; }
+        .faq-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .faq-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
 
         /* ЗАЩИТА ДАННЫХ */
         .privacy-grid {
@@ -1012,41 +1106,9 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-accent);
         }
-        .privacy-card .icon { font-size: 40px; color: var(--accent); margin-bottom: 16px; transition: transform 0.3s ease; display: inline-block; }
-        .privacy-card:hover .icon { transform: scale(1.2); }
+        .privacy-card .icon { font-size: 48px; color: var(--accent); margin-bottom: 15px; display: inline-block; }
         .privacy-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        .privacy-card p { color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
-
-        /* FAQ */
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .faq-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(var(--blur));
-            -webkit-backdrop-filter: blur(var(--blur));
-            padding: 30px;
-            border-radius: 25px;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-        .faq-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-accent);
-        }
-        .faq-card .icon {
-            font-size: 38px;
-            color: var(--accent);
-            margin-bottom: 18px;
-            display: inline-block;
-        }
-        .faq-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
-        .faq-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+        .privacy-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
 
         /* ДЕТАЛЬНЫЙ FAQ */
         .detailed-faq-grid {
@@ -1072,8 +1134,8 @@
         }
         .detailed-faq-item h3 {
             background: rgba(163, 102, 255, 0.1);
-            padding: 16px 20px;
-            font-size: 16px;
+            padding: 18px 20px;
+            font-size: 18px;
             font-weight: 600;
             color: var(--accent);
             border-bottom: 2px solid var(--border);
@@ -1092,13 +1154,13 @@
         }
         .detailed-faq-item.active .faq-answer {
             padding: 20px;
-            max-height: 200px;
+            max-height: 300px;
         }
         .faq-answer p {
             color: var(--text-secondary);
             font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 5px;
+            line-height: 1.6;
+            margin-bottom: 8px;
         }
 
         /* МОДАЛКА ПРАВИЛ */
@@ -1186,7 +1248,7 @@
         }
         .punish {
             color: #ff6666;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 13px;
             display: inline-block;
             margin-left: 10px;
@@ -1211,17 +1273,17 @@
         .footer-section h4 {
             color: var(--accent);
             font-size: 20px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
         }
         .footer-section h4::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: var(--accent);
             transform: scaleX(0);
             transition: transform 0.3s ease;
@@ -1234,14 +1296,14 @@
             display: block;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 10px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
         .footer-section a:hover {
             color: var(--accent);
-            transform: translateX(6px);
+            transform: translateX(8px);
         }
         .footer-bottom {
             text-align: center;
@@ -1339,7 +1401,7 @@
                 padding: 10px 15px;
             }
             
-            /* На телефоне меньше пунктов */
+            /* На телефоне 7 пунктов */
             .panel-links .panel-link-item {
                 display: none;
             }
@@ -1381,6 +1443,7 @@
             }
             .stats-grid,
             .features-grid,
+            .streamers-grid,
             .top-players-grid,
             .achievements-grid,
             .events-grid,
@@ -1545,7 +1608,7 @@
     <div class="panel-handle" onclick="togglePanel()">✕</div>
     <h2 class="panel-logo">SWEETLAND</h2>
     <div class="panel-links" id="panel-links">
-        <!-- На телефоне 6 пунктов, на ПК все 13 -->
+        <!-- На телефоне 7 пунктов, на ПК все 13 -->
         <a href="#stats" class="panel-link-item mobile-visible" data-i18n="panel-stats">📊 Статистика</a>
         <a href="#features" class="panel-link-item mobile-visible" data-i18n="panel-features">✨ Особенности</a>
         <a href="#streamers" class="panel-link-item mobile-visible" data-i18n="panel-streamers">🎥 Стримеры</a>
@@ -1577,7 +1640,7 @@
     </div>
 </div>
 
-<!-- ГЕРОЙ С КАРТИНКОЙ ИЗ ПАПКИ IMAGES -->
+<!-- ГЕРОЙ -->
 <header class="hero">
     <div class="hero-layout">
         <div class="hero-content reveal">
@@ -1619,13 +1682,39 @@
     </div>
 </section>
 
-<!-- СТРИМЕРЫ -->
+<!-- СТРИМЕРЫ - ИСПРАВЛЕНО -->
 <section class="section reveal" id="streamers">
     <h2 class="section-title"><span data-i18n="streamers-title">Стримеры на сервере</span></h2>
-    <div class="features-grid">
-        <div class="feature-card streamer-card"><div class="feature-icon">🎥</div><h3>Babka3434</h3><p data-i18n="streamer-1-desc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p></div>
-        <div class="feature-card streamer-card"><div class="feature-icon">🎮</div><h3>Gyraffic</h3><p data-i18n="streamer-2-desc">Владелец сервера и стример. Играет вместе с вами.</p></div>
-        <div class="feature-card"><div class="feature-icon">🎮</div><h3 data-i18n="more-streamers">Скоро будут другие</h3><p data-i18n="streamer-3-desc">Список стримеров будет пополняться. Следи за новостями в Discord.</p></div>
+    <div class="streamers-grid">
+        <div class="streamer-card">
+            <div class="streamer-icon">🎥</div>
+            <h3>Babka3434</h3>
+            <p data-i18n="streamer-1-desc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p>
+            <a href="https://youtube.com/@Babka3434" target="_blank" class="streamer-link" data-i18n="streamer-1-link">Babka3434 YouTube</a>
+            <div class="streamer-stats">
+                <span data-i18n="subscribe">подпишись</span>
+                <span>⭐</span>
+            </div>
+        </div>
+        <div class="streamer-card">
+            <div class="streamer-icon">🎮</div>
+            <h3>Gyraffic</h3>
+            <p data-i18n="streamer-2-desc">Владелец сервера и стример. Играет вместе с вами.</p>
+            <a href="https://youtube.com/@gyraffic" target="_blank" class="streamer-link" data-i18n="streamer-2-link">Gyraffic YouTube</a>
+            <div class="streamer-stats">
+                <span data-i18n="subscribe">подпишись</span>
+                <span>🔴 LIVE</span>
+            </div>
+        </div>
+        <div class="streamer-card">
+            <div class="streamer-icon">🎬</div>
+            <h3 data-i18n="more-streamers">Скоро будут другие</h3>
+            <p data-i18n="streamer-3-desc">Список стримеров будет пополняться. Следи за новостями в Discord.</p>
+            <div class="streamer-stats">
+                <span data-i18n="announcements">анонсы</span>
+                <span data-i18n="news">новости</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -1791,7 +1880,7 @@
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
 
-    // === ПЕРЕВОДЫ ===
+    // === ПЕРЕВОДЫ (ПОЛНЫЙ ОБЪЕКТ) ===
     const translations = {
         ru: {
             // Навигация
@@ -1884,9 +1973,14 @@
             // Стримеры
             'streamers-title': 'Стримеры на сервере',
             'streamer-1-desc': 'Популярная стримерша, будет играть на сервере. Следи за стримами!',
+            'streamer-1-link': 'Babka3434 YouTube',
             'streamer-2-desc': 'Владелец сервера и стример. Играет вместе с вами.',
+            'streamer-2-link': 'Gyraffic YouTube',
             'more-streamers': 'Скоро будут другие',
             'streamer-3-desc': 'Список стримеров будет пополняться. Следи за новостями в Discord.',
+            'subscribe': 'подпишись',
+            'announcements': 'анонсы',
+            'news': 'новости',
             
             // Топ игроков
             'top-title': 'Топ игроков',
@@ -2142,12 +2236,19 @@
         }
     };
 
-    // Копируем переводы для других языков (для демонстрации)
+    // Копируем переводы для других языков
     translations.uk = JSON.parse(JSON.stringify(translations.ru));
     translations.en = JSON.parse(JSON.stringify(translations.ru));
     translations.de = JSON.parse(JSON.stringify(translations.ru));
     translations.fr = JSON.parse(JSON.stringify(translations.ru));
     translations.es = JSON.parse(JSON.stringify(translations.ru));
+
+    // Меняем название языка в меню
+    if(translations.uk) translations.uk['lang-uk'] = 'Українська';
+    if(translations.en) translations.en['lang-en'] = 'English';
+    if(translations.de) translations.de['lang-de'] = 'Deutsch';
+    if(translations.fr) translations.fr['lang-fr'] = 'Français';
+    if(translations.es) translations.es['lang-es'] = 'Español';
 
     // === ПРАВИЛА (СПИСОК ДЛЯ РЕНДЕРА) ===
     const rulesList = [
@@ -2342,7 +2443,7 @@
     
     function toggleBlur() { 
         blurEnabled = !blurEnabled; 
-        document.querySelectorAll('.feature-card, .stat-card, .player-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => { 
+        document.querySelectorAll('.feature-card, .stat-card, .streamer-card, .player-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => { 
             c.style.backdropFilter = blurEnabled ? 'blur(var(--blur))' : 'none'; 
         }); 
         document.getElementById('blurText').innerHTML = blurEnabled ? 
@@ -2354,7 +2455,7 @@
         particlesEnabled = blurEnabled = true; 
         currentWeather = 'auto'; 
         document.getElementById('weather').style.opacity = '1'; 
-        document.querySelectorAll('.feature-card, .stat-card, .player-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => c.style.backdropFilter = ''); 
+        document.querySelectorAll('.feature-card, .stat-card, .streamer-card, .player-card, .achievement-card, .event-card, .roadmap-item, .faq-card, .privacy-card, .detailed-faq-item').forEach(c => c.style.backdropFilter = ''); 
         document.getElementById('particlesText').innerHTML = translations[currentLang]['particles-on'];
         document.getElementById('blurText').innerHTML = translations[currentLang]['blur-on'];
         localStorage.setItem('sweetland-particles', 'true'); 

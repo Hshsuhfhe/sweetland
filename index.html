@@ -1817,13 +1817,16 @@
             }).catch(() => alert('play.sweet-land.fun'));
         }
 
-        // ==================== ТЕМЫ ====================
+        // ==================== ТЕМЫ (ИСПРАВЛЕНО) ====================
         function setTheme(theme) {
             const body = document.body;
-            // Удаляем все классы тем
-            const classes = ['light', 'dark', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal',
-                'accent-pink', 'accent-blue', 'accent-green', 'accent-orange', 'accent-purple', 'accent-yellow', 'accent-red', 'accent-teal'];
-            body.classList.remove(...classes);
+
+            // Все классы, отвечающие за темы и акценты
+            const colorClasses = [
+                'dark', 'light', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal',
+                'accent-pink', 'accent-blue', 'accent-green', 'accent-orange', 'accent-purple', 'accent-yellow', 'accent-red', 'accent-teal'
+            ];
+            body.classList.remove(...colorClasses);
 
             if (theme === 'light') {
                 body.classList.add('light');
@@ -1834,7 +1837,9 @@
                 currentTheme = 'dark';
                 document.getElementById('themeIcon').textContent = '🌙';
             } else {
-                if (body.classList.contains('light')) {
+                // Цветная тема — определяем, нужна светлая или тёмная основа
+                const wasLight = body.classList.contains('light') || currentTheme === 'light';
+                if (wasLight) {
                     body.classList.add('light', `accent-${theme}`);
                 } else {
                     body.classList.add(theme);
@@ -1843,6 +1848,7 @@
                 const icons = { pink: '🌸', blue: '💙', green: '💚', orange: '🧡', purple: '💜', yellow: '💛', red: '❤️', teal: '💙' };
                 document.getElementById('themeIcon').textContent = icons[theme] || '🌙';
             }
+
             localStorage.setItem('sweetland-theme', currentTheme);
             updateThemeImage();
             closeAllDropdowns();

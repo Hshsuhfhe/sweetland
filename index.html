@@ -1852,7 +1852,7 @@
         }
     }
 
-    // ТЕМЫ
+    // ТЕМЫ (с поддержкой цветов в светлой теме)
     function setAccentColor(color) {
         const allClasses = ['light', 'dark', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal', 
                            'accent-pink', 'accent-blue', 'accent-green', 'accent-orange', 'accent-purple', 
@@ -1867,9 +1867,11 @@
             currentTheme = 'dark';
             document.getElementById('themeIcon').textContent = '🌙';
         } else {
+            // Если сейчас светлая тема, добавляем light + accent-цвет
             if (document.body.classList.contains('light')) {
                 document.body.classList.add('light', `accent-${color}`);
             } else {
+                // Иначе просто цветной класс для тёмной темы
                 document.body.classList.add(color);
             }
             currentTheme = color;

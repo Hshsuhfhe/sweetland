@@ -6,6 +6,38 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ==================== ЗАЩИТА ОТ КОПИРОВАНИЯ ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.2s ease;
+            line-height: 1.5;
+            width: 100%;
+            position: relative;
+        }
+
+        a, button, .clickable {
+            cursor: pointer;
+        }
+
         /* ==================== БАЗОВЫЕ ПЕРЕМЕННЫЕ ==================== */
         :root {
             --accent: #a366ff;
@@ -28,18 +60,27 @@
             --header-bg: rgba(10, 10, 15, 0.95);
         }
 
-        /* ==================== СВЕТЛАЯ ТЕМА С ЦВЕТАМИ ==================== */
+        /* ==================== СВЕТЛАЯ ТЕМА ==================== */
         body.light {
+            --accent: #ff7b5c;
+            --accent-light: #ff9b7c;
+            --accent-dark: #e05b3c;
             --bg: #faf7f5;
             --bg-secondary: #ffffff;
             --bg-card: rgba(255, 255, 255, 0.85);
             --text: #2a2a2a;
             --text-secondary: #5a5a5a;
             --text-tertiary: #8a8a8a;
+            --border: rgba(255, 123, 92, 0.2);
+            --border-hover: rgba(255, 123, 92, 0.4);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            --shadow-accent: 0 8px 32px rgba(255, 123, 92, 0.15);
+            --glow: 0 0 20px rgba(255, 123, 92, 0.15);
+            --neon: #ff9b7c;
             --header-bg: rgba(250, 247, 245, 0.95);
         }
-        
+
+        /* ==================== ЦВЕТА ДЛЯ СВЕТЛОЙ ТЕМЫ ==================== */
         body.light.accent-pink {
             --accent: #ff66b2;
             --accent-light: #ff85c2;
@@ -128,7 +169,7 @@
             --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.15);
         }
 
-        /* ==================== ТЕМНЫЕ ЦВЕТНЫЕ ТЕМЫ ==================== */
+        /* ==================== ЦВЕТА ДЛЯ ТЕМНОЙ ТЕМЫ ==================== */
         body.pink {
             --accent: #ff66b2;
             --accent-light: #ff85c2;
@@ -281,38 +322,6 @@
             --header-bg: rgba(15, 26, 26, 0.95);
         }
 
-        /* ==================== ЗАЩИТА ОТ КОПИРОВАНИЯ ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            font-size: 16px;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.2s ease;
-            line-height: 1.5;
-            width: 100%;
-            position: relative;
-        }
-
-        a, button, .clickable {
-            cursor: pointer;
-        }
-
         /* ==================== ПОГОДА ==================== */
         #weather {
             position: fixed;
@@ -461,7 +470,7 @@
             font-size: 22px; 
         }
 
-        /* ==================== АДАПТИВНЫЙ ОВАЛ ==================== */
+        /* ==================== ВЕРХНИЙ ОВАЛ ==================== */
         .nav-oval-container {
             position: fixed;
             top: 25px;
@@ -469,7 +478,7 @@
             transform: translateX(-50%);
             z-index: 2400;
             width: 95%;
-            max-width: 95%;
+            max-width: 1400px;
             animation: slideDown 0.6s ease;
         }
         
@@ -1613,6 +1622,8 @@
             
             .modal-content { padding: 30px 20px; }
             .rules-main-title { font-size: 28px; }
+            
+            .panel-links a { font-size: 18px; margin: 12px 0; }
         }
         
         @media (max-width: 480px) {
@@ -1625,6 +1636,7 @@
             .stat-number { font-size: 36px; }
             .banner-right { width: 100%; justify-content: center; }
             .side-panel { width: 260px; }
+            .panel-links a { font-size: 16px; margin: 10px 0; }
         }
     </style>
 </head>
@@ -1632,7 +1644,7 @@
 
 <div id="weather"></div>
 
-<!-- УВЕЛИЧЕННЫЙ ВЕРХНИЙ ОВАЛ -->
+<!-- ВЕРХНИЙ ОВАЛ -->
 <div class="nav-oval-container">
     <div class="shop-banner">
         <div class="banner-left">
@@ -1702,7 +1714,7 @@
     </div>
 </div>
 
-<!-- ЛЕВАЯ ШТОРКА -->
+<!-- ЛЕВАЯ ШТОРКА (ТОЛЬКО 6 ПУНКТОВ) -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -1843,7 +1855,7 @@
 </footer>
 
 <script>
-    // ==================== ПОЛНЫЙ JS ====================
+    // ==================== ПОЛНЫЙ JS СО ВСЕМИ ЯЗЫКАМИ ====================
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
@@ -1856,13 +1868,6 @@
     // ==================== ПЕРЕВОДЫ (ВСЕ 6 ЯЗЫКОВ) ====================
     const translations = {
         ru: {
-            'panel-home': '🏠 Главная',
-            'panel-features': '✨ Особенности',
-            'panel-streamers': '🎥 Стримеры',
-            'panel-top': '🏆 Топ игроков',
-            'panel-faq': '❓ FAQ',
-            'panel-rules': '📜 Правила',
-            'footer-home': 'Главная',
             'nav-features': 'Особенности',
             'nav-howtoplay': 'Как начать',
             'nav-faq': 'FAQ',
@@ -1895,9 +1900,21 @@
             'animations-on': 'Анимации: вкл',
             'animations-off': 'Анимации: выкл',
             'reset-settings': 'Сброс',
+            'panel-home': '🏠 Главная',
+            'panel-features': '✨ Особенности',
+            'panel-streamers': '🎥 Стримеры',
+            'panel-top': '🏆 Топ игроков',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Правила',
             'social-discord': 'Discord',
             'social-telegram': 'Telegram',
             'social-youtube': 'YouTube',
+            'footer-home': 'Главная',
+            'footer-features': 'Особенности',
+            'footer-streamers': 'Стримеры',
+            'footer-top': 'Топ игроков',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Правила',
             'hero-tagline': 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
             'ip-button': 'play.sweet-land.fun',
             'version-text': '1.21.8',
@@ -1952,14 +1969,7 @@
             'faq-7-desc': 'Сервер скоро открывается. Будь первым.',
             'faq-8': 'Будут вайпы?',
             'faq-8-desc': 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
-            'footer-desc': 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
-            'footer-note': 'Никаких донатов — только чистый ванильный геймплей',
             'quick-links': 'Быстрые ссылки',
-            'footer-features': 'Особенности',
-            'footer-streamers': 'Стримеры',
-            'footer-top': 'Топ игроков',
-            'footer-faq': 'FAQ',
-            'footer-rules': 'Правила',
             'social': 'Соцсети',
             'data-protection': 'Защита данных',
             'privacy-footer': 'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',
@@ -1967,7 +1977,556 @@
             'privacy-note': 'Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.',
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
         },
-        // Остальные языки (uk, en, de, fr, es) здесь... (я их не копирую для краткости, но они есть)
+        uk: {
+            'nav-features': 'Особливості',
+            'nav-howtoplay': 'Як почати',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Магазин',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Темна',
+            'theme-light': 'Світла',
+            'theme-pink': 'Рожева',
+            'theme-blue': 'Блакитна',
+            'theme-green': 'Зелена',
+            'theme-orange': 'Помаранчева',
+            'theme-purple': 'Фіолетова',
+            'theme-yellow': 'Жовта',
+            'theme-red': 'Червона',
+            'theme-teal': 'Бірюзова',
+            'lang-ru': 'Російська',
+            'lang-uk': 'Українська',
+            'lang-en': 'Англійська',
+            'lang-de': 'Німецька',
+            'lang-fr': 'Французька',
+            'lang-es': 'Іспанська',
+            'weather-auto': 'Авто',
+            'weather-snow': 'Сніг',
+            'weather-rain': 'Дощ',
+            'weather-none': 'Вимк',
+            'particles-on': 'Частинки: вкл',
+            'particles-off': 'Частинки: вимк',
+            'blur-on': 'Розмиття: вкл',
+            'blur-off': 'Розмиття: вимк',
+            'animations-on': 'Анімації: вкл',
+            'animations-off': 'Анімації: вимк',
+            'reset-settings': 'Скинути',
+            'panel-home': '🏠 Головна',
+            'panel-features': '✨ Особливості',
+            'panel-streamers': '🎥 Стрімери',
+            'panel-top': '🏆 Топ гравців',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Правила',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'footer-home': 'Головна',
+            'footer-features': 'Особливості',
+            'footer-streamers': 'Стрімери',
+            'footer-top': 'Топ гравців',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Правила',
+            'hero-tagline': 'Ванільне виживання на версії 1.21.8. Твій світ — твої правила.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP скопійовано',
+            'stats-title': 'Статистика сервера',
+            'stat-1': 'Робота сервера',
+            'stat-2': 'Актуальна версія',
+            'stat-3': 'Ванільний геймплей',
+            'stat-4': 'Донату',
+            'features-title': 'Особливості сервера',
+            'feature-1-title': 'Анти-чит система',
+            'feature-1-desc': 'Просунутий захист від читів. Честна гра для всіх.',
+            'feature-2-title': 'Стабільний TPS',
+            'feature-2-desc': 'Оптимізований сервер на потужному залізі. Жодних лагів.',
+            'feature-3-title': 'Регулярні івенти',
+            'feature-3-desc': 'Щотижневі події та конкурси з призами для гравців.',
+            'feature-4-title': 'Чистий ванільний світ',
+            'feature-4-desc': 'Жодних плагінів, тільки чистий Minecraft як задумано.',
+            'feature-5-title': 'Захист будівель',
+            'feature-5-desc': 'Ваші будівлі під надійним захистом від ґріферів.',
+            'feature-6-title': 'Дружня спільнота',
+            'feature-6-desc': 'Перші гравці вже тут. Приєднуйся до нас.',
+            'streamers-title': 'Стрімери на сервері',
+            'streamer-1-desc': 'Популярна стрімерша, буде грати на сервері. Слідкуй за стрімами!',
+            'streamer-2-desc': 'Власник сервера та стрімер. Грає разом з вами.',
+            'more-streamers': 'Скоро будуть інші',
+            'streamer-3-desc': 'Список стрімерів буде поповнюватися. Слідкуй за новинами в Discord.',
+            'subscribe': 'підпишись',
+            'soon': 'скоро',
+            'announcements': 'анонси',
+            'news': 'новини',
+            'top-title': 'Топ гравців',
+            'owner': 'Власник сервера',
+            'streamer-label': 'Стрімерка',
+            'admin': 'Старший адміністратор',
+            'hours': 'годин',
+            'update-date': 'Дані оновлено 17 лютого 2026 року',
+            'faq-title': 'Відповіді на питання',
+            'faq-1': 'Коли старт?',
+            'faq-1-desc': 'Сервер готується до відкриття. Слідкуй за новинами в Discord.',
+            'faq-2': 'Яка версія?',
+            'faq-2-desc': 'Сервер працюватиме на актуальній версії 1.21.8.',
+            'faq-3': 'Де спілкування?',
+            'faq-3-desc': 'Основне спілкування в Discord. Там же новини та івенти.',
+            'faq-4': 'Біла тема?',
+            'faq-4-desc': 'Так, натисни на місяць у правому кутку і побачиш дощик.',
+            'faq-5': 'Захист акаунта?',
+            'faq-5-desc': 'Анти-чит система та шифрування даних гравців.',
+            'faq-6': 'Донат?',
+            'faq-6-desc': 'Ні, це повністю ванільний сервер. Жодних привілеїв.',
+            'faq-7': 'Який онлайн?',
+            'faq-7-desc': 'Сервер скоро відкривається. Будь першим.',
+            'faq-8': 'Чи будуть вайпи?',
+            'faq-8-desc': 'Вайпи плануються раз на 8-11 місяців. Всі будівлі зберігаються надовго.',
+            'quick-links': 'Швидкі посилання',
+            'social': 'Соцмережі',
+            'data-protection': 'Захист даних',
+            'privacy-footer': 'Всі дані захищені та не передаються третім особам. Сервер відповідає стандартам безпеки.',
+            'vanilla-server': 'Ванільний Minecraft сервер.',
+            'privacy-note': 'Ваші дані під надійним захистом. Використовуючи сервер, ви погоджуєтесь з політикою конфіденційності.',
+            'rules-title': 'ПРАВИЛА СЕРВЕРА',
+        },
+        en: {
+            'nav-features': 'Features',
+            'nav-howtoplay': 'How to Play',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Shop',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Dark',
+            'theme-light': 'Light',
+            'theme-pink': 'Pink',
+            'theme-blue': 'Blue',
+            'theme-green': 'Green',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Purple',
+            'theme-yellow': 'Yellow',
+            'theme-red': 'Red',
+            'theme-teal': 'Teal',
+            'lang-ru': 'Russian',
+            'lang-uk': 'Ukrainian',
+            'lang-en': 'English',
+            'lang-de': 'German',
+            'lang-fr': 'French',
+            'lang-es': 'Spanish',
+            'weather-auto': 'Auto',
+            'weather-snow': 'Snow',
+            'weather-rain': 'Rain',
+            'weather-none': 'Off',
+            'particles-on': 'Particles: on',
+            'particles-off': 'Particles: off',
+            'blur-on': 'Blur: on',
+            'blur-off': 'Blur: off',
+            'animations-on': 'Animations: on',
+            'animations-off': 'Animations: off',
+            'reset-settings': 'Reset',
+            'panel-home': '🏠 Home',
+            'panel-features': '✨ Features',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Top Players',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Rules',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'footer-home': 'Home',
+            'footer-features': 'Features',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Top Players',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Rules',
+            'hero-tagline': 'Vanilla survival on version 1.21.8. Your world — your rules.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copied',
+            'stats-title': 'Server Stats',
+            'stat-1': 'Server Uptime',
+            'stat-2': 'Current Version',
+            'stat-3': 'Vanilla Gameplay',
+            'stat-4': 'No Donate',
+            'features-title': 'Server Features',
+            'feature-1-title': 'Anti-Cheat System',
+            'feature-1-desc': 'Advanced protection against cheaters. Fair play for everyone.',
+            'feature-2-title': 'Stable TPS',
+            'feature-2-desc': 'Optimized server on powerful hardware. No lags.',
+            'feature-3-title': 'Regular Events',
+            'feature-3-desc': 'Weekly events and competitions with prizes for players.',
+            'feature-4-title': 'Pure Vanilla World',
+            'feature-4-desc': 'No plugins, just pure Minecraft as intended.',
+            'feature-5-title': 'Build Protection',
+            'feature-5-desc': 'Your buildings are reliably protected from griefers.',
+            'feature-6-title': 'Friendly Community',
+            'feature-6-desc': 'The first players are already here. Join us.',
+            'streamers-title': 'Streamers on Server',
+            'streamer-1-desc': 'Popular streamer, will play on the server. Follow the streams!',
+            'streamer-2-desc': 'Server owner and streamer. Plays with you.',
+            'more-streamers': 'More coming soon',
+            'streamer-3-desc': 'The list of streamers will be updated. Follow news in Discord.',
+            'subscribe': 'subscribe',
+            'soon': 'soon',
+            'announcements': 'announcements',
+            'news': 'news',
+            'top-title': 'Top Players',
+            'owner': 'Server Owner',
+            'streamer-label': 'Streamer',
+            'admin': 'Senior Admin',
+            'hours': 'hours',
+            'update-date': 'Data updated February 17, 2026',
+            'faq-title': 'FAQ',
+            'faq-1': 'When is the start?',
+            'faq-1-desc': 'The server is preparing for launch. Follow news in Discord.',
+            'faq-2': 'What version?',
+            'faq-2-desc': 'The server will run on the latest version 1.21.8.',
+            'faq-3': 'Where to chat?',
+            'faq-3-desc': 'Main communication is in Discord. News and events there too.',
+            'faq-4': 'Light theme?',
+            'faq-4-desc': 'Yes, click on the moon in the right corner and you will see rain.',
+            'faq-5': 'Account protection?',
+            'faq-5-desc': 'Anti-cheat system and encryption of player data.',
+            'faq-6': 'Donate?',
+            'faq-6-desc': 'No, this is a completely vanilla server. No privileges.',
+            'faq-7': 'Online count?',
+            'faq-7-desc': 'The server is opening soon. Be the first.',
+            'faq-8': 'Will there be wipes?',
+            'faq-8-desc': 'Wipes are planned every 8-11 months. All buildings are preserved for a long time.',
+            'quick-links': 'Quick Links',
+            'social': 'Social',
+            'data-protection': 'Data Protection',
+            'privacy-footer': 'All data is protected and not shared with third parties. The server meets security standards.',
+            'vanilla-server': 'Vanilla Minecraft server.',
+            'privacy-note': 'Your data is under reliable protection. By using the server, you agree to the privacy policy.',
+            'rules-title': 'SERVER RULES',
+        },
+        de: {
+            'nav-features': 'Funktionen',
+            'nav-howtoplay': 'Spielanleitung',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Shop',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Dunkel',
+            'theme-light': 'Hell',
+            'theme-pink': 'Rosa',
+            'theme-blue': 'Blau',
+            'theme-green': 'Grün',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Lila',
+            'theme-yellow': 'Gelb',
+            'theme-red': 'Rot',
+            'theme-teal': 'Türkis',
+            'lang-ru': 'Russisch',
+            'lang-uk': 'Ukrainisch',
+            'lang-en': 'Englisch',
+            'lang-de': 'Deutsch',
+            'lang-fr': 'Französisch',
+            'lang-es': 'Spanisch',
+            'weather-auto': 'Auto',
+            'weather-snow': 'Schnee',
+            'weather-rain': 'Regen',
+            'weather-none': 'Aus',
+            'particles-on': 'Partikel: an',
+            'particles-off': 'Partikel: aus',
+            'blur-on': 'Unschärfe: an',
+            'blur-off': 'Unschärfe: aus',
+            'animations-on': 'Animationen: an',
+            'animations-off': 'Animationen: aus',
+            'reset-settings': 'Zurücksetzen',
+            'panel-home': '🏠 Startseite',
+            'panel-features': '✨ Funktionen',
+            'panel-streamers': '🎥 Streamer',
+            'panel-top': '🏆 Top-Spieler',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Regeln',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'footer-home': 'Startseite',
+            'footer-features': 'Funktionen',
+            'footer-streamers': 'Streamer',
+            'footer-top': 'Top-Spieler',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Regeln',
+            'hero-tagline': 'Vanilla-Überleben auf Version 1.21.8. Deine Welt — deine Regeln.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP kopiert',
+            'stats-title': 'Server-Statistiken',
+            'stat-1': 'Server-Betrieb',
+            'stat-2': 'Aktuelle Version',
+            'stat-3': 'Vanilla-Gameplay',
+            'stat-4': 'Kein Donate',
+            'features-title': 'Server-Funktionen',
+            'feature-1-title': 'Anti-Cheat-System',
+            'feature-1-desc': 'Erweiterter Schutz vor Cheatern. Faires Spiel für alle.',
+            'feature-2-title': 'Stabiler TPS',
+            'feature-2-desc': 'Optimierter Server auf leistungsstarker Hardware. Keine Verzögerungen.',
+            'feature-3-title': 'Regelmäßige Events',
+            'feature-3-desc': 'Wöchentliche Veranstaltungen und Wettbewerbe mit Preisen für Spieler.',
+            'feature-4-title': 'Reine Vanilla-Welt',
+            'feature-4-desc': 'Keine Plugins, nur reines Minecraft wie vorgesehen.',
+            'feature-5-title': 'Bautenschutz',
+            'feature-5-desc': 'Ihre Gebäude sind zuverlässig vor Griefern geschützt.',
+            'feature-6-title': 'Freundliche Gemeinschaft',
+            'feature-6-desc': 'Die ersten Spieler sind bereits hier. Komm zu uns.',
+            'streamers-title': 'Streamer auf dem Server',
+            'streamer-1-desc': 'Beliebte Streamerin, wird auf dem Server spielen. Folge den Streams!',
+            'streamer-2-desc': 'Serverbesitzer und Streamer. Spielt mit euch.',
+            'more-streamers': 'Weitere folgen bald',
+            'streamer-3-desc': 'Die Liste der Streamer wird aktualisiert. Folge den Neuigkeiten in Discord.',
+            'subscribe': 'abonnieren',
+            'soon': 'bald',
+            'announcements': 'Ankündigungen',
+            'news': 'Neuigkeiten',
+            'top-title': 'Top-Spieler',
+            'owner': 'Serverbesitzer',
+            'streamer-label': 'Streamer',
+            'admin': 'Senior-Admin',
+            'hours': 'Stunden',
+            'update-date': 'Daten aktualisiert am 17. Februar 2026',
+            'faq-title': 'FAQ',
+            'faq-1': 'Wann ist der Start?',
+            'faq-1-desc': 'Der Server bereitet sich auf den Start vor. Folge den Neuigkeiten in Discord.',
+            'faq-2': 'Welche Version?',
+            'faq-2-desc': 'Der Server wird auf der neuesten Version 1.21.8 laufen.',
+            'faq-3': 'Wo chatten?',
+            'faq-3-desc': 'Hauptkommunikation ist in Discord. Dort auch Neuigkeiten und Events.',
+            'faq-4': 'Helles Thema?',
+            'faq-4-desc': 'Ja, klicke auf den Mond in der rechten Ecke und du wirst Regen sehen.',
+            'faq-5': 'Kontoschutz?',
+            'faq-5-desc': 'Anti-Cheat-System und Verschlüsselung der Spielerdaten.',
+            'faq-6': 'Donate?',
+            'faq-6-desc': 'Nein, dies ist ein komplett Vanilla-Server. Keine Privilegien.',
+            'faq-7': 'Online-Zahl?',
+            'faq-7-desc': 'Der Server öffnet bald. Sei der Erste.',
+            'faq-8': 'Wird es Wipes geben?',
+            'faq-8-desc': 'Wipes sind alle 8-11 Monate geplant. Alle Gebäude bleiben lange erhalten.',
+            'quick-links': 'Schnelllinks',
+            'social': 'Soziales',
+            'data-protection': 'Datenschutz',
+            'privacy-footer': 'Alle Daten sind geschützt und werden nicht an Dritte weitergegeben. Der Server entspricht den Sicherheitsstandards.',
+            'vanilla-server': 'Vanilla Minecraft Server.',
+            'privacy-note': 'Ihre Daten sind zuverlässig geschützt. Durch die Nutzung des Servers stimmen Sie der Datenschutzerklärung zu.',
+            'rules-title': 'SERVER REGELN',
+        },
+        fr: {
+            'nav-features': 'Fonctionnalités',
+            'nav-howtoplay': 'Comment jouer',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Boutique',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Sombre',
+            'theme-light': 'Clair',
+            'theme-pink': 'Rose',
+            'theme-blue': 'Bleu',
+            'theme-green': 'Vert',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Violet',
+            'theme-yellow': 'Jaune',
+            'theme-red': 'Rouge',
+            'theme-teal': 'Sarcelle',
+            'lang-ru': 'Russe',
+            'lang-uk': 'Ukrainien',
+            'lang-en': 'Anglais',
+            'lang-de': 'Allemand',
+            'lang-fr': 'Français',
+            'lang-es': 'Espagnol',
+            'weather-auto': 'Auto',
+            'weather-snow': 'Neige',
+            'weather-rain': 'Pluie',
+            'weather-none': 'Off',
+            'particles-on': 'Particules: on',
+            'particles-off': 'Particules: off',
+            'blur-on': 'Flou: on',
+            'blur-off': 'Flou: off',
+            'animations-on': 'Animations: on',
+            'animations-off': 'Animations: off',
+            'reset-settings': 'Réinitialiser',
+            'panel-home': '🏠 Accueil',
+            'panel-features': '✨ Fonctionnalités',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Meilleurs',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Règles',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'footer-home': 'Accueil',
+            'footer-features': 'Fonctionnalités',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Meilleurs',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Règles',
+            'hero-tagline': 'Survie vanilla sur la version 1.21.8. Ton monde — tes règles.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiée',
+            'stats-title': 'Statistiques',
+            'stat-1': 'Fonctionnement',
+            'stat-2': 'Version actuelle',
+            'stat-3': 'Gameplay vanilla',
+            'stat-4': 'Pas de don',
+            'features-title': 'Fonctionnalités',
+            'feature-1-title': 'Anti-triche',
+            'feature-1-desc': 'Protection avancée contre les tricheurs.',
+            'feature-2-title': 'TPS stable',
+            'feature-2-desc': 'Serveur optimisé. Pas de lags.',
+            'feature-3-title': 'Événements',
+            'feature-3-desc': 'Événements hebdomadaires avec prix.',
+            'feature-4-title': 'Monde vanilla',
+            'feature-4-desc': 'Pas de plugins, Minecraft pur.',
+            'feature-5-title': 'Protection',
+            'feature-5-desc': 'Constructions protégées.',
+            'feature-6-title': 'Communauté',
+            'feature-6-desc': 'Rejoins les premiers.',
+            'streamers-title': 'Streamers',
+            'streamer-1-desc': 'Streamera sur le serveur.',
+            'streamer-2-desc': 'Propriétaire et streamer.',
+            'more-streamers': 'Plus bientôt',
+            'streamer-3-desc': 'Liste mise à jour sur Discord.',
+            'subscribe': 'abonne-toi',
+            'soon': 'bientôt',
+            'announcements': 'annonces',
+            'news': 'nouvelles',
+            'top-title': 'Top joueurs',
+            'owner': 'Propriétaire',
+            'streamer-label': 'Streameuse',
+            'admin': 'Admin',
+            'hours': 'heures',
+            'update-date': 'MAJ 17/02/2026',
+            'faq-title': 'FAQ',
+            'faq-1': 'Début?',
+            'faq-1-desc': 'Bientôt.',
+            'faq-2': 'Version?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': 'Chat?',
+            'faq-3-desc': 'Discord.',
+            'faq-4': 'Thème clair?',
+            'faq-4-desc': 'Clique sur la lune.',
+            'faq-5': 'Sécurité?',
+            'faq-5-desc': 'Anti-triche.',
+            'faq-6': 'Don?',
+            'faq-6-desc': 'Non, vanilla.',
+            'faq-7': 'Online?',
+            'faq-7-desc': 'Bientôt.',
+            'faq-8': 'Wipes?',
+            'faq-8-desc': '8-11 mois.',
+            'quick-links': 'Liens',
+            'social': 'Réseaux',
+            'data-protection': 'Protection',
+            'privacy-footer': 'Données protégées et non partagées.',
+            'vanilla-server': 'Serveur Minecraft vanilla.',
+            'privacy-note': 'En utilisant le serveur, vous acceptez la politique de confidentialité.',
+            'rules-title': 'RÈGLES DU SERVEUR',
+        },
+        es: {
+            'nav-features': 'Características',
+            'nav-howtoplay': 'Cómo jugar',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Tienda',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Oscuro',
+            'theme-light': 'Claro',
+            'theme-pink': 'Rosa',
+            'theme-blue': 'Azul',
+            'theme-green': 'Verde',
+            'theme-orange': 'Naranja',
+            'theme-purple': 'Púrpura',
+            'theme-yellow': 'Amarillo',
+            'theme-red': 'Rojo',
+            'theme-teal': 'Turquesa',
+            'lang-ru': 'Ruso',
+            'lang-uk': 'Ucraniano',
+            'lang-en': 'Inglés',
+            'lang-de': 'Alemán',
+            'lang-fr': 'Francés',
+            'lang-es': 'Español',
+            'weather-auto': 'Auto',
+            'weather-snow': 'Nieve',
+            'weather-rain': 'Lluvia',
+            'weather-none': 'Off',
+            'particles-on': 'Partículas: on',
+            'particles-off': 'Partículas: off',
+            'blur-on': 'Desenfoque: on',
+            'blur-off': 'Desenfoque: off',
+            'animations-on': 'Animaciones: on',
+            'animations-off': 'Animaciones: off',
+            'reset-settings': 'Reiniciar',
+            'panel-home': '🏠 Inicio',
+            'panel-features': '✨ Características',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Top jugadores',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Reglas',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'footer-home': 'Inicio',
+            'footer-features': 'Características',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Top jugadores',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Reglas',
+            'hero-tagline': 'Supervivencia vanilla en la versión 1.21.8. Tu mundo — tus reglas.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiada',
+            'stats-title': 'Estadísticas',
+            'stat-1': 'Funcionamiento',
+            'stat-2': 'Versión actual',
+            'stat-3': 'Juego vanilla',
+            'stat-4': 'Sin donaciones',
+            'features-title': 'Características',
+            'feature-1-title': 'Anti-trampas',
+            'feature-1-desc': 'Protección avanzada contra tramposos.',
+            'feature-2-title': 'TPS estable',
+            'feature-2-desc': 'Servidor optimizado. Sin retrasos.',
+            'feature-3-title': 'Eventos',
+            'feature-3-desc': 'Eventos semanales con premios.',
+            'feature-4-title': 'Mundo vanilla',
+            'feature-4-desc': 'Sin plugins, Minecraft puro.',
+            'feature-5-title': 'Protección',
+            'feature-5-desc': 'Construcciones protegidas.',
+            'feature-6-title': 'Comunidad',
+            'feature-6-desc': 'Únete a los primeros.',
+            'streamers-title': 'Streamers',
+            'streamer-1-desc': 'Streamer popular en el servidor.',
+            'streamer-2-desc': 'Dueño y streamer.',
+            'more-streamers': 'Más pronto',
+            'streamer-3-desc': 'Lista actualizada en Discord.',
+            'subscribe': 'suscríbete',
+            'soon': 'pronto',
+            'announcements': 'anuncios',
+            'news': 'noticias',
+            'top-title': 'Top jugadores',
+            'owner': 'Dueño',
+            'streamer-label': 'Streamer',
+            'admin': 'Admin',
+            'hours': 'horas',
+            'update-date': 'Actualizado 17/02/2026',
+            'faq-title': 'FAQ',
+            'faq-1': '¿Inicio?',
+            'faq-1-desc': 'Pronto.',
+            'faq-2': '¿Versión?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': '¿Chat?',
+            'faq-3-desc': 'Discord.',
+            'faq-4': '¿Tema claro?',
+            'faq-4-desc': 'Haz clic en la luna.',
+            'faq-5': '¿Seguridad?',
+            'faq-5-desc': 'Anti-trampas.',
+            'faq-6': '¿Donación?',
+            'faq-6-desc': 'No, vanilla.',
+            'faq-7': '¿Online?',
+            'faq-7-desc': 'Pronto.',
+            'faq-8': '¿Wipes?',
+            'faq-8-desc': '8-11 meses.',
+            'quick-links': 'Enlaces',
+            'social': 'Redes',
+            'data-protection': 'Protección',
+            'privacy-footer': 'Datos protegidos y no compartidos.',
+            'vanilla-server': 'Servidor Minecraft vanilla.',
+            'privacy-note': 'Al usar el servidor, aceptas la política de privacidad.',
+            'rules-title': 'REGLAS DEL SERVIDOR',
+        }
     };
 
     // ==================== ПРАВИЛА ====================
@@ -2018,7 +2577,236 @@
             { num: "2.4", text: "Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.", punish: "Снятие" },
             { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
         ],
-        // Остальные языки здесь...
+        uk: [
+            { num: "1.0", text: "Заходячи на сервер, ви автоматично погоджуєтесь з усіма правилами проекту.", punish: "Бан 1 день" },
+            { num: "1.1", text: "Незнання правил не звільняє вас від відповідальності.", punish: "Попередження" },
+            { num: "1.2", text: "Гріферство (псування або знищення чужих будівель).", punish: "Бан 30 днів" },
+            { num: "1.3", text: "Крадіжка ресурсів з чужих скринь, бочок, лійок.", punish: "Бан 14 днів" },
+            { num: "1.4", text: "Навмисне вбивство чужих домашніх тварин або іменних мобів.", punish: "Бан 2 дні" },
+            { num: "1.5", text: "Заселення на чужу територію або будівництво впритул без згоди власника.", punish: "Знос + Кік" },
+            { num: "1.6", text: "Ігнорування табличок «Вхід заборонено».", punish: "Вбивство без повернення речей" },
+            { num: "1.7", text: "Використання чужих автоматичних або ручних ферм без дозволу.", punish: "Бан 3 дні" },
+            { num: "1.8", text: "Псування світу (розлиття лави, води тощо).", punish: "Знос + Бан 2 дні" },
+            { num: "1.9", text: "Створення механізмів, що навмисно викликають лаги або падіння сервера.", punish: "Знос + Бан 14 днів" },
+            { num: "1.10", text: "Вбивство гравця без його попередньої згоди на PVP.", punish: "Бан 7 днів" },
+            { num: "1.11", text: "Підбирання та привласнення чужих речей після смерті гравця (якщо він просить повернути).", punish: "Бан 1 день + повернення речей" },
+            { num: "1.12", text: "Використання будь-яких видів читів (METEOR, WURST, IMPACT та інші).", punish: "ПЕРМАНЕНТНИЙ БАН" },
+            { num: "1.13", text: "Приховування інформації про баги, дюпи або недоробки економіки.", punish: "Бан 30 днів" },
+            { num: "1.14", text: "Привласнення закинутих баз без узгодження з адміністрацією.", punish: "Бан 5 днів" },
+            { num: "1.15", text: "Злам, спроба зламу або вхід на чужий акаунт.", punish: "Перманентний бан" },
+            { num: "1.16", text: "Нанесення будь-якої шкоди репутації або технічній частині сервера.", punish: "Бан назавжди" },
+            { num: "1.17", text: "Продаж ігрових ресурсів або послуг за реальні гроші.", punish: "ЧС проекту" },
+            { num: "1.18", text: "Підбурювання інших гравців до порушення правил.", punish: "Бан 10 днів" },
+            { num: "1.19", text: "Відповідальність за безпеку акаунта несе тільки його власник.", punish: "" },
+            { num: "1.20", text: "Створення додаткових акаунтів (твінків) для обходу активного бану.", punish: "Бан по IP" },
+            { num: "1.21", text: "Встановлення більше 4 масштабних автоматичних ферм на одного гравця або клан.", punish: "Знос + Бан 5 днів" },
+            { num: "1.22", text: "Надмірний спам, мат, капс та неадекватна поведінка в загальному чаті.", punish: "Мут 24 години" },
+            { num: "1.23", text: "Крадіжка товарів або обман у торгових зонах та магазинах гравців.", punish: "Бан 10 днів" },
+            { num: "1.24", text: "Постійне переслідування гравця та захід у його будинок без запрошення.", punish: "Кік" },
+            { num: "1.25", text: "Погрози баном, зв'язками з адміністрацією або спроби шантажу.", punish: "Бан 14 днів" },
+            { num: "1.26", text: "Будівництво будь-яких споруд ближче 500 блоків від нульових координат (спавну).", punish: "Перенесення або знос" },
+            { num: "1.27", text: "Створення будівель у Незері ближче 300 блоків від центрального порталу.", punish: "Знос" },
+            { num: "1.28", text: "Будівництво пасток, що вбивають гравця при вході (трапки).", punish: "Бан 7 днів" },
+            { num: "1.29", text: "Відмова знести незаконну будівлю за офіційною вимогою адміністрації.", punish: "Бан 7 днів" },
+            { num: "1.30", text: "Використання автоклікерів, автопіаніно або автототемів.", punish: "Бан 30 днів" },
+            { num: "1.31", text: "Організація масових роздач цінних ресурсів, що ламають економіку.", punish: "Бан 14 днів" },
+            { num: "1.32", text: "Будь-який вид дюпу предметів (включаючи килими або тнт).", punish: "ПЕРМАНЕНТНИЙ БАН" },
+            { num: "1.33", text: "Адміністрація має право виносити вирок, ґрунтуючись на ситуації, навіть якщо її немає в правилах.", punish: "" },
+            { num: "1.34", text: "Використання x-ray (моди або текстур-паки).", punish: "БАН НА 4 МІСЯЦІ" },
+            { num: "1.35", text: "Пошук та використання лазівок у правилах.", punish: "Бан 30 днів" },
+            { num: "1.36", text: "Попрошайництво до Адміністрації або Гравців.", punish: "Мут 6 годин потім Бан 2 дні" },
+            { num: "1.37", text: "Деструктивні дії в бік сервера або його онлайну.", punish: "Перманент" },
+            { num: "1.38", text: "Знесення або пошкодження чужих тотемів (Totem of Undying) без згоди власника.", punish: "Бан 7 днів + компенсація" },
+            { num: "2.1", text: "Правила сервера обов'язкові для виконання всіма членами персоналу.", punish: "" },
+            { num: "2.2", text: "Використання творчого режиму для особистого виживання або допомоги гравцям.", punish: "Зняття" },
+            { num: "2.3", text: "Надання ігрових переваг своїм друзям.", punish: "Зняття + ЧС" },
+            { num: "2.4", text: "Видача необґрунтованих покарань (банів, мутів) без наявності доказів.", punish: "Зняття" },
+            { num: "2.5", text: "Гравець має право оскаржити будь-яку дію адміністратора в Discord-каналі.", punish: "" }
+        ],
+        en: [
+            { num: "1.0", text: "By joining the server, you automatically agree to all project rules.", punish: "Ban 1 day" },
+            { num: "1.1", text: "Ignorance of the rules does not exempt you from responsibility.", punish: "Warning" },
+            { num: "1.2", text: "Griefing (damaging or destroying other people's buildings).", punish: "Ban 30 days" },
+            { num: "1.3", text: "Stealing resources from other people's chests, barrels, hoppers.", punish: "Ban 14 days" },
+            { num: "1.4", text: "Intentional killing of other people's pets or named mobs.", punish: "Ban 2 days" },
+            { num: "1.5", text: "Settling on someone else's territory or building close without the owner's consent.", punish: "Demolition + Kick" },
+            { num: "1.6", text: "Ignoring 'No Entry' signs.", punish: "Kill without item return" },
+            { num: "1.7", text: "Using other people's automatic or manual farms without permission.", punish: "Ban 3 days" },
+            { num: "1.8", text: "Damaging the world (spilling lava, water, etc.).", punish: "Demolition + Ban 2 days" },
+            { num: "1.9", text: "Creating mechanisms that intentionally cause lag or server crashes.", punish: "Demolition + Ban 14 days" },
+            { num: "1.10", text: "Killing a player without their prior consent to PVP.", punish: "Ban 7 days" },
+            { num: "1.11", text: "Picking up and appropriating other people's items after a player's death (if they ask to return them).", punish: "Ban 1 day + return items" },
+            { num: "1.12", text: "Using any kind of cheats (METEOR, WURST, IMPACT, etc.).", punish: "PERMANENT BAN" },
+            { num: "1.13", text: "Concealing information about bugs, dupes, or economic flaws.", punish: "Ban 30 days" },
+            { num: "1.14", text: "Appropriating abandoned bases without coordination with the administration.", punish: "Ban 5 days" },
+            { num: "1.15", text: "Hacking, attempted hacking, or logging into someone else's account.", punish: "Permanent ban" },
+            { num: "1.16", text: "Causing any harm to the reputation or technical part of the server.", punish: "Permanent ban" },
+            { num: "1.17", text: "Selling game resources or services for real money.", punish: "Blacklist" },
+            { num: "1.18", text: "Inciting other players to break the rules.", punish: "Ban 10 days" },
+            { num: "1.19", text: "The account owner is solely responsible for the security of the account.", punish: "" },
+            { num: "1.20", text: "Creating additional accounts (alts) to bypass an active ban.", punish: "IP ban" },
+            { num: "1.21", text: "Installing more than 4 large-scale automatic farms per player or clan.", punish: "Demolition + Ban 5 days" },
+            { num: "1.22", text: "Excessive spam, profanity, caps, and inappropriate behavior in the global chat.", punish: "Mute 24 hours" },
+            { num: "1.23", text: "Stealing goods or cheating in trading zones and player shops.", punish: "Ban 10 days" },
+            { num: "1.24", text: "Constantly stalking a player and entering their house without an invitation.", punish: "Kick" },
+            { num: "1.25", text: "Threats of banning, connections with the administration, or attempts at blackmail.", punish: "Ban 14 days" },
+            { num: "1.26", text: "Building any structures closer than 500 blocks from zero coordinates (spawn).", punish: "Relocation or demolition" },
+            { num: "1.27", text: "Creating buildings in the Nether closer than 300 blocks from the central portal.", punish: "Demolition" },
+            { num: "1.28", text: "Building traps that kill a player upon entry.", punish: "Ban 7 days" },
+            { num: "1.29", text: "Refusing to demolish an illegal building upon official request from the administration.", punish: "Ban 7 days" },
+            { num: "1.30", text: "Using auto-clickers, auto-pianos, or auto-totems.", punish: "Ban 30 days" },
+            { num: "1.31", text: "Organizing mass giveaways of valuable resources that break the economy.", punish: "Ban 14 days" },
+            { num: "1.32", text: "Any kind of item duping (including carpets or TNT).", punish: "PERMANENT BAN" },
+            { num: "1.33", text: "The administration has the right to make a ruling based on the situation, even if it is not in the rules.", punish: "" },
+            { num: "1.34", text: "Using x-ray (mods or texture packs).", punish: "BAN FOR 4 MONTHS" },
+            { num: "1.35", text: "Searching for and exploiting loopholes in the rules.", punish: "Ban 30 days" },
+            { num: "1.36", text: "Begging to the Administration or Players.", punish: "Mute 6 hours then Ban 2 days" },
+            { num: "1.37", text: "Destructive actions towards the server or its online community.", punish: "Permanent" },
+            { num: "1.38", text: "Destroying or damaging other players' Totems of Undying without consent.", punish: "Ban 7 days + compensation" },
+            { num: "2.1", text: "Server rules are mandatory for all staff members.", punish: "" },
+            { num: "2.2", text: "Using creative mode for personal survival or helping players.", punish: "Removal" },
+            { num: "2.3", text: "Providing game advantages to friends.", punish: "Removal + Blacklist" },
+            { num: "2.4", text: "Issuing unjustified punishments (bans, mutes) without evidence.", punish: "Removal" },
+            { num: "2.5", text: "A player has the right to appeal any action of an administrator in the Discord channel.", punish: "" }
+        ],
+        de: [
+            { num: "1.0", text: "Mit dem Beitritt zum Server stimmst du automatisch allen Projektregeln zu.", punish: "Ban 1 Tag" },
+            { num: "1.1", text: "Unkenntnis der Regeln befreit dich nicht von der Verantwortung.", punish: "Verwarnung" },
+            { num: "1.2", text: "Griefing (Beschädigung oder Zerstörung fremder Bauten).", punish: "Ban 30 Tage" },
+            { num: "1.3", text: "Diebstahl von Ressourcen aus fremden Kisten, Fässern, Trichtern.", punish: "Ban 14 Tage" },
+            { num: "1.4", text: "Vorsätzliches Töten fremder Haustiere oder benannter Mobs.", punish: "Ban 2 Tage" },
+            { num: "1.5", text: "Besiedlung fremden Gebiets oder Bau in unmittelbarer Nähe ohne Zustimmung des Eigentümers.", punish: "Abriss + Kick" },
+            { num: "1.6", text: "Ignorieren von 'Kein Zutritt'-Schildern.", punish: "Töten ohne Gegenstands-Rückgabe" },
+            { num: "1.7", text: "Nutzung fremder automatischer oder manueller Farmen ohne Erlaubnis.", punish: "Ban 3 Tage" },
+            { num: "1.8", text: "Weltbeschädigung (Verschütten von Lava, Wasser usw.).", punish: "Abriss + Ban 2 Tage" },
+            { num: "1.9", text: "Erstellen von Mechanismen, die absichtlich Lag verursachen oder Serverabstürze.", punish: "Abriss + Ban 14 Tage" },
+            { num: "1.10", text: "Töten eines Spielers ohne dessen vorherige Zustimmung zu PVP.", punish: "Ban 7 Tage" },
+            { num: "1.11", text: "Aufheben und Aneignen fremder Gegenstände nach dem Tod eines Spielers (wenn er um Rückgabe bittet).", punish: "Ban 1 Tag + Rückgabe der Gegenstände" },
+            { num: "1.12", text: "Verwendung jeglicher Cheats (METEOR, WURST, IMPACT usw.).", punish: "PERMANENTER BAN" },
+            { num: "1.13", text: "Verheimlichen von Informationen über Bugs, Dupes oder wirtschaftliche Mängel.", punish: "Ban 30 Tage" },
+            { num: "1.14", text: "Aneignung verlassener Basen ohne Absprache mit der Administration.", punish: "Ban 5 Tage" },
+            { num: "1.15", text: "Hacking, Hackversuch oder Einloggen in fremde Accounts.", punish: "Permanenter Ban" },
+            { num: "1.16", text: "Schädigung des Rufs oder des technischen Teils des Servers.", punish: "Permanenter Ban" },
+            { num: "1.17", text: "Verkauf von Spielressourcen oder -dienstleistungen gegen echtes Geld.", punish: "Blacklist" },
+            { num: "1.18", text: "Anstiftung anderer Spieler zu Regelverstößen.", punish: "Ban 10 Tage" },
+            { num: "1.19", text: "Die Sicherheit des Kontos liegt in der alleinigen Verantwortung des Besitzers.", punish: "" },
+            { num: "1.20", text: "Erstellen von Zweitkonten (Alts) zur Umgehung eines aktiven Bans.", punish: "IP-Ban" },
+            { num: "1.21", text: "Installation von mehr als 4 groß angelegten automatischen Farmen pro Spieler oder Clan.", punish: "Abriss + Ban 5 Tage" },
+            { num: "1.22", text: "Übermäßiger Spam, Fluchen, Caps und unangemessenes Verhalten im globalen Chat.", punish: "Mute 24 Stunden" },
+            { num: "1.23", text: "Diebstahl von Waren oder Betrug in Handelszonen und Spielerläden.", punish: "Ban 10 Tage" },
+            { num: "1.24", text: "Ständiges Verfolgen eines Spielers und Betreten seines Hauses ohne Einladung.", punish: "Kick" },
+            { num: "1.25", text: "Androhung von Bans, Verbindungen zur Administration oder Erpressungsversuche.", punish: "Ban 14 Tage" },
+            { num: "1.26", text: "Bau von Strukturen näher als 500 Blöcke von den Nullkoordinaten (Spawn).", punish: "Umsetzung oder Abriss" },
+            { num: "1.27", text: "Erstellen von Bauten im Nether näher als 300 Blöcke vom zentralen Portal.", punish: "Abriss" },
+            { num: "1.28", text: "Bau von Fallen, die Spieler beim Betreten töten.", punish: "Ban 7 Tage" },
+            { num: "1.29", text: "Weigerung, einen illegalen Bau auf offizielle Aufforderung der Administration abzureißen.", punish: "Ban 7 Tage" },
+            { num: "1.30", text: "Verwendung von Auto-Clickern, Auto-Pianos oder Auto-Totems.", punish: "Ban 30 Tage" },
+            { num: "1.31", text: "Organisation von Massenverteilungen wertvoller Ressourcen, die die Wirtschaft zerstören.", punish: "Ban 14 Tage" },
+            { num: "1.32", text: "Jegliche Art von Item-Duping (einschließlich Teppiche oder TNT).", punish: "PERMANENTER BAN" },
+            { num: "1.33", text: "Die Administration hat das Recht, basierend auf der Situation zu entscheiden, auch wenn diese nicht in den Regeln steht.", punish: "" },
+            { num: "1.34", text: "Verwendung von X-Ray (Mods oder Texturen).", punish: "BAN FÜR 4 MONATE" },
+            { num: "1.35", text: "Suche nach und Ausnutzung von Regelungslücken.", punish: "Ban 30 Tage" },
+            { num: "1.36", text: "Betteln bei der Administration oder Spielern.", punish: "Mute 6 Stunden dann Ban 2 Tage" },
+            { num: "1.37", text: "Destruktive Handlungen gegen den Server oder seine Online-Community.", punish: "Permanent" },
+            { num: "1.38", text: "Zerstörung oder Beschädigung fremder Totems (Totem der Unsterblichkeit) ohne Zustimmung.", punish: "Ban 7 Tage + Entschädigung" },
+            { num: "2.1", text: "Serverregeln sind für alle Mitarbeiter verbindlich.", punish: "" },
+            { num: "2.2", text: "Nutzung des Kreativmodus für persönliches Überleben oder Hilfe für Spieler.", punish: "Entfernung" },
+            { num: "2.3", text: "Gewährung von Spielvorteilen für Freunde.", punish: "Entfernung + Blacklist" },
+            { num: "2.4", text: "Ausstellung unbegründeter Strafen (Bans, Mutes) ohne Beweise.", punish: "Entfernung" },
+            { num: "2.5", text: "Ein Spieler hat das Recht, jede Aktion eines Administrators im Discord-Kanal anzufechten.", punish: "" }
+        ],
+        fr: [
+            { num: "1.0", text: "En rejoignant le serveur, vous acceptez automatiquement toutes les règles du projet.", punish: "Ban 1 jour" },
+            { num: "1.1", text: "La méconnaissance des règles ne vous exempte pas de votre responsabilité.", punish: "Avertissement" },
+            { num: "1.2", text: "Griefing (endommager ou détruire les constructions d'autrui).", punish: "Ban 30 jours" },
+            { num: "1.3", text: "Vol de ressources dans les coffres, tonneaux, entonnoirs d'autrui.", punish: "Ban 14 jours" },
+            { num: "1.4", text: "Meurtre intentionnel d'animaux domestiques ou de mobs nommés d'autrui.", punish: "Ban 2 jours" },
+            { num: "1.5", text: "S'installer sur le territoire d'autrui ou construire à proximité sans le consentement du propriétaire.", punish: "Démolition + Kick" },
+            { num: "1.6", text: "Ignorer les panneaux 'Entrée interdite'.", punish: "Mort sans retour d'objets" },
+            { num: "1.7", text: "Utiliser les fermes automatiques ou manuelles d'autrui sans permission.", punish: "Ban 3 jours" },
+            { num: "1.8", text: "Détérioration du monde (déversement de lave, d'eau, etc.).", punish: "Démolition + Ban 2 jours" },
+            { num: "1.9", text: "Créer des mécanismes provoquant intentionnellement des lags ou des crashs du serveur.", punish: "Démolition + Ban 14 jours" },
+            { num: "1.10", text: "Tuer un joueur sans son consentement préalable au PVP.", punish: "Ban 7 jours" },
+            { num: "1.11", text: "Ramasser et s'approprier les objets d'autrui après la mort d'un joueur (s'il demande de les rendre).", punish: "Ban 1 jour + retour des objets" },
+            { num: "1.12", text: "Utilisation de tout type de cheats (METEOR, WURST, IMPACT, etc.).", punish: "BAN PERMANENT" },
+            { num: "1.13", text: "Cacher des informations sur les bugs, les dupes ou les défauts économiques.", punish: "Ban 30 jours" },
+            { num: "1.14", text: "S'approprier des bases abandonnées sans coordination avec l'administration.", punish: "Ban 5 jours" },
+            { num: "1.15", text: "Hacking, tentative de hacking ou connexion au compte d'autrui.", punish: "Ban permanent" },
+            { num: "1.16", text: "Causer tout préjudice à la réputation ou à la partie technique du serveur.", punish: "Ban permanent" },
+            { num: "1.17", text: "Vente de ressources ou services de jeu pour de l'argent réel.", punish: "Liste noire" },
+            { num: "1.18", text: "Inciter d'autres joueurs à enfreindre les règles.", punish: "Ban 10 jours" },
+            { num: "1.19", text: "La sécurité du compte relève de la seule responsabilité de son propriétaire.", punish: "" },
+            { num: "1.20", text: "Création de comptes supplémentaires (alts) pour contourner un ban actif.", punish: "Ban IP" },
+            { num: "1.21", text: "Installation de plus de 4 fermes automatiques à grande échelle par joueur ou clan.", punish: "Démolition + Ban 5 jours" },
+            { num: "1.22", text: "Spam excessif, grossièretés, majuscules et comportement inapproprié dans le chat global.", punish: "Mute 24 heures" },
+            { num: "1.23", text: "Vol de marchandises ou tromperie dans les zones commerciales et les magasins de joueurs.", punish: "Ban 10 jours" },
+            { num: "1.24", text: "Harcèlement constant d'un joueur et entrée dans sa maison sans invitation.", punish: "Kick" },
+            { num: "1.25", text: "Menaces de ban, liens avec l'administration ou tentatives de chantage.", punish: "Ban 14 jours" },
+            { num: "1.26", text: "Construction de structures à moins de 500 blocs des coordonnées zéro (spawn).", punish: "Relocalisation ou démolition" },
+            { num: "1.27", text: "Création de constructions dans le Nether à moins de 300 blocs du portail central.", punish: "Démolition" },
+            { num: "1.28", text: "Construction de pièges tuant le joueur à l'entrée.", punish: "Ban 7 jours" },
+            { num: "1.29", text: "Refus de démolir une construction illégale sur demande officielle de l'administration.", punish: "Ban 7 jours" },
+            { num: "1.30", text: "Utilisation d'auto-clickers, d'auto-pianos ou d'auto-totems.", punish: "Ban 30 jours" },
+            { num: "1.31", text: "Organisation de distributions massives de ressources précieuses cassant l'économie.", punish: "Ban 14 jours" },
+            { num: "1.32", text: "Tout type de dupe d'objets (y compris les tapis ou TNT).", punish: "BAN PERMANENT" },
+            { num: "1.33", text: "L'administration a le droit de statuer en fonction de la situation, même si elle n'est pas dans les règles.", punish: "" },
+            { num: "1.34", text: "Utilisation de x-ray (mods ou packs de textures).", punish: "BAN DE 4 MOIS" },
+            { num: "1.35", text: "Recherche et exploitation de failles dans les règles.", punish: "Ban 30 jours" },
+            { num: "1.36", text: "Mendicité auprès de l'Administration ou des Joueurs.", punish: "Mute 6 heures puis Ban 2 jours" },
+            { num: "1.37", text: "Actions destructrices envers le serveur ou sa communauté en ligne.", punish: "Permanent" },
+            { num: "1.38", text: "Détruire ou endommager les totems (Totem d'immortalité) d'autres joueurs sans consentement.", punish: "Ban 7 jours + compensation" },
+            { num: "2.1", text: "Les règles du serveur sont obligatoires pour tous les membres du personnel.", punish: "" },
+            { num: "2.2", text: "Utilisation du mode créatif pour la survie personnelle ou l'aide aux joueurs.", punish: "Retrait" },
+            { num: "2.3", text: "Octroi d'avantages de jeu à ses amis.", punish: "Retrait + Liste noire" },
+            { num: "2.4", text: "Prononciation de sanctions injustifiées (bans, mutes) sans preuve.", punish: "Retrait" },
+            { num: "2.5", text: "Un joueur a le droit de contester toute action d'un administrateur dans le canal Discord.", punish: "" }
+        ],
+        es: [
+            { num: "1.0", text: "Al unirte al servidor, aceptas automáticamente todas las reglas del proyecto.", punish: "Ban 1 día" },
+            { num: "1.1", text: "El desconocimiento de las reglas no te exime de responsabilidad.", punish: "Advertencia" },
+            { num: "1.2", text: "Griefing (dañar o destruir construcciones ajenas).", punish: "Ban 30 días" },
+            { num: "1.3", text: "Robo de recursos de cofres, barriles, tolvas ajenos.", punish: "Ban 14 días" },
+            { num: "1.4", text: "Asesinato intencional de mascotas o mobs con nombre ajenos.", punish: "Ban 2 días" },
+            { num: "1.5", text: "Asentarse en territorio ajeno o construir cerca sin consentimiento del propietario.", punish: "Demolición + Kick" },
+            { num: "1.6", text: "Ignorar carteles de 'Prohibido el paso'.", punish: "Muerte sin devolución de objetos" },
+            { num: "1.7", text: "Usar granjas automáticas o manuales ajenas sin permiso.", punish: "Ban 3 días" },
+            { num: "1.8", text: "Dañar el mundo (derramar lava, agua, etc.).", punish: "Demolición + Ban 2 días" },
+            { num: "1.9", text: "Crear mecanismos que causen intencionalmente lag o caídas del servidor.", punish: "Demolición + Ban 14 días" },
+            { num: "1.10", text: "Matar a un jugador sin su consentimiento previo para PVP.", punish: "Ban 7 días" },
+            { num: "1.11", text: "Recoger y apropiarse de objetos ajenos tras la muerte de un jugador (si pide que los devuelvan).", punish: "Ban 1 día + devolución de objetos" },
+            { num: "1.12", text: "Uso de cualquier tipo de cheats (METEOR, WURST, IMPACT, etc.).", punish: "BAN PERMANENTE" },
+            { num: "1.13", text: "Ocultar información sobre bugs, dupes o fallos económicos.", punish: "Ban 30 días" },
+            { num: "1.14", text: "Apropiarse de bases abandonadas sin coordinación con la administración.", punish: "Ban 5 días" },
+            { num: "1.15", text: "Hackeo, intento de hackeo o acceso a cuenta ajena.", punish: "Ban permanente" },
+            { num: "1.16", text: "Causar cualquier daño a la reputación o parte técnica del servidor.", punish: "Ban permanente" },
+            { num: "1.17", text: "Venta de recursos o servicios del juego por dinero real.", punish: "Lista negra" },
+            { num: "1.18", text: "Incitar a otros jugadores a violar las reglas.", punish: "Ban 10 días" },
+            { num: "1.19", text: "La seguridad de la cuenta es responsabilidad exclusiva del propietario.", punish: "" },
+            { num: "1.20", text: "Creación de cuentas adicionales (alts) para evadir un ban activo.", punish: "Ban IP" },
+            { num: "1.21", text: "Instalación de más de 4 granjas automáticas a gran escala por jugador o clan.", punish: "Demolición + Ban 5 días" },
+            { num: "1.22", text: "Spam excesivo, groserías, mayúsculas y comportamiento inapropiado en el chat global.", punish: "Mute 24 horas" },
+            { num: "1.23", text: "Robo de mercancías o engaño en zonas comerciales y tiendas de jugadores.", punish: "Ban 10 días" },
+            { num: "1.24", text: "Acecho constante de un jugador y entrada a su casa sin invitación.", punish: "Kick" },
+            { num: "1.25", text: "Amenazas de ban, vínculos con la administración o intentos de chantaje.", punish: "Ban 14 días" },
+            { num: "1.26", text: "Construcción de estructuras a menos de 500 bloques de las coordenadas cero (spawn).", punish: "Reubicación o demolición" },
+            { num: "1.27", text: "Creación de construcciones en el Nether a menos de 300 bloques del portal central.", punish: "Demolición" },
+            { num: "1.28", text: "Construcción de trampas que matan al jugador al entrar.", punish: "Ban 7 días" },
+            { num: "1.29", text: "Negativa a demoler una construcción ilegal por solicitud oficial de la administración.", punish: "Ban 7 días" },
+            { num: "1.30", text: "Uso de auto-clickers, auto-pianos o auto-totems.", punish: "Ban 30 días" },
+            { num: "1.31", text: "Organización de sorteos masivos de recursos valiosos que rompen la economía.", punish: "Ban 14 días" },
+            { num: "1.32", text: "Cualquier tipo de dupe de objetos (incluyendo alfombras o TNT).", punish: "BAN PERMANENTE" },
+            { num: "1.33", text: "La administración tiene derecho a decidir basándose en la situación, incluso si no está en las reglas.", punish: "" },
+            { num: "1.34", text: "Uso de x-ray (mods o texturas).", punish: "BAN POR 4 MESES" },
+            { num: "1.35", text: "Búsqueda y explotación de lagunas en las reglas.", punish: "Ban 30 días" },
+            { num: "1.36", text: "Mendicidad a la Administración o Jugadores.", punish: "Mute 6 horas luego Ban 2 días" },
+            { num: "1.37", text: "Acciones destructivas hacia el servidor o su comunidad online.", punish: "Permanente" },
+            { num: "1.38", text: "Destruir o dañar los tótems (Totem de la inmortalidad) de otros jugadores sin consentimiento.", punish: "Ban 7 días + compensación" },
+            { num: "2.1", text: "Las reglas del servidor son obligatorias para todos los miembros del personal.", punish: "" },
+            { num: "2.2", text: "Uso del modo creativo para supervivencia personal o ayuda a jugadores.", punish: "Remoción" },
+            { num: "2.3", text: "Otorgar ventajas de juego a amigos.", punish: "Remoción + Lista negra" },
+            { num: "2.4", text: "Emisión de castigos injustificados (bans, mutes) sin pruebas.", punish: "Remoción" },
+            { num: "2.5", text: "Un jugador tiene derecho a apelar cualquier acción de un administrador en el canal de Discord.", punish: "" }
+        ]
     };
 
     // ==================== ФУНКЦИИ ====================
@@ -2098,10 +2886,13 @@
         }
     }
 
-    // ТЕМЫ
+    // ТЕМЫ (ИСПРАВЛЕНО)
     function setAccentColor(color) {
-        const colorClasses = ['light', 'dark', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal'];
-        document.body.classList.remove(...colorClasses);
+        // Удаляем все классы тем
+        const allClasses = ['light', 'dark', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal', 
+                           'accent-pink', 'accent-blue', 'accent-green', 'accent-orange', 'accent-purple', 
+                           'accent-yellow', 'accent-red', 'accent-teal'];
+        document.body.classList.remove(...allClasses);
         
         if (color === 'light') {
             document.body.classList.add('light');
@@ -2114,6 +2905,7 @@
             document.getElementById('themeIcon').textContent = '🌙';
         }
         else {
+            // Проверяем, есть ли светлая тема
             if (document.body.classList.contains('light')) {
                 document.body.classList.add('light', `accent-${color}`);
             } else {
@@ -2263,11 +3055,18 @@
         localStorage.setItem('sweetland-particles', particlesEnabled); 
     }
     
+    // ИСПРАВЛЕННЫЙ BLUR
     function toggleBlur() {
         blurEnabled = !blurEnabled;
-        document.querySelectorAll('.feature-card, .stat-card, .community-card, .player-card, .faq-card').forEach(c => {
-            c.style.backdropFilter = blurEnabled ? 'blur(var(--blur))' : 'none';
-            c.style.webkitBackdropFilter = blurEnabled ? 'blur(var(--blur))' : 'none';
+        const blurElements = document.querySelectorAll('.stat-card, .feature-card, .community-card, .player-card, .faq-card, .modal-content, .shop-banner');
+        blurElements.forEach(el => {
+            if (blurEnabled) {
+                el.style.backdropFilter = 'blur(var(--blur))';
+                el.style.webkitBackdropFilter = 'blur(var(--blur))';
+            } else {
+                el.style.backdropFilter = 'none';
+                el.style.webkitBackdropFilter = 'none';
+            }
         });
         document.getElementById('blurText').innerHTML = blurEnabled ? 
             translations[currentLang]['blur-on'] : 
@@ -2275,23 +3074,44 @@
         localStorage.setItem('sweetland-blur', blurEnabled);
     }
     
+    // ИСПРАВЛЕННЫЕ АНИМАЦИИ
     function toggleAnimations() {
         animationsEnabled = !animationsEnabled;
+        
+        const animatedElements = [
+            document.querySelector('.banner-star'),
+            document.querySelector('.title'),
+            document.querySelector('.hero::before'),
+            ...document.querySelectorAll('.reveal')
+        ];
+        
         if (animationsEnabled) {
-            document.querySelector('.banner-star').style.animation = 'starGlow 2.5s ease-in-out infinite';
-            document.querySelector('.title').style.animation = 'titleGlow 4s ease-in-out infinite';
-            document.querySelector('.hero::before').style.animation = 'neonPulse 5s ease-in-out infinite';
+            if (document.querySelector('.banner-star')) {
+                document.querySelector('.banner-star').style.animation = 'starGlow 2.5s ease-in-out infinite';
+            }
+            if (document.querySelector('.title')) {
+                document.querySelector('.title').style.animation = 'titleGlow 4s ease-in-out infinite';
+            }
+            // Для псевдоэлемента через JS не включить, но он и так работает через CSS
             document.querySelectorAll('.reveal').forEach(el => {
                 el.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             });
+            // Запускаем проверку видимости
             reveal();
+            // Включаем анимации в CSS
+            document.documentElement.style.setProperty('--animations-enabled', 'running');
         } else {
-            document.querySelector('.banner-star').style.animation = 'none';
-            document.querySelector('.title').style.animation = 'none';
-            document.querySelector('.hero::before').style.animation = 'none';
+            if (document.querySelector('.banner-star')) {
+                document.querySelector('.banner-star').style.animation = 'none';
+            }
+            if (document.querySelector('.title')) {
+                document.querySelector('.title').style.animation = 'none';
+            }
             document.querySelectorAll('.reveal').forEach(el => {
                 el.style.transition = 'none';
+                el.classList.remove('active');
             });
+            document.documentElement.style.setProperty('--animations-enabled', 'paused');
         }
         
         document.getElementById('animationsText').innerHTML = animationsEnabled ? 
@@ -2307,17 +3127,25 @@
         currentWeather = 'auto';
         
         document.getElementById('weather').style.opacity = '1';
-        document.querySelectorAll('.feature-card, .stat-card, .community-card, .player-card, .faq-card').forEach(c => {
-            c.style.backdropFilter = '';
-            c.style.webkitBackdropFilter = '';
+        
+        // Сброс blur
+        const blurElements = document.querySelectorAll('.stat-card, .feature-card, .community-card, .player-card, .faq-card, .modal-content, .shop-banner');
+        blurElements.forEach(el => {
+            el.style.backdropFilter = '';
+            el.style.webkitBackdropFilter = '';
         });
         
-        document.querySelector('.banner-star').style.animation = 'starGlow 2.5s ease-in-out infinite';
-        document.querySelector('.title').style.animation = 'titleGlow 4s ease-in-out infinite';
-        document.querySelector('.hero::before').style.animation = 'neonPulse 5s ease-in-out infinite';
+        // Сброс анимаций
+        if (document.querySelector('.banner-star')) {
+            document.querySelector('.banner-star').style.animation = '';
+        }
+        if (document.querySelector('.title')) {
+            document.querySelector('.title').style.animation = '';
+        }
         document.querySelectorAll('.reveal').forEach(el => {
-            el.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            el.style.transition = '';
         });
+        document.documentElement.style.setProperty('--animations-enabled', 'running');
         
         document.getElementById('particlesText').innerHTML = translations[currentLang]['particles-on'];
         document.getElementById('blurText').innerHTML = translations[currentLang]['blur-on'];

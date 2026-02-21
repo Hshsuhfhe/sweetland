@@ -1302,6 +1302,9 @@
             margin-top: 30px;
         }
 
+        /* ==================== КАК НАЧАТЬ ==================== */
+        /* стили уже есть в .features-grid */
+
         /* ==================== FAQ ==================== */
         .faq-grid {
             display: grid;
@@ -1615,6 +1618,57 @@
             color: white;
         }
 
+        /* ==================== НОВАЯ ФИШКА: СЛУЧАЙНЫЙ ФАКТ ==================== */
+        .fact-section {
+            max-width: 600px;
+            margin: 30px auto 0;
+            text-align: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            padding: 25px;
+            border-radius: 30px;
+            border: 2px solid var(--border);
+            transition: all 0.4s ease;
+        }
+        
+        .fact-section:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-accent);
+        }
+        
+        .fact-title {
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .fact-text {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+        
+        .fact-button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--accent);
+        }
+        
+        .fact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--accent);
+            background: var(--accent-light);
+        }
+
         /* ==================== АДАПТИВНОСТЬ ==================== */
         @media (max-width: 1200px) {
             .banner-center { gap: 30px; }
@@ -1631,48 +1685,84 @@
         
         @media (max-width: 768px) {
             .nav-oval-container { width: 95%; }
-            .shop-banner { padding: 12px 20px; border-radius: 60px; }
+            .shop-banner { 
+                padding: 10px 15px; 
+                border-radius: 50px; 
+                gap: 10px;
+            }
             .banner-center { display: none; }
-            .banner-left { font-size: 20px; }
-            .banner-right { gap: 12px; }
-            .shop-link, .discord-link { padding: 10px 20px; font-size: 14px; }
-            
-            .control-panel { top: 15px; right: 15px; gap: 8px; }
-            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { 
-                width: 40px; height: 40px; font-size: 18px; 
+            .banner-left { 
+                font-size: 18px; 
+                gap: 8px;
+            }
+            .banner-left .online-counter {
+                margin-left: 5px;
+                padding: 4px 10px;
+                font-size: 12px;
+            }
+            .banner-right { gap: 8px; }
+            .shop-link, .discord-link { 
+                padding: 6px 12px; 
+                font-size: 12px; 
             }
             
-            .side-trigger { top: 15px; left: 15px; }
-            .side-trigger .line { width: 28px; height: 3px; margin: 6px 0; }
-            .side-panel { width: 280px; padding: 70px 20px; }
+            .control-panel { 
+                top: 10px; 
+                right: 10px; 
+                gap: 5px; 
+            }
+            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { 
+                width: 36px; 
+                height: 36px; 
+                font-size: 18px; 
+            }
+            
+            .side-trigger { top: 10px; left: 10px; }
+            .side-trigger .line { width: 28px; height: 3px; margin: 5px 0; }
+            .side-panel { width: 260px; padding: 70px 15px; }
             
             .hero-layout { flex-direction: column; text-align: center; gap: 30px; }
             .title { font-size: 50px; }
             .hero-tagline { font-size: 16px; }
             .ip-container { flex-direction: column; gap: 10px; }
-            .btn-ip, .btn-version { width: 100%; padding: 14px 20px !important; }
+            .btn-ip, .btn-version { width: 100%; padding: 14px 20px !important; font-size: 16px; }
             .giant-img { max-width: 250px; }
             
-            .section { padding: 50px 4%; }
+            .section { padding: 40px 4%; }
             .section-title { font-size: 28px; margin-bottom: 30px; }
+            
+            .stat-number { font-size: 36px; }
+            .feature-card, .community-card, .player-card, .faq-card { padding: 20px; }
             
             .footer-content { grid-template-columns: 1fr; gap: 30px; text-align: center; }
             .footer-section a { display: inline-block; margin: 5px 15px; }
             
             .modal-content { padding: 30px 20px; }
             .rules-main-title { font-size: 28px; }
+            
+            .fact-section { margin-top: 20px; padding: 15px; }
+            .fact-text { font-size: 16px; }
         }
         
         @media (max-width: 480px) {
-            .control-panel { gap: 5px; }
+            .control-panel { gap: 4px; }
             .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { 
-                width: 34px; height: 34px; font-size: 16px; 
+                width: 32px; 
+                height: 32px; 
+                font-size: 16px; 
             }
             .title { font-size: 40px; }
             .hero-tagline { font-size: 14px; }
-            .stat-number { font-size: 36px; }
             .banner-right { width: 100%; justify-content: center; }
-            .side-panel { width: 260px; }
+            .banner-left .online-counter {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+            .shop-link, .discord-link { 
+                padding: 5px 10px; 
+                font-size: 11px; 
+            }
+            .side-panel { width: 240px; }
         }
     </style>
 </head>
@@ -1882,6 +1972,15 @@
     </div>
 </section>
 
+<!-- НОВАЯ ФИШКА: СЛУЧАЙНЫЙ ФАКТ -->
+<section class="section reveal">
+    <div class="fact-section">
+        <div class="fact-title" data-i18n="fact-title">🔮 Знали ли вы?</div>
+        <div class="fact-text" id="factDisplay">Сервер SweetLand работает на чистом ванильном Minecraft без доната.</div>
+        <button class="fact-button" onclick="showRandomFact()" data-i18n="fact-button">Ещё факт</button>
+    </div>
+</section>
+
 <!-- ФУТЕР -->
 <footer class="footer">
     <div class="footer-content">
@@ -1922,13 +2021,11 @@
     // ==================== ПЕРЕВОДЫ (ВСЕ 6 ЯЗЫКОВ, ПОЛНЫЕ) ====================
     const translations = {
         ru: {
-            // Навигация
             'nav-features': 'Особенности',
             'nav-howtoplay': 'Как начать',
             'nav-faq': 'FAQ',
             'shop-link': '🛒 Магазин',
             'discord-link': '💬 Discord',
-            // Темы
             'theme-dark': 'Тёмная',
             'theme-light': 'Светлая',
             'theme-pink': 'Розовая',
@@ -1939,19 +2036,16 @@
             'theme-yellow': 'Жёлтая',
             'theme-red': 'Красная',
             'theme-teal': 'Бирюзовая',
-            // Языки
             'lang-ru': 'Русский',
             'lang-uk': 'Українська',
             'lang-en': 'English',
             'lang-de': 'Deutsch',
             'lang-fr': 'Français',
             'lang-es': 'Español',
-            // Погода
             'weather-auto': 'Авто',
             'weather-snow': 'Снег',
             'weather-rain': 'Дождь',
             'weather-none': 'Выкл',
-            // Настройки
             'particles-on': 'Частицы: вкл',
             'particles-off': 'Частицы: выкл',
             'blur-on': 'Размытие: вкл',
@@ -1959,7 +2053,6 @@
             'animations-on': 'Анимации: вкл',
             'animations-off': 'Анимации: выкл',
             'reset-settings': 'Сброс',
-            // Панель
             'panel-home': '🏠 Главная',
             'panel-features': '✨ Особенности',
             'panel-streamers': '🎥 Стримеры',
@@ -1969,18 +2062,15 @@
             'social-discord': 'Discord',
             'social-telegram': 'Telegram',
             'social-youtube': 'YouTube',
-            // Герой
             'hero-tagline': 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
             'ip-button': 'play.sweet-land.fun',
             'version-text': '1.21.8',
             'copy-notice': 'IP скопирован',
-            // Статистика
             'stats-title': 'Статистика сервера',
             'stat-1': 'Работа сервера',
             'stat-2': 'Актуальная версия',
             'stat-3': 'Ванильный геймплей',
             'stat-4': 'Доната',
-            // Особенности
             'features-title': 'Особенности сервера',
             'feature-1-title': 'Анти-чит система',
             'feature-1-desc': 'Продвинутая защита от читеров. Честная игра для всех.',
@@ -1994,7 +2084,6 @@
             'feature-5-desc': 'Ваши постройки под надежной защитой от гриферов.',
             'feature-6-title': 'Дружное сообщество',
             'feature-6-desc': 'Первые игроки уже здесь. Присоединяйся к нам.',
-            // Стримеры
             'streamers-title': 'Стримеры на сервере',
             'streamer-1-desc': 'Популярная стримерша, будет играть на сервере. Следи за стримами!',
             'streamer-2-desc': 'Владелец сервера и стример. Играет вместе с вами.',
@@ -2004,14 +2093,12 @@
             'soon': 'скоро',
             'announcements': 'анонсы',
             'news': 'новости',
-            // Топ игроков
             'top-title': 'Топ игроков',
             'owner': 'Владелец сервера',
             'streamer-label': 'Стримерша',
             'admin': 'Старший администратор',
             'hours': 'часов',
             'update-date': 'Данные обновлены 17 февраля 2026 года',
-            // Как начать
             'howto-title': 'Как начать играть',
             'howto-1': 'Версия 1.21.8',
             'howto-1-desc': 'Убедись, что у тебя установлена последняя версия Minecraft.',
@@ -2021,7 +2108,6 @@
             'howto-3-desc': 'После одобрения добавь сервер play.sweet-land.fun в список.',
             'howto-4': 'Заходи и играй',
             'howto-4-desc': 'Выбирай место для базы, строй и исследуй мир.',
-            // FAQ
             'faq-title': 'Ответы на вопросы',
             'faq-1': 'Когда старт?',
             'faq-1-desc': 'Сервер готовится к открытию. Следи за новостями в Discord.',
@@ -2039,7 +2125,6 @@
             'faq-7-desc': 'Сервер скоро открывается. Будь первым.',
             'faq-8': 'Будут вайпы?',
             'faq-8-desc': 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
-            // Футер
             'footer-desc': 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
             'footer-note': 'Никаких донатов — только чистый ванильный геймплей',
             'quick-links': 'Быстрые ссылки',
@@ -2056,15 +2141,15 @@
             'vanilla-server': 'Ванильный Minecraft сервер.',
             'privacy-note': 'Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.',
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
+            'fact-title': '🔮 Знали ли вы?',
+            'fact-button': 'Ещё факт',
         },
         uk: {
-            // Навігація
             'nav-features': 'Особливості',
             'nav-howtoplay': 'Як почати',
             'nav-faq': 'FAQ',
             'shop-link': '🛒 Магазин',
             'discord-link': '💬 Discord',
-            // Теми
             'theme-dark': 'Темна',
             'theme-light': 'Світла',
             'theme-pink': 'Рожева',
@@ -2075,19 +2160,16 @@
             'theme-yellow': 'Жовта',
             'theme-red': 'Червона',
             'theme-teal': 'Бірюзова',
-            // Мови
             'lang-ru': 'Російська',
             'lang-uk': 'Українська',
             'lang-en': 'Англійська',
             'lang-de': 'Німецька',
             'lang-fr': 'Французька',
             'lang-es': 'Іспанська',
-            // Погода
             'weather-auto': 'Авто',
             'weather-snow': 'Сніг',
             'weather-rain': 'Дощ',
             'weather-none': 'Вимк',
-            // Налаштування
             'particles-on': 'Частинки: вкл',
             'particles-off': 'Частинки: вимк',
             'blur-on': 'Розмиття: вкл',
@@ -2095,7 +2177,6 @@
             'animations-on': 'Анімації: вкл',
             'animations-off': 'Анімації: вимк',
             'reset-settings': 'Скинути',
-            // Панель
             'panel-home': '🏠 Головна',
             'panel-features': '✨ Особливості',
             'panel-streamers': '🎥 Стрімери',
@@ -2105,18 +2186,15 @@
             'social-discord': 'Discord',
             'social-telegram': 'Telegram',
             'social-youtube': 'YouTube',
-            // Герой
             'hero-tagline': 'Ванільне виживання на версії 1.21.8. Твій світ — твої правила.',
             'ip-button': 'play.sweet-land.fun',
             'version-text': '1.21.8',
             'copy-notice': 'IP скопійовано',
-            // Статистика
             'stats-title': 'Статистика сервера',
             'stat-1': 'Робота сервера',
             'stat-2': 'Актуальна версія',
             'stat-3': 'Ванільний геймплей',
             'stat-4': 'Донату',
-            // Особливості
             'features-title': 'Особливості сервера',
             'feature-1-title': 'Анти-чит система',
             'feature-1-desc': 'Просунутий захист від читів. Честна гра для всіх.',
@@ -2130,7 +2208,6 @@
             'feature-5-desc': 'Ваші будівлі під надійним захистом від ґріферів.',
             'feature-6-title': 'Дружня спільнота',
             'feature-6-desc': 'Перші гравці вже тут. Приєднуйся до нас.',
-            // Стрімери
             'streamers-title': 'Стрімери на сервері',
             'streamer-1-desc': 'Популярна стрімерша, буде грати на сервері. Слідкуй за стрімами!',
             'streamer-2-desc': 'Власник сервера та стрімер. Грає разом з вами.',
@@ -2140,14 +2217,12 @@
             'soon': 'скоро',
             'announcements': 'анонси',
             'news': 'новини',
-            // Топ гравців
             'top-title': 'Топ гравців',
             'owner': 'Власник сервера',
             'streamer-label': 'Стрімерка',
             'admin': 'Старший адміністратор',
             'hours': 'годин',
             'update-date': 'Дані оновлено 17 лютого 2026 року',
-            // Як почати
             'howto-title': 'Як почати грати',
             'howto-1': 'Версія 1.21.8',
             'howto-1-desc': 'Переконайся, що у тебе встановлена остання версія Minecraft.',
@@ -2157,7 +2232,6 @@
             'howto-3-desc': 'Після схвалення додай сервер play.sweet-land.fun до списку.',
             'howto-4': 'Заходь та грай',
             'howto-4-desc': 'Обирай місце для бази, будуй та досліджуй світ.',
-            // FAQ
             'faq-title': 'Відповіді на питання',
             'faq-1': 'Коли старт?',
             'faq-1-desc': 'Сервер готується до відкриття. Слідкуй за новинами в Discord.',
@@ -2175,7 +2249,6 @@
             'faq-7-desc': 'Сервер скоро відкривається. Будь першим.',
             'faq-8': 'Чи будуть вайпи?',
             'faq-8-desc': 'Вайпи плануються раз на 8-11 місяців. Всі будівлі зберігаються надовго.',
-            // Футер
             'footer-desc': 'Ванільне виживання без кордонів з дружньою спільнотою та активною адміністрацією.',
             'footer-note': 'Жодних донатів — тільки чистий ванільний геймплей',
             'quick-links': 'Швидкі посилання',
@@ -2192,6 +2265,8 @@
             'vanilla-server': 'Ванільний Minecraft сервер.',
             'privacy-note': 'Ваші дані під надійним захистом. Використовуючи сервер, ви погоджуєтесь з політикою конфіденційності.',
             'rules-title': 'ПРАВИЛА СЕРВЕРА',
+            'fact-title': '🔮 Чи знали ви?',
+            'fact-button': 'Ще факт',
         },
         en: {
             'nav-features': 'Features',
@@ -2314,6 +2389,8 @@
             'vanilla-server': 'Vanilla Minecraft server.',
             'privacy-note': 'Your data is securely protected. By using the server, you agree to the privacy policy.',
             'rules-title': 'SERVER RULES',
+            'fact-title': '🔮 Did you know?',
+            'fact-button': 'Another fact',
         },
         de: {
             'nav-features': 'Funktionen',
@@ -2436,6 +2513,8 @@
             'vanilla-server': 'Vanilla Minecraft Server.',
             'privacy-note': 'Ihre Daten sind sicher geschützt. Durch die Nutzung des Servers stimmen Sie der Datenschutzrichtlinie zu.',
             'rules-title': 'SERVER REGELN',
+            'fact-title': '🔮 Wussten Sie schon?',
+            'fact-button': 'Noch ein Fakt',
         },
         fr: {
             'nav-features': 'Fonctionnalités',
@@ -2558,6 +2637,8 @@
             'vanilla-server': 'Serveur Minecraft vanilla.',
             'privacy-note': 'Vos données sont protégées. En utilisant le serveur, vous acceptez la politique de confidentialité.',
             'rules-title': 'RÈGLES DU SERVEUR',
+            'fact-title': '🔮 Le saviez-vous?',
+            'fact-button': 'Autre fait',
         },
         es: {
             'nav-features': 'Características',
@@ -2680,6 +2761,8 @@
             'vanilla-server': 'Servidor Minecraft vanilla.',
             'privacy-note': 'Tus datos están protegidos. Al usar el servidor, aceptas la política de privacidad.',
             'rules-title': 'REGLAS DEL SERVIDOR',
+            'fact-title': '🔮 ¿Sabías que?',
+            'fact-button': 'Otro hecho',
         }
     };
 
@@ -3134,6 +3217,9 @@
         if (document.getElementById('rules-modal').classList.contains('show')) {
             renderRules();
         }
+        
+        // Обновляем текст факта при смене языка
+        showRandomFact();
     }
 
     // МЕНЮ
@@ -3206,12 +3292,17 @@
     
     function toggleParticles() { 
         particlesEnabled = !particlesEnabled; 
-        document.getElementById('weather').style.opacity = particlesEnabled ? '1' : '0'; 
+        if (particlesEnabled) {
+            document.getElementById('weather').style.opacity = '1';
+            createWeather();
+        } else {
+            document.getElementById('weather').style.opacity = '0';
+            document.getElementById('weather').innerHTML = '';
+        }
         document.getElementById('particlesText').innerHTML = particlesEnabled ? 
             translations[currentLang]['particles-on'] : 
             translations[currentLang]['particles-off'];
         localStorage.setItem('sweetland-particles', particlesEnabled); 
-        if (particlesEnabled) createWeather(); else document.getElementById('weather').innerHTML = '';
     }
     
     function toggleBlur() {
@@ -3279,6 +3370,7 @@
         localStorage.setItem('sweetland-animations', 'true');
         localStorage.setItem('sweetland-weather', 'auto');
         
+        setAccentColor('dark'); // или сохранить текущую тему? Для простоты сбросим на тёмную
         createWeather();
         reveal();
         closeSettingsMenu();
@@ -3333,6 +3425,76 @@
         }, 30);
     }
 
+    // НОВАЯ ФИШКА: СЛУЧАЙНЫЕ ФАКТЫ
+    const facts = {
+        ru: [
+            "Сервер SweetLand работает на чистом ванильном Minecraft без доната.",
+            "У нас нет привилегий — все игроки равны.",
+            "Вайпы происходят раз в 8-11 месяцев, так что постройки живут долго.",
+            "Анти-чит система защищает от нечестной игры.",
+            "На сервере регулярно проходят ивенты и конкурсы.",
+            "SweetLand — это сообщество, а не просто сервер.",
+            "Ты можешь строить где угодно, кроме спавна и Незера рядом с порталом.",
+            "У нас есть защита построек от гриферов.",
+        ],
+        uk: [
+            "Сервер SweetLand працює на чистому ванільному Minecraft без донату.",
+            "У нас немає привілеїв — всі гравці рівні.",
+            "Вайпи відбуваються раз на 8-11 місяців, тому будівлі живуть довго.",
+            "Анти-чит система захищає від нечесної гри.",
+            "На сервері регулярно проходять івенти та конкурси.",
+            "SweetLand — це спільнота, а не просто сервер.",
+            "Ти можеш будувати де завгодно, крім спавну та Незера біля порталу.",
+            "У нас є захист будівель від гріферів.",
+        ],
+        en: [
+            "SweetLand server runs on pure vanilla Minecraft with no donate.",
+            "We have no privileges — all players are equal.",
+            "Wipes happen every 8-11 months, so builds last long.",
+            "Anti-cheat system protects against unfair play.",
+            "Regular events and competitions are held on the server.",
+            "SweetLand is a community, not just a server.",
+            "You can build anywhere except spawn and the Nether near the portal.",
+            "We have build protection against griefers.",
+        ],
+        de: [
+            "Der SweetLand-Server läuft auf reinem Vanilla Minecraft ohne Spenden.",
+            "Wir haben keine Privilegien — alle Spieler sind gleich.",
+            "Wipes finden alle 8-11 Monate statt, daher halten Bauten lange.",
+            "Anti-Cheat-System schützt vor unfairem Spiel.",
+            "Auf dem Server finden regelmäßig Events und Wettbewerbe statt.",
+            "SweetLand ist eine Gemeinschaft, nicht nur ein Server.",
+            "Du kannst überall bauen, außer am Spawn und im Nether nahe dem Portal.",
+            "Wir haben Bautenschutz gegen Griefer.",
+        ],
+        fr: [
+            "Le serveur SweetLand fonctionne sur du vanilla Minecraft pur sans don.",
+            "Nous n'avons pas de privilèges — tous les joueurs sont égaux.",
+            "Les wipes ont lieu tous les 8-11 mois, donc les constructions durent longtemps.",
+            "Le système anti-triche protège contre le jeu déloyal.",
+            "Des événements et concours réguliers sont organisés sur le serveur.",
+            "SweetLand est une communauté, pas seulement un serveur.",
+            "Tu peux construire n'importe où sauf au spawn et dans le Nether près du portail.",
+            "Nous avons une protection des constructions contre les griefers.",
+        ],
+        es: [
+            "El servidor SweetLand funciona en vanilla Minecraft puro sin donaciones.",
+            "No tenemos privilegios — todos los jugadores son iguales.",
+            "Los wipes ocurren cada 8-11 meses, por lo que las construcciones duran mucho.",
+            "El sistema anti-trampas protege contra el juego injusto.",
+            "Se realizan eventos y concursos regulares en el servidor.",
+            "SweetLand es una comunidad, no solo un servidor.",
+            "Puedes construir en cualquier lugar excepto en el spawn y el Nether cerca del portal.",
+            "Tenemos protección de construcciones contra griefers.",
+        ]
+    };
+    
+    function showRandomFact() {
+        const factArray = facts[currentLang] || facts.ru;
+        const randomIndex = Math.floor(Math.random() * factArray.length);
+        document.getElementById('factDisplay').textContent = factArray[randomIndex];
+    }
+
     // ИНИЦИАЛИЗАЦИЯ
     window.addEventListener('load', () => {
         // Устанавливаем тему из localStorage
@@ -3340,8 +3502,6 @@
             document.body.classList.add('light');
             document.getElementById('themeIcon').textContent = '☀️';
         } else if (['pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal'].includes(currentTheme)) {
-            // Проверим, была ли светлая основа? Но мы не сохраняем это, поэтому используем логику по умолчанию
-            // Для простоты: если тема цветная и не light/dark, добавляем просто класс цвета (тёмная версия)
             document.body.classList.add(currentTheme);
             const icons = { 
                 pink: '🌸', blue: '💙', green: '💚', 
@@ -3357,20 +3517,24 @@
         updateLanguage();
         updateThemeImage();
         
-        if (!particlesEnabled) {
-            document.getElementById('weather').style.opacity = '0';
-        } else {
+        // Инициализация погоды
+        if (particlesEnabled) {
             createWeather();
+        } else {
+            document.getElementById('weather').innerHTML = '';
+            document.getElementById('weather').style.opacity = '0';
         }
+        
+        // Инициализация размытия
         if (!blurEnabled) {
-            // применить blurEnabled = false через стили
             document.querySelectorAll('.feature-card, .stat-card, .community-card, .player-card, .faq-card').forEach(c => {
                 c.style.backdropFilter = 'none';
                 c.style.webkitBackdropFilter = 'none';
             });
         }
+        
+        // Инициализация анимаций
         if (!animationsEnabled) {
-            // отключаем анимации
             document.querySelector('.banner-star').style.animation = 'none';
             document.querySelector('.title').style.animation = 'none';
             document.querySelector('.hero::before').style.animation = 'none';
@@ -3381,7 +3545,8 @@
             reveal();
         }
         
-        animateOnlineCounter(); // запускаем счётчик
+        animateOnlineCounter();
+        showRandomFact();
     });
     
     window.addEventListener('resize', () => { 

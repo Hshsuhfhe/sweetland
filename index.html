@@ -382,7 +382,7 @@
             100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0.2; }
         }
 
-        /* ==================== ПАНЕЛЬ УПРАВЛЕНИЯ ==================== */
+        /* ==================== УЛУЧШЕННАЯ ПАНЕЛЬ УПРАВЛЕНИЯ ==================== */
         .control-panel {
             position: fixed;
             top: 20px;
@@ -396,27 +396,49 @@
         }
         
         .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn {
-            width: 44px;
-            height: 44px;
-            background: var(--header-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 2px solid var(--accent);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid transparent;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            transition: all 0.3s ease;
-            box-shadow: var(--glow);
+            font-size: 24px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 15px var(--accent), inset 0 0 10px rgba(255,255,255,0.2);
             color: var(--text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theme-icon::before, .color-btn::before, .lang-btn::before, .weather-btn::before, .settings-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .theme-icon:hover, .color-btn:hover, .lang-btn:hover, .weather-btn:hover, .settings-btn:hover {
-            transform: scale(1.1) rotate(180deg);
+            transform: scale(1.15) rotate(360deg);
             background: var(--accent);
             color: white;
-            box-shadow: 0 0 30px var(--accent);
+            box-shadow: 0 0 40px var(--accent);
+            border-color: white;
         }
         
         .color-picker, .lang-picker, .weather-picker, .settings-picker, .cursor-picker { 
@@ -425,17 +447,19 @@
         
         .color-menu, .lang-menu, .weather-menu, .settings-menu, .cursor-menu {
             position: absolute;
-            top: 50px;
+            top: 55px;
             right: 0;
-            background: var(--bg-secondary);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 2px solid var(--accent);
-            border-radius: 20px;
-            padding: 12px;
+            border-radius: 25px;
+            padding: 15px;
             display: none;
             flex-direction: column;
-            gap: 6px;
-            min-width: 180px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            gap: 8px;
+            min-width: 200px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px var(--accent);
             z-index: 2600;
             max-height: 400px;
             overflow-y: auto;
@@ -448,23 +472,29 @@
         .color-option, .lang-option, .weather-option, .settings-option, .cursor-option {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 30px;
+            gap: 12px;
+            padding: 10px 15px;
+            border-radius: 40px;
             transition: all 0.2s ease;
             color: var(--text);
-            font-size: 14px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid transparent;
         }
         
         .color-option:hover, .lang-option:hover, .weather-option:hover, .settings-option:hover, .cursor-option:hover { 
             background: var(--accent); 
-            color: white; 
+            color: white;
+            border-color: white;
+            transform: translateX(5px);
+            box-shadow: 0 0 20px var(--accent);
         }
         
         .color-dot { 
-            width: 22px; 
-            height: 22px; 
+            width: 24px; 
+            height: 24px; 
             border-radius: 50%; 
+            box-shadow: 0 0 10px currentColor;
         }
         
         .color-dot.dark { background: #0a0a0f; border: 2px solid #a366ff; }
@@ -479,153 +509,10 @@
         .color-dot.teal { background: #008080; }
         
         .lang-flag { 
-            font-size: 20px; 
+            font-size: 22px; 
         }
 
-        /* ==================== АДАПТИВНЫЙ ОВАЛ ==================== */
-        .nav-oval-container {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2400;
-            width: 95%;
-            max-width: 1200px;
-            animation: slideDown 0.6s ease;
-        }
-        
-        @keyframes slideDown {
-            from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-        
-        .shop-banner {
-            background: var(--header-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 60px;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 30px var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 25px;
-            width: 100%;
-            transition: all 0.3s ease;
-            gap: 15px;
-        }
-        
-        .shop-banner:hover {
-            border-color: var(--accent-light);
-            box-shadow: 0 0 50px var(--accent);
-            transform: scale(1.01);
-        }
-        
-        .banner-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text);
-            white-space: nowrap;
-        }
-        
-        .banner-star {
-            font-size: 26px;
-            color: gold;
-            filter: drop-shadow(0 0 10px gold);
-            animation: starGlow 2.5s ease-in-out infinite;
-        }
-        
-        @keyframes starGlow {
-            0%,100%{ filter: drop-shadow(0 0 5px gold); transform: scale(1); }
-            50%{ filter: drop-shadow(0 0 20px gold); transform: scale(1.1); }
-        }
-        
-        .banner-center {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-        
-        .banner-center a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            white-space: nowrap;
-        }
-        
-        .banner-center a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-        
-        .banner-center a:hover { 
-            color: var(--text); 
-        }
-        
-        .banner-center a:hover::after { 
-            width: 100%; 
-        }
-        
-        .banner-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-        
-        .shop-link, .discord-link {
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            border: 2px solid transparent;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .shop-link {
-            background: linear-gradient(135deg, #ffd700, #ffb347);
-            color: #2a2a2a;
-            box-shadow: 0 4px 12px rgba(255,215,0,0.5);
-        }
-        
-        .shop-link:hover {
-            background: linear-gradient(135deg, #ffb347, #ffd700);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255,215,0,0.8);
-            border-color: white;
-        }
-        
-        .discord-link {
-            background: #5865F2;
-            color: white;
-            box-shadow: 0 4px 12px rgba(88,101,242,0.6);
-        }
-        
-        .discord-link:hover {
-            background: #4752c4;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(88,101,242,0.9);
-            border-color: white;
-        }
-
-        /* ==================== ЛЕВАЯ ШТОРКА ==================== */
+        /* ==================== УЛУЧШЕННАЯ ЛЕВАЯ ШТОРКА ==================== */
         .side-trigger {
             position: fixed;
             top: 20px;
@@ -633,36 +520,48 @@
             z-index: 2300;
             cursor: pointer;
             animation: slideRight 0.6s ease;
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+            transition: all 0.3s;
         }
         
-        @keyframes slideRight {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .side-trigger:hover {
+            transform: scale(1.1);
+            background: var(--accent);
         }
         
         .side-trigger .line {
-            width: 30px;
+            width: 24px;
             height: 3px;
-            background: var(--accent);
-            margin: 6px 0;
-            border-radius: 8px;
+            background: white;
+            margin: 4px 0;
+            border-radius: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 8px var(--accent);
+            box-shadow: 0 0 8px white;
+        }
+        
+        .side-trigger:hover .line {
+            background: white;
+            box-shadow: 0 0 15px white;
         }
         
         .side-trigger:hover .line:nth-child(1) {
-            transform: translateY(-2px) rotate(-3deg);
-            width: 33px;
-        }
-        
-        .side-trigger:hover .line:nth-child(2) {
-            width: 27px;
-            margin-left: 3px;
+            transform: translateY(-2px) rotate(-5deg);
+            width: 26px;
         }
         
         .side-trigger:hover .line:nth-child(3) {
-            transform: translateY(2px) rotate(3deg);
-            width: 33px;
+            transform: translateY(2px) rotate(5deg);
+            width: 26px;
         }
 
         .side-panel {
@@ -671,13 +570,14 @@
             top: 0;
             width: 340px;
             height: 100%;
-            background: var(--bg-secondary);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 3000;
-            transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             padding: 80px 25px 25px;
-            border-right: 2px solid var(--accent);
-            box-shadow: 10px 0 40px rgba(163,102,255,0.3);
-            backdrop-filter: blur(8px);
+            border-right: 3px solid var(--accent);
+            box-shadow: 20px 0 80px rgba(163,102,255,0.5);
             overflow-y: auto;
         }
         
@@ -689,61 +589,44 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(163, 102, 255, 0.15);
+            background: rgba(163, 102, 255, 0.2);
             color: var(--accent);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             transition: all 0.3s ease;
-            border: 1px solid var(--border);
+            border: 2px solid var(--accent);
+            cursor: pointer;
             z-index: 10;
+            box-shadow: 0 0 15px var(--accent);
         }
         
         .panel-handle:hover {
             background: var(--accent);
             color: white;
-            transform: rotate(360deg) scale(1.1);
-            border-color: transparent;
+            transform: rotate(360deg) scale(1.2);
+            border-color: white;
         }
         
         .panel-logo {
             color: var(--accent);
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 40px;
             text-align: center;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             animation: logoGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--accent);
         }
         
         @keyframes logoGlow {
-            0%,100%{ text-shadow: 0 0 8px var(--accent); }
-            50%{ text-shadow: 0 0 25px var(--accent); }
-        }
-        
-        .panel-links {
-            max-height: calc(100vh - 280px);
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-        
-        .panel-links::-webkit-scrollbar { 
-            width: 4px; 
-        }
-        
-        .panel-links::-webkit-scrollbar-track { 
-            background: rgba(163,102,255,0.1); 
-            border-radius: 10px; 
-        }
-        
-        .panel-links::-webkit-scrollbar-thumb { 
-            background: var(--accent); 
-            border-radius: 10px; 
+            0%,100%{ text-shadow: 0 0 10px var(--accent); }
+            50%{ text-shadow: 0 0 40px var(--accent); }
         }
         
         .panel-links a {
@@ -753,19 +636,19 @@
             font-size: 18px;
             margin: 15px 0;
             transition: all 0.3s ease;
-            padding-left: 12px;
-            border-left: 3px solid transparent;
+            padding: 10px 15px;
+            border-left: 4px solid transparent;
+            border-radius: 0 10px 10px 0;
             font-weight: 500;
-            cursor: pointer;
+            background: rgba(255,255,255,0.02);
         }
         
         .panel-links a:hover {
-            color: var(--accent);
+            color: white;
             border-left-color: var(--accent);
-            padding-left: 20px;
+            background: linear-gradient(90deg, rgba(163,102,255,0.2), transparent);
             transform: translateX(5px);
-            background: rgba(163,102,255,0.05);
-            border-radius: 0 8px 8px 0;
+            box-shadow: 0 0 20px rgba(163,102,255,0.3);
         }
 
         .panel-social {
@@ -778,34 +661,36 @@
         .social-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
-            padding: 10px 15px;
-            border-radius: 30px;
-            background: rgba(163,102,255,0.08);
+            padding: 12px 20px;
+            border-radius: 40px;
+            background: rgba(163,102,255,0.1);
             border: 1px solid var(--border);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            backdrop-filter: blur(5px);
         }
         
         .social-link span { 
-            font-size: 20px; 
+            font-size: 22px; 
             transition: transform 0.3s ease; 
-            min-width: 28px; 
+            min-width: 30px; 
             text-align: center; 
         }
         
         .social-link:hover { 
-            transform: translateX(5px) scale(1.01); 
-            border-color: transparent; 
+            transform: translateX(8px) scale(1.02); 
+            border-color: var(--accent); 
             background: var(--accent);
             color: white;
+            box-shadow: 0 0 30px var(--accent);
         }
         
         .social-link:hover span { 
-            transform: scale(1.1); 
+            transform: scale(1.2); 
         }
 
         /* ==================== ОСНОВНОЙ КОНТЕНТ ==================== */
@@ -815,266 +700,6 @@
         
         .main-content.hidden {
             display: none;
-        }
-
-        /* ==================== КОНФЕТНЫЙ МАГАЗИН (НА ВЕСЬ ЭКРАН) ==================== */
-        .candy-shop-screen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--bg);
-            z-index: 4000;
-            overflow-y: auto;
-            padding: 30px 20px;
-        }
-        
-        .candy-shop-screen.active {
-            display: block;
-        }
-        
-        .candy-shop-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border-radius: 30px;
-            border: 2px solid var(--accent);
-            padding: 30px;
-            box-shadow: 0 0 50px var(--accent);
-        }
-        
-        .candy-shop-title {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--accent);
-            text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 0 0 20px var(--accent);
-        }
-        
-        .candy-stats {
-            margin-bottom: 30px;
-        }
-        
-        .candy-balance {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 24px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-        }
-        
-        .candy-balance span:last-child {
-            color: gold;
-            font-weight: 700;
-            font-size: 32px;
-        }
-        
-        .candy-graph {
-            height: 150px;
-            display: flex;
-            align-items: flex-end;
-            gap: 3px;
-            margin-bottom: 10px;
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 15px;
-        }
-        
-        .graph-bar {
-            flex: 1;
-            background: var(--accent);
-            border-radius: 4px 4px 0 0;
-            min-height: 2px;
-            transition: height 0.3s ease;
-            opacity: 0.7;
-        }
-        
-        .graph-bar:hover {
-            opacity: 1;
-        }
-        
-        .graph-labels {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-secondary);
-            font-size: 12px;
-            padding: 0 5px;
-        }
-        
-        .candy-code-input {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .candy-code-input input {
-            flex: 1;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid var(--border);
-            border-radius: 30px;
-            padding: 12px 15px;
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: 0.2s;
-        }
-        
-        .candy-code-input input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
-        }
-        
-        .candy-code-input button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 0 25px;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        
-        .candy-code-input button:hover {
-            background: var(--accent-light);
-            transform: scale(1.02);
-        }
-        
-        .register-section {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .register-section input {
-            flex: 1;
-            padding: 12px 15px;
-            border-radius: 30px;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid var(--border);
-            color: var(--text);
-        }
-        
-        .register-btn {
-            background: gold;
-            color: #2a2a2a;
-            border: none;
-            border-radius: 30px;
-            padding: 0 25px;
-            font-weight: 700;
-            transition: 0.2s;
-        }
-        
-        .register-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px gold;
-        }
-        
-        /* Админ панель */
-        .admin-panel {
-            display: none;
-        }
-        
-        .admin-panel.active {
-            display: block;
-        }
-        
-        .admin-title {
-            color: #ff4444;
-            font-size: 28px;
-            text-align: center;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .user-list {
-            max-height: 500px;
-            overflow-y: auto;
-            margin-bottom: 30px;
-        }
-        
-        .user-item {
-            background: rgba(255,68,68,0.1);
-            border: 1px solid #ff4444;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .user-info {
-            flex: 1;
-        }
-        
-        .user-name {
-            font-weight: 600;
-            color: #ff4444;
-            font-size: 18px;
-        }
-        
-        .user-candies {
-            font-size: 20px;
-            color: gold;
-            margin-top: 5px;
-        }
-        
-        .user-actions button {
-            background: rgba(255,68,68,0.2);
-            border: 1px solid #ff4444;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 3px;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-        
-        .user-actions button:hover {
-            background: #ff4444;
-        }
-        
-        .back-to-shop {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            padding: 12px;
-            border-radius: 30px;
-            width: 100%;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        
-        .back-to-shop:hover {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .close-shop-btn {
-            display: block;
-            margin: 20px auto 0;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: 0.2s;
-        }
-        
-        .close-shop-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--accent);
         }
 
         /* ==================== ГЕРОЙ ==================== */
@@ -1299,7 +924,6 @@
             transform: scaleX(1); 
         }
 
-        /* ==================== СТАТИСТИКА ==================== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1337,7 +961,6 @@
             font-size: 16px;
         }
 
-        /* ==================== ОСОБЕННОСТИ ==================== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1406,7 +1029,6 @@
             line-height: 1.6;
         }
 
-        /* ==================== СТРИМЕРЫ ==================== */
         .community-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1521,7 +1143,6 @@
             50%{ transform: translateY(-5px); } 
         }
 
-        /* ==================== ТОП ИГРОКОВ ==================== */
         .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1586,10 +1207,6 @@
             margin-top: 25px;
         }
 
-        /* ==================== КАК НАЧАТЬ ==================== */
-        /* стили уже есть в .features-grid */
-
-        /* ==================== FAQ ==================== */
         .faq-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1894,102 +1511,338 @@
             color: white;
         }
 
-        /* ==================== АДАПТИВНОСТЬ ==================== */
-        @media (max-width: 992px) {
-            .banner-center { gap: 20px; }
-            .banner-center a { font-size: 14px; }
-            .shop-banner { padding: 8px 20px; }
-            .banner-left { font-size: 18px; }
+        /* ==================== КОНФЕТНЫЙ МАГАЗИН (НА ВЕСЬ ЭКРАН) ==================== */
+        .candy-shop-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg);
+            z-index: 4000;
+            overflow-y: auto;
+            padding: 30px 20px;
         }
         
+        .candy-shop-screen.active {
+            display: block;
+        }
+        
+        .candy-shop-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 40px;
+            border: 2px solid var(--accent);
+            padding: 40px;
+            box-shadow: 0 0 80px var(--accent);
+        }
+        
+        .candy-shop-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 30px var(--accent);
+        }
+        
+        .candy-stats {
+            margin-bottom: 30px;
+        }
+        
+        .candy-balance {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+        
+        .candy-balance span:last-child {
+            color: gold;
+            font-weight: 700;
+            font-size: 36px;
+            text-shadow: 0 0 20px gold;
+        }
+        
+        .candy-graph {
+            height: 180px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 20px;
+        }
+        
+        .graph-bar {
+            flex: 1;
+            background: var(--accent);
+            border-radius: 6px 6px 0 0;
+            min-height: 2px;
+            transition: height 0.3s ease;
+            opacity: 0.7;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .graph-bar:hover {
+            opacity: 1;
+            transform: scaleX(1.05);
+        }
+        
+        .graph-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 12px;
+            padding: 0 10px;
+        }
+        
+        .candy-code-input {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .candy-code-input input {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid var(--border);
+            border-radius: 40px;
+            padding: 15px 20px;
+            color: var(--text);
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+        }
+        
+        .candy-code-input input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
+        .candy-code-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 0 30px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.2s;
+            box-shadow: 0 0 15px var(--accent);
+        }
+        
+        .candy-code-input button:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent);
+        }
+        
+        .register-section {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .register-section input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+        
+        .register-btn {
+            background: gold;
+            color: #2a2a2a;
+            border: none;
+            border-radius: 40px;
+            padding: 0 30px;
+            font-weight: 700;
+            transition: 0.2s;
+            box-shadow: 0 0 20px gold;
+        }
+        
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px gold;
+        }
+
+        /* УЛУЧШЕННАЯ АДМИН ПАНЕЛЬ */
+        .admin-panel {
+            display: none;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .admin-title {
+            color: #ff4444;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px #ff4444;
+        }
+        
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .admin-controls input,
+        .admin-controls select {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 40px;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid var(--border);
+            color: var(--text);
+            font-size: 14px;
+        }
+        
+        .user-list {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 30px;
+            padding-right: 10px;
+        }
+        
+        .user-item {
+            background: rgba(255,68,68,0.1);
+            border: 1px solid #ff4444;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+        }
+        
+        .user-item:hover {
+            background: rgba(255,68,68,0.2);
+            box-shadow: 0 0 20px #ff4444;
+            transform: translateX(5px);
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: #ff4444;
+            font-size: 18px;
+        }
+        
+        .user-candies {
+            font-size: 20px;
+            color: gold;
+            margin-top: 5px;
+        }
+        
+        .user-history {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .user-actions button {
+            background: rgba(255,68,68,0.2);
+            border: 1px solid #ff4444;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 2px;
+            font-size: 18px;
+            transition: 0.2s;
+            box-shadow: 0 0 10px #ff4444;
+        }
+        
+        .user-actions button:hover {
+            background: #ff4444;
+            transform: scale(1.1);
+        }
+        
+        .user-actions input {
+            width: 70px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #ff4444;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .back-to-shop {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 15px;
+            border-radius: 40px;
+            width: 100%;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        
+        .back-to-shop:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 30px var(--accent);
+        }
+        
+        .close-shop-btn {
+            display: block;
+            margin: 20px auto 0;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.2s;
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
+        .close-shop-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--accent);
+        }
+
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
-            .nav-oval-container { width: 98%; top: 10px; }
-            .shop-banner { 
-                padding: 6px 12px; 
-                border-radius: 40px; 
-                gap: 5px;
-            }
-            .banner-center { display: none; }
-            .banner-left { 
-                font-size: 14px; 
-                gap: 4px;
-                flex-wrap: wrap;
-            }
-            .banner-left .online-counter {
-                margin-left: 0;
-                padding: 2px 8px;
-                font-size: 10px;
-            }
-            .banner-right { 
-                gap: 4px; 
-            }
-            .shop-link, .discord-link { 
-                padding: 4px 8px; 
-                font-size: 10px; 
-            }
-            
-            .control-panel { 
-                top: 65px;
-                right: 10px; 
-                gap: 5px; 
-            }
-            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { 
-                width: 36px; 
-                height: 36px; 
-                font-size: 18px; 
-            }
-            
-            .side-trigger { top: 10px; left: 10px; }
-            .side-trigger .line { width: 26px; height: 3px; margin: 5px 0; }
-            .side-panel { width: 280px; padding: 70px 15px; }
-            
-            .hero-layout { flex-direction: column; text-align: center; gap: 20px; }
-            .title { font-size: 44px; }
-            .hero-tagline { font-size: 15px; }
-            .ip-container { flex-direction: column; gap: 8px; }
-            .btn-ip, .btn-version { width: 100%; padding: 12px 20px !important; font-size: 15px; }
-            .giant-img { max-width: 220px; }
-            
-            .section { padding: 40px 4%; }
-            .section-title { font-size: 26px; margin-bottom: 30px; }
-            
-            .stat-number { font-size: 36px; }
-            .feature-card, .community-card, .player-card, .faq-card { padding: 20px; }
-            
-            .footer-content { grid-template-columns: 1fr; gap: 25px; text-align: center; }
-            .footer-section a { display: inline-block; margin: 5px 12px; }
-            
-            .modal-content { padding: 30px 20px; }
-            .rules-main-title { font-size: 26px; }
-            
             .candy-shop-container { padding: 20px; }
             .candy-balance { font-size: 18px; }
-            .candy-balance span:last-child { font-size: 24px; }
-            .candy-graph { height: 100px; }
-        }
-        
-        @media (max-width: 480px) {
-            .control-panel { 
-                top: 70px; 
-                gap: 4px; 
-            }
-            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { 
-                width: 32px; 
-                height: 32px; 
-                font-size: 16px; 
-            }
-            .title { font-size: 38px; }
-            .hero-tagline { font-size: 14px; }
-            .banner-right { width: 100%; justify-content: center; }
-            .banner-left .online-counter {
-                font-size: 9px;
-                padding: 2px 6px;
-            }
-            .shop-link, .discord-link { 
-                padding: 3px 6px; 
-                font-size: 9px; 
-            }
-            .side-panel { width: 260px; }
+            .candy-balance span:last-child { font-size: 28px; }
+            .candy-graph { height: 120px; }
+            .control-panel { top: 70px; }
         }
     </style>
 </head>
@@ -2003,7 +1856,6 @@
         <div class="banner-left">
             <span class="banner-star">⭐</span>
             <span class="server-name">SweetLand</span>
-            <!-- СЧЁТЧИК ОНЛАЙНА -->
             <div class="online-counter" id="onlineCounter">
                 <span class="online-dot"></span>
                 <span class="online-number" id="onlineNumber">0</span>
@@ -2022,7 +1874,7 @@
     </div>
 </div>
 
-<!-- ПАНЕЛЬ УПРАВЛЕНИЯ -->
+<!-- УЛУЧШЕННАЯ ПАНЕЛЬ УПРАВЛЕНИЯ -->
 <div class="control-panel">
     <div class="theme-toggle" onclick="toggleTheme()">
         <div class="theme-icon" id="themeIcon">🌙</div>
@@ -2082,7 +1934,7 @@
     </div>
 </div>
 
-<!-- ЛЕВАЯ ШТОРКА -->
+<!-- УЛУЧШЕННАЯ ЛЕВАЯ ШТОРКА -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -2245,7 +2097,7 @@
         <h2 class="candy-shop-title">🍭 Конфетный магазин</h2>
         
         <div id="candyShopContent">
-            <!-- Динамическое содержимое будет вставлено через JS -->
+            <!-- Динамическое содержимое -->
         </div>
         
         <button class="close-shop-btn" onclick="closeCandyShop()">← Вернуться на главную</button>
@@ -2254,6 +2106,7 @@
 
 <script>
     // ==================== ПОЛНЫЙ JS С ВСЕМИ ФУНКЦИЯМИ ====================
+
     // --- Основные переменные ---
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
@@ -2268,8 +2121,10 @@
     let usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
     let currentUser = localStorage.getItem('sweetland_current_user') || null;
     let adminMode = false;
+    let userFilter = '';
+    let userSort = 'name';
 
-    // Если нет пользователей, создаём тестовых
+    // Инициализация тестовых пользователей
     if (Object.keys(usersDB).length === 0) {
         usersDB['Gyraffic'] = { candies: 100, history: Array(24).fill(100) };
         usersDB['Babka3434'] = { candies: 50, history: Array(24).fill(50) };
@@ -2318,7 +2173,7 @@
 
         let graphHtml = '<div class="candy-graph">';
         for (let i = 0; i < 24; i++) {
-            let height = (history[i] / maxVal) * 130;
+            let height = (history[i] / maxVal) * 160;
             graphHtml += `<div class="graph-bar" style="height: ${height}px;" title="Час ${i}: ${history[i]}"></div>`;
         }
         graphHtml += '</div><div class="graph-labels">';
@@ -2351,31 +2206,55 @@
         `;
     }
 
+    // --- УЛУЧШЕННАЯ АДМИН ПАНЕЛЬ ---
     function renderAdminPanel() {
+        let filteredUsers = Object.entries(usersDB).filter(([name]) => 
+            name.toLowerCase().includes(userFilter.toLowerCase())
+        );
+        
+        if (userSort === 'name') {
+            filteredUsers.sort((a, b) => a[0].localeCompare(b[0]));
+        } else if (userSort === 'candies') {
+            filteredUsers.sort((a, b) => b[1].candies - a[1].candies);
+        }
+
         let userListHtml = '<div class="user-list">';
-        for (let [name, data] of Object.entries(usersDB)) {
+        for (let [name, data] of filteredUsers) {
+            let avgChange = data.history.length > 1 ? 
+                ((data.history[data.history.length-1] - data.history[0]) / data.history.length).toFixed(1) : 0;
             userListHtml += `
                 <div class="user-item">
                     <div class="user-info">
                         <div class="user-name">${name}</div>
                         <div class="user-candies" id="candies-${name}">${data.candies}</div>
+                        <div class="user-history">↗️ Средн. изменение: ${avgChange} за час</div>
                     </div>
                     <div class="user-actions">
                         <button onclick="adjustCandies('${name}', 1)">+</button>
                         <button onclick="adjustCandies('${name}', -1)">-</button>
                         <button onclick="adjustCandies('${name}', 10)">+10</button>
                         <button onclick="adjustCandies('${name}', -10)">-10</button>
+                        <input type="number" id="set-${name}" placeholder="Уст" min="0" style="width:70px">
+                        <button onclick="setCandies('${name}')">Уст</button>
                         <button onclick="deleteUser('${name}')">🗑️</button>
                     </div>
                 </div>
             `;
         }
         userListHtml += '</div>';
-        userListHtml += '<button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>';
+
         candyShopContent.innerHTML = `
             <div class="admin-panel active">
                 <div class="admin-title">🔧 ADMIN PANEL</div>
+                <div class="admin-controls">
+                    <input type="text" placeholder="Поиск пользователя" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
+                    <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();">
+                        <option value="name" ${userSort==='name'?'selected':''}>Сортировать по имени</option>
+                        <option value="candies" ${userSort==='candies'?'selected':''}>Сортировать по конфетам</option>
+                    </select>
+                </div>
                 ${userListHtml}
+                <button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>
             </div>
         `;
     }
@@ -2421,16 +2300,26 @@
         if (!usersDB[username]) return;
         usersDB[username].candies += delta;
         if (usersDB[username].candies < 0) usersDB[username].candies = 0;
-        // Обновляем историю: сдвигаем и добавляем новое значение
         usersDB[username].history.shift();
         usersDB[username].history.push(usersDB[username].candies);
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         if (adminMode) {
-            document.getElementById(`candies-${username}`).innerText = usersDB[username].candies;
+            renderAdminPanel();
         } else if (currentUser === username) {
             document.getElementById('userCandies').innerText = usersDB[username].candies;
-            renderCandyShop(); // обновим график
+            renderCandyShop();
         }
+    }
+
+    function setCandies(username) {
+        let input = document.getElementById(`set-${username}`);
+        let val = parseInt(input.value);
+        if (isNaN(val) || val < 0) return alert('Введите корректное число');
+        usersDB[username].candies = val;
+        usersDB[username].history.shift();
+        usersDB[username].history.push(val);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderAdminPanel();
     }
 
     function deleteUser(username) {
@@ -2441,7 +2330,7 @@
             currentUser = null;
             localStorage.removeItem('sweetland_current_user');
         }
-        renderCandyShop();
+        renderAdminPanel();
     }
 
     function toggleAdminMode(enable) {
@@ -2449,9 +2338,83 @@
         renderCandyShop();
     }
 
-    // --- Функции темы, погоды и т.д. (полные реализации) ---
+    // --- Функции темы, погоды и т.д. ---
     function togglePanel() {
         document.getElementById('side-panel').classList.toggle('active');
+    }
+
+    function openRules() {
+        document.getElementById('rules-modal').classList.add('show');
+        document.body.style.overflow = 'hidden';
+        renderRules();
+    }
+
+    function closeRules() {
+        document.getElementById('rules-modal').classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+
+    // --- Правила (полные на русском) ---
+    const rulesData = {
+        ru: [
+            { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
+            { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
+            { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
+            { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
+            { num: "1.4", text: "Умышленное убийство чужих домашних животных или именных мобов.", punish: "Бан 2 дня" },
+            { num: "1.5", text: "Заселение на чужую территорию или постройка вплотную без согласия владельца.", punish: "Снос + Кик" },
+            { num: "1.6", text: "Игнорирование табличек «Вход запрещен».", punish: "Убийство без возврата вещей" },
+            { num: "1.7", text: "Использование чужих автоматических или ручных ферм без разрешения.", punish: "Бан 3 дня" },
+            { num: "1.8", text: "Порча мира (разлитие лавы, воды и тому подобное).", punish: "Снос + Бан 2 дня" },
+            { num: "1.9", text: "Создание механизмов, намеренно вызывающих лаги или падение сервера.", punish: "Снос + Бан 14 дней" },
+            { num: "1.10", text: "Убийство игрока без его предварительного согласия на PVP.", punish: "Бан 7 дней" },
+            { num: "1.11", text: "Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть).", punish: "Бан 1 день + возврат вещей" },
+            { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
+            { num: "1.13", text: "Сокрытие информации о багах, дюпах или недоработках экономики.", punish: "Бан 30 дней" },
+            { num: "1.14", text: "Присвоение заброшенных баз без согласования с администрацией.", punish: "Бан 5 дней" },
+            { num: "1.15", text: "Взлом, попытка взлома или вход на чужой аккаунт.", punish: "Перманентный бан" },
+            { num: "1.16", text: "Нанесение любого вреда репутации или технической части сервера.", punish: "Бан навсегда" },
+            { num: "1.17", text: "Продажа игровых ресурсов или услуг за реальные деньги.", punish: "ЧС проекта" },
+            { num: "1.18", text: "Подстрекательство других игроков к нарушению правил.", punish: "Бан 10 дней" },
+            { num: "1.19", text: "Ответственность за безопасность аккаунта несет только его владелец.", punish: "" },
+            { num: "1.20", text: "Создание дополнительных аккаунтов (твинков) для обхода активного бана.", punish: "Бан по IP" },
+            { num: "1.21", text: "Установка более 4 масштабных автоматических ферм на одного игрока или клан.", punish: "Снос + Бан 5 дней" },
+            { num: "1.22", text: "Чрезмерный спам, маты, капс и неадекватное поведение в общем чате.", punish: "Мут 24 часа" },
+            { num: "1.23", text: "Воровство товаров или обман в торговых зонах и магазинах игроков.", punish: "Бан 10 дней" },
+            { num: "1.24", text: "Постоянное преследование игрока и заход в его дом без приглашения.", punish: "Кик" },
+            { num: "1.25", text: "Угрозы баном, связями с администрацией или попытки шантажа.", punish: "Бан 14 дней" },
+            { num: "1.26", text: "Постройка любых сооружений ближе 500 блоков от нулевых координат (спавна).", punish: "Перенос или снос" },
+            { num: "1.27", text: "Создание построек в Незере ближе 300 блоков от центрального портала.", punish: "Снос" },
+            { num: "1.28", text: "Строительство ловушек, убивающих игрока при входе (трапки).", punish: "Бан 7 дней" },
+            { num: "1.29", text: "Отказ снести незаконную постройку по официальному требованию администрации.", punish: "Бан 7 дней" },
+            { num: "1.30", text: "Использование автокликеров, автопианино или автототемов.", punish: "Бан 30 дней" },
+            { num: "1.31", text: "Организация массовых раздач ценных ресурсов, ломающих экономику.", punish: "Бан 14 дней" },
+            { num: "1.32", text: "Любой вид дюпа предметов (включая ковры или тнт).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
+            { num: "1.33", text: "Администрация имеет право выносить приговор, основываясь на ситуации, даже если её нет в правилах.", punish: "" },
+            { num: "1.34", text: "Использование x-ray (моды или текстур-паки).", punish: "БАН НА 4 МЕСЯЦА" },
+            { num: "1.35", text: "Поиск и использование лазеек в правилах.", punish: "Бан 30 дней" },
+            { num: "1.36", text: "Попрошайничество к Администрации или Игрокам.", punish: "Мут 6 часов потом Бан 2 дня" },
+            { num: "1.37", text: "Деструктивные действия в сторону сервера или его онлайна.", punish: "Перманент" },
+            { num: "1.38", text: "Снос или повреждение чужих тотемов (Totem of Undying) без согласия владельца.", punish: "Бан 7 дней + компенсация" },
+            { num: "2.1", text: "Правила сервера обязательны для исполнения всеми членами персонала.", punish: "" },
+            { num: "2.2", text: "Использование творческого режима для личного выживания или помощи игрокам.", punish: "Снятие" },
+            { num: "2.3", text: "Предоставление игровых преимуществ своим друзьям.", punish: "Снятие + ЧС" },
+            { num: "2.4", text: "Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.", punish: "Снятие" },
+            { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
+        ]
+    };
+
+    function renderRules() {
+        const rules = rulesData[currentLang] || rulesData.ru;
+        let html = '';
+        rules.forEach(rule => {
+            if (rule.punish) {
+                html += `<p><b>${rule.num}</b> ${rule.text} <span class="punish">${rule.punish}</span></p>`;
+            } else {
+                html += `<p><b>${rule.num}</b> ${rule.text}</p>`;
+            }
+        });
+        document.getElementById('rules-content').innerHTML = html;
     }
 
     // --- Цветовые темы ---
@@ -2638,8 +2601,8 @@
             document.getElementById('weather').innerHTML = '';
         }
         document.getElementById('particlesText').innerHTML = particlesEnabled ? 
-            translations[currentLang]['particles-on'] : 
-            translations[currentLang]['particles-off'];
+            (translations[currentLang]?.['particles-on'] || 'Частицы: вкл') : 
+            (translations[currentLang]?.['particles-off'] || 'Частицы: выкл');
         localStorage.setItem('sweetland-particles', particlesEnabled);
     }
 
@@ -2650,8 +2613,8 @@
             c.style.webkitBackdropFilter = blurEnabled ? 'blur(var(--blur))' : 'none';
         });
         document.getElementById('blurText').innerHTML = blurEnabled ? 
-            translations[currentLang]['blur-on'] : 
-            translations[currentLang]['blur-off'];
+            (translations[currentLang]?.['blur-on'] || 'Размытие: вкл') : 
+            (translations[currentLang]?.['blur-off'] || 'Размытие: выкл');
         localStorage.setItem('sweetland-blur', blurEnabled);
     }
 
@@ -2678,8 +2641,8 @@
             });
         }
         document.getElementById('animationsText').innerHTML = animationsEnabled ? 
-            translations[currentLang]['animations-on'] : 
-            translations[currentLang]['animations-off'];
+            (translations[currentLang]?.['animations-on'] || 'Анимации: вкл') : 
+            (translations[currentLang]?.['animations-off'] || 'Анимации: выкл');
         localStorage.setItem('sweetland-animations', animationsEnabled);
     }
 
@@ -2703,9 +2666,9 @@
             el.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1)';
         });
         
-        document.getElementById('particlesText').innerHTML = translations[currentLang]['particles-on'];
-        document.getElementById('blurText').innerHTML = translations[currentLang]['blur-on'];
-        document.getElementById('animationsText').innerHTML = translations[currentLang]['animations-on'];
+        document.getElementById('particlesText').innerHTML = translations[currentLang]?.['particles-on'] || 'Частицы: вкл';
+        document.getElementById('blurText').innerHTML = translations[currentLang]?.['blur-on'] || 'Размытие: вкл';
+        document.getElementById('animationsText').innerHTML = translations[currentLang]?.['animations-on'] || 'Анимации: вкл';
         
         localStorage.setItem('sweetland-particles', 'true');
         localStorage.setItem('sweetland-blur', 'true');
@@ -2722,7 +2685,7 @@
         closeSettingsMenu();
     }
 
-    // --- Языки ---
+    // --- Переводы (минимум) ---
     const translations = {
         ru: {
             'particles-on': 'Частицы: вкл',
@@ -2731,9 +2694,7 @@
             'blur-off': 'Размытие: выкл',
             'animations-on': 'Анимации: вкл',
             'animations-off': 'Анимации: выкл',
-            // Остальные переводы (полные) должны быть здесь, но для краткости оставлю так
-        },
-        // Для других языков аналогично
+        }
     };
 
     function setLanguage(lang) {
@@ -2751,89 +2712,15 @@
             }
         });
         document.getElementById('particlesText').innerHTML = particlesEnabled ? 
-            translations[currentLang]['particles-on'] : 
-            translations[currentLang]['particles-off'];
+            (translations[currentLang]?.['particles-on'] || 'Частицы: вкл') : 
+            (translations[currentLang]?.['particles-off'] || 'Частицы: выкл');
         document.getElementById('blurText').innerHTML = blurEnabled ? 
-            translations[currentLang]['blur-on'] : 
-            translations[currentLang]['blur-off'];
+            (translations[currentLang]?.['blur-on'] || 'Размытие: вкл') : 
+            (translations[currentLang]?.['blur-off'] || 'Размытие: выкл');
         document.getElementById('animationsText').innerHTML = animationsEnabled ? 
-            translations[currentLang]['animations-on'] : 
-            translations[currentLang]['animations-off'];
-    }
-
-    // --- Правила (полные) ---
-    const rulesData = {
-        ru: [
-            { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
-            { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
-            { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
-            { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
-            { num: "1.4", text: "Умышленное убийство чужих домашних животных или именных мобов.", punish: "Бан 2 дня" },
-            { num: "1.5", text: "Заселение на чужую территорию или постройка вплотную без согласия владельца.", punish: "Снос + Кик" },
-            { num: "1.6", text: "Игнорирование табличек «Вход запрещен».", punish: "Убийство без возврата вещей" },
-            { num: "1.7", text: "Использование чужих автоматических или ручных ферм без разрешения.", punish: "Бан 3 дня" },
-            { num: "1.8", text: "Порча мира (разлитие лавы, воды и тому подобное).", punish: "Снос + Бан 2 дня" },
-            { num: "1.9", text: "Создание механизмов, намеренно вызывающих лаги или падение сервера.", punish: "Снос + Бан 14 дней" },
-            { num: "1.10", text: "Убийство игрока без его предварительного согласия на PVP.", punish: "Бан 7 дней" },
-            { num: "1.11", text: "Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть).", punish: "Бан 1 день + возврат вещей" },
-            { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
-            { num: "1.13", text: "Сокрытие информации о багах, дюпах или недоработках экономики.", punish: "Бан 30 дней" },
-            { num: "1.14", text: "Присвоение заброшенных баз без согласования с администрацией.", punish: "Бан 5 дней" },
-            { num: "1.15", text: "Взлом, попытка взлома или вход на чужой аккаунт.", punish: "Перманентный бан" },
-            { num: "1.16", text: "Нанесение любого вреда репутации или технической части сервера.", punish: "Бан навсегда" },
-            { num: "1.17", text: "Продажа игровых ресурсов или услуг за реальные деньги.", punish: "ЧС проекта" },
-            { num: "1.18", text: "Подстрекательство других игроков к нарушению правил.", punish: "Бан 10 дней" },
-            { num: "1.19", text: "Ответственность за безопасность аккаунта несет только его владелец.", punish: "" },
-            { num: "1.20", text: "Создание дополнительных аккаунтов (твинков) для обхода активного бана.", punish: "Бан по IP" },
-            { num: "1.21", text: "Установка более 4 масштабных автоматических ферм на одного игрока или клан.", punish: "Снос + Бан 5 дней" },
-            { num: "1.22", text: "Чрезмерный спам, маты, капс и неадекватное поведение в общем чате.", punish: "Мут 24 часа" },
-            { num: "1.23", text: "Воровство товаров или обман в торговых зонах и магазинах игроков.", punish: "Бан 10 дней" },
-            { num: "1.24", text: "Постоянное преследование игрока и заход в его дом без приглашения.", punish: "Кик" },
-            { num: "1.25", text: "Угрозы баном, связями с администрацией или попытки шантажа.", punish: "Бан 14 дней" },
-            { num: "1.26", text: "Постройка любых сооружений ближе 500 блоков от нулевых координат (спавна).", punish: "Перенос или снос" },
-            { num: "1.27", text: "Создание построек в Незере ближе 300 блоков от центрального портала.", punish: "Снос" },
-            { num: "1.28", text: "Строительство ловушек, убивающих игрока при входе (трапки).", punish: "Бан 7 дней" },
-            { num: "1.29", text: "Отказ снести незаконную постройку по официальному требованию администрации.", punish: "Бан 7 дней" },
-            { num: "1.30", text: "Использование автокликеров, автопианино или автототемов.", punish: "Бан 30 дней" },
-            { num: "1.31", text: "Организация массовых раздач ценных ресурсов, ломающих экономику.", punish: "Бан 14 дней" },
-            { num: "1.32", text: "Любой вид дюпа предметов (включая ковры или тнт).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
-            { num: "1.33", text: "Администрация имеет право выносить приговор, основываясь на ситуации, даже если её нет в правилах.", punish: "" },
-            { num: "1.34", text: "Использование x-ray (моды или текстур-паки).", punish: "БАН НА 4 МЕСЯЦА" },
-            { num: "1.35", text: "Поиск и использование лазеек в правилах.", punish: "Бан 30 дней" },
-            { num: "1.36", text: "Попрошайничество к Администрации или Игрокам.", punish: "Мут 6 часов потом Бан 2 дня" },
-            { num: "1.37", text: "Деструктивные действия в сторону сервера или его онлайна.", punish: "Перманент" },
-            { num: "1.38", text: "Снос или повреждение чужих тотемов (Totem of Undying) без согласия владельца.", punish: "Бан 7 дней + компенсация" },
-            { num: "2.1", text: "Правила сервера обязательны для исполнения всеми членами персонала.", punish: "" },
-            { num: "2.2", text: "Использование творческого режима для личного выживания или помощи игрокам.", punish: "Снятие" },
-            { num: "2.3", text: "Предоставление игровых преимуществ своим друзьям.", punish: "Снятие + ЧС" },
-            { num: "2.4", text: "Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.", punish: "Снятие" },
-            { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
-        ],
-        // Для других языков нужно добавить аналогичные массивы
-    };
-
-    function openRules() {
-        document.getElementById('rules-modal').classList.add('show');
-        document.body.style.overflow = 'hidden';
-        renderRules();
-    }
-
-    function closeRules() {
-        document.getElementById('rules-modal').classList.remove('show');
-        document.body.style.overflow = 'auto';
-    }
-
-    function renderRules() {
-        const rules = rulesData[currentLang] || rulesData.ru;
-        let html = '';
-        rules.forEach(rule => {
-            if (rule.punish) {
-                html += `<p><b>${rule.num}</b> ${rule.text} <span class="punish">${rule.punish}</span></p>`;
-            } else {
-                html += `<p><b>${rule.num}</b> ${rule.text}</p>`;
-            }
-        });
-        document.getElementById('rules-content').innerHTML = html;
+            (translations[currentLang]?.['animations-on'] || 'Анимации: вкл') : 
+            (translations[currentLang]?.['animations-off'] || 'Анимации: выкл');
+        if (document.getElementById('rules-modal').classList.contains('show')) renderRules();
     }
 
     // --- Прочие функции ---

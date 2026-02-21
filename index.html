@@ -77,7 +77,7 @@
         @keyframes rainfall { 0%{ transform:translateY(-10vh) translateX(0); opacity:0.7; } 100%{ transform:translateY(110vh) translateX(-15px); opacity:0.1; } }
         @keyframes candyfall { 0%{ transform:translateY(-10vh) rotate(0deg) scale(0.8); opacity:0.8; } 100%{ transform:translateY(110vh) rotate(360deg) scale(1.2); opacity:0.2; } }
 
-        /* ==================== ПАНЕЛЬ УПРАВЛЕНИЯ (СТИЛЬ ИЗ ВЕРХНЕГО КОДА) ==================== */
+        /* ==================== ПАНЕЛЬ УПРАВЛЕНИЯ ==================== */
         .control-panel { position:fixed; top:20px; right:20px; z-index:2500; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; max-width:500px; }
         .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { width:48px; height:48px; background:rgba(0,0,0,0.3); backdrop-filter:blur(12px); border:2px solid transparent; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:0 0 15px var(--accent), inset 0 0 10px rgba(255,255,255,0.2); color:var(--text); position:relative; overflow:hidden; }
         .theme-icon::before, .color-btn::before, .lang-btn::before, .weather-btn::before, .settings-btn::before { content:''; position:absolute; top:-2px; left:-2px; right:-2px; bottom:-2px; background:linear-gradient(45deg, var(--accent), transparent, var(--accent)); border-radius:50%; z-index:-1; animation:rotate 4s linear infinite; opacity:0.6; }
@@ -297,7 +297,7 @@
         .settings-quick button { flex:1; min-width:80px; background:rgba(255,255,255,0.1); border:2px solid var(--border); border-radius:40px; padding:10px; color:var(--text); transition:0.2s; font-size:14px; }
         .settings-quick button:hover { border-color:var(--accent); background:var(--accent); color:#fff; }
 
-        /* ==================== АДАПТИВНОСТЬ (ИЗ НИЖНЕГО КОДА) ==================== */
+        /* ==================== АДАПТИВНОСТЬ ==================== */
         @media (max-width: 992px) {
             .banner-center { gap: 20px; }
             .banner-center a { font-size: 14px; }
@@ -333,6 +333,10 @@
             .footer-section a { display: inline-block; margin: 5px 12px; }
             .modal-content { padding: 30px 20px; }
             .rules-main-title { font-size: 26px; }
+            .candy-shop-container { padding: 20px; }
+            .candy-balance { font-size: 18px; }
+            .candy-balance span:last-child { font-size: 28px; }
+            .candy-graph { height: 120px; }
         }
         @media (max-width: 480px) {
             .control-panel { top: 70px; gap: 4px; }
@@ -362,7 +366,7 @@
                 <span data-i18n="online">online</span>
             </div>
             <div class="current-time" id="currentTime"></div>
-            <!-- НОВАЯ ФИШКА: СЧЁТЧИК СЛАДОСТЕЙ -->
+            <!-- СЧЁТЧИК КОНФЕТ -->
             <div class="candy-counter" id="candyCounter" onclick="eatCandy()">
                 <span>🍬</span>
                 <span id="candyCount">0</span>
@@ -528,7 +532,7 @@
 
     // ==================== ПОЛНЫЕ ПЕРЕВОДЫ НА 6 ЯЗЫКОВ ====================
     const translations = {
-        ru: { /* ... полный объект из верхнего кода ... */ 
+        ru: {
             'nav-features': 'Особенности',
             'nav-howtoplay': 'Как начать',
             'nav-faq': 'FAQ',
@@ -1662,6 +1666,7 @@
             'code': 'Código',
             'reward': 'Recompensa',
         },
+    };
 
     // ==================== ПОЛНЫЕ ПРАВИЛА НА 6 ЯЗЫКОВ ====================
     const rulesData = {
@@ -2320,7 +2325,7 @@
         renderAdminPanel();
     };
 
-    // --- Функции меню (из нижнего кода, улучшенные) ---
+    // --- Функции меню ---
     let colorMenuOpen = false, langMenuOpen = false, weatherMenuOpen = false, settingsMenuOpen = false, cursorMenuOpen = false;
 
     window.toggleColorMenu = function() { 
@@ -2373,7 +2378,7 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // --- Функции темы (из нижнего, улучшенные) ---
+    // --- Функции темы ---
     function setAccentColor(color) {
         const body = document.body;
         const wasLight = body.classList.contains('light') || currentTheme === 'light';

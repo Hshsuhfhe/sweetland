@@ -421,7 +421,7 @@
 <!-- ОСНОВНОЙ КОНТЕНТ -->
 <div class="main-content" id="mainContent">
     <!-- ГЕРОЙ -->
-    <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-i18n="hero-tagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()" data-i18n="ip-button">play.sweet-land.fun</button><span class="btn-version" data-i18n="version-text">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%238a4cdd'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E" alt="5opka" class="giant-img theme-dependent-img" data-light-src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23ffb347'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='40' fill='black' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E" data-dark-src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%238a4cdd'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESweetLand%3C/text%3E%3C/svg%3E"></div></div><div id="copyNotice" class="copy-notice" data-i18n="copy-notice">IP скопирован</div></header>
+    <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-i18n="hero-tagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()" data-i18n="ip-button">play.sweet-land.fun</button><span class="btn-version" data-i18n="version-text">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="5opka" class="giant-img theme-dependent-img" data-light-src="images/hero-image.png" data-dark-src="images/5opka.png" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%238a4cdd\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Arial\' font-size=\'40\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E'"></div></div><div id="copyNotice" class="copy-notice" data-i18n="copy-notice">IP скопирован</div></header>
 
     <!-- СТАТИСТИКА -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-i18n="stats-title">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-i18n="stat-1">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-i18n="stat-2">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-i18n="stat-3">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-i18n="stat-4">Доната</div></div></div></section>
@@ -2778,13 +2778,18 @@
                 el.style.transition = 'none';
                 el.classList.add('active');
             });
-        } else reveal();
+        } else {
+            // При загрузке показываем элементы, которые уже видны
+            reveal();
+            // Также можно добавить класс active всем элементам, если нужно, чтобы они появились сразу без анимации
+            // Но для сохранения эффекта появления при скролле оставим как есть
+        }
         
         document.getElementById('particlesText').innerHTML = particlesEnabled ? translations[currentLang]['particles-on'] : translations[currentLang]['particles-off'];
         document.getElementById('blurText').innerHTML = blurEnabled ? translations[currentLang]['blur-on'] : translations[currentLang]['blur-off'];
         document.getElementById('animationsText').innerHTML = animationsEnabled ? translations[currentLang]['animations-on'] : translations[currentLang]['animations-off'];
         
-        // Анимация онлайн счётчика
+        // Анимация онлайн счётчика (плавный старт)
         let start = 0, end = 6;
         let interval = setInterval(() => {
             if (start >= end) {

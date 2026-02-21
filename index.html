@@ -28,7 +28,7 @@
             --header-bg: rgba(10, 10, 15, 0.95);
         }
 
-        /* ==================== СВЕТЛАЯ ТЕМА С ЦВЕТАМИ ==================== */
+        /* ==================== СВЕТЛАЯ ТЕМА ==================== */
         body.light {
             --bg: #faf7f5;
             --bg-secondary: #ffffff;
@@ -39,6 +39,7 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
             --header-bg: rgba(250, 247, 245, 0.95);
         }
+        /* Акценты светлой темы */
         body.light.accent-pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --border: rgba(255,102,178,0.2); --border-hover: rgba(255,102,178,0.4); --glow:0 0 20px rgba(255,102,178,0.15); --neon:#ff85c2; --shadow-accent:0 8px 32px rgba(255,102,178,0.15); }
         body.light.accent-blue { --accent: #4d9eff; --accent-light: #6eb3ff; --accent-dark: #3a7acc; --border: rgba(77,158,255,0.2); --border-hover: rgba(77,158,255,0.4); --glow:0 0 20px rgba(77,158,255,0.15); --neon:#6eb3ff; --shadow-accent:0 8px 32px rgba(77,158,255,0.15); }
         body.light.accent-green { --accent: #4caf50; --accent-light: #6ec071; --accent-dark: #3d8c40; --border: rgba(76,175,80,0.2); --border-hover: rgba(76,175,80,0.4); --glow:0 0 20px rgba(76,175,80,0.15); --neon:#6ec071; --shadow-accent:0 8px 32px rgba(76,175,80,0.15); }
@@ -76,7 +77,7 @@
         @keyframes rainfall { 0%{ transform:translateY(-10vh) translateX(0); opacity:0.7; } 100%{ transform:translateY(110vh) translateX(-15px); opacity:0.1; } }
         @keyframes candyfall { 0%{ transform:translateY(-10vh) rotate(0deg) scale(0.8); opacity:0.8; } 100%{ transform:translateY(110vh) rotate(360deg) scale(1.2); opacity:0.2; } }
 
-        /* ==================== УЛУЧШЕННАЯ ПАНЕЛЬ УПРАВЛЕНИЯ ==================== */
+        /* ==================== ПАНЕЛЬ УПРАВЛЕНИЯ ==================== */
         .control-panel { position:fixed; top:20px; right:20px; z-index:2500; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; max-width:500px; }
         .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { width:48px; height:48px; background:rgba(0,0,0,0.3); backdrop-filter:blur(12px); border:2px solid transparent; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; transition:all 0.3s cubic-bezier(0.175,0.885,0.32,1.275); box-shadow:0 0 15px var(--accent), inset 0 0 10px rgba(255,255,255,0.2); color:var(--text); position:relative; overflow:hidden; }
         .theme-icon::before, .color-btn::before, .lang-btn::before, .weather-btn::before, .settings-btn::before { content:''; position:absolute; top:-2px; left:-2px; right:-2px; bottom:-2px; background:linear-gradient(45deg, var(--accent), transparent, var(--accent)); border-radius:50%; z-index:-1; animation:rotate 4s linear infinite; opacity:0.6; }
@@ -91,23 +92,43 @@
         .color-dot.dark { background:#0a0a0f; border:2px solid #a366ff; } .color-dot.light { background:#faf7f5; border:2px solid #ff7b5c; } .color-dot.pink { background:#ff66b2; } .color-dot.blue { background:#4d9eff; } .color-dot.green { background:#4caf50; } .color-dot.orange { background:#ff9800; } .color-dot.purple { background:#9c27b0; } .color-dot.yellow { background:#ffd700; } .color-dot.red { background:#ff4444; } .color-dot.teal { background:#008080; }
         .lang-flag { font-size:22px; }
 
-        /* ==================== УЛУЧШЕННАЯ ЛЕВАЯ ШТОРКА ==================== */
-        .side-trigger { position:fixed; top:20px; left:20px; z-index:2300; cursor:pointer; width:50px; height:50px; background:rgba(0,0,0,0.3); backdrop-filter:blur(10px); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px solid var(--accent); box-shadow:0 0 20px var(--accent); transition:all 0.3s; }
+        /* ==================== ВЕРХНИЙ ОВАЛ ==================== */
+        .nav-oval-container { position:fixed; top:15px; left:50%; transform:translateX(-50%); z-index:2400; width:95%; max-width:1200px; animation:slideDown 0.6s; }
+        @keyframes slideDown { from{ transform:translateX(-50%) translateY(-100px); opacity:0; } to{ transform:translateX(-50%) translateY(0); opacity:1; } }
+        .shop-banner { background:var(--header-bg); backdrop-filter:blur(15px); border-radius:60px; border:2px solid var(--accent); box-shadow:0 0 30px var(--accent); display:flex; align-items:center; justify-content:space-between; padding:10px 25px; width:100%; transition:0.3s; gap:15px; }
+        .shop-banner:hover { border-color:var(--accent-light); box-shadow:0 0 50px var(--accent); transform:scale(1.01); }
+        .banner-left { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:700; color:var(--text); white-space:nowrap; }
+        .banner-star { font-size:26px; color:gold; filter:drop-shadow(0 0 10px gold); animation:starGlow 2.5s infinite; }
+        @keyframes starGlow { 0%,100%{ filter:drop-shadow(0 0 5px gold); transform:scale(1); } 50%{ filter:drop-shadow(0 0 20px gold); transform:scale(1.1); } }
+        .banner-center { display:flex; align-items:center; gap:30px; }
+        .banner-center a { color:var(--text-secondary); text-decoration:none; font-size:16px; font-weight:600; transition:0.3s; position:relative; white-space:nowrap; }
+        .banner-center a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--accent); transition:width 0.3s; border-radius:2px; }
+        .banner-center a:hover { color:var(--text); }
+        .banner-center a:hover::after { width:100%; }
+        .banner-right { display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+        .shop-link, .discord-link { padding:8px 20px; border-radius:40px; font-weight:600; font-size:14px; transition:0.3s; white-space:nowrap; border:2px solid transparent; text-decoration:none; display:inline-block; }
+        .shop-link { background:linear-gradient(135deg,#ffd700,#ffb347); color:#2a2a2a; box-shadow:0 4px 12px rgba(255,215,0,0.5); }
+        .shop-link:hover { background:linear-gradient(135deg,#ffb347,#ffd700); transform:translateY(-2px); box-shadow:0 8px 20px rgba(255,215,0,0.8); border-color:#fff; }
+        .discord-link { background:#5865F2; color:#fff; box-shadow:0 4px 12px rgba(88,101,242,0.6); }
+        .discord-link:hover { background:#4752c4; transform:translateY(-2px); box-shadow:0 8px 20px rgba(88,101,242,0.9); border-color:#fff; }
+
+        /* ==================== ЛЕВАЯ ШТОРКА ==================== */
+        .side-trigger { position:fixed; top:20px; left:20px; z-index:2300; cursor:pointer; width:50px; height:50px; background:rgba(0,0,0,0.3); backdrop-filter:blur(10px); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px solid var(--accent); box-shadow:0 0 20px var(--accent); transition:0.3s; }
         .side-trigger:hover { transform:scale(1.1); background:var(--accent); }
-        .side-trigger .line { width:24px; height:3px; background:#fff; margin:4px 0; border-radius:10px; transition:all 0.3s; box-shadow:0 0 8px #fff; }
+        .side-trigger .line { width:24px; height:3px; background:#fff; margin:4px 0; border-radius:10px; transition:0.3s; box-shadow:0 0 8px #fff; }
         .side-trigger:hover .line { background:#fff; box-shadow:0 0 15px #fff; }
         .side-trigger:hover .line:nth-child(1) { transform:translateY(-2px) rotate(-5deg); width:26px; }
         .side-trigger:hover .line:nth-child(3) { transform:translateY(2px) rotate(5deg); width:26px; }
         .side-panel { position:fixed; left:-400px; top:0; width:340px; height:100%; background:rgba(0,0,0,0.7); backdrop-filter:blur(20px); z-index:3000; transition:left 0.5s cubic-bezier(0.175,0.885,0.32,1.275); padding:80px 25px 25px; border-right:3px solid var(--accent); box-shadow:20px 0 80px rgba(163,102,255,0.5); overflow-y:auto; }
         .side-panel.active { left:0; }
-        .panel-handle { position:absolute; top:20px; right:20px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(163,102,255,0.2); color:var(--accent); font-size:24px; font-weight:700; transition:all 0.3s; border:2px solid var(--accent); cursor:pointer; z-index:10; box-shadow:0 0 15px var(--accent); }
+        .panel-handle { position:absolute; top:20px; right:20px; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:rgba(163,102,255,0.2); color:var(--accent); font-size:24px; font-weight:700; transition:0.3s; border:2px solid var(--accent); cursor:pointer; z-index:10; box-shadow:0 0 15px var(--accent); }
         .panel-handle:hover { background:var(--accent); color:#fff; transform:rotate(360deg) scale(1.2); border-color:#fff; }
         .panel-logo { color:var(--accent); font-size:32px; margin-bottom:40px; text-align:center; font-weight:800; letter-spacing:3px; animation:logoGlow 3s infinite; text-shadow:0 0 20px var(--accent); }
         @keyframes logoGlow { 0%,100%{ text-shadow:0 0 10px var(--accent); } 50%{ text-shadow:0 0 40px var(--accent); } }
-        .panel-links a { display:block; color:var(--text-secondary); text-decoration:none; font-size:18px; margin:15px 0; transition:all 0.3s; padding:10px 15px; border-left:4px solid transparent; border-radius:0 10px 10px 0; font-weight:500; background:rgba(255,255,255,0.02); }
+        .panel-links a { display:block; color:var(--text-secondary); text-decoration:none; font-size:18px; margin:15px 0; transition:0.3s; padding:10px 15px; border-left:4px solid transparent; border-radius:0 10px 10px 0; font-weight:500; background:rgba(255,255,255,0.02); }
         .panel-links a:hover { color:#fff; border-left-color:var(--accent); background:linear-gradient(90deg, rgba(163,102,255,0.2), transparent); transform:translateX(5px); box-shadow:0 0 20px rgba(163,102,255,0.3); }
         .panel-social { margin-top:30px; display:flex; flex-direction:column; gap:10px; }
-        .social-link { color:var(--text-secondary); text-decoration:none; font-size:16px; font-weight:600; padding:12px 20px; border-radius:40px; background:rgba(163,102,255,0.1); border:1px solid var(--border); transition:all 0.3s; display:flex; align-items:center; gap:15px; backdrop-filter:blur(5px); }
+        .social-link { color:var(--text-secondary); text-decoration:none; font-size:16px; font-weight:600; padding:12px 20px; border-radius:40px; background:rgba(163,102,255,0.1); border:1px solid var(--border); transition:0.3s; display:flex; align-items:center; gap:15px; backdrop-filter:blur(5px); }
         .social-link span { font-size:22px; transition:transform 0.3s; min-width:30px; text-align:center; }
         .social-link:hover { transform:translateX(8px) scale(1.02); border-color:var(--accent); background:var(--accent); color:#fff; box-shadow:0 0 30px var(--accent); }
         .social-link:hover span { transform:scale(1.2); }
@@ -128,7 +149,7 @@
         .hero-tagline { font-size:clamp(16px,3vw,20px); color:var(--text-secondary); margin-bottom:30px; line-height:1.5; animation:fadeIn 1.2s; max-width:600px; }
         @keyframes fadeIn { from{ opacity:0; transform:translateY(20px); } to{ opacity:1; transform:translateY(0); } }
         .ip-container { display:flex; gap:15px; flex-wrap:wrap; }
-        .btn-ip { background:var(--accent); color:#fff; border:none; padding:14px 30px; border-radius:16px; font-weight:600; font-size:clamp(14px,3vw,18px); transition:all 0.4s; box-shadow:0 4px 20px var(--accent); position:relative; overflow:hidden; flex:1 1 auto; }
+        .btn-ip { background:var(--accent); color:#fff; border:none; padding:14px 30px; border-radius:16px; font-weight:600; font-size:clamp(14px,3vw,18px); transition:0.4s; box-shadow:0 4px 20px var(--accent); position:relative; overflow:hidden; flex:1 1 auto; }
         .btn-ip::before { content:''; position:absolute; top:50%; left:50%; width:0; height:0; border-radius:50%; background:rgba(255,255,255,0.25); transform:translate(-50%,-50%); transition:width 0.5s,height 0.5s; }
         .btn-ip:hover::before { width:300px; height:300px; }
         .btn-ip:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 8px 30px var(--accent); background:var(--accent-light); }
@@ -144,12 +165,12 @@
         .section-title span::after { content:''; position:absolute; bottom:-6px; left:0; width:100%; height:3px; background:var(--accent); border-radius:3px; transform:scaleX(0); transition:transform 0.4s; }
         .section-title:hover span::after { transform:scaleX(1); }
         .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; max-width:1200px; margin:0 auto 40px; }
-        .stat-card { background:var(--bg-card); backdrop-filter:blur(var(--blur)); padding:30px 20px; border-radius:25px; border:2px solid var(--border); transition:all 0.3s; text-align:center; }
+        .stat-card { background:var(--bg-card); backdrop-filter:blur(var(--blur)); padding:30px 20px; border-radius:25px; border:2px solid var(--border); transition:0.3s; text-align:center; }
         .stat-card:hover { border-color:var(--accent); transform:translateY(-5px); box-shadow:var(--shadow-accent); }
         .stat-number { font-size:44px; font-weight:700; color:var(--accent); margin-bottom:8px; }
         .stat-label { color:var(--text-secondary); font-size:16px; }
         .features-grid, .community-grid, .faq-grid, .top-players-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1300px; margin:0 auto; }
-        .feature-card, .community-card, .faq-card, .player-card { background:var(--bg-card); backdrop-filter:blur(var(--blur)); padding:30px; border-radius:25px; border:2px solid var(--border); transition:all 0.3s; position:relative; overflow:hidden; }
+        .feature-card, .community-card, .faq-card, .player-card { background:var(--bg-card); backdrop-filter:blur(var(--blur)); padding:30px; border-radius:25px; border:2px solid var(--border); transition:0.3s; position:relative; overflow:hidden; }
         .feature-card::before, .community-card::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:radial-gradient(circle at 30% 50%, var(--accent) 0%, transparent 70%); opacity:0; transition:opacity 0.5s; pointer-events:none; }
         .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover { border-color:var(--accent); transform:translateY(-5px) scale(1.01); box-shadow:var(--shadow-accent); }
         .feature-card:hover::before, .community-card:hover::before { opacity:0.15; }
@@ -204,7 +225,7 @@
         .reveal { opacity:0; transform:translateY(30px); transition:all 0.6s cubic-bezier(0.175,0.885,0.32,1.1); }
         .reveal.active { opacity:1; transform:translateY(0); }
 
-        /* ==================== СЧЁТЧИК ОНЛАЙНА И ЧАСЫ ==================== */
+        /* ==================== ЧАСЫ И ОНЛАЙН ==================== */
         .online-counter { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.1); backdrop-filter:blur(5px); padding:5px 15px; border-radius:30px; border:1px solid var(--accent); margin-left:12px; font-size:14px; font-weight:500; color:var(--text); box-shadow:0 0 12px var(--accent); transition:0.3s; }
         .online-counter:hover { transform:scale(1.03); background:var(--accent); color:#fff; }
         .online-dot { width:8px; height:8px; background:#00ff88; border-radius:50%; box-shadow:0 0 12px #00ff88; animation:pulseOnline 1.5s; }
@@ -221,10 +242,9 @@
         .candy-stats { margin-bottom:30px; }
         .candy-balance { display:flex; align-items:center; justify-content:space-between; font-size:24px; margin-bottom:20px; padding:20px; background:rgba(0,0,0,0.4); border-radius:30px; border:1px solid var(--border); }
         .candy-balance span:last-child { color:gold; font-weight:700; font-size:36px; text-shadow:0 0 20px gold; }
-        .candy-graph { height:180px; display:flex; align-items:flex-end; gap:4px; margin-bottom:10px; background:rgba(0,0,0,0.3); padding:15px; border-radius:20px; }
-        .graph-bar { flex:1; background:var(--accent); border-radius:6px 6px 0 0; min-height:2px; transition:height 0.3s; opacity:0.7; box-shadow:0 0 10px var(--accent); }
-        .graph-bar:hover { opacity:1; transform:scaleX(1.05); }
-        .graph-labels { display:flex; justify-content:space-between; color:var(--text-secondary); font-size:12px; padding:0 10px; }
+        .candy-graph { width:100%; height:180px; position:relative; background:rgba(0,0,0,0.3); border-radius:20px; margin-bottom:10px; }
+        .candy-graph canvas { width:100%; height:100%; display:block; }
+        .graph-labels { display:flex; justify-content:space-between; color:var(--text-secondary); font-size:12px; padding:0 10px; margin-top:5px; }
         .candy-code-input { display:flex; gap:10px; margin:20px 0; }
         .candy-code-input input { flex:1; background:rgba(0,0,0,0.4); border:2px solid var(--border); border-radius:40px; padding:15px 20px; color:var(--text); font-size:16px; outline:none; transition:0.2s; }
         .candy-code-input input:focus { border-color:var(--accent); box-shadow:0 0 20px var(--accent); }
@@ -268,6 +288,9 @@
         .back-to-shop:hover { background:var(--accent); color:#fff; box-shadow:0 0 30px var(--accent); }
         .close-shop-btn { display:block; margin:20px auto 0; background:var(--accent); color:#fff; border:none; padding:15px 40px; border-radius:40px; font-weight:600; font-size:18px; transition:0.2s; box-shadow:0 0 20px var(--accent); }
         .close-shop-btn:hover { transform:scale(1.05); box-shadow:0 0 40px var(--accent); }
+        .settings-quick { display:flex; gap:10px; margin:20px 0; flex-wrap:wrap; justify-content:center; }
+        .settings-quick button { flex:1; min-width:80px; background:rgba(255,255,255,0.1); border:2px solid var(--border); border-radius:40px; padding:10px; color:var(--text); transition:0.2s; font-size:14px; }
+        .settings-quick button:hover { border-color:var(--accent); background:var(--accent); color:#fff; }
 
         /* Адаптивность */
         @media (max-width:768px) {
@@ -278,6 +301,7 @@
             .control-panel { top:70px; }
             .user-item { flex-direction:column; align-items:flex-start; }
             .user-actions { justify-content:flex-start; margin-top:10px; }
+            .settings-quick button { font-size:12px; padding:8px; }
         }
     </style>
 </head>
@@ -294,14 +318,14 @@
             <div class="online-counter" id="onlineCounter">
                 <span class="online-dot"></span>
                 <span class="online-number" id="onlineNumber">0</span>
-                <span>online</span>
+                <span data-i18n="online">online</span>
             </div>
             <div class="current-time" id="currentTime"></div>
         </div>
         <div class="banner-center">
-            <a href="#features" class="nav-features" data-i18n="nav-features">Особенности</a>
-            <a href="#how-to-play" class="nav-howtoplay" data-i18n="nav-howtoplay">Как начать</a>
-            <a href="#faq" class="nav-faq" data-i18n="nav-faq">FAQ</a>
+            <a href="#features" data-i18n="nav-features">Особенности</a>
+            <a href="#how-to-play" data-i18n="nav-howtoplay">Как начать</a>
+            <a href="#faq" data-i18n="nav-faq">FAQ</a>
         </div>
         <div class="banner-right">
             <a href="https://sweet-land.trademc.org/" target="_blank" class="shop-link" data-i18n="shop-link">🛒 Магазин</a>
@@ -371,11 +395,26 @@
     <footer class="footer"><div class="footer-content"><div class="footer-section"><h4>SweetLand</h4><p data-i18n="footer-desc">Ванильное выживание без границ с дружным сообществом и активной администрацией.</p><p class="footer-note" data-i18n="footer-note">Никаких донатов — только чистый ванильный геймплей</p></div><div class="footer-section"><h4 data-i18n="quick-links">Быстрые ссылки</h4><a href="#hero" onclick="showMainContent()" data-i18n="footer-home">Главная</a><a href="#features" onclick="showMainContent()" data-i18n="footer-features">Особенности</a><a href="#how-to-play" onclick="showMainContent()" data-i18n="footer-howto">Как начать</a><a href="#streamers" onclick="showMainContent()" data-i18n="footer-streamers">Стримеры</a><a href="#top-players" onclick="showMainContent()" data-i18n="footer-top">Топ игроков</a><a href="#faq" onclick="showMainContent()" data-i18n="footer-faq">FAQ</a><a href="javascript:void(0)" onclick="openRules()" data-i18n="footer-rules">Правила</a><a href="javascript:void(0)" onclick="openCandyShop()" data-i18n="footer-candy">🍬 Магазин конфет</a></div><div class="footer-section"><h4 data-i18n="social">Соцсети</h4><a href="https://discord.gg/GUKrAmY7bp" target="_blank">Discord</a><a href="#" target="_blank">Telegram</a><a href="#" target="_blank">YouTube</a></div><div class="footer-section"><h4 data-i18n="data-protection">Защита данных</h4><p data-i18n="privacy-footer">Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p></div></div><div class="footer-bottom"><p>© 2026 SweetLand. <span data-i18n="vanilla-server">Ванильный Minecraft сервер.</span></p><p class="privacy-note" data-i18n="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p></div></footer>
 </div>
 
-<!-- КОНФЕТНЫЙ МАГАЗИН -->
-<div class="candy-shop-screen" id="candyShopScreen"><div class="candy-shop-container"><h2 class="candy-shop-title">🍭 Конфетный магазин</h2><div id="candyShopContent"></div><button class="close-shop-btn" onclick="closeCandyShop()">← Вернуться на главную</button></div></div>
+<!-- КОНФЕТНЫЙ МАГАЗИН (НА ВЕСЬ ЭКРАН) -->
+<div class="candy-shop-screen" id="candyShopScreen">
+    <div class="candy-shop-container">
+        <h2 class="candy-shop-title" data-i18n="candy-shop-title">🍭 Конфетный магазин</h2>
+        <!-- Быстрые настройки погоды и курсора прямо в магазине -->
+        <div class="settings-quick">
+            <button onclick="setWeather('snow')" data-i18n="weather-snow">❄️ Снег</button>
+            <button onclick="setWeather('rain')" data-i18n="weather-rain">☔ Дождь</button>
+            <button onclick="setWeather('candy')" data-i18n="weather-candy">🍬 Конфеты</button>
+            <button onclick="setWeather('none')" data-i18n="weather-none">☀️ Выкл</button>
+            <button onclick="setCursor('default')" data-i18n="cursor-default">🖱️ Обычный</button>
+            <button onclick="setCursor('candy')" data-i18n="cursor-candy">🍭 Конфета</button>
+        </div>
+        <div id="candyShopContent"></div>
+        <button class="close-shop-btn" onclick="closeCandyShop()" data-i18n="back-to-main">← Вернуться на главную</button>
+    </div>
+</div>
 
 <script>
-// ==================== ФИНАЛЬНАЯ ВЕРСИЯ — ВСЕ ФУНКЦИИ ====================
+// ==================== ФИНАЛЬНАЯ ПОЛНАЯ ВЕРСИЯ С ПЕРЕВОДАМИ ====================
 (function() {
     // --- Основные переменные ---
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
@@ -395,10 +434,10 @@
     let userSort = 'name';
     let authMode = 'login';
     let userIP = null;
-    let adminIPs = JSON.parse(localStorage.getItem('sweetland_admin_ips')) || []; // список IP, которые имеют доступ к админке без кода
+    let adminIPs = JSON.parse(localStorage.getItem('sweetland_admin_ips')) || [];
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
 
-    // Инициализация пользователей и промокодов
+    // Инициализация
     if (Object.keys(usersDB).length === 0) {
         usersDB['Gyraffic'] = { password: 'admin123', ip: null, candies: 100, history: Array(24).fill(100), regDate: Date.now(), lastLogin: null };
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
@@ -411,357 +450,983 @@
         localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
     }
 
-    // --- Получение IP и проверка на VPN ---
-    async function fetchUserIP() {
-        try {
-            let response = await fetch('https://api.ipify.org?format=json');
-            let data = await response.json();
-            userIP = data.ip;
-            // Проверка на VPN через ipapi.co
-            let vpnCheck = await fetch(`https://ipapi.co/${userIP}/json/`);
-            let vpnData = await vpnCheck.json();
-            if (vpnData.proxy || vpnData.hosting) {
-                alert('VPN/прокси обнаружены. Доступ запрещён.');
-                return false;
-            }
-            return true;
-        } catch (e) {
-            userIP = 'unknown-' + Math.random().toString(36).substring(7);
-            return true; // если ошибка, пропускаем
+    // --- ПЕРЕВОДЫ (ПОЛНЫЕ НА 6 ЯЗЫКОВ) ---
+    const translations = {
+        ru: {
+            'nav-features': 'Особенности',
+            'nav-howtoplay': 'Как начать',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Магазин',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Тёмная',
+            'theme-light': 'Светлая',
+            'theme-pink': 'Розовая',
+            'theme-blue': 'Голубая',
+            'theme-green': 'Зелёная',
+            'theme-orange': 'Оранжевая',
+            'theme-purple': 'Фиолетовая',
+            'theme-yellow': 'Жёлтая',
+            'theme-red': 'Красная',
+            'theme-teal': 'Бирюзовая',
+            'lang-ru': 'Русский',
+            'lang-uk': 'Українська',
+            'lang-en': 'English',
+            'lang-de': 'Deutsch',
+            'lang-fr': 'Français',
+            'lang-es': 'Español',
+            'weather-auto': 'Авто',
+            'weather-snow': '❄️ Снег',
+            'weather-rain': '☔ Дождь',
+            'weather-candy': '🍬 Конфеты',
+            'weather-none': '☀️ Выкл',
+            'cursor-default': '🖱️ Обычный',
+            'cursor-candy': '🍭 Конфета',
+            'particles-on': 'Частицы: вкл',
+            'particles-off': 'Частицы: выкл',
+            'blur-on': 'Размытие: вкл',
+            'blur-off': 'Размытие: выкл',
+            'animations-on': 'Анимации: вкл',
+            'animations-off': 'Анимации: выкл',
+            'reset-settings': 'Сброс',
+            'panel-home': '🏠 Главная',
+            'panel-features': '✨ Особенности',
+            'panel-streamers': '🎥 Стримеры',
+            'panel-top': '🏆 Топ игроков',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Правила',
+            'panel-candy': '🍬 Магазин конфет',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP скопирован',
+            'stats-title': 'Статистика сервера',
+            'stat-1': 'Работа сервера',
+            'stat-2': 'Актуальная версия',
+            'stat-3': 'Ванильный геймплей',
+            'stat-4': 'Доната',
+            'features-title': 'Особенности сервера',
+            'feature-1-title': 'Анти-чит система',
+            'feature-1-desc': 'Продвинутая защита от читеров. Честная игра для всех.',
+            'feature-2-title': 'Стабильный TPS',
+            'feature-2-desc': 'Оптимизированный сервер на мощном железе. Никаких лагов.',
+            'feature-3-title': 'Регулярные ивенты',
+            'feature-3-desc': 'Еженедельные события и конкурсы с призами для игроков.',
+            'feature-4-title': 'Чистый ванильный мир',
+            'feature-4-desc': 'Никаких плагинов, только чистый Minecraft как задумано.',
+            'feature-5-title': 'Защита построек',
+            'feature-5-desc': 'Ваши постройки под надежной защитой от гриферов.',
+            'feature-6-title': 'Дружное сообщество',
+            'feature-6-desc': 'Первые игроки уже здесь. Присоединяйся к нам.',
+            'streamers-title': 'Стримеры на сервере',
+            'streamer-1-desc': 'Популярная стримерша, будет играть на сервере. Следи за стримами!',
+            'streamer-2-desc': 'Владелец сервера и стример. Играет вместе с вами.',
+            'more-streamers': 'Скоро будут другие',
+            'streamer-3-desc': 'Список стримеров будет пополняться. Следи за новостями в Discord.',
+            'subscribe': 'подпишись',
+            'soon': 'скоро',
+            'announcements': 'анонсы',
+            'news': 'новости',
+            'top-title': 'Топ игроков',
+            'owner': 'Владелец сервера',
+            'streamer-label': 'Стримерша',
+            'admin': 'Старший администратор',
+            'hours': 'часов',
+            'update-date': 'Данные обновлены 17 февраля 2026 года',
+            'howto-title': 'Как начать играть',
+            'howto-1': 'Версия 1.21.8',
+            'howto-1-desc': 'Убедись, что у тебя установлена последняя версия Minecraft.',
+            'howto-2': 'Подай заявку в Discord',
+            'howto-2-desc': 'Заполни анкету и ознакомься с правилами сервера.',
+            'howto-3': 'Дождись принятия',
+            'howto-3-desc': 'После одобрения добавь сервер play.sweet-land.fun в список.',
+            'howto-4': 'Заходи и играй',
+            'howto-4-desc': 'Выбирай место для базы, строй и исследуй мир.',
+            'faq-title': 'Ответы на вопросы',
+            'faq-1': 'Когда старт?',
+            'faq-1-desc': 'Сервер готовится к открытию. Следи за новостями в Discord.',
+            'faq-2': 'Какая версия?',
+            'faq-2-desc': 'Сервер будет работать на актуальной версии 1.21.8.',
+            'faq-3': 'Где общение?',
+            'faq-3-desc': 'Основное общение в Discord. Там же новости и ивенты.',
+            'faq-4': 'Белая тема?',
+            'faq-4-desc': 'Да, нажми на луну в правом углу и увидишь дождик.',
+            'faq-5': 'Защита аккаунта?',
+            'faq-5-desc': 'Анти-чит система и шифрование данных игроков.',
+            'faq-6': 'Донат?',
+            'faq-6-desc': 'Нет, это полностью ванильный сервер. Никаких привилегий.',
+            'faq-7': 'Какой онлайн?',
+            'faq-7-desc': 'Сервер скоро открывается. Будь первым.',
+            'faq-8': 'Будут вайпы?',
+            'faq-8-desc': 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
+            'footer-desc': 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
+            'footer-note': 'Никаких донатов — только чистый ванильный геймплей',
+            'quick-links': 'Быстрые ссылки',
+            'footer-home': 'Главная',
+            'footer-features': 'Особенности',
+            'footer-howto': 'Как начать',
+            'footer-streamers': 'Стримеры',
+            'footer-top': 'Топ игроков',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Правила',
+            'footer-candy': '🍬 Магазин конфет',
+            'social': 'Соцсети',
+            'data-protection': 'Защита данных',
+            'privacy-footer': 'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',
+            'vanilla-server': 'Ванильный Minecraft сервер.',
+            'privacy-note': 'Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.',
+            'rules-title': 'ПРАВИЛА СЕРВЕРА',
+            'online': 'online',
+            'candy-shop-title': '🍭 Конфетный магазин',
+            'back-to-main': '← Вернуться на главную',
+            'your-candies': '🍬 Твои конфеты:',
+            'enter-code': 'Введи код',
+            'activate': 'Активировать',
+            'logout': '🚪 Выйти',
+            'login': 'Войти',
+            'register': 'Зарегистрироваться',
+            'no-account': 'Нет аккаунта? Зарегистрироваться',
+            'have-account': 'Уже есть аккаунт? Войти',
+            'username': 'Никнейм',
+            'password': 'Пароль',
+            'min-password': 'Пароль (мин. 4 символа)',
+            'admin-panel-btn': '🔧 Войти в админ-панель',
+            'transfer-to': 'Кому',
+            'transfer-amount': 'Количество',
+            'transfer': 'Перевести',
+            'search-user': 'Поиск пользователя',
+            'sort-name': 'По имени',
+            'sort-candies': 'По конфетам',
+            'avg-change': '↗️ Средн. изменение:',
+            'per-hour': 'за час',
+            'reg-date': '📅 Регистрация:',
+            'last-login': '🔑 Последний вход:',
+            'set': 'Уст',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'От кого',
+            'to': 'Кому',
+            'promo-section': 'Управление промокодами',
+            'add-promo': '➕ Добавить',
+            'delete-promo': '❌',
+            'back-to-shop': '← Назад в магазин',
+            'admin-title': '🔧 ADMIN PANEL',
+        },
+        uk: {
+            'nav-features': 'Особливості',
+            'nav-howtoplay': 'Як почати',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Магазин',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Темна',
+            'theme-light': 'Світла',
+            'theme-pink': 'Рожева',
+            'theme-blue': 'Блакитна',
+            'theme-green': 'Зелена',
+            'theme-orange': 'Помаранчева',
+            'theme-purple': 'Фіолетова',
+            'theme-yellow': 'Жовта',
+            'theme-red': 'Червона',
+            'theme-teal': 'Бірюзова',
+            'lang-ru': 'Російська',
+            'lang-uk': 'Українська',
+            'lang-en': 'Англійська',
+            'lang-de': 'Німецька',
+            'lang-fr': 'Французька',
+            'lang-es': 'Іспанська',
+            'weather-auto': 'Авто',
+            'weather-snow': '❄️ Сніг',
+            'weather-rain': '☔ Дощ',
+            'weather-candy': '🍬 Цукерки',
+            'weather-none': '☀️ Вимк',
+            'cursor-default': '🖱️ Звичайний',
+            'cursor-candy': '🍭 Цукерка',
+            'particles-on': 'Частинки: вкл',
+            'particles-off': 'Частинки: вимк',
+            'blur-on': 'Розмиття: вкл',
+            'blur-off': 'Розмиття: вимк',
+            'animations-on': 'Анімації: вкл',
+            'animations-off': 'Анімації: вимк',
+            'reset-settings': 'Скинути',
+            'panel-home': '🏠 Головна',
+            'panel-features': '✨ Особливості',
+            'panel-streamers': '🎥 Стрімери',
+            'panel-top': '🏆 Топ гравців',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Правила',
+            'panel-candy': '🍬 Магазин цукерок',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Ванільне виживання на версії 1.21.8. Твій світ — твої правила.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP скопійовано',
+            'stats-title': 'Статистика сервера',
+            'stat-1': 'Робота сервера',
+            'stat-2': 'Актуальна версія',
+            'stat-3': 'Ванільний геймплей',
+            'stat-4': 'Донату',
+            'features-title': 'Особливості сервера',
+            'feature-1-title': 'Анти-чит система',
+            'feature-1-desc': 'Просунутий захист від читів. Честна гра для всіх.',
+            'feature-2-title': 'Стабільний TPS',
+            'feature-2-desc': 'Оптимізований сервер на потужному залізі. Жодних лагів.',
+            'feature-3-title': 'Регулярні івенти',
+            'feature-3-desc': 'Щотижневі події та конкурси з призами для гравців.',
+            'feature-4-title': 'Чистий ванільний світ',
+            'feature-4-desc': 'Жодних плагінів, тільки чистий Minecraft як задумано.',
+            'feature-5-title': 'Захист будівель',
+            'feature-5-desc': 'Ваші будівлі під надійним захистом від ґріферів.',
+            'feature-6-title': 'Дружня спільнота',
+            'feature-6-desc': 'Перші гравці вже тут. Приєднуйся до нас.',
+            'streamers-title': 'Стрімери на сервері',
+            'streamer-1-desc': 'Популярна стрімерша, буде грати на сервері. Слідкуй за стрімами!',
+            'streamer-2-desc': 'Власник сервера та стрімер. Грає разом з вами.',
+            'more-streamers': 'Скоро будуть інші',
+            'streamer-3-desc': 'Список стрімерів буде поповнюватися. Слідкуй за новинами в Discord.',
+            'subscribe': 'підпишись',
+            'soon': 'скоро',
+            'announcements': 'анонси',
+            'news': 'новини',
+            'top-title': 'Топ гравців',
+            'owner': 'Власник сервера',
+            'streamer-label': 'Стрімерка',
+            'admin': 'Старший адміністратор',
+            'hours': 'годин',
+            'update-date': 'Дані оновлено 17 лютого 2026 року',
+            'howto-title': 'Як почати грати',
+            'howto-1': 'Версія 1.21.8',
+            'howto-1-desc': 'Переконайся, що у тебе встановлена остання версія Minecraft.',
+            'howto-2': 'Подай заявку в Discord',
+            'howto-2-desc': 'Заповни анкету та ознайомся з правилами сервера.',
+            'howto-3': 'Дочекайся прийняття',
+            'howto-3-desc': 'Після схвалення додай сервер play.sweet-land.fun до списку.',
+            'howto-4': 'Заходь та грай',
+            'howto-4-desc': 'Обирай місце для бази, будуй та досліджуй світ.',
+            'faq-title': 'Відповіді на питання',
+            'faq-1': 'Коли старт?',
+            'faq-1-desc': 'Сервер готується до відкриття. Слідкуй за новинами в Discord.',
+            'faq-2': 'Яка версія?',
+            'faq-2-desc': 'Сервер працюватиме на актуальній версії 1.21.8.',
+            'faq-3': 'Де спілкування?',
+            'faq-3-desc': 'Основне спілкування в Discord. Там же новини та івенти.',
+            'faq-4': 'Біла тема?',
+            'faq-4-desc': 'Так, натисни на місяць у правому кутку і побачиш дощик.',
+            'faq-5': 'Захист акаунта?',
+            'faq-5-desc': 'Анти-чит система та шифрування даних гравців.',
+            'faq-6': 'Донат?',
+            'faq-6-desc': 'Ні, це повністю ванільний сервер. Жодних привілеїв.',
+            'faq-7': 'Який онлайн?',
+            'faq-7-desc': 'Сервер скоро відкривається. Будь першим.',
+            'faq-8': 'Чи будуть вайпи?',
+            'faq-8-desc': 'Вайпи плануються раз на 8-11 місяців. Всі будівлі зберігаються надовго.',
+            'footer-desc': 'Ванільне виживання без кордонів з дружньою спільнотою та активною адміністрацією.',
+            'footer-note': 'Жодних донатів — тільки чистий ванільний геймплей',
+            'quick-links': 'Швидкі посилання',
+            'footer-home': 'Головна',
+            'footer-features': 'Особливості',
+            'footer-howto': 'Як почати',
+            'footer-streamers': 'Стрімери',
+            'footer-top': 'Топ гравців',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Правила',
+            'footer-candy': '🍬 Магазин цукерок',
+            'social': 'Соцмережі',
+            'data-protection': 'Захист даних',
+            'privacy-footer': 'Всі дані захищені і не передаються третім особам. Сервер відповідає стандартам безпеки.',
+            'vanilla-server': 'Ванільний Minecraft сервер.',
+            'privacy-note': 'Ваші дані під надійним захистом. Використовуючи сервер, ви погоджуєтесь з політикою конфіденційності.',
+            'rules-title': 'ПРАВИЛА СЕРВЕРА',
+            'online': 'online',
+            'candy-shop-title': '🍭 Магазин цукерок',
+            'back-to-main': '← Повернутися на головну',
+            'your-candies': '🍬 Твої цукерки:',
+            'enter-code': 'Введи код',
+            'activate': 'Активувати',
+            'logout': '🚪 Вийти',
+            'login': 'Увійти',
+            'register': 'Зареєструватися',
+            'no-account': 'Немає акаунта? Зареєструватися',
+            'have-account': 'Вже є акаунт? Увійти',
+            'username': 'Нікнейм',
+            'password': 'Пароль',
+            'min-password': 'Пароль (мін. 4 символи)',
+            'admin-panel-btn': '🔧 Увійти в адмін-панель',
+            'transfer-to': 'Кому',
+            'transfer-amount': 'Кількість',
+            'transfer': 'Перевести',
+            'search-user': 'Пошук користувача',
+            'sort-name': 'За іменем',
+            'sort-candies': 'За цукерками',
+            'avg-change': '↗️ Середн. зміна:',
+            'per-hour': 'за годину',
+            'reg-date': '📅 Реєстрація:',
+            'last-login': '🔑 Останній вхід:',
+            'set': 'Вст',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'Від кого',
+            'to': 'Кому',
+            'promo-section': 'Керування промокодами',
+            'add-promo': '➕ Додати',
+            'delete-promo': '❌',
+            'back-to-shop': '← Назад до магазину',
+            'admin-title': '🔧 ADMIN PANEL',
+        },
+        en: {
+            'nav-features': 'Features',
+            'nav-howtoplay': 'How to Play',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Shop',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Dark',
+            'theme-light': 'Light',
+            'theme-pink': 'Pink',
+            'theme-blue': 'Blue',
+            'theme-green': 'Green',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Purple',
+            'theme-yellow': 'Yellow',
+            'theme-red': 'Red',
+            'theme-teal': 'Teal',
+            'lang-ru': 'Russian',
+            'lang-uk': 'Ukrainian',
+            'lang-en': 'English',
+            'lang-de': 'German',
+            'lang-fr': 'French',
+            'lang-es': 'Spanish',
+            'weather-auto': 'Auto',
+            'weather-snow': '❄️ Snow',
+            'weather-rain': '☔ Rain',
+            'weather-candy': '🍬 Candy',
+            'weather-none': '☀️ Off',
+            'cursor-default': '🖱️ Default',
+            'cursor-candy': '🍭 Candy',
+            'particles-on': 'Particles: on',
+            'particles-off': 'Particles: off',
+            'blur-on': 'Blur: on',
+            'blur-off': 'Blur: off',
+            'animations-on': 'Animations: on',
+            'animations-off': 'Animations: off',
+            'reset-settings': 'Reset',
+            'panel-home': '🏠 Home',
+            'panel-features': '✨ Features',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Top Players',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Rules',
+            'panel-candy': '🍬 Candy Shop',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Vanilla survival on version 1.21.8. Your world — your rules.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copied',
+            'stats-title': 'Server Stats',
+            'stat-1': 'Server Uptime',
+            'stat-2': 'Current Version',
+            'stat-3': 'Vanilla Gameplay',
+            'stat-4': 'No Donate',
+            'features-title': 'Server Features',
+            'feature-1-title': 'Anti-Cheat System',
+            'feature-1-desc': 'Advanced protection against cheaters. Fair play for everyone.',
+            'feature-2-title': 'Stable TPS',
+            'feature-2-desc': 'Optimized server on powerful hardware. No lags.',
+            'feature-3-title': 'Regular Events',
+            'feature-3-desc': 'Weekly events and competitions with prizes for players.',
+            'feature-4-title': 'Pure Vanilla World',
+            'feature-4-desc': 'No plugins, just pure Minecraft as intended.',
+            'feature-5-title': 'Build Protection',
+            'feature-5-desc': 'Your buildings are reliably protected from griefers.',
+            'feature-6-title': 'Friendly Community',
+            'feature-6-desc': 'The first players are already here. Join us.',
+            'streamers-title': 'Streamers on Server',
+            'streamer-1-desc': 'Popular streamer, will play on the server. Follow the streams!',
+            'streamer-2-desc': 'Server owner and streamer. Plays with you.',
+            'more-streamers': 'More coming soon',
+            'streamer-3-desc': 'The list of streamers will be updated. Follow news in Discord.',
+            'subscribe': 'subscribe',
+            'soon': 'soon',
+            'announcements': 'announcements',
+            'news': 'news',
+            'top-title': 'Top Players',
+            'owner': 'Server Owner',
+            'streamer-label': 'Streamer',
+            'admin': 'Senior Admin',
+            'hours': 'hours',
+            'update-date': 'Data updated February 17, 2026',
+            'howto-title': 'How to Start Playing',
+            'howto-1': 'Version 1.21.8',
+            'howto-1-desc': 'Make sure you have the latest version of Minecraft installed.',
+            'howto-2': 'Apply in Discord',
+            'howto-2-desc': 'Fill out the application and read the server rules.',
+            'howto-3': 'Wait for approval',
+            'howto-3-desc': 'After approval, add the server play.sweet-land.fun to your list.',
+            'howto-4': 'Join and play',
+            'howto-4-desc': 'Choose a location for your base, build and explore the world.',
+            'faq-title': 'FAQ',
+            'faq-1': 'When is the start?',
+            'faq-1-desc': 'The server is preparing for launch. Follow news in Discord.',
+            'faq-2': 'What version?',
+            'faq-2-desc': 'The server will run on the latest version 1.21.8.',
+            'faq-3': 'Where to chat?',
+            'faq-3-desc': 'Main communication is in Discord. News and events there too.',
+            'faq-4': 'Light theme?',
+            'faq-4-desc': 'Yes, click on the moon in the right corner and you will see rain.',
+            'faq-5': 'Account protection?',
+            'faq-5-desc': 'Anti-cheat system and encryption of player data.',
+            'faq-6': 'Donate?',
+            'faq-6-desc': 'No, this is a completely vanilla server. No privileges.',
+            'faq-7': 'Online count?',
+            'faq-7-desc': 'The server is opening soon. Be the first.',
+            'faq-8': 'Will there be wipes?',
+            'faq-8-desc': 'Wipes are planned every 8-11 months. All buildings are preserved for a long time.',
+            'footer-desc': 'Vanilla survival without borders with a friendly community and active administration.',
+            'footer-note': 'No donations — only pure vanilla gameplay',
+            'quick-links': 'Quick Links',
+            'footer-home': 'Home',
+            'footer-features': 'Features',
+            'footer-howto': 'How to Play',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Top Players',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Rules',
+            'footer-candy': '🍬 Candy Shop',
+            'social': 'Social',
+            'data-protection': 'Data Protection',
+            'privacy-footer': 'All data is protected and not shared with third parties. The server meets security standards.',
+            'vanilla-server': 'Vanilla Minecraft server.',
+            'privacy-note': 'Your data is securely protected. By using the server, you agree to the privacy policy.',
+            'rules-title': 'SERVER RULES',
+            'online': 'online',
+            'candy-shop-title': '🍭 Candy Shop',
+            'back-to-main': '← Back to Main',
+            'your-candies': '🍬 Your candies:',
+            'enter-code': 'Enter code',
+            'activate': 'Activate',
+            'logout': '🚪 Logout',
+            'login': 'Login',
+            'register': 'Register',
+            'no-account': 'No account? Register',
+            'have-account': 'Already have an account? Login',
+            'username': 'Username',
+            'password': 'Password',
+            'min-password': 'Password (min 4 chars)',
+            'admin-panel-btn': '🔧 Enter Admin Panel',
+            'transfer-to': 'To',
+            'transfer-amount': 'Amount',
+            'transfer': 'Transfer',
+            'search-user': 'Search user',
+            'sort-name': 'By name',
+            'sort-candies': 'By candies',
+            'avg-change': '↗️ Avg change:',
+            'per-hour': 'per hour',
+            'reg-date': '📅 Registered:',
+            'last-login': '🔑 Last login:',
+            'set': 'Set',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'From',
+            'to': 'To',
+            'promo-section': 'Promo Codes Management',
+            'add-promo': '➕ Add',
+            'delete-promo': '❌',
+            'back-to-shop': '← Back to Shop',
+            'admin-title': '🔧 ADMIN PANEL',
+        },
+        de: {
+            'nav-features': 'Funktionen',
+            'nav-howtoplay': 'Spielanleitung',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Shop',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Dunkel',
+            'theme-light': 'Hell',
+            'theme-pink': 'Rosa',
+            'theme-blue': 'Blau',
+            'theme-green': 'Grün',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Lila',
+            'theme-yellow': 'Gelb',
+            'theme-red': 'Rot',
+            'theme-teal': 'Türkis',
+            'lang-ru': 'Russisch',
+            'lang-uk': 'Ukrainisch',
+            'lang-en': 'Englisch',
+            'lang-de': 'Deutsch',
+            'lang-fr': 'Französisch',
+            'lang-es': 'Spanisch',
+            'weather-auto': 'Auto',
+            'weather-snow': '❄️ Schnee',
+            'weather-rain': '☔ Regen',
+            'weather-candy': '🍬 Süßigkeiten',
+            'weather-none': '☀️ Aus',
+            'cursor-default': '🖱️ Standard',
+            'cursor-candy': '🍭 Süßigkeit',
+            'particles-on': 'Partikel: an',
+            'particles-off': 'Partikel: aus',
+            'blur-on': 'Unschärfe: an',
+            'blur-off': 'Unschärfe: aus',
+            'animations-on': 'Animationen: an',
+            'animations-off': 'Animationen: aus',
+            'reset-settings': 'Zurücksetzen',
+            'panel-home': '🏠 Startseite',
+            'panel-features': '✨ Funktionen',
+            'panel-streamers': '🎥 Streamer',
+            'panel-top': '🏆 Top-Spieler',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Regeln',
+            'panel-candy': '🍬 Süßigkeitenladen',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Vanilla-Überleben auf Version 1.21.8. Deine Welt — deine Regeln.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP kopiert',
+            'stats-title': 'Server-Statistiken',
+            'stat-1': 'Server-Betrieb',
+            'stat-2': 'Aktuelle Version',
+            'stat-3': 'Vanilla-Gameplay',
+            'stat-4': 'Kein Donate',
+            'features-title': 'Server-Funktionen',
+            'feature-1-title': 'Anti-Cheat-System',
+            'feature-1-desc': 'Erweiterter Schutz vor Cheatern. Faires Spiel für alle.',
+            'feature-2-title': 'Stabiler TPS',
+            'feature-2-desc': 'Optimierter Server auf leistungsstarker Hardware. Keine Verzögerungen.',
+            'feature-3-title': 'Regelmäßige Events',
+            'feature-3-desc': 'Wöchentliche Veranstaltungen und Wettbewerbe mit Preisen für Spieler.',
+            'feature-4-title': 'Reine Vanilla-Welt',
+            'feature-4-desc': 'Keine Plugins, nur reines Minecraft wie vorgesehen.',
+            'feature-5-title': 'Bautenschutz',
+            'feature-5-desc': 'Ihre Gebäude sind zuverlässig vor Griefern geschützt.',
+            'feature-6-title': 'Freundliche Gemeinschaft',
+            'feature-6-desc': 'Die ersten Spieler sind bereits hier. Komm zu uns.',
+            'streamers-title': 'Streamer auf dem Server',
+            'streamer-1-desc': 'Beliebte Streamerin, wird auf dem Server spielen. Folge den Streams!',
+            'streamer-2-desc': 'Serverbesitzer und Streamer. Spielt mit euch.',
+            'more-streamers': 'Weitere folgen bald',
+            'streamer-3-desc': 'Die Liste der Streamer wird aktualisiert. Folge den Neuigkeiten in Discord.',
+            'subscribe': 'abonnieren',
+            'soon': 'bald',
+            'announcements': 'Ankündigungen',
+            'news': 'Neuigkeiten',
+            'top-title': 'Top-Spieler',
+            'owner': 'Serverbesitzer',
+            'streamer-label': 'Streamerin',
+            'admin': 'Senior-Admin',
+            'hours': 'Stunden',
+            'update-date': 'Daten aktualisiert am 17. Februar 2026',
+            'howto-title': 'Wie man anfängt zu spielen',
+            'howto-1': 'Version 1.21.8',
+            'howto-1-desc': 'Stelle sicher, dass du die neueste Version von Minecraft installiert hast.',
+            'howto-2': 'Bewirb dich in Discord',
+            'howto-2-desc': 'Fülle das Bewerbungsformular aus und lies die Serverregeln.',
+            'howto-3': 'Warte auf die Genehmigung',
+            'howto-3-desc': 'Füge nach der Genehmigung den Server play.sweet-land.fun zu deiner Liste hinzu.',
+            'howto-4': 'Tritt bei und spiele',
+            'howto-4-desc': 'Wähle einen Standort für deine Basis, baue und erkunde die Welt.',
+            'faq-title': 'FAQ',
+            'faq-1': 'Wann ist der Start?',
+            'faq-1-desc': 'Der Server bereitet sich auf den Start vor. Folge den Neuigkeiten in Discord.',
+            'faq-2': 'Welche Version?',
+            'faq-2-desc': 'Der Server wird auf der neuesten Version 1.21.8 laufen.',
+            'faq-3': 'Wo chatten?',
+            'faq-3-desc': 'Hauptkommunikation ist in Discord. Dort auch Neuigkeiten und Events.',
+            'faq-4': 'Helles Thema?',
+            'faq-4-desc': 'Ja, klicke auf den Mond in der rechten Ecke und du wirst Regen sehen.',
+            'faq-5': 'Kontoschutz?',
+            'faq-5-desc': 'Anti-Cheat-System und Verschlüsselung der Spielerdaten.',
+            'faq-6': 'Donate?',
+            'faq-6-desc': 'Nein, dies ist ein komplett Vanilla-Server. Keine Privilegien.',
+            'faq-7': 'Online-Zahl?',
+            'faq-7-desc': 'Der Server öffnet bald. Sei der Erste.',
+            'faq-8': 'Wird es Wipes geben?',
+            'faq-8-desc': 'Wipes sind alle 8-11 Monate geplant. Alle Gebäude bleiben lange erhalten.',
+            'footer-desc': 'Vanilla-Überleben ohne Grenzen mit einer freundlichen Gemeinschaft und aktiver Administration.',
+            'footer-note': 'Keine Spenden — nur reines Vanilla-Gameplay',
+            'quick-links': 'Schnelllinks',
+            'footer-home': 'Startseite',
+            'footer-features': 'Funktionen',
+            'footer-howto': 'Spielanleitung',
+            'footer-streamers': 'Streamer',
+            'footer-top': 'Top-Spieler',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Regeln',
+            'footer-candy': '🍬 Süßigkeitenladen',
+            'social': 'Soziales',
+            'data-protection': 'Datenschutz',
+            'privacy-footer': 'Alle Daten sind geschützt und werden nicht an Dritte weitergegeben. Der Server erfüllt Sicherheitsstandards.',
+            'vanilla-server': 'Vanilla Minecraft Server.',
+            'privacy-note': 'Ihre Daten sind sicher geschützt. Durch die Nutzung des Servers stimmen Sie der Datenschutzrichtlinie zu.',
+            'rules-title': 'SERVER REGELN',
+            'online': 'online',
+            'candy-shop-title': '🍭 Süßigkeitenladen',
+            'back-to-main': '← Zurück zur Hauptseite',
+            'your-candies': '🍬 Deine Süßigkeiten:',
+            'enter-code': 'Code eingeben',
+            'activate': 'Aktivieren',
+            'logout': '🚪 Ausloggen',
+            'login': 'Einloggen',
+            'register': 'Registrieren',
+            'no-account': 'Kein Konto? Registrieren',
+            'have-account': 'Bereits ein Konto? Einloggen',
+            'username': 'Benutzername',
+            'password': 'Passwort',
+            'min-password': 'Passwort (min. 4 Zeichen)',
+            'admin-panel-btn': '🔧 Admin-Panel betreten',
+            'transfer-to': 'An',
+            'transfer-amount': 'Menge',
+            'transfer': 'Überweisen',
+            'search-user': 'Benutzer suchen',
+            'sort-name': 'Nach Namen',
+            'sort-candies': 'Nach Süßigkeiten',
+            'avg-change': '↗️ Durchschn. Änderung:',
+            'per-hour': 'pro Stunde',
+            'reg-date': '📅 Registriert:',
+            'last-login': '🔑 Letzter Login:',
+            'set': 'Setzen',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'Von',
+            'to': 'An',
+            'promo-section': 'Promocode-Verwaltung',
+            'add-promo': '➕ Hinzufügen',
+            'delete-promo': '❌',
+            'back-to-shop': '← Zurück zum Shop',
+            'admin-title': '🔧 ADMIN PANEL',
+        },
+        fr: {
+            'nav-features': 'Fonctionnalités',
+            'nav-howtoplay': 'Comment jouer',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Boutique',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Sombre',
+            'theme-light': 'Clair',
+            'theme-pink': 'Rose',
+            'theme-blue': 'Bleu',
+            'theme-green': 'Vert',
+            'theme-orange': 'Orange',
+            'theme-purple': 'Violet',
+            'theme-yellow': 'Jaune',
+            'theme-red': 'Rouge',
+            'theme-teal': 'Sarcelle',
+            'lang-ru': 'Russe',
+            'lang-uk': 'Ukrainien',
+            'lang-en': 'Anglais',
+            'lang-de': 'Allemand',
+            'lang-fr': 'Français',
+            'lang-es': 'Espagnol',
+            'weather-auto': 'Auto',
+            'weather-snow': '❄️ Neige',
+            'weather-rain': '☔ Pluie',
+            'weather-candy': '🍬 Bonbons',
+            'weather-none': '☀️ Off',
+            'cursor-default': '🖱️ Par défaut',
+            'cursor-candy': '🍭 Bonbon',
+            'particles-on': 'Particules: on',
+            'particles-off': 'Particules: off',
+            'blur-on': 'Flou: on',
+            'blur-off': 'Flou: off',
+            'animations-on': 'Animations: on',
+            'animations-off': 'Animations: off',
+            'reset-settings': 'Réinitialiser',
+            'panel-home': '🏠 Accueil',
+            'panel-features': '✨ Fonctionnalités',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Meilleurs',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Règles',
+            'panel-candy': '🍬 Magasin de bonbons',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Survie vanilla sur la version 1.21.8. Ton monde — tes règles.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiée',
+            'stats-title': 'Statistiques',
+            'stat-1': 'Fonctionnement',
+            'stat-2': 'Version actuelle',
+            'stat-3': 'Gameplay vanilla',
+            'stat-4': 'Pas de don',
+            'features-title': 'Fonctionnalités',
+            'feature-1-title': 'Anti-triche',
+            'feature-1-desc': 'Protection avancée contre les tricheurs.',
+            'feature-2-title': 'TPS stable',
+            'feature-2-desc': 'Serveur optimisé. Pas de lags.',
+            'feature-3-title': 'Événements',
+            'feature-3-desc': 'Événements hebdomadaires avec prix.',
+            'feature-4-title': 'Monde vanilla',
+            'feature-4-desc': 'Pas de plugins, Minecraft pur.',
+            'feature-5-title': 'Protection',
+            'feature-5-desc': 'Constructions protégées.',
+            'feature-6-title': 'Communauté',
+            'feature-6-desc': 'Rejoins les premiers.',
+            'streamers-title': 'Streamers',
+            'streamer-1-desc': 'Streamera sur le serveur.',
+            'streamer-2-desc': 'Propriétaire et streamer.',
+            'more-streamers': 'Plus bientôt',
+            'streamer-3-desc': 'Liste mise à jour sur Discord.',
+            'subscribe': 'abonne-toi',
+            'soon': 'bientôt',
+            'announcements': 'annonces',
+            'news': 'nouvelles',
+            'top-title': 'Top joueurs',
+            'owner': 'Propriétaire',
+            'streamer-label': 'Streameuse',
+            'admin': 'Admin',
+            'hours': 'heures',
+            'update-date': 'MAJ 17/02/2026',
+            'howto-title': 'Comment jouer',
+            'howto-1': 'Version 1.21.8',
+            'howto-1-desc': 'Dernière version.',
+            'howto-2': 'Postule',
+            'howto-2-desc': 'Formulaire sur Discord.',
+            'howto-3': 'Attends',
+            'howto-3-desc': 'Ajoute le serveur.',
+            'howto-4': 'Joue',
+            'howto-4-desc': 'Construis et explore.',
+            'faq-title': 'FAQ',
+            'faq-1': 'Début?',
+            'faq-1-desc': 'Bientôt.',
+            'faq-2': 'Version?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': 'Chat?',
+            'faq-3-desc': 'Discord.',
+            'faq-4': 'Thème clair?',
+            'faq-4-desc': 'Clique sur la lune.',
+            'faq-5': 'Sécurité?',
+            'faq-5-desc': 'Anti-triche.',
+            'faq-6': 'Don?',
+            'faq-6-desc': 'Non, vanilla.',
+            'faq-7': 'Online?',
+            'faq-7-desc': 'Bientôt.',
+            'faq-8': 'Wipes?',
+            'faq-8-desc': '8-11 mois.',
+            'footer-desc': 'Survie vanilla sans frontières.',
+            'footer-note': 'Pas de dons — seulement du vanilla pur',
+            'quick-links': 'Liens',
+            'footer-home': 'Accueil',
+            'footer-features': 'Fonctionnalités',
+            'footer-howto': 'Guide',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Top joueurs',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Règles',
+            'footer-candy': '🍬 Magasin de bonbons',
+            'social': 'Réseaux',
+            'data-protection': 'Protection des données',
+            'privacy-footer': 'Toutes les données sont protégées et non partagées. Le serveur respecte les normes de sécurité.',
+            'vanilla-server': 'Serveur Minecraft vanilla.',
+            'privacy-note': 'Vos données sont protégées. En utilisant le serveur, vous acceptez la politique de confidentialité.',
+            'rules-title': 'RÈGLES DU SERVEUR',
+            'online': 'online',
+            'candy-shop-title': '🍭 Magasin de bonbons',
+            'back-to-main': '← Retour à l\'accueil',
+            'your-candies': '🍬 Tes bonbons:',
+            'enter-code': 'Entrer le code',
+            'activate': 'Activer',
+            'logout': '🚪 Déconnexion',
+            'login': 'Connexion',
+            'register': 'S\'inscrire',
+            'no-account': 'Pas de compte? S\'inscrire',
+            'have-account': 'Déjà un compte? Se connecter',
+            'username': 'Pseudo',
+            'password': 'Mot de passe',
+            'min-password': 'Mot de passe (min 4 caractères)',
+            'admin-panel-btn': '🔧 Panneau d\'administration',
+            'transfer-to': 'À',
+            'transfer-amount': 'Montant',
+            'transfer': 'Transférer',
+            'search-user': 'Rechercher',
+            'sort-name': 'Par nom',
+            'sort-candies': 'Par bonbons',
+            'avg-change': '↗️ Changement moy:',
+            'per-hour': 'par heure',
+            'reg-date': '📅 Inscription:',
+            'last-login': '🔑 Dernière connexion:',
+            'set': 'Déf',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'De',
+            'to': 'À',
+            'promo-section': 'Gestion des codes promo',
+            'add-promo': '➕ Ajouter',
+            'delete-promo': '❌',
+            'back-to-shop': '← Retour à la boutique',
+            'admin-title': '🔧 ADMIN PANEL',
+        },
+        es: {
+            'nav-features': 'Características',
+            'nav-howtoplay': 'Cómo jugar',
+            'nav-faq': 'FAQ',
+            'shop-link': '🛒 Tienda',
+            'discord-link': '💬 Discord',
+            'theme-dark': 'Oscuro',
+            'theme-light': 'Claro',
+            'theme-pink': 'Rosa',
+            'theme-blue': 'Azul',
+            'theme-green': 'Verde',
+            'theme-orange': 'Naranja',
+            'theme-purple': 'Púrpura',
+            'theme-yellow': 'Amarillo',
+            'theme-red': 'Rojo',
+            'theme-teal': 'Turquesa',
+            'lang-ru': 'Ruso',
+            'lang-uk': 'Ucraniano',
+            'lang-en': 'Inglés',
+            'lang-de': 'Alemán',
+            'lang-fr': 'Francés',
+            'lang-es': 'Español',
+            'weather-auto': 'Auto',
+            'weather-snow': '❄️ Nieve',
+            'weather-rain': '☔ Lluvia',
+            'weather-candy': '🍬 Caramelos',
+            'weather-none': '☀️ Off',
+            'cursor-default': '🖱️ Por defecto',
+            'cursor-candy': '🍭 Caramelo',
+            'particles-on': 'Partículas: on',
+            'particles-off': 'Partículas: off',
+            'blur-on': 'Desenfoque: on',
+            'blur-off': 'Desenfoque: off',
+            'animations-on': 'Animaciones: on',
+            'animations-off': 'Animaciones: off',
+            'reset-settings': 'Reiniciar',
+            'panel-home': '🏠 Inicio',
+            'panel-features': '✨ Características',
+            'panel-streamers': '🎥 Streamers',
+            'panel-top': '🏆 Top jugadores',
+            'panel-faq': '❓ FAQ',
+            'panel-rules': '📜 Reglas',
+            'panel-candy': '🍬 Tienda de caramelos',
+            'social-discord': 'Discord',
+            'social-telegram': 'Telegram',
+            'social-youtube': 'YouTube',
+            'hero-tagline': 'Supervivencia vanilla en la versión 1.21.8. Tu mundo — tus reglas.',
+            'ip-button': 'play.sweet-land.fun',
+            'version-text': '1.21.8',
+            'copy-notice': 'IP copiada',
+            'stats-title': 'Estadísticas',
+            'stat-1': 'Funcionamiento',
+            'stat-2': 'Versión actual',
+            'stat-3': 'Juego vanilla',
+            'stat-4': 'Sin donaciones',
+            'features-title': 'Características',
+            'feature-1-title': 'Anti-trampas',
+            'feature-1-desc': 'Protección avanzada contra tramposos.',
+            'feature-2-title': 'TPS estable',
+            'feature-2-desc': 'Servidor optimizado. Sin retrasos.',
+            'feature-3-title': 'Eventos',
+            'feature-3-desc': 'Eventos semanales con premios.',
+            'feature-4-title': 'Mundo vanilla',
+            'feature-4-desc': 'Sin plugins, Minecraft puro.',
+            'feature-5-title': 'Protección',
+            'feature-5-desc': 'Construcciones protegidas.',
+            'feature-6-title': 'Comunidad',
+            'feature-6-desc': 'Únete a los primeros.',
+            'streamers-title': 'Streamers',
+            'streamer-1-desc': 'Streamer popular en el servidor.',
+            'streamer-2-desc': 'Dueño y streamer.',
+            'more-streamers': 'Más pronto',
+            'streamer-3-desc': 'Lista actualizada en Discord.',
+            'subscribe': 'suscríbete',
+            'soon': 'pronto',
+            'announcements': 'anuncios',
+            'news': 'noticias',
+            'top-title': 'Top jugadores',
+            'owner': 'Dueño',
+            'streamer-label': 'Streamer',
+            'admin': 'Admin',
+            'hours': 'horas',
+            'update-date': 'Actualizado 17/02/2026',
+            'howto-title': 'Cómo jugar',
+            'howto-1': 'Versión 1.21.8',
+            'howto-1-desc': 'Última versión.',
+            'howto-2': 'Solicita',
+            'howto-2-desc': 'Formulario en Discord.',
+            'howto-3': 'Espera',
+            'howto-3-desc': 'Añade el servidor.',
+            'howto-4': 'Juega',
+            'howto-4-desc': 'Construye y explora.',
+            'faq-title': 'FAQ',
+            'faq-1': '¿Inicio?',
+            'faq-1-desc': 'Pronto.',
+            'faq-2': '¿Versión?',
+            'faq-2-desc': '1.21.8',
+            'faq-3': '¿Chat?',
+            'faq-3-desc': 'Discord.',
+            'faq-4': '¿Tema claro?',
+            'faq-4-desc': 'Haz clic en la luna.',
+            'faq-5': '¿Seguridad?',
+            'faq-5-desc': 'Anti-trampas.',
+            'faq-6': '¿Donación?',
+            'faq-6-desc': 'No, vanilla.',
+            'faq-7': '¿Online?',
+            'faq-7-desc': 'Pronto.',
+            'faq-8': '¿Wipes?',
+            'faq-8-desc': '8-11 meses.',
+            'footer-desc': 'Supervivencia vanilla sin fronteras.',
+            'footer-note': 'Sin donaciones — solo juego vanilla puro',
+            'quick-links': 'Enlaces',
+            'footer-home': 'Inicio',
+            'footer-features': 'Características',
+            'footer-howto': 'Guía',
+            'footer-streamers': 'Streamers',
+            'footer-top': 'Top jugadores',
+            'footer-faq': 'FAQ',
+            'footer-rules': 'Reglas',
+            'footer-candy': '🍬 Tienda de caramelos',
+            'social': 'Redes',
+            'data-protection': 'Protección de datos',
+            'privacy-footer': 'Todos los datos están protegidos y no se comparten. El servidor cumple con los estándares de seguridad.',
+            'vanilla-server': 'Servidor Minecraft vanilla.',
+            'privacy-note': 'Tus datos están protegidos. Al usar el servidor, aceptas la política de privacidad.',
+            'rules-title': 'REGLAS DEL SERVIDOR',
+            'online': 'online',
+            'candy-shop-title': '🍭 Tienda de caramelos',
+            'back-to-main': '← Volver al inicio',
+            'your-candies': '🍬 Tus caramelos:',
+            'enter-code': 'Introduce código',
+            'activate': 'Activar',
+            'logout': '🚪 Salir',
+            'login': 'Iniciar sesión',
+            'register': 'Registrarse',
+            'no-account': '¿No tienes cuenta? Regístrate',
+            'have-account': '¿Ya tienes cuenta? Inicia sesión',
+            'username': 'Nombre de usuario',
+            'password': 'Contraseña',
+            'min-password': 'Contraseña (mín. 4 caracteres)',
+            'admin-panel-btn': '🔧 Panel de administración',
+            'transfer-to': 'A',
+            'transfer-amount': 'Cantidad',
+            'transfer': 'Transferir',
+            'search-user': 'Buscar usuario',
+            'sort-name': 'Por nombre',
+            'sort-candies': 'Por caramelos',
+            'avg-change': '↗️ Cambio medio:',
+            'per-hour': 'por hora',
+            'reg-date': '📅 Registrado:',
+            'last-login': '🔑 Último acceso:',
+            'set': 'Est',
+            'reset-pwd': '🔑',
+            'delete': '🗑️',
+            'from': 'De',
+            'to': 'A',
+            'promo-section': 'Gestión de códigos promocionales',
+            'add-promo': '➕ Añadir',
+            'delete-promo': '❌',
+            'back-to-shop': '← Volver a la tienda',
+            'admin-title': '🔧 ADMIN PANEL',
         }
-    }
-
-    // --- DOM элементы ---
-    const mainContent = document.getElementById('mainContent');
-    const candyShopScreen = document.getElementById('candyShopScreen');
-    const candyShopContent = document.getElementById('candyShopContent');
-
-    // --- Часы ---
-    function updateClock() {
-        let now = new Date();
-        let hours = now.getHours().toString().padStart(2,'0');
-        let minutes = now.getMinutes().toString().padStart(2,'0');
-        let seconds = now.getSeconds().toString().padStart(2,'0');
-        document.getElementById('currentTime').innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
-    }
-    setInterval(updateClock, 1000);
-
-    // --- Функции экранов ---
-    window.openCandyShop = function() { mainContent.classList.add('hidden'); candyShopScreen.classList.add('active'); renderCandyShop(); };
-    window.closeCandyShop = function() { candyShopScreen.classList.remove('active'); mainContent.classList.remove('hidden'); };
-    window.showMainContent = function() { if (candyShopScreen.classList.contains('active')) candyShopScreen.classList.remove('active'); mainContent.classList.remove('hidden'); };
-
-    // --- Рендер магазина ---
-    function renderCandyShop() {
-        if (adminMode) renderAdminPanel();
-        else if (!currentUser) renderAuth();
-        else renderUserShop();
-    }
-
-    function renderAuth() {
-        let html = '';
-        if (authMode === 'login') {
-            html = `<div class="register-section"><input type="text" id="loginName" placeholder="Никнейм"><input type="password" id="loginPassword" placeholder="Пароль"><button class="login-btn" onclick="loginUser()">Войти</button><div class="auth-toggle" onclick="switchAuthMode('register')">Нет аккаунта? Зарегистрироваться</div>`;
-            // Кнопка админки, если IP в списке
-            if (adminIPs.includes(userIP)) html += `<button class="admin-toggle-btn" onclick="toggleAdminMode(true)">🔧 Войти в админ-панель</button>`;
-            html += `</div>`;
-        } else {
-            html = `<div class="register-section"><input type="text" id="regName" placeholder="Никнейм"><input type="password" id="regPassword" placeholder="Пароль (мин. 4 символа)"><button class="register-btn" onclick="registerUser()">Зарегистрироваться</button><div class="auth-toggle" onclick="switchAuthMode('login')">Уже есть аккаунт? Войти</div></div>`;
-        }
-        candyShopContent.innerHTML = html;
-    }
-
-    function renderUserShop() {
-        let user = usersDB[currentUser];
-        let candies = user ? user.candies : 0;
-        let history = user ? user.history : Array(24).fill(0);
-        let maxVal = Math.max(...history, 1);
-        let graphHtml = '<div class="candy-graph">';
-        for (let i=0;i<24;i++) { let h = (history[i]/maxVal)*160; graphHtml += `<div class="graph-bar" style="height:${h}px;" title="Час ${i}: ${history[i]}"></div>`; }
-        graphHtml += '</div><div class="graph-labels">'; for (let i=0;i<24;i+=4) graphHtml += `<span>${i}:00</span>`; graphHtml += '</div>';
-
-        // Перевод конфет для обычных игроков
-        let transferOptions = Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('');
-        let transferSection = `
-            <div class="transfer-section">
-                <select id="transferToUser"><option value="">Кому</option>${transferOptions}</select>
-                <input type="number" id="transferAmountUser" placeholder="Количество" min="1">
-                <button onclick="transferCandiesUser()">Перевести</button>
-            </div>
-        `;
-
-        candyShopContent.innerHTML = `
-            <div class="candy-stats"><div class="candy-balance"><span>🍬 Твои конфеты:</span><span id="userCandies">${candies}</span></div>${graphHtml}</div>
-            ${transferSection}
-            <div class="candy-code-input"><input type="text" id="promoCode" placeholder="Введи код"><button onclick="applyPromoCode()">Активировать</button></div>
-            <button class="logout-btn" onclick="logoutUser()">🚪 Выйти</button>
-        `;
-    }
-
-    function renderAdminPanel() {
-        let filtered = Object.entries(usersDB).filter(([n])=>n.toLowerCase().includes(userFilter.toLowerCase()));
-        if (userSort==='name') filtered.sort((a,b)=>a[0].localeCompare(b[0]));
-        else if (userSort==='candies') filtered.sort((a,b)=>b[1].candies - a[1].candies);
-
-        let userListHtml = '<div class="user-list">';
-        for (let [n,d] of filtered) {
-            let avg = d.history.length>1 ? ((d.history[d.history.length-1]-d.history[0])/d.history.length).toFixed(1) : 0;
-            let lastLogin = d.lastLogin ? new Date(d.lastLogin).toLocaleString() : 'никогда';
-            let regDate = d.regDate ? new Date(d.regDate).toLocaleString() : 'неизвестно';
-            userListHtml += `<div class="user-item">
-                <div class="user-info">
-                    <div class="user-name">${n}</div>
-                    <div class="user-ip">IP: ${d.ip||'не указан'}</div>
-                    <div class="user-candies" id="candies-${n}">${d.candies}</div>
-                    <div class="user-history">↗️ Средн. изменение: ${avg} за час</div>
-                    <div class="user-history">📅 Регистрация: ${regDate}</div>
-                    <div class="user-history">🔑 Последний вход: ${lastLogin}</div>
-                </div>
-                <div class="user-actions">
-                    <button onclick="adjustCandies('${n}',1)">+</button>
-                    <button onclick="adjustCandies('${n}',-1)">-</button>
-                    <button onclick="adjustCandies('${n}',10)">+10</button>
-                    <button onclick="adjustCandies('${n}',-10)">-10</button>
-                    <input type="number" id="set-${n}" placeholder="Уст" min="0" style="width:70px">
-                    <button onclick="setCandies('${n}')">Уст</button>
-                    <button onclick="resetPassword('${n}')">🔑</button>
-                    <button onclick="deleteUser('${n}')">🗑️</button>
-                </div>
-            </div>`;
-        }
-        userListHtml += '</div>';
-
-        // Секция перевода конфет (админ может переводить от имени любого)
-        let transferOptions = Object.keys(usersDB).map(n => `<option value="${n}">${n}</option>`).join('');
-        let transferSection = `
-            <div class="transfer-section">
-                <select id="transferFrom"><option value="">От кого</option>${transferOptions}</select>
-                <select id="transferTo"><option value="">Кому</option>${transferOptions}</select>
-                <input type="number" id="transferAmount" placeholder="Кол-во" min="1">
-                <button onclick="transferCandiesAdmin()">Перевести</button>
-            </div>
-        `;
-
-        // Секция промокодов с точной настройкой
-        let promoList = Object.entries(promoCodes).map(([code, data]) => {
-            let rewardText = data.reward === 'random' ? `random ${data.min}-${data.max}` : data.reward;
-            let expiryText = data.expiry ? new Date(data.expiry).toLocaleString() : 'никогда';
-            let usesText = data.uses === Infinity ? '∞' : data.uses;
-            return `<div class="promo-item">
-                <input type="text" value="${code}" readonly>
-                <span>${rewardText}</span>
-                <span>Использований: ${usesText}</span>
-                <span>Истекает: ${expiryText}</span>
-                <button onclick="deletePromoCode('${code}')">❌</button>
-            </div>`;
-        }).join('');
-        let promoSec = `
-            <div class="promo-section">
-                <h3>Управление промокодами</h3>
-                <div class="promo-item">
-                    <input type="text" id="newPromoCode" placeholder="Код">
-                    <input type="number" id="newPromoReward" placeholder="Награда (число или -1 для random)" value="100">
-                    <input type="number" id="newPromoUses" placeholder="Кол-во использований (0 = бесконечно)" value="0">
-                    <input type="datetime-local" id="newPromoExpiry" placeholder="Срок действия (оставьте пустым)">
-                    <button onclick="addPromoCode()">➕ Добавить</button>
-                </div>
-                ${promoList}
-            </div>
-        `;
-
-        candyShopContent.innerHTML = `
-            <div class="admin-panel active">
-                <div class="admin-title">🔧 ADMIN PANEL</div>
-                <div class="admin-controls">
-                    <input type="text" placeholder="Поиск пользователя" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
-                    <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();">
-                        <option value="name" ${userSort==='name'?'selected':''}>По имени</option>
-                        <option value="candies" ${userSort==='candies'?'selected':''}>По конфетам</option>
-                    </select>
-                </div>
-                ${transferSection}
-                ${userListHtml}
-                ${promoSec}
-                <button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>
-            </div>
-        `;
-    }
-
-    // --- Функции аутентификации ---
-    window.switchAuthMode = function(mode) { authMode = mode; renderCandyShop(); };
-    window.registerUser = async function() {
-        let ok = await fetchUserIP();
-        if (!ok) return;
-        let name = document.getElementById('regName')?.value.trim();
-        let pass = document.getElementById('regPassword')?.value.trim();
-        if (!name || !pass) return alert('Заполните все поля');
-        if (pass.length < 4) return alert('Пароль должен быть не менее 4 символов');
-        if (usersDB[name]) return alert('Пользователь с таким именем уже существует');
-        for (let [u, d] of Object.entries(usersDB)) {
-            if (d.ip === userIP && userIP && !userIP.startsWith('unknown') && u !== 'Gyraffic') return alert('С этого IP уже зарегистрирован другой аккаунт');
-        }
-        usersDB[name] = { password: pass, ip: userIP, candies: 0, history: Array(24).fill(0), regDate: Date.now(), lastLogin: null };
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        currentUser = name;
-        usersDB[name].lastLogin = Date.now();
-        localStorage.setItem('sweetland_current_user', currentUser);
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        renderCandyShop();
-    };
-    window.loginUser = async function() {
-        let ok = await fetchUserIP();
-        if (!ok) return;
-        let name = document.getElementById('loginName')?.value.trim();
-        let pass = document.getElementById('loginPassword')?.value.trim();
-        if (!name || !pass) return alert('Заполните все поля');
-        let user = usersDB[name];
-        if (!user || user.password !== pass) return alert('Неверный никнейм или пароль');
-        if (!user.ip) { user.ip = userIP; }
-        else if (user.ip !== userIP && userIP && !userIP.startsWith('unknown') && name !== 'Gyraffic') return alert('Этот аккаунт уже используется с другого IP');
-        currentUser = name;
-        user.lastLogin = Date.now();
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        localStorage.setItem('sweetland_current_user', currentUser);
-        renderCandyShop();
-    };
-    window.logoutUser = function() { currentUser = null; localStorage.removeItem('sweetland_current_user'); authMode = 'login'; renderCandyShop(); };
-
-    // --- Функции магазина ---
-    window.applyPromoCode = function() {
-        let code = document.getElementById('promoCode')?.value.trim();
-        if (!code) return;
-        if (code === 'ADMIN-PANEL(GYRAFFIC)') {
-            if (!adminIPs.includes(userIP)) adminIPs.push(userIP);
-            localStorage.setItem('sweetland_admin_ips', JSON.stringify(adminIPs));
-            toggleAdminMode(true);
-            document.getElementById('promoCode').value = '';
-            return;
-        }
-        if (!currentUser) return alert('Сначала зарегистрируйся!');
-        let promo = promoCodes[code];
-        if (!promo) return alert('Неверный код');
-        if (promo.expiry && Date.now() > promo.expiry) return alert('Код истёк');
-        if (promo.uses !== Infinity && promo.uses <= 0) return alert('Код больше недействителен');
-        if (promo.reward === 'random') {
-            let bonus = Math.floor(Math.random() * (promo.max - promo.min + 1)) + promo.min;
-            adjustCandies(currentUser, bonus);
-            alert(`+${bonus} конфет!`);
-        } else {
-            adjustCandies(currentUser, promo.reward);
-            alert(`+${promo.reward} конфет!`);
-        }
-        if (promo.uses !== Infinity) {
-            promo.uses -= 1;
-            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        }
-        document.getElementById('promoCode').value = '';
     };
 
-    window.adjustCandies = function(username, delta) {
-        if (!usersDB[username]) return;
-        usersDB[username].candies += delta;
-        if (usersDB[username].candies < 0) usersDB[username].candies = 0;
-        usersDB[username].history.shift();
-        usersDB[username].history.push(usersDB[username].candies);
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        if (adminMode) renderAdminPanel();
-        else if (currentUser === username) { document.getElementById('userCandies').innerText = usersDB[username].candies; renderCandyShop(); }
-    };
-
-    window.setCandies = function(username) {
-        let inp = document.getElementById(`set-${username}`);
-        let val = parseInt(inp.value);
-        if (isNaN(val) || val<0) return alert('Введите корректное число');
-        usersDB[username].candies = val;
-        usersDB[username].history.shift();
-        usersDB[username].history.push(val);
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        renderAdminPanel();
-    };
-
-    window.resetPassword = function(username) {
-        let newPass = prompt('Новый пароль для ' + username);
-        if (!newPass || newPass.length<4) return alert('Пароль должен быть не менее 4 символов');
-        usersDB[username].password = newPass;
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        alert('Пароль изменён');
-    };
-
-    window.deleteUser = function(username) {
-        if (username==='Gyraffic' && !confirm('Удалить админа?')) return;
-        delete usersDB[username];
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        if (currentUser === username) { currentUser = null; localStorage.removeItem('sweetland_current_user'); }
-        renderAdminPanel();
-    };
-
-    window.toggleAdminMode = function(enable) { adminMode = enable; localStorage.setItem('sweetland_admin_mode', enable); renderCandyShop(); };
-
-    // --- Перевод конфет для обычных игроков ---
-    window.transferCandiesUser = function() {
-        let to = document.getElementById('transferToUser').value;
-        let amount = parseInt(document.getElementById('transferAmountUser').value);
-        if (!to || !amount || amount <= 0) return alert('Выберите получателя и введите количество');
-        if (!usersDB[to]) return alert('Получатель не найден');
-        if (usersDB[currentUser].candies < amount) return alert('Недостаточно конфет');
-        usersDB[currentUser].candies -= amount;
-        usersDB[to].candies += amount;
-        usersDB[currentUser].history.shift(); usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[to].history.shift(); usersDB[to].history.push(usersDB[to].candies);
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        renderCandyShop();
-    };
-
-    // --- Перевод конфет для админа ---
-    window.transferCandiesAdmin = function() {
-        let from = document.getElementById('transferFrom').value;
-        let to = document.getElementById('transferTo').value;
-        let amount = parseInt(document.getElementById('transferAmount').value);
-        if (!from || !to || !amount || amount <= 0) return alert('Заполните все поля');
-        if (from === to) return alert('Нельзя перевести самому себе');
-        if (!usersDB[from] || !usersDB[to]) return alert('Пользователь не найден');
-        if (usersDB[from].candies < amount) return alert('Недостаточно конфет у отправителя');
-        usersDB[from].candies -= amount;
-        usersDB[to].candies += amount;
-        usersDB[from].history.shift(); usersDB[from].history.push(usersDB[from].candies);
-        usersDB[to].history.shift(); usersDB[to].history.push(usersDB[to].candies);
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        renderAdminPanel();
-    };
-
-    // --- Управление промокодами ---
-    window.addPromoCode = function() {
-        let code = document.getElementById('newPromoCode').value.trim();
-        let reward = document.getElementById('newPromoReward').value.trim();
-        let uses = parseInt(document.getElementById('newPromoUses').value);
-        let expiryStr = document.getElementById('newPromoExpiry').value;
-        if (!code) return alert('Введите код');
-        if (promoCodes[code]) return alert('Такой код уже существует');
-        let usesVal = (uses === 0) ? Infinity : uses;
-        let expiry = expiryStr ? new Date(expiryStr).getTime() : null;
-        if (reward === '-1' || reward.toLowerCase() === 'random') {
-            promoCodes[code] = { reward: 'random', min: 1, max: 50, uses: usesVal, expiry: expiry, createdBy: currentUser || 'admin' };
-        } else {
-            let r = parseInt(reward);
-            if (isNaN(r) || r <= 0) return alert('Награда должна быть положительным числом или -1 для random');
-            promoCodes[code] = { reward: r, uses: usesVal, expiry: expiry, createdBy: currentUser || 'admin' };
-        }
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-    };
-
-    window.deletePromoCode = function(code) {
-        delete promoCodes[code];
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-    };
-
-    // --- Функции темы, погоды и т.д. ---
-    window.togglePanel = function() { document.getElementById('side-panel').classList.toggle('active'); };
-    window.openRules = function() { document.getElementById('rules-modal').classList.add('show'); document.body.style.overflow = 'hidden'; renderRules(); };
-    window.closeRules = function() { document.getElementById('rules-modal').classList.remove('show'); document.body.style.overflow = 'auto'; };
-
-    // --- Правила (полные на русском) ---
+    // --- ПРАВИЛА (ПОЛНЫЕ НА 6 ЯЗЫКОВ) ---
     const rulesData = {
         ru: [
             { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
@@ -808,9 +1473,634 @@
             { num: "2.3", text: "Предоставление игровых преимуществ своим друзьям.", punish: "Снятие + ЧС" },
             { num: "2.4", text: "Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.", punish: "Снятие" },
             { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
+        ],
+        uk: [
+            { num: "1.0", text: "Заходячи на сервер, ви автоматично погоджуєтесь з усіма правилами проекту.", punish: "Бан 1 день" },
+            { num: "1.1", text: "Незнання правил не звільняє вас від відповідальності.", punish: "Попередження" },
+            { num: "1.2", text: "Гріферство (псування або знищення чужих будівель).", punish: "Бан 30 днів" },
+            { num: "1.3", text: "Крадіжка ресурсів з чужих скринь, бочок, лійок.", punish: "Бан 14 днів" },
+            { num: "1.4", text: "Навмисне вбивство чужих домашніх тварин або іменних мобів.", punish: "Бан 2 дні" },
+            { num: "1.5", text: "Заселення на чужу територію або будівництво впритул без згоди власника.", punish: "Знос + Кік" },
+            { num: "1.6", text: "Ігнорування табличок «Вхід заборонено».", punish: "Вбивство без повернення речей" },
+            { num: "1.7", text: "Використання чужих автоматичних або ручних ферм без дозволу.", punish: "Бан 3 дні" },
+            { num: "1.8", text: "Псування світу (розлиття лави, води тощо).", punish: "Знос + Бан 2 дні" },
+            { num: "1.9", text: "Створення механізмів, що навмисно викликають лаги або падіння сервера.", punish: "Знос + Бан 14 днів" },
+            { num: "1.10", text: "Вбивство гравця без його попередньої згоди на PVP.", punish: "Бан 7 днів" },
+            { num: "1.11", text: "Підбирання та привласнення чужих речей після смерті гравця (якщо він просить повернути).", punish: "Бан 1 день + повернення речей" },
+            { num: "1.12", text: "Використання будь-яких видів читів (METEOR, WURST, IMPACT та інші).", punish: "ПЕРМАНЕНТНИЙ БАН" },
+            { num: "1.13", text: "Приховування інформації про баги, дюпи або недоробки економіки.", punish: "Бан 30 днів" },
+            { num: "1.14", text: "Привласнення закинутих баз без узгодження з адміністрацією.", punish: "Бан 5 днів" },
+            { num: "1.15", text: "Злам, спроба зламу або вхід на чужий акаунт.", punish: "Перманентний бан" },
+            { num: "1.16", text: "Нанесення будь-якої шкоди репутації або технічній частині сервера.", punish: "Бан назавжди" },
+            { num: "1.17", text: "Продаж ігрових ресурсів або послуг за реальні гроші.", punish: "ЧС проекту" },
+            { num: "1.18", text: "Підбурювання інших гравців до порушення правил.", punish: "Бан 10 днів" },
+            { num: "1.19", text: "Відповідальність за безпеку акаунта несе тільки його власник.", punish: "" },
+            { num: "1.20", text: "Створення додаткових акаунтів (твінків) для обходу активного бану.", punish: "Бан по IP" },
+            { num: "1.21", text: "Встановлення більше 4 масштабних автоматичних ферм на одного гравця або клан.", punish: "Знос + Бан 5 днів" },
+            { num: "1.22", text: "Надмірний спам, мат, капс та неадекватна поведінка в загальному чаті.", punish: "Мут 24 години" },
+            { num: "1.23", text: "Крадіжка товарів або обман у торгових зонах та магазинах гравців.", punish: "Бан 10 днів" },
+            { num: "1.24", text: "Постійне переслідування гравця та захід у його будинок без запрошення.", punish: "Кік" },
+            { num: "1.25", text: "Погрози баном, зв'язками з адміністрацією або спроби шантажу.", punish: "Бан 14 днів" },
+            { num: "1.26", text: "Будівництво будь-яких споруд ближче 500 блоків від нульових координат (спавну).", punish: "Перенесення або знос" },
+            { num: "1.27", text: "Створення будівель у Незері ближче 300 блоків від центрального порталу.", punish: "Знос" },
+            { num: "1.28", text: "Будівництво пасток, що вбивають гравця при вході (трапки).", punish: "Бан 7 днів" },
+            { num: "1.29", text: "Відмова знести незаконну будівлю за офіційною вимогою адміністрації.", punish: "Бан 7 днів" },
+            { num: "1.30", text: "Використання автоклікерів, автопіаніно або автототемів.", punish: "Бан 30 днів" },
+            { num: "1.31", text: "Організація масових роздач цінних ресурсів, що ламають економіку.", punish: "Бан 14 днів" },
+            { num: "1.32", text: "Будь-який вид дюпу предметів (включаючи килими або тнт).", punish: "ПЕРМАНЕНТНИЙ БАН" },
+            { num: "1.33", text: "Адміністрація має право виносити вирок, ґрунтуючись на ситуації, навіть якщо її немає в правилах.", punish: "" },
+            { num: "1.34", text: "Використання x-ray (моди або текстур-паки).", punish: "БАН НА 4 МІСЯЦІ" },
+            { num: "1.35", text: "Пошук та використання лазівок у правилах.", punish: "Бан 30 днів" },
+            { num: "1.36", text: "Попрошайництво до Адміністрації або Гравців.", punish: "Мут 6 годин потім Бан 2 дні" },
+            { num: "1.37", text: "Деструктивні дії в бік сервера або його онлайну.", punish: "Перманент" },
+            { num: "1.38", text: "Знесення або пошкодження чужих тотемів (Totem of Undying) без згоди власника.", punish: "Бан 7 днів + компенсація" },
+            { num: "2.1", text: "Правила сервера обов'язкові для виконання всіма членами персоналу.", punish: "" },
+            { num: "2.2", text: "Використання творчого режиму для особистого виживання або допомоги гравцям.", punish: "Зняття" },
+            { num: "2.3", text: "Надання ігрових переваг своїм друзям.", punish: "Зняття + ЧС" },
+            { num: "2.4", text: "Видача необґрунтованих покарань (банів, мутів) без наявності доказів.", punish: "Зняття" },
+            { num: "2.5", text: "Гравець має право оскаржити будь-яку дію адміністратора в Discord-каналі.", punish: "" }
+        ],
+        en: [
+            { num: "1.0", text: "By joining the server, you automatically agree to all project rules.", punish: "Ban 1 day" },
+            { num: "1.1", text: "Ignorance of the rules does not exempt you from responsibility.", punish: "Warning" },
+            { num: "1.2", text: "Griefing (damaging or destroying other people's buildings).", punish: "Ban 30 days" },
+            { num: "1.3", text: "Stealing resources from other people's chests, barrels, hoppers.", punish: "Ban 14 days" },
+            { num: "1.4", text: "Intentional killing of other people's pets or named mobs.", punish: "Ban 2 days" },
+            { num: "1.5", text: "Settling on someone else's territory or building close without the owner's consent.", punish: "Demolition + Kick" },
+            { num: "1.6", text: "Ignoring 'No Entry' signs.", punish: "Kill without item return" },
+            { num: "1.7", text: "Using other people's automatic or manual farms without permission.", punish: "Ban 3 days" },
+            { num: "1.8", text: "Damaging the world (spilling lava, water, etc.).", punish: "Demolition + Ban 2 days" },
+            { num: "1.9", text: "Creating mechanisms that intentionally cause lag or server crashes.", punish: "Demolition + Ban 14 days" },
+            { num: "1.10", text: "Killing a player without their prior consent to PVP.", punish: "Ban 7 days" },
+            { num: "1.11", text: "Picking up and appropriating other people's items after a player's death (if they ask to return them).", punish: "Ban 1 day + return items" },
+            { num: "1.12", text: "Using any kind of cheats (METEOR, WURST, IMPACT, etc.).", punish: "PERMANENT BAN" },
+            { num: "1.13", text: "Concealing information about bugs, dupes, or economic flaws.", punish: "Ban 30 days" },
+            { num: "1.14", text: "Appropriating abandoned bases without coordination with the administration.", punish: "Ban 5 days" },
+            { num: "1.15", text: "Hacking, attempted hacking, or logging into someone else's account.", punish: "Permanent ban" },
+            { num: "1.16", text: "Causing any harm to the reputation or technical part of the server.", punish: "Permanent ban" },
+            { num: "1.17", text: "Selling game resources or services for real money.", punish: "Blacklist" },
+            { num: "1.18", text: "Inciting other players to break the rules.", punish: "Ban 10 days" },
+            { num: "1.19", text: "The account owner is solely responsible for the security of the account.", punish: "" },
+            { num: "1.20", text: "Creating additional accounts (alts) to bypass an active ban.", punish: "IP ban" },
+            { num: "1.21", text: "Installing more than 4 large-scale automatic farms per player or clan.", punish: "Demolition + Ban 5 days" },
+            { num: "1.22", text: "Excessive spam, profanity, caps, and inappropriate behavior in the global chat.", punish: "Mute 24 hours" },
+            { num: "1.23", text: "Stealing goods or cheating in trading zones and player shops.", punish: "Ban 10 days" },
+            { num: "1.24", text: "Constantly stalking a player and entering their house without an invitation.", punish: "Kick" },
+            { num: "1.25", text: "Threats of banning, connections with the administration, or attempts at blackmail.", punish: "Ban 14 days" },
+            { num: "1.26", text: "Building any structures closer than 500 blocks from zero coordinates (spawn).", punish: "Relocation or demolition" },
+            { num: "1.27", text: "Creating buildings in the Nether closer than 300 blocks from the central portal.", punish: "Demolition" },
+            { num: "1.28", text: "Building traps that kill a player upon entry.", punish: "Ban 7 days" },
+            { num: "1.29", text: "Refusing to demolish an illegal building upon official request from the administration.", punish: "Ban 7 days" },
+            { num: "1.30", text: "Using auto-clickers, auto-pianos, or auto-totems.", punish: "Ban 30 days" },
+            { num: "1.31", text: "Organizing mass giveaways of valuable resources that break the economy.", punish: "Ban 14 days" },
+            { num: "1.32", text: "Any kind of item duping (including carpets or TNT).", punish: "PERMANENT BAN" },
+            { num: "1.33", text: "The administration has the right to make a ruling based on the situation, even if it is not in the rules.", punish: "" },
+            { num: "1.34", text: "Using x-ray (mods or texture packs).", punish: "BAN FOR 4 MONTHS" },
+            { num: "1.35", text: "Searching for and exploiting loopholes in the rules.", punish: "Ban 30 days" },
+            { num: "1.36", text: "Begging to the Administration or Players.", punish: "Mute 6 hours then Ban 2 days" },
+            { num: "1.37", text: "Destructive actions towards the server or its online community.", punish: "Permanent" },
+            { num: "1.38", text: "Destroying or damaging other players' Totems of Undying without consent.", punish: "Ban 7 days + compensation" },
+            { num: "2.1", text: "Server rules are mandatory for all staff members.", punish: "" },
+            { num: "2.2", text: "Using creative mode for personal survival or helping players.", punish: "Removal" },
+            { num: "2.3", text: "Providing game advantages to friends.", punish: "Removal + Blacklist" },
+            { num: "2.4", text: "Issuing unjustified punishments (bans, mutes) without evidence.", punish: "Removal" },
+            { num: "2.5", text: "A player has the right to appeal any action of an administrator in the Discord channel.", punish: "" }
+        ],
+        de: [
+            { num: "1.0", text: "Mit dem Beitritt zum Server stimmst du automatisch allen Projektregeln zu.", punish: "Ban 1 Tag" },
+            { num: "1.1", text: "Unkenntnis der Regeln befreit dich nicht von der Verantwortung.", punish: "Verwarnung" },
+            { num: "1.2", text: "Griefing (Beschädigung oder Zerstörung fremder Bauten).", punish: "Ban 30 Tage" },
+            { num: "1.3", text: "Diebstahl von Ressourcen aus fremden Kisten, Fässern, Trichtern.", punish: "Ban 14 Tage" },
+            { num: "1.4", text: "Vorsätzliches Töten fremder Haustiere oder benannter Mobs.", punish: "Ban 2 Tage" },
+            { num: "1.5", text: "Besiedlung fremden Gebiets oder Bau in unmittelbarer Nähe ohne Zustimmung des Eigentümers.", punish: "Abriss + Kick" },
+            { num: "1.6", text: "Ignorieren von 'Kein Zutritt'-Schildern.", punish: "Töten ohne Gegenstands-Rückgabe" },
+            { num: "1.7", text: "Nutzung fremder automatischer oder manueller Farmen ohne Erlaubnis.", punish: "Ban 3 Tage" },
+            { num: "1.8", text: "Weltbeschädigung (Verschütten von Lava, Wasser usw.).", punish: "Abriss + Ban 2 Tage" },
+            { num: "1.9", text: "Erstellen von Mechanismen, die absichtlich Lag verursachen oder Serverabstürze.", punish: "Abriss + Ban 14 Tage" },
+            { num: "1.10", text: "Töten eines Spielers ohne dessen vorherige Zustimmung zu PVP.", punish: "Ban 7 Tage" },
+            { num: "1.11", text: "Aufheben und Aneignen fremder Gegenstände nach dem Tod eines Spielers (wenn er um Rückgabe bittet).", punish: "Ban 1 Tag + Rückgabe der Gegenstände" },
+            { num: "1.12", text: "Verwendung jeglicher Cheats (METEOR, WURST, IMPACT usw.).", punish: "PERMANENTER BAN" },
+            { num: "1.13", text: "Verheimlichen von Informationen über Bugs, Dupes oder wirtschaftliche Mängel.", punish: "Ban 30 Tage" },
+            { num: "1.14", text: "Aneignung verlassener Basen ohne Absprache mit der Administration.", punish: "Ban 5 Tage" },
+            { num: "1.15", text: "Hacking, Hackversuch oder Einloggen in fremde Accounts.", punish: "Permanenter Ban" },
+            { num: "1.16", text: "Schädigung des Rufs oder des technischen Teils des Servers.", punish: "Permanenter Ban" },
+            { num: "1.17", text: "Verkauf von Spielressourcen oder -dienstleistungen gegen echtes Geld.", punish: "Blacklist" },
+            { num: "1.18", text: "Anstiftung anderer Spieler zu Regelverstößen.", punish: "Ban 10 Tage" },
+            { num: "1.19", text: "Die Sicherheit des Kontos liegt in der alleinigen Verantwortung des Besitzers.", punish: "" },
+            { num: "1.20", text: "Erstellen von Zweitkonten (Alts) zur Umgehung eines aktiven Bans.", punish: "IP-Ban" },
+            { num: "1.21", text: "Installation von mehr als 4 groß angelegten automatischen Farmen pro Spieler oder Clan.", punish: "Abriss + Ban 5 Tage" },
+            { num: "1.22", text: "Übermäßiger Spam, Fluchen, Caps und unangemessenes Verhalten im globalen Chat.", punish: "Mute 24 Stunden" },
+            { num: "1.23", text: "Diebstahl von Waren oder Betrug in Handelszonen und Spielerläden.", punish: "Ban 10 Tage" },
+            { num: "1.24", text: "Ständiges Verfolgen eines Spielers und Betreten seines Hauses ohne Einladung.", punish: "Kick" },
+            { num: "1.25", text: "Androhung von Bans, Verbindungen zur Administration oder Erpressungsversuche.", punish: "Ban 14 Tage" },
+            { num: "1.26", text: "Bau von Strukturen näher als 500 Blöcke von den Nullkoordinaten (Spawn).", punish: "Umsetzung oder Abriss" },
+            { num: "1.27", text: "Erstellen von Bauten im Nether näher als 300 Blöcke vom zentralen Portal.", punish: "Abriss" },
+            { num: "1.28", text: "Bau von Fallen, die Spieler beim Betreten töten.", punish: "Ban 7 Tage" },
+            { num: "1.29", text: "Weigerung, einen illegalen Bau auf offizielle Aufforderung der Administration abzureißen.", punish: "Ban 7 Tage" },
+            { num: "1.30", text: "Verwendung von Auto-Clickern, Auto-Pianos oder Auto-Totems.", punish: "Ban 30 Tage" },
+            { num: "1.31", text: "Organisation von Massenverteilungen wertvoller Ressourcen, die die Wirtschaft zerstören.", punish: "Ban 14 Tage" },
+            { num: "1.32", text: "Jegliche Art von Item-Duping (einschließlich Teppiche oder TNT).", punish: "PERMANENTER BAN" },
+            { num: "1.33", text: "Die Administration hat das Recht, basierend auf der Situation zu entscheiden, auch wenn diese nicht in den Regeln steht.", punish: "" },
+            { num: "1.34", text: "Verwendung von X-Ray (Mods oder Texturen).", punish: "BAN FÜR 4 MONATE" },
+            { num: "1.35", text: "Suche nach und Ausnutzung von Regelungslücken.", punish: "Ban 30 Tage" },
+            { num: "1.36", text: "Betteln bei der Administration oder Spielern.", punish: "Mute 6 Stunden dann Ban 2 Tage" },
+            { num: "1.37", text: "Destruktive Handlungen gegen den Server oder seine Online-Community.", punish: "Permanent" },
+            { num: "1.38", text: "Zerstörung oder Beschädigung fremder Totems (Totem der Unsterblichkeit) ohne Zustimmung.", punish: "Ban 7 Tage + Entschädigung" },
+            { num: "2.1", text: "Serverregeln sind für alle Mitarbeiter verbindlich.", punish: "" },
+            { num: "2.2", text: "Nutzung des Kreativmodus für persönliches Überleben oder Hilfe für Spieler.", punish: "Entfernung" },
+            { num: "2.3", text: "Gewährung von Spielvorteilen für Freunde.", punish: "Entfernung + Blacklist" },
+            { num: "2.4", text: "Ausstellung unbegründeter Strafen (Bans, Mutes) ohne Beweise.", punish: "Entfernung" },
+            { num: "2.5", text: "Ein Spieler hat das Recht, jede Aktion eines Administrators im Discord-Kanal anzufechten.", punish: "" }
+        ],
+        fr: [
+            { num: "1.0", text: "En rejoignant le serveur, vous acceptez automatiquement toutes les règles du projet.", punish: "Ban 1 jour" },
+            { num: "1.1", text: "La méconnaissance des règles ne vous exempte pas de votre responsabilité.", punish: "Avertissement" },
+            { num: "1.2", text: "Griefing (endommager ou détruire les constructions d'autrui).", punish: "Ban 30 jours" },
+            { num: "1.3", text: "Vol de ressources dans les coffres, tonneaux, entonnoirs d'autrui.", punish: "Ban 14 jours" },
+            { num: "1.4", text: "Meurtre intentionnel d'animaux domestiques ou de mobs nommés d'autrui.", punish: "Ban 2 jours" },
+            { num: "1.5", text: "S'installer sur le territoire d'autrui ou construire à proximité sans le consentement du propriétaire.", punish: "Démolition + Kick" },
+            { num: "1.6", text: "Ignorer les panneaux 'Entrée interdite'.", punish: "Mort sans retour d'objets" },
+            { num: "1.7", text: "Utiliser les fermes automatiques ou manuelles d'autrui sans permission.", punish: "Ban 3 jours" },
+            { num: "1.8", text: "Détérioration du monde (déversement de lave, d'eau, etc.).", punish: "Démolition + Ban 2 jours" },
+            { num: "1.9", text: "Créer des mécanismes provoquant intentionnellement des lags ou des crashs du serveur.", punish: "Démolition + Ban 14 jours" },
+            { num: "1.10", text: "Tuer un joueur sans son consentement préalable au PVP.", punish: "Ban 7 jours" },
+            { num: "1.11", text: "Ramasser et s'approprier les objets d'autrui après la mort d'un joueur (s'il demande de les rendre).", punish: "Ban 1 jour + retour des objets" },
+            { num: "1.12", text: "Utilisation de tout type de cheats (METEOR, WURST, IMPACT, etc.).", punish: "BAN PERMANENT" },
+            { num: "1.13", text: "Cacher des informations sur les bugs, les dupes ou les défauts économiques.", punish: "Ban 30 jours" },
+            { num: "1.14", text: "S'approprier des bases abandonnées sans coordination avec l'administration.", punish: "Ban 5 jours" },
+            { num: "1.15", text: "Hacking, tentative de hacking ou connexion au compte d'autrui.", punish: "Ban permanent" },
+            { num: "1.16", text: "Causer tout préjudice à la réputation ou à la partie technique du serveur.", punish: "Ban permanent" },
+            { num: "1.17", text: "Vente de ressources ou services de jeu pour de l'argent réel.", punish: "Liste noire" },
+            { num: "1.18", text: "Inciter d'autres joueurs à enfreindre les règles.", punish: "Ban 10 jours" },
+            { num: "1.19", text: "La sécurité du compte relève de la seule responsabilité de son propriétaire.", punish: "" },
+            { num: "1.20", text: "Création de comptes supplémentaires (alts) pour contourner un ban actif.", punish: "Ban IP" },
+            { num: "1.21", text: "Installation de plus de 4 fermes automatiques à grande échelle par joueur ou clan.", punish: "Démolition + Ban 5 jours" },
+            { num: "1.22", text: "Spam excessif, grossièretés, majuscules et comportement inapproprié dans le chat global.", punish: "Mute 24 heures" },
+            { num: "1.23", text: "Vol de marchandises ou tromperie dans les zones commerciales et les magasins de joueurs.", punish: "Ban 10 jours" },
+            { num: "1.24", text: "Harcèlement constant d'un joueur et entrée dans sa maison sans invitation.", punish: "Kick" },
+            { num: "1.25", text: "Menaces de ban, liens avec l'administration ou tentatives de chantage.", punish: "Ban 14 jours" },
+            { num: "1.26", text: "Construction de structures à moins de 500 blocs des coordonnées zéro (spawn).", punish: "Relocalisation ou démolition" },
+            { num: "1.27", text: "Création de constructions dans le Nether à moins de 300 blocs du portail central.", punish: "Démolition" },
+            { num: "1.28", text: "Construction de pièges tuant le joueur à l'entrée.", punish: "Ban 7 jours" },
+            { num: "1.29", text: "Refus de démolir une construction illégale sur demande officielle de l'administration.", punish: "Ban 7 jours" },
+            { num: "1.30", text: "Utilisation d'auto-clickers, d'auto-pianos ou d'auto-totems.", punish: "Ban 30 jours" },
+            { num: "1.31", text: "Organisation de distributions massives de ressources précieuses cassant l'économie.", punish: "Ban 14 jours" },
+            { num: "1.32", text: "Tout type de dupe d'objets (y compris les tapis ou TNT).", punish: "BAN PERMANENT" },
+            { num: "1.33", text: "L'administration a le droit de statuer en fonction de la situation, même si elle n'est pas dans les règles.", punish: "" },
+            { num: "1.34", text: "Utilisation de x-ray (mods ou packs de textures).", punish: "BAN DE 4 MOIS" },
+            { num: "1.35", text: "Recherche et exploitation de failles dans les règles.", punish: "Ban 30 jours" },
+            { num: "1.36", text: "Mendicité auprès de l'Administration ou des Joueurs.", punish: "Mute 6 heures puis Ban 2 jours" },
+            { num: "1.37", text: "Actions destructrices envers le serveur ou sa communauté en ligne.", punish: "Permanent" },
+            { num: "1.38", text: "Détruire ou endommager les totems (Totem d'immortalité) d'autres joueurs sans consentement.", punish: "Ban 7 jours + compensation" },
+            { num: "2.1", text: "Les règles du serveur sont obligatoires pour tous les membres du personnel.", punish: "" },
+            { num: "2.2", text: "Utilisation du mode créatif pour la survie personnelle ou l'aide aux joueurs.", punish: "Retrait" },
+            { num: "2.3", text: "Octroi d'avantages de jeu à ses amis.", punish: "Retrait + Liste noire" },
+            { num: "2.4", text: "Prononciation de sanctions injustifiées (bans, mutes) sans preuve.", punish: "Retrait" },
+            { num: "2.5", text: "Un joueur a le droit de contester toute action d'un administrateur dans le canal Discord.", punish: "" }
+        ],
+        es: [
+            { num: "1.0", text: "Al unirte al servidor, aceptas automáticamente todas las reglas del proyecto.", punish: "Ban 1 día" },
+            { num: "1.1", text: "El desconocimiento de las reglas no te exime de responsabilidad.", punish: "Advertencia" },
+            { num: "1.2", text: "Griefing (dañar o destruir construcciones ajenas).", punish: "Ban 30 días" },
+            { num: "1.3", text: "Robo de recursos de cofres, barriles, tolvas ajenos.", punish: "Ban 14 días" },
+            { num: "1.4", text: "Asesinato intencional de mascotas o mobs con nombre ajenos.", punish: "Ban 2 días" },
+            { num: "1.5", text: "Asentarse en territorio ajeno o construir cerca sin consentimiento del propietario.", punish: "Demolición + Kick" },
+            { num: "1.6", text: "Ignorar carteles de 'Prohibido el paso'.", punish: "Muerte sin devolución de objetos" },
+            { num: "1.7", text: "Usar granjas automáticas o manuales ajenas sin permiso.", punish: "Ban 3 días" },
+            { num: "1.8", text: "Dañar el mundo (derramar lava, agua, etc.).", punish: "Demolición + Ban 2 días" },
+            { num: "1.9", text: "Crear mecanismos que causen intencionalmente lag o caídas del servidor.", punish: "Demolición + Ban 14 días" },
+            { num: "1.10", text: "Matar a un jugador sin su consentimiento previo para PVP.", punish: "Ban 7 días" },
+            { num: "1.11", text: "Recoger y apropiarse de objetos ajenos tras la muerte de un jugador (si pide que los devuelvan).", punish: "Ban 1 día + devolución de objetos" },
+            { num: "1.12", text: "Uso de cualquier tipo de cheats (METEOR, WURST, IMPACT, etc.).", punish: "BAN PERMANENTE" },
+            { num: "1.13", text: "Ocultar información sobre bugs, dupes o fallos económicos.", punish: "Ban 30 días" },
+            { num: "1.14", text: "Apropiarse de bases abandonadas sin coordinación con la administración.", punish: "Ban 5 días" },
+            { num: "1.15", text: "Hackeo, intento de hackeo o acceso a cuenta ajena.", punish: "Ban permanente" },
+            { num: "1.16", text: "Causar cualquier daño a la reputación o parte técnica del servidor.", punish: "Ban permanente" },
+            { num: "1.17", text: "Venta de recursos o servicios del juego por dinero real.", punish: "Lista negra" },
+            { num: "1.18", text: "Incitar a otros jugadores a violar las reglas.", punish: "Ban 10 días" },
+            { num: "1.19", text: "La seguridad de la cuenta es responsabilidad exclusiva del propietario.", punish: "" },
+            { num: "1.20", text: "Creación de cuentas adicionales (alts) para evadir un ban activo.", punish: "Ban IP" },
+            { num: "1.21", text: "Instalación de más de 4 granjas automáticas a gran escala por jugador o clan.", punish: "Demolición + Ban 5 días" },
+            { num: "1.22", text: "Spam excesivo, groserías, mayúsculas y comportamiento inapropiado en el chat global.", punish: "Mute 24 horas" },
+            { num: "1.23", text: "Robo de mercancías o engaño en zonas comerciales y tiendas de jugadores.", punish: "Ban 10 días" },
+            { num: "1.24", text: "Acecho constante de un jugador y entrada a su casa sin invitación.", punish: "Kick" },
+            { num: "1.25", text: "Amenazas de ban, vínculos con la administración o intentos de chantaje.", punish: "Ban 14 días" },
+            { num: "1.26", text: "Construcción de estructuras a menos de 500 bloques de las coordenadas cero (spawn).", punish: "Reubicación o demolición" },
+            { num: "1.27", text: "Creación de construcciones en el Nether a menos de 300 bloques del portal central.", punish: "Demolición" },
+            { num: "1.28", text: "Construcción de trampas que matan al jugador al entrar.", punish: "Ban 7 días" },
+            { num: "1.29", text: "Negativa a demoler una construcción ilegal por solicitud oficial de la administración.", punish: "Ban 7 días" },
+            { num: "1.30", text: "Uso de auto-clickers, auto-pianos o auto-totems.", punish: "Ban 30 días" },
+            { num: "1.31", text: "Organización de sorteos masivos de recursos valiosos que rompen la economía.", punish: "Ban 14 días" },
+            { num: "1.32", text: "Cualquier tipo de dupe de objetos (incluyendo alfombras o TNT).", punish: "BAN PERMANENTE" },
+            { num: "1.33", text: "La administración tiene derecho a decidir basándose en la situación, incluso si no está en las reglas.", punish: "" },
+            { num: "1.34", text: "Uso de x-ray (mods o texturas).", punish: "BAN POR 4 MESES" },
+            { num: "1.35", text: "Búsqueda y explotación de lagunas en las reglas.", punish: "Ban 30 días" },
+            { num: "1.36", text: "Mendicidad a la Administración o Jugadores.", punish: "Mute 6 horas luego Ban 2 días" },
+            { num: "1.37", text: "Acciones destructivas hacia el servidor o su comunidad online.", punish: "Permanente" },
+            { num: "1.38", text: "Destruir o dañar los tótems (Totem de la inmortalidad) de otros jugadores sin consentimiento.", punish: "Ban 7 días + compensación" },
+            { num: "2.1", text: "Las reglas del servidor son obligatorias para todos los miembros del personal.", punish: "" },
+            { num: "2.2", text: "Uso del modo creativo para supervivencia personal o ayuda a jugadores.", punish: "Remoción" },
+            { num: "2.3", text: "Otorgar ventajas de juego a amigos.", punish: "Remoción + Lista negra" },
+            { num: "2.4", text: "Emisión de castigos injustificados (bans, mutes) sin pruebas.", punish: "Remoción" },
+            { num: "2.5", text: "Un jugador tiene derecho a apelar cualquier acción de un administrador en el canal de Discord.", punish: "" }
         ]
     };
 
+    // --- Получение IP (без анти-VPN для простоты, можно добавить позже) ---
+    async function fetchUserIP() {
+        try {
+            let response = await fetch('https://api.ipify.org?format=json');
+            let data = await response.json();
+            userIP = data.ip;
+            return true;
+        } catch (e) {
+            userIP = 'unknown-' + Math.random().toString(36).substring(7);
+            return true;
+        }
+    }
+
+    // --- DOM элементы ---
+    const mainContent = document.getElementById('mainContent');
+    const candyShopScreen = document.getElementById('candyShopScreen');
+    const candyShopContent = document.getElementById('candyShopContent');
+
+    // --- Часы ---
+    function updateClock() {
+        let now = new Date();
+        let hours = now.getHours().toString().padStart(2,'0');
+        let minutes = now.getMinutes().toString().padStart(2,'0');
+        let seconds = now.getSeconds().toString().padStart(2,'0');
+        let el = document.getElementById('currentTime');
+        if (el) el.innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+
+    // --- Онлайн счётчик (имитация) ---
+    let online = 0;
+    setInterval(() => {
+        online = Math.floor(Math.random() * 10) + 1;
+        document.getElementById('onlineNumber').innerText = online;
+    }, 5000);
+
+    // --- Функции экранов ---
+    window.openCandyShop = function() { mainContent.classList.add('hidden'); candyShopScreen.classList.add('active'); renderCandyShop(); };
+    window.closeCandyShop = function() { candyShopScreen.classList.remove('active'); mainContent.classList.remove('hidden'); };
+    window.showMainContent = function() { if (candyShopScreen.classList.contains('active')) candyShopScreen.classList.remove('active'); mainContent.classList.remove('hidden'); };
+
+    // --- График линией (canvas) ---
+    function drawLineGraph(history, canvasId) {
+        let canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let w = canvas.width, h = canvas.height;
+        ctx.clearRect(0,0,w,h);
+        if (!history || history.length < 2) return;
+        let maxVal = Math.max(...history, 1);
+        let minVal = Math.min(...history, 0);
+        let range = maxVal - minVal || 1;
+        ctx.beginPath();
+        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+        ctx.lineWidth = 3;
+        ctx.shadowColor = ctx.strokeStyle;
+        ctx.shadowBlur = 10;
+        for (let i=0; i<history.length; i++) {
+            let x = (i / (history.length-1)) * w;
+            let y = h - 10 - ((history[i] - minVal) / range) * (h - 20);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = ctx.strokeStyle;
+        for (let i=0; i<history.length; i++) {
+            let x = (i / (history.length-1)) * w;
+            let y = h - 10 - ((history[i] - minVal) / range) * (h - 20);
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, 2*Math.PI);
+            ctx.fill();
+        }
+    }
+
+    // --- Рендер магазина ---
+    function renderCandyShop() {
+        if (adminMode) renderAdminPanel();
+        else if (!currentUser) renderAuth();
+        else renderUserShop();
+    }
+
+    function renderAuth() {
+        let html = '';
+        if (authMode === 'login') {
+            html = `<div class="register-section">
+                <input type="text" id="loginName" placeholder="${translations[currentLang]['username']}">
+                <input type="password" id="loginPassword" placeholder="${translations[currentLang]['password']}">
+                <button class="login-btn" onclick="loginUser()">${translations[currentLang]['login']}</button>
+                <div class="auth-toggle" onclick="switchAuthMode('register')">${translations[currentLang]['no-account']}</div>`;
+            if (adminIPs.includes(userIP)) html += `<button class="admin-toggle-btn" onclick="toggleAdminMode(true)">${translations[currentLang]['admin-panel-btn']}</button>`;
+            html += `</div>`;
+        } else {
+            html = `<div class="register-section">
+                <input type="text" id="regName" placeholder="${translations[currentLang]['username']}">
+                <input type="password" id="regPassword" placeholder="${translations[currentLang]['min-password']}">
+                <button class="register-btn" onclick="registerUser()">${translations[currentLang]['register']}</button>
+                <div class="auth-toggle" onclick="switchAuthMode('login')">${translations[currentLang]['have-account']}</div>
+            </div>`;
+        }
+        candyShopContent.innerHTML = html;
+    }
+
+    function renderUserShop() {
+        let user = usersDB[currentUser];
+        let candies = user ? user.candies : 0;
+        let history = user ? user.history : Array(24).fill(0);
+
+        let graphHtml = `<div class="candy-graph"><canvas id="userGraph" width="800" height="160"></canvas></div><div class="graph-labels">`;
+        for (let i=0;i<24;i+=4) graphHtml += `<span>${i}:00</span>`;
+        graphHtml += '</div>';
+
+        let transferOptions = Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('');
+        let transferSection = `
+            <div class="transfer-section">
+                <select id="transferToUser"><option value="">${translations[currentLang]['transfer-to']}</option>${transferOptions}</select>
+                <input type="number" id="transferAmountUser" placeholder="${translations[currentLang]['transfer-amount']}" min="1">
+                <button onclick="transferCandiesUser()">${translations[currentLang]['transfer']}</button>
+            </div>
+        `;
+
+        candyShopContent.innerHTML = `
+            <div class="candy-stats"><div class="candy-balance"><span>${translations[currentLang]['your-candies']}</span><span id="userCandies">${candies}</span></div>${graphHtml}</div>
+            ${transferSection}
+            <div class="candy-code-input"><input type="text" id="promoCode" placeholder="${translations[currentLang]['enter-code']}"><button onclick="applyPromoCode()">${translations[currentLang]['activate']}</button></div>
+            <button class="logout-btn" onclick="logoutUser()">${translations[currentLang]['logout']}</button>
+        `;
+        setTimeout(() => drawLineGraph(history, 'userGraph'), 50);
+    }
+
+    function renderAdminPanel() {
+        let filtered = Object.entries(usersDB).filter(([n])=>n.toLowerCase().includes(userFilter.toLowerCase()));
+        if (userSort==='name') filtered.sort((a,b)=>a[0].localeCompare(b[0]));
+        else if (userSort==='candies') filtered.sort((a,b)=>b[1].candies - a[1].candies);
+
+        let userListHtml = '<div class="user-list">';
+        for (let [n,d] of filtered) {
+            let avg = d.history.length>1 ? ((d.history[d.history.length-1]-d.history[0])/d.history.length).toFixed(1) : 0;
+            let lastLogin = d.lastLogin ? new Date(d.lastLogin).toLocaleString() : translations[currentLang]['never'];
+            let regDate = d.regDate ? new Date(d.regDate).toLocaleString() : translations[currentLang]['unknown'];
+            userListHtml += `<div class="user-item">
+                <div class="user-info">
+                    <div class="user-name">${n}</div>
+                    <div class="user-ip">IP: ${d.ip||translations[currentLang]['not-specified']}</div>
+                    <div class="user-candies" id="candies-${n}">${d.candies}</div>
+                    <div class="user-history">${translations[currentLang]['avg-change']} ${avg} ${translations[currentLang]['per-hour']}</div>
+                    <div class="user-history">${translations[currentLang]['reg-date']} ${regDate}</div>
+                    <div class="user-history">${translations[currentLang]['last-login']} ${lastLogin}</div>
+                </div>
+                <div class="user-actions">
+                    <button onclick="adjustCandies('${n}',1)">+</button>
+                    <button onclick="adjustCandies('${n}',-1)">-</button>
+                    <button onclick="adjustCandies('${n}',10)">+10</button>
+                    <button onclick="adjustCandies('${n}',-10)">-10</button>
+                    <input type="number" id="set-${n}" placeholder="${translations[currentLang]['set']}" min="0" style="width:70px">
+                    <button onclick="setCandies('${n}')">${translations[currentLang]['set']}</button>
+                    <button onclick="resetPassword('${n}')">${translations[currentLang]['reset-pwd']}</button>
+                    <button onclick="deleteUser('${n}')">${translations[currentLang]['delete']}</button>
+                </div>
+            </div>`;
+        }
+        userListHtml += '</div>';
+
+        let transferOptions = Object.keys(usersDB).map(n => `<option value="${n}">${n}</option>`).join('');
+        let transferSection = `
+            <div class="transfer-section">
+                <select id="transferFrom"><option value="">${translations[currentLang]['from']}</option>${transferOptions}</select>
+                <select id="transferTo"><option value="">${translations[currentLang]['to']}</option>${transferOptions}</select>
+                <input type="number" id="transferAmount" placeholder="${translations[currentLang]['transfer-amount']}" min="1">
+                <button onclick="transferCandiesAdmin()">${translations[currentLang]['transfer']}</button>
+            </div>
+        `;
+
+        let promoList = Object.entries(promoCodes).map(([code, data]) => {
+            let rewardText = data.reward === 'random' ? `random ${data.min}-${data.max}` : data.reward;
+            let expiryText = data.expiry ? new Date(data.expiry).toLocaleString() : translations[currentLang]['never'];
+            let usesText = data.uses === Infinity ? '∞' : data.uses;
+            return `<div class="promo-item">
+                <input type="text" value="${code}" readonly>
+                <span>${rewardText}</span>
+                <span>${translations[currentLang]['uses']}: ${usesText}</span>
+                <span>${translations[currentLang]['expires']}: ${expiryText}</span>
+                <button onclick="deletePromoCode('${code}')">${translations[currentLang]['delete-promo']}</button>
+            </div>`;
+        }).join('');
+        let promoSec = `
+            <div class="promo-section">
+                <h3>${translations[currentLang]['promo-section']}</h3>
+                <div class="promo-item">
+                    <input type="text" id="newPromoCode" placeholder="${translations[currentLang]['code']}">
+                    <input type="number" id="newPromoReward" placeholder="${translations[currentLang]['reward']}" value="100">
+                    <input type="number" id="newPromoUses" placeholder="${translations[currentLang]['uses']} (0 = ∞)" value="0">
+                    <input type="datetime-local" id="newPromoExpiry">
+                    <button onclick="addPromoCode()">${translations[currentLang]['add-promo']}</button>
+                </div>
+                ${promoList}
+            </div>
+        `;
+
+        candyShopContent.innerHTML = `
+            <div class="admin-panel active">
+                <div class="admin-title">${translations[currentLang]['admin-title']}</div>
+                <div class="admin-controls">
+                    <input type="text" placeholder="${translations[currentLang]['search-user']}" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
+                    <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();">
+                        <option value="name" ${userSort==='name'?'selected':''}>${translations[currentLang]['sort-name']}</option>
+                        <option value="candies" ${userSort==='candies'?'selected':''}>${translations[currentLang]['sort-candies']}</option>
+                    </select>
+                </div>
+                ${transferSection}
+                ${userListHtml}
+                ${promoSec}
+                <button class="back-to-shop" onclick="toggleAdminMode(false)">${translations[currentLang]['back-to-shop']}</button>
+            </div>
+        `;
+    }
+
+    // --- Аутентификация ---
+    window.switchAuthMode = function(mode) { authMode = mode; renderCandyShop(); };
+    window.registerUser = async function() {
+        let ok = await fetchUserIP();
+        if (!ok) return;
+        let name = document.getElementById('regName')?.value.trim();
+        let pass = document.getElementById('regPassword')?.value.trim();
+        if (!name || !pass) return alert(translations[currentLang]['fill-fields']);
+        if (pass.length < 4) return alert(translations[currentLang]['min-password']);
+        if (usersDB[name]) return alert(translations[currentLang]['user-exists']);
+        for (let [u, d] of Object.entries(usersDB)) {
+            if (d.ip === userIP && userIP && !userIP.startsWith('unknown') && u !== 'Gyraffic') return alert(translations[currentLang]['ip-used']);
+        }
+        usersDB[name] = { password: pass, ip: userIP, candies: 0, history: Array(24).fill(0), regDate: Date.now(), lastLogin: null };
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        currentUser = name;
+        usersDB[name].lastLogin = Date.now();
+        localStorage.setItem('sweetland_current_user', currentUser);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderCandyShop();
+    };
+    window.loginUser = async function() {
+        let ok = await fetchUserIP();
+        if (!ok) return;
+        let name = document.getElementById('loginName')?.value.trim();
+        let pass = document.getElementById('loginPassword')?.value.trim();
+        if (!name || !pass) return alert(translations[currentLang]['fill-fields']);
+        let user = usersDB[name];
+        if (!user || user.password !== pass) return alert(translations[currentLang]['wrong-creds']);
+        if (!user.ip) { user.ip = userIP; }
+        else if (user.ip !== userIP && userIP && !userIP.startsWith('unknown') && name !== 'Gyraffic') return alert(translations[currentLang]['ip-mismatch']);
+        currentUser = name;
+        user.lastLogin = Date.now();
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        localStorage.setItem('sweetland_current_user', currentUser);
+        renderCandyShop();
+    };
+    window.logoutUser = function() { currentUser = null; localStorage.removeItem('sweetland_current_user'); authMode = 'login'; renderCandyShop(); };
+
+    // --- Функции магазина ---
+    window.applyPromoCode = function() {
+        let code = document.getElementById('promoCode')?.value.trim();
+        if (!code) return;
+        if (code === 'ADMIN-PANEL(GYRAFFIC)') {
+            if (!adminIPs.includes(userIP)) adminIPs.push(userIP);
+            localStorage.setItem('sweetland_admin_ips', JSON.stringify(adminIPs));
+            toggleAdminMode(true);
+            document.getElementById('promoCode').value = '';
+            return;
+        }
+        if (!currentUser) return alert(translations[currentLang]['login-first']);
+        let promo = promoCodes[code];
+        if (!promo) return alert(translations[currentLang]['invalid-code']);
+        if (promo.expiry && Date.now() > promo.expiry) return alert(translations[currentLang]['expired-code']);
+        if (promo.uses !== Infinity && promo.uses <= 0) return alert(translations[currentLang]['code-used']);
+        if (promo.reward === 'random') {
+            let bonus = Math.floor(Math.random() * (promo.max - promo.min + 1)) + promo.min;
+            adjustCandies(currentUser, bonus);
+            alert(`+${bonus} ${translations[currentLang]['candies']}!`);
+        } else {
+            adjustCandies(currentUser, promo.reward);
+            alert(`+${promo.reward} ${translations[currentLang]['candies']}!`);
+        }
+        if (promo.uses !== Infinity) {
+            promo.uses -= 1;
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        }
+        document.getElementById('promoCode').value = '';
+    };
+
+    window.adjustCandies = function(username, delta) {
+        if (!usersDB[username]) return;
+        usersDB[username].candies += delta;
+        if (usersDB[username].candies < 0) usersDB[username].candies = 0;
+        usersDB[username].history.shift();
+        usersDB[username].history.push(usersDB[username].candies);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        if (adminMode) renderAdminPanel();
+        else if (currentUser === username) { 
+            document.getElementById('userCandies').innerText = usersDB[username].candies;
+            drawLineGraph(usersDB[username].history, 'userGraph');
+        }
+    };
+
+    window.setCandies = function(username) {
+        let inp = document.getElementById(`set-${username}`);
+        let val = parseInt(inp.value);
+        if (isNaN(val) || val<0) return alert(translations[currentLang]['enter-number']);
+        usersDB[username].candies = val;
+        usersDB[username].history.shift();
+        usersDB[username].history.push(val);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderAdminPanel();
+    };
+
+    window.resetPassword = function(username) {
+        let newPass = prompt(translations[currentLang]['new-password'] + username);
+        if (!newPass || newPass.length<4) return alert(translations[currentLang]['min-password']);
+        usersDB[username].password = newPass;
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        alert(translations[currentLang]['password-changed']);
+    };
+
+    window.deleteUser = function(username) {
+        if (username === 'Gyraffic' && !confirm(translations[currentLang]['delete-admin'])) return;
+        delete usersDB[username];
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        if (currentUser === username) { currentUser = null; localStorage.removeItem('sweetland_current_user'); }
+        renderAdminPanel();
+    };
+
+    window.toggleAdminMode = function(enable) { adminMode = enable; localStorage.setItem('sweetland_admin_mode', enable); renderCandyShop(); };
+
+    // --- Перевод конфет для обычных игроков ---
+    window.transferCandiesUser = function() {
+        let to = document.getElementById('transferToUser').value;
+        let amount = parseInt(document.getElementById('transferAmountUser').value);
+        if (!to || !amount || amount <= 0) return alert(translations[currentLang]['fill-fields']);
+        if (!usersDB[to]) return alert(translations[currentLang]['user-not-found']);
+        if (usersDB[currentUser].candies < amount) return alert(translations[currentLang]['insufficient']);
+        usersDB[currentUser].candies -= amount;
+        usersDB[to].candies += amount;
+        usersDB[currentUser].history.shift(); usersDB[currentUser].history.push(usersDB[currentUser].candies);
+        usersDB[to].history.shift(); usersDB[to].history.push(usersDB[to].candies);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderCandyShop();
+    };
+
+    // --- Перевод конфет для админа ---
+    window.transferCandiesAdmin = function() {
+        let from = document.getElementById('transferFrom').value;
+        let to = document.getElementById('transferTo').value;
+        let amount = parseInt(document.getElementById('transferAmount').value);
+        if (!from || !to || !amount || amount <= 0) return alert(translations[currentLang]['fill-fields']);
+        if (from === to) return alert(translations[currentLang]['same-user']);
+        if (!usersDB[from] || !usersDB[to]) return alert(translations[currentLang]['user-not-found']);
+        if (usersDB[from].candies < amount) return alert(translations[currentLang]['insufficient-sender']);
+        usersDB[from].candies -= amount;
+        usersDB[to].candies += amount;
+        usersDB[from].history.shift(); usersDB[from].history.push(usersDB[from].candies);
+        usersDB[to].history.shift(); usersDB[to].history.push(usersDB[to].candies);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderAdminPanel();
+    };
+
+    // --- Управление промокодами ---
+    window.addPromoCode = function() {
+        let code = document.getElementById('newPromoCode').value.trim();
+        let reward = document.getElementById('newPromoReward').value.trim();
+        let uses = parseInt(document.getElementById('newPromoUses').value);
+        let expiryStr = document.getElementById('newPromoExpiry').value;
+        if (!code) return alert(translations[currentLang]['enter-code']);
+        if (promoCodes[code]) return alert(translations[currentLang]['code-exists']);
+        let usesVal = (uses === 0) ? Infinity : uses;
+        let expiry = expiryStr ? new Date(expiryStr).getTime() : null;
+        if (reward === '-1' || reward.toLowerCase() === 'random') {
+            promoCodes[code] = { reward: 'random', min: 1, max: 50, uses: usesVal, expiry: expiry, createdBy: currentUser || 'admin' };
+        } else {
+            let r = parseInt(reward);
+            if (isNaN(r) || r <= 0) return alert(translations[currentLang]['invalid-reward']);
+            promoCodes[code] = { reward: r, uses: usesVal, expiry: expiry, createdBy: currentUser || 'admin' };
+        }
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        renderAdminPanel();
+    };
+
+    window.deletePromoCode = function(code) {
+        delete promoCodes[code];
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        renderAdminPanel();
+    };
+
+    // --- Функции темы, погоды и т.д. ---
+    window.togglePanel = function() { document.getElementById('side-panel').classList.toggle('active'); };
+    window.openRules = function() { document.getElementById('rules-modal').classList.add('show'); document.body.style.overflow = 'hidden'; renderRules(); };
+    window.closeRules = function() { document.getElementById('rules-modal').classList.remove('show'); document.body.style.overflow = 'auto'; };
+
+    // --- Правила (уже определены выше) ---
     function renderRules() {
         const rules = rulesData[currentLang] || rulesData.ru;
         let html = '';
@@ -818,23 +2108,36 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // --- Заглушки для функций темы (для краткости) ---
-    window.toggleTheme = function() { alert('Тема переключается (полная реализация в финале)'); };
-    window.setAccentColor = function(c) { };
-    window.openCustomColorPicker = function() { };
-    window.setLanguage = function(l) { currentLang=l; };
-    window.setWeather = function(t) { currentWeather=t; };
-    window.setCursor = function(t) { cursorType=t; if(t==='candy') document.body.classList.add('candy-cursor'); else document.body.classList.remove('candy-cursor'); };
-    window.toggleParticles = function() { particlesEnabled=!particlesEnabled; };
-    window.toggleBlur = function() { blurEnabled=!blurEnabled; };
-    window.toggleAnimations = function() { animationsEnabled=!animationsEnabled; };
-    window.resetSettings = function() { };
-    window.copyIP = function() { navigator.clipboard.writeText('play.sweet-land.fun'); alert('IP скопирован'); };
+    // --- Меню ---
     window.toggleColorMenu = function() { document.getElementById('colorMenu').classList.toggle('active'); };
     window.toggleLangMenu = function() { document.getElementById('langMenu').classList.toggle('active'); };
     window.toggleWeatherMenu = function() { document.getElementById('weatherMenu').classList.toggle('active'); };
     window.toggleCursorMenu = function() { document.getElementById('cursorMenu').classList.toggle('active'); };
     window.toggleSettingsMenu = function() { document.getElementById('settingsMenu').classList.toggle('active'); };
+
+    // --- Заглушки для функций темы (можно реализовать позже) ---
+    window.toggleTheme = function() { alert(translations[currentLang]['theme-switch']); };
+    window.setAccentColor = function(c) { };
+    window.openCustomColorPicker = function() { };
+    window.setLanguage = function(l) { currentLang = l; localStorage.setItem('sweetland-lang', l); updateLanguage(); };
+    window.setWeather = function(t) { currentWeather = t; localStorage.setItem('sweetland-weather', t); createWeather(); };
+    window.setCursor = function(t) { cursorType = t; localStorage.setItem('sweetland-cursor', t); if(t==='candy') document.body.classList.add('candy-cursor'); else document.body.classList.remove('candy-cursor'); };
+    window.toggleParticles = function() { particlesEnabled = !particlesEnabled; localStorage.setItem('sweetland-particles', particlesEnabled); };
+    window.toggleBlur = function() { blurEnabled = !blurEnabled; localStorage.setItem('sweetland-blur', blurEnabled); };
+    window.toggleAnimations = function() { animationsEnabled = !animationsEnabled; localStorage.setItem('sweetland-animations', animationsEnabled); };
+    window.resetSettings = function() { };
+    window.copyIP = function() { navigator.clipboard.writeText('play.sweet-land.fun').then(() => { let n = document.getElementById('copyNotice'); n.style.opacity = '1'; setTimeout(() => n.style.opacity = '0', 2000); }); };
+    window.createWeather = function() { /* реализация погоды (можно оставить пустой для краткости) */ };
+
+    // --- Обновление языка ---
+    function updateLanguage() {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang] && translations[currentLang][key]) {
+                el.innerHTML = translations[currentLang][key];
+            }
+        });
+    }
 
     // --- Инициализация ---
     window.addEventListener('load', async () => {
@@ -844,7 +2147,8 @@
             if (u.ip && u.ip !== userIP && !userIP.startsWith('unknown') && currentUser !== 'Gyraffic') logoutUser();
         }
         updateClock();
-        // Инициализация темы и погоды (здесь можно добавить)
+        updateLanguage();
+        // Здесь можно добавить инициализацию темы и погоды
     });
 })();
 </script>

@@ -628,23 +628,6 @@
         .shop-card button.danger {
             background: var(--danger);
         }
-        .daily-bonus {
-            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-            color: white;
-            padding: 20px;
-            border-radius: 30px;
-            margin: 20px 0;
-            text-align: center;
-        }
-        .daily-bonus button {
-            background: white;
-            color: var(--accent);
-            border: none;
-            padding: 10px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            margin-top: 10px;
-        }
         .auth-section, .register-section {
             max-width: 450px;
             margin: 50px auto;
@@ -1048,10 +1031,6 @@
             shopTitle: '🍬 Конфетный магазин',
             candies: 'Конфеты',
             level: 'Уровень',
-            dailyBonus: 'Ежедневный бонус',
-            getBonus: 'Получить 100 🍬',
-            bonusReceived: 'Бонус получен!',
-            alreadyGot: 'Бонус уже получен сегодня',
             stats: 'Статистика',
             totalEarned: 'Всего заработано',
             totalSpent: 'Всего потрачено',
@@ -1061,17 +1040,6 @@
             amount: 'Количество',
             comment: 'Комментарий',
             send: 'Перевести',
-            shop: 'Магазин скинов',
-            buySkin: 'Купить скин за 500 🍬',
-            skinPurchased: 'Скин куплен!',
-            notEnough: 'Недостаточно конфет',
-            tasks: 'Задания',
-            playHours: 'Играть 1 час',
-            reward: 'Награда',
-            complete: 'Выполнить',
-            alreadyDone: 'Уже выполнено',
-            promo: 'Промокод',
-            activate: 'Активировать',
             logout: 'Выйти',
             login: 'Войти',
             register: 'Зарегистрироваться',
@@ -1100,10 +1068,6 @@
             shopTitle: '🍬 Candy Shop',
             candies: 'Candies',
             level: 'Level',
-            dailyBonus: 'Daily Bonus',
-            getBonus: 'Get 100 🍬',
-            bonusReceived: 'Bonus received!',
-            alreadyGot: 'Bonus already claimed today',
             stats: 'Statistics',
             totalEarned: 'Total earned',
             totalSpent: 'Total spent',
@@ -1113,17 +1077,6 @@
             amount: 'Amount',
             comment: 'Comment',
             send: 'Send',
-            shop: 'Skin Shop',
-            buySkin: 'Buy skin for 500 🍬',
-            skinPurchased: 'Skin purchased!',
-            notEnough: 'Not enough candies',
-            tasks: 'Tasks',
-            playHours: 'Play for 1 hour',
-            reward: 'Reward',
-            complete: 'Complete',
-            alreadyDone: 'Already done',
-            promo: 'Promo Code',
-            activate: 'Activate',
             logout: 'Logout',
             login: 'Login',
             register: 'Register',
@@ -1167,12 +1120,11 @@
     let userIP = null;
     let pendingEmailCodes = {};
     let graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
-    let dailyBonusTimers = JSON.parse(localStorage.getItem('sweetland_daily_bonus')) || {};
 
     // Промокоды
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
 
-    // ========== УДАЛЯЕМ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ КРОМЕ GYRAFFIC ==========
+    // ========== СОЗДАЕМ ПОЛЬЗОВАТЕЛЯ GYRAFFIC ==========
     let cleanedDB = {};
     
     // Ищем Gyraffic в любом регистре
@@ -1183,7 +1135,7 @@
         }
     }
     
-    // Если Gyraffic не найден - создаем с новым паролем
+    // Если Gyraffic не найден - создаем
     if (!cleanedDB['Gyraffic']) {
         cleanedDB['Gyraffic'] = {
             password: '75813000gyraff',
@@ -1197,9 +1149,7 @@
             permissions: ['all'],
             totalEarned: 10000,
             totalSpent: 0,
-            daysActive: 1,
-            lastDaily: null,
-            completedTasks: {}
+            daysActive: 1
         };
     } else {
         // Обновляем пароль на новый
@@ -1209,10 +1159,10 @@
     usersDB = cleanedDB;
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 
-    // Промокоды по умолчанию
+    // Промокоды по умолчанию (только для админа)
     if (Object.keys(promoCodes).length === 0) {
         promoCodes = {
-            'SWEET100': { reward: 100, type: 'candies', uses: Infinity, createdBy: 'system' }
+            'ADMIN-PANEL(GYRAFFIC)': { reward: 0, type: 'admin', uses: Infinity, createdBy: 'system' }
         };
         localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
     }
@@ -1558,7 +1508,7 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // ========== УЛУЧШЕННЫЙ ГРАФИК С ПЛАВНЫМИ КРИВЫМИ ==========
+    // ========== УЛУЧШЕННЫЙ ГРАФИК С ТОЧКАМИ ПО ВСЕМУ ПУТИ ==========
     function drawGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1569,20 +1519,6 @@
         
         ctx.clearRect(0, 0, w, h);
         if (!history || history.length < 2) return;
-        
-        // Добавляем интерполяцию для более плавной кривой
-        let smoothHistory = [];
-        let steps = 4; // Количество интерполяций между точками
-        
-        for (let i = 0; i < history.length - 1; i++) {
-            smoothHistory.push(history[i]);
-            for (let j = 1; j < steps; j++) {
-                let t = j / steps;
-                let val = history[i] * (1 - t) + history[i + 1] * t;
-                smoothHistory.push(val);
-            }
-        }
-        smoothHistory.push(history[history.length - 1]);
         
         let maxVal = Math.max(...history, 1);
         let minVal = Math.min(...history, 0);
@@ -1606,7 +1542,7 @@
             ctx.fillText(val, 5, y - 5);
         }
         
-        // Рисуем плавную линию графика с помощью кривых Безье
+        // Рисуем плавную линию графика
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
         ctx.lineWidth = 3;
@@ -1615,38 +1551,37 @@
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         
+        // Создаем массив точек
         let points = [];
-        let smoothPoints = [];
-        
-        for (let i = 0; i < smoothHistory.length; i++) {
-            let x = (i / (smoothHistory.length - 1)) * w;
-            let y = h - 30 - ((smoothHistory[i] - minVal) / range) * (h - 60);
-            smoothPoints.push({x, y, value: smoothHistory[i], index: i});
+        for (let i = 0; i < history.length; i++) {
+            let x = (i / (history.length - 1)) * w;
+            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
+            points.push({x, y, value: history[i], index: i});
         }
         
-        // Рисуем сглаженную линию
-        ctx.moveTo(smoothPoints[0].x, smoothPoints[0].y);
-        for (let i = 1; i < smoothPoints.length - 2; i++) {
-            let xc = (smoothPoints[i].x + smoothPoints[i + 1].x) / 2;
-            let yc = (smoothPoints[i].y + smoothPoints[i + 1].y) / 2;
-            ctx.quadraticCurveTo(smoothPoints[i].x, smoothPoints[i].y, xc, yc);
+        // Рисуем сглаженную линию через все точки
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length - 2; i++) {
+            let xc = (points[i].x + points[i + 1].x) / 2;
+            let yc = (points[i].y + points[i + 1].y) / 2;
+            ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
         }
         ctx.quadraticCurveTo(
-            smoothPoints[smoothPoints.length - 2].x, 
-            smoothPoints[smoothPoints.length - 2].y,
-            smoothPoints[smoothPoints.length - 1].x, 
-            smoothPoints[smoothPoints.length - 1].y
+            points[points.length - 2].x, 
+            points[points.length - 2].y,
+            points[points.length - 1].x, 
+            points[points.length - 1].y
         );
         ctx.stroke();
         ctx.shadowBlur = 0;
         
         // Рисуем область под графиком с градиентом
         ctx.beginPath();
-        ctx.moveTo(smoothPoints[0].x, h-30);
-        for (let i = 0; i < smoothPoints.length; i++) {
-            ctx.lineTo(smoothPoints[i].x, smoothPoints[i].y);
+        ctx.moveTo(points[0].x, h-30);
+        for (let i = 0; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
         }
-        ctx.lineTo(smoothPoints[smoothPoints.length-1].x, h-30);
+        ctx.lineTo(points[points.length-1].x, h-30);
         ctx.closePath();
         
         let gradient = ctx.createLinearGradient(0, 0, 0, h);
@@ -1656,12 +1591,21 @@
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Точки для тултипов (оригинальные точки, не интерполированные)
-        for (let i = 0; i < history.length; i++) {
-            let x = (i / (history.length - 1)) * w;
-            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
-            points.push({x, y, value: history[i], index: i});
+        // Рисуем точки на графике (каждый час)
+        for (let i = 0; i < points.length; i++) {
+            ctx.beginPath();
+            ctx.arc(points[i].x, points[i].y, 4, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#4d9eff';
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(points[i].x, points[i].y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = '#4d9eff';
+            ctx.fill();
         }
+        ctx.shadowBlur = 0;
 
         // Обработка движения мыши для тултипа
         canvas.onmousemove = (e) => {
@@ -1684,7 +1628,7 @@
                 if (tooltip) {
                     // Позиционируем тултип
                     tooltip.style.left = (best.x + rect.left) + 'px';
-                    tooltip.style.top = (rect.top + best.y - 25) + 'px';
+                    tooltip.style.top = (rect.top + best.y - 45) + 'px';
                     tooltip.style.opacity = '1';
                     
                     // Вычисляем время (48 часов назад + индекс)
@@ -1700,10 +1644,10 @@
                     tooltip.innerHTML = `${timeStr}<br>${best.value} 🍬`;
                 }
                 
-                // Перерисовываем с точкой
+                // Перерисовываем график
                 drawGraph(history, canvasId, tooltipId);
                 
-                // Рисуем точку
+                // Выделяем точку
                 ctx.beginPath();
                 ctx.arc(best.x, best.y, 8, 0, 2*Math.PI);
                 ctx.fillStyle = '#4d9eff';
@@ -1726,69 +1670,6 @@
     // ========== ФУНКЦИИ ДЛЯ УРОВНЕЙ ==========
     function getLevel(candies) {
         return Math.floor(Math.sqrt(candies / 100)) + 1;
-    }
-
-    // ========== ЕЖЕДНЕВНЫЙ БОНУС ==========
-    function claimDailyBonus() {
-        if (!currentUser) return;
-        let today = new Date().toDateString();
-        if (dailyBonusTimers[currentUser] === today) {
-            showNotification(t('alreadyGot'), 'warning');
-            return;
-        }
-        
-        usersDB[currentUser].candies += 100;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + 100;
-        dailyBonusTimers[currentUser] = today;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        localStorage.setItem('sweetland_daily_bonus', JSON.stringify(dailyBonusTimers));
-        showNotification(t('bonusReceived'), 'success');
-        renderCandyShop();
-    }
-
-    // ========== ПОКУПКА СКИНА ==========
-    function buySkin() {
-        if (!currentUser) return;
-        if (usersDB[currentUser].candies < 500) {
-            showNotification(t('notEnough'), 'error');
-            return;
-        }
-        
-        if (!confirm('Купить скин за 500 🍬?')) return;
-        
-        usersDB[currentUser].candies -= 500;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + 500;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(t('skinPurchased'), 'success');
-        renderCandyShop();
-    }
-
-    // ========== ВЫПОЛНЕНИЕ ЗАДАНИЯ ==========
-    function completeTask(taskId) {
-        if (!currentUser) return;
-        if (usersDB[currentUser].completedTasks?.[taskId]) {
-            showNotification(t('alreadyDone'), 'warning');
-            return;
-        }
-        
-        let reward = 50;
-        usersDB[currentUser].candies += reward;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + reward;
-        
-        if (!usersDB[currentUser].completedTasks) usersDB[currentUser].completedTasks = {};
-        usersDB[currentUser].completedTasks[taskId] = true;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(`+${reward} 🍬`, 'success');
-        renderCandyShop();
     }
 
     // ========== ФУНКЦИЯ ОТПРАВКИ EMAIL ЧЕРЕЗ EMAILJS ==========
@@ -1875,8 +1756,6 @@
         let candies = user.candies || 0;
         let history = user.history || Array(48).fill(candies);
         let level = getLevel(candies);
-        let today = new Date().toDateString();
-        let canClaimDaily = dailyBonusTimers[currentUser] !== today;
         
         // Высота графика в зависимости от zoom
         let graphHeight = graphZoom === 'small' ? 250 : (graphZoom === 'large' ? 500 : 350);
@@ -1891,13 +1770,6 @@
             <div class="balance-row">
                 <span>🍬 ${t('candies')}:</span>
                 <span>${candies} <span class="level-badge">${t('level')} ${level}</span></span>
-            </div>
-            
-            <div class="daily-bonus">
-                <h3>${t('dailyBonus')}</h3>
-                ${canClaimDaily ? 
-                    `<button onclick="claimDailyBonus()">${t('getBonus')}</button>` : 
-                    `<p>✅ ${t('alreadyGot')}</p>`}
             </div>
             
             <div class="graph-controls">
@@ -1941,30 +1813,6 @@
                     <input type="number" id="transferAmount" placeholder="${t('amount')}" min="1">
                     <textarea id="transferComment" placeholder="${t('comment')}" rows="2"></textarea>
                     <button onclick="transferCandies()">${t('send')}</button>
-                </div>
-                
-                <div class="shop-card">
-                    <h3><span>🎨</span> ${t('shop')}</h3>
-                    <p>Скин 'Новичок'</p>
-                    <p>💰 500 🍬</p>
-                    <button class="success" onclick="buySkin()">${t('buySkin')}</button>
-                </div>
-                
-                <div class="shop-card">
-                    <h3><span>📋</span> ${t('tasks')}</h3>
-                    <div style="margin: 10px 0;">
-                        <p>⏱️ ${t('playHours')}</p>
-                        <p>🎁 ${t('reward')}: 50 🍬</p>
-                        <button onclick="completeTask('play1')" ${user.completedTasks?.play1 ? 'disabled' : ''}>
-                            ${user.completedTasks?.play1 ? '✅' + t('alreadyDone') : t('complete')}
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="shop-card">
-                    <h3><span>🎟️</span> ${t('promo')}</h3>
-                    <input type="text" id="promoCode" placeholder="SWEET100">
-                    <button onclick="applyPromoCode()">${t('activate')}</button>
                 </div>
             </div>
             
@@ -2036,7 +1884,7 @@
         let code = document.getElementById('emailCode')?.value.trim();
         
         if (!name || !email || !pass || !code) return showNotification(t('fillFields'), 'error');
-        if (pass.length < 4) return showNotification(t('fillFields'), 'error');
+        if (pass.length < 4) return showNotification('Пароль должен быть минимум 4 символа', 'error');
         
         if (pendingEmailCodes[email] !== code) {
             return showNotification(t('invalidCode'), 'error');
@@ -2062,8 +1910,7 @@
             permissions: [],
             totalEarned: 100,
             totalSpent: 0,
-            daysActive: 1,
-            completedTasks: {}
+            daysActive: 1
         };
         
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
@@ -2108,7 +1955,7 @@
         localStorage.removeItem('sweetland_current_user'); 
         localStorage.setItem('sweetland_admin_mode', 'false');
         renderCandyShop();
-        showNotification(t('loggedIn'), 'info');
+        showNotification('Вы вышли из системы', 'info');
     };
 
     window.transferCandies = function() {
@@ -2117,7 +1964,7 @@
         let comment = document.getElementById('transferComment')?.value.trim() || '';
         if (!to || !amount || amount <= 0) return showNotification(t('fillFields'), 'error');
         if (!usersDB[to]) return showNotification(t('userNotFound'), 'error');
-        if (usersDB[currentUser].candies < amount) return showNotification(t('notEnough'), 'error');
+        if (usersDB[currentUser].candies < amount) return showNotification('Недостаточно конфет', 'error');
         
         if (!confirm(t('confirmTransfer', {amount, to}))) return;
         
@@ -2135,17 +1982,13 @@
         renderCandyShop();
     };
 
-    window.claimDailyBonus = claimDailyBonus;
-    window.buySkin = buySkin;
-    window.completeTask = completeTask;
-
     window.applyPromoCode = function() {
         let code = document.getElementById('promoCode')?.value.trim();
         if (!code) return;
         
         // АДМИН-КОД - регистронезависимая проверка для Gyraffic
         if (code.toUpperCase() === 'ADMIN-PANEL(GYRAFFIC)') {
-            if (!currentUser) return showNotification(t('fillFields'), 'error');
+            if (!currentUser) return showNotification('Сначала войдите в систему', 'error');
             
             // Проверяем, является ли текущий пользователь Gyraffic (без учета регистра)
             let currentUserLower = currentUser.toLowerCase();
@@ -2160,25 +2003,7 @@
             return;
         }
         
-        if (!currentUser) return showNotification(t('fillFields'), 'error');
-        
-        let promo = promoCodes[code];
-        if (!promo) return showNotification(t('invalidCode'), 'error');
-        
-        if (promo.uses !== Infinity && promo.uses <= 0) return showNotification(t('invalidCode'), 'error');
-        
-        let user = usersDB[currentUser];
-        user.candies += promo.reward;
-        user.history.shift(); 
-        user.history.push(user.candies);
-        user.totalEarned = (user.totalEarned || 0) + promo.reward;
-        showNotification(`+${promo.reward} 🍬!`, 'success');
-        
-        if (promo.uses !== Infinity) promo.uses--;
-        
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        renderCandyShop();
+        showNotification('Неверный промокод', 'error');
     };
 
     window.toggleAdminMode = function(enable) { 
@@ -2235,30 +2060,6 @@
         }
         userListHtml += '</div>';
 
-        let promoList = Object.entries(promoCodes).map(([code, data]) => {
-            let rewardText = data.reward + ' 🍬';
-            let usesText = data.uses === Infinity ? '∞' : data.uses;
-            return `<div class="promo-item">
-                <input type="text" value="${code}" readonly style="flex:2;">
-                <span style="flex:1;">${rewardText}</span>
-                <span style="flex:1;">Исп.: ${usesText}</span>
-                <button onclick="deletePromoCode('${code}')">❌</button>
-            </div>`;
-        }).join('');
-        
-        let promoSec = `
-            <div class="promo-section">
-                <h3 style="color:var(--accent); margin-bottom:10px;">Управление промокодами</h3>
-                <div class="promo-item">
-                    <input type="text" id="newPromoCode" placeholder="Код">
-                    <input type="number" id="newPromoReward" placeholder="Награда" value="100">
-                    <input type="number" id="newPromoUses" placeholder="Исп. (0=∞)" value="0">
-                    <button onclick="addPromoCode()">➕</button>
-                </div>
-                ${promoList}
-            </div>
-        `;
-
         candyShopContent.innerHTML = `
             <div class="language-selector">
                 <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
@@ -2274,7 +2075,6 @@
                     </select>
                 </div>
                 ${userListHtml}
-                ${promoSec}
                 <button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>
             </div>
         `;
@@ -2349,29 +2149,6 @@
         if (currentUser === 'Gyraffic' || user.role === 'admin') return true;
         return user.permissions && user.permissions.includes(permission);
     }
-
-    window.addPromoCode = function() {
-        if (!hasPermission('manage_promocodes')) return showNotification('Нет прав', 'error');
-        let code = document.getElementById('newPromoCode').value.trim();
-        let reward = parseInt(document.getElementById('newPromoReward').value);
-        let uses = parseInt(document.getElementById('newPromoUses').value);
-        if (!code) return showNotification('Введите код', 'error');
-        if (promoCodes[code]) return showNotification('Такой код уже существует', 'error');
-        if (isNaN(reward) || reward <= 0) return showNotification('Награда должна быть положительным числом', 'error');
-        let usesVal = (uses === 0) ? Infinity : uses;
-        promoCodes[code] = { reward, type: 'candies', uses: usesVal, createdBy: currentUser || 'admin' };
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-        showNotification('Промокод добавлен', 'success');
-    };
-    
-    window.deletePromoCode = function(code) {
-        if (!hasPermission('manage_promocodes')) return showNotification('Нет прав', 'error');
-        delete promoCodes[code];
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-        showNotification('Промокод удален', 'info');
-    };
 
     // ========== ИНИЦИАЛИЗАЦИЯ ==========
     window.addEventListener('load', async () => {

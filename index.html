@@ -1172,8 +1172,9 @@
     // Промокоды
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
 
-    // СОЗДАЁМ GYRAFFIC АВТОМАТИЧЕСКИ
+    // УДАЛЯЕМ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ, КРОМЕ GYRAFFIC
     if (!usersDB['Gyraffic']) {
+        usersDB = {};
         usersDB['Gyraffic'] = {
             password: 'gyraffic123',
             email: 'gyraffic@gmail.com',
@@ -1190,6 +1191,12 @@
             lastDaily: null,
             completedTasks: {}
         };
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    } else {
+        // Если Gyraffic есть, удаляем всех остальных
+        let temp = {};
+        temp['Gyraffic'] = usersDB['Gyraffic'];
+        usersDB = temp;
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     }
 
@@ -1542,7 +1549,7 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // ========== КРАСИВЫЙ ГРАФИК С ПРАВИЛЬНЫМИ ТУЛТИПАМИ ==========
+    // ========== УЛУЧШЕННЫЙ ГРАФИК С ПЛАВНЫМИ КРИВЫМИ ==========
     function drawGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1553,6 +1560,20 @@
         
         ctx.clearRect(0, 0, w, h);
         if (!history || history.length < 2) return;
+        
+        // Добавляем интерполяцию для более плавной кривой
+        let smoothHistory = [];
+        let steps = 4; // Количество интерполяций между точками
+        
+        for (let i = 0; i < history.length - 1; i++) {
+            smoothHistory.push(history[i]);
+            for (let j = 1; j < steps; j++) {
+                let t = j / steps;
+                let val = history[i] * (1 - t) + history[i + 1] * t;
+                smoothHistory.push(val);
+            }
+        }
+        smoothHistory.push(history[history.length - 1]);
         
         let maxVal = Math.max(...history, 1);
         let minVal = Math.min(...history, 0);
@@ -1576,7 +1597,7 @@
             ctx.fillText(val, 5, y - 5);
         }
         
-        // Рисуем линию графика
+        // Рисуем плавную линию графика с помощью кривых Безье
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
         ctx.lineWidth = 3;
@@ -1586,37 +1607,52 @@
         ctx.lineCap = 'round';
         
         let points = [];
-        for (let i = 0; i < history.length; i++) {
-            let x = (i / (history.length - 1)) * w;
-            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
-            points.push({x, y, value: history[i], index: i});
-            if (i === 0) ctx.moveTo(x, y);
-            else {
-                let prev = points[i-1];
-                let cp1x = prev.x + (x - prev.x) * 0.3;
-                let cp1y = prev.y;
-                let cp2x = x - (x - prev.x) * 0.3;
-                let cp2y = y;
-                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-            }
+        let smoothPoints = [];
+        
+        for (let i = 0; i < smoothHistory.length; i++) {
+            let x = (i / (smoothHistory.length - 1)) * w;
+            let y = h - 30 - ((smoothHistory[i] - minVal) / range) * (h - 60);
+            smoothPoints.push({x, y, value: smoothHistory[i], index: i});
         }
+        
+        // Рисуем сглаженную линию
+        ctx.moveTo(smoothPoints[0].x, smoothPoints[0].y);
+        for (let i = 1; i < smoothPoints.length - 2; i++) {
+            let xc = (smoothPoints[i].x + smoothPoints[i + 1].x) / 2;
+            let yc = (smoothPoints[i].y + smoothPoints[i + 1].y) / 2;
+            ctx.quadraticCurveTo(smoothPoints[i].x, smoothPoints[i].y, xc, yc);
+        }
+        ctx.quadraticCurveTo(
+            smoothPoints[smoothPoints.length - 2].x, 
+            smoothPoints[smoothPoints.length - 2].y,
+            smoothPoints[smoothPoints.length - 1].x, 
+            smoothPoints[smoothPoints.length - 1].y
+        );
         ctx.stroke();
         ctx.shadowBlur = 0;
         
-        // Рисуем область под графиком
+        // Рисуем область под графиком с градиентом
         ctx.beginPath();
-        ctx.moveTo(points[0].x, h-30);
-        for (let i = 0; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
+        ctx.moveTo(smoothPoints[0].x, h-30);
+        for (let i = 0; i < smoothPoints.length; i++) {
+            ctx.lineTo(smoothPoints[i].x, smoothPoints[i].y);
         }
-        ctx.lineTo(points[points.length-1].x, h-30);
+        ctx.lineTo(smoothPoints[smoothPoints.length-1].x, h-30);
         ctx.closePath();
         
         let gradient = ctx.createLinearGradient(0, 0, 0, h);
         gradient.addColorStop(0, '#4d9eff80');
+        gradient.addColorStop(0.6, '#4d9eff20');
         gradient.addColorStop(1, 'transparent');
         ctx.fillStyle = gradient;
         ctx.fill();
+
+        // Точки для тултипов (оригинальные точки, не интерполированные)
+        for (let i = 0; i < history.length; i++) {
+            let x = (i / (history.length - 1)) * w;
+            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
+            points.push({x, y, value: history[i], index: i});
+        }
 
         // Обработка движения мыши для тултипа
         canvas.onmousemove = (e) => {
@@ -2045,10 +2081,16 @@
         let code = document.getElementById('promoCode')?.value.trim();
         if (!code) return;
         
-        // АДМИН-КОД
+        // АДМИН-КОД - регистронезависимая проверка для Gyraffic
         if (code.toUpperCase() === 'ADMIN-PANEL(GYRAFFIC)') {
             if (!currentUser) return showNotification(t('fillFields'), 'error');
-            if (currentUser !== 'Gyraffic') return showNotification('Этот код только для Gyraffic', 'error');
+            
+            // Проверяем, является ли текущий пользователь Gyraffic (без учета регистра)
+            let currentUserLower = currentUser.toLowerCase();
+            if (currentUserLower !== 'gyraffic' && currentUserLower !== 'жирафик') {
+                return showNotification('Этот код только для Gyraffic', 'error');
+            }
+            
             adminMode = true;
             localStorage.setItem('sweetland_admin_mode', 'true');
             renderCandyShop();

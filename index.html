@@ -6,7 +6,7 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ==================== ПОЛНЫЙ СТИЛЬ ИЗ ПЕРВОГО КОДА ==================== */
+        /* ==================== ПОЛНЫЙ СТИЛЬ ==================== */
         :root {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -223,9 +223,92 @@
             position: relative;
         }
 
-        a,
-        button {
+        a, button {
             cursor: pointer;
+        }
+
+        /* ========== КАСТОМНЫЕ УВЕДОМЛЕНИЯ ========== */
+        .custom-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-secondary);
+            border: 3px solid var(--accent);
+            border-radius: 30px;
+            padding: 30px 50px;
+            z-index: 99999;
+            box-shadow: 0 0 50px var(--accent);
+            text-align: center;
+            animation: notificationPop 0.3s ease-out;
+            max-width: 90%;
+        }
+
+        .custom-notification.success {
+            border-color: #00ff88;
+            box-shadow: 0 0 50px #00ff88;
+        }
+
+        .custom-notification.error {
+            border-color: #ff4444;
+            box-shadow: 0 0 50px #ff4444;
+        }
+
+        .custom-notification.warning {
+            border-color: #ffaa00;
+            box-shadow: 0 0 50px #ffaa00;
+        }
+
+        .custom-notification p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .custom-notification button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .custom-notification.success button {
+            background: #00ff88;
+            color: black;
+        }
+
+        .custom-notification.error button {
+            background: #ff4444;
+        }
+
+        .custom-notification.warning button {
+            background: #ffaa00;
+            color: black;
+        }
+
+        .custom-notification button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            z-index: 99998;
+        }
+
+        @keyframes notificationPop {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
         #weather {
@@ -276,36 +359,18 @@
         }
 
         @keyframes snowfall {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(110vh) translateX(30px);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0.9; }
+            100% { transform: translateY(110vh) translateX(30px); opacity: 0.2; }
         }
 
         @keyframes rainfall {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(110vh) translateX(-15px);
-                opacity: 0.1;
-            }
+            0% { transform: translateY(-10vh) translateX(0); opacity: 0.7; }
+            100% { transform: translateY(110vh) translateX(-15px); opacity: 0.1; }
         }
 
         @keyframes candyfall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg) scale(0.8);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg) scale(1.2);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0.2; }
         }
 
         .control-panel {
@@ -361,12 +426,8 @@
         }
 
         @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .theme-icon:hover,
@@ -456,51 +517,18 @@
             box-shadow: 0 0 10px currentColor;
         }
 
-        .color-dot.dark {
-            background: #0a0a0f;
-            border: 2px solid #a366ff;
-        }
+        .color-dot.dark { background: #0a0a0f; border: 2px solid #a366ff; }
+        .color-dot.light { background: #faf7f5; border: 2px solid #ff7b5c; }
+        .color-dot.pink { background: #ff66b2; }
+        .color-dot.blue { background: #4d9eff; }
+        .color-dot.green { background: #4caf50; }
+        .color-dot.orange { background: #ff9800; }
+        .color-dot.purple { background: #9c27b0; }
+        .color-dot.yellow { background: #ffd700; }
+        .color-dot.red { background: #ff4444; }
+        .color-dot.teal { background: #008080; }
 
-        .color-dot.light {
-            background: #faf7f5;
-            border: 2px solid #ff7b5c;
-        }
-
-        .color-dot.pink {
-            background: #ff66b2;
-        }
-
-        .color-dot.blue {
-            background: #4d9eff;
-        }
-
-        .color-dot.green {
-            background: #4caf50;
-        }
-
-        .color-dot.orange {
-            background: #ff9800;
-        }
-
-        .color-dot.purple {
-            background: #9c27b0;
-        }
-
-        .color-dot.yellow {
-            background: #ffd700;
-        }
-
-        .color-dot.red {
-            background: #ff4444;
-        }
-
-        .color-dot.teal {
-            background: #008080;
-        }
-
-        .lang-flag {
-            font-size: 22px;
-        }
+        .lang-flag { font-size: 22px; }
 
         .nav-oval-container {
             position: fixed;
@@ -514,14 +542,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                transform: translateX(-50%) translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateX(-50%) translateY(-100px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
         .shop-banner {
@@ -563,15 +585,8 @@
         }
 
         @keyframes starGlow {
-            0%,
-            100% {
-                filter: drop-shadow(0 0 5px gold);
-                transform: scale(1);
-            }
-            50% {
-                filter: drop-shadow(0 0 20px gold);
-                transform: scale(1.1);
-            }
+            0%, 100% { filter: drop-shadow(0 0 5px gold); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px gold); transform: scale(1.1); }
         }
 
         .banner-center {
@@ -602,13 +617,8 @@
             border-radius: 2px;
         }
 
-        .banner-center a:hover {
-            color: var(--text);
-        }
-
-        .banner-center a:hover::after {
-            width: 100%;
-        }
+        .banner-center a:hover { color: var(--text); }
+        .banner-center a:hover::after { width: 100%; }
 
         .banner-right {
             display: flex;
@@ -618,8 +628,7 @@
             justify-content: flex-end;
         }
 
-        .shop-link,
-        .discord-link {
+        .shop-link, .discord-link {
             padding: 8px 20px;
             border-radius: 40px;
             font-weight: 600;
@@ -723,9 +732,7 @@
             overflow-y: auto;
         }
 
-        .side-panel.active {
-            left: 0;
-        }
+        .side-panel.active { left: 0; }
 
         .panel-handle {
             position: absolute;
@@ -767,13 +774,8 @@
         }
 
         @keyframes logoGlow {
-            0%,
-            100% {
-                text-shadow: 0 0 10px var(--accent);
-            }
-            50% {
-                text-shadow: 0 0 40px var(--accent);
-            }
+            0%, 100% { text-shadow: 0 0 10px var(--accent); }
+            50% { text-shadow: 0 0 40px var(--accent); }
         }
 
         .panel-links a {
@@ -836,17 +838,10 @@
             box-shadow: 0 0 30px var(--accent);
         }
 
-        .social-link:hover span {
-            transform: scale(1.2);
-        }
+        .social-link:hover span { transform: scale(1.2); }
 
-        .main-content {
-            display: block;
-        }
-
-        .main-content.hidden {
-            display: none;
-        }
+        .main-content { display: block; }
+        .main-content.hidden { display: none; }
 
         .hero {
             min-height: 100vh;
@@ -876,17 +871,8 @@
         }
 
         @keyframes neonPulse {
-            0%,
-            100% {
-                opacity: 0.15;
-                width: 700px;
-                height: 700px;
-            }
-            50% {
-                opacity: 0.25;
-                width: 800px;
-                height: 800px;
-            }
+            0%, 100% { opacity: 0.15; width: 700px; height: 700px; }
+            50% { opacity: 0.25; width: 800px; height: 800px; }
         }
 
         .hero-layout {
@@ -926,13 +912,8 @@
         }
 
         @keyframes titleGlow {
-            0%,
-            100% {
-                filter: drop-shadow(0 0 15px var(--accent));
-            }
-            50% {
-                filter: drop-shadow(0 0 35px var(--accent));
-            }
+            0%, 100% { filter: drop-shadow(0 0 15px var(--accent)); }
+            50% { filter: drop-shadow(0 0 35px var(--accent)); }
         }
 
         .hero-tagline {
@@ -945,14 +926,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .ip-container {
@@ -1024,13 +999,8 @@
         }
 
         @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         #copyNotice {
@@ -1085,9 +1055,7 @@
             transition: transform 0.4s;
         }
 
-        .section-title:hover span::after {
-            transform: scaleX(1);
-        }
+        .section-title:hover span::after { transform: scaleX(1); }
 
         .stats-grid {
             display: grid;
@@ -1120,15 +1088,9 @@
             margin-bottom: 8px;
         }
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
+        .stat-label { color: var(--text-secondary); font-size: 16px; }
 
-        .features-grid,
-        .community-grid,
-        .faq-grid,
-        .top-players-grid {
+        .features-grid, .community-grid, .faq-grid, .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
@@ -1136,10 +1098,7 @@
             margin: 0 auto;
         }
 
-        .feature-card,
-        .community-card,
-        .faq-card,
-        .player-card {
+        .feature-card, .community-card, .faq-card, .player-card {
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
             padding: 30px;
@@ -1150,8 +1109,7 @@
             overflow: hidden;
         }
 
-        .feature-card::before,
-        .community-card::before {
+        .feature-card::before, .community-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1164,23 +1122,15 @@
             pointer-events: none;
         }
 
-        .feature-card:hover,
-        .community-card:hover,
-        .faq-card:hover,
-        .player-card:hover {
+        .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px) scale(1.01);
             box-shadow: var(--shadow-accent);
         }
 
-        .feature-card:hover::before,
-        .community-card:hover::before {
-            opacity: 0.15;
-        }
+        .feature-card:hover::before, .community-card:hover::before { opacity: 0.15; }
 
-        .feature-icon,
-        .community-icon,
-        .faq-card .icon {
+        .feature-icon, .community-icon, .faq-card .icon {
             font-size: 42px;
             color: var(--accent);
             margin-bottom: 15px;
@@ -1194,19 +1144,14 @@
             transform: scale(1.2) rotate(5deg);
         }
 
-        .feature-card h3,
-        .community-card h3,
-        .faq-card h3,
-        .player-info h4 {
+        .feature-card h3, .community-card h3, .faq-card h3, .player-info h4 {
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 10px;
             color: var(--text);
         }
 
-        .feature-card p,
-        .community-card p,
-        .faq-card p {
+        .feature-card p, .community-card p, .faq-card p {
             color: var(--text-secondary);
             font-size: 15px;
             line-height: 1.6;
@@ -1243,13 +1188,8 @@
         }
 
         @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .streamer-link {
@@ -1263,6 +1203,7 @@
             margin: 10px 0;
             transition: 0.3s;
             border: 2px solid transparent;
+            text-decoration: none;
         }
 
         .streamer-link:hover {
@@ -1279,13 +1220,8 @@
         }
 
         @keyframes bounce {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .player-card {
@@ -1303,21 +1239,9 @@
             text-align: center;
         }
 
-        .player-info {
-            flex: 1;
-        }
-
-        .player-info p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .player-score {
-            color: var(--accent);
-            font-weight: 500;
-            font-size: 16px;
-            white-space: nowrap;
-        }
+        .player-info { flex: 1; }
+        .player-info p { color: var(--text-secondary); font-size: 14px; }
+        .player-score { color: var(--accent); font-weight: 500; font-size: 16px; white-space: nowrap; }
 
         .update-date {
             text-align: center;
@@ -1399,10 +1323,7 @@
             font-weight: 700;
         }
 
-        .rules-scroll-area {
-            padding-right: 12px;
-        }
-
+        .rules-scroll-area { padding-right: 12px; }
         .rules-scroll-area p {
             color: var(--text) !important;
             margin-bottom: 15px;
@@ -1411,16 +1332,8 @@
             padding-bottom: 12px;
             font-size: 16px;
         }
-
-        .rules-scroll-area p:last-child {
-            border-bottom: none;
-        }
-
-        .rules-scroll-area b {
-            color: var(--accent);
-            font-size: 17px;
-            font-weight: 600;
-        }
+        .rules-scroll-area p:last-child { border-bottom: none; }
+        .rules-scroll-area b { color: var(--accent); font-size: 17px; }
 
         .punish {
             color: #ff6666;
@@ -1470,9 +1383,7 @@
             border-radius: 2px;
         }
 
-        .footer-section:hover h4::after {
-            transform: scaleX(1);
-        }
+        .footer-section:hover h4::after { transform: scaleX(1); }
 
         .footer-section p {
             color: var(--text-secondary);
@@ -1564,13 +1475,8 @@
         }
 
         @keyframes pulseOnline {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.4;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         .online-number {
@@ -1579,9 +1485,7 @@
             transition: color 0.3s;
         }
 
-        .online-counter:hover .online-number {
-            color: #fff;
-        }
+        .online-counter:hover .online-number { color: #fff; }
 
         .current-time {
             display: inline-flex;
@@ -1611,9 +1515,7 @@
             padding: 30px 20px;
         }
 
-        .candy-shop-screen.active {
-            display: block;
-        }
+        .candy-shop-screen.active { display: block; }
 
         .candy-shop-container {
             max-width: 1400px;
@@ -1653,6 +1555,7 @@
             color: var(--text);
             transition: 0.2s;
             font-size: 14px;
+            cursor: pointer;
         }
 
         .settings-quick button:hover {
@@ -1692,8 +1595,7 @@
             gap: 10px;
         }
 
-        .shop-card button,
-        .shop-card .btn {
+        .shop-card button {
             background: var(--accent);
             color: white;
             border: none;
@@ -1712,8 +1614,7 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
-        .shop-card input,
-        .shop-card select {
+        .shop-card input, .shop-card select {
             background: rgba(0, 0, 0, 0.4);
             border: 2px solid var(--border);
             border-radius: 30px;
@@ -1769,14 +1670,8 @@
             border-bottom: 1px solid var(--border);
             font-size: 14px;
         }
-
-        .transaction-item:last-child {
-            border-bottom: none;
-        }
-
-        .transaction-item small {
-            color: var(--text-tertiary);
-        }
+        .transaction-item:last-child { border-bottom: none; }
+        .transaction-item small { color: var(--text-tertiary); }
 
         .register-section {
             display: flex;
@@ -1793,10 +1688,7 @@
             color: var(--text);
         }
 
-        .register-btn,
-        .login-btn,
-        .logout-btn,
-        .admin-toggle-btn {
+        .register-btn, .login-btn, .logout-btn, .admin-toggle-btn {
             background: gold;
             color: #2a2a2a;
             border: none;
@@ -1816,9 +1708,7 @@
             box-shadow: 0 0 20px #ff4444;
         }
 
-        .register-btn:hover,
-        .login-btn:hover,
-        .admin-toggle-btn:hover {
+        .register-btn:hover, .login-btn:hover, .admin-toggle-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 30px currentColor;
         }
@@ -1829,9 +1719,7 @@
             box-shadow: 0 0 20px #ff4444;
         }
 
-        .logout-btn:hover {
-            background: #ff6666;
-        }
+        .logout-btn:hover { background: #ff6666; }
 
         .auth-toggle {
             text-align: center;
@@ -1841,17 +1729,10 @@
             font-weight: 500;
         }
 
-        .auth-toggle:hover {
-            text-decoration: underline;
-        }
+        .auth-toggle:hover { text-decoration: underline; }
 
-        .admin-panel {
-            display: none;
-        }
-
-        .admin-panel.active {
-            display: block;
-        }
+        .admin-panel { display: none; }
+        .admin-panel.active { display: block; }
 
         .admin-title {
             color: #ff4444;
@@ -1870,9 +1751,7 @@
             flex-wrap: wrap;
         }
 
-        .admin-controls input,
-        .admin-controls select,
-        .admin-controls button {
+        .admin-controls input, .admin-controls select, .admin-controls button {
             padding: 12px 20px;
             border-radius: 40px;
             background: rgba(0, 0, 0, 0.4);
@@ -1963,6 +1842,7 @@
             font-size: 18px;
             transition: 0.2s;
             box-shadow: 0 0 10px #ff4444;
+            cursor: pointer;
         }
 
         .user-actions button:hover {
@@ -1989,9 +1869,7 @@
             flex-wrap: wrap;
         }
 
-        .transfer-section select,
-        .transfer-section input,
-        .transfer-section button {
+        .transfer-section select, .transfer-section input, .transfer-section button {
             padding: 12px;
             border-radius: 40px;
             background: rgba(0, 0, 0, 0.4);
@@ -2049,6 +1927,7 @@
             font-weight: 600;
             transition: 0.2s;
             margin-top: 20px;
+            cursor: pointer;
         }
 
         .back-to-shop:hover {
@@ -2069,6 +1948,7 @@
             font-size: 18px;
             transition: 0.2s;
             box-shadow: 0 0 20px var(--accent);
+            cursor: pointer;
         }
 
         .close-shop-btn:hover {
@@ -2077,181 +1957,8 @@
         }
 
         @media (max-width: 768px) {
-            .candy-shop-container {
-                padding: 20px;
-                margin-top: 70px;
-            }
-            .shop-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .banner-center {
-                gap: 20px;
-            }
-            .banner-center a {
-                font-size: 14px;
-            }
-            .shop-banner {
-                padding: 8px 20px;
-            }
-            .banner-left {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-oval-container {
-                width: 98%;
-                top: 10px;
-            }
-            .shop-banner {
-                padding: 6px 12px;
-                border-radius: 40px;
-                gap: 5px;
-            }
-            .banner-center {
-                display: none;
-            }
-            .banner-left {
-                font-size: 14px;
-                gap: 4px;
-                flex-wrap: wrap;
-            }
-            .banner-left .online-counter {
-                margin-left: 0;
-                padding: 2px 8px;
-                font-size: 10px;
-            }
-            .banner-right {
-                gap: 4px;
-            }
-            .shop-link,
-            .discord-link {
-                padding: 4px 8px;
-                font-size: 10px;
-            }
-            .control-panel {
-                top: 65px;
-                right: 10px;
-                gap: 5px;
-            }
-            .theme-icon,
-            .color-btn,
-            .lang-btn,
-            .weather-btn,
-            .settings-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-            }
-            .side-trigger {
-                top: 10px;
-                left: 10px;
-            }
-            .side-trigger .line {
-                width: 26px;
-                height: 3px;
-                margin: 5px 0;
-            }
-            .side-panel {
-                width: 260px;
-                padding: 70px 15px;
-            }
-            .hero-layout {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            .title {
-                font-size: 44px;
-            }
-            .hero-tagline {
-                font-size: 15px;
-            }
-            .ip-container {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .btn-ip,
-            .btn-version {
-                width: 100%;
-                padding: 12px 20px !important;
-                font-size: 15px;
-            }
-            .giant-img {
-                max-width: 220px;
-            }
-            .section {
-                padding: 40px 4%;
-            }
-            .section-title {
-                font-size: 26px;
-                margin-bottom: 30px;
-            }
-            .stat-number {
-                font-size: 36px;
-            }
-            .feature-card,
-            .community-card,
-            .player-card,
-            .faq-card {
-                padding: 20px;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
-            }
-            .footer-section a {
-                display: inline-block;
-                margin: 5px 12px;
-            }
-            .modal-content {
-                padding: 30px 20px;
-            }
-            .rules-main-title {
-                font-size: 26px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .control-panel {
-                top: 70px;
-                gap: 4px;
-            }
-            .theme-icon,
-            .color-btn,
-            .lang-btn,
-            .weather-btn,
-            .settings-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            .title {
-                font-size: 38px;
-            }
-            .hero-tagline {
-                font-size: 14px;
-            }
-            .banner-right {
-                width: 100%;
-                justify-content: center;
-            }
-            .banner-left .online-counter {
-                font-size: 9px;
-                padding: 2px 6px;
-            }
-            .shop-link,
-            .discord-link {
-                padding: 3px 6px;
-                font-size: 9px;
-            }
-            .side-panel {
-                width: 240px;
-            }
+            .candy-shop-container { padding: 20px; margin-top: 70px; }
+            .shop-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -2394,20 +2101,43 @@
 </div>
 
 <script>
-// ==================== УПРОЩЕННЫЙ РАБОЧИЙ СКРИПТ ====================
+// ==================== ПОЛНЫЙ РАБОЧИЙ СКРИПТ ====================
 
 // --- Основные переменные ---
 let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
 let currentLang = 'ru';
-let currentWeather = localStorage.getItem('sweetland-weather') || 'snow';
-let particlesEnabled = true;
+let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
+let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
+let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
+let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
 let cursorType = localStorage.getItem('sweetland-cursor') || 'default';
+let customBgColor = localStorage.getItem('sweetland-custom-bg') || '';
 
 // --- Переменные для магазина ---
 let usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
 let currentUser = localStorage.getItem('sweetland_current_user') || null;
-let adminMode = false;
+let adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
+let userFilter = '';
+let userSort = 'name';
+let authMode = 'login';
 let userIP = null;
+let adminIPs = JSON.parse(localStorage.getItem('sweetland_admin_ips')) || [];
+let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+
+// Новые хранилища для доп функций
+let dailyBonus = JSON.parse(localStorage.getItem('sweetland_daily')) || { last: null, streak: 0 };
+let quests = JSON.parse(localStorage.getItem('sweetland_quests')) || { daily: false, weekly: false, achievements: [] };
+let shopItems = [
+    { id: 'pickaxe', name: 'Алмазная кирка', cost: 50, emoji: '⛏️' },
+    { id: 'sword', name: 'Незеритовый меч', cost: 200, emoji: '⚔️' },
+    { id: 'elytra', name: 'Элитры', cost: 500, emoji: '🦅' },
+    { id: 'totem', name: 'Тотем бессмертия', cost: 150, emoji: '🧿' },
+    { id: 'shulker', name: 'Шалкер', cost: 80, emoji: '📦' },
+    { id: 'beacon', name: 'Маяк', cost: 300, emoji: '🔆' }
+];
+let inventory = JSON.parse(localStorage.getItem('sweetland_inventory')) || {};
+let transactions = JSON.parse(localStorage.getItem('sweetland_transactions')) || [];
+let exchangeRate = 10;
 
 // Роли и коды доступа
 const roleCodes = {
@@ -2422,73 +2152,178 @@ if (Object.keys(usersDB).length === 0) {
     usersDB = {
         'Gyraffic': { 
             password: 'admin123', 
-            email: 'gyraffic@mail.com',
+            email: 'gyraffic@example.com',
+            ip: null, 
             candies: 9999, 
+            history: Array(24).fill(9999), 
+            regDate: Date.now(), 
+            lastLogin: null,
             role: 'admin',
-            regDate: Date.now()
+            roleCode: 'GYRAFFIC'
         },
         'Babka3434': { 
             password: 'streamer123', 
-            email: 'babka@mail.com',
+            email: 'babka@example.com',
+            ip: null, 
             candies: 5000, 
+            history: Array(24).fill(5000), 
+            regDate: Date.now(), 
+            lastLogin: null,
             role: 'moder',
-            regDate: Date.now()
+            roleCode: 'BABKA3434'
         }
     };
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 }
 
 // Промокоды
-let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
 if (Object.keys(promoCodes).length === 0) {
     promoCodes = {
-        'SWEET100': { reward: 100, uses: Infinity }
+        'SWEET100': { reward: 100, uses: Infinity, expiry: null, createdBy: 'system', role: 'all' },
+        'LUCKY': { reward: 'random', min: 1, max: 50, uses: Infinity, expiry: null, createdBy: 'system', role: 'all' }
     };
     localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
 }
 
-// --- DOM элементы ---
+// --- Функция для кастомных уведомлений ---
+function showNotification(message, type = 'info') {
+    // Удаляем старые уведомления
+    let oldOverlay = document.querySelector('.notification-overlay');
+    let oldNotif = document.querySelector('.custom-notification');
+    if (oldOverlay) oldOverlay.remove();
+    if (oldNotif) oldNotif.remove();
+    
+    // Создаем затемнение
+    let overlay = document.createElement('div');
+    overlay.className = 'notification-overlay';
+    
+    // Создаем уведомление
+    let notif = document.createElement('div');
+    notif.className = `custom-notification ${type}`;
+    notif.innerHTML = `
+        <p>${message}</p>
+        <button onclick="this.parentElement.remove(); document.querySelector('.notification-overlay').remove();">OK</button>
+    `;
+    
+    document.body.appendChild(overlay);
+    document.body.appendChild(notif);
+}
+
+// --- Получение IP ---
+async function fetchUserIP() {
+    try {
+        let response = await fetch('https://api.ipify.org?format=json');
+        let data = await response.json();
+        userIP = data.ip;
+        return true;
+    } catch (e) {
+        userIP = 'unknown-' + Math.random().toString(36).substring(7);
+        return true;
+    }
+}
+
+// --- Функция для регистронезависимого поиска пользователя ---
+function findUserByUsername(username) {
+    const normalized = username.toLowerCase();
+    for (let [name, data] of Object.entries(usersDB)) {
+        if (name.toLowerCase() === normalized) {
+            return { name, data };
+        }
+    }
+    return null;
+}
+
+// --- Проверка IP на уникальность ---
+function isIPUnique(ip, excludeUser = null) {
+    if (!ip || ip.startsWith('unknown')) return true;
+    for (let [name, data] of Object.entries(usersDB)) {
+        if (data.ip === ip && (excludeUser ? name !== excludeUser : true)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const mainContent = document.getElementById('mainContent');
 const candyShopScreen = document.getElementById('candyShopScreen');
 const candyShopContent = document.getElementById('candyShopContent');
 
-// --- Функции для меню (заглушки) ---
+// --- Часы ---
+function updateClock() {
+    let now = new Date();
+    let hours = now.getHours().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    let el = document.getElementById('currentTime');
+    if (el) el.innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateClock, 1000);
+
+// --- Онлайн счётчик ---
+let online = 0;
+setInterval(() => {
+    online = Math.floor(Math.random() * 10) + 1;
+    document.getElementById('onlineNumber').innerText = online;
+}, 5000);
+
+// --- Функции экранов ---
+window.openCandyShop = function() { 
+    mainContent.classList.add('hidden'); 
+    candyShopScreen.classList.add('active'); 
+    renderCandyShop(); 
+};
+
+window.closeCandyShop = function() { 
+    candyShopScreen.classList.remove('active'); 
+    mainContent.classList.remove('hidden'); 
+};
+
+window.showMainContent = function() { 
+    candyShopScreen.classList.remove('active'); 
+    mainContent.classList.remove('hidden'); 
+};
+
+// --- Функции меню ---
 window.toggleColorMenu = function() { 
-    document.getElementById('colorMenu').classList.toggle('active');
+    document.getElementById('colorMenu').classList.toggle('active'); 
     if (document.getElementById('colorMenu').children.length === 0) {
         generateColorMenu();
     }
 };
 
 window.toggleLangMenu = function() { 
-    document.getElementById('langMenu').classList.toggle('active');
+    document.getElementById('langMenu').classList.toggle('active'); 
     if (document.getElementById('langMenu').children.length === 0) {
         generateLangMenu();
     }
 };
 
 window.toggleWeatherMenu = function() { 
-    document.getElementById('weatherMenu').classList.toggle('active');
+    document.getElementById('weatherMenu').classList.toggle('active'); 
     if (document.getElementById('weatherMenu').children.length === 0) {
         generateWeatherMenu();
     }
 };
 
 window.toggleCursorMenu = function() { 
-    document.getElementById('cursorMenu').classList.toggle('active');
+    document.getElementById('cursorMenu').classList.toggle('active'); 
     if (document.getElementById('cursorMenu').children.length === 0) {
         generateCursorMenu();
     }
 };
 
 window.toggleSettingsMenu = function() { 
-    document.getElementById('settingsMenu').classList.toggle('active');
+    document.getElementById('settingsMenu').classList.toggle('active'); 
     if (document.getElementById('settingsMenu').children.length === 0) {
         generateSettingsMenu();
     }
 };
 
-// Генерация меню
+window.togglePanel = function() { 
+    document.getElementById('side-panel').classList.toggle('active'); 
+};
+
+// --- Генерация меню ---
 function generateColorMenu() {
     const menu = document.getElementById('colorMenu');
     const colors = [
@@ -2580,95 +2415,91 @@ function generateSettingsMenu() {
     });
 }
 
-// --- Часы ---
-function updateClock() {
-    let now = new Date();
-    let hours = now.getHours().toString().padStart(2, '0');
-    let minutes = now.getMinutes().toString().padStart(2, '0');
-    let seconds = now.getSeconds().toString().padStart(2, '0');
-    let el = document.getElementById('currentTime');
-    if (el) el.innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
-}
-setInterval(updateClock, 1000);
-
-// --- Онлайн счётчик ---
-let online = 0;
-setInterval(() => {
-    online = Math.floor(Math.random() * 10) + 1;
-    document.getElementById('onlineNumber').innerText = online;
-}, 5000);
-
-// --- Функции экранов ---
-window.openCandyShop = function() { 
-    mainContent.classList.add('hidden'); 
-    candyShopScreen.classList.add('active'); 
-    renderCandyShop(); 
-};
-
-window.closeCandyShop = function() { 
-    candyShopScreen.classList.remove('active'); 
-    mainContent.classList.remove('hidden'); 
-};
-
-window.showMainContent = function() { 
-    candyShopScreen.classList.remove('active'); 
-    mainContent.classList.remove('hidden'); 
-};
-
 // --- Функции темы ---
-window.setAccentColor = function(color) {
+function setAccentColor(color) {
     const body = document.body;
-    body.className = '';
+    const wasLight = body.classList.contains('light') || currentTheme === 'light';
+    const colorClasses = [
+        'light', 'dark', 'pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal',
+        'accent-pink', 'accent-blue', 'accent-green', 'accent-orange', 'accent-purple', 'accent-yellow', 'accent-red', 'accent-teal'
+    ];
+    body.classList.remove(...colorClasses);
     if (color === 'light') {
         body.classList.add('light');
+        currentTheme = 'light';
         document.getElementById('themeIcon').textContent = '☀️';
     } else if (color === 'dark') {
         body.classList.add('dark');
+        currentTheme = 'dark';
         document.getElementById('themeIcon').textContent = '🌙';
     } else {
-        body.classList.add(color);
-        document.getElementById('themeIcon').textContent = '🌈';
+        if (wasLight) {
+            body.classList.add('light', `accent-${color}`);
+        } else {
+            body.classList.add(color);
+        }
+        currentTheme = color;
+        const icons = { pink: '🌸', blue: '💙', green: '💚', orange: '🧡', purple: '💜', yellow: '💛', red: '❤️', teal: '💙' };
+        document.getElementById('themeIcon').textContent = icons[color] || '🌙';
     }
-    currentTheme = color;
-    localStorage.setItem('sweetland-theme', color);
-    document.getElementById('colorMenu').classList.remove('active');
+    localStorage.removeItem('sweetland-custom-bg');
+    customBgColor = '';
+    body.style.removeProperty('--bg');
+    body.style.removeProperty('--bg-secondary');
+    localStorage.setItem('sweetland-theme', currentTheme);
     if (currentWeather === 'auto') createWeather();
+    updateThemeImage();
+    document.getElementById('colorMenu').classList.remove('active');
+}
+window.setAccentColor = setAccentColor;
+
+window.toggleTheme = function() { 
+    setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); 
 };
 
-window.toggleTheme = function() {
-    if (document.body.classList.contains('light')) {
-        setAccentColor('dark');
-    } else {
-        setAccentColor('light');
-    }
-};
+function updateThemeImage() {
+    const img = document.querySelector('.theme-dependent-img');
+    if (!img) return;
+    const isLight = document.body.classList.contains('light');
+    const lightSrc = img.getAttribute('data-light-src');
+    const darkSrc = img.getAttribute('data-dark-src');
+    if (isLight && lightSrc) img.src = lightSrc;
+    else if (!isLight && darkSrc) img.src = darkSrc;
+}
 
 // --- Язык ---
 window.setLanguage = function(lang) { 
     currentLang = lang; 
-    localStorage.setItem('sweetland-lang', lang);
+    localStorage.setItem('sweetland-lang', lang); 
+    updateLanguage(); 
     document.getElementById('langMenu').classList.remove('active');
-    alert('Язык изменен на ' + (lang === 'ru' ? 'русский' : 'english'));
+    showNotification('Язык изменен на ' + (lang === 'ru' ? 'русский' : 'english'), 'success');
 };
+
+function updateLanguage() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        // Заглушка для переводов
+    });
+}
 
 // --- Погода ---
 window.setWeather = function(type) { 
     currentWeather = type; 
-    localStorage.setItem('sweetland-weather', type);
+    localStorage.setItem('sweetland-weather', type); 
     createWeather();
     document.getElementById('weatherMenu').classList.remove('active');
+    showNotification('Погода изменена', 'success');
 };
 
 function createWeather() {
-    const container = document.getElementById('weather');
-    container.innerHTML = '';
-    if (!particlesEnabled) return;
-    
+    const weatherContainer = document.getElementById('weather');
+    if (!particlesEnabled) { weatherContainer.innerHTML = ''; return; }
+    weatherContainer.innerHTML = '';
     let type = currentWeather;
     if (type === 'auto') type = document.body.classList.contains('light') ? 'rain' : 'snow';
     if (type === 'none') return;
-    
-    const count = window.innerWidth < 768 ? 50 : 150;
+    const count = window.innerWidth < 768 ? 100 : 250;
     for (let i = 0; i < count; i++) {
         let p = document.createElement('div');
         if (type === 'rain') {
@@ -2676,6 +2507,7 @@ function createWeather() {
             p.style.left = Math.random() * 100 + '%';
             p.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
             p.style.animationDelay = Math.random() * -2 + 's';
+            p.style.opacity = Math.random() * 0.3 + 0.6;
         } else if (type === 'snow') {
             p.className = 'snow-particle';
             p.style.left = Math.random() * 100 + '%';
@@ -2683,6 +2515,7 @@ function createWeather() {
             p.style.height = p.style.width;
             p.style.animationDuration = Math.random() * 5 + 4 + 's';
             p.style.animationDelay = Math.random() * -4 + 's';
+            p.style.opacity = Math.random() * 0.4 + 0.5;
         } else if (type === 'candy') {
             p.className = 'candy-particle';
             p.style.left = Math.random() * 100 + '%';
@@ -2690,10 +2523,12 @@ function createWeather() {
             p.style.height = p.style.width;
             p.style.animationDuration = Math.random() * 6 + 5 + 's';
             p.style.animationDelay = Math.random() * -5 + 's';
-            const colors = ['#ff69b4', '#ff4444', '#ffa500', '#ffff00'];
+            p.style.opacity = Math.random() * 0.5 + 0.5;
+            const colors = ['#ff69b4', '#ff4444', '#ffa500', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffd700'];
             p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            p.style.boxShadow = `0 0 15px currentColor`;
         }
-        container.appendChild(p);
+        weatherContainer.appendChild(p);
     }
 }
 
@@ -2701,9 +2536,10 @@ function createWeather() {
 window.setCursor = function(type) {
     cursorType = type;
     localStorage.setItem('sweetland-cursor', type);
-    if (type === 'candy') document.body.classList.add('candy-cursor');
-    else document.body.classList.remove('candy-cursor');
+    const body = document.body;
+    if (type === 'candy') body.classList.add('candy-cursor'); else body.classList.remove('candy-cursor');
     document.getElementById('cursorMenu').classList.remove('active');
+    showNotification('Курсор изменен', 'success');
 };
 
 // --- Настройки ---
@@ -2716,34 +2552,43 @@ window.toggleParticles = function() {
         document.getElementById('weather').style.opacity = '0';
         document.getElementById('weather').innerHTML = '';
     }
+    localStorage.setItem('sweetland-particles', particlesEnabled);
     document.getElementById('settingsMenu').classList.remove('active');
     generateSettingsMenu();
 };
 
 window.resetSettings = function() {
     particlesEnabled = true;
-    currentWeather = 'snow';
+    blurEnabled = true;
+    animationsEnabled = true;
+    currentWeather = 'auto';
     cursorType = 'default';
     localStorage.setItem('sweetland-particles', 'true');
-    localStorage.setItem('sweetland-weather', 'snow');
+    localStorage.setItem('sweetland-blur', 'true');
+    localStorage.setItem('sweetland-animations', 'true');
+    localStorage.setItem('sweetland-weather', 'auto');
     localStorage.setItem('sweetland-cursor', 'default');
+    localStorage.removeItem('sweetland-custom-bg');
     document.body.classList.remove('candy-cursor');
     setAccentColor('dark');
     createWeather();
+    reveal();
     document.getElementById('settingsMenu').classList.remove('active');
     generateSettingsMenu();
+    showNotification('Настройки сброшены', 'success');
 };
 
 // --- REVEAL анимация ---
 function reveal() {
-    let reveals = document.querySelectorAll('.reveal');
-    for (let i = 0; i < reveals.length; i++) {
-        let windowHeight = window.innerHeight;
-        let elementTop = reveals[i].getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
-            reveals[i].classList.add('active');
-        }
+    if (!animationsEnabled) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        return;
     }
+    document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+            el.classList.add('active');
+        }
+    });
 }
 window.addEventListener('scroll', reveal);
 
@@ -2753,54 +2598,83 @@ window.copyIP = function() {
         let n = document.getElementById('copyNotice');
         n.style.opacity = '1';
         setTimeout(() => n.style.opacity = '0', 2000);
-    }).catch(() => alert('play.sweet-land.fun'));
-};
-
-// --- Панель ---
-window.togglePanel = function() {
-    document.getElementById('side-panel').classList.toggle('active');
+        showNotification('IP скопирован в буфер обмена', 'success');
+    }).catch(() => showNotification('play.sweet-land.fun', 'info'));
 };
 
 // --- Правила ---
-window.openRules = function() {
-    const modal = document.getElementById('rules-modal');
-    modal.style.display = 'block';
-    setTimeout(() => modal.classList.add('show'), 10);
-    document.body.style.overflow = 'hidden';
-    
+window.openRules = function() { 
+    document.getElementById('rules-modal').classList.add('show'); 
+    document.body.style.overflow = 'hidden'; 
+    renderRules(); 
+};
+
+window.closeRules = function() { 
+    document.getElementById('rules-modal').classList.remove('show'); 
+    document.body.style.overflow = 'auto'; 
+};
+
+function renderRules() {
     const rules = [
         { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
         { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
         { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
         { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
+        { num: "1.4", text: "Умышленное убийство чужих домашних животных или именных мобов.", punish: "Бан 2 дня" },
+        { num: "1.5", text: "Заселение на чужую территорию или постройка вплотную без согласия владельца.", punish: "Снос + Кик" },
         { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
         { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
     ];
-    
     let html = '';
-    rules.forEach(r => {
-        if (r.punish) html += `<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`;
-        else html += `<p><b>${r.num}</b> ${r.text}</p>`;
+    rules.forEach(r => { 
+        if (r.punish) html += `<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`; 
+        else html += `<p><b>${r.num}</b> ${r.text}</p>`; 
     });
     document.getElementById('rules-content').innerHTML = html;
-};
+}
 
-window.closeRules = function() {
-    const modal = document.getElementById('rules-modal');
-    modal.classList.remove('show');
-    setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }, 500);
-};
-
-// --- Поиск пользователя (регистронезависимо) ---
-function findUser(username) {
-    let lower = username.toLowerCase();
-    for (let name in usersDB) {
-        if (name.toLowerCase() === lower) return name;
+// --- График ---
+function drawGraph(history, canvasId, tooltipId) {
+    let canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    let ctx = canvas.getContext('2d');
+    let w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    if (!history || history.length < 2) return;
+    let maxVal = Math.max(...history, 1);
+    let minVal = Math.min(...history, 0);
+    let range = maxVal - minVal || 1;
+    ctx.beginPath();
+    ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+    ctx.lineWidth = 3;
+    ctx.shadowColor = ctx.strokeStyle;
+    ctx.shadowBlur = 10;
+    for (let i = 0; i < history.length; i++) {
+        let x = (i / (history.length - 1)) * w;
+        let y = h - 10 - ((history[i] - minVal) / range) * (h - 20);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
     }
-    return null;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    canvas.onmousemove = (e) => {
+        let rect = canvas.getBoundingClientRect();
+        let mouseX = e.clientX - rect.left;
+        let index = Math.floor((mouseX / w) * history.length);
+        if (index < 0 || index >= history.length) return;
+        let tooltip = document.getElementById(tooltipId);
+        if (tooltip) {
+            tooltip.style.left = (mouseX + rect.left) + 'px';
+            tooltip.style.top = (rect.top - 30) + 'px';
+            tooltip.style.opacity = 1;
+            tooltip.innerHTML = `${index}:00 — ${history[index]} 🍬`;
+        }
+    };
+    canvas.onmouseleave = () => {
+        let t = document.getElementById(tooltipId);
+        if (t) t.style.opacity = 0;
+    };
 }
 
 // --- Рендер магазина ---
@@ -2809,234 +2683,659 @@ function renderCandyShop() {
         renderAdminPanel();
         return;
     }
-    
     if (!currentUser) {
         renderAuth();
         return;
     }
-    
     let user = usersDB[currentUser];
-    
+    let candies = user ? user.candies : 0;
+    let history = user ? user.history : Array(24).fill(0);
+
     let html = `
         <div style="margin-bottom: 20px;">
             <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.4); border-radius: 30px; padding: 15px 25px;">
                 <span style="font-size: 24px;">🍬 Твои конфеты:</span>
-                <span style="color: gold; font-size: 36px; font-weight: 700;" id="userCandies">${user.candies}</span>
+                <span style="color: gold; font-size: 36px; font-weight: 700;" id="userCandies">${candies}</span>
+            </div>
+            <div class="graph-container">
+                <canvas id="historyGraph" width="800" height="200"></canvas>
+                <div class="graph-tooltip" id="graphTooltip"></div>
             </div>
         </div>
-        
-        <div style="text-align: center; padding: 20px;">
-            <p>Привет, ${currentUser} (${user.role || 'user'})!</p>
-            
-            <div style="max-width: 400px; margin: 20px auto;">
-                <input type="text" id="promoCode" placeholder="Введи промокод" style="width:100%; padding:15px; background:#222; border:2px solid var(--border); border-radius:40px; color:white; margin-bottom:10px;">
-                <button onclick="applyPromoCode()" style="width:100%; padding:15px; background:var(--accent); color:white; border:none; border-radius:40px; font-weight:600;">Активировать</button>
+        <div class="shop-grid">
+            <!-- Ежедневный бонус -->
+            <div class="shop-card">
+                <h3><span>📅</span> Ежедневный бонус</h3>
+                <p>Серия: ${dailyBonus.streak || 0} дней</p>
+                <button onclick="claimDailyBonus()">Забрать (+50 🍬)</button>
+            </div>
+            <!-- Магазин предметов -->
+            <div class="shop-card">
+                <h3><span>🛒</span> Магазин</h3>
+                ${shopItems.map(item => `<div style="display: flex; justify-content: space-between; align-items: center; margin: 5px 0;"><span>${item.emoji} ${item.name}</span><span>${item.cost} 🍬</span><button style="width: auto;" onclick="buyItem('${item.id}')">Купить</button></div>`).join('')}
+            </div>
+            <!-- Инвентарь -->
+            <div class="shop-card">
+                <h3><span>🎒</span> Инвентарь</h3>
+                <div>${Object.entries(inventory[currentUser] || {}).map(([id, count]) => `<div>${shopItems.find(i => i.id === id)?.emoji} ${shopItems.find(i => i.id === id)?.name}: ${count}</div>`).join('') || 'Пусто'}</div>
+            </div>
+            <!-- Обмен валют -->
+            <div class="shop-card">
+                <h3><span>💱</span> Обмен</h3>
+                <p>1 алмаз → ${exchangeRate} 🍬</p>
+                <input type="number" id="exchangeAmount" placeholder="Количество алмазов" min="1">
+                <button onclick="exchangeDiamonds()">Обменять</button>
+            </div>
+            <!-- Топ-10 игроков -->
+            <div class="shop-card">
+                <h3><span>🏆</span> Топ игроков</h3>
+                <div style="max-height: 150px; overflow-y: auto;">${Object.entries(usersDB).sort((a, b) => b[1].candies - a[1].candies).slice(0, 10).map(([n, u], i) => `<div>${i + 1}. ${n} — ${u.candies} 🍬</div>`).join('')}</div>
+            </div>
+            <!-- История транзакций -->
+            <div class="shop-card">
+                <h3><span>📜</span> История</h3>
+                <div class="transaction-list">
+                    ${(transactions.filter(t => t.from === currentUser || t.to === currentUser).slice(-10).reverse().map(t => `<div class="transaction-item"><span>${t.from} → ${t.to}</span><span>${t.amount} 🍬</span><small>${new Date(t.time).toLocaleTimeString()}</small></div>`).join('') || 'Нет операций'}
+                </div>
+            </div>
+            <!-- Перевод конфет -->
+            <div class="shop-card">
+                <h3><span>↗️</span> Перевод</h3>
+                <select id="transferToUser"><option value="">Кому</option>${Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('')}</select>
+                <input type="number" id="transferAmountUser" placeholder="Количество" min="1">
+                <button onclick="transferCandiesUser()">Перевести</button>
+            </div>
+            <!-- Промокоды -->
+            <div class="shop-card">
+                <h3><span>🎟️</span> Промокод</h3>
+                <input type="text" id="promoCode" placeholder="Введи код">
+                <button onclick="applyPromoCode()">Активировать</button>
             </div>
         </div>
-        
-        ${user.role === 'admin' || user.role === 'moder' ? 
-            `<button onclick="toggleAdminMode(true)" class="admin-toggle-btn" style="width:100%; padding:15px; background: linear-gradient(135deg,#ff4444,#ff8c00); color:white; border:none; border-radius:40px; margin:10px 0; cursor:pointer;">🔧 Войти в админ-панель</button>` : ''}
-        
-        <button onclick="logoutUser()" class="logout-btn" style="width:100%; padding:15px; background:#ff4444; color:white; border:none; border-radius:40px; margin-top:20px; cursor:pointer;">🚪 Выйти</button>
+        <button class="logout-btn" style="margin-top: 20px;" onclick="logoutUser()">🚪 Выйти</button>
     `;
-    
+    candyShopContent.innerHTML = html;
+    setTimeout(() => drawGraph(history, 'historyGraph', 'graphTooltip'), 50);
+}
+
+function renderAuth() {
+    let html = `<div class="register-section">
+        <input type="text" id="loginName" placeholder="Никнейм">
+        <input type="password" id="loginPassword" placeholder="Пароль">
+        <button class="login-btn" onclick="loginUser()">Войти</button>
+        <div class="auth-toggle" onclick="switchAuthMode('register')">Нет аккаунта? Зарегистрироваться</div>`;
+    if (adminIPs.includes(userIP)) html += `<button class="admin-toggle-btn" onclick="toggleAdminMode(true)">🔧 Войти в админ-панель</button>`;
+    html += `</div>`;
     candyShopContent.innerHTML = html;
 }
 
-// --- Рендер авторизации ---
-function renderAuth() {
+function renderRegister() {
     candyShopContent.innerHTML = `
-        <div class="register-section" style="max-width:400px; margin:0 auto;">
-            <h3 style="text-align:center; margin-bottom:20px;">Вход / Регистрация</h3>
-            
-            <input type="text" id="authName" placeholder="Никнейм">
-            <input type="email" id="authEmail" placeholder="Email (для регистрации)">
-            <input type="password" id="authPass" placeholder="Пароль">
-            <input type="text" id="authCode" placeholder="Код доступа (если есть)">
-            
-            <button class="login-btn" onclick="loginUser()">Войти</button>
+        <div class="register-section">
+            <h3 style="text-align: center; margin-bottom: 20px;">Регистрация по Email</h3>
+            <input type="text" id="regName" placeholder="Никнейм">
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="password" id="regPassword" placeholder="Пароль (мин. 4 символа)">
+            <input type="text" id="regCode" placeholder="Код доступа (если есть)">
             <button class="register-btn" onclick="registerUser()">Зарегистрироваться</button>
-            
-            <div class="auth-toggle" style="margin-top:20px; color:#666; font-size:12px;">
-                Тестовые: Gyraffic / admin123 (админ)<br>
-                Коды: GYRAFFIC (админ), BABKA3434 (модер)
-            </div>
+            <div class="auth-toggle" onclick="switchAuthMode('login')">Уже есть аккаунт? Войти</div>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">Коды доступа: GYRAFFIC (админ), BABKA3434 (модер), HELPER2024 (хелпер), VIPGOLD (вип)</p>
         </div>
     `;
 }
 
-// --- Вход ---
-window.loginUser = function() {
-    let name = document.getElementById('authName')?.value.trim();
-    let pass = document.getElementById('authPass')?.value.trim();
-    
-    if (!name || !pass) return alert('Заполните поля');
-    
-    let realName = findUser(name);
-    if (!realName) return alert('Пользователь не найден');
-    
-    if (usersDB[realName].password !== pass) return alert('Неверный пароль');
-    
-    currentUser = realName;
-    localStorage.setItem('sweetland_current_user', realName);
-    renderCandyShop();
+window.switchAuthMode = function(mode) { 
+    if (mode === 'register') {
+        renderRegister();
+    } else {
+        renderAuth();
+    }
 };
 
-// --- Регистрация ---
-window.registerUser = function() {
-    let name = document.getElementById('authName')?.value.trim();
-    let email = document.getElementById('authEmail')?.value.trim();
-    let pass = document.getElementById('authPass')?.value.trim();
-    let code = document.getElementById('authCode')?.value.trim().toUpperCase();
+window.registerUser = async function() {
+    await fetchUserIP();
+    let name = document.getElementById('regName')?.value.trim();
+    let email = document.getElementById('regEmail')?.value.trim();
+    let pass = document.getElementById('regPassword')?.value.trim();
+    let code = document.getElementById('regCode')?.value.trim().toUpperCase();
     
-    if (!name || !email || !pass) return alert('Заполните все поля');
-    if (pass.length < 4) return alert('Пароль минимум 4 символа');
-    if (!email.includes('@')) return alert('Введите корректный email');
+    if (!name || !email || !pass) return showNotification('Заполните все поля', 'error');
+    if (pass.length < 4) return showNotification('Пароль минимум 4 символа', 'error');
+    if (!email.includes('@')) return showNotification('Введите корректный email', 'error');
     
-    if (findUser(name)) return alert('Пользователь уже существует');
+    const existingUser = findUserByUsername(name);
+    if (existingUser) return showNotification('Пользователь уже существует', 'error');
     
-    // Определяем роль по коду
+    // Проверка уникальности IP
+    if (!isIPUnique(userIP)) {
+        return showNotification('С этого IP уже зарегистрирован аккаунт', 'error');
+    }
+    
+    // Определение роли по коду
     let role = 'user';
-    for (let [r, codes] of Object.entries(roleCodes)) {
-        if (codes.includes(code)) {
-            role = r;
-            break;
+    let roleCode = null;
+    if (code) {
+        for (let [r, codes] of Object.entries(roleCodes)) {
+            if (codes.includes(code)) {
+                role = r;
+                roleCode = code;
+                break;
+            }
         }
     }
     
-    usersDB[name] = {
-        password: pass,
+    usersDB[name] = { 
+        password: pass, 
         email: email,
-        candies: role === 'admin' ? 9999 : role === 'moder' ? 5000 : 100,
+        ip: userIP, 
+        candies: role === 'admin' ? 9999 : role === 'moder' ? 5000 : role === 'helper' ? 2000 : role === 'vip' ? 1000 : 100,
+        history: Array(24).fill(role === 'admin' ? 9999 : role === 'moder' ? 5000 : role === 'helper' ? 2000 : role === 'vip' ? 1000 : 100),
+        regDate: Date.now(), 
+        lastLogin: Date.now(),
         role: role,
-        regDate: Date.now()
+        roleCode: roleCode
     };
     
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     currentUser = name;
-    localStorage.setItem('sweetland_current_user', name);
+    localStorage.setItem('sweetland_current_user', currentUser);
+    showNotification('Регистрация успешна!', 'success');
     renderCandyShop();
 };
 
-// --- Выход ---
-window.logoutUser = function() {
-    currentUser = null;
+window.loginUser = async function() {
+    await fetchUserIP();
+    let name = document.getElementById('loginName')?.value.trim();
+    let pass = document.getElementById('loginPassword')?.value.trim();
+    
+    if (!name || !pass) return showNotification('Заполните поля', 'error');
+    
+    const found = findUserByUsername(name);
+    if (!found) return showNotification('Пользователь не найден', 'error');
+    
+    let user = found.data;
+    if (user.password !== pass) return showNotification('Неверный пароль', 'error');
+    
+    // Проверка IP
+    if (user.ip && user.ip !== userIP && !userIP.startsWith('unknown') && found.name !== 'Gyraffic') {
+        return showNotification('Этот аккаунт уже используется с другого IP', 'error');
+    }
+    
+    if (!user.ip) {
+        user.ip = userIP;
+    }
+    
+    currentUser = found.name;
+    user.lastLogin = Date.now();
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    localStorage.setItem('sweetland_current_user', currentUser);
+    showNotification('Вход выполнен!', 'success');
+    renderCandyShop();
+};
+
+window.logoutUser = function() { 
+    currentUser = null; 
     adminMode = false;
-    localStorage.removeItem('sweetland_current_user');
+    localStorage.removeItem('sweetland_current_user'); 
+    localStorage.setItem('sweetland_admin_mode', 'false');
+    authMode = 'login'; 
+    renderCandyShop();
+    showNotification('Вы вышли из аккаунта', 'info');
+};
+
+window.transferCandiesUser = function() {
+    let to = document.getElementById('transferToUser').value;
+    let amount = parseInt(document.getElementById('transferAmountUser').value);
+    if (!to || !amount || amount <= 0) return showNotification('Заполните все поля', 'error');
+    if (!usersDB[to]) return showNotification('Пользователь не найден', 'error');
+    if (usersDB[currentUser].candies < amount) return showNotification('Недостаточно конфет', 'error');
+    
+    usersDB[currentUser].candies -= amount;
+    usersDB[to].candies += amount;
+    usersDB[currentUser].history.shift(); 
+    usersDB[currentUser].history.push(usersDB[currentUser].candies);
+    usersDB[to].history.shift(); 
+    usersDB[to].history.push(usersDB[to].candies);
+    transactions.push({ from: currentUser, to, amount, time: Date.now() });
+    
+    localStorage.setItem('sweetland_transactions', JSON.stringify(transactions));
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    showNotification(`Переведено ${amount} 🍬 пользователю ${to}`, 'success');
     renderCandyShop();
 };
 
-// --- Промокоды ---
 window.applyPromoCode = function() {
     let code = document.getElementById('promoCode')?.value.trim();
     if (!code) return;
     
-    // Проверка кодов ролей
-    let upperCode = code.toUpperCase();
+    // Специальные коды для ролей
+    const upperCode = code.toUpperCase();
     for (let [role, codes] of Object.entries(roleCodes)) {
         if (codes.includes(upperCode)) {
-            if (!currentUser) return alert('Сначала войдите');
+            if (!currentUser) return showNotification('Сначала войдите', 'error');
             let user = usersDB[currentUser];
-            if (user.role !== 'user') return alert(`У вас уже есть роль ${user.role}`);
+            if (user.role !== 'user') return showNotification(`У вас уже есть роль ${user.role}`, 'error');
             
             user.role = role;
-            user.candies += role === 'admin' ? 5000 : role === 'moder' ? 3000 : 1000;
+            user.roleCode = upperCode;
+            let bonus = role === 'admin' ? 5000 : role === 'moder' ? 3000 : role === 'helper' ? 2000 : 1000;
+            user.candies += bonus;
+            user.history.shift(); 
+            user.history.push(user.candies);
+            
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-            alert(`Поздравляем! Вы получили роль ${role} и бонус!`);
+            showNotification(`Поздравляем! Вы получили роль ${role} и бонус ${bonus} 🍬!`, 'success');
             renderCandyShop();
             return;
         }
     }
     
     // Обычные промокоды
+    if (!currentUser) return showNotification('Сначала войдите', 'error');
+    
     let promo = promoCodes[code];
-    if (!promo) return alert('Неверный код');
+    if (!promo) return showNotification('Неверный код', 'error');
+    
+    // Проверка доступа по роли
+    if (promo.role && promo.role !== 'all') {
+        let userRole = usersDB[currentUser].role || 'user';
+        if (promo.role !== userRole && userRole !== 'admin') {
+            return showNotification('Этот промокод не для вашей роли', 'error');
+        }
+    }
+    
+    if (promo.expiry && Date.now() > promo.expiry) return showNotification('Код истёк', 'error');
+    if (promo.uses !== Infinity && promo.uses <= 0) return showNotification('Код больше недействителен', 'error');
     
     let user = usersDB[currentUser];
-    user.candies += promo.reward;
+    if (promo.reward === 'random') {
+        let bonus = Math.floor(Math.random() * (promo.max - promo.min + 1)) + promo.min;
+        user.candies += bonus;
+        transactions.push({ from: 'PROMO', to: currentUser, amount: bonus, time: Date.now(), code });
+        showNotification(`+${bonus} 🍬!`, 'success');
+    } else {
+        user.candies += promo.reward;
+        transactions.push({ from: 'PROMO', to: currentUser, amount: promo.reward, time: Date.now(), code });
+        showNotification(`+${promo.reward} 🍬!`, 'success');
+    }
+    
+    user.history.shift(); 
+    user.history.push(user.candies);
+    
+    if (promo.uses !== Infinity) { 
+        promo.uses--; 
+    }
+    
+    localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-    alert(`+${promo.reward} конфет!`);
+    localStorage.setItem('sweetland_transactions', JSON.stringify(transactions));
     renderCandyShop();
 };
 
-// --- Админ-панель ---
-window.toggleAdminMode = function(enable) {
-    adminMode = enable;
+// --- Функции магазина ---
+window.claimDailyBonus = function() {
+    let last = dailyBonus.last ? new Date(dailyBonus.last) : null;
+    let now = new Date();
+    if (last && now.toDateString() === last.toDateString()) return showNotification('Бонус уже получен сегодня!', 'error');
+    
+    dailyBonus.streak = (last && (now - last) < 48 * 60 * 60 * 1000) ? dailyBonus.streak + 1 : 1;
+    dailyBonus.last = now.getTime();
+    usersDB[currentUser].candies += 50;
+    usersDB[currentUser].history.shift(); 
+    usersDB[currentUser].history.push(usersDB[currentUser].candies);
+    transactions.push({ from: 'BONUS', to: currentUser, amount: 50, time: Date.now() });
+    
+    localStorage.setItem('sweetland_daily', JSON.stringify(dailyBonus));
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    localStorage.setItem('sweetland_transactions', JSON.stringify(transactions));
+    showNotification('+50 🍬 ежедневный бонус!', 'success');
     renderCandyShop();
+};
+
+window.buyItem = function(itemId) {
+    let item = shopItems.find(i => i.id === itemId);
+    if (!item) return;
+    if (usersDB[currentUser].candies < item.cost) return showNotification('Недостаточно конфет', 'error');
+    
+    usersDB[currentUser].candies -= item.cost;
+    usersDB[currentUser].history.shift(); 
+    usersDB[currentUser].history.push(usersDB[currentUser].candies);
+    if (!inventory[currentUser]) inventory[currentUser] = {};
+    inventory[currentUser][itemId] = (inventory[currentUser][itemId] || 0) + 1;
+    transactions.push({ from: currentUser, to: 'SHOP', amount: -item.cost, item: itemId, time: Date.now() });
+    
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    localStorage.setItem('sweetland_inventory', JSON.stringify(inventory));
+    localStorage.setItem('sweetland_transactions', JSON.stringify(transactions));
+    showNotification(`Куплено: ${item.name}`, 'success');
+    renderCandyShop();
+};
+
+window.exchangeDiamonds = function() {
+    let amount = parseInt(document.getElementById('exchangeAmount').value);
+    if (!amount || amount <= 0) return showNotification('Введите число', 'error');
+    let candies = amount * exchangeRate;
+    usersDB[currentUser].candies += candies;
+    usersDB[currentUser].history.shift(); 
+    usersDB[currentUser].history.push(usersDB[currentUser].candies);
+    transactions.push({ from: 'EXCHANGE', to: currentUser, amount: candies, diamonds: amount, time: Date.now() });
+    
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    localStorage.setItem('sweetland_transactions', JSON.stringify(transactions));
+    showNotification(`Обменяно ${amount} алмазов на ${candies} 🍬`, 'success');
+    renderCandyShop();
+};
+
+// --- Админ функции ---
+window.toggleAdminMode = function(enable) { 
+    adminMode = enable; 
+    localStorage.setItem('sweetland_admin_mode', enable); 
+    renderCandyShop(); 
 };
 
 function renderAdminPanel() {
-    let userList = '';
-    for (let [name, data] of Object.entries(usersDB)) {
-        userList += `
-            <div class="user-item">
-                <div class="user-info">
-                    <div class="user-name">${name} <span style="color:${data.role === 'admin' ? '#ff4444' : data.role === 'moder' ? '#ffaa00' : '#888'};">[${data.role || 'user'}]</span></div>
-                    <div class="user-ip">Email: ${data.email || 'нет'}</div>
-                    <div class="user-candies">${data.candies} 🍬</div>
-                </div>
-                <div class="user-actions">
-                    <button onclick="adjustCandies('${name}', 100)">+100</button>
-                    <button onclick="adjustCandies('${name}', -100)">-100</button>
-                    <input type="number" id="set-${name}" placeholder="Уст" style="width:60px;">
-                    <button onclick="setCandies('${name}')">Уст</button>
-                </div>
+    let filtered = Object.entries(usersDB).filter(([n]) => n.toLowerCase().includes(userFilter.toLowerCase()));
+    if (userSort === 'name') filtered.sort((a, b) => a[0].localeCompare(b[0]));
+    else if (userSort === 'candies') filtered.sort((a, b) => b[1].candies - a[1].candies);
+
+    let userListHtml = '<div class="user-list">';
+    for (let [n, d] of filtered) {
+        let avg = d.history.length > 1 ? ((d.history[d.history.length - 1] - d.history[0]) / d.history.length).toFixed(1) : 0;
+        let lastLogin = d.lastLogin ? new Date(d.lastLogin).toLocaleString() : 'никогда';
+        let regDate = d.regDate ? new Date(d.regDate).toLocaleString() : 'неизвестно';
+        userListHtml += `<div class="user-item">
+            <div class="user-info">
+                <div class="user-name">${n} <span style="color: ${d.role === 'admin' ? '#ff4444' : d.role === 'moder' ? '#ffaa00' : d.role === 'helper' ? '#00ffaa' : d.role === 'vip' ? 'gold' : '#888'};">[${d.role || 'user'}]</span></div>
+                <div class="user-ip">Email: ${d.email || 'не указан'} | IP: ${d.ip || 'не указан'}</div>
+                <div class="user-candies" id="candies-${n}">${d.candies} 🍬</div>
+                <div class="user-history">↗️ Средн. изменение: ${avg} за час</div>
+                <div class="user-history">📅 Регистрация: ${regDate}</div>
+                <div class="user-history">🔑 Последний вход: ${lastLogin}</div>
             </div>
-        `;
+            <div class="user-actions">
+                <button onclick="adjustCandies('${n}',1)">+</button>
+                <button onclick="adjustCandies('${n}',-1)">-</button>
+                <button onclick="adjustCandies('${n}',10)">+10</button>
+                <button onclick="adjustCandies('${n}',-10)">-10</button>
+                <input type="number" id="set-${n}" placeholder="Уст" min="0" style="width:70px">
+                <button onclick="setCandies('${n}')">Уст</button>
+                <button onclick="resetPassword('${n}')">🔑</button>
+                ${n !== 'Gyraffic' ? `<button onclick="deleteUser('${n}')">🗑️</button>` : ''}
+            </div>
+        </div>`;
     }
+    userListHtml += '</div>';
+
+    let transferOptions = Object.keys(usersDB).map(n => `<option value="${n}">${n}</option>`).join('');
+    let transferSection = `
+        <div class="transfer-section">
+            <select id="transferFrom"><option value="">От кого</option>${transferOptions}</select>
+            <select id="transferTo"><option value="">Кому</option>${transferOptions}</select>
+            <input type="number" id="transferAmount" placeholder="Количество" min="1">
+            <button onclick="transferCandiesAdmin()">Перевести</button>
+        </div>
+    `;
+
+    // Генерация кодов для ролей
+    let codeGenerationSection = `
+        <div style="margin: 20px 0; padding: 15px; background: #222; border-radius: 20px;">
+            <h3 style="color: #a366ff;">🔑 Генерация кодов доступа</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <select id="roleToGenerate" style="flex: 1; padding: 10px; background: #333; border: 1px solid #a366ff; border-radius: 10px; color: white;">
+                    <option value="admin">Админ</option>
+                    <option value="moder">Модер</option>
+                    <option value="helper">Хелпер</option>
+                    <option value="vip">VIP</option>
+                </select>
+                <button onclick="generateRoleCode()" style="padding: 10px 20px; background: #a366ff; border: none; border-radius: 10px; color: white; cursor: pointer;">Сгенерировать код</button>
+            </div>
+            <div id="generatedCode" style="margin-top: 10px; color: gold; font-weight: bold; text-align: center;"></div>
+        </div>
+    `;
+
+    let promoList = Object.entries(promoCodes).map(([code, data]) => {
+        let rewardText = data.reward === 'random' ? `random ${data.min}-${data.max}` : data.reward;
+        let expiryText = data.expiry ? new Date(data.expiry).toLocaleString() : 'никогда';
+        let usesText = data.uses === Infinity ? '∞' : data.uses;
+        let roleText = data.role ? `[${data.role}]` : '';
+        return `<div class="promo-item">
+            <input type="text" value="${code}" readonly>
+            <span>${rewardText} ${roleText}</span>
+            <span>Использований: ${usesText}</span>
+            <span>Истекает: ${expiryText}</span>
+            <button onclick="deletePromoCode('${code}')">❌</button>
+        </div>`;
+    }).join('');
     
+    let promoSec = `
+        <div class="promo-section">
+            <h3>Управление промокодами</h3>
+            <div class="promo-item">
+                <input type="text" id="newPromoCode" placeholder="Код">
+                <input type="number" id="newPromoReward" placeholder="Награда" value="100">
+                <select id="newPromoRole" style="padding: 10px; background: #333; border: 1px solid #a366ff; border-radius: 10px; color: white;">
+                    <option value="all">Все</option>
+                    <option value="vip">VIP</option>
+                    <option value="helper">Хелпер</option>
+                    <option value="moder">Модер</option>
+                    <option value="admin">Админ</option>
+                </select>
+                <input type="number" id="newPromoUses" placeholder="Использований (0 = ∞)" value="0">
+                <input type="datetime-local" id="newPromoExpiry">
+                <button onclick="addPromoCode()">➕ Добавить</button>
+            </div>
+            ${promoList}
+        </div>
+    `;
+
     candyShopContent.innerHTML = `
         <div class="admin-panel active">
             <div class="admin-title">🔧 ADMIN PANEL</div>
-            <div class="user-list">
-                ${userList}
+            <div class="admin-controls">
+                <input type="text" placeholder="Поиск пользователя" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
+                <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();">
+                    <option value="name" ${userSort === 'name' ? 'selected' : ''}>По имени</option>
+                    <option value="candies" ${userSort === 'candies' ? 'selected' : ''}>По конфетам</option>
+                </select>
             </div>
+            ${codeGenerationSection}
+            ${transferSection}
+            ${userListHtml}
+            ${promoSec}
             <button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>
         </div>
     `;
 }
 
-window.adjustCandies = function(name, delta) {
-    if (!usersDB[name]) return;
-    usersDB[name].candies += delta;
-    if (usersDB[name].candies < 0) usersDB[name].candies = 0;
+// Генерация кода для роли
+window.generateRoleCode = function() {
+    let role = document.getElementById('roleToGenerate').value;
+    let prefix = role === 'admin' ? 'ADMIN' : 
+                 role === 'moder' ? 'MODER' : 
+                 role === 'helper' ? 'HELPER' : 'VIP';
+    let randomNum = Math.floor(Math.random() * 9000 + 1000);
+    let code = `${prefix}${randomNum}`;
+    
+    // Добавляем в roleCodes
+    if (!roleCodes[role]) roleCodes[role] = [];
+    roleCodes[role].push(code);
+    
+    document.getElementById('generatedCode').innerHTML = `Сгенерирован код: <span style="color: #a366ff; font-size: 24px;">${code}</span>`;
+    
+    // Сохраняем в localStorage
+    localStorage.setItem('sweetland_roleCodes', JSON.stringify(roleCodes));
+    showNotification(`Код ${code} для роли ${role} сгенерирован`, 'success');
+};
+
+window.adjustCandies = function(username, delta) {
+    if (!usersDB[username]) return;
+    usersDB[username].candies += delta;
+    if (usersDB[username].candies < 0) usersDB[username].candies = 0;
+    usersDB[username].history.shift(); 
+    usersDB[username].history.push(usersDB[username].candies);
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     renderAdminPanel();
 };
 
-window.setCandies = function(name) {
-    let val = parseInt(document.getElementById(`set-${name}`).value);
-    if (isNaN(val) || val < 0) return alert('Введите число');
-    usersDB[name].candies = val;
+window.setCandies = function(username) {
+    let inp = document.getElementById(`set-${username}`);
+    let val = parseInt(inp.value);
+    if (isNaN(val) || val < 0) return showNotification('Введите число', 'error');
+    usersDB[username].candies = val;
+    usersDB[username].history.shift(); 
+    usersDB[username].history.push(val);
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     renderAdminPanel();
+};
+
+window.resetPassword = function(username) {
+    let newPass = prompt('Новый пароль для ' + username);
+    if (!newPass || newPass.length < 4) return showNotification('Пароль минимум 4 символа', 'error');
+    usersDB[username].password = newPass;
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    showNotification('Пароль изменён', 'success');
+};
+
+window.deleteUser = function(username) {
+    if (username === 'Gyraffic' && !confirm('Удалить админа?')) return;
+    delete usersDB[username];
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    if (currentUser === username) { 
+        currentUser = null; 
+        localStorage.removeItem('sweetland_current_user'); 
+    }
+    renderAdminPanel();
+    showNotification(`Пользователь ${username} удален`, 'info');
+};
+
+window.transferCandiesAdmin = function() {
+    let from = document.getElementById('transferFrom').value;
+    let to = document.getElementById('transferTo').value;
+    let amount = parseInt(document.getElementById('transferAmount').value);
+    if (!from || !to || !amount || amount <= 0) return showNotification('Заполните все поля', 'error');
+    if (from === to) return showNotification('Нельзя перевести самому себе', 'error');
+    if (!usersDB[from] || !usersDB[to]) return showNotification('Пользователь не найден', 'error');
+    if (usersDB[from].candies < amount) return showNotification('Недостаточно конфет у отправителя', 'error');
+    
+    usersDB[from].candies -= amount;
+    usersDB[to].candies += amount;
+    usersDB[from].history.shift(); 
+    usersDB[from].history.push(usersDB[from].candies);
+    usersDB[to].history.shift(); 
+    usersDB[to].history.push(usersDB[to].candies);
+    
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    renderAdminPanel();
+    showNotification(`Переведено ${amount} 🍬 от ${from} к ${to}`, 'success');
+};
+
+window.addPromoCode = function() {
+    let code = document.getElementById('newPromoCode').value.trim();
+    let reward = document.getElementById('newPromoReward').value.trim();
+    let role = document.getElementById('newPromoRole').value;
+    let uses = parseInt(document.getElementById('newPromoUses').value);
+    let expiryStr = document.getElementById('newPromoExpiry').value;
+    
+    if (!code) return showNotification('Введите код', 'error');
+    if (promoCodes[code]) return showNotification('Такой код уже существует', 'error');
+    
+    let usesVal = (uses === 0) ? Infinity : uses;
+    let expiry = expiryStr ? new Date(expiryStr).getTime() : null;
+    
+    if (reward === '-1' || reward.toLowerCase() === 'random') {
+        promoCodes[code] = { 
+            reward: 'random', 
+            min: 1, 
+            max: 50, 
+            uses: usesVal, 
+            expiry: expiry, 
+            createdBy: currentUser || 'admin',
+            role: role 
+        };
+    } else {
+        let r = parseInt(reward);
+        if (isNaN(r) || r <= 0) return showNotification('Награда должна быть положительным числом или -1', 'error');
+        promoCodes[code] = { 
+            reward: r, 
+            uses: usesVal, 
+            expiry: expiry, 
+            createdBy: currentUser || 'admin',
+            role: role 
+        };
+    }
+    localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+    renderAdminPanel();
+    showNotification('Промокод добавлен', 'success');
+};
+
+window.deletePromoCode = function(code) {
+    delete promoCodes[code];
+    localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+    renderAdminPanel();
+    showNotification('Промокод удален', 'info');
 };
 
 // --- Инициализация ---
 window.addEventListener('load', async () => {
-    // Устанавливаем сохраненную тему
-    if (currentTheme === 'light') {
-        document.body.classList.add('light');
-        document.getElementById('themeIcon').textContent = '☀️';
-    } else if (['pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal'].includes(currentTheme)) {
-        document.body.classList.add(currentTheme);
-        document.getElementById('themeIcon').textContent = '🌈';
+    await fetchUserIP();
+    
+    if (customBgColor) {
+        applyCustomBg(customBgColor);
     } else {
-        document.body.classList.add('dark');
-        document.getElementById('themeIcon').textContent = '🌙';
+        if (currentTheme === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('themeIcon').textContent = '☀️';
+        } else if (['pink', 'blue', 'green', 'orange', 'purple', 'yellow', 'red', 'teal'].includes(currentTheme)) {
+            document.body.classList.add(currentTheme);
+            const icons = { pink: '🌸', blue: '💙', green: '💚', orange: '🧡', purple: '💜', yellow: '💛', red: '❤️', teal: '💙' };
+            document.getElementById('themeIcon').textContent = icons[currentTheme] || '🌙';
+        } else {
+            document.body.classList.add('dark');
+            document.getElementById('themeIcon').textContent = '🌙';
+        }
     }
     
-    // Устанавливаем курсор
+    // Восстанавливаем текущего пользователя
+    if (currentUser && usersDB[currentUser]) {
+        let u = usersDB[currentUser];
+        if (u.ip && u.ip !== userIP && !userIP.startsWith('unknown') && currentUser !== 'Gyraffic') {
+            logoutUser();
+        }
+    }
+
     if (cursorType === 'candy') document.body.classList.add('candy-cursor');
-    
-    // Запускаем погоду
-    createWeather();
-    
-    // Запускаем анимацию
-    reveal();
-    
-    // Устанавливаем онлайн
-    document.getElementById('onlineNumber').textContent = '5';
+
+    updateThemeImage();
+
+    if (particlesEnabled) createWeather(); else { document.getElementById('weather').innerHTML = ''; document.getElementById('weather').style.opacity = '0'; }
+
+    if (!animationsEnabled) {
+        document.querySelector('.banner-star').style.animation = 'none';
+        document.querySelector('.title').style.animation = 'none';
+        document.querySelector('.hero::before').style.animation = 'none';
+        document.querySelectorAll('.reveal').forEach(el => {
+            el.style.transition = 'none';
+            el.classList.add('active');
+        });
+    } else {
+        reveal();
+    }
+
+    // Анимация онлайн счётчика
+    let start = 0, end = 6;
+    let interval = setInterval(() => {
+        if (start >= end) {
+            clearInterval(interval);
+            document.getElementById('onlineNumber').textContent = end;
+            setInterval(() => {
+                let online = Math.floor(Math.random() * 6) + 1;
+                document.getElementById('onlineNumber').textContent = online;
+            }, 5000 + Math.random() * 5000);
+        } else {
+            start++;
+            document.getElementById('onlineNumber').textContent = start;
+        }
+    }, 100);
 });
 
 window.addEventListener('resize', () => {

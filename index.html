@@ -39,6 +39,94 @@
             --header-bg: rgba(250, 247, 245, 0.95);
         }
 
+        body.light.accent-pink {
+            --accent: #ff66b2;
+            --accent-light: #ff85c2;
+            --accent-dark: #e64d9e;
+            --border: rgba(255, 102, 178, 0.2);
+            --border-hover: rgba(255, 102, 178, 0.4);
+            --glow: 0 0 20px rgba(255, 102, 178, 0.15);
+            --neon: #ff85c2;
+            --shadow-accent: 0 8px 32px rgba(255, 102, 178, 0.15);
+        }
+
+        body.light.accent-blue {
+            --accent: #4d9eff;
+            --accent-light: #6eb3ff;
+            --accent-dark: #3a7acc;
+            --border: rgba(77, 158, 255, 0.2);
+            --border-hover: rgba(77, 158, 255, 0.4);
+            --glow: 0 0 20px rgba(77, 158, 255, 0.15);
+            --neon: #6eb3ff;
+            --shadow-accent: 0 8px 32px rgba(77, 158, 255, 0.15);
+        }
+
+        body.light.accent-green {
+            --accent: #4caf50;
+            --accent-light: #6ec071;
+            --accent-dark: #3d8c40;
+            --border: rgba(76, 175, 80, 0.2);
+            --border-hover: rgba(76, 175, 80, 0.4);
+            --glow: 0 0 20px rgba(76, 175, 80, 0.15);
+            --neon: #6ec071;
+            --shadow-accent: 0 8px 32px rgba(76, 175, 80, 0.15);
+        }
+
+        body.light.accent-orange {
+            --accent: #ff9800;
+            --accent-light: #ffb74d;
+            --accent-dark: #f57c00;
+            --border: rgba(255, 152, 0, 0.2);
+            --border-hover: rgba(255, 152, 0, 0.4);
+            --glow: 0 0 20px rgba(255, 152, 0, 0.15);
+            --neon: #ffb74d;
+            --shadow-accent: 0 8px 32px rgba(255, 152, 0, 0.15);
+        }
+
+        body.light.accent-purple {
+            --accent: #9c27b0;
+            --accent-light: #ba68c8;
+            --accent-dark: #7b1fa2;
+            --border: rgba(156, 39, 176, 0.2);
+            --border-hover: rgba(156, 39, 176, 0.4);
+            --glow: 0 0 20px rgba(156, 39, 176, 0.15);
+            --neon: #ba68c8;
+            --shadow-accent: 0 8px 32px rgba(156, 39, 176, 0.15);
+        }
+
+        body.light.accent-yellow {
+            --accent: #ffd700;
+            --accent-light: #ffe44d;
+            --accent-dark: #e6c300;
+            --border: rgba(255, 215, 0, 0.2);
+            --border-hover: rgba(255, 215, 0, 0.4);
+            --glow: 0 0 20px rgba(255, 215, 0, 0.15);
+            --neon: #ffe44d;
+            --shadow-accent: 0 8px 32px rgba(255, 215, 0, 0.15);
+        }
+
+        body.light.accent-red {
+            --accent: #ff4444;
+            --accent-light: #ff6666;
+            --accent-dark: #cc3333;
+            --border: rgba(255, 68, 68, 0.2);
+            --border-hover: rgba(255, 68, 68, 0.4);
+            --glow: 0 0 20px rgba(255, 68, 68, 0.15);
+            --neon: #ff6666;
+            --shadow-accent: 0 8px 32px rgba(255, 68, 68, 0.15);
+        }
+
+        body.light.accent-teal {
+            --accent: #008080;
+            --accent-light: #20b2aa;
+            --accent-dark: #006666;
+            --border: rgba(0, 128, 128, 0.2);
+            --border-hover: rgba(0, 128, 128, 0.4);
+            --glow: 0 0 20px rgba(0, 128, 128, 0.15);
+            --neon: #20b2aa;
+            --shadow-accent: 0 8px 32px rgba(0, 128, 128, 0.15);
+        }
+
         body.pink {
             --accent: #ff66b2;
             --accent-light: #ff85c2;
@@ -1959,6 +2047,8 @@
         @media (max-width: 768px) {
             .candy-shop-container { padding: 20px; margin-top: 70px; }
             .shop-grid { grid-template-columns: 1fr; }
+            .banner-center { display: none; }
+            .control-panel { top: 65px; }
         }
     </style>
 </head>
@@ -2101,7 +2191,7 @@
 </div>
 
 <script>
-// ==================== ИСПРАВЛЕННЫЙ РАБОЧИЙ СКРИПТ ====================
+// ==================== ПОЛНЫЙ ИСПРАВЛЕННЫЙ JS ====================
 (function() {
     // --- Основные переменные ---
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
@@ -3163,7 +3253,7 @@
         window.weatherTimeout = setTimeout(createWeather, 200);
     });
 
-})(); // <--- ЭТА СКОБКА ДОЛЖНА БЫТЬ ТОЛЬКО ОДНА!
+})(); // <--- ТОЛЬКО ОДНА ЗАКРЫВАЮЩАЯ СКОБКА!
 </script>
 </body>
 </html>

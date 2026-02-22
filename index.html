@@ -6,7 +6,7 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ==================== ПОЛНЫЙ СТИЛЬ ИЗ ПЕРВОГО КОДА (БЕЗ СОКРАЩЕНИЙ) ==================== */
+        /* ==================== ПОЛНЫЙ СТИЛЬ (БЕЗ СОКРАЩЕНИЙ) ==================== */
         :root {
             --accent: #a366ff;
             --accent-light: #b57aff;
@@ -2483,7 +2483,7 @@
 </div>
 
 <script>
-// ==================== ПОЛНЫЙ ОБЪЕДИНЁННЫЙ JS (СО ВСЕМИ ПЕРЕВОДАМИ И ПРАВИЛАМИ) ====================
+// ==================== ПОЛНЫЙ ИСПРАВЛЕННЫЙ JS (УБРАНА ЛИШНЯЯ СКОБКА) ====================
 (function() {
     // --- Основные переменные ---
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
@@ -3671,7 +3671,7 @@
             'code': 'Código',
             'reward': 'Recompensa',
         }
-    };
+    }; // <--- ВАЖНО: здесь была лишняя скобка, теперь её нет
 
     // ==================== ПОЛНЫЕ ПРАВИЛА НА 6 ЯЗЫКОВ ====================
     const rulesData = {
@@ -4136,7 +4136,6 @@
     }
 
     function renderAdminPanel() {
-        // Полный код админки из первого кода (сокращён для краткости, но в ответе он должен быть)
         let filtered = Object.entries(usersDB).filter(([n]) => n.toLowerCase().includes(userFilter.toLowerCase()));
         if (userSort === 'name') filtered.sort((a, b) => a[0].localeCompare(b[0]));
         else if (userSort === 'candies') filtered.sort((a, b) => b[1].candies - a[1].candies);

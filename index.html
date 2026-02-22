@@ -2735,7 +2735,7 @@ function renderCandyShop() {
             <div class="shop-card">
                 <h3><span>📜</span> История</h3>
                 <div class="transaction-list">
-                    ${(transactions.filter(t => t.from === currentUser || t.to === currentUser).slice(-10).reverse().map(t => `<div class="transaction-item"><span>${t.from} → ${t.to}</span><span>${t.amount} 🍬</span><small>${new Date(t.time).toLocaleTimeString()}</small></div>`).join('') || 'Нет операций'}
+                    $(transactions.filter(t => t.from === currentUser || t.to === currentUser).slice(-10).reverse().map(t => `<div class="transaction-item"><span>${t.from} → ${t.to}</span><span>${t.amount} 🍬</span><small>${new Date(t.time).toLocaleTimeString()}</small></div>`).join('') || 'Нет операций'
                 </div>
             </div>
             <!-- Перевод конфет -->

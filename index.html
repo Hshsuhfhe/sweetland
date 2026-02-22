@@ -1172,11 +1172,21 @@
     // Промокоды
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
 
-    // УДАЛЯЕМ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ, КРОМЕ GYRAFFIC
-    if (!usersDB['Gyraffic']) {
-        usersDB = {};
-        usersDB['Gyraffic'] = {
-            password: 'gyraffic123',
+    // ========== УДАЛЯЕМ ВСЕХ ПОЛЬЗОВАТЕЛЕЙ КРОМЕ GYRAFFIC ==========
+    let cleanedDB = {};
+    
+    // Ищем Gyraffic в любом регистре
+    for (let name in usersDB) {
+        if (name.toLowerCase() === 'gyraffic' || name.toLowerCase() === 'жирафик') {
+            cleanedDB['Gyraffic'] = usersDB[name];
+            break;
+        }
+    }
+    
+    // Если Gyraffic не найден - создаем с новым паролем
+    if (!cleanedDB['Gyraffic']) {
+        cleanedDB['Gyraffic'] = {
+            password: '75813000gyraff',
             email: 'gyraffic@gmail.com',
             ip: null,
             candies: 10000,
@@ -1191,14 +1201,13 @@
             lastDaily: null,
             completedTasks: {}
         };
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     } else {
-        // Если Gyraffic есть, удаляем всех остальных
-        let temp = {};
-        temp['Gyraffic'] = usersDB['Gyraffic'];
-        usersDB = temp;
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        // Обновляем пароль на новый
+        cleanedDB['Gyraffic'].password = '75813000gyraff';
     }
+    
+    usersDB = cleanedDB;
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 
     // Промокоды по умолчанию
     if (Object.keys(promoCodes).length === 0) {
@@ -1782,6 +1791,71 @@
         renderCandyShop();
     }
 
+    // ========== ФУНКЦИЯ ОТПРАВКИ EMAIL ЧЕРЕЗ EMAILJS ==========
+    window.sendEmailCode = async function() {
+        let email = document.getElementById('regEmail')?.value.trim();
+        let username = document.getElementById('regName')?.value.trim();
+        
+        if (!email || !email.endsWith('@gmail.com')) {
+            showNotification('Введите корректный Gmail', 'error');
+            return;
+        }
+        
+        if (!username) {
+            showNotification('Введите никнейм', 'error');
+            return;
+        }
+        
+        let code = Math.floor(100000 + Math.random() * 900000).toString();
+        pendingEmailCodes[email] = code;
+        
+        showNotification('⏳ Отправка кода...', 'info', false);
+        
+        try {
+            const now = new Date();
+            const timeStr = now.toLocaleString('ru-RU', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                day: '2-digit',
+                month: '2-digit'
+            });
+            
+            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    service_id: 'service_9pb9n41',
+                    template_id: 'template_2xboqmc',
+                    user_id: 'jlf5eIKN7TZ8SMquH',
+                    template_params: {
+                        to_name: username,
+                        code: code,
+                        message: 'Ваш код для входа на SweetLand сервер',
+                        time: timeStr
+                    }
+                })
+            });
+            
+            if (response.ok) {
+                showNotification(`✅ Код отправлен на ${email}`, 'success');
+                document.getElementById('emailCodeSection').style.display = 'block';
+                console.log(`Код для ${username}: ${code}`);
+            } else {
+                const errorText = await response.text();
+                console.error('Ошибка EmailJS:', errorText);
+                showNotification(`❌ Ошибка отправки. Ваш код: ${code}`, 'warning', false);
+                document.getElementById('emailCodeSection').style.display = 'block';
+            }
+            
+        } catch (error) {
+            console.error('Ошибка:', error);
+            showNotification(`⚠️ Проблема с отправкой. Ваш код: ${code}`, 'warning', false);
+            document.getElementById('emailCodeSection').style.display = 'block';
+        }
+    };
+
     // ========== РЕНДЕР МАГАЗИНА ==========
     function renderCandyShop() {
         if (adminMode) {
@@ -1953,31 +2027,6 @@
     window.switchAuthMode = function(mode) { 
         if (mode === 'register') renderRegister(); else renderAuth(); 
     };
-
-window.sendEmailCode = function() {
-    let email = document.getElementById('regEmail')?.value.trim();
-    let username = document.getElementById('regName')?.value.trim();
-    
-    if (!email || !email.endsWith('@gmail.com')) {
-        showNotification('Введите корректный Gmail', 'error');
-        return;
-    }
-    
-    if (!username) {
-        showNotification('Введите никнейм', 'error');
-        return;
-    }
-    
-    let code = Math.floor(100000 + Math.random() * 900000).toString();
-    pendingEmailCodes[email] = code;
-    
-    // Показываем код прямо на сайте (для теста)
-    showNotification(`✅ Тестовый режим! Ваш код: ${code}`, 'success');
-    console.log('Код подтверждения для', email, ':', code);
-    
-    // Показываем поле для ввода кода
-    document.getElementById('emailCodeSection').style.display = 'block';
-};
 
     window.registerUser = async function() {
         await fetchUserIP();

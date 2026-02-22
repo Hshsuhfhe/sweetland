@@ -1954,66 +1954,29 @@
         if (mode === 'register') renderRegister(); else renderAuth(); 
     };
 
-window.sendEmailCode = async function() {
+window.sendEmailCode = function() {
     let email = document.getElementById('regEmail')?.value.trim();
     let username = document.getElementById('regName')?.value.trim();
     
     if (!email || !email.endsWith('@gmail.com')) {
-        return showNotification('Введите корректный Gmail', 'error');
+        showNotification('Введите корректный Gmail', 'error');
+        return;
     }
     
     if (!username) {
-        return showNotification('Введите никнейм', 'error');
+        showNotification('Введите никнейм', 'error');
+        return;
     }
     
     let code = Math.floor(100000 + Math.random() * 900000).toString();
     pendingEmailCodes[email] = code;
     
-    showNotification('⏳ Отправка кода...', 'info', false);
+    // Показываем код прямо на сайте (для теста)
+    showNotification(`✅ Тестовый режим! Ваш код: ${code}`, 'success');
+    console.log('Код подтверждения для', email, ':', code);
     
-    try {
-        const now = new Date();
-        const timeStr = now.toLocaleString('ru-RU', { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            day: '2-digit',
-            month: '2-digit'
-        });
-        
-        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                service_id: 'service_9pb9n41',
-                template_id: 'template_2xboqmc',
-                user_id: 'jlf5eIKN7TZ8SMquH',
-                template_params: {
-                    to_name: username,
-                    code: code,
-                    message: 'Ваш код для входа на SweetLand сервер',
-                    time: timeStr
-                }
-            })
-        });
-        
-        if (response.ok) {
-            showNotification(`✅ Код отправлен на ${email}`, 'success');
-            document.getElementById('emailCodeSection').style.display = 'block';
-            console.log(`Код для ${username}: ${code}`);
-        } else {
-            const errorText = await response.text();
-            console.error('Ошибка EmailJS:', errorText);
-            showNotification(`❌ Ошибка отправки. Ваш код: ${code}`, 'warning', false);
-            document.getElementById('emailCodeSection').style.display = 'block';
-        }
-        
-    } catch (error) {
-        console.error('Ошибка:', error);
-        showNotification(`⚠️ Проблема с отправкой. Ваш код: ${code}`, 'warning', false);
-        document.getElementById('emailCodeSection').style.display = 'block';
-    }
+    // Показываем поле для ввода кода
+    document.getElementById('emailCodeSection').style.display = 'block';
 };
 
     window.registerUser = async function() {

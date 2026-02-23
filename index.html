@@ -6,12 +6,12 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ========== ОСНОВНЫЕ СТИЛИ ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
-            user-select: none;
         }
 
         :root {
@@ -62,7 +62,7 @@
         body { background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.3s, color 0.2s; line-height: 1.5; width: 100%; position: relative; }
         a, button { cursor: pointer; }
 
-        /* Уведомления */
+        /* ========== УВЕДОМЛЕНИЯ ========== */
         .notification-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 99998;
@@ -87,7 +87,7 @@
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
-        /* Погода */
+        /* ========== ПОГОДА ========== */
         #weather {
             position: fixed; top: -20vh; left: 0; width: 100%; height: 120vh;
             pointer-events: none; z-index: 1; opacity: var(--snow-opacity); overflow: hidden;
@@ -121,7 +121,7 @@
             100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0.2; }
         }
 
-        /* Панель управления */
+        /* ========== ПАНЕЛЬ УПРАВЛЕНИЯ ========== */
         .control-panel {
             position: fixed; top: 20px; right: 20px; z-index: 2500;
             display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; max-width: 500px;
@@ -175,7 +175,7 @@
         .color-dot.teal { background: #008080; }
         .lang-flag { font-size: 22px; }
 
-        /* Верхний овал */
+        /* ========== ВЕРХНИЙ ОВАЛ ========== */
         .nav-oval-container {
             position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
             z-index: 2400; width: 95%; max-width: 1200px; animation: slideDown 0.6s;
@@ -220,7 +220,7 @@
         .discord-link { background: #5865f2; color: #fff; box-shadow: 0 4px 12px rgba(88, 101, 242, 0.6); }
         .discord-link:hover { background: #4752c4; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(88, 101, 242, 0.9); border-color: #fff; }
 
-        /* Левая шторка */
+        /* ========== ЛЕВАЯ ШТОРКА ========== */
         .side-trigger {
             position: fixed; top: 20px; left: 20px; z-index: 2300; cursor: pointer;
             width: 50px; height: 50px; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px);
@@ -270,7 +270,7 @@
         .main-content { display: block; }
         .main-content.hidden { display: none; }
 
-        /* Герой */
+        /* ========== ГЕРОЙ ========== */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             padding: 100px 5%; position: relative; z-index: 2; overflow: hidden;
@@ -317,7 +317,7 @@
             font-size: clamp(13px, 2.5vw, 16px);
         }
 
-        /* Секции */
+        /* ========== СЕКЦИИ ========== */
         .section { padding: 60px 5%; position: relative; z-index: 2; }
         .section-title { text-align: center; font-size: clamp(28px, 5vw, 40px); font-weight: 700; margin-bottom: 50px; color: var(--text); }
         .section-title span { color: var(--accent); position: relative; display: inline-block; }
@@ -359,7 +359,7 @@
         .player-score { color: var(--accent); font-weight: 500; font-size: 16px; white-space: nowrap; }
         .update-date { text-align: center; color: var(--text-tertiary); font-size: 14px; margin-top: 25px; }
 
-        /* Модалка правил */
+        /* ========== МОДАЛКА ПРАВИЛ ========== */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.96); z-index: 3500; opacity: 0; transition: opacity 0.3s; }
         .modal.show { display: block; opacity: 1; }
         .modal-content {
@@ -381,7 +381,7 @@
         .rules-scroll-area p { color: var(--text) !important; margin-bottom: 15px; line-height: 1.6; border-bottom: 1px solid var(--border); padding-bottom: 12px; font-size: 16px; }
         .punish { color: #ff6666; font-weight: 500; font-size: 14px; display: inline-block; margin-left: 10px; background: rgba(255, 68, 68, 0.12); padding: 3px 12px; border-radius: 20px; }
 
-        /* Футер */
+        /* ========== ФУТЕР ========== */
         .footer { background: var(--bg-secondary); border-top: 2px solid var(--border); padding: 50px 5% 20px; z-index: 2; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto 30px; }
         .footer-section h4 { color: var(--accent); font-size: 18px; font-weight: 600; margin-bottom: 15px; position: relative; display: inline-block; }
@@ -402,7 +402,7 @@
         .online-number { font-weight: 700; color: var(--accent); transition: color 0.3s; }
         .current-time { display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); padding: 5px 15px; border-radius: 30px; border: 1px solid var(--accent); margin-left: 12px; font-size: 14px; color: var(--text); box-shadow: 0 0 12px var(--accent); }
 
-        /* ПОЛНОЭКРАННЫЙ МАГАЗИН КОНФЕТ */
+        /* ========== ПОЛНОЭКРАННЫЙ МАГАЗИН КОНФЕТ ========== */
         .candy-shop-screen {
             display: none;
             position: fixed;
@@ -628,6 +628,23 @@
         .shop-card button.danger {
             background: var(--danger);
         }
+        .daily-bonus {
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: white;
+            padding: 20px;
+            border-radius: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .daily-bonus button {
+            background: white;
+            color: var(--accent);
+            border: none;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
         .auth-section, .register-section {
             max-width: 450px;
             margin: 50px auto;
@@ -725,7 +742,7 @@
             border-color: var(--accent);
         }
 
-        /* Админ-панель */
+        /* ========== АДМИН-ПАНЕЛЬ ========== */
         .admin-title {
             color: var(--danger);
             font-size: 36px;
@@ -1024,33 +1041,92 @@
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
+    let currentUser = localStorage.getItem('sweetland_current_user') || null;
+    let adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
+    let userFilter = '';
+    let userSort = 'name';
+    let userIP = null;
+    let pendingEmailCodes = {};
+    let graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
+    let dailyBonusTimers = JSON.parse(localStorage.getItem('sweetland_daily_bonus')) || {};
+
+    // ========== УДАЛЯЕМ ВСЕ АККАУНТЫ КРОМЕ GYRAFFIC ==========
+    let usersDB = {};
+    
+    // Создаем только Gyraffic с новым паролем
+    usersDB['Gyraffic'] = {
+        password: '75813000gyraff',
+        email: 'gyraffic@gmail.com',
+        ip: null,
+        candies: 10000,
+        history: Array(48).fill(10000),
+        regDate: Date.now(),
+        lastLogin: null,
+        role: 'admin',
+        permissions: ['all'],
+        totalEarned: 10000,
+        totalSpent: 0,
+        daysActive: 1,
+        lastDaily: null,
+        completedTasks: {}
+    };
+    
+    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+
+    // ========== ПРОМОКОДЫ ==========
+    let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+    
+    // Промокоды по умолчанию
+    if (Object.keys(promoCodes).length === 0) {
+        promoCodes = {
+            'SWEET100': { reward: 100, uses: Infinity, createdBy: 'system' },
+            'WELCOME': { reward: 50, uses: Infinity, createdBy: 'system' },
+            'GYRAFFIC': { reward: 1000, uses: 1, createdBy: 'system' }
+        };
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+    }
 
     // ========== ПЕРЕВОД ==========
     const translations = {
         ru: {
-            shopTitle: '🍬 Конфетный магазин',
+            shopTitle: '🍬 КОНФЕТНЫЙ МАГАЗИН',
             candies: 'Конфеты',
             level: 'Уровень',
-            stats: 'Статистика',
+            dailyBonus: '🎁 ЕЖЕДНЕВНЫЙ БОНУС',
+            getBonus: 'ПОЛУЧИТЬ 100 🍬',
+            bonusReceived: 'Бонус получен!',
+            alreadyGot: 'Бонус уже получен сегодня',
+            stats: '📊 СТАТИСТИКА',
             totalEarned: 'Всего заработано',
             totalSpent: 'Всего потрачено',
             daysActive: 'Дней на сервере',
-            transfer: 'Перевод конфет',
+            transfer: '💸 ПЕРЕВОД КОНФЕТ',
             to: 'Кому',
             amount: 'Количество',
             comment: 'Комментарий',
-            send: 'Перевести',
-            logout: 'Выйти',
-            login: 'Войти',
-            register: 'Зарегистрироваться',
+            send: 'ПЕРЕВЕСТИ',
+            shop: '🎨 МАГАЗИН СКИНОВ',
+            buySkin: 'КУПИТЬ СКИН ЗА 500 🍬',
+            skinPurchased: 'Скин куплен!',
+            notEnough: 'Недостаточно конфет',
+            tasks: '📋 ЗАДАНИЯ',
+            playHours: 'Играть 1 час',
+            reward: 'Награда',
+            complete: 'ВЫПОЛНИТЬ',
+            alreadyDone: 'Уже выполнено',
+            promo: '🎟️ ПРОМОКОД',
+            activate: 'АКТИВИРОВАТЬ',
+            logout: '🚪 ВЫЙТИ',
+            login: 'ВОЙТИ',
+            register: 'ЗАРЕГИСТРИРОВАТЬСЯ',
             noAccount: 'Нет аккаунта?',
             haveAccount: 'Уже есть аккаунт?',
             username: 'Никнейм',
             password: 'Пароль',
             email: 'Email',
-            sendCode: 'Отправить код',
+            sendCode: 'ОТПРАВИТЬ КОД',
             confirmCode: 'Код из email',
-            confirm: 'Подтвердить',
+            confirm: 'ПОДТВЕРДИТЬ',
             invalidCode: 'Неверный код',
             userExists: 'Пользователь уже существует',
             registered: 'Регистрация успешна!',
@@ -1058,36 +1134,87 @@
             wrongPassword: 'Неверный пароль',
             userNotFound: 'Пользователь не найден',
             fillFields: 'Заполните все поля',
-            graphZoom: 'Масштаб графика',
-            small: 'Маленький',
-            medium: 'Средний',
-            large: 'Большой',
-            confirmTransfer: 'Перевести {amount} 🍬 пользователю {to}?'
+            graphZoom: '📈 МАСШТАБ ГРАФИКА',
+            small: 'МАЛЕНЬКИЙ',
+            medium: 'СРЕДНИЙ',
+            large: 'БОЛЬШОЙ',
+            confirmTransfer: 'Перевести {amount} 🍬 пользователю {to}?',
+            adminPanel: '🔧 ПАНЕЛЬ АДМИНИСТРАТОРА',
+            searchUser: '🔍 Поиск пользователя',
+            sortByName: 'По имени',
+            sortByCandies: 'По конфетам',
+            managePromoCodes: '🎫 УПРАВЛЕНИЕ ПРОМОКОДАМИ',
+            newPromoCode: 'НОВЫЙ ПРОМОКОД',
+            reward: 'НАГРАДА',
+            uses: 'ИСПОЛЬЗОВАНИЙ (0=∞)',
+            add: '➕ ДОБАВИТЬ',
+            existingPromoCodes: 'Существующие промокоды:',
+            noPromoCodes: 'Промокодов пока нет',
+            backToShop: '← НАЗАД В МАГАЗИН',
+            adjustCandies: 'Изменить конфеты',
+            setCandies: 'Установить',
+            delete: '🗑️ Удалить',
+            emailNotSent: '❌ Ошибка отправки. Ваш код: {code}',
+            connectionError: '⚠️ Проблема с отправкой. Ваш код: {code}',
+            loginFirst: 'Сначала войдите в аккаунт',
+            adminCodeOnly: 'Этот код только для Gyraffic',
+            adminModeActivated: '🎮 Режим администратора активирован!',
+            invalidPromoCode: '❌ Неверный промокод',
+            promoCodeExpired: '❌ Промокод больше недействителен',
+            promoCodeActivated: '✅ +{reward} 🍬!',
+            candiesChanged: '✅ Конфеты изменены',
+            enterValidNumber: 'Введите корректное число',
+            candiesSet: '✅ Конфеты установлены',
+            cannotDeleteGyraffic: '❌ Нельзя удалить Gyraffic',
+            confirmDelete: 'Удалить пользователя {username}?',
+            userDeleted: '✅ Пользователь {username} удален',
+            enterCode: 'Введите код',
+            enterValidReward: 'Введите корректную награду',
+            codeExists: 'Такой код уже существует',
+            codeAdded: '✅ Промокод {code} добавлен',
+            confirmDeleteCode: 'Удалить промокод {code}?',
+            codeDeleted: '✅ Промокод удален',
+            goodbye: '👋 До свидания!'
         },
         en: {
-            shopTitle: '🍬 Candy Shop',
+            shopTitle: '🍬 CANDY SHOP',
             candies: 'Candies',
             level: 'Level',
-            stats: 'Statistics',
+            dailyBonus: '🎁 DAILY BONUS',
+            getBonus: 'GET 100 🍬',
+            bonusReceived: 'Bonus received!',
+            alreadyGot: 'Bonus already claimed today',
+            stats: '📊 STATISTICS',
             totalEarned: 'Total earned',
             totalSpent: 'Total spent',
             daysActive: 'Days active',
-            transfer: 'Transfer Candies',
+            transfer: '💸 TRANSFER CANDIES',
             to: 'To',
             amount: 'Amount',
             comment: 'Comment',
-            send: 'Send',
-            logout: 'Logout',
-            login: 'Login',
-            register: 'Register',
+            send: 'SEND',
+            shop: '🎨 SKIN SHOP',
+            buySkin: 'BUY SKIN FOR 500 🍬',
+            skinPurchased: 'Skin purchased!',
+            notEnough: 'Not enough candies',
+            tasks: '📋 TASKS',
+            playHours: 'Play for 1 hour',
+            reward: 'Reward',
+            complete: 'COMPLETE',
+            alreadyDone: 'Already done',
+            promo: '🎟️ PROMO CODE',
+            activate: 'ACTIVATE',
+            logout: '🚪 LOGOUT',
+            login: 'LOGIN',
+            register: 'REGISTER',
             noAccount: 'No account?',
             haveAccount: 'Already have an account?',
             username: 'Username',
             password: 'Password',
             email: 'Email',
-            sendCode: 'Send code',
+            sendCode: 'SEND CODE',
             confirmCode: 'Code from email',
-            confirm: 'Confirm',
+            confirm: 'CONFIRM',
             invalidCode: 'Invalid code',
             userExists: 'User already exists',
             registered: 'Registration successful!',
@@ -1095,11 +1222,47 @@
             wrongPassword: 'Wrong password',
             userNotFound: 'User not found',
             fillFields: 'Fill all fields',
-            graphZoom: 'Graph zoom',
-            small: 'Small',
-            medium: 'Medium',
-            large: 'Large',
-            confirmTransfer: 'Transfer {amount} 🍬 to {to}?'
+            graphZoom: '📈 GRAPH ZOOM',
+            small: 'SMALL',
+            medium: 'MEDIUM',
+            large: 'LARGE',
+            confirmTransfer: 'Transfer {amount} 🍬 to {to}?',
+            adminPanel: '🔧 ADMIN PANEL',
+            searchUser: '🔍 Search user',
+            sortByName: 'By name',
+            sortByCandies: 'By candies',
+            managePromoCodes: '🎫 MANAGE PROMO CODES',
+            newPromoCode: 'NEW PROMO CODE',
+            reward: 'REWARD',
+            uses: 'USES (0=∞)',
+            add: '➕ ADD',
+            existingPromoCodes: 'Existing promo codes:',
+            noPromoCodes: 'No promo codes yet',
+            backToShop: '← BACK TO SHOP',
+            adjustCandies: 'Adjust candies',
+            setCandies: 'Set',
+            delete: '🗑️ Delete',
+            emailNotSent: '❌ Sending error. Your code: {code}',
+            connectionError: '⚠️ Connection error. Your code: {code}',
+            loginFirst: 'Login first',
+            adminCodeOnly: 'This code is for Gyraffic only',
+            adminModeActivated: '🎮 Admin mode activated!',
+            invalidPromoCode: '❌ Invalid promo code',
+            promoCodeExpired: '❌ Promo code expired',
+            promoCodeActivated: '✅ +{reward} 🍬!',
+            candiesChanged: '✅ Candies changed',
+            enterValidNumber: 'Enter valid number',
+            candiesSet: '✅ Candies set',
+            cannotDeleteGyraffic: '❌ Cannot delete Gyraffic',
+            confirmDelete: 'Delete user {username}?',
+            userDeleted: '✅ User {username} deleted',
+            enterCode: 'Enter code',
+            enterValidReward: 'Enter valid reward',
+            codeExists: 'Code already exists',
+            codeAdded: '✅ Promo code {code} added',
+            confirmDeleteCode: 'Delete promo code {code}?',
+            codeDeleted: '✅ Promo code deleted',
+            goodbye: '👋 Goodbye!'
         }
     };
 
@@ -1111,66 +1274,290 @@
         return text;
     }
 
-    // ========== ПЕРЕМЕННЫЕ МАГАЗИНА ==========
-    let usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
-    let currentUser = localStorage.getItem('sweetland_current_user') || null;
-    let adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
-    let userFilter = '';
-    let userSort = 'name';
-    let userIP = null;
-    let pendingEmailCodes = {};
-    let graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
-
-    // Промокоды
-    let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-
-    // ========== СОЗДАЕМ ПОЛЬЗОВАТЕЛЯ GYRAFFIC ==========
-    let cleanedDB = {};
-    
-    // Ищем Gyraffic в любом регистре
-    for (let name in usersDB) {
-        if (name.toLowerCase() === 'gyraffic' || name.toLowerCase() === 'жирафик') {
-            cleanedDB['Gyraffic'] = usersDB[name];
-            break;
-        }
-    }
-    
-    // Если Gyraffic не найден - создаем
-    if (!cleanedDB['Gyraffic']) {
-        cleanedDB['Gyraffic'] = {
-            password: '75813000gyraff',
-            email: 'gyraffic@gmail.com',
-            ip: null,
-            candies: 10000,
-            history: Array(48).fill(10000),
-            regDate: Date.now(),
-            lastLogin: null,
-            role: 'admin',
-            permissions: ['all'],
-            totalEarned: 10000,
-            totalSpent: 0,
-            daysActive: 1
-        };
-    } else {
-        // Обновляем пароль на новый
-        cleanedDB['Gyraffic'].password = '75813000gyraff';
-    }
-    
-    usersDB = cleanedDB;
-    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-
-    // Промокоды по умолчанию (только для админа)
-    if (Object.keys(promoCodes).length === 0) {
-        promoCodes = {
-            'ADMIN-PANEL(GYRAFFIC)': { reward: 0, type: 'admin', uses: Infinity, createdBy: 'system' }
-        };
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-    }
-
     // ========== ЭЛЕМЕНТЫ ==========
     const mainContent = document.getElementById('mainContent');
     const candyShopScreen = document.getElementById('candyShopScreen');
     const candyShopContent = document.getElementById('candyShopContent');
+
+    // ========== ФУНКЦИИ ЭКРАНОВ ==========
+    window.openCandyShop = function() { 
+        mainContent.classList.add('hidden'); 
+        candyShopScreen.classList.add('active'); 
+        renderCandyShop(); 
+    };
+    
+    window.closeCandyShop = function() { 
+        candyShopScreen.classList.remove('active'); 
+        mainContent.classList.remove('hidden'); 
+    };
+    
+    window.showMainContent = function() { 
+        candyShopScreen.classList.remove('active'); 
+        mainContent.classList.remove('hidden'); 
+    };
+
+    // ========== ФУНКЦИИ МЕНЮ ==========
+    window.toggleColorMenu = function() { 
+        document.getElementById('colorMenu').classList.toggle('active'); 
+        if (document.getElementById('colorMenu').children.length === 0) generateColorMenu();
+    };
+    
+    window.toggleLangMenu = function() { 
+        document.getElementById('langMenu').classList.toggle('active'); 
+        if (document.getElementById('langMenu').children.length === 0) generateLangMenu();
+    };
+    
+    window.toggleWeatherMenu = function() { 
+        document.getElementById('weatherMenu').classList.toggle('active'); 
+        if (document.getElementById('weatherMenu').children.length === 0) generateWeatherMenu();
+    };
+    
+    window.toggleSettingsMenu = function() { 
+        document.getElementById('settingsMenu').classList.toggle('active'); 
+        if (document.getElementById('settingsMenu').children.length === 0) generateSettingsMenu();
+    };
+    
+    window.togglePanel = function() { 
+        document.getElementById('side-panel').classList.toggle('active'); 
+    };
+
+    // ========== ГЕНЕРАЦИЯ МЕНЮ ==========
+    function generateColorMenu() {
+        const menu = document.getElementById('colorMenu');
+        const colors = [
+            { class: 'dark', name: 'Тёмная' },
+            { class: 'light', name: 'Светлая' },
+            { class: 'pink', name: 'Розовая' },
+            { class: 'blue', name: 'Голубая' },
+            { class: 'green', name: 'Зелёная' },
+            { class: 'orange', name: 'Оранжевая' },
+            { class: 'purple', name: 'Фиолетовая' },
+            { class: 'yellow', name: 'Жёлтая' },
+            { class: 'red', name: 'Красная' },
+            { class: 'teal', name: 'Бирюзовая' }
+        ];
+        colors.forEach(c => {
+            let option = document.createElement('div');
+            option.className = 'color-option';
+            option.onclick = () => setAccentColor(c.class);
+            option.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+    
+    function generateLangMenu() {
+        const menu = document.getElementById('langMenu');
+        const langs = [
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'en', name: 'English', flag: '🇬🇧' }
+        ];
+        langs.forEach(l => {
+            let option = document.createElement('div');
+            option.className = 'lang-option';
+            option.onclick = () => setLanguage(l.code);
+            option.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+    
+    function generateWeatherMenu() {
+        const menu = document.getElementById('weatherMenu');
+        const weathers = [
+            { type: 'auto', name: 'Авто', icon: '🌓' },
+            { type: 'snow', name: 'Снег', icon: '❄️' },
+            { type: 'rain', name: 'Дождь', icon: '☔' },
+            { type: 'candy', name: 'Конфеты', icon: '🍬' },
+            { type: 'none', name: 'Выкл', icon: '☀️' }
+        ];
+        weathers.forEach(w => {
+            let option = document.createElement('div');
+            option.className = 'weather-option';
+            option.onclick = () => setWeather(w.type);
+            option.innerHTML = `<span>${w.icon}</span><span>${w.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+    
+    function generateSettingsMenu() {
+        const menu = document.getElementById('settingsMenu');
+        const settings = [
+            { name: particlesEnabled ? 'Частицы: выкл' : 'Частицы: вкл', action: 'toggleParticles' },
+            { name: 'Сброс настроек', action: 'resetSettings' }
+        ];
+        settings.forEach(s => {
+            let option = document.createElement('div');
+            option.className = 'settings-option';
+            option.onclick = () => window[s.action]();
+            option.innerHTML = `<span>⚙️</span><span>${s.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+
+    // ========== ФУНКЦИИ ТЕМЫ ==========
+    function setAccentColor(color) {
+        const body = document.body;
+        body.className = '';
+        if (color === 'light') {
+            body.classList.add('light');
+            document.getElementById('themeIcon').textContent = '☀️';
+        } else if (color === 'dark') {
+            body.classList.add('dark');
+            document.getElementById('themeIcon').textContent = '🌙';
+        } else {
+            body.classList.add(color);
+            document.getElementById('themeIcon').textContent = '🌈';
+        }
+        currentTheme = color;
+        localStorage.setItem('sweetland-theme', color);
+        if (currentWeather === 'auto') createWeather();
+        document.getElementById('colorMenu').classList.remove('active');
+    }
+    window.setAccentColor = setAccentColor;
+    
+    window.toggleTheme = function() { 
+        setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); 
+    };
+
+    // ========== ФУНКЦИИ ЯЗЫКА ==========
+    window.setLanguage = function(lang) { 
+        currentLang = lang; 
+        localStorage.setItem('sweetland-lang', lang); 
+        document.getElementById('langMenu').classList.remove('active');
+        if (candyShopScreen.classList.contains('active')) {
+            renderCandyShop();
+        }
+    };
+
+    // ========== ФУНКЦИИ ПОГОДЫ ==========
+    window.setWeather = function(type) { 
+        currentWeather = type; 
+        localStorage.setItem('sweetland-weather', type); 
+        createWeather();
+        document.getElementById('weatherMenu').classList.remove('active');
+    };
+    
+    function createWeather() {
+        const weatherContainer = document.getElementById('weather');
+        if (!particlesEnabled) { weatherContainer.innerHTML = ''; return; }
+        weatherContainer.innerHTML = '';
+        let type = currentWeather;
+        if (type === 'auto') type = document.body.classList.contains('light') ? 'rain' : 'snow';
+        if (type === 'none') return;
+        const count = window.innerWidth < 768 ? 100 : 250;
+        for (let i = 0; i < count; i++) {
+            let p = document.createElement('div');
+            if (type === 'rain') {
+                p.className = 'rain-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
+                p.style.animationDelay = Math.random() * -2 + 's';
+                p.style.opacity = Math.random() * 0.3 + 0.6;
+            } else if (type === 'snow') {
+                p.className = 'snow-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.width = Math.random() * 8 + 4 + 'px';
+                p.style.height = p.style.width;
+                p.style.animationDuration = Math.random() * 5 + 4 + 's';
+                p.style.animationDelay = Math.random() * -4 + 's';
+                p.style.opacity = Math.random() * 0.4 + 0.5;
+            } else if (type === 'candy') {
+                p.className = 'candy-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.width = Math.random() * 10 + 8 + 'px';
+                p.style.height = p.style.width;
+                p.style.animationDuration = Math.random() * 6 + 5 + 's';
+                p.style.animationDelay = Math.random() * -5 + 's';
+                p.style.opacity = Math.random() * 0.5 + 0.5;
+                const colors = ['#ff69b4', '#ff4444', '#ffa500', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffd700'];
+                p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                p.style.boxShadow = `0 0 15px currentColor`;
+            }
+            weatherContainer.appendChild(p);
+        }
+    }
+
+    // ========== ФУНКЦИИ НАСТРОЕК ==========
+    window.toggleParticles = function() {
+        particlesEnabled = !particlesEnabled;
+        if (particlesEnabled) {
+            document.getElementById('weather').style.opacity = '1';
+            createWeather();
+        } else {
+            document.getElementById('weather').style.opacity = '0';
+            document.getElementById('weather').innerHTML = '';
+        }
+        localStorage.setItem('sweetland-particles', particlesEnabled);
+        document.getElementById('settingsMenu').classList.remove('active');
+        showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
+    };
+    
+    window.resetSettings = function() {
+        particlesEnabled = true;
+        blurEnabled = true;
+        animationsEnabled = true;
+        currentWeather = 'auto';
+        localStorage.setItem('sweetland-particles', 'true');
+        localStorage.setItem('sweetland-blur', 'true');
+        localStorage.setItem('sweetland-animations', 'true');
+        localStorage.setItem('sweetland-weather', 'auto');
+        setAccentColor('dark');
+        createWeather();
+        document.getElementById('settingsMenu').classList.remove('active');
+        showNotification('Настройки сброшены', 'success');
+    };
+
+    // ========== REVEAL АНИМАЦИЯ ==========
+    function reveal() {
+        if (!animationsEnabled) {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            return;
+        }
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', reveal);
+
+    // ========== КОПИРОВАНИЕ IP ==========
+    window.copyIP = function() {
+        navigator.clipboard.writeText('play.sweet-land.fun').then(() => {
+            let n = document.getElementById('copyNotice');
+            n.style.opacity = '1';
+            setTimeout(() => n.style.opacity = '0', 2000);
+            showNotification('IP скопирован в буфер обмена', 'success');
+        }).catch(() => showNotification('play.sweet-land.fun', 'info'));
+    };
+
+    // ========== ПРАВИЛА ==========
+    window.openRules = function() { 
+        document.getElementById('rules-modal').classList.add('show'); 
+        document.body.style.overflow = 'hidden'; 
+        renderRules(); 
+    };
+    
+    window.closeRules = function() { 
+        document.getElementById('rules-modal').classList.remove('show'); 
+        document.body.style.overflow = 'auto'; 
+    };
+    
+    function renderRules() {
+        const rules = [
+            { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
+            { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
+            { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
+            { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
+            { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
+            { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
+        ];
+        let html = '';
+        rules.forEach(r => { 
+            if (r.punish) html += `<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`; 
+            else html += `<p><b>${r.num}</b> ${r.text}</p>`; 
+        });
+        document.getElementById('rules-content').innerHTML = html;
+    }
 
     // ========== ФУНКЦИЯ ПОИСКА ПОЛЬЗОВАТЕЛЯ БЕЗ УЧЁТА РЕГИСТРА ==========
     function findUser(username) {
@@ -1242,273 +1629,7 @@
     // ========== ОНЛАЙН ==========
     document.getElementById('onlineNumber').innerText = '0';
 
-    // ========== ФУНКЦИИ ЭКРАНОВ ==========
-    window.openCandyShop = function() { 
-        mainContent.classList.add('hidden'); 
-        candyShopScreen.classList.add('active'); 
-        renderCandyShop(); 
-    };
-    window.closeCandyShop = function() { 
-        candyShopScreen.classList.remove('active'); 
-        mainContent.classList.remove('hidden'); 
-    };
-    window.showMainContent = function() { 
-        candyShopScreen.classList.remove('active'); 
-        mainContent.classList.remove('hidden'); 
-    };
-
-    // ========== ФУНКЦИИ МЕНЮ ==========
-    window.toggleColorMenu = function() { 
-        document.getElementById('colorMenu').classList.toggle('active'); 
-        if (document.getElementById('colorMenu').children.length === 0) generateColorMenu();
-    };
-    window.toggleLangMenu = function() { 
-        document.getElementById('langMenu').classList.toggle('active'); 
-        if (document.getElementById('langMenu').children.length === 0) generateLangMenu();
-    };
-    window.toggleWeatherMenu = function() { 
-        document.getElementById('weatherMenu').classList.toggle('active'); 
-        if (document.getElementById('weatherMenu').children.length === 0) generateWeatherMenu();
-    };
-    window.toggleSettingsMenu = function() { 
-        document.getElementById('settingsMenu').classList.toggle('active'); 
-        if (document.getElementById('settingsMenu').children.length === 0) generateSettingsMenu();
-    };
-    window.togglePanel = function() { 
-        document.getElementById('side-panel').classList.toggle('active'); 
-    };
-
-    // ========== ГЕНЕРАЦИЯ МЕНЮ ==========
-    function generateColorMenu() {
-        const menu = document.getElementById('colorMenu');
-        const colors = [
-            { class: 'dark', name: 'Тёмная' },
-            { class: 'light', name: 'Светлая' },
-            { class: 'pink', name: 'Розовая' },
-            { class: 'blue', name: 'Голубая' },
-            { class: 'green', name: 'Зелёная' },
-            { class: 'orange', name: 'Оранжевая' },
-            { class: 'purple', name: 'Фиолетовая' },
-            { class: 'yellow', name: 'Жёлтая' },
-            { class: 'red', name: 'Красная' },
-            { class: 'teal', name: 'Бирюзовая' }
-        ];
-        colors.forEach(c => {
-            let option = document.createElement('div');
-            option.className = 'color-option';
-            option.onclick = () => setAccentColor(c.class);
-            option.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.name}</span>`;
-            menu.appendChild(option);
-        });
-    }
-    function generateLangMenu() {
-        const menu = document.getElementById('langMenu');
-        const langs = [
-            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-            { code: 'en', name: 'English', flag: '🇬🇧' }
-        ];
-        langs.forEach(l => {
-            let option = document.createElement('div');
-            option.className = 'lang-option';
-            option.onclick = () => setLanguage(l.code);
-            option.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
-            menu.appendChild(option);
-        });
-    }
-    function generateWeatherMenu() {
-        const menu = document.getElementById('weatherMenu');
-        const weathers = [
-            { type: 'auto', name: 'Авто', icon: '🌓' },
-            { type: 'snow', name: 'Снег', icon: '❄️' },
-            { type: 'rain', name: 'Дождь', icon: '☔' },
-            { type: 'candy', name: 'Конфеты', icon: '🍬' },
-            { type: 'none', name: 'Выкл', icon: '☀️' }
-        ];
-        weathers.forEach(w => {
-            let option = document.createElement('div');
-            option.className = 'weather-option';
-            option.onclick = () => setWeather(w.type);
-            option.innerHTML = `<span>${w.icon}</span><span>${w.name}</span>`;
-            menu.appendChild(option);
-        });
-    }
-    function generateSettingsMenu() {
-        const menu = document.getElementById('settingsMenu');
-        const settings = [
-            { name: particlesEnabled ? 'Частицы: выкл' : 'Частицы: вкл', action: 'toggleParticles' },
-            { name: 'Сброс настроек', action: 'resetSettings' }
-        ];
-        settings.forEach(s => {
-            let option = document.createElement('div');
-            option.className = 'settings-option';
-            option.onclick = () => window[s.action]();
-            option.innerHTML = `<span>⚙️</span><span>${s.name}</span>`;
-            menu.appendChild(option);
-        });
-    }
-
-    // ========== ФУНКЦИИ ТЕМЫ ==========
-    function setAccentColor(color) {
-        const body = document.body;
-        body.className = '';
-        if (color === 'light') {
-            body.classList.add('light');
-            document.getElementById('themeIcon').textContent = '☀️';
-        } else if (color === 'dark') {
-            body.classList.add('dark');
-            document.getElementById('themeIcon').textContent = '🌙';
-        } else {
-            body.classList.add(color);
-            document.getElementById('themeIcon').textContent = '🌈';
-        }
-        currentTheme = color;
-        localStorage.setItem('sweetland-theme', color);
-        if (currentWeather === 'auto') createWeather();
-        document.getElementById('colorMenu').classList.remove('active');
-    }
-    window.setAccentColor = setAccentColor;
-    window.toggleTheme = function() { 
-        setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); 
-    };
-
-    // ========== ФУНКЦИИ ЯЗЫКА ==========
-    window.setLanguage = function(lang) { 
-        currentLang = lang; 
-        localStorage.setItem('sweetland-lang', lang); 
-        document.getElementById('langMenu').classList.remove('active');
-        if (candyShopScreen.classList.contains('active')) {
-            renderCandyShop();
-        }
-    };
-
-    // ========== ФУНКЦИИ ПОГОДЫ ==========
-    window.setWeather = function(type) { 
-        currentWeather = type; 
-        localStorage.setItem('sweetland-weather', type); 
-        createWeather();
-        document.getElementById('weatherMenu').classList.remove('active');
-    };
-    function createWeather() {
-        const weatherContainer = document.getElementById('weather');
-        if (!particlesEnabled) { weatherContainer.innerHTML = ''; return; }
-        weatherContainer.innerHTML = '';
-        let type = currentWeather;
-        if (type === 'auto') type = document.body.classList.contains('light') ? 'rain' : 'snow';
-        if (type === 'none') return;
-        const count = window.innerWidth < 768 ? 100 : 250;
-        for (let i = 0; i < count; i++) {
-            let p = document.createElement('div');
-            if (type === 'rain') {
-                p.className = 'rain-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = Math.random() * 0.8 + 0.4 + 's';
-                p.style.animationDelay = Math.random() * -2 + 's';
-                p.style.opacity = Math.random() * 0.3 + 0.6;
-            } else if (type === 'snow') {
-                p.className = 'snow-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.width = Math.random() * 8 + 4 + 'px';
-                p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 5 + 4 + 's';
-                p.style.animationDelay = Math.random() * -4 + 's';
-                p.style.opacity = Math.random() * 0.4 + 0.5;
-            } else if (type === 'candy') {
-                p.className = 'candy-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.width = Math.random() * 10 + 8 + 'px';
-                p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 6 + 5 + 's';
-                p.style.animationDelay = Math.random() * -5 + 's';
-                p.style.opacity = Math.random() * 0.5 + 0.5;
-                const colors = ['#ff69b4', '#ff4444', '#ffa500', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffd700'];
-                p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                p.style.boxShadow = `0 0 15px currentColor`;
-            }
-            weatherContainer.appendChild(p);
-        }
-    }
-
-    // ========== ФУНКЦИИ НАСТРОЕК ==========
-    window.toggleParticles = function() {
-        particlesEnabled = !particlesEnabled;
-        if (particlesEnabled) {
-            document.getElementById('weather').style.opacity = '1';
-            createWeather();
-        } else {
-            document.getElementById('weather').style.opacity = '0';
-            document.getElementById('weather').innerHTML = '';
-        }
-        localStorage.setItem('sweetland-particles', particlesEnabled);
-        document.getElementById('settingsMenu').classList.remove('active');
-        showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
-    };
-    window.resetSettings = function() {
-        particlesEnabled = true;
-        blurEnabled = true;
-        animationsEnabled = true;
-        currentWeather = 'auto';
-        localStorage.setItem('sweetland-particles', 'true');
-        localStorage.setItem('sweetland-blur', 'true');
-        localStorage.setItem('sweetland-animations', 'true');
-        localStorage.setItem('sweetland-weather', 'auto');
-        setAccentColor('dark');
-        createWeather();
-        document.getElementById('settingsMenu').classList.remove('active');
-        showNotification('Настройки сброшены', 'success');
-    };
-
-    // ========== REVEAL АНИМАЦИЯ ==========
-    function reveal() {
-        if (!animationsEnabled) {
-            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            return;
-        }
-        document.querySelectorAll('.reveal').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                el.classList.add('active');
-            }
-        });
-    }
-    window.addEventListener('scroll', reveal);
-
-    // ========== КОПИРОВАНИЕ IP ==========
-    window.copyIP = function() {
-        navigator.clipboard.writeText('play.sweet-land.fun').then(() => {
-            let n = document.getElementById('copyNotice');
-            n.style.opacity = '1';
-            setTimeout(() => n.style.opacity = '0', 2000);
-            showNotification('IP скопирован в буфер обмена', 'success');
-        }).catch(() => showNotification('play.sweet-land.fun', 'info'));
-    };
-
-    // ========== ПРАВИЛА ==========
-    window.openRules = function() { 
-        document.getElementById('rules-modal').classList.add('show'); 
-        document.body.style.overflow = 'hidden'; 
-        renderRules(); 
-    };
-    window.closeRules = function() { 
-        document.getElementById('rules-modal').classList.remove('show'); 
-        document.body.style.overflow = 'auto'; 
-    };
-    function renderRules() {
-        const rules = [
-            { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
-            { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
-            { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
-            { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
-            { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
-            { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
-        ];
-        let html = '';
-        rules.forEach(r => { 
-            if (r.punish) html += `<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`; 
-            else html += `<p><b>${r.num}</b> ${r.text}</p>`; 
-        });
-        document.getElementById('rules-content').innerHTML = html;
-    }
-
-    // ========== УЛУЧШЕННЫЙ ГРАФИК С ТОЧКАМИ ПО ВСЕМУ ПУТИ ==========
+    // ========== УЛУЧШЕННЫЙ ГРАФИК (ТОЛЬКО ТОЧКИ) ==========
     function drawGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1524,100 +1645,103 @@
         let minVal = Math.min(...history, 0);
         let range = maxVal - minVal || 1;
         
+        // Рисуем фон
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.fillRect(0, 0, w, h);
+        
         // Рисуем сетку
-        ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
         ctx.lineWidth = 1;
+        
+        // Горизонтальные линии
         for (let i = 0; i <= 5; i++) {
-            let y = 20 + (i/5) * (h - 60);
+            let y = 40 + (i / 5) * (h - 80);
             ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(w, y);
-            ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+            ctx.moveTo(50, y);
+            ctx.lineTo(w - 30, y);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
             ctx.stroke();
             
             // Подписи значений
-            let val = Math.round(maxVal - (i/5) * range);
-            ctx.fillStyle = 'rgba(255,255,255,0.3)';
-            ctx.font = '10px Inter';
-            ctx.fillText(val, 5, y - 5);
+            let val = Math.round(maxVal - (i / 5) * range);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = 'bold 12px Inter';
+            ctx.fillText(val.toLocaleString(), 10, y + 4);
         }
         
-        // Рисуем плавную линию графика
-        ctx.beginPath();
-        ctx.strokeStyle = '#4d9eff';
-        ctx.lineWidth = 3;
-        ctx.shadowColor = '#4d9eff';
-        ctx.shadowBlur = 10;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        
-        // Создаем массив точек
-        let points = [];
-        for (let i = 0; i < history.length; i++) {
-            let x = (i / (history.length - 1)) * w;
-            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
-            points.push({x, y, value: history[i], index: i});
-        }
-        
-        // Рисуем сглаженную линию через все точки
-        ctx.moveTo(points[0].x, points[0].y);
-        for (let i = 1; i < points.length - 2; i++) {
-            let xc = (points[i].x + points[i + 1].x) / 2;
-            let yc = (points[i].y + points[i + 1].y) / 2;
-            ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-        }
-        ctx.quadraticCurveTo(
-            points[points.length - 2].x, 
-            points[points.length - 2].y,
-            points[points.length - 1].x, 
-            points[points.length - 1].y
-        );
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-        
-        // Рисуем область под графиком с градиентом
-        ctx.beginPath();
-        ctx.moveTo(points[0].x, h-30);
-        for (let i = 0; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
-        }
-        ctx.lineTo(points[points.length-1].x, h-30);
-        ctx.closePath();
-        
-        let gradient = ctx.createLinearGradient(0, 0, 0, h);
-        gradient.addColorStop(0, '#4d9eff80');
-        gradient.addColorStop(0.6, '#4d9eff20');
-        gradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Рисуем точки на графике (каждый час)
-        for (let i = 0; i < points.length; i++) {
+        // Вертикальные линии (часы)
+        for (let i = 0; i <= 6; i++) {
+            let x = 50 + (i / 6) * (w - 80);
             ctx.beginPath();
-            ctx.arc(points[i].x, points[i].y, 4, 0, 2 * Math.PI);
-            ctx.fillStyle = '#ffffff';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#4d9eff';
-            ctx.fill();
+            ctx.moveTo(x, 40);
+            ctx.lineTo(x, h - 40);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.stroke();
+            
+            // Подписи времени
+            let hours = 48 - i * 8;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.font = 'bold 10px Inter';
+            ctx.fillText(hours + 'ч', x - 15, h - 20);
+        }
+        
+        // Рисуем ТОЛЬКО ТОЧКИ (без линий)
+        let points = [];
+        let pointSize = 8;
+        
+        for (let i = 0; i < history.length; i++) {
+            let x = 50 + (i / (history.length - 1)) * (w - 80);
+            let y = h - 40 - ((history[i] - minVal) / range) * (h - 80);
+            points.push({ x, y, value: history[i], index: i });
+            
+            // Рисуем точку с градиентом
+            let gradient = ctx.createRadialGradient(x, y, 0, x, y, pointSize * 2);
+            gradient.addColorStop(0, 'rgba(77, 158, 255, 1)');
+            gradient.addColorStop(0.5, 'rgba(77, 158, 255, 0.5)');
+            gradient.addColorStop(1, 'rgba(77, 158, 255, 0)');
             
             ctx.beginPath();
-            ctx.arc(points[i].x, points[i].y, 2, 0, 2 * Math.PI);
+            ctx.arc(x, y, pointSize * 1.5, 0, 2 * Math.PI);
+            ctx.fillStyle = gradient;
+            ctx.shadowColor = 'rgba(77, 158, 255, 0.8)';
+            ctx.shadowBlur = 20;
+            ctx.fill();
+            
+            // Основная точка
+            ctx.shadowBlur = 0;
+            ctx.beginPath();
+            ctx.arc(x, y, pointSize - 2, 0, 2 * Math.PI);
             ctx.fillStyle = '#4d9eff';
             ctx.fill();
+            
+            // Белая серединка
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, 2 * Math.PI);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            
+            // Внешнее свечение
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#4d9eff';
+            ctx.beginPath();
+            ctx.arc(x, y, pointSize, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
         }
-        ctx.shadowBlur = 0;
 
         // Обработка движения мыши для тултипа
         canvas.onmousemove = (e) => {
             let rect = canvas.getBoundingClientRect();
             let mouseX = e.clientX - rect.left;
+            let mouseY = e.clientY - rect.top;
             
             // Находим ближайшую точку
             let best = null;
             let bestDist = Infinity;
             for (let p of points) {
-                let dist = Math.abs(p.x - mouseX);
-                if (dist < bestDist) {
+                let dist = Math.hypot(p.x - mouseX, p.y - mouseY);
+                if (dist < bestDist && dist < 50) {
                     bestDist = dist;
                     best = p;
                 }
@@ -1626,12 +1750,10 @@
             if (best) {
                 let tooltip = document.getElementById(tooltipId);
                 if (tooltip) {
-                    // Позиционируем тултип
                     tooltip.style.left = (best.x + rect.left) + 'px';
-                    tooltip.style.top = (rect.top + best.y - 45) + 'px';
+                    tooltip.style.top = (rect.top + best.y - 25) + 'px';
                     tooltip.style.opacity = '1';
                     
-                    // Вычисляем время (48 часов назад + индекс)
                     let date = new Date();
                     date.setHours(date.getHours() - (47 - best.index));
                     let timeStr = date.toLocaleTimeString(currentLang === 'ru' ? 'ru-RU' : 'en-US', {
@@ -1641,29 +1763,15 @@
                         month: '2-digit'
                     });
                     
-                    tooltip.innerHTML = `${timeStr}<br>${best.value} 🍬`;
+                    tooltip.innerHTML = `${timeStr}<br>${best.value.toLocaleString()} 🍬`;
                 }
-                
-                // Перерисовываем график
-                drawGraph(history, canvasId, tooltipId);
-                
-                // Выделяем точку
-                ctx.beginPath();
-                ctx.arc(best.x, best.y, 8, 0, 2*Math.PI);
-                ctx.fillStyle = '#4d9eff';
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = '#4d9eff';
-                ctx.fill();
-                ctx.shadowBlur = 0;
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
+            } else {
+                document.getElementById(tooltipId).style.opacity = '0';
             }
         };
         
         canvas.onmouseleave = () => {
             document.getElementById(tooltipId).style.opacity = '0';
-            drawGraph(history, canvasId, tooltipId);
         };
     }
 
@@ -1671,6 +1779,166 @@
     function getLevel(candies) {
         return Math.floor(Math.sqrt(candies / 100)) + 1;
     }
+
+    // ========== ЕЖЕДНЕВНЫЙ БОНУС ==========
+    window.claimDailyBonus = function() {
+        if (!currentUser) return;
+        let today = new Date().toDateString();
+        if (dailyBonusTimers[currentUser] === today) {
+            showNotification(t('alreadyGot'), 'warning');
+            return;
+        }
+        
+        usersDB[currentUser].candies += 100;
+        usersDB[currentUser].history.shift();
+        usersDB[currentUser].history.push(usersDB[currentUser].candies);
+        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + 100;
+        dailyBonusTimers[currentUser] = today;
+        
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        localStorage.setItem('sweetland_daily_bonus', JSON.stringify(dailyBonusTimers));
+        showNotification(t('bonusReceived'), 'success');
+        renderCandyShop();
+    };
+
+    // ========== ПОКУПКА СКИНА ==========
+    window.buySkin = function() {
+        if (!currentUser) return;
+        if (usersDB[currentUser].candies < 500) {
+            showNotification(t('notEnough'), 'error');
+            return;
+        }
+        
+        if (!confirm('Купить скин за 500 🍬?')) return;
+        
+        usersDB[currentUser].candies -= 500;
+        usersDB[currentUser].history.shift();
+        usersDB[currentUser].history.push(usersDB[currentUser].candies);
+        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + 500;
+        
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        showNotification(t('skinPurchased'), 'success');
+        renderCandyShop();
+    };
+
+    // ========== ВЫПОЛНЕНИЕ ЗАДАНИЯ ==========
+    window.completeTask = function(taskId) {
+        if (!currentUser) return;
+        if (usersDB[currentUser].completedTasks?.[taskId]) {
+            showNotification(t('alreadyDone'), 'warning');
+            return;
+        }
+        
+        let reward = 50;
+        usersDB[currentUser].candies += reward;
+        usersDB[currentUser].history.shift();
+        usersDB[currentUser].history.push(usersDB[currentUser].candies);
+        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + reward;
+        
+        if (!usersDB[currentUser].completedTasks) usersDB[currentUser].completedTasks = {};
+        usersDB[currentUser].completedTasks[taskId] = true;
+        
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        showNotification(`+${reward} 🍬`, 'success');
+        renderCandyShop();
+    };
+
+    // ========== ПЕРЕВОД КОНФЕТ ==========
+    window.transferCandies = function() {
+        let to = document.getElementById('transferToUser').value;
+        let amount = parseInt(document.getElementById('transferAmount').value);
+        let comment = document.getElementById('transferComment')?.value.trim() || '';
+        
+        if (!to || !amount || amount <= 0) {
+            showNotification(t('fillFields'), 'error');
+            return;
+        }
+        
+        if (!usersDB[to]) {
+            showNotification(t('userNotFound'), 'error');
+            return;
+        }
+        
+        if (usersDB[currentUser].candies < amount) {
+            showNotification(t('notEnough'), 'error');
+            return;
+        }
+        
+        if (!confirm(t('confirmTransfer', { amount: amount.toLocaleString(), to }))) return;
+        
+        usersDB[currentUser].candies -= amount;
+        usersDB[to].candies += amount;
+        usersDB[currentUser].history.shift();
+        usersDB[currentUser].history.push(usersDB[currentUser].candies);
+        usersDB[to].history.shift();
+        usersDB[to].history.push(usersDB[to].candies);
+        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
+        usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
+        
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        showNotification(`✅ ${t('send')} ${amount.toLocaleString()} 🍬 → ${to}`, 'success');
+        renderCandyShop();
+    };
+
+    // ========== ПРИМЕНЕНИЕ ПРОМОКОДА ==========
+    window.applyPromoCode = function() {
+        let code = document.getElementById('promoCode')?.value.trim().toUpperCase();
+        if (!code) return;
+        
+        // АДМИН-КОД - регистронезависимая проверка
+        if (code === 'ADMIN-PANEL(GYRAFFIC)') {
+            if (!currentUser) {
+                showNotification(t('loginFirst'), 'error');
+                return;
+            }
+            
+            let currentUserLower = currentUser.toLowerCase();
+            if (currentUserLower !== 'gyraffic' && currentUserLower !== 'жирафик') {
+                showNotification(t('adminCodeOnly'), 'error');
+                return;
+            }
+            
+            adminMode = true;
+            localStorage.setItem('sweetland_admin_mode', 'true');
+            renderCandyShop();
+            showNotification(t('adminModeActivated'), 'success');
+            return;
+        }
+        
+        if (!currentUser) {
+            showNotification(t('loginFirst'), 'error');
+            return;
+        }
+        
+        // Загружаем актуальные промокоды
+        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+        
+        let promo = promoCodes[code];
+        if (!promo) {
+            showNotification(t('invalidPromoCode'), 'error');
+            return;
+        }
+        
+        if (promo.uses !== Infinity && promo.uses <= 0) {
+            showNotification(t('promoCodeExpired'), 'error');
+            return;
+        }
+        
+        let user = usersDB[currentUser];
+        user.candies += promo.reward;
+        user.history.shift();
+        user.history.push(user.candies);
+        user.totalEarned = (user.totalEarned || 0) + promo.reward;
+        
+        if (promo.uses !== Infinity) {
+            promo.uses--;
+        }
+        
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString() }), 'success');
+        renderCandyShop();
+    };
 
     // ========== ФУНКЦИЯ ОТПРАВКИ EMAIL ЧЕРЕЗ EMAILJS ==========
     window.sendEmailCode = async function() {
@@ -1726,156 +1994,18 @@
             } else {
                 const errorText = await response.text();
                 console.error('Ошибка EmailJS:', errorText);
-                showNotification(`❌ Ошибка отправки. Ваш код: ${code}`, 'warning', false);
+                showNotification(t('emailNotSent', { code }), 'warning', false);
                 document.getElementById('emailCodeSection').style.display = 'block';
             }
             
         } catch (error) {
             console.error('Ошибка:', error);
-            showNotification(`⚠️ Проблема с отправкой. Ваш код: ${code}`, 'warning', false);
+            showNotification(t('connectionError', { code }), 'warning', false);
             document.getElementById('emailCodeSection').style.display = 'block';
         }
     };
 
-    // ========== РЕНДЕР МАГАЗИНА ==========
-    function renderCandyShop() {
-        if (adminMode) {
-            renderAdminPanel();
-            return;
-        }
-        if (!currentUser) {
-            renderAuth();
-            return;
-        }
-        let user = usersDB[currentUser];
-        if (!user) {
-            logoutUser();
-            return;
-        }
-        
-        let candies = user.candies || 0;
-        let history = user.history || Array(48).fill(candies);
-        let level = getLevel(candies);
-        
-        // Высота графика в зависимости от zoom
-        let graphHeight = graphZoom === 'small' ? 250 : (graphZoom === 'large' ? 500 : 350);
-
-        let html = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            
-            <div class="balance-row">
-                <span>🍬 ${t('candies')}:</span>
-                <span>${candies} <span class="level-badge">${t('level')} ${level}</span></span>
-            </div>
-            
-            <div class="graph-controls">
-                <span>📊 ${t('graphZoom')}:</span>
-                <div>
-                    <button onclick="graphZoom='small'; localStorage.setItem('sweetland_graph_zoom', 'small'); renderCandyShop();">${t('small')}</button>
-                    <button onclick="graphZoom='medium'; localStorage.setItem('sweetland_graph_zoom', 'medium'); renderCandyShop();">${t('medium')}</button>
-                    <button onclick="graphZoom='large'; localStorage.setItem('sweetland_graph_zoom', 'large'); renderCandyShop();">${t('large')}</button>
-                </div>
-            </div>
-            
-            <div class="graph-container" style="height: ${graphHeight}px;" id="graphContainer">
-                <div class="graph-inner">
-                    <canvas id="candyGraph" width="1600" height="${graphHeight}"></canvas>
-                </div>
-                <div class="graph-tooltip" id="graphTooltip"></div>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h4>${t('totalEarned')}</h4>
-                    <div class="value">${user.totalEarned || 0} 🍬</div>
-                </div>
-                <div class="stat-card">
-                    <h4>${t('totalSpent')}</h4>
-                    <div class="value">${user.totalSpent || 0} 🍬</div>
-                </div>
-                <div class="stat-card">
-                    <h4>${t('daysActive')}</h4>
-                    <div class="value">${user.daysActive || 1}</div>
-                </div>
-            </div>
-            
-            <div class="shop-grid">
-                <div class="shop-card">
-                    <h3><span>↗️</span> ${t('transfer')}</h3>
-                    <select id="transferToUser">
-                        <option value="">${t('to')}</option>
-                        ${Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('')}
-                    </select>
-                    <input type="number" id="transferAmount" placeholder="${t('amount')}" min="1">
-                    <textarea id="transferComment" placeholder="${t('comment')}" rows="2"></textarea>
-                    <button onclick="transferCandies()">${t('send')}</button>
-                </div>
-            </div>
-            
-            <button class="logout-btn" onclick="logoutUser()">🚪 ${t('logout')}</button>
-        `;
-        
-        candyShopContent.innerHTML = html;
-        
-        setTimeout(() => {
-            drawGraph(history, 'candyGraph', 'graphTooltip');
-        }, 50);
-        
-        let container = document.getElementById('graphContainer');
-        if (container) {
-            container.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                container.scrollLeft += e.deltaY;
-            });
-        }
-    }
-
-    function renderAuth() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            <div class="auth-section">
-                <input type="text" id="loginName" placeholder="${t('username')}">
-                <input type="password" id="loginPassword" placeholder="${t('password')}">
-                <button onclick="loginUser()">${t('login')}</button>
-                <div class="auth-toggle" onclick="switchAuthMode('register')">${t('noAccount')} ${t('register')}</div>
-            </div>
-        `;
-    }
-
-    function renderRegister() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            <div class="register-section">
-                <h3 style="text-align:center; margin-bottom:15px;">${t('register')}</h3>
-                <input type="text" id="regName" placeholder="${t('username')}">
-                <input type="email" id="regEmail" placeholder="${t('email')} (@gmail.com)">
-                <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
-                <button onclick="sendEmailCode()">${t('sendCode')}</button>
-                <div id="emailCodeSection" style="display:none;">
-                    <input type="text" id="emailCode" placeholder="${t('confirmCode')}">
-                    <button onclick="registerUser()">${t('confirm')}</button>
-                </div>
-                <div class="auth-toggle" onclick="switchAuthMode('login')">${t('haveAccount')} ${t('login')}</div>
-            </div>
-        `;
-    }
-
-    window.switchAuthMode = function(mode) { 
-        if (mode === 'register') renderRegister(); else renderAuth(); 
-    };
-
+    // ========== РЕГИСТРАЦИЯ ==========
     window.registerUser = async function() {
         await fetchUserIP();
         let name = document.getElementById('regName')?.value.trim();
@@ -1883,20 +2013,34 @@
         let pass = document.getElementById('regPassword')?.value.trim();
         let code = document.getElementById('emailCode')?.value.trim();
         
-        if (!name || !email || !pass || !code) return showNotification(t('fillFields'), 'error');
-        if (pass.length < 4) return showNotification('Пароль должен быть минимум 4 символа', 'error');
+        if (!name || !email || !pass || !code) {
+            showNotification(t('fillFields'), 'error');
+            return;
+        }
+        
+        if (pass.length < 4) {
+            showNotification(t('fillFields'), 'error');
+            return;
+        }
         
         if (pendingEmailCodes[email] !== code) {
-            return showNotification(t('invalidCode'), 'error');
+            showNotification(t('invalidCode'), 'error');
+            return;
         }
         
         // Проверка уникальности email
         for (let u in usersDB) {
-            if (usersDB[u].email === email) return showNotification(t('userExists'), 'error');
+            if (usersDB[u].email === email) {
+                showNotification(t('userExists'), 'error');
+                return;
+            }
         }
         
         // Поиск без учёта регистра
-        if (findUser(name)) return showNotification(t('userExists'), 'error');
+        if (findUser(name)) {
+            showNotification(t('userExists'), 'error');
+            return;
+        }
         
         usersDB[name] = { 
             password: pass, 
@@ -1910,7 +2054,8 @@
             permissions: [],
             totalEarned: 100,
             totalSpent: 0,
-            daysActive: 1
+            daysActive: 1,
+            completedTasks: {}
         };
         
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
@@ -1921,20 +2066,31 @@
         renderCandyShop();
     };
 
+    // ========== ВХОД ==========
     window.loginUser = async function() {
         await fetchUserIP();
         let name = document.getElementById('loginName')?.value.trim();
         let pass = document.getElementById('loginPassword')?.value.trim();
         
-        if (!name || !pass) return showNotification(t('fillFields'), 'error');
+        if (!name || !pass) {
+            showNotification(t('fillFields'), 'error');
+            return;
+        }
         
         let foundName = findUser(name);
-        if (!foundName) return showNotification(t('userNotFound'), 'error');
+        if (!foundName) {
+            showNotification(t('userNotFound'), 'error');
+            return;
+        }
         
-        if (usersDB[foundName].password !== pass) return showNotification(t('wrongPassword'), 'error');
+        if (usersDB[foundName].password !== pass) {
+            showNotification(t('wrongPassword'), 'error');
+            return;
+        }
         
         currentUser = foundName;
         usersDB[foundName].lastLogin = Date.now();
+        usersDB[foundName].ip = userIP;
         
         // Обновляем дни активности
         let lastLogin = new Date(usersDB[foundName].lastLogin || 0);
@@ -1949,210 +2105,430 @@
         renderCandyShop();
     };
 
+    // ========== ВЫХОД ==========
     window.logoutUser = function() { 
         currentUser = null; 
         adminMode = false;
         localStorage.removeItem('sweetland_current_user'); 
         localStorage.setItem('sweetland_admin_mode', 'false');
         renderCandyShop();
-        showNotification('Вы вышли из системы', 'info');
+        showNotification(t('goodbye'), 'info');
     };
 
-    window.transferCandies = function() {
-        let to = document.getElementById('transferToUser').value;
-        let amount = parseInt(document.getElementById('transferAmount').value);
-        let comment = document.getElementById('transferComment')?.value.trim() || '';
-        if (!to || !amount || amount <= 0) return showNotification(t('fillFields'), 'error');
-        if (!usersDB[to]) return showNotification(t('userNotFound'), 'error');
-        if (usersDB[currentUser].candies < amount) return showNotification('Недостаточно конфет', 'error');
-        
-        if (!confirm(t('confirmTransfer', {amount, to}))) return;
-        
-        usersDB[currentUser].candies -= amount;
-        usersDB[to].candies += amount;
-        usersDB[currentUser].history.shift(); 
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[to].history.shift(); 
-        usersDB[to].history.push(usersDB[to].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
-        usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(`Переведено ${amount} 🍬 пользователю ${to}`, 'success');
-        renderCandyShop();
+    // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ВХОДОМ И РЕГИСТРАЦИЕЙ ==========
+    window.switchAuthMode = function(mode) { 
+        if (mode === 'register') renderRegister(); 
+        else renderAuth(); 
     };
 
-    window.applyPromoCode = function() {
-        let code = document.getElementById('promoCode')?.value.trim();
-        if (!code) return;
-        
-        // АДМИН-КОД - регистронезависимая проверка для Gyraffic
-        if (code.toUpperCase() === 'ADMIN-PANEL(GYRAFFIC)') {
-            if (!currentUser) return showNotification('Сначала войдите в систему', 'error');
+    // ========== РЕНДЕР АВТОРИЗАЦИИ ==========
+    function renderAuth() {
+        candyShopContent.innerHTML = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
             
-            // Проверяем, является ли текущий пользователь Gyraffic (без учета регистра)
-            let currentUserLower = currentUser.toLowerCase();
-            if (currentUserLower !== 'gyraffic' && currentUserLower !== 'жирафик') {
-                return showNotification('Этот код только для Gyraffic', 'error');
-            }
+            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
             
-            adminMode = true;
-            localStorage.setItem('sweetland_admin_mode', 'true');
-            renderCandyShop();
-            showNotification('Режим администратора активирован!', 'success');
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="shop-card">
+                    <input type="text" id="loginName" placeholder="${t('username')}">
+                    <input type="password" id="loginPassword" placeholder="${t('password')}">
+                    <button onclick="loginUser()">${t('login')}</button>
+                    <div class="auth-toggle" onclick="switchAuthMode('register')">
+                        ${t('noAccount')} ${t('register')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // ========== РЕНДЕР РЕГИСТРАЦИИ ==========
+    function renderRegister() {
+        candyShopContent.innerHTML = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            
+            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
+            
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="shop-card">
+                    <h3 style="text-align: center; margin-bottom: 20px;">${t('register')}</h3>
+                    
+                    <input type="text" id="regName" placeholder="${t('username')}">
+                    <input type="email" id="regEmail" placeholder="${t('email')} (@gmail.com)">
+                    <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
+                    
+                    <button onclick="sendEmailCode()">${t('sendCode')}</button>
+                    
+                    <div id="emailCodeSection" style="display: none;">
+                        <input type="text" id="emailCode" placeholder="${t('confirmCode')}">
+                        <button onclick="registerUser()">${t('confirm')}</button>
+                    </div>
+                    
+                    <div class="auth-toggle" onclick="switchAuthMode('login')">
+                        ${t('haveAccount')} ${t('login')}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // ========== РЕНДЕР МАГАЗИНА ==========
+    function renderCandyShop() {
+        if (adminMode) {
+            renderAdminPanel();
             return;
         }
         
-        showNotification('Неверный промокод', 'error');
-    };
+        if (!currentUser) {
+            renderAuth();
+            return;
+        }
+        
+        // Загружаем актуальные данные
+        usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
+        let user = usersDB[currentUser];
+        
+        if (!user) {
+            logoutUser();
+            return;
+        }
+        
+        let candies = user.candies || 0;
+        let history = user.history || Array(48).fill(candies);
+        let level = getLevel(candies);
+        let today = new Date().toDateString();
+        let canClaimDaily = dailyBonusTimers[currentUser] !== today;
+        
+        // Высота графика в зависимости от zoom
+        let graphHeight = graphZoom === 'small' ? 300 : (graphZoom === 'large' ? 600 : 450);
 
-    window.toggleAdminMode = function(enable) { 
-        adminMode = enable; 
-        localStorage.setItem('sweetland_admin_mode', enable); 
-        renderCandyShop(); 
-    };
+        let html = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            
+            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
+            
+            <div class="balance-row">
+                <span>🍬 ${t('candies')}:</span>
+                <span>${candies.toLocaleString()} <span class="level-badge">${t('level')} ${level}</span></span>
+            </div>
+            
+            <div class="daily-bonus">
+                <h3>${t('dailyBonus')}</h3>
+                ${canClaimDaily 
+                    ? `<button onclick="claimDailyBonus()">${t('getBonus')}</button>` 
+                    : `<p style="font-size: 18px;">✅ ${t('alreadyGot')}</p>`}
+            </div>
+            
+            <div class="graph-controls">
+                <span style="font-size: 18px; font-weight: 600;">📊 ${t('graphZoom')}:</span>
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="graphZoom='small'; localStorage.setItem('sweetland_graph_zoom', 'small'); renderCandyShop();">${t('small')}</button>
+                    <button onclick="graphZoom='medium'; localStorage.setItem('sweetland_graph_zoom', 'medium'); renderCandyShop();">${t('medium')}</button>
+                    <button onclick="graphZoom='large'; localStorage.setItem('sweetland_graph_zoom', 'large'); renderCandyShop();">${t('large')}</button>
+                </div>
+            </div>
+            
+            <div class="graph-container" style="height: ${graphHeight}px;">
+                <canvas id="candyGraph" width="1200" height="${graphHeight}"></canvas>
+                <div class="graph-tooltip" id="graphTooltip"></div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>${t('totalEarned')}</h4>
+                    <div class="value">${(user.totalEarned || 0).toLocaleString()} 🍬</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t('totalSpent')}</h4>
+                    <div class="value">${(user.totalSpent || 0).toLocaleString()} 🍬</div>
+                </div>
+                <div class="stat-card">
+                    <h4>${t('daysActive')}</h4>
+                    <div class="value">${user.daysActive || 1}</div>
+                </div>
+            </div>
+            
+            <div class="shop-grid">
+                <div class="shop-card">
+                    <h3>💸 ${t('transfer')}</h3>
+                    <select id="transferToUser">
+                        <option value="">${t('to')}</option>
+                        ${Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('')}
+                    </select>
+                    <input type="number" id="transferAmount" placeholder="${t('amount')}" min="1">
+                    <textarea id="transferComment" placeholder="${t('comment')}" rows="2"></textarea>
+                    <button onclick="transferCandies()">${t('send')}</button>
+                </div>
+                
+                <div class="shop-card">
+                    <h3>🎨 ${t('shop')}</h3>
+                    <p style="font-size: 18px; margin: 15px 0;">Скин 'Новичок'</p>
+                    <p style="font-size: 24px; color: gold; margin: 15px 0;">💰 500 🍬</p>
+                    <button class="success" onclick="buySkin()">${t('buySkin')}</button>
+                </div>
+                
+                <div class="shop-card">
+                    <h3>📋 ${t('tasks')}</h3>
+                    <div style="margin: 15px 0;">
+                        <p style="font-size: 16px;">⏱️ ${t('playHours')}</p>
+                        <p style="color: gold; font-size: 18px;">🎁 ${t('reward')}: 50 🍬</p>
+                        <button onclick="completeTask('play1')" ${user.completedTasks?.play1 ? 'disabled style="opacity: 0.5;"' : ''}>
+                            ${user.completedTasks?.play1 ? '✅ ' + t('alreadyDone') : t('complete')}
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="shop-card">
+                    <h3>🎟️ ${t('promo')}</h3>
+                    <input type="text" id="promoCode" placeholder="SWEET100">
+                    <button onclick="applyPromoCode()">${t('activate')}</button>
+                </div>
+            </div>
+            
+            <button class="logout-btn" onclick="logoutUser()">🚪 ${t('logout')}</button>
+        `;
+        
+        candyShopContent.innerHTML = html;
+        
+        setTimeout(() => {
+            drawGraph(history, 'candyGraph', 'graphTooltip');
+        }, 100);
+    }
 
-    // ========== АДМИН-ПАНЕЛЬ ==========
+    // ========== РЕНДЕР АДМИН-ПАНЕЛИ ==========
     function renderAdminPanel() {
-        let filtered = Object.entries(usersDB).filter(([n]) => n.toLowerCase().includes(userFilter.toLowerCase()));
-        if (userSort === 'name') filtered.sort((a, b) => a[0].localeCompare(b[0]));
-        else if (userSort === 'candies') filtered.sort((a, b) => b[1].candies - a[1].candies);
+        // Загружаем актуальные данные
+        usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
+        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+        
+        let filtered = Object.entries(usersDB).filter(([n]) => 
+            n.toLowerCase().includes(userFilter.toLowerCase())
+        );
+        
+        if (userSort === 'name') {
+            filtered.sort((a, b) => a[0].localeCompare(b[0]));
+        } else if (userSort === 'candies') {
+            filtered.sort((a, b) => b[1].candies - a[1].candies);
+        }
 
         let userListHtml = '<div class="user-list">';
-        for (let [n, d] of filtered) {
-            let avgCandies = d.history.length > 1 ? ((d.history[d.history.length - 1] - d.history[0]) / d.history.length).toFixed(1) : 0;
-            let lastLogin = d.lastLogin ? new Date(d.lastLogin).toLocaleString() : 'никогда';
-            let regDate = d.regDate ? new Date(d.regDate).toLocaleString() : 'неизвестно';
-            let roleDisplay = d.role === 'admin' ? '👑 Админ' : (d.role === 'moderator' ? '🛡️ Модератор' : (d.role === 'helper' ? '🤝 Хелпер' : '👤 Игрок'));
+        
+        for (let [name, data] of filtered) {
+            let avgCandies = data.history.length > 1 
+                ? ((data.history[data.history.length - 1] - data.history[0]) / data.history.length).toFixed(1) 
+                : 0;
+            let lastLogin = data.lastLogin ? new Date(data.lastLogin).toLocaleString() : 'никогда';
+            let regDate = data.regDate ? new Date(data.regDate).toLocaleString() : 'неизвестно';
+            let roleDisplay = data.role === 'admin' ? '👑 Админ' : 
+                             (data.role === 'moderator' ? '🛡️ Модератор' : 
+                             (data.role === 'helper' ? '🤝 Хелпер' : '👤 Игрок'));
             
-            userListHtml += `<div class="user-item">
-                <div class="user-info">
-                    <div class="user-name">
-                        ${n} 
-                        <span class="user-role-badge">${roleDisplay}</span>
-                        ${d.role === 'admin' ? '<span style="color:gold;">👑</span>' : ''}
+            userListHtml += `
+                <div class="user-item">
+                    <div class="user-info">
+                        <div class="user-name">
+                            ${name}
+                            <span class="user-role-badge">${roleDisplay}</span>
+                        </div>
+                        <div class="user-ip">Email: ${data.email || 'не указан'} | IP: ${data.ip || 'не указан'}</div>
+                        <div class="user-candies">🍬 ${data.candies.toLocaleString()}</div>
+                        <div class="user-history">📈 Изменение: ${avgCandies} в час</div>
+                        <div class="user-history">📅 Регистрация: ${regDate}</div>
+                        <div class="user-history">🔑 Последний вход: ${lastLogin}</div>
+                        <div class="user-history">💰 Заработано: ${(data.totalEarned || 0).toLocaleString()} | Потрачено: ${(data.totalSpent || 0).toLocaleString()}</div>
                     </div>
-                    <div class="user-ip">Email: ${d.email || 'не указан'} | IP: ${d.ip || 'не указан'}</div>
-                    <div class="user-candies">🍬 ${d.candies}</div>
-                    <div class="user-history">📈 Изменение: ${avgCandies} в час</div>
-                    <div class="user-history">📅 Регистрация: ${regDate}</div>
-                    <div class="user-history">🔑 Последний вход: ${lastLogin}</div>
-                    <div class="user-history">💰 Заработано: ${d.totalEarned || 0} | Потрачено: ${d.totalSpent || 0}</div>
+                    <div class="user-actions">
+                        <button onclick="adjustCandies('${name}', 100)">+100 🍬</button>
+                        <button onclick="adjustCandies('${name}', -100)">-100 🍬</button>
+                        <input type="number" id="set-${name}" placeholder="Уст" min="0">
+                        <button onclick="setCandies('${name}')">${t('setCandies')}</button>
+                        ${name !== 'Gyraffic' ? `<button onclick="deleteUser('${name}')">${t('delete')}</button>` : ''}
+                    </div>
                 </div>
-                <div class="user-actions">
-                    <button onclick="adjustCandies('${n}', 100)">+100🍬</button>
-                    <button onclick="adjustCandies('${n}', -100)">-100🍬</button>
-                    <input type="number" id="set-${n}" placeholder="Уст" style="width:60px">
-                    <button onclick="setCandies('${n}')">Уст🍬</button>
-                    <button onclick="resetPassword('${n}')">🔑</button>
-                    ${n !== 'Gyraffic' ? `<button onclick="deleteUser('${n}')">🗑️</button>` : ''}
-                </div>
-                ${n !== 'Gyraffic' ? `
-                <div class="role-selector">
-                    <select id="role-${n}" onchange="changeUserRole('${n}', this.value)">
-                        <option value="user" ${d.role === 'user' ? 'selected' : ''}>Игрок</option>
-                        <option value="helper" ${d.role === 'helper' ? 'selected' : ''}>Хелпер</option>
-                        <option value="moderator" ${d.role === 'moderator' ? 'selected' : ''}>Модератор</option>
-                    </select>
-                </div>
-                ` : ''}
-            </div>`;
+            `;
         }
         userListHtml += '</div>';
+
+        let promoList = Object.entries(promoCodes).map(([code, data]) => {
+            let usesText = data.uses === Infinity ? '∞' : data.uses;
+            return `
+                <div class="promo-item">
+                    <input type="text" value="${code}" readonly style="flex: 2;">
+                    <span style="flex: 1; color: gold;">${data.reward.toLocaleString()} 🍬</span>
+                    <span style="flex: 1;">Исп.: ${usesText}</span>
+                    <button onclick="deletePromoCode('${code}')" style="background: var(--danger);">❌</button>
+                </div>
+            `;
+        }).join('');
 
         candyShopContent.innerHTML = `
             <div class="language-selector">
                 <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
             </div>
-            <h2 class="candy-shop-title" style="color:#ff4444;">🔧 ADMIN PANEL</h2>
-            <div class="admin-panel active">
+            
+            <h2 class="candy-shop-title" style="color: #ff4444;">${t('adminPanel')}</h2>
+            
+            <div class="admin-panel">
                 <div class="admin-controls">
-                    <input type="text" placeholder="Поиск пользователя" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
+                    <input type="text" placeholder="${t('searchUser')}" id="searchUser" 
+                           value="${userFilter}" oninput="userFilter=this.value; renderAdminPanel();">
                     <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();">
-                        <option value="name" ${userSort === 'name' ? 'selected' : ''}>По имени</option>
-                        <option value="candies" ${userSort === 'candies' ? 'selected' : ''}>По конфетам</option>
+                        <option value="name" ${userSort === 'name' ? 'selected' : ''}>${t('sortByName')}</option>
+                        <option value="candies" ${userSort === 'candies' ? 'selected' : ''}>${t('sortByCandies')}</option>
                     </select>
                 </div>
+                
                 ${userListHtml}
-                <button class="back-to-shop" onclick="toggleAdminMode(false)">← Назад в магазин</button>
+                
+                <div class="promo-section">
+                    <h3 style="color: var(--accent); font-size: 24px; margin-bottom: 20px;">${t('managePromoCodes')}</h3>
+                    
+                    <div class="promo-item">
+                        <input type="text" id="newPromoCode" placeholder="${t('newPromoCode')}">
+                        <input type="number" id="newPromoReward" placeholder="${t('reward')}" value="100" min="1">
+                        <input type="number" id="newPromoUses" placeholder="${t('uses')}" value="0" min="0">
+                        <button onclick="addPromoCode()" style="background: var(--success);">${t('add')}</button>
+                    </div>
+                    
+                    <h4 style="color: var(--text); margin: 30px 0 15px;">${t('existingPromoCodes')}</h4>
+                    ${promoList || `<p style="color: var(--text-secondary);">${t('noPromoCodes')}</p>`}
+                </div>
+                
+                <button class="back-to-shop" onclick="toggleAdminMode(false)">${t('backToShop')}</button>
             </div>
         `;
     }
 
     // ========== ФУНКЦИИ АДМИНА ==========
     window.adjustCandies = function(username, delta) {
-        if (!usersDB[username]) return;
-        if (!hasPermission('edit_balance')) return showNotification('Нет прав', 'error');
-        
-        usersDB[username].candies += delta;
-        if (usersDB[username].candies < 0) usersDB[username].candies = 0;
-        usersDB[username].history.shift(); 
+        usersDB[username].candies = Math.max(0, usersDB[username].candies + delta);
+        usersDB[username].history.shift();
         usersDB[username].history.push(usersDB[username].candies);
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         renderAdminPanel();
+        showNotification(t('candiesChanged'), 'success');
     };
     
     window.setCandies = function(username) {
-        if (!hasPermission('edit_balance')) return showNotification('Нет прав', 'error');
         let inp = document.getElementById(`set-${username}`);
         let val = parseInt(inp.value);
-        if (isNaN(val) || val < 0) return showNotification('Введите число', 'error');
+        if (isNaN(val) || val < 0) {
+            showNotification(t('enterValidNumber'), 'error');
+            return;
+        }
         usersDB[username].candies = val;
         usersDB[username].history = Array(48).fill(val);
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         renderAdminPanel();
-    };
-    
-    window.resetPassword = function(username) {
-        if (!hasPermission('manage_users')) return showNotification('Нет прав', 'error');
-        let newPass = prompt('Новый пароль для ' + username);
-        if (!newPass || newPass.length < 4) return showNotification('Пароль минимум 4 символа', 'error');
-        usersDB[username].password = newPass;
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification('Пароль изменён', 'success');
+        showNotification(t('candiesSet'), 'success');
     };
     
     window.deleteUser = function(username) {
-        if (!hasPermission('delete_user')) return showNotification('Нет прав', 'error');
-        if (username === 'Gyraffic') return showNotification('Нельзя удалить Gyraffic', 'error');
-        if (!confirm(`Удалить пользователя ${username}?`)) return;
+        if (username === 'Gyraffic') {
+            showNotification(t('cannotDeleteGyraffic'), 'error');
+            return;
+        }
+        if (!confirm(t('confirmDelete', { username }))) return;
+        
         delete usersDB[username];
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        if (currentUser === username) { 
-            currentUser = null; 
-            localStorage.removeItem('sweetland_current_user'); 
+        
+        if (currentUser === username) {
+            currentUser = null;
+            localStorage.removeItem('sweetland_current_user');
         }
+        
         renderAdminPanel();
-        showNotification(`Пользователь ${username} удален`, 'info');
+        showNotification(t('userDeleted', { username }), 'success');
     };
     
-    window.changeUserRole = function(username, role) {
-        if (!hasPermission('manage_roles')) return showNotification('Нет прав', 'error');
-        usersDB[username].role = role;
-        if (role === 'moderator') {
-            usersDB[username].permissions = ['edit_balance', 'view_logs'];
-        } else if (role === 'helper') {
-            usersDB[username].permissions = ['view_logs'];
-        } else {
-            usersDB[username].permissions = [];
+    window.addPromoCode = function() {
+        let code = document.getElementById('newPromoCode')?.value.trim().toUpperCase();
+        let reward = parseInt(document.getElementById('newPromoReward')?.value);
+        let uses = parseInt(document.getElementById('newPromoUses')?.value);
+        
+        if (!code) {
+            showNotification(t('enterCode'), 'error');
+            return;
         }
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        
+        if (isNaN(reward) || reward <= 0) {
+            showNotification(t('enterValidReward'), 'error');
+            return;
+        }
+        
+        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+        
+        if (promoCodes[code]) {
+            showNotification(t('codeExists'), 'error');
+            return;
+        }
+        
+        let usesVal = uses === 0 ? Infinity : uses;
+        promoCodes[code] = { reward, uses: usesVal, createdBy: currentUser || 'admin' };
+        
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
         renderAdminPanel();
-        showNotification(`Роль ${username} изменена на ${role}`, 'success');
+        showNotification(t('codeAdded', { code }), 'success');
     };
     
-    function hasPermission(permission) {
-        if (!currentUser) return false;
-        let user = usersDB[currentUser];
-        if (!user) return false;
-        if (currentUser === 'Gyraffic' || user.role === 'admin') return true;
-        return user.permissions && user.permissions.includes(permission);
-    }
+    window.deletePromoCode = function(code) {
+        if (!confirm(t('confirmDeleteCode', { code }))) return;
+        
+        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+        delete promoCodes[code];
+        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        renderAdminPanel();
+        showNotification(t('codeDeleted'), 'success');
+    };
+    
+    window.toggleAdminMode = function(enable) {
+        adminMode = enable;
+        localStorage.setItem('sweetland_admin_mode', enable ? 'true' : 'false');
+        renderCandyShop();
+    };
 
     // ========== ИНИЦИАЛИЗАЦИЯ ==========
     window.addEventListener('load', async () => {
         await fetchUserIP();
+        
+        // Загружаем данные
+        usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
+        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+        dailyBonusTimers = JSON.parse(localStorage.getItem('sweetland_daily_bonus')) || {};
+        currentUser = localStorage.getItem('sweetland_current_user') || null;
+        adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
+        graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
+        
+        // Убеждаемся что Gyraffic существует
+        if (!usersDB['Gyraffic']) {
+            usersDB['Gyraffic'] = {
+                password: '75813000gyraff',
+                email: 'gyraffic@gmail.com',
+                ip: null,
+                candies: 10000,
+                history: Array(48).fill(10000),
+                regDate: Date.now(),
+                lastLogin: null,
+                role: 'admin',
+                permissions: ['all'],
+                totalEarned: 10000,
+                totalSpent: 0,
+                daysActive: 1,
+                lastDaily: null,
+                completedTasks: {}
+            };
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        }
         
         if (currentTheme === 'light') {
             document.body.classList.add('light');

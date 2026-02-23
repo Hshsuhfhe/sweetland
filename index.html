@@ -77,12 +77,12 @@
         body { background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.3s, color 0.2s; line-height: 1.5; width: 100%; position: relative; }
         a, button { cursor: pointer; }
 
-        /* ========== УВЕДОМЛЕНИЯ ========== */
+        /* ========== УВЕДОМЛЕНИЯ И МОДАЛКИ ========== */
         .notification-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 99998;
         }
-        .custom-notification {
+        .custom-notification, .custom-confirm {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: var(--bg-secondary); border: 3px solid var(--accent); border-radius: 30px;
             padding: 30px 50px; z-index: 99999; box-shadow: 0 0 50px var(--accent);
@@ -91,12 +91,13 @@
         .custom-notification.success { border-color: var(--success); box-shadow: 0 0 50px var(--success); }
         .custom-notification.error { border-color: var(--danger); box-shadow: 0 0 50px var(--danger); }
         .custom-notification.warning { border-color: var(--warning); box-shadow: 0 0 50px var(--warning); }
-        .custom-notification p { font-size: 20px; margin-bottom: 20px; color: var(--text); }
-        .custom-notification button {
+        .custom-notification p, .custom-confirm p { font-size: 20px; margin-bottom: 20px; color: var(--text); }
+        .custom-notification button, .custom-confirm button {
             background: var(--accent); color: white; border: none; padding: 10px 30px;
-            border-radius: 30px; font-size: 16px; cursor: pointer; transition: 0.2s;
+            border-radius: 30px; font-size: 16px; cursor: pointer; transition: 0.2s; margin: 0 10px;
         }
-        .custom-notification button:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .custom-notification button:hover, .custom-confirm button:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .custom-confirm .cancel { background: var(--danger); }
         @keyframes notificationPop {
             0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
@@ -119,9 +120,10 @@
             animation: rainfall linear infinite;
         }
         .candy-particle {
-            position: absolute; width: 16px; height: 16px; border-radius: 50%; opacity: 0;
-            filter: blur(1px); box-shadow: 0 0 15px currentColor; animation: candyfall linear infinite;
+            position: absolute; width: 20px; height: 20px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0; filter: blur(1px); box-shadow: 0 0 15px currentColor; animation: candyfall linear infinite;
             background: radial-gradient(circle at 30% 30%, #fff, currentColor);
+            transform: rotate(45deg);
         }
         @keyframes snowfall {
             0% { transform: translateY(-10vh) translateX(0); opacity: 0.9; }
@@ -480,7 +482,7 @@
         .graph-container {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 400px;
             background: rgba(0,0,0,0.2);
             border-radius: 20px;
             margin: 20px 0;
@@ -1107,8 +1109,8 @@
 
     if (Object.keys(promoCodes).length === 0) {
         promoCodes = {
-            'SWEET100': { reward: 100, uses: Infinity, createdBy: 'system' },
-            'WELCOME': { reward: 50, uses: Infinity, createdBy: 'system' }
+            'SWEET100': { type: 'candy', reward: 100, uses: Infinity, createdBy: 'system' },
+            'WELCOME': { type: 'candy', reward: 50, uses: Infinity, createdBy: 'system' }
         };
         localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
     }
@@ -1232,10 +1234,6 @@
             amount: 'Количество',
             comment: 'Комментарий',
             send: 'ПЕРЕВЕСТИ',
-            shop: '🎨 МАГАЗИН СКИНОВ',
-            buySkin: 'КУПИТЬ СКИН ЗА 500 🍬',
-            skinPurchased: 'Скин куплен!',
-            notEnough: 'Недостаточно конфет',
             tasks: '📋 ЗАДАНИЯ',
             playHours: 'Играть 1 час',
             reward: 'Награда',
@@ -1325,12 +1323,225 @@
             availableCodes: 'Доступные коды:',
             codeUsed: 'Код уже использован',
             codeValid: 'Код действителен',
-            generateCode: '➕ Сгенерировать новый код',
+            generateCode: '➕ Сгенерировать новый код модератора',
             codeGenerated: '✅ Новый код: {code}',
-            codeNotFound: '❌ Код не найден'
+            codeNotFound: '❌ Код не найден',
+            confirmAction: 'Подтвердите действие',
+            yes: 'Да',
+            no: 'Нет'
         },
         en: {
-            // ... аналогично, можно не дублировать для краткости, но в реальном коде должно быть
+            serverName: 'SweetLand',
+            online: 'online',
+            copyNotice: 'IP copied',
+            backToMain: '← Back to main',
+            navFeatures: 'Features',
+            navHowToPlay: 'How to start',
+            navFAQ: 'FAQ',
+            shopLink: '🛒 Shop',
+            discordLink: '💬 Discord',
+            panelLogo: 'SWEETLAND',
+            panelHome: '🏠 Home',
+            panelFeatures: '✨ Features',
+            panelStreamers: '🎥 Streamers',
+            panelTopPlayers: '🏆 Top Players',
+            panelFAQ: '❓ FAQ',
+            panelRules: '📜 Rules',
+            panelCandyShop: '🍬 Candy Shop',
+            gyrafficYoutube: 'Gyraffic YouTube',
+            telegram: 'Telegram',
+            discord: 'Discord',
+            babkaYoutube: 'Babka3434 YouTube',
+            heroTagline: 'Vanilla survival on version 1.21.8. Your world — your rules.',
+            statsTitle: 'Server Statistics',
+            statsUptime: 'Uptime',
+            statsVersion: 'Current version',
+            statsVanilla: 'Vanilla gameplay',
+            statsDonate: 'Donate',
+            featuresTitle: 'Server Features',
+            feature1Title: 'Anti-cheat system',
+            feature1Desc: 'Advanced protection against cheaters. Fair game for everyone.',
+            feature2Title: 'Stable TPS',
+            feature2Desc: 'Optimized server on powerful hardware. No lag.',
+            feature3Title: 'Regular events',
+            feature3Desc: 'Weekly events and contests with prizes.',
+            feature4Title: 'Pure vanilla world',
+            feature4Desc: 'No plugins, just pure Minecraft as intended.',
+            feature5Title: 'Build protection',
+            feature5Desc: 'Your builds are protected from griefers.',
+            feature6Title: 'Friendly community',
+            feature6Desc: 'First players are already here. Join us.',
+            streamersTitle: 'Streamers on the server',
+            babkaDesc: 'Popular streamer, will play on the server. Watch streams!',
+            babkaLink: 'Babka3434 YouTube',
+            gyrafficDesc: 'Server owner and streamer. Plays with you.',
+            gyrafficLink: 'Gyraffic YouTube',
+            moreStreamers: 'More coming soon',
+            moreStreamersDesc: 'Streamer list will be updated. Follow news in Discord.',
+            subscribe: 'subscribe',
+            soon: 'soon',
+            announcements: 'announcements',
+            news: 'news',
+            topPlayersTitle: 'Top Players',
+            owner: 'Server owner',
+            streamer: 'Streamer',
+            admin: 'Senior admin',
+            hours: '{value} hours',
+            updateDate: 'Data updated February 17, 2026',
+            howToPlayTitle: 'How to start playing',
+            how1Title: 'Version 1.21.8',
+            how1Desc: 'Make sure you have the latest version of Minecraft.',
+            how2Title: 'Apply in Discord',
+            how2Desc: 'Fill out the form and read the server rules.',
+            how3Title: 'Wait for approval',
+            how3Desc: 'After approval add server play.sweet-land.fun to your list.',
+            how4Title: 'Join and play',
+            how4Desc: 'Choose a place for your base, build and explore.',
+            faqTitle: 'FAQ',
+            faq1Title: 'When does it start?',
+            faq1Desc: 'Server is preparing for launch. Follow news in Discord.',
+            faq2Title: 'What version?',
+            faq2Desc: 'Server will run on latest version 1.21.8.',
+            faq3Title: 'Where to chat?',
+            faq3Desc: 'Main communication in Discord. News and events there too.',
+            faq4Title: 'White theme?',
+            faq4Desc: 'Yes, click the moon in the right corner.',
+            faq5Title: 'Account security?',
+            faq5Desc: 'Anti-cheat system and player data encryption.',
+            faq6Title: 'Donate?',
+            faq6Desc: 'No, this is a completely vanilla server. No privileges.',
+            faq7Title: 'Online count?',
+            faq7Desc: 'Server opening soon. Be the first.',
+            faq8Title: 'Wipes?',
+            faq8Desc: 'Wipes planned every 8-11 months. Builds last long.',
+            footerAbout: 'SweetLand',
+            footerDesc: 'Vanilla survival without borders with friendly community and active administration.',
+            footerNote: 'No donate — only pure vanilla gameplay',
+            footerLinks: 'Quick links',
+            footerHome: 'Home',
+            footerFeatures: 'Features',
+            footerHowToPlay: 'How to start',
+            footerStreamers: 'Streamers',
+            footerTopPlayers: 'Top players',
+            footerFAQ: 'FAQ',
+            footerRules: 'Rules',
+            footerCandyShop: '🍬 Candy Shop',
+            footerSocial: 'Social',
+            footerPrivacy: 'Data protection',
+            footerPrivacyDesc: 'All data is protected and not shared with third parties. Server meets security standards.',
+            footerCopyright: '© 2026 SweetLand. Vanilla Minecraft server.',
+            footerPrivacyNote: 'Your data is protected. By using the server, you agree to the privacy policy.',
+            shopTitle: '🍬 CANDY SHOP',
+            candies: 'Candies',
+            level: 'Level',
+            dailyBonus: '🎁 DAILY BONUS',
+            getBonus: 'GET 100 🍬',
+            bonusReceived: 'Bonus received!',
+            alreadyGot: 'Bonus already claimed today',
+            stats: '📊 STATISTICS',
+            totalEarned: 'Total earned',
+            totalSpent: 'Total spent',
+            daysActive: 'Days active',
+            transfer: '💸 TRANSFER CANDIES',
+            to: 'To',
+            amount: 'Amount',
+            comment: 'Comment',
+            send: 'SEND',
+            tasks: '📋 TASKS',
+            playHours: 'Play for 1 hour',
+            reward: 'Reward',
+            complete: 'COMPLETE',
+            alreadyDone: 'Already done',
+            promo: '🎟️ PROMO CODE',
+            activate: 'ACTIVATE',
+            logout: '🚪 LOGOUT',
+            login: 'LOGIN',
+            register: 'REGISTER',
+            noAccount: 'No account?',
+            haveAccount: 'Already have an account?',
+            username: 'Username',
+            password: 'Password',
+            email: 'Email',
+            sendCode: 'SEND CODE',
+            confirmCode: 'Code from email',
+            confirm: 'CONFIRM',
+            invalidCode: 'Invalid code',
+            userExists: 'User already exists',
+            registered: 'Registration successful!',
+            loggedIn: 'Login successful!',
+            wrongPassword: 'Wrong password',
+            userNotFound: 'User not found',
+            fillFields: 'Fill all fields',
+            graphZoom: '📈 GRAPH ZOOM',
+            small: 'SMALL',
+            medium: 'MEDIUM',
+            large: 'LARGE',
+            confirmTransfer: 'Transfer {amount} 🍬 to {to}?',
+            adminPanel: '🔧 ADMIN PANEL',
+            moderatorPanel: '🛡️ MODERATOR PANEL',
+            searchUser: '🔍 Search user',
+            sortByName: 'By name',
+            sortByCandies: 'By candies',
+            managePromoCodes: '🎫 MANAGE PROMO CODES',
+            newPromoCode: 'NEW PROMO CODE',
+            reward: 'REWARD',
+            uses: 'USES (0=∞)',
+            add: '➕ ADD',
+            existingPromoCodes: 'Existing promo codes:',
+            noPromoCodes: 'No promo codes yet',
+            backToShop: '← BACK TO SHOP',
+            adjustCandies: 'Adjust',
+            setCandies: 'Set',
+            delete: '🗑️ Delete',
+            ban: '🔨 Ban',
+            unban: '✅ Unban',
+            banIP: '📌 Ban IP',
+            mute: '🔇 Mute',
+            unmute: '🔊 Unmute',
+            warn: '⚠️ Warn',
+            kick: '👢 Kick',
+            emailNotSent: '❌ Sending error. Your code: {code}',
+            connectionError: '⚠️ Connection error. Your code: {code}',
+            loginFirst: 'Login first',
+            adminCodeOnly: 'This code is for Gyraffic only',
+            adminModeActivated: '🎮 Admin mode activated!',
+            moderatorModeActivated: '🛡️ Moderator mode activated!',
+            invalidPromoCode: '❌ Invalid promo code',
+            promoCodeExpired: '❌ Promo code expired',
+            promoCodeActivated: '✅ +{reward} 🍬!',
+            candiesChanged: '✅ Candies changed',
+            enterValidNumber: 'Enter valid number',
+            candiesSet: '✅ Candies set',
+            cannotDeleteGyraffic: '❌ Cannot delete Gyraffic',
+            confirmDelete: 'Delete user {username}?',
+            userDeleted: '✅ User {username} deleted',
+            confirmBan: 'Ban {username}?',
+            userBanned: '✅ {username} banned',
+            confirmBanIP: 'Ban IP {ip}?',
+            ipBanned: '✅ IP {ip} banned',
+            confirmMute: 'Mute {username}?',
+            userMuted: '✅ {username} muted',
+            confirmKick: 'Kick {username}?',
+            userKicked: '✅ {username} kicked',
+            confirmWarn: 'Warn {username}?',
+            userWarned: '✅ Warn issued',
+            enterCode: 'Enter code',
+            enterValidReward: 'Enter valid reward',
+            codeExists: 'Code already exists',
+            codeAdded: '✅ Promo code {code} added',
+            confirmDeleteCode: 'Delete promo code {code}?',
+            codeDeleted: '✅ Promo code deleted',
+            goodbye: '👋 Goodbye!',
+            moderCodes: '🔑 MODERATOR CODES',
+            availableCodes: 'Available codes:',
+            codeUsed: 'Code already used',
+            codeValid: 'Code is valid',
+            generateCode: '➕ Generate new moderator code',
+            codeGenerated: '✅ New code: {code}',
+            codeNotFound: '❌ Code not found',
+            confirmAction: 'Confirm action',
+            yes: 'Yes',
+            no: 'No'
         }
     };
 
@@ -1342,7 +1553,7 @@
         return text;
     }
 
-    // ========== ГЛОБАЛЬНЫЕ ФУНКЦИИ (ВСЁ, ЧТО НУЖНО ИЗ onclick) ==========
+    // ========== ГЛОБАЛЬНЫЕ ФУНКЦИИ ==========
     window.toggleTheme = function() { setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); };
     window.toggleColorMenu = function() { document.getElementById('colorMenu').classList.toggle('active'); if (!document.getElementById('colorMenu').children.length) generateColorMenu(); };
     window.toggleLangMenu = function() { document.getElementById('langMenu').classList.toggle('active'); if (!document.getElementById('langMenu').children.length) generateLangMenu(); };
@@ -1361,9 +1572,8 @@
     window.closeCandyShop = closeCandyShop;
     window.showMainContent = showMainContent;
     window.claimDailyBonus = claimDailyBonus;
-    window.buySkin = buySkin;
-    window.completeTask = completeTask;
     window.transferCandies = transferCandies;
+    window.completeTask = completeTask;
     window.applyPromoCode = applyPromoCode;
     window.sendEmailCode = sendEmailCode;
     window.registerUser = registerUser;
@@ -1382,9 +1592,39 @@
     window.deletePromoCode = deletePromoCode;
     window.generateNewModerCode = generateNewModerCode;
     window.deleteModerCode = deleteModerCode;
-    window.renderCandyShop = renderCandyShop; // важно для кнопок масштаба
+    window.renderCandyShop = renderCandyShop;
 
-    // ========== РЕАЛИЗАЦИИ ФУНКЦИЙ ==========
+    // ========== КАСТОМНЫЙ CONFIRM ==========
+    function showConfirm(message, onConfirm, onCancel) {
+        let overlay = document.createElement('div');
+        overlay.className = 'notification-overlay';
+
+        let modal = document.createElement('div');
+        modal.className = 'custom-confirm';
+        modal.innerHTML = `
+            <p>${message}</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="confirm">${t('yes')}</button>
+                <button class="cancel">${t('no')}</button>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(modal);
+
+        modal.querySelector('.confirm').onclick = () => {
+            overlay.remove();
+            modal.remove();
+            if (onConfirm) onConfirm();
+        };
+        modal.querySelector('.cancel').onclick = () => {
+            overlay.remove();
+            modal.remove();
+            if (onCancel) onCancel();
+        };
+    }
+
+    // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
     function setAccentColor(color) {
         const body = document.body;
         body.className = '';
@@ -1841,25 +2081,6 @@
         renderCandyShop();
     }
 
-    function buySkin() {
-        if (!currentUser) return;
-        if (usersDB[currentUser].candies < 500) {
-            showNotification(t('notEnough'), 'error');
-            return;
-        }
-
-        if (!confirm('Купить скин за 500 🍬?')) return;
-
-        usersDB[currentUser].candies -= 500;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + 500;
-
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(t('skinPurchased'), 'success');
-        renderCandyShop();
-    }
-
     function completeTask(taskId) {
         if (!currentUser) return;
         if (usersDB[currentUser].completedTasks?.[taskId]) {
@@ -1901,26 +2122,27 @@
             return;
         }
 
-        if (!confirm(t('confirmTransfer', { amount: amount.toLocaleString(), to }))) return;
+        showConfirm(t('confirmTransfer', { amount: amount.toLocaleString(), to }), () => {
+            usersDB[currentUser].candies -= amount;
+            usersDB[to].candies += amount;
+            usersDB[currentUser].history.shift();
+            usersDB[currentUser].history.push(usersDB[currentUser].candies);
+            usersDB[to].history.shift();
+            usersDB[to].history.push(usersDB[to].candies);
+            usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
+            usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
 
-        usersDB[currentUser].candies -= amount;
-        usersDB[to].candies += amount;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[to].history.shift();
-        usersDB[to].history.push(usersDB[to].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
-        usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
-
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(`✅ ${t('send')} ${amount.toLocaleString()} 🍬 → ${to}`, 'success');
-        renderCandyShop();
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            showNotification(`✅ ${t('send')} ${amount.toLocaleString()} 🍬 → ${to}`, 'success');
+            renderCandyShop();
+        });
     }
 
     function applyPromoCode() {
         let code = document.getElementById('promoCode')?.value.trim().toUpperCase();
         if (!code) return;
 
+        // Админ-код
         if (code === 'ADMIN-GYRAFFIC-2026') {
             if (!currentUser) {
                 showNotification(t('loginFirst'), 'error');
@@ -1940,6 +2162,7 @@
             return;
         }
 
+        // Код модератора (одноразовый)
         if (code.startsWith('MODER-')) {
             if (!currentUser) {
                 showNotification(t('loginFirst'), 'error');
@@ -1965,6 +2188,7 @@
             }
         }
 
+        // Обычный промокод (на конфеты)
         if (!currentUser) {
             showNotification(t('loginFirst'), 'error');
             return;
@@ -1974,6 +2198,11 @@
 
         let promo = promoCodes[code];
         if (!promo) {
+            showNotification(t('invalidPromoCode'), 'error');
+            return;
+        }
+
+        if (promo.type !== 'candy') {
             showNotification(t('invalidPromoCode'), 'error');
             return;
         }
@@ -2256,7 +2485,7 @@
         let today = new Date().toDateString();
         let canClaimDaily = dailyBonusTimers[currentUser] !== today;
 
-        let graphHeight = graphZoom === 'small' ? 400 : (graphZoom === 'large' ? 700 : 550);
+        let graphHeight = graphZoom === 'small' ? 300 : (graphZoom === 'large' ? 500 : 400);
 
         let html = `
             <div class="language-selector">
@@ -2317,13 +2546,6 @@
                     <input type="number" id="transferAmount" placeholder="${t('amount')}" min="1">
                     <textarea id="transferComment" placeholder="${t('comment')}" rows="2"></textarea>
                     <button onclick="transferCandies()">${t('send')}</button>
-                </div>
-
-                <div class="shop-card">
-                    <h3>🎨 ${t('shop')}</h3>
-                    <p style="font-size: 18px; margin: 15px 0;">Скин 'Новичок'</p>
-                    <p style="font-size: 24px; color: gold; margin: 15px 0;">💰 500 🍬</p>
-                    <button class="success" onclick="buySkin()">${t('buySkin')}</button>
                 </div>
 
                 <div class="shop-card">
@@ -2406,10 +2628,11 @@
 
         let promoList = Object.entries(promoCodes).map(([code, data]) => {
             let usesText = data.uses === Infinity ? '∞' : data.uses;
+            let typeText = data.type === 'candy' ? '🍬' : '🔑';
             return `
                 <div class="promo-item">
                     <input type="text" value="${code}" readonly style="flex: 2;">
-                    <span style="flex: 1; color: gold;">${data.reward.toLocaleString()} 🍬</span>
+                    <span style="flex: 1; color: gold;">${typeText} ${data.reward ? data.reward.toLocaleString() : ''}</span>
                     <span style="flex: 1;">${t('uses')}: ${usesText}</span>
                     <button onclick="deletePromoCode('${code}')" style="background: var(--danger);">❌</button>
                 </div>
@@ -2452,7 +2675,11 @@
                     <h3 style="color: var(--accent); font-size: 24px; margin-bottom: 20px;">${t('managePromoCodes')}</h3>
 
                     <div class="promo-item">
-                        <input type="text" id="newPromoCode" placeholder="${t('newPromoCode')}">
+                        <select id="newPromoType">
+                            <option value="candy">🍬 Конфетный</option>
+                            <option value="moderator">🛡️ Модераторский (одноразовый)</option>
+                        </select>
+                        <input type="text" id="newPromoCode" placeholder="${t('newPromoCode')} (оставьте пустым для генерации)">
                         <input type="number" id="newPromoReward" placeholder="${t('reward')}" value="100" min="1">
                         <input type="number" id="newPromoUses" placeholder="${t('uses')}" value="0" min="0">
                         <button onclick="addPromoCode()" style="background: var(--success);">${t('add')}</button>
@@ -2466,7 +2693,7 @@
                     <h3 style="color: #ffaa00; font-size: 24px; margin-bottom: 20px;">${t('moderCodes')}</h3>
 
                     <div class="promo-item">
-                        <button onclick="generateNewModerCode()" style="background: var(--success);">➕ Сгенерировать новый код</button>
+                        <button onclick="generateNewModerCode()" style="background: var(--success);">➕ ${t('generateCode')}</button>
                     </div>
 
                     <h4 style="color: var(--text); margin: 30px 0 15px;">${t('availableCodes')}</h4>
@@ -2566,59 +2793,71 @@
             showNotification(t('cannotDeleteGyraffic'), 'error');
             return;
         }
-        if (!confirm(t('confirmDelete', { username }))) return;
+        showConfirm(t('confirmDelete', { username }), () => {
+            delete usersDB[username];
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 
-        delete usersDB[username];
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            if (currentUser === username) {
+                currentUser = null;
+                localStorage.removeItem('sweetland_current_user');
+            }
 
-        if (currentUser === username) {
-            currentUser = null;
-            localStorage.removeItem('sweetland_current_user');
-        }
-
-        renderAdminPanel();
-        showNotification(t('userDeleted', { username }), 'success');
+            renderAdminPanel();
+            showNotification(t('userDeleted', { username }), 'success');
+        });
     }
 
     function banUser(username) {
-        if (!confirm(t('confirmBan', { username }))) return;
-        showNotification(t('userBanned', { username }), 'success');
+        showConfirm(t('confirmBan', { username }), () => {
+            showNotification(t('userBanned', { username }), 'success');
+        });
     }
 
     function banIP(username) {
         let ip = usersDB[username]?.ip || 'unknown';
-        if (!confirm(t('confirmBanIP', { ip }))) return;
-        showNotification(t('ipBanned', { ip }), 'success');
+        showConfirm(t('confirmBanIP', { ip }), () => {
+            showNotification(t('ipBanned', { ip }), 'success');
+        });
     }
 
     function muteUser(username) {
-        if (!confirm(t('confirmMute', { username }))) return;
-        showNotification(t('userMuted', { username }), 'success');
+        showConfirm(t('confirmMute', { username }), () => {
+            showNotification(t('userMuted', { username }), 'success');
+        });
     }
 
     function warnUser(username) {
-        if (!confirm(t('confirmWarn', { username }))) return;
-        showNotification(t('userWarned'), 'success');
+        showConfirm(t('confirmWarn', { username }), () => {
+            showNotification(t('userWarned'), 'success');
+        });
     }
 
     function kickUser(username) {
-        if (!confirm(t('confirmKick', { username }))) return;
-        showNotification(t('userKicked', { username }), 'success');
+        showConfirm(t('confirmKick', { username }), () => {
+            showNotification(t('userKicked', { username }), 'success');
+        });
     }
 
     function addPromoCode() {
-        let code = document.getElementById('newPromoCode')?.value.trim().toUpperCase();
+        let type = document.getElementById('newPromoType')?.value;
+        let codeInput = document.getElementById('newPromoCode')?.value.trim().toUpperCase();
         let reward = parseInt(document.getElementById('newPromoReward')?.value);
         let uses = parseInt(document.getElementById('newPromoUses')?.value);
 
+        let code = codeInput;
         if (!code) {
-            showNotification(t('enterCode'), 'error');
-            return;
+            if (type === 'moderator') {
+                code = 'MODER-' + Math.floor(1000 + Math.random() * 9000);
+            } else {
+                code = 'PROMO-' + Math.floor(1000 + Math.random() * 9000);
+            }
         }
 
-        if (isNaN(reward) || reward <= 0) {
-            showNotification(t('enterValidReward'), 'error');
-            return;
+        if (type === 'candy') {
+            if (isNaN(reward) || reward <= 0) {
+                showNotification(t('enterValidReward'), 'error');
+                return;
+            }
         }
 
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
@@ -2629,7 +2868,21 @@
         }
 
         let usesVal = uses === 0 ? Infinity : uses;
-        promoCodes[code] = { reward, uses: usesVal, createdBy: currentUser || 'admin' };
+
+        if (type === 'candy') {
+            promoCodes[code] = { type: 'candy', reward, uses: usesVal, createdBy: currentUser || 'admin' };
+        } else if (type === 'moderator') {
+            // Создаём одноразовый код модератора (отдельное хранилище)
+            moderatorCodes[code] = {
+                used: false,
+                usedBy: null,
+                createdAt: Date.now()
+            };
+            localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+            showNotification(t('codeAdded', { code }), 'success');
+            renderAdminPanel();
+            return;
+        }
 
         localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
         renderAdminPanel();
@@ -2637,13 +2890,13 @@
     }
 
     function deletePromoCode(code) {
-        if (!confirm(t('confirmDeleteCode', { code }))) return;
-
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        delete promoCodes[code];
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-        showNotification(t('codeDeleted'), 'success');
+        showConfirm(t('confirmDeleteCode', { code }), () => {
+            promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+            delete promoCodes[code];
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+            renderAdminPanel();
+            showNotification(t('codeDeleted'), 'success');
+        });
     }
 
     function generateNewModerCode() {
@@ -2659,11 +2912,12 @@
     }
 
     function deleteModerCode(code) {
-        if (!confirm('Удалить код?')) return;
-        delete moderatorCodes[code];
-        localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
-        renderAdminPanel();
-        showNotification('✅ Код удален', 'success');
+        showConfirm('Удалить код?', () => {
+            delete moderatorCodes[code];
+            localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+            renderAdminPanel();
+            showNotification('✅ Код удален', 'success');
+        });
     }
 
     // ========== ИНИЦИАЛИЗАЦИЯ ==========

@@ -6,6 +6,21 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ========== ЗАЩИТА ОТ ВЫДЕЛЕНИЯ/КОПИРОВАНИЯ ========== */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        input, textarea, [contenteditable] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
         /* ========== ОСНОВНЫЕ СТИЛИ ========== */
         * {
             margin: 0;
@@ -465,7 +480,7 @@
         .graph-container {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 500px;
             background: rgba(0,0,0,0.2);
             border-radius: 20px;
             margin: 20px 0;
@@ -955,7 +970,7 @@
         <a href="#top-players" onclick="togglePanel(); showMainContent();">🏆 Топ игроков</a>
         <a href="#faq" onclick="togglePanel(); showMainContent();">❓ FAQ</a>
         <a href="javascript:void(0)" onclick="togglePanel(); openRules();">📜 Правила</a>
-        <a href="javascript:void(0)" onclick="togglePanel(); openCandyShop();">🍬 Магазин конфет</a>
+        <a href="javascript:void(0)" onclick="togglePanel(); openCandyShop();">🍬 Магазин леденцов</a>
     </div>
     <div class="panel-social">
         <a href="https://www.youtube.com/@gyraffic" target="_blank" class="social-link youtube"><span>▶️</span> Gyraffic YouTube</a>
@@ -1021,10 +1036,10 @@
     </div></section>
 
     <!-- ФУТЕР -->
-    <footer class="footer"><div class="footer-content"><div class="footer-section"><h4>SweetLand</h4><p>Ванильное выживание без границ с дружным сообществом и активной администрацией.</p><p class="footer-note">Никаких донатов — только чистый ванильный геймплей</p></div><div class="footer-section"><h4>Быстрые ссылки</h4><a href="#hero" onclick="showMainContent()">Главная</a><a href="#features" onclick="showMainContent()">Особенности</a><a href="#how-to-play" onclick="showMainContent()">Как начать</a><a href="#streamers" onclick="showMainContent()">Стримеры</a><a href="#top-players" onclick="showMainContent()">Топ игроков</a><a href="#faq" onclick="showMainContent()">FAQ</a><a href="javascript:void(0)" onclick="openRules()">Правила</a><a href="javascript:void(0)" onclick="openCandyShop()">🍬 Магазин конфет</a></div><div class="footer-section"><h4>Соцсети</h4><a href="https://www.youtube.com/@gyraffic" target="_blank">Gyraffic YouTube</a><a href="https://t.me/Gyraff" target="_blank">Telegram</a><a href="https://discord.gg/bb3Kf8sDmt" target="_blank">Discord</a><a href="https://www.youtube.com/@Babka3434offical" target="_blank">Babka3434 YouTube</a></div><div class="footer-section"><h4>Защита данных</h4><p>Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p></div></div><div class="footer-bottom"><p>© 2026 SweetLand. Ванильный Minecraft сервер.</p><p class="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p></div></footer>
+    <footer class="footer"><div class="footer-content"><div class="footer-section"><h4>SweetLand</h4><p>Ванильное выживание без границ с дружным сообществом и активной администрацией.</p><p class="footer-note">Никаких донатов — только чистый ванильный геймплей</p></div><div class="footer-section"><h4>Быстрые ссылки</h4><a href="#hero" onclick="showMainContent()">Главная</a><a href="#features" onclick="showMainContent()">Особенности</a><a href="#how-to-play" onclick="showMainContent()">Как начать</a><a href="#streamers" onclick="showMainContent()">Стримеры</a><a href="#top-players" onclick="showMainContent()">Топ игроков</a><a href="#faq" onclick="showMainContent()">FAQ</a><a href="javascript:void(0)" onclick="openRules()">Правила</a><a href="javascript:void(0)" onclick="openCandyShop()">🍬 Магазин леденцов</a></div><div class="footer-section"><h4>Соцсети</h4><a href="https://www.youtube.com/@gyraffic" target="_blank">Gyraffic YouTube</a><a href="https://t.me/Gyraff" target="_blank">Telegram</a><a href="https://discord.gg/bb3Kf8sDmt" target="_blank">Discord</a><a href="https://www.youtube.com/@Babka3434offical" target="_blank">Babka3434 YouTube</a></div><div class="footer-section"><h4>Защита данных</h4><p>Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p></div></div><div class="footer-bottom"><p>© 2026 SweetLand. Ванильный Minecraft сервер.</p><p class="privacy-note">Ваши данные под надежной защитой. Используя сервер, вы соглашаетесь с политикой конфиденциальности.</p></div></footer>
 </div>
 
-<!-- ПОЛНОЭКРАННЫЙ МАГАЗИН КОНФЕТ -->
+<!-- ПОЛНОЭКРАННЫЙ МАГАЗИН ЛЕДЕНЦОВ -->
 <div class="candy-shop-screen" id="candyShopScreen">
     <div class="candy-shop-container">
         <div class="candy-shop-content" id="candyShopContent"></div>
@@ -1034,140 +1049,118 @@
 
 <script>
 (function() {
+    // ========== ЗАЩИТА ОТ КОПИРОВАНИЯ ==========
+    document.addEventListener('copy', (e) => e.preventDefault());
+    document.addEventListener('cut', (e) => e.preventDefault());
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a')) e.preventDefault();
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
+    });
+
     // ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ==========
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
-    let blurEnabled = localStorage.getItem('sweetland-blur') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
     let currentUser = localStorage.getItem('sweetland_current_user') || null;
-    let adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
+    let adminMode = false;
+    let moderatorMode = false;
     let userFilter = '';
     let userSort = 'name';
     let userIP = null;
-    let pendingEmailCodes = {};
     let graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
-    let dailyBonusTimers = JSON.parse(localStorage.getItem('sweetland_daily_bonus')) || {};
 
     // ========== УДАЛЯЕМ ВСЕ АККАУНТЫ КРОМЕ GYRAFFIC ==========
     let usersDB = {};
     
-    // Создаем только Gyraffic с новым паролем
     usersDB['Gyraffic'] = {
         password: '75813000gyraff',
         email: 'gyraffic@gmail.com',
         ip: null,
-        candies: 10000,
-        history: Array(48).fill(10000),
+        candies: 0, // Только для отображения в графике
+        history: Array(48).fill(0),
         regDate: Date.now(),
         lastLogin: null,
         role: 'admin',
-        permissions: ['all'],
-        totalEarned: 10000,
-        totalSpent: 0,
-        daysActive: 1,
-        lastDaily: null,
-        completedTasks: {}
+        permissions: ['all']
     };
     
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 
-    // ========== ПРОМОКОДЫ ==========
-    let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-    
-    // Промокоды по умолчанию
-    if (Object.keys(promoCodes).length === 0) {
-        promoCodes = {
-            'SWEET100': { reward: 100, uses: Infinity, createdBy: 'system' },
-            'WELCOME': { reward: 50, uses: Infinity, createdBy: 'system' },
-            'GYRAFFIC': { reward: 1000, uses: 1, createdBy: 'system' }
-        };
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-    }
-
     // ========== ПЕРЕВОД ==========
     const translations = {
         ru: {
-            shopTitle: '🍬 КОНФЕТНЫЙ МАГАЗИН',
-            candies: 'Конфеты',
-            level: 'Уровень',
-            dailyBonus: '🎁 ЕЖЕДНЕВНЫЙ БОНУС',
-            getBonus: 'ПОЛУЧИТЬ 100 🍬',
-            bonusReceived: 'Бонус получен!',
-            alreadyGot: 'Бонус уже получен сегодня',
+            shopTitle: '🍬 МАГАЗИН ЛЕДЕНЦОВ',
+            candies: 'Леденцы',
             stats: '📊 СТАТИСТИКА',
             totalEarned: 'Всего заработано',
             totalSpent: 'Всего потрачено',
             daysActive: 'Дней на сервере',
-            transfer: '💸 ПЕРЕВОД КОНФЕТ',
-            to: 'Кому',
-            amount: 'Количество',
-            comment: 'Комментарий',
-            send: 'ПЕРЕВЕСТИ',
-            shop: '🎨 МАГАЗИН СКИНОВ',
-            buySkin: 'КУПИТЬ СКИН ЗА 500 🍬',
-            skinPurchased: 'Скин куплен!',
-            notEnough: 'Недостаточно конфет',
-            tasks: '📋 ЗАДАНИЯ',
-            playHours: 'Играть 1 час',
-            reward: 'Награда',
-            complete: 'ВЫПОЛНИТЬ',
-            alreadyDone: 'Уже выполнено',
-            promo: '🎟️ ПРОМОКОД',
-            activate: 'АКТИВИРОВАТЬ',
-            logout: '🚪 ВЫЙТИ',
-            login: 'ВОЙТИ',
-            register: 'ЗАРЕГИСТРИРОВАТЬСЯ',
-            noAccount: 'Нет аккаунта?',
-            haveAccount: 'Уже есть аккаунт?',
-            username: 'Никнейм',
-            password: 'Пароль',
-            email: 'Email',
-            sendCode: 'ОТПРАВИТЬ КОД',
-            confirmCode: 'Код из email',
-            confirm: 'ПОДТВЕРДИТЬ',
-            invalidCode: 'Неверный код',
-            userExists: 'Пользователь уже существует',
-            registered: 'Регистрация успешна!',
-            loggedIn: 'Вход выполнен!',
-            wrongPassword: 'Неверный пароль',
-            userNotFound: 'Пользователь не найден',
-            fillFields: 'Заполните все поля',
             graphZoom: '📈 МАСШТАБ ГРАФИКА',
             small: 'МАЛЕНЬКИЙ',
             medium: 'СРЕДНИЙ',
             large: 'БОЛЬШОЙ',
-            confirmTransfer: 'Перевести {amount} 🍬 пользователю {to}?',
             adminPanel: '🔧 ПАНЕЛЬ АДМИНИСТРАТОРА',
+            moderatorPanel: '🛡️ ПАНЕЛЬ МОДЕРАТОРА',
             searchUser: '🔍 Поиск пользователя',
             sortByName: 'По имени',
-            sortByCandies: 'По конфетам',
-            managePromoCodes: '🎫 УПРАВЛЕНИЕ ПРОМОКОДАМИ',
-            newPromoCode: 'НОВЫЙ ПРОМОКОД',
-            reward: 'НАГРАДА',
-            uses: 'ИСПОЛЬЗОВАНИЙ (0=∞)',
-            add: '➕ ДОБАВИТЬ',
-            existingPromoCodes: 'Существующие промокоды:',
-            noPromoCodes: 'Промокодов пока нет',
+            sortByCandies: 'По леденцам',
             backToShop: '← НАЗАД В МАГАЗИН',
-            adjustCandies: 'Изменить конфеты',
+            adjustCandies: 'Изменить',
             setCandies: 'Установить',
             delete: '🗑️ Удалить',
-            emailNotSent: '❌ Ошибка отправки. Ваш код: {code}',
-            connectionError: '⚠️ Проблема с отправкой. Ваш код: {code}',
+            ban: '🔨 Бан',
+            unban: '✅ Разбан',
+            banIP: '📌 Бан по IP',
+            mute: '🔇 Мут',
+            unmute: '🔊 Снять мут',
+            warn: '⚠️ Предупреждение',
+            history: '📋 История',
+            permissions: '⚙️ Права',
+            kick: '👢 Кик',
+            freeze: '❄️ Заморозить',
+            unfreeze: '🔥 Разморозить',
+            teleport: '🌀 Телепорт',
+            invsee: '👁️ Инвентарь',
+            clear: '🧹 Очистить',
+            heal: '💚 Вылечить',
+            feed: '🍗 Накормить',
             loginFirst: 'Сначала войдите в аккаунт',
             adminCodeOnly: 'Этот код только для Gyraffic',
             adminModeActivated: '🎮 Режим администратора активирован!',
-            invalidPromoCode: '❌ Неверный промокод',
-            promoCodeExpired: '❌ Промокод больше недействителен',
-            promoCodeActivated: '✅ +{reward} 🍬!',
-            candiesChanged: '✅ Конфеты изменены',
+            moderatorModeActivated: '🛡️ Режим модератора активирован!',
+            candiesChanged: '✅ Леденцы изменены',
             enterValidNumber: 'Введите корректное число',
-            candiesSet: '✅ Конфеты установлены',
+            candiesSet: '✅ Леденцы установлены',
             cannotDeleteGyraffic: '❌ Нельзя удалить Gyraffic',
             confirmDelete: 'Удалить пользователя {username}?',
             userDeleted: '✅ Пользователь {username} удален',
+            confirmBan: 'Забанить {username}?',
+            userBanned: '✅ {username} забанен',
+            confirmBanIP: 'Забанить IP {ip}?',
+            ipBanned: '✅ IP {ip} забанен',
+            confirmMute: 'Замутить {username}?',
+            userMuted: '✅ {username} замучен',
+            confirmKick: 'Кикнуть {username}?',
+            userKicked: '✅ {username} кикнут',
+            confirmWarn: 'Выдать предупреждение {username}?',
+            userWarned: '✅ Предупреждение выдано',
+            confirmFreeze: 'Заморозить {username}?',
+            userFrozen: '✅ {username} заморожен',
+            confirmUnfreeze: 'Разморозить {username}?',
+            userUnfrozen: '✅ {username} разморожен',
+            confirmTeleport: 'Телепортироваться к {username}?',
+            teleportDone: '✅ Телепорт выполнен',
+            confirmInvsee: 'Просмотреть инвентарь {username}?',
+            invseeDone: '✅ Инвентарь открыт',
+            confirmClear: 'Очистить инвентарь {username}?',
+            clearDone: '✅ Инвентарь очищен',
+            confirmHeal: 'Вылечить {username}?',
+            healDone: '✅ {username} вылечен',
+            confirmFeed: 'Накормить {username}?',
+            feedDone: '✅ {username} накормлен',
             enterCode: 'Введите код',
             enterValidReward: 'Введите корректную награду',
             codeExists: 'Такой код уже существует',
@@ -1177,85 +1170,75 @@
             goodbye: '👋 До свидания!'
         },
         en: {
-            shopTitle: '🍬 CANDY SHOP',
-            candies: 'Candies',
-            level: 'Level',
-            dailyBonus: '🎁 DAILY BONUS',
-            getBonus: 'GET 100 🍬',
-            bonusReceived: 'Bonus received!',
-            alreadyGot: 'Bonus already claimed today',
+            shopTitle: '🍬 LOLLIPOP SHOP',
+            candies: 'Lollipops',
             stats: '📊 STATISTICS',
             totalEarned: 'Total earned',
             totalSpent: 'Total spent',
             daysActive: 'Days active',
-            transfer: '💸 TRANSFER CANDIES',
-            to: 'To',
-            amount: 'Amount',
-            comment: 'Comment',
-            send: 'SEND',
-            shop: '🎨 SKIN SHOP',
-            buySkin: 'BUY SKIN FOR 500 🍬',
-            skinPurchased: 'Skin purchased!',
-            notEnough: 'Not enough candies',
-            tasks: '📋 TASKS',
-            playHours: 'Play for 1 hour',
-            reward: 'Reward',
-            complete: 'COMPLETE',
-            alreadyDone: 'Already done',
-            promo: '🎟️ PROMO CODE',
-            activate: 'ACTIVATE',
-            logout: '🚪 LOGOUT',
-            login: 'LOGIN',
-            register: 'REGISTER',
-            noAccount: 'No account?',
-            haveAccount: 'Already have an account?',
-            username: 'Username',
-            password: 'Password',
-            email: 'Email',
-            sendCode: 'SEND CODE',
-            confirmCode: 'Code from email',
-            confirm: 'CONFIRM',
-            invalidCode: 'Invalid code',
-            userExists: 'User already exists',
-            registered: 'Registration successful!',
-            loggedIn: 'Login successful!',
-            wrongPassword: 'Wrong password',
-            userNotFound: 'User not found',
-            fillFields: 'Fill all fields',
             graphZoom: '📈 GRAPH ZOOM',
             small: 'SMALL',
             medium: 'MEDIUM',
             large: 'LARGE',
-            confirmTransfer: 'Transfer {amount} 🍬 to {to}?',
             adminPanel: '🔧 ADMIN PANEL',
+            moderatorPanel: '🛡️ MODERATOR PANEL',
             searchUser: '🔍 Search user',
             sortByName: 'By name',
-            sortByCandies: 'By candies',
-            managePromoCodes: '🎫 MANAGE PROMO CODES',
-            newPromoCode: 'NEW PROMO CODE',
-            reward: 'REWARD',
-            uses: 'USES (0=∞)',
-            add: '➕ ADD',
-            existingPromoCodes: 'Existing promo codes:',
-            noPromoCodes: 'No promo codes yet',
+            sortByCandies: 'By lollipops',
             backToShop: '← BACK TO SHOP',
-            adjustCandies: 'Adjust candies',
+            adjustCandies: 'Adjust',
             setCandies: 'Set',
             delete: '🗑️ Delete',
-            emailNotSent: '❌ Sending error. Your code: {code}',
-            connectionError: '⚠️ Connection error. Your code: {code}',
+            ban: '🔨 Ban',
+            unban: '✅ Unban',
+            banIP: '📌 Ban IP',
+            mute: '🔇 Mute',
+            unmute: '🔊 Unmute',
+            warn: '⚠️ Warn',
+            history: '📋 History',
+            permissions: '⚙️ Permissions',
+            kick: '👢 Kick',
+            freeze: '❄️ Freeze',
+            unfreeze: '🔥 Unfreeze',
+            teleport: '🌀 Teleport',
+            invsee: '👁️ Invsee',
+            clear: '🧹 Clear',
+            heal: '💚 Heal',
+            feed: '🍗 Feed',
             loginFirst: 'Login first',
             adminCodeOnly: 'This code is for Gyraffic only',
             adminModeActivated: '🎮 Admin mode activated!',
-            invalidPromoCode: '❌ Invalid promo code',
-            promoCodeExpired: '❌ Promo code expired',
-            promoCodeActivated: '✅ +{reward} 🍬!',
-            candiesChanged: '✅ Candies changed',
+            moderatorModeActivated: '🛡️ Moderator mode activated!',
+            candiesChanged: '✅ Lollipops changed',
             enterValidNumber: 'Enter valid number',
-            candiesSet: '✅ Candies set',
+            candiesSet: '✅ Lollipops set',
             cannotDeleteGyraffic: '❌ Cannot delete Gyraffic',
             confirmDelete: 'Delete user {username}?',
             userDeleted: '✅ User {username} deleted',
+            confirmBan: 'Ban {username}?',
+            userBanned: '✅ {username} banned',
+            confirmBanIP: 'Ban IP {ip}?',
+            ipBanned: '✅ IP {ip} banned',
+            confirmMute: 'Mute {username}?',
+            userMuted: '✅ {username} muted',
+            confirmKick: 'Kick {username}?',
+            userKicked: '✅ {username} kicked',
+            confirmWarn: 'Warn {username}?',
+            userWarned: '✅ Warn issued',
+            confirmFreeze: 'Freeze {username}?',
+            userFrozen: '✅ {username} frozen',
+            confirmUnfreeze: 'Unfreeze {username}?',
+            userUnfrozen: '✅ {username} unfrozen',
+            confirmTeleport: 'Teleport to {username}?',
+            teleportDone: '✅ Teleported',
+            confirmInvsee: 'View inventory of {username}?',
+            invseeDone: '✅ Inventory opened',
+            confirmClear: 'Clear inventory of {username}?',
+            clearDone: '✅ Inventory cleared',
+            confirmHeal: 'Heal {username}?',
+            healDone: '✅ {username} healed',
+            confirmFeed: 'Feed {username}?',
+            feedDone: '✅ {username} fed',
             enterCode: 'Enter code',
             enterValidReward: 'Enter valid reward',
             codeExists: 'Code already exists',
@@ -1493,11 +1476,9 @@
     
     window.resetSettings = function() {
         particlesEnabled = true;
-        blurEnabled = true;
         animationsEnabled = true;
         currentWeather = 'auto';
         localStorage.setItem('sweetland-particles', 'true');
-        localStorage.setItem('sweetland-blur', 'true');
         localStorage.setItem('sweetland-animations', 'true');
         localStorage.setItem('sweetland-weather', 'auto');
         setAccentColor('dark');
@@ -1559,7 +1540,7 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // ========== ФУНКЦИЯ ПОИСКА ПОЛЬЗОВАТЕЛЯ БЕЗ УЧЁТА РЕГИСТРА ==========
+    // ========== ФУНКЦИЯ ПОИСКА ПОЛЬЗОВАТЕЛЯ ==========
     function findUser(username) {
         if (!username) return null;
         const lowerUsername = username.toLowerCase();
@@ -1573,8 +1554,6 @@
 
     // ========== ФУНКЦИЯ УВЕДОМЛЕНИЙ ==========
     function showNotification(message, type = 'info', autoClose = true) {
-        if (type === 'silent') return;
-        
         let oldOverlay = document.querySelector('.notification-overlay');
         let oldNotif = document.querySelector('.custom-notification');
         if (oldOverlay) oldOverlay.remove();
@@ -1629,7 +1608,7 @@
     // ========== ОНЛАЙН ==========
     document.getElementById('onlineNumber').innerText = '0';
 
-    // ========== УЛУЧШЕННЫЙ ГРАФИК (ТОЛЬКО ТОЧКИ) ==========
+    // ========== НОВЫЙ ГРАФИК (ТОЛЬКО ЛИНИЯ, БЕЗ ТОЧЕК) ==========
     function drawGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1685,49 +1664,32 @@
             ctx.fillText(hours + 'ч', x - 15, h - 20);
         }
         
-        // Рисуем ТОЛЬКО ТОЧКИ (без линий)
-        let points = [];
-        let pointSize = 8;
+        // Рисуем ТОЛЬКО ЛИНИЮ (БЕЗ ТОЧЕК)
+        ctx.beginPath();
+        ctx.strokeStyle = '#4d9eff';
+        ctx.lineWidth = 3;
+        ctx.shadowColor = '#4d9eff';
+        ctx.shadowBlur = 15;
         
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
             let y = h - 40 - ((history[i] - minVal) / range) * (h - 80);
+            
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Сохраняем точки для тултипа (но не рисуем их)
+        let points = [];
+        for (let i = 0; i < history.length; i++) {
+            let x = 50 + (i / (history.length - 1)) * (w - 80);
+            let y = h - 40 - ((history[i] - minVal) / range) * (h - 80);
             points.push({ x, y, value: history[i], index: i });
-            
-            // Рисуем точку с градиентом
-            let gradient = ctx.createRadialGradient(x, y, 0, x, y, pointSize * 2);
-            gradient.addColorStop(0, 'rgba(77, 158, 255, 1)');
-            gradient.addColorStop(0.5, 'rgba(77, 158, 255, 0.5)');
-            gradient.addColorStop(1, 'rgba(77, 158, 255, 0)');
-            
-            ctx.beginPath();
-            ctx.arc(x, y, pointSize * 1.5, 0, 2 * Math.PI);
-            ctx.fillStyle = gradient;
-            ctx.shadowColor = 'rgba(77, 158, 255, 0.8)';
-            ctx.shadowBlur = 20;
-            ctx.fill();
-            
-            // Основная точка
-            ctx.shadowBlur = 0;
-            ctx.beginPath();
-            ctx.arc(x, y, pointSize - 2, 0, 2 * Math.PI);
-            ctx.fillStyle = '#4d9eff';
-            ctx.fill();
-            
-            // Белая серединка
-            ctx.beginPath();
-            ctx.arc(x, y, 3, 0, 2 * Math.PI);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            
-            // Внешнее свечение
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#4d9eff';
-            ctx.beginPath();
-            ctx.arc(x, y, pointSize, 0, 2 * Math.PI);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
         }
 
         // Обработка движения мыши для тултипа
@@ -1736,7 +1698,7 @@
             let mouseX = e.clientX - rect.left;
             let mouseY = e.clientY - rect.top;
             
-            // Находим ближайшую точку
+            // Находим ближайшую точку на линии
             let best = null;
             let bestDist = Infinity;
             for (let p of points) {
@@ -1775,437 +1737,47 @@
         };
     }
 
-    // ========== ФУНКЦИИ ДЛЯ УРОВНЕЙ ==========
-    function getLevel(candies) {
-        return Math.floor(Math.sqrt(candies / 100)) + 1;
-    }
-
-    // ========== ЕЖЕДНЕВНЫЙ БОНУС ==========
-    window.claimDailyBonus = function() {
-        if (!currentUser) return;
-        let today = new Date().toDateString();
-        if (dailyBonusTimers[currentUser] === today) {
-            showNotification(t('alreadyGot'), 'warning');
-            return;
-        }
-        
-        usersDB[currentUser].candies += 100;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + 100;
-        dailyBonusTimers[currentUser] = today;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        localStorage.setItem('sweetland_daily_bonus', JSON.stringify(dailyBonusTimers));
-        showNotification(t('bonusReceived'), 'success');
-        renderCandyShop();
-    };
-
-    // ========== ПОКУПКА СКИНА ==========
-    window.buySkin = function() {
-        if (!currentUser) return;
-        if (usersDB[currentUser].candies < 500) {
-            showNotification(t('notEnough'), 'error');
-            return;
-        }
-        
-        if (!confirm('Купить скин за 500 🍬?')) return;
-        
-        usersDB[currentUser].candies -= 500;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + 500;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(t('skinPurchased'), 'success');
-        renderCandyShop();
-    };
-
-    // ========== ВЫПОЛНЕНИЕ ЗАДАНИЯ ==========
-    window.completeTask = function(taskId) {
-        if (!currentUser) return;
-        if (usersDB[currentUser].completedTasks?.[taskId]) {
-            showNotification(t('alreadyDone'), 'warning');
-            return;
-        }
-        
-        let reward = 50;
-        usersDB[currentUser].candies += reward;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[currentUser].totalEarned = (usersDB[currentUser].totalEarned || 0) + reward;
-        
-        if (!usersDB[currentUser].completedTasks) usersDB[currentUser].completedTasks = {};
-        usersDB[currentUser].completedTasks[taskId] = true;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(`+${reward} 🍬`, 'success');
-        renderCandyShop();
-    };
-
-    // ========== ПЕРЕВОД КОНФЕТ ==========
-    window.transferCandies = function() {
-        let to = document.getElementById('transferToUser').value;
-        let amount = parseInt(document.getElementById('transferAmount').value);
-        let comment = document.getElementById('transferComment')?.value.trim() || '';
-        
-        if (!to || !amount || amount <= 0) {
-            showNotification(t('fillFields'), 'error');
-            return;
-        }
-        
-        if (!usersDB[to]) {
-            showNotification(t('userNotFound'), 'error');
-            return;
-        }
-        
-        if (usersDB[currentUser].candies < amount) {
-            showNotification(t('notEnough'), 'error');
-            return;
-        }
-        
-        if (!confirm(t('confirmTransfer', { amount: amount.toLocaleString(), to }))) return;
-        
-        usersDB[currentUser].candies -= amount;
-        usersDB[to].candies += amount;
-        usersDB[currentUser].history.shift();
-        usersDB[currentUser].history.push(usersDB[currentUser].candies);
-        usersDB[to].history.shift();
-        usersDB[to].history.push(usersDB[to].candies);
-        usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
-        usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(`✅ ${t('send')} ${amount.toLocaleString()} 🍬 → ${to}`, 'success');
-        renderCandyShop();
-    };
-
-    // ========== ПРИМЕНЕНИЕ ПРОМОКОДА ==========
-    window.applyPromoCode = function() {
-        let code = document.getElementById('promoCode')?.value.trim().toUpperCase();
-        if (!code) return;
-        
-        // АДМИН-КОД - регистронезависимая проверка
-        if (code === 'ADMIN-PANEL(GYRAFFIC)') {
-            if (!currentUser) {
-                showNotification(t('loginFirst'), 'error');
-                return;
-            }
-            
-            let currentUserLower = currentUser.toLowerCase();
-            if (currentUserLower !== 'gyraffic' && currentUserLower !== 'жирафик') {
-                showNotification(t('adminCodeOnly'), 'error');
-                return;
-            }
-            
-            adminMode = true;
-            localStorage.setItem('sweetland_admin_mode', 'true');
-            renderCandyShop();
-            showNotification(t('adminModeActivated'), 'success');
-            return;
-        }
-        
-        if (!currentUser) {
-            showNotification(t('loginFirst'), 'error');
-            return;
-        }
-        
-        // Загружаем актуальные промокоды
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        
-        let promo = promoCodes[code];
-        if (!promo) {
-            showNotification(t('invalidPromoCode'), 'error');
-            return;
-        }
-        
-        if (promo.uses !== Infinity && promo.uses <= 0) {
-            showNotification(t('promoCodeExpired'), 'error');
-            return;
-        }
-        
-        let user = usersDB[currentUser];
-        user.candies += promo.reward;
-        user.history.shift();
-        user.history.push(user.candies);
-        user.totalEarned = (user.totalEarned || 0) + promo.reward;
-        
-        if (promo.uses !== Infinity) {
-            promo.uses--;
-        }
-        
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString() }), 'success');
-        renderCandyShop();
-    };
-
-    // ========== ФУНКЦИЯ ОТПРАВКИ EMAIL ЧЕРЕЗ EMAILJS ==========
-    window.sendEmailCode = async function() {
-        let email = document.getElementById('regEmail')?.value.trim();
-        let username = document.getElementById('regName')?.value.trim();
-        
-        if (!email || !email.endsWith('@gmail.com')) {
-            showNotification('Введите корректный Gmail', 'error');
-            return;
-        }
-        
-        if (!username) {
-            showNotification('Введите никнейм', 'error');
-            return;
-        }
-        
-        let code = Math.floor(100000 + Math.random() * 900000).toString();
-        pendingEmailCodes[email] = code;
-        
-        showNotification('⏳ Отправка кода...', 'info', false);
-        
-        try {
-            const now = new Date();
-            const timeStr = now.toLocaleString('ru-RU', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                day: '2-digit',
-                month: '2-digit'
-            });
-            
-            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    service_id: 'service_9pb9n41',
-                    template_id: 'template_2xboqmc',
-                    user_id: 'jlf5eIKN7TZ8SMquH',
-                    template_params: {
-                        to_name: username,
-                        code: code,
-                        message: 'Ваш код для входа на SweetLand сервер',
-                        time: timeStr
-                    }
-                })
-            });
-            
-            if (response.ok) {
-                showNotification(`✅ Код отправлен на ${email}`, 'success');
-                document.getElementById('emailCodeSection').style.display = 'block';
-                console.log(`Код для ${username}: ${code}`);
-            } else {
-                const errorText = await response.text();
-                console.error('Ошибка EmailJS:', errorText);
-                showNotification(t('emailNotSent', { code }), 'warning', false);
-                document.getElementById('emailCodeSection').style.display = 'block';
-            }
-            
-        } catch (error) {
-            console.error('Ошибка:', error);
-            showNotification(t('connectionError', { code }), 'warning', false);
-            document.getElementById('emailCodeSection').style.display = 'block';
-        }
-    };
-
-    // ========== РЕГИСТРАЦИЯ ==========
-    window.registerUser = async function() {
-        await fetchUserIP();
-        let name = document.getElementById('regName')?.value.trim();
-        let email = document.getElementById('regEmail')?.value.trim();
-        let pass = document.getElementById('regPassword')?.value.trim();
-        let code = document.getElementById('emailCode')?.value.trim();
-        
-        if (!name || !email || !pass || !code) {
-            showNotification(t('fillFields'), 'error');
-            return;
-        }
-        
-        if (pass.length < 4) {
-            showNotification(t('fillFields'), 'error');
-            return;
-        }
-        
-        if (pendingEmailCodes[email] !== code) {
-            showNotification(t('invalidCode'), 'error');
-            return;
-        }
-        
-        // Проверка уникальности email
-        for (let u in usersDB) {
-            if (usersDB[u].email === email) {
-                showNotification(t('userExists'), 'error');
-                return;
-            }
-        }
-        
-        // Поиск без учёта регистра
-        if (findUser(name)) {
-            showNotification(t('userExists'), 'error');
-            return;
-        }
-        
-        usersDB[name] = { 
-            password: pass, 
-            email: email,
-            ip: userIP, 
-            candies: 100,
-            history: Array(48).fill(100),
-            regDate: Date.now(), 
-            lastLogin: Date.now(),
-            role: 'user',
-            permissions: [],
-            totalEarned: 100,
-            totalSpent: 0,
-            daysActive: 1,
-            completedTasks: {}
-        };
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        currentUser = name;
-        localStorage.setItem('sweetland_current_user', currentUser);
-        delete pendingEmailCodes[email];
-        showNotification(t('registered'), 'success');
-        renderCandyShop();
-    };
-
-    // ========== ВХОД ==========
-    window.loginUser = async function() {
-        await fetchUserIP();
-        let name = document.getElementById('loginName')?.value.trim();
-        let pass = document.getElementById('loginPassword')?.value.trim();
-        
-        if (!name || !pass) {
-            showNotification(t('fillFields'), 'error');
-            return;
-        }
-        
-        let foundName = findUser(name);
-        if (!foundName) {
-            showNotification(t('userNotFound'), 'error');
-            return;
-        }
-        
-        if (usersDB[foundName].password !== pass) {
-            showNotification(t('wrongPassword'), 'error');
-            return;
-        }
-        
-        currentUser = foundName;
-        usersDB[foundName].lastLogin = Date.now();
-        usersDB[foundName].ip = userIP;
-        
-        // Обновляем дни активности
-        let lastLogin = new Date(usersDB[foundName].lastLogin || 0);
-        let today = new Date();
-        if (lastLogin.toDateString() !== today.toDateString()) {
-            usersDB[foundName].daysActive = (usersDB[foundName].daysActive || 1) + 1;
-        }
-        
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        localStorage.setItem('sweetland_current_user', currentUser);
-        showNotification(t('loggedIn'), 'success');
-        renderCandyShop();
-    };
-
-    // ========== ВЫХОД ==========
-    window.logoutUser = function() { 
-        currentUser = null; 
-        adminMode = false;
-        localStorage.removeItem('sweetland_current_user'); 
-        localStorage.setItem('sweetland_admin_mode', 'false');
-        renderCandyShop();
-        showNotification(t('goodbye'), 'info');
-    };
-
-    // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ ВХОДОМ И РЕГИСТРАЦИЕЙ ==========
-    window.switchAuthMode = function(mode) { 
-        if (mode === 'register') renderRegister(); 
-        else renderAuth(); 
-    };
-
-    // ========== РЕНДЕР АВТОРИЗАЦИИ ==========
-    function renderAuth() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            
-            <div style="max-width: 450px; margin: 0 auto;">
-                <div class="shop-card">
-                    <input type="text" id="loginName" placeholder="${t('username')}">
-                    <input type="password" id="loginPassword" placeholder="${t('password')}">
-                    <button onclick="loginUser()">${t('login')}</button>
-                    <div class="auth-toggle" onclick="switchAuthMode('register')">
-                        ${t('noAccount')} ${t('register')}
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    // ========== РЕНДЕР РЕГИСТРАЦИИ ==========
-    function renderRegister() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            
-            <div style="max-width: 450px; margin: 0 auto;">
-                <div class="shop-card">
-                    <h3 style="text-align: center; margin-bottom: 20px;">${t('register')}</h3>
-                    
-                    <input type="text" id="regName" placeholder="${t('username')}">
-                    <input type="email" id="regEmail" placeholder="${t('email')} (@gmail.com)">
-                    <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
-                    
-                    <button onclick="sendEmailCode()">${t('sendCode')}</button>
-                    
-                    <div id="emailCodeSection" style="display: none;">
-                        <input type="text" id="emailCode" placeholder="${t('confirmCode')}">
-                        <button onclick="registerUser()">${t('confirm')}</button>
-                    </div>
-                    
-                    <div class="auth-toggle" onclick="switchAuthMode('login')">
-                        ${t('haveAccount')} ${t('login')}
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    // ========== РЕНДЕР МАГАЗИНА ==========
+    // ========== РЕНДЕР МАГАЗИНА (ТОЛЬКО ГРАФИК И АДМИНКА) ==========
     function renderCandyShop() {
+        if (!currentUser) {
+            // Простая заглушка для неавторизованных
+            candyShopContent.innerHTML = `
+                <div class="language-selector">
+                    <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                    <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+                </div>
+                <h2 class="candy-shop-title">🍬 ${t('shopTitle')}</h2>
+                <div style="text-align: center; padding: 50px; font-size: 24px;">${t('loginFirst')}</div>
+            `;
+            return;
+        }
+        
         if (adminMode) {
             renderAdminPanel();
             return;
         }
         
-        if (!currentUser) {
-            renderAuth();
+        if (moderatorMode) {
+            renderModeratorPanel();
             return;
         }
         
-        // Загружаем актуальные данные
+        // Загружаем данные
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         let user = usersDB[currentUser];
         
         if (!user) {
-            logoutUser();
+            currentUser = null;
+            localStorage.removeItem('sweetland_current_user');
+            renderCandyShop();
             return;
         }
         
         let candies = user.candies || 0;
         let history = user.history || Array(48).fill(candies);
-        let level = getLevel(candies);
-        let today = new Date().toDateString();
-        let canClaimDaily = dailyBonusTimers[currentUser] !== today;
         
         // Высота графика в зависимости от zoom
-        let graphHeight = graphZoom === 'small' ? 300 : (graphZoom === 'large' ? 600 : 450);
+        let graphHeight = graphZoom === 'small' ? 400 : (graphZoom === 'large' ? 700 : 550);
 
         let html = `
             <div class="language-selector">
@@ -2213,18 +1785,11 @@
                 <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
             </div>
             
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
+            <h2 class="candy-shop-title">🍬 ${t('shopTitle')}</h2>
             
             <div class="balance-row">
                 <span>🍬 ${t('candies')}:</span>
-                <span>${candies.toLocaleString()} <span class="level-badge">${t('level')} ${level}</span></span>
-            </div>
-            
-            <div class="daily-bonus">
-                <h3>${t('dailyBonus')}</h3>
-                ${canClaimDaily 
-                    ? `<button onclick="claimDailyBonus()">${t('getBonus')}</button>` 
-                    : `<p style="font-size: 18px;">✅ ${t('alreadyGot')}</p>`}
+                <span>${candies.toLocaleString()}</span>
             </div>
             
             <div class="graph-controls">
@@ -2256,43 +1821,6 @@
                 </div>
             </div>
             
-            <div class="shop-grid">
-                <div class="shop-card">
-                    <h3>💸 ${t('transfer')}</h3>
-                    <select id="transferToUser">
-                        <option value="">${t('to')}</option>
-                        ${Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('')}
-                    </select>
-                    <input type="number" id="transferAmount" placeholder="${t('amount')}" min="1">
-                    <textarea id="transferComment" placeholder="${t('comment')}" rows="2"></textarea>
-                    <button onclick="transferCandies()">${t('send')}</button>
-                </div>
-                
-                <div class="shop-card">
-                    <h3>🎨 ${t('shop')}</h3>
-                    <p style="font-size: 18px; margin: 15px 0;">Скин 'Новичок'</p>
-                    <p style="font-size: 24px; color: gold; margin: 15px 0;">💰 500 🍬</p>
-                    <button class="success" onclick="buySkin()">${t('buySkin')}</button>
-                </div>
-                
-                <div class="shop-card">
-                    <h3>📋 ${t('tasks')}</h3>
-                    <div style="margin: 15px 0;">
-                        <p style="font-size: 16px;">⏱️ ${t('playHours')}</p>
-                        <p style="color: gold; font-size: 18px;">🎁 ${t('reward')}: 50 🍬</p>
-                        <button onclick="completeTask('play1')" ${user.completedTasks?.play1 ? 'disabled style="opacity: 0.5;"' : ''}>
-                            ${user.completedTasks?.play1 ? '✅ ' + t('alreadyDone') : t('complete')}
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="shop-card">
-                    <h3>🎟️ ${t('promo')}</h3>
-                    <input type="text" id="promoCode" placeholder="SWEET100">
-                    <button onclick="applyPromoCode()">${t('activate')}</button>
-                </div>
-            </div>
-            
             <button class="logout-btn" onclick="logoutUser()">🚪 ${t('logout')}</button>
         `;
         
@@ -2305,9 +1833,7 @@
 
     // ========== РЕНДЕР АДМИН-ПАНЕЛИ ==========
     function renderAdminPanel() {
-        // Загружаем актуальные данные
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         
         let filtered = Object.entries(usersDB).filter(([n]) => 
             n.toLowerCase().includes(userFilter.toLowerCase())
@@ -2322,11 +1848,6 @@
         let userListHtml = '<div class="user-list">';
         
         for (let [name, data] of filtered) {
-            let avgCandies = data.history.length > 1 
-                ? ((data.history[data.history.length - 1] - data.history[0]) / data.history.length).toFixed(1) 
-                : 0;
-            let lastLogin = data.lastLogin ? new Date(data.lastLogin).toLocaleString() : 'никогда';
-            let regDate = data.regDate ? new Date(data.regDate).toLocaleString() : 'неизвестно';
             let roleDisplay = data.role === 'admin' ? '👑 Админ' : 
                              (data.role === 'moderator' ? '🛡️ Модератор' : 
                              (data.role === 'helper' ? '🤝 Хелпер' : '👤 Игрок'));
@@ -2340,34 +1861,31 @@
                         </div>
                         <div class="user-ip">Email: ${data.email || 'не указан'} | IP: ${data.ip || 'не указан'}</div>
                         <div class="user-candies">🍬 ${data.candies.toLocaleString()}</div>
-                        <div class="user-history">📈 Изменение: ${avgCandies} в час</div>
-                        <div class="user-history">📅 Регистрация: ${regDate}</div>
-                        <div class="user-history">🔑 Последний вход: ${lastLogin}</div>
-                        <div class="user-history">💰 Заработано: ${(data.totalEarned || 0).toLocaleString()} | Потрачено: ${(data.totalSpent || 0).toLocaleString()}</div>
+                        <div class="user-history">📅 Регистрация: ${data.regDate ? new Date(data.regDate).toLocaleString() : 'неизвестно'}</div>
                     </div>
                     <div class="user-actions">
                         <button onclick="adjustCandies('${name}', 100)">+100 🍬</button>
                         <button onclick="adjustCandies('${name}', -100)">-100 🍬</button>
-                        <input type="number" id="set-${name}" placeholder="Уст" min="0">
+                        <input type="number" id="set-${name}" placeholder="Уст" min="0" style="width: 70px;">
                         <button onclick="setCandies('${name}')">${t('setCandies')}</button>
-                        ${name !== 'Gyraffic' ? `<button onclick="deleteUser('${name}')">${t('delete')}</button>` : ''}
+                        <button onclick="banUser('${name}')">🔨 Бан</button>
+                        <button onclick="banIP('${name}')">📌 Бан IP</button>
+                        <button onclick="muteUser('${name}')">🔇 Мут</button>
+                        <button onclick="warnUser('${name}')">⚠️ Варн</button>
+                        <button onclick="kickUser('${name}')">👢 Кик</button>
+                        <button onclick="freezeUser('${name}')">❄️ Заморозить</button>
+                        <button onclick="unfreezeUser('${name}')">🔥 Разморозить</button>
+                        <button onclick="teleportTo('${name}')">🌀 Тп</button>
+                        <button onclick="invsee('${name}')">👁️ Инв</button>
+                        <button onclick="clearInv('${name}')">🧹 Очистить</button>
+                        <button onclick="healUser('${name}')">💚 Хил</button>
+                        <button onclick="feedUser('${name}')">🍗 Еда</button>
+                        ${name !== 'Gyraffic' ? `<button onclick="deleteUser('${name}')" style="background: var(--danger);">${t('delete')}</button>` : ''}
                     </div>
                 </div>
             `;
         }
         userListHtml += '</div>';
-
-        let promoList = Object.entries(promoCodes).map(([code, data]) => {
-            let usesText = data.uses === Infinity ? '∞' : data.uses;
-            return `
-                <div class="promo-item">
-                    <input type="text" value="${code}" readonly style="flex: 2;">
-                    <span style="flex: 1; color: gold;">${data.reward.toLocaleString()} 🍬</span>
-                    <span style="flex: 1;">Исп.: ${usesText}</span>
-                    <button onclick="deletePromoCode('${code}')" style="background: var(--danger);">❌</button>
-                </div>
-            `;
-        }).join('');
 
         candyShopContent.innerHTML = `
             <div class="language-selector">
@@ -2389,26 +1907,78 @@
                 
                 ${userListHtml}
                 
-                <div class="promo-section">
-                    <h3 style="color: var(--accent); font-size: 24px; margin-bottom: 20px;">${t('managePromoCodes')}</h3>
-                    
-                    <div class="promo-item">
-                        <input type="text" id="newPromoCode" placeholder="${t('newPromoCode')}">
-                        <input type="number" id="newPromoReward" placeholder="${t('reward')}" value="100" min="1">
-                        <input type="number" id="newPromoUses" placeholder="${t('uses')}" value="0" min="0">
-                        <button onclick="addPromoCode()" style="background: var(--success);">${t('add')}</button>
-                    </div>
-                    
-                    <h4 style="color: var(--text); margin: 30px 0 15px;">${t('existingPromoCodes')}</h4>
-                    ${promoList || `<p style="color: var(--text-secondary);">${t('noPromoCodes')}</p>`}
-                </div>
-                
-                <button class="back-to-shop" onclick="toggleAdminMode(false)">${t('backToShop')}</button>
+                <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;
     }
 
-    // ========== ФУНКЦИИ АДМИНА ==========
+    // ========== РЕНДЕР МОДЕРАТОР-ПАНЕЛИ ==========
+    function renderModeratorPanel() {
+        usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
+        
+        let filtered = Object.entries(usersDB).filter(([n]) => 
+            n.toLowerCase().includes(userFilter.toLowerCase())
+        );
+        
+        if (userSort === 'name') {
+            filtered.sort((a, b) => a[0].localeCompare(b[0]));
+        } else if (userSort === 'candies') {
+            filtered.sort((a, b) => b[1].candies - a[1].candies);
+        }
+
+        let userListHtml = '<div class="user-list">';
+        
+        for (let [name, data] of filtered) {
+            userListHtml += `
+                <div class="user-item">
+                    <div class="user-info">
+                        <div class="user-name">
+                            ${name}
+                            <span class="user-role-badge">${data.role === 'moderator' ? '🛡️ Модератор' : '👤 Игрок'}</span>
+                        </div>
+                        <div class="user-candies">🍬 ${data.candies.toLocaleString()}</div>
+                    </div>
+                    <div class="user-actions">
+                        <button onclick="muteUser('${name}')">🔇 Мут</button>
+                        <button onclick="warnUser('${name}')">⚠️ Варн</button>
+                        <button onclick="kickUser('${name}')">👢 Кик</button>
+                        <button onclick="freezeUser('${name}')">❄️ Заморозить</button>
+                        <button onclick="unfreezeUser('${name}')">🔥 Разморозить</button>
+                        <button onclick="teleportTo('${name}')">🌀 Тп</button>
+                        <button onclick="invsee('${name}')">👁️ Инв</button>
+                        <button onclick="clearInv('${name}')">🧹 Очистить</button>
+                    </div>
+                </div>
+            `;
+        }
+        userListHtml += '</div>';
+
+        candyShopContent.innerHTML = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            
+            <h2 class="candy-shop-title" style="color: #ffaa00;">${t('moderatorPanel')}</h2>
+            
+            <div class="admin-panel">
+                <div class="admin-controls">
+                    <input type="text" placeholder="${t('searchUser')}" id="searchUser" 
+                           value="${userFilter}" oninput="userFilter=this.value; renderModeratorPanel();">
+                    <select id="sortSelect" onchange="userSort=this.value; renderModeratorPanel();">
+                        <option value="name" ${userSort === 'name' ? 'selected' : ''}>${t('sortByName')}</option>
+                        <option value="candies" ${userSort === 'candies' ? 'selected' : ''}>${t('sortByCandies')}</option>
+                    </select>
+                </div>
+                
+                ${userListHtml}
+                
+                <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
+            </div>
+        `;
+    }
+
+    // ========== ФУНКЦИИ АДМИНА/МОДЕРАТОРА ==========
     window.adjustCandies = function(username, delta) {
         usersDB[username].candies = Math.max(0, usersDB[username].candies + delta);
         usersDB[username].history.shift();
@@ -2451,65 +2021,130 @@
         showNotification(t('userDeleted', { username }), 'success');
     };
     
-    window.addPromoCode = function() {
-        let code = document.getElementById('newPromoCode')?.value.trim().toUpperCase();
-        let reward = parseInt(document.getElementById('newPromoReward')?.value);
-        let uses = parseInt(document.getElementById('newPromoUses')?.value);
-        
-        if (!code) {
-            showNotification(t('enterCode'), 'error');
-            return;
-        }
-        
-        if (isNaN(reward) || reward <= 0) {
-            showNotification(t('enterValidReward'), 'error');
-            return;
-        }
-        
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        
-        if (promoCodes[code]) {
-            showNotification(t('codeExists'), 'error');
-            return;
-        }
-        
-        let usesVal = uses === 0 ? Infinity : uses;
-        promoCodes[code] = { reward, uses: usesVal, createdBy: currentUser || 'admin' };
-        
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-        showNotification(t('codeAdded', { code }), 'success');
+    window.banUser = function(username) {
+        if (!confirm(t('confirmBan', { username }))) return;
+        showNotification(t('userBanned', { username }), 'success');
     };
     
-    window.deletePromoCode = function(code) {
-        if (!confirm(t('confirmDeleteCode', { code }))) return;
-        
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        delete promoCodes[code];
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        renderAdminPanel();
-        showNotification(t('codeDeleted'), 'success');
+    window.banIP = function(username) {
+        let ip = usersDB[username]?.ip || 'unknown';
+        if (!confirm(t('confirmBanIP', { ip }))) return;
+        showNotification(t('ipBanned', { ip }), 'success');
     };
     
-    window.toggleAdminMode = function(enable) {
-        adminMode = enable;
-        localStorage.setItem('sweetland_admin_mode', enable ? 'true' : 'false');
+    window.muteUser = function(username) {
+        if (!confirm(t('confirmMute', { username }))) return;
+        showNotification(t('userMuted', { username }), 'success');
+    };
+    
+    window.warnUser = function(username) {
+        if (!confirm(t('confirmWarn', { username }))) return;
+        showNotification(t('userWarned'), 'success');
+    };
+    
+    window.kickUser = function(username) {
+        if (!confirm(t('confirmKick', { username }))) return;
+        showNotification(t('userKicked', { username }), 'success');
+    };
+    
+    window.freezeUser = function(username) {
+        if (!confirm(t('confirmFreeze', { username }))) return;
+        showNotification(t('userFrozen', { username }), 'success');
+    };
+    
+    window.unfreezeUser = function(username) {
+        if (!confirm(t('confirmUnfreeze', { username }))) return;
+        showNotification(t('userUnfrozen', { username }), 'success');
+    };
+    
+    window.teleportTo = function(username) {
+        if (!confirm(t('confirmTeleport', { username }))) return;
+        showNotification(t('teleportDone'), 'success');
+    };
+    
+    window.invsee = function(username) {
+        if (!confirm(t('confirmInvsee', { username }))) return;
+        showNotification(t('invseeDone'), 'success');
+    };
+    
+    window.clearInv = function(username) {
+        if (!confirm(t('confirmClear', { username }))) return;
+        showNotification(t('clearDone'), 'success');
+    };
+    
+    window.healUser = function(username) {
+        if (!confirm(t('confirmHeal', { username }))) return;
+        showNotification(t('healDone', { username }), 'success');
+    };
+    
+    window.feedUser = function(username) {
+        if (!confirm(t('confirmFeed', { username }))) return;
+        showNotification(t('feedDone', { username }), 'success');
+    };
+
+    // ========== ВХОД ==========
+    window.loginUser = async function() {
+        await fetchUserIP();
+        let name = document.getElementById('loginName')?.value.trim();
+        let pass = document.getElementById('loginPassword')?.value.trim();
+        
+        if (!name || !pass) {
+            showNotification(t('fillFields'), 'error');
+            return;
+        }
+        
+        let foundName = findUser(name);
+        if (!foundName) {
+            showNotification(t('userNotFound'), 'error');
+            return;
+        }
+        
+        if (usersDB[foundName].password !== pass) {
+            showNotification(t('wrongPassword'), 'error');
+            return;
+        }
+        
+        currentUser = foundName;
+        usersDB[foundName].lastLogin = Date.now();
+        usersDB[foundName].ip = userIP;
+        
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        localStorage.setItem('sweetland_current_user', currentUser);
+        
+        // Проверка на админские коды (вводить в консоль или через специальное поле)
+        let adminCode = prompt('Введите код администратора (если есть):');
+        if (adminCode === 'ADMIN-PANEL(GYRAFFIC)') {
+            adminMode = true;
+            moderatorMode = false;
+            showNotification(t('adminModeActivated'), 'success');
+        } else if (adminCode && adminCode.startsWith('MODER-PANEL(') && adminCode.endsWith(')')) {
+            moderatorMode = true;
+            adminMode = false;
+            showNotification(t('moderatorModeActivated'), 'success');
+        }
+        
+        showNotification(t('loggedIn'), 'success');
         renderCandyShop();
+    };
+
+    // ========== ВЫХОД ==========
+    window.logoutUser = function() { 
+        currentUser = null; 
+        adminMode = false;
+        moderatorMode = false;
+        localStorage.removeItem('sweetland_current_user'); 
+        renderCandyShop();
+        showNotification(t('goodbye'), 'info');
     };
 
     // ========== ИНИЦИАЛИЗАЦИЯ ==========
     window.addEventListener('load', async () => {
         await fetchUserIP();
         
-        // Загружаем данные
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        dailyBonusTimers = JSON.parse(localStorage.getItem('sweetland_daily_bonus')) || {};
         currentUser = localStorage.getItem('sweetland_current_user') || null;
-        adminMode = localStorage.getItem('sweetland_admin_mode') === 'true';
         graphZoom = localStorage.getItem('sweetland_graph_zoom') || 'medium';
         
-        // Убеждаемся что Gyraffic существует
         if (!usersDB['Gyraffic']) {
             usersDB['Gyraffic'] = {
                 password: '75813000gyraff',
@@ -2523,9 +2158,7 @@
                 permissions: ['all'],
                 totalEarned: 10000,
                 totalSpent: 0,
-                daysActive: 1,
-                lastDaily: null,
-                completedTasks: {}
+                daysActive: 1
             };
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         }

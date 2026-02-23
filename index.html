@@ -112,13 +112,18 @@
             animation: rainfall linear infinite;
         }
         .candy-particle {
-            position: absolute; font-size: 24px; line-height: 1; text-align: center;
-            opacity: 0; filter: drop-shadow(0 0 5px currentColor);
+            position: absolute;
+            font-size: 24px;
+            line-height: 1;
+            text-align: center;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px currentColor);
             animation: candyfall linear infinite;
             color: #ff69b4;
-            width: auto; height: auto;
+            width: auto;
+            height: auto;
             white-space: nowrap;
-            transform: none !important; /* без вращения */
+            --dx: 1;
         }
         @keyframes snowfall {
             0% { transform: translateY(-10vh) translateX(0); opacity: 0.9; }
@@ -130,10 +135,7 @@
         }
         @keyframes candyfall {
             0% { transform: translateY(-10vh) translateX(0) scale(0.8); opacity: 0.8; }
-            100% { transform: translateY(110vh) translateX(calc(30px * var(--dx, 1))) scale(1.2); opacity: 0.2; }
-        }
-        .candy-particle {
-            --dx: 1;
+            100% { transform: translateY(110vh) translateX(calc(30px * var(--dx))) scale(1.2); opacity: 0.2; }
         }
 
         /* ========== ПАНЕЛЬ УПРАВЛЕНИЯ ========== */
@@ -1109,7 +1111,8 @@
     if (Object.keys(promoCodes).length === 0) {
         promoCodes = {
             'SWEET100': { type: 'candy', reward: 100, uses: Infinity, createdBy: 'system' },
-            'WELCOME': { type: 'candy', reward: 50, uses: Infinity, createdBy: 'system' }
+            'WELCOME': { type: 'candy', reward: 50, uses: Infinity, createdBy: 'system' },
+            'LOLLY50': { type: 'lollipop', reward: 50, uses: Infinity, createdBy: 'system' }
         };
         localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
     }
@@ -1281,8 +1284,9 @@
             moderatorModeActivated: '🛡️ Режим модератора активирован!',
             invalidPromoCode: '❌ Неверный промокод',
             promoCodeExpired: '❌ Промокод больше недействителен',
-            promoCodeActivated: '✅ +{reward} 🍬!',
+            promoCodeActivated: '✅ +{reward} {currency}!',
             candiesChanged: '✅ Конфеты изменены',
+            lollipopsChanged: '✅ Леденцы изменены',
             enterValidNumber: 'Введите корректное число',
             candiesSet: '✅ Конфеты установлены',
             cannotDeleteGyraffic: '❌ Нельзя удалить Gyraffic',
@@ -1321,7 +1325,8 @@
             roleUser: 'Игрок',
             roleHelper: 'Помощник',
             roleModerator: 'Модератор',
-            roleAdmin: 'Админ'
+            roleAdmin: 'Админ',
+            promoTypeLollipop: '🍭 Леденцовый'
         },
         en: {
             serverName: 'SweetLand',
@@ -1488,8 +1493,9 @@
             moderatorModeActivated: '🛡️ Moderator mode activated!',
             invalidPromoCode: '❌ Invalid promo code',
             promoCodeExpired: '❌ Promo code expired',
-            promoCodeActivated: '✅ +{reward} 🍬!',
+            promoCodeActivated: '✅ +{reward} {currency}!',
             candiesChanged: '✅ Candies changed',
+            lollipopsChanged: '✅ Lollipops changed',
             enterValidNumber: 'Enter valid number',
             candiesSet: '✅ Candies set',
             cannotDeleteGyraffic: '❌ Cannot delete Gyraffic',
@@ -1528,7 +1534,8 @@
             roleUser: 'User',
             roleHelper: 'Helper',
             roleModerator: 'Moderator',
-            roleAdmin: 'Admin'
+            roleAdmin: 'Admin',
+            promoTypeLollipop: '🍭 Lollipop'
         }
     };
 
@@ -2060,20 +2067,34 @@
             } else { showNotification(t('codeNotFound'), 'error'); return; }
         }
         if (!currentUser) { showNotification(t('loginFirst'), 'error'); return; }
+
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         let promo = promoCodes[code];
         if (!promo) { showNotification(t('invalidPromoCode'), 'error'); return; }
-        if (promo.type !== 'candy') { showNotification(t('invalidPromoCode'), 'error'); return; }
-        if (promo.uses !== Infinity && promo.uses <= 0) { showNotification(t('promoCodeExpired'), 'error'); return; }
-        let user = usersDB[currentUser];
-        user.candies += promo.reward;
-        user.history.shift(); user.history.push(user.candies);
-        user.totalEarned = (user.totalEarned || 0) + promo.reward;
-        if (promo.uses !== Infinity) promo.uses--;
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString() }), 'success');
-        renderCandyShop();
+
+        if (promo.type === 'candy') {
+            if (promo.uses !== Infinity && promo.uses <= 0) { showNotification(t('promoCodeExpired'), 'error'); return; }
+            let user = usersDB[currentUser];
+            user.candies += promo.reward;
+            user.history.shift(); user.history.push(user.candies);
+            user.totalEarned = (user.totalEarned || 0) + promo.reward;
+            if (promo.uses !== Infinity) promo.uses--;
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString(), currency: '🍬' }), 'success');
+            renderCandyShop();
+        } else if (promo.type === 'lollipop') {
+            if (promo.uses !== Infinity && promo.uses <= 0) { showNotification(t('promoCodeExpired'), 'error'); return; }
+            let user = usersDB[currentUser];
+            user.lollipops = (user.lollipops || 0) + promo.reward;
+            if (promo.uses !== Infinity) promo.uses--;
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString(), currency: '🍭' }), 'success');
+            renderCandyShop();
+        } else {
+            showNotification(t('invalidPromoCode'), 'error');
+        }
     }
 
     async function sendEmailCode() {
@@ -2316,8 +2337,8 @@
 
         let promoList = Object.entries(promoCodes).map(([code, data]) => {
             let usesText = data.uses === Infinity ? '∞' : data.uses;
-            let typeText = data.type === 'candy' ? '🍬' : (data.type === 'admin' ? '👑' : '🔑');
-            return `<div class="promo-item"><input type="text" value="${code}" readonly style="flex:2;"><span style="flex:1; color:gold;">${typeText} ${data.reward ? data.reward.toLocaleString() : ''}</span><span style="flex:1;">${t('uses')}: ${usesText}</span><button onclick="deletePromoCode('${code}')" style="background:var(--danger);">❌</button></div>`;
+            let typeIcon = data.type === 'candy' ? '🍬' : (data.type === 'lollipop' ? '🍭' : (data.type === 'admin' ? '👑' : '🔑'));
+            return `<div class="promo-item"><input type="text" value="${code}" readonly style="flex:2;"><span style="flex:1; color:gold;">${typeIcon} ${data.reward ? data.reward.toLocaleString() : ''}</span><span style="flex:1;">${t('uses')}: ${usesText}</span><button onclick="deletePromoCode('${code}')" style="background:var(--danger);">❌</button></div>`;
         }).join('');
 
         let moderList = Object.entries(moderatorCodes).map(([code, data]) => {
@@ -2337,7 +2358,12 @@
                 <div class="promo-section">
                     <h3 style="color:var(--accent);">${t('managePromoCodes')}</h3>
                     <div class="promo-item">
-                        <select id="newPromoType"><option value="candy">🍬 Конфетный</option><option value="moderator">🛡️ Модераторский</option><option value="admin">👑 Админский</option></select>
+                        <select id="newPromoType">
+                            <option value="candy">🍬 Конфетный</option>
+                            <option value="lollipop">🍭 Леденцовый</option>
+                            <option value="moderator">🛡️ Модераторский</option>
+                            <option value="admin">👑 Админский</option>
+                        </select>
                         <input type="text" id="newPromoCode" placeholder="${t('newPromoCode')}">
                         <input type="number" id="newPromoReward" placeholder="${t('reward')}" value="100" min="1">
                         <input type="number" id="newPromoUses" placeholder="${t('uses')}" value="0" min="0">
@@ -2433,12 +2459,27 @@
         let reward = parseInt(document.getElementById('newPromoReward')?.value);
         let uses = parseInt(document.getElementById('newPromoUses')?.value);
         let code = codeInput || (type === 'moderator' ? 'MODER-' + Math.floor(1000 + Math.random() * 9000) : 'PROMO-' + Math.floor(1000 + Math.random() * 9000));
-        if (type === 'candy' && (isNaN(reward) || reward <= 0)) { showNotification(t('enterValidReward'), 'error'); return; }
+
+        if ((type === 'candy' || type === 'lollipop') && (isNaN(reward) || reward <= 0)) {
+            showNotification(t('enterValidReward'), 'error');
+            return;
+        }
+
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         if (promoCodes[code]) { showNotification(t('codeExists'), 'error'); return; }
-        if (type === 'candy') { promoCodes[code] = { type: 'candy', reward, uses: uses === 0 ? Infinity : uses, createdBy: currentUser || 'admin' }; localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes)); }
-        else if (type === 'moderator') { moderatorCodes[code] = { active: true, createdAt: Date.now() }; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); }
-        else if (type === 'admin') { promoCodes[code] = { type: 'admin', uses: 1, createdBy: currentUser || 'admin' }; localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes)); }
+
+        if (type === 'candy' || type === 'lollipop') {
+            let usesVal = uses === 0 ? Infinity : uses;
+            promoCodes[code] = { type, reward, uses: usesVal, createdBy: currentUser || 'admin' };
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        } else if (type === 'moderator') {
+            moderatorCodes[code] = { active: true, createdAt: Date.now() };
+            localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+        } else if (type === 'admin') {
+            promoCodes[code] = { type: 'admin', uses: 1, createdBy: currentUser || 'admin' };
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+        }
+
         renderAdminPanel();
         showNotification(t('codeAdded', { code }), 'success');
     }

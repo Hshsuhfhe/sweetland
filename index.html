@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- EmailJS library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* ========== ЗАЩИТА ОТ КОПИРОВАНИЯ ========== */
         * {
@@ -55,14 +57,14 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
             --header-bg: rgba(250, 247, 245, 0.95);
         }
-        body.pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --bg: #1a0f14; --bg-secondary: #241a1f; --text: #fff0f5; --text-secondary: #ffc0cb; --border: rgba(255, 102, 178, 0.3); --neon: #ff66b2; }
-        body.blue { --accent: #4d9eff; --accent-light: #6eb3ff; --accent-dark: #3a7acc; --bg: #0f1a24; --bg-secondary: #1a2733; --text: #e6f0ff; --border: rgba(77, 158, 255, 0.3); --neon: #4d9eff; }
-        body.green { --accent: #4caf50; --accent-light: #6ec071; --accent-dark: #3d8c40; --bg: #0f1a11; --bg-secondary: #1a2a1d; --text: #e8f5e9; --border: rgba(76, 175, 80, 0.3); --neon: #4caf50; }
-        body.orange { --accent: #ff9800; --accent-light: #ffb74d; --accent-dark: #f57c00; --bg: #1f1a0f; --bg-secondary: #2a241a; --text: #fff3e0; --border: rgba(255, 152, 0, 0.3); --neon: #ff9800; }
-        body.purple { --accent: #9c27b0; --accent-light: #ba68c8; --accent-dark: #7b1fa2; --bg: #1a0f1f; --bg-secondary: #251a2a; --text: #f3e5f5; --border: rgba(156, 39, 176, 0.3); --neon: #9c27b0; }
-        body.yellow { --accent: #ffd700; --accent-light: #ffe44d; --accent-dark: #e6c300; --bg: #1a1a0f; --bg-secondary: #2a2a1a; --text: #fffff0; --border: rgba(255, 215, 0, 0.3); --neon: #ffd700; }
-        body.red { --accent: #ff4444; --accent-light: #ff6666; --accent-dark: #cc3333; --bg: #1a0f0f; --bg-secondary: #2a1a1a; --text: #fff0f0; --border: rgba(255, 68, 68, 0.3); --neon: #ff4444; }
-        body.teal { --accent: #008080; --accent-light: #20b2aa; --accent-dark: #006666; --bg: #0f1a1a; --bg-secondary: #1a2a2a; --text: #e0ffff; --border: rgba(0, 128, 128, 0.3); --neon: #008080; }
+        body.pink { --accent: #ff66b2; --accent-light: #ff85c2; --accent-dark: #e64d9e; --bg: #1a0f14; --bg-secondary: #241a1f; --text: #fff0f5; --text-secondary: #ffc0cb; --border: rgba(255, 102, 178, 0.3); }
+        body.blue { --accent: #4d9eff; --accent-light: #6eb3ff; --accent-dark: #3a7acc; --bg: #0f1a24; --bg-secondary: #1a2733; --text: #e6f0ff; --border: rgba(77, 158, 255, 0.3); }
+        body.green { --accent: #4caf50; --accent-light: #6ec071; --accent-dark: #3d8c40; --bg: #0f1a11; --bg-secondary: #1a2a1d; --text: #e8f5e9; --border: rgba(76, 175, 80, 0.3); }
+        body.orange { --accent: #ff9800; --accent-light: #ffb74d; --accent-dark: #f57c00; --bg: #1f1a0f; --bg-secondary: #2a241a; --text: #fff3e0; --border: rgba(255, 152, 0, 0.3); }
+        body.purple { --accent: #9c27b0; --accent-light: #ba68c8; --accent-dark: #7b1fa2; --bg: #1a0f1f; --bg-secondary: #251a2a; --text: #f3e5f5; --border: rgba(156, 39, 176, 0.3); }
+        body.yellow { --accent: #ffd700; --accent-light: #ffe44d; --accent-dark: #e6c300; --bg: #1a1a0f; --bg-secondary: #2a2a1a; --text: #fffff0; --border: rgba(255, 215, 0, 0.3); }
+        body.red { --accent: #ff4444; --accent-light: #ff6666; --accent-dark: #cc3333; --bg: #1a0f0f; --bg-secondary: #2a1a1a; --text: #fff0f0; --border: rgba(255, 68, 68, 0.3); }
+        body.teal { --accent: #008080; --accent-light: #20b2aa; --accent-dark: #006666; --bg: #0f1a1a; --bg-secondary: #1a2a2a; --text: #e0ffff; --border: rgba(0, 128, 128, 0.3); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -95,7 +97,7 @@
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
-        /* ========== ПОГОДА (ПРОСТЫЕ ЧАСТИЦЫ, БЕЗ ЭМОДЗИ) ========== */
+        /* ========== ПОГОДА (ПРОСТЫЕ ЧАСТИЦЫ) ========== */
         #weather {
             position: fixed; top: -20vh; left: 0; width: 100%; height: 120vh;
             pointer-events: none; z-index: 1; overflow: hidden;
@@ -119,7 +121,7 @@
             filter: blur(0.5px);
         }
         .candy-particle {
-            background: #ff69b4; /* розовый, как конфеты */
+            background: #ff69b4;
             box-shadow: 0 0 12px #ff69b4;
         }
         @keyframes fall {
@@ -264,7 +266,7 @@
         @keyframes logoGlow { 0%,100% { text-shadow: 0 0 10px var(--accent); } 50% { text-shadow: 0 0 40px var(--accent); } }
         .panel-links {
             display: flex; flex-direction: column; gap: 10px;
-            flex: 1; /* занимает доступное пространство */
+            flex: 1;
         }
         .panel-links a {
             display: flex; align-items: center; gap: 15px;
@@ -345,14 +347,13 @@
         }
         .section-title:hover span::after { transform: scaleX(1); }
 
-        /* ИСПРАВЛЕННАЯ СТАТИСТИКА — теперь карточки строго по центру */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto 40px;
-            place-items: center; /* центрирует элементы и по горизонтали, и по вертикали */
+            place-items: center;
         }
         .stat-card {
             width: 100%;
@@ -363,7 +364,7 @@
             border-radius: 25px;
             border: 2px solid var(--border);
             transition: 0.3s;
-            text-align: center; /* дополнительно центрируем текст */
+            text-align: center;
         }
         .stat-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: var(--shadow-accent); }
         .stat-number { font-size: 44px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
@@ -603,7 +604,7 @@
         .shop-card button.success { background: var(--success); }
         .shop-card button.danger { background: var(--danger); }
 
-        /* ========== ЛИНЕЙНЫЙ ГРАФИК ========== */
+        /* ========== УЛУЧШЕННЫЙ ГРАФИК ========== */
         .graph-container {
             position: relative;
             width: 100%;
@@ -974,7 +975,7 @@
     <!-- ГЕРОЙ -->
     <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%238a4cdd\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Arial\' font-size=\'40\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E';"></div></div><div id="copyNotice" data-key="copyNotice">IP скопирован</div></header>
 
-    <!-- СТАТИСТИКА (исправлено центрирование) -->
+    <!-- СТАТИСТИКА -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-key="statsDonate">Доната</div></div></div></section>
 
     <!-- ОСОБЕННОСТИ -->
@@ -1035,6 +1036,16 @@
 
 <script>
 (function() {
+    // ========== ИНИЦИАЛИЗАЦИЯ EMAILJS ==========
+    (function() {
+        emailjs.init('jlf5eIKN7TZ8SMquH');
+    })();
+
+    // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
+    const mainContent = document.getElementById('mainContent');
+    const candyShopScreen = document.getElementById('candyShopScreen');
+    const candyShopContent = document.getElementById('candyShopContent');
+
     // ========== ЗАЩИТА ОТ КОПИРОВАНИЯ ==========
     document.addEventListener('copy', (e) => e.preventDefault());
     document.addEventListener('cut', (e) => e.preventDefault());
@@ -1044,7 +1055,7 @@
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
     });
 
-    // ========== ПЕРЕМЕННЫЕ ==========
+    // ========== ПЕРЕМЕННЫЕ СОСТОЯНИЯ ==========
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
@@ -1062,7 +1073,7 @@
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
     let moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
 
-    // ========== ИНИЦИАЛИЗАЦИЯ ПО УМОЛЧАНИЮ ==========
+    // ========== ДЕФОЛТНЫЙ АДМИН ==========
     if (!usersDB['Gyraffic']) {
         usersDB['Gyraffic'] = {
             password: '75813000gyraff',
@@ -1070,7 +1081,7 @@
             ip: null,
             candies: 10000,
             lollipops: 5000,
-            history: Array(48).fill(10000),
+            history: Array(168).fill(10000), // 168 точек (неделя почасово)
             regDate: Date.now(),
             lastLogin: null,
             role: 'admin',
@@ -1082,6 +1093,7 @@
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     }
 
+    // ========== ДЕФОЛТНЫЕ ПРОМОКОДЫ ==========
     if (Object.keys(promoCodes).length === 0) {
         promoCodes = {
             'SWEET100': { type: 'candy', reward: 100, uses: Infinity, createdBy: 'system' },
@@ -1932,7 +1944,7 @@
     setInterval(updateClock, 1000);
     document.getElementById('onlineNumber').innerText = '0';
 
-    // ========== ЛИНЕЙНЫЙ ГРАФИК ==========
+    // ========== УЛУЧШЕННЫЙ ГРАФИК ==========
     function drawLineGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1941,6 +1953,7 @@
         let h = canvas.height = canvas.clientHeight;
 
         ctx.clearRect(0, 0, w, h);
+
         if (!history || history.length < 2) return;
 
         let maxVal = Math.max(...history, 1);
@@ -1962,11 +1975,12 @@
             ctx.fillText(val.toLocaleString(), 10, y + 4);
         }
 
-        // Вертикальные линии времени
-        let steps = Math.min(history.length, 8);
+        // Вертикальные линии времени (до 12 меток)
+        let totalPoints = history.length;
+        let steps = Math.min(12, totalPoints);
         for (let i = 0; i < steps; i++) {
-            let idx = Math.floor((i / (steps - 1)) * (history.length - 1));
-            let x = 50 + (idx / (history.length - 1)) * (w - 80);
+            let idx = Math.floor((i / (steps - 1)) * (totalPoints - 1));
+            let x = 50 + (idx / (totalPoints - 1)) * (w - 80);
             ctx.beginPath();
             ctx.moveTo(x, 30);
             ctx.lineTo(x, h - 30);
@@ -1974,17 +1988,37 @@
             ctx.stroke();
 
             let date = new Date();
-            date.setHours(date.getHours() - (history.length - 1 - idx));
+            date.setHours(date.getHours() - (totalPoints - 1 - idx));
             let timeStr = date.toLocaleTimeString(currentLang === 'ru' ? 'ru-RU' : 'en-US', {
                 hour: '2-digit',
-                minute: '2-digit'
+                minute: '2-digit',
+                day: '2-digit',
+                month: '2-digit'
             });
             ctx.fillStyle = 'rgba(255,255,255,0.5)';
             ctx.font = '10px Inter';
-            ctx.fillText(timeStr, x - 20, h - 10);
+            ctx.fillText(timeStr, x - 25, h - 10);
         }
 
-        // Рисуем линию (синюю)
+        // Градиент под линией
+        let gradient = ctx.createLinearGradient(0, 0, 0, h);
+        gradient.addColorStop(0, 'rgba(77, 158, 255, 0.3)');
+        gradient.addColorStop(1, 'rgba(77, 158, 255, 0)');
+
+        ctx.beginPath();
+        for (let i = 0; i < history.length; i++) {
+            let x = 50 + (i / (history.length - 1)) * (w - 80);
+            let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.lineTo(50 + (history.length - 1) / (history.length - 1) * (w - 80), h - 30);
+        ctx.lineTo(50, h - 30);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Линия
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
         ctx.lineWidth = 3;
@@ -2000,20 +2034,20 @@
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // Рисуем точки на линии для лучшего наведения
+        // Точки (каждая 6-я для чистоты)
         ctx.fillStyle = '#4d9eff';
         ctx.shadowBlur = 10;
         ctx.shadowColor = '#4d9eff';
-        for (let i = 0; i < history.length; i++) {
+        for (let i = 0; i < history.length; i += Math.ceil(history.length / 30)) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
             let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.arc(x, y, 4, 0, 2 * Math.PI);
             ctx.fill();
         }
         ctx.shadowBlur = 0;
 
-        // Сохраняем точки для тултипа
+        // Точки для тултипа
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -2030,7 +2064,7 @@
             let bestDist = Infinity;
             for (let p of points) {
                 let dist = Math.hypot(p.x - mouseX, p.y - mouseY);
-                if (dist < bestDist && dist < 70) {
+                if (dist < bestDist && dist < 50) {
                     bestDist = dist;
                     best = p;
                 }
@@ -2064,7 +2098,7 @@
         };
     }
 
-    // Функция для добавления новой точки в историю (имитация каждого часа)
+    // Функция для добавления новой точки в историю (каждый час)
     function addHistoryPoint() {
         if (!currentUser) return;
         let user = usersDB[currentUser];
@@ -2077,7 +2111,7 @@
             if (canvas) drawLineGraph(user.history, 'candyLineGraph', 'graphTooltip');
         }
     }
-    setInterval(addHistoryPoint, 60000);
+    setInterval(addHistoryPoint, 60000); // каждую минуту для демо (в реальности лучше раз в час)
 
     // ========== ФУНКЦИИ МАГАЗИНА ==========
     function renderCandyShop() {
@@ -2091,7 +2125,7 @@
 
         let candies = user.candies || 0;
         let lollipops = user.lollipops || 0;
-        let history = user.history || Array(48).fill(candies);
+        let history = user.history || Array(168).fill(candies);
 
         let html = `
             <div class="language-selector">
@@ -2175,6 +2209,7 @@
     function applyPromoCode() {
         let code = document.getElementById('promoCode')?.value.trim().toUpperCase();
         if (!code) return;
+        // Проверка на административный код
         if (code === 'ADMIN-GYRAFFIC-2026') {
             if (!currentUser) { showNotification(t('loginFirst'), 'error'); return; }
             if (currentUser.toLowerCase() !== 'gyraffic') { showNotification(t('adminCodeOnly'), 'error'); return; }
@@ -2269,7 +2304,7 @@
         if (findUser(name)) { showNotification(t('userExists'), 'error'); return; }
         usersDB[name] = {
             password: pass, email: email, ip: userIP, candies: 100, lollipops: 0,
-            history: Array(48).fill(100), regDate: Date.now(), lastLogin: Date.now(),
+            history: Array(168).fill(100), regDate: Date.now(), lastLogin: Date.now(),
             role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1
         };
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
@@ -2490,7 +2525,7 @@
         let val = parseInt(inp.value);
         if (isNaN(val) || val < 0) { showNotification(t('enterValidNumber'), 'error'); return; }
         usersDB[username].candies = val;
-        usersDB[username].history = Array(48).fill(val);
+        usersDB[username].history = Array(168).fill(val);
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         renderAdminPanel();
         showNotification(t('candiesSet'), 'success');

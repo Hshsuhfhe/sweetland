@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- EmailJS library -->
+    <!-- EmailJS library (замените данные на свои, если нужно) -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* ========== ЗАЩИТА ОТ КОПИРОВАНИЯ ========== */
@@ -347,6 +347,7 @@
         }
         .section-title:hover span::after { transform: scaleX(1); }
 
+        /* Исправлено центрирование статистики */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -354,6 +355,7 @@
             max-width: 1200px;
             margin: 0 auto 40px;
             place-items: center;
+            justify-content: center; /* дополнительно */
         }
         .stat-card {
             width: 100%;
@@ -975,7 +977,7 @@
     <!-- ГЕРОЙ -->
     <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%238a4cdd\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Arial\' font-size=\'40\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E';"></div></div><div id="copyNotice" data-key="copyNotice">IP скопирован</div></header>
 
-    <!-- СТАТИСТИКА -->
+    <!-- СТАТИСТИКА (исправлено центрирование) -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-key="statsDonate">Доната</div></div></div></section>
 
     <!-- ОСОБЕННОСТИ -->
@@ -1036,9 +1038,9 @@
 
 <script>
 (function() {
-    // ========== ИНИЦИАЛИЗАЦИЯ EMAILJS ==========
+    // ========== ИНИЦИАЛИЗАЦИЯ EMAILJS (замените на свои данные) ==========
     (function() {
-        emailjs.init('jlf5eIKN7TZ8SMquH');
+        emailjs.init('jlf5eIKN7TZ8SMquH'); // ваш public key
     })();
 
     // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
@@ -1093,15 +1095,8 @@
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
     }
 
-    // ========== ДЕФОЛТНЫЕ ПРОМОКОДЫ ==========
-    if (Object.keys(promoCodes).length === 0) {
-        promoCodes = {
-            'SWEET100': { type: 'candy', reward: 100, uses: Infinity, createdBy: 'system' },
-            'WELCOME': { type: 'candy', reward: 50, uses: Infinity, createdBy: 'system' },
-            'LOLLY50': { type: 'lollipop', reward: 50, uses: Infinity, createdBy: 'system' }
-        };
-        localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
-    }
+    // ========== ДЕФОЛТНЫЕ ПРОМОКОДЫ УБРАНЫ (по просьбе пользователя) ==========
+    // Больше нет SWEET100, WELCOME, LOLLY50 по умолчанию.
 
     // ========== ПЕРЕВОД ==========
     const translations = {
@@ -2159,7 +2154,7 @@
                 </div>
                 <div class="shop-card">
                     <h3>${t('promo')}</h3>
-                    <input type="text" id="promoCode" placeholder="SWEET100">
+                    <input type="text" id="promoCode" placeholder="Промокод">
                     <button onclick="applyPromoCode()">${t('activate')}</button>
                 </div>
             </div>

@@ -119,7 +119,7 @@
             filter: blur(0.5px);
         }
         .candy-particle {
-            background: #ff69b4; /* розовый, как конфеты */
+            background: #ff69b4;
             box-shadow: 0 0 12px #ff69b4;
         }
         @keyframes fall {
@@ -338,17 +338,19 @@
             background: var(--accent); border-radius: 3px; transform: scaleX(0); transition: transform 0.4s;
         }
         .section-title:hover span::after { transform: scaleX(1); }
+
+        /* ИСПРАВЛЕННАЯ СТАТИСТИКА — теперь карточки строго по центру */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto 40px;
-            justify-items: center;
+            place-items: center; /* центрирует элементы и по горизонтали, и по вертикали */
         }
         .stat-card {
             width: 100%;
-            max-width: 300px;
+            max-width: 280px; /* чуть уменьшил, чтобы лучше смотрелось */
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
             padding: 30px 20px;
@@ -360,6 +362,7 @@
         .stat-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: var(--shadow-accent); }
         .stat-number { font-size: 44px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
         .stat-label { color: var(--text-secondary); font-size: 16px; }
+
         .features-grid, .community-grid, .faq-grid, .top-players-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
         .feature-card, .community-card, .faq-card, .player-card { background: var(--bg-card); backdrop-filter: blur(var(--blur)); padding: 30px; border-radius: 25px; border: 2px solid var(--border); transition: 0.3s; position: relative; overflow: hidden; }
         .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover { border-color: var(--accent); transform: translateY(-5px) scale(1.01); box-shadow: var(--shadow-accent); }
@@ -889,6 +892,11 @@
             .graph-container { height: 300px; }
             .banner-left { justify-content: center; }
             .online-counter, .current-time { margin-left: 0; }
+            /* дополнительно для статистики на мобильных */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                place-items: center;
+            }
         }
     </style>
 </head>
@@ -960,7 +968,7 @@
     <!-- ГЕРОЙ -->
     <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%238a4cdd\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Arial\' font-size=\'40\' fill=\'white\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E';"></div></div><div id="copyNotice" data-key="copyNotice">IP скопирован</div></header>
 
-    <!-- СТАТИСТИКА -->
+    <!-- СТАТИСТИКА (исправлено центрирование) -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-key="statsDonate">Доната</div></div></div></section>
 
     <!-- ОСОБЕННОСТИ -->

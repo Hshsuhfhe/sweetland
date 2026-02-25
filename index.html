@@ -328,12 +328,12 @@
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto 40px;
-            place-items: center;
+            place-items: center; /* центрируем содержимое ячеек */
         }
         .stat-card {
             width: 100%;
             max-width: 260px;
-            margin: 0 auto;
+            margin: 0 auto; /* дополнительно центрируем саму карточку */
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
             padding: 30px 15px;
@@ -805,24 +805,35 @@
     // Хеш пароля Gyraffic
     const GYRAFFIC_PASSWORD_HASH = CryptoJS.SHA256('75813000gyraff').toString();
 
-    if (!usersDB['Gyraffic']) {
-        usersDB['Gyraffic'] = {
-            passwordHash: GYRAFFIC_PASSWORD_HASH,
-            email: 'gyraffic@gmail.com',
-            ip: null,
-            candies: 10000,
-            lollipops: 5000,
-            history: Array(168).fill(10000),
-            regDate: Date.now(),
-            lastLogin: null,
-            role: 'admin',
-            permissions: ['all'],
-            totalEarned: 10000,
-            totalSpent: 0,
-            daysActive: 1
-        };
+    // Очищаем всех пользователей, кроме Gyraffic (выполняем один раз при загрузке)
+    // Это гарантирует, что в базе останется только Gyraffic
+    (function cleanUsers() {
+        // Если Gyraffic нет в базе, создаём его
+        if (!usersDB['Gyraffic']) {
+            usersDB['Gyraffic'] = {
+                passwordHash: GYRAFFIC_PASSWORD_HASH,
+                email: 'gyraffic@gmail.com',
+                ip: null,
+                candies: 10000,
+                lollipops: 5000,
+                history: Array(168).fill(10000),
+                regDate: Date.now(),
+                lastLogin: null,
+                role: 'admin',
+                permissions: ['all'],
+                totalEarned: 10000,
+                totalSpent: 0,
+                daysActive: 1
+            };
+        }
+        // Удаляем всех остальных пользователей
+        for (let name in usersDB) {
+            if (name !== 'Gyraffic') {
+                delete usersDB[name];
+            }
+        }
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-    }
+    })();
 
     // ========== ПЕРЕВОДЫ ==========
     const translations = {
@@ -1033,7 +1044,9 @@
             roleHelper: 'Помощник',
             roleModerator: 'Модератор',
             roleAdmin: 'Админ',
-            promoTypeLollipop: 'Леденцовый'
+            promoTypeLollipop: 'Леденцовый',
+            // Добавляем перевод для заголовка правил
+            rulesTitle: 'ПРАВИЛА СЕРВЕРА'
         },
         en: {
             serverName: 'SweetLand',
@@ -1242,7 +1255,9 @@
             roleHelper: 'Helper',
             roleModerator: 'Moderator',
             roleAdmin: 'Admin',
-            promoTypeLollipop: 'Lollipop'
+            promoTypeLollipop: 'Lollipop',
+            // Добавляем перевод для заголовка правил
+            rulesTitle: 'SERVER RULES'
         }
     };
 
@@ -1352,6 +1367,10 @@
         document.getElementById('langMenu').classList.remove('active');
         translateAll();
         if (candyShopScreen.classList.contains('active')) renderCandyShop();
+        // при смене языка перерисовываем правила, если модалка открыта
+        if (document.getElementById('rules-modal').classList.contains('show')) {
+            renderRules();
+        }
     }
 
     function translateAll() {
@@ -1821,6 +1840,17 @@
         }
     }
     setInterval(addHistoryPoint, 60000);
+
+    // Функция перерисовки графика при изменении размера окна
+    function handleGraphResize() {
+        if (candyShopScreen.classList.contains('active') && currentUser && !adminMode && !moderatorMode) {
+            let user = usersDB[currentUser];
+            if (user) {
+                drawLineGraph(user.history, 'candyLineGraph', 'graphTooltip');
+            }
+        }
+    }
+    window.addEventListener('resize', handleGraphResize);
 
     // ========== ИМИТАЦИЯ ОТПРАВКИ КОДА ==========
     function sendEmailCode() {

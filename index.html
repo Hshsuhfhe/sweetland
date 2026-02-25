@@ -7,10 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- CryptoJS for SHA-256 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        /* ========== ЗАЩИТА ОТ КОПИРОВАНИЯ ========== */
+        /* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -25,7 +23,6 @@
             user-select: text;
         }
 
-        /* ========== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ========== */
         :root {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -103,11 +100,11 @@
             position: fixed; top: -20vh; left: 0; width: 100%; height: 120vh;
             pointer-events: none; z-index: 1; overflow: hidden;
         }
-        .snow-particle, .rain-particle, .candy-particle {
+        .snow-particle, .rain-particle {
             position: absolute;
             width: 6px;
             height: 6px;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255,255,255,0.4);
             border-radius: 50%;
             opacity: 0;
             filter: blur(1px);
@@ -116,15 +113,38 @@
         .rain-particle {
             width: 2px;
             height: 20px;
-            background: rgba(120, 144, 156, 0.5);
+            background: rgba(120,144,156,0.5);
             border-radius: 0;
         }
         .candy-particle {
-            background: #ff99cc;
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: transparent;
+            opacity: 0;
+            animation: candyFall linear infinite;
+            transform-origin: center;
         }
+        .candy-particle::before {
+            content: '🍬';
+            position: absolute;
+            font-size: 16px;
+            line-height: 1;
+            color: #ff99cc;
+            text-shadow: 0 0 5px #ff66b2;
+            transform: rotate(var(--rot));
+        }
+        .candy-particle.style1::before { content: '🍭'; color: #ff66b2; }
+        .candy-particle.style2::before { content: '🍫'; color: #d2691e; }
+        .candy-particle.style3::before { content: '🍬'; color: #ff99cc; }
+        .candy-particle.style4::before { content: '🍡'; color: #ffb6c1; }
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0); opacity: 0.4; }
             100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
+        }
+        @keyframes candyFall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(110vh) translateX(30px) rotate(360deg); opacity: 0.2; }
         }
 
         /* ========== ПАНЕЛЬ УПРАВЛЕНИЯ ========== */
@@ -275,11 +295,13 @@
         .hero-tagline { font-size: clamp(16px, 3vw, 18px); color: var(--text-secondary); margin-bottom: 30px; max-width: 600px; }
         .ip-container { display: flex; gap: 15px; flex-wrap: wrap; }
         .btn-ip {
-            background: var(--accent); color: #fff; border: none; padding: 12px 28px; border-radius: 12px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: #fff; border: none; padding: 12px 28px; border-radius: 12px;
             font-weight: 500; font-size: clamp(14px, 3vw, 16px); transition: 0.2s;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2); flex: 1 1 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); flex: 1 1 auto;
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        .btn-ip:hover { background: var(--accent-light); transform: translateY(-2px); }
+        .btn-ip:hover { background: linear-gradient(145deg, var(--accent-light), var(--accent)); transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent); }
         .btn-version { background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border); padding: 12px 28px; border-radius: 12px; font-weight: 500; font-size: clamp(14px, 3vw, 16px); cursor: default; backdrop-filter: blur(8px); flex: 0 1 auto; }
         .giant-img { width: 100%; max-width: 500px; height: auto; filter: drop-shadow(0 0 20px rgba(0,0,0,0.5)); border-radius: 20px; object-fit: contain; }
         #copyNotice {
@@ -299,7 +321,7 @@
         }
         .section-title:hover span::after { transform: scaleX(1); }
 
-        /* СТАТИСТИКА */
+        /* ========== СТАТИСТИКА (ЦЕНТРИРОВАНА) ========== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -307,11 +329,11 @@
             max-width: 1200px;
             margin: 0 auto 40px;
             place-items: center;
-            justify-content: center;
         }
         .stat-card {
             width: 100%;
             max-width: 260px;
+            margin: 0 auto;
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
             padding: 30px 15px;
@@ -324,8 +346,21 @@
         .stat-number { font-size: 40px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
         .stat-label { color: var(--text-secondary); font-size: 15px; }
 
-        .features-grid, .community-grid, .faq-grid, .top-players-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
-        .feature-card, .community-card, .faq-card, .player-card { background: var(--bg-card); backdrop-filter: blur(var(--blur)); padding: 25px; border-radius: 20px; border: 1px solid var(--border); transition: 0.2s; }
+        .features-grid, .community-grid, .faq-grid, .top-players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .feature-card, .community-card, .faq-card, .player-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: 0.2s;
+        }
         .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover { border-color: var(--accent); }
         .feature-icon, .community-icon, .faq-card .icon { font-size: 36px; color: var(--accent); margin-bottom: 12px; display: inline-block; }
         .feature-card h3, .community-card h3, .faq-card h3, .player-info h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
@@ -396,11 +431,13 @@
         .candy-shop-content { max-width: 1200px; margin: 0 auto; background: var(--bg); border: none; border-radius: 0; padding: 80px 20px 40px; }
         .close-shop-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: #fff; border: none; padding: 12px 36px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: #fff; border: none; padding: 12px 36px;
             border-radius: 40px; font-weight: 500; font-size: 16px; transition: 0.2s;
-            cursor: pointer; z-index: 10001; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            cursor: pointer; z-index: 10001; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        .close-shop-btn:hover { background: var(--accent-light); transform: translateX(-50%) scale(1.02); }
+        .close-shop-btn:hover { background: linear-gradient(145deg, var(--accent-light), var(--accent)); transform: translateX(-50%) scale(1.02); box-shadow: 0 6px 20px var(--accent); }
         .candy-shop-title { font-size: 42px; font-weight: 600; color: var(--accent); text-align: center; margin-bottom: 30px; }
         .balance-row { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 15px 25px; margin-bottom: 20px; font-size: 20px; border: 1px solid var(--border); }
         .balance-row span:last-child { font-size: 32px; font-weight: 600; }
@@ -411,22 +448,84 @@
         .stat-card h4 { color: var(--text-secondary); font-size: 13px; margin-bottom: 8px; }
         .stat-card .value { font-size: 28px; font-weight: 600; color: var(--accent); }
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0; }
-        .shop-card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid var(--border); padding: 20px; transition: 0.2s; }
+        .shop-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            transition: 0.2s;
+        }
         .shop-card:hover { border-color: var(--accent); }
-        .shop-card h3 { font-size: 20px; margin-bottom: 15px; color: var(--accent); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+        .shop-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
         .shop-card input, .shop-card select, .shop-card textarea {
-            width: 100%; padding: 10px 15px; margin: 8px 0; background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border); border-radius: 30px; color: var(--text); font-size: 14px;
+            width: 100%;
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text);
+            font-size: 14px;
         }
         .shop-card input:focus, .shop-card select:focus { border-color: var(--accent); outline: none; }
         .shop-card button {
-            background: var(--accent); color: white; border: none; border-radius: 30px;
-            padding: 10px 18px; font-weight: 500; transition: 0.2s; cursor: pointer; width: 100%;
-            margin: 8px 0; font-size: 14px;
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 18px;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: pointer;
+            width: 100%;
+            margin: 8px 0;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        .shop-card button:hover { background: var(--accent-light); }
-        .shop-card button.success { background: var(--success); }
-        .shop-card button.danger { background: var(--danger); }
+        .shop-card button:hover {
+            background: linear-gradient(145deg, var(--accent-light), var(--accent));
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px var(--accent);
+        }
+        .shop-card button.success {
+            background: linear-gradient(145deg, #00c853, #009624);
+        }
+        .shop-card button.danger {
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+        }
+
+        /* ========== КНОПКА ВЫХОДА ========== */
+        .logout-btn {
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            padding: 12px 30px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(255,68,68,0.3);
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .logout-btn:hover {
+            background: linear-gradient(145deg, #ff6666, #ee4444);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,68,68,0.5);
+        }
 
         /* ========== ГРАФИК ========== */
         .graph-container {
@@ -475,7 +574,7 @@
             border-top: 6px solid var(--accent);
         }
 
-        /* ========== АДМИНКА ========== */
+        /* ========== АДМИН-ПАНЕЛЬ ========== */
         .admin-panel { width: 100%; min-height: 100vh; background: var(--bg); padding: 20px; }
         .admin-title { color: var(--danger); font-size: 32px; text-align: center; margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; }
         .admin-controls { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
@@ -498,14 +597,47 @@
         .promo-item { display: flex; gap: 10px; align-items: center; margin: 10px 0; flex-wrap: wrap; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 20px; }
         .promo-item input, .promo-item select { padding: 6px 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 20px; color: var(--text); flex: 1; min-width: 100px; }
         .promo-item button { background: rgba(255,68,68,0.2); border: 1px solid var(--danger); color: #fff; padding: 6px 12px; border-radius: 20px; cursor: pointer; }
-        .back-to-shop { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 12px; border-radius: 30px; width: 100%; font-weight: 500; transition: 0.2s; margin-top: 20px; cursor: pointer; }
-        .back-to-shop:hover { background: var(--accent); color: #fff; }
+        .back-to-shop {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px;
+            border-radius: 30px;
+            width: 100%;
+            font-weight: 500;
+            transition: 0.2s;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .back-to-shop:hover {
+            background: var(--accent);
+            color: #fff;
+        }
 
+        /* ========== АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ========== */
         @media (max-width: 768px) {
             .banner-center { display: none; }
             .control-panel { top: 65px; }
             .graph-container { height: 300px; }
-            .stats-grid { grid-template-columns: 1fr; }
+            .hero-content { text-align: center; }
+            .ip-container { justify-content: center; }
+            .title { font-size: clamp(36px, 15vw, 60px); }
+            .hero-tagline { font-size: 16px; }
+            .btn-ip, .btn-version { padding: 10px 20px; font-size: 14px; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-section a { justify-content: center; }
+            .candy-shop-title { font-size: 32px; }
+            .balance-row { flex-direction: column; gap: 10px; text-align: center; }
+            .balance-row span:last-child { font-size: 28px; }
+            .shop-grid { grid-template-columns: 1fr; }
+            .stat-card .value { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .shop-banner { padding: 8px 15px; }
+            .banner-left { font-size: 16px; }
+            .online-counter, .current-time { font-size: 12px; padding: 2px 8px; }
+            .control-panel { gap: 5px; }
+            .theme-icon, .color-btn, .lang-btn, .weather-btn, .settings-btn { width: 40px; height: 40px; font-size: 18px; }
         }
     </style>
 </head>
@@ -577,7 +709,7 @@
     <!-- ГЕРОЙ -->
     <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23333\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23fff\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E';"></div></div><div id="copyNotice" data-key="copyNotice">IP скопирован</div></header>
 
-    <!-- СТАТИСТИКА -->
+    <!-- СТАТИСТИКА (ЦЕНТРИРОВАНА) -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-key="statsDonate">Доната</div></div></div></section>
 
     <!-- ОСОБЕННОСТИ -->
@@ -638,9 +770,6 @@
 
 <script>
 (function() {
-    // ========== EmailJS ==========
-    emailjs.init('jlf5eIKN7TZ8SMquH');
-
     // ========== ГЛОБАЛЬНЫЕ ЭЛЕМЕНТЫ ==========
     const mainContent = document.getElementById('mainContent');
     const candyShopScreen = document.getElementById('candyShopScreen');
@@ -667,7 +796,7 @@
     let userFilter = '';
     let userSort = 'name';
     let userIP = null;
-    let pendingEmailCodes = {};
+    let pendingCodes = {}; // для имитации отправки кода
 
     let usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
@@ -1251,23 +1380,34 @@
         let type = currentWeather;
         if (type === 'auto') type = document.body.classList.contains('light') ? 'rain' : 'snow';
         if (type === 'none') return;
-        const count = window.innerWidth < 768 ? 100 : 250;
-        for (let i = 0; i < count; i++) {
-            let p = document.createElement('div');
-            if (type === 'rain') {
-                p.className = 'rain-particle';
-            } else if (type === 'snow') {
-                p.className = 'snow-particle';
-            } else if (type === 'candy') {
+
+        if (type === 'candy') {
+            const count = window.innerWidth < 768 ? 60 : 150;
+            for (let i = 0; i < count; i++) {
+                let p = document.createElement('div');
                 p.className = 'candy-particle';
-            } else {
-                continue;
+                const style = Math.floor(Math.random() * 4) + 1;
+                p.classList.add(`style${style}`);
+                const rot = Math.random() * 360;
+                p.style.setProperty('--rot', rot + 'deg');
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                p.style.animationDelay = Math.random() * -3 + 's';
+                p.style.opacity = Math.random() * 0.7 + 0.3;
+                weatherContainer.appendChild(p);
             }
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = Math.random() * 3 + 2 + 's';
-            p.style.animationDelay = Math.random() * -2 + 's';
-            p.style.opacity = Math.random() * 0.5 + 0.3;
-            weatherContainer.appendChild(p);
+        } else {
+            const count = window.innerWidth < 768 ? 100 : 250;
+            for (let i = 0; i < count; i++) {
+                let p = document.createElement('div');
+                if (type === 'rain') p.className = 'rain-particle';
+                else p.className = 'snow-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = Math.random() * 3 + 2 + 's';
+                p.style.animationDelay = Math.random() * -2 + 's';
+                p.style.opacity = Math.random() * 0.5 + 0.3;
+                weatherContainer.appendChild(p);
+            }
         }
     }
 
@@ -1536,7 +1676,7 @@
     setInterval(updateClock, 1000);
     document.getElementById('onlineNumber').innerText = '0';
 
-    // ========== ГРАФИК (БЕЗ ТОЧЕК) ==========
+    // ========== ГРАФИК (БЕЗ ВИДИМЫХ ТОЧЕК) ==========
     function drawLineGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -1622,7 +1762,7 @@
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // Точки не рисуем
+        // Сохраняем все точки для тултипов (но не рисуем)
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -1681,6 +1821,130 @@
         }
     }
     setInterval(addHistoryPoint, 60000);
+
+    // ========== ИМИТАЦИЯ ОТПРАВКИ КОДА ==========
+    function sendEmailCode() {
+        let email = document.getElementById('regEmail')?.value.trim();
+        let username = document.getElementById('regName')?.value.trim();
+        if (!email || !email.endsWith('@gmail.com')) {
+            showNotification('Введите корректный Gmail', 'error');
+            return;
+        }
+        if (!username) {
+            showNotification('Введите никнейм', 'error');
+            return;
+        }
+        let code = Math.floor(100000 + Math.random() * 900000).toString();
+        pendingCodes[email] = code;
+        showNotification(`Ваш код подтверждения: ${code}`, 'info', false);
+        document.getElementById('emailCodeSection').style.display = 'block';
+    }
+
+    // Регистрация с проверкой кода
+    async function registerUser() {
+        await fetchUserIP();
+        let name = document.getElementById('regName')?.value.trim();
+        let email = document.getElementById('regEmail')?.value.trim();
+        let pass = document.getElementById('regPassword')?.value.trim();
+        let code = document.getElementById('emailCode')?.value.trim();
+        if (!name || !email || !pass || !code) { showNotification(t('fillFields'), 'error'); return; }
+        if (pass.length < 4) { showNotification('Пароль должен быть минимум 4 символа', 'error'); return; }
+        if (pendingCodes[email] !== code) { showNotification('Неверный код', 'error'); return; }
+        for (let u in usersDB) { if (usersDB[u].email === email) { showNotification(t('userExists'), 'error'); return; } }
+        if (findUser(name)) { showNotification(t('userExists'), 'error'); return; }
+        let passwordHash = CryptoJS.SHA256(pass).toString();
+        usersDB[name] = {
+            passwordHash: passwordHash,
+            email: email, ip: userIP, candies: 100, lollipops: 0,
+            history: Array(168).fill(100), regDate: Date.now(), lastLogin: Date.now(),
+            role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1
+        };
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        currentUser = name;
+        localStorage.setItem('sweetland_current_user', currentUser);
+        delete pendingCodes[email];
+        showNotification(t('registered'), 'success');
+        renderCandyShop();
+    }
+
+    // Вход с хешированием
+    async function loginUser() {
+        await fetchUserIP();
+        let name = document.getElementById('loginName')?.value.trim();
+        let pass = document.getElementById('loginPassword')?.value.trim();
+        if (!name || !pass) { showNotification(t('fillFields'), 'error'); return; }
+        let foundName = findUser(name);
+        if (!foundName) { showNotification(t('userNotFound'), 'error'); return; }
+        let user = usersDB[foundName];
+        let inputHash = CryptoJS.SHA256(pass).toString();
+        if (user.passwordHash !== inputHash) { showNotification(t('wrongPassword'), 'error'); return; }
+        currentUser = foundName;
+        user.lastLogin = Date.now();
+        user.ip = userIP;
+        let lastLogin = new Date(user.lastLogin || 0);
+        let today = new Date();
+        if (lastLogin.toDateString() !== today.toDateString()) {
+            user.daysActive = (user.daysActive || 1) + 1;
+        }
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        localStorage.setItem('sweetland_current_user', currentUser);
+        showNotification(t('loggedIn'), 'success');
+        renderCandyShop();
+    }
+
+    function logoutUser() {
+        currentUser = null; adminMode = false; moderatorMode = false;
+        localStorage.removeItem('sweetland_current_user');
+        renderCandyShop();
+        showNotification(t('goodbye'), 'info');
+    }
+
+    function switchAuthMode(mode) {
+        if (mode === 'register') renderRegister();
+        else renderAuth();
+    }
+
+    function renderAuth() {
+        candyShopContent.innerHTML = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="shop-card">
+                    <input type="text" id="loginName" placeholder="${t('username')}">
+                    <input type="password" id="loginPassword" placeholder="${t('password')}">
+                    <button onclick="loginUser()">${t('login')}</button>
+                    <div class="auth-toggle" onclick="switchAuthMode('register')">${t('noAccount')} ${t('register')}</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderRegister() {
+        candyShopContent.innerHTML = `
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
+            <div style="max-width: 450px; margin: 0 auto;">
+                <div class="shop-card">
+                    <h3 style="text-align: center;">${t('register')}</h3>
+                    <input type="text" id="regName" placeholder="${t('username')}">
+                    <input type="email" id="regEmail" placeholder="${t('email')} (@gmail.com)">
+                    <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
+                    <button onclick="sendEmailCode()">${t('sendCode')}</button>
+                    <div id="emailCodeSection" style="display: none;">
+                        <input type="text" id="emailCode" placeholder="${t('confirmCode')}">
+                        <button onclick="registerUser()">${t('confirm')}</button>
+                    </div>
+                    <div class="auth-toggle" onclick="switchAuthMode('login')">${t('haveAccount')} ${t('login')}</div>
+                </div>
+            </div>
+        `;
+    }
 
     // ========== ФУНКЦИИ МАГАЗИНА ==========
     function renderCandyShop() {
@@ -1820,148 +2084,6 @@
         } else {
             showNotification(t('invalidPromoCode'), 'error');
         }
-    }
-
-    async function sendEmailCode() {
-        let email = document.getElementById('regEmail')?.value.trim();
-        let username = document.getElementById('regName')?.value.trim();
-        if (!email || !email.endsWith('@gmail.com')) { showNotification('Введите корректный Gmail', 'error'); return; }
-        if (!username) { showNotification('Введите никнейм', 'error'); return; }
-        let code = Math.floor(100000 + Math.random() * 900000).toString();
-        pendingEmailCodes[email] = code;
-        showNotification('⏳ Отправка кода...', 'info', false);
-        try {
-            const now = new Date();
-            const timeStr = now.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
-            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    service_id: 'service_9pb9n41',
-                    template_id: 'template_2xboqmc',
-                    user_id: 'jlf5eIKN7TZ8SMquH',
-                    template_params: { to_name: username, code: code, message: 'Ваш код для входа на SweetLand сервер', time: timeStr }
-                })
-            });
-            if (response.ok) {
-                showNotification(`✅ Код отправлен на ${email}`, 'success');
-                document.getElementById('emailCodeSection').style.display = 'block';
-                console.log(`Код для ${username}: ${code}`);
-            } else {
-                const errorText = await response.text();
-                console.error('Ошибка EmailJS:', errorText);
-                showNotification(t('emailNotSent', { code }), 'warning', false);
-                document.getElementById('emailCodeSection').style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Ошибка:', error);
-            showNotification(t('connectionError', { code }), 'warning', false);
-            document.getElementById('emailCodeSection').style.display = 'block';
-        }
-    }
-
-    async function registerUser() {
-        await fetchUserIP();
-        let name = document.getElementById('regName')?.value.trim();
-        let email = document.getElementById('regEmail')?.value.trim();
-        let pass = document.getElementById('regPassword')?.value.trim();
-        let code = document.getElementById('emailCode')?.value.trim();
-        if (!name || !email || !pass || !code) { showNotification(t('fillFields'), 'error'); return; }
-        if (pass.length < 4) { showNotification(t('fillFields'), 'error'); return; }
-        if (pendingEmailCodes[email] !== code) { showNotification(t('invalidCode'), 'error'); return; }
-        for (let u in usersDB) { if (usersDB[u].email === email) { showNotification(t('userExists'), 'error'); return; } }
-        if (findUser(name)) { showNotification(t('userExists'), 'error'); return; }
-        let passwordHash = CryptoJS.SHA256(pass).toString();
-        usersDB[name] = {
-            passwordHash: passwordHash,
-            email: email, ip: userIP, candies: 100, lollipops: 0,
-            history: Array(168).fill(100), regDate: Date.now(), lastLogin: Date.now(),
-            role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1
-        };
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        currentUser = name;
-        localStorage.setItem('sweetland_current_user', currentUser);
-        delete pendingEmailCodes[email];
-        showNotification(t('registered'), 'success');
-        renderCandyShop();
-    }
-
-    async function loginUser() {
-        await fetchUserIP();
-        let name = document.getElementById('loginName')?.value.trim();
-        let pass = document.getElementById('loginPassword')?.value.trim();
-        if (!name || !pass) { showNotification(t('fillFields'), 'error'); return; }
-        let foundName = findUser(name);
-        if (!foundName) { showNotification(t('userNotFound'), 'error'); return; }
-        let user = usersDB[foundName];
-        let inputHash = CryptoJS.SHA256(pass).toString();
-        if (user.passwordHash !== inputHash) { showNotification(t('wrongPassword'), 'error'); return; }
-        currentUser = foundName;
-        user.lastLogin = Date.now();
-        user.ip = userIP;
-        let lastLogin = new Date(user.lastLogin || 0);
-        let today = new Date();
-        if (lastLogin.toDateString() !== today.toDateString()) {
-            user.daysActive = (user.daysActive || 1) + 1;
-        }
-        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
-        localStorage.setItem('sweetland_current_user', currentUser);
-        showNotification(t('loggedIn'), 'success');
-        renderCandyShop();
-    }
-
-    function logoutUser() {
-        currentUser = null; adminMode = false; moderatorMode = false;
-        localStorage.removeItem('sweetland_current_user');
-        renderCandyShop();
-        showNotification(t('goodbye'), 'info');
-    }
-
-    function switchAuthMode(mode) {
-        if (mode === 'register') renderRegister();
-        else renderAuth();
-    }
-
-    function renderAuth() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            <div style="max-width: 450px; margin: 0 auto;">
-                <div class="shop-card">
-                    <input type="text" id="loginName" placeholder="${t('username')}">
-                    <input type="password" id="loginPassword" placeholder="${t('password')}">
-                    <button onclick="loginUser()">${t('login')}</button>
-                    <div class="auth-toggle" onclick="switchAuthMode('register')">${t('noAccount')} ${t('register')}</div>
-                </div>
-            </div>
-        `;
-    }
-
-    function renderRegister() {
-        candyShopContent.innerHTML = `
-            <div class="language-selector">
-                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
-                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
-            </div>
-            <h2 class="candy-shop-title">${t('shopTitle')}</h2>
-            <div style="max-width: 450px; margin: 0 auto;">
-                <div class="shop-card">
-                    <h3 style="text-align: center;">${t('register')}</h3>
-                    <input type="text" id="regName" placeholder="${t('username')}">
-                    <input type="email" id="regEmail" placeholder="${t('email')} (@gmail.com)">
-                    <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
-                    <button onclick="sendEmailCode()">${t('sendCode')}</button>
-                    <div id="emailCodeSection" style="display: none;">
-                        <input type="text" id="emailCode" placeholder="${t('confirmCode')}">
-                        <button onclick="registerUser()">${t('confirm')}</button>
-                    </div>
-                    <div class="auth-toggle" onclick="switchAuthMode('login')">${t('haveAccount')} ${t('login')}</div>
-                </div>
-            </div>
-        `;
     }
 
     // ========== АДМИН ПАНЕЛЬ ==========

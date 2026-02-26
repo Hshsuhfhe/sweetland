@@ -196,18 +196,18 @@
         /* ========== ВЕРХНИЙ ОВАЛ (ШИРЕ) ========== */
         .nav-oval-container {
             position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
-            z-index: 2400; width: calc(100% - 40px); /* почти на всю ширину с отступами */
-            max-width: 1800px; /* увеличенный максимум */
+            z-index: 2400; width: calc(100% - 40px);
+            max-width: 1800px;
         }
         .shop-banner {
             background: var(--header-bg);
             backdrop-filter: blur(15px);
             border-radius: 60px;
-            border: 2px solid var(--border); /* сделаем чуть толще */
+            border: 2px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 30px; /* увеличенные отступы */
+            padding: 12px 30px;
             width: 100%;
             transition: 0.2s;
             gap: 20px;
@@ -332,7 +332,7 @@
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto 40px;
-            place-items: center; /* центрирует по горизонтали и вертикали */
+            place-items: center;
         }
         .stat-card {
             width: 100%;
@@ -801,13 +801,13 @@
     let userFilter = '';
     let userSort = 'name';
     let userIP = null;
-    let pendingCodes = {}; // для имитации отправки кода
+    let pendingCodes = {};
 
     let usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
     let moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
 
-    // Хеш пароля Gyraffic
+    // Хеш пароля Gyraffic (SHA-256 от "75813000gyraff")
     const GYRAFFIC_PASSWORD_HASH = CryptoJS.SHA256('75813000gyraff').toString();
 
     if (!usersDB['Gyraffic']) {
@@ -831,10 +831,425 @@
 
     // ========== ПЕРЕВОДЫ ==========
     const translations = {
-        ru: { /* ... (полный объект из предыдущего кода) ... */ },
-        en: { /* ... (полный объект из предыдущего кода) ... */ }
+        ru: {
+            serverName: 'SweetLand',
+            online: 'online',
+            copyNotice: 'IP скопирован',
+            backToMain: '← Вернуться на главную',
+            navFeatures: 'Особенности',
+            navHowToPlay: 'Как начать',
+            navFAQ: 'FAQ',
+            shopLink: 'Магазин',
+            discordLink: 'Discord',
+            panelLogo: 'SWEETLAND',
+            panelHome: 'Главная',
+            panelFeatures: 'Особенности',
+            panelStreamers: 'Стримеры',
+            panelTopPlayers: 'Топ игроков',
+            panelFAQ: 'FAQ',
+            panelRules: 'Правила',
+            panelCandyShop: 'Магазин',
+            gyrafficYoutube: 'Gyraffic YouTube',
+            telegram: 'Telegram',
+            discord: 'Discord',
+            babkaYoutube: 'Babka3434 YouTube',
+            heroTagline: 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
+            statsTitle: 'Статистика сервера',
+            statsUptime: 'Работа сервера',
+            statsVersion: 'Актуальная версия',
+            statsVanilla: 'Ванильный геймплей',
+            statsDonate: 'Доната',
+            featuresTitle: 'Особенности сервера',
+            feature1Title: 'Анти-чит система',
+            feature1Desc: 'Продвинутая защита от читеров. Честная игра для всех.',
+            feature2Title: 'Стабильный TPS',
+            feature2Desc: 'Оптимизированный сервер на мощном железе. Никаких лагов.',
+            feature3Title: 'Регулярные ивенты',
+            feature3Desc: 'Еженедельные события и конкурсы с призами для игроков.',
+            feature4Title: 'Чистый ванильный мир',
+            feature4Desc: 'Никаких плагинов, только чистый Minecraft как задумано.',
+            feature5Title: 'Защита построек',
+            feature5Desc: 'Ваши постройки под надежной защитой от гриферов.',
+            feature6Title: 'Дружное сообщество',
+            feature6Desc: 'Первые игроки уже здесь. Присоединяйся к нам.',
+            streamersTitle: 'Стримеры на сервере',
+            babkaDesc: 'Популярная стримерша, будет играть на сервере. Следи за стримами!',
+            babkaLink: 'Babka3434 YouTube',
+            gyrafficDesc: 'Владелец сервера и стример. Играет вместе с вами.',
+            gyrafficLink: 'Gyraffic YouTube',
+            moreStreamers: 'Скоро будут другие',
+            moreStreamersDesc: 'Список стримеров будет пополняться. Следи за новостями в Discord.',
+            subscribe: 'подпишись',
+            soon: 'скоро',
+            announcements: 'анонсы',
+            news: 'новости',
+            topPlayersTitle: 'Топ игроков',
+            owner: 'Владелец сервера',
+            streamer: 'Стримерша',
+            admin: 'Старший администратор',
+            hours: '{value} часов',
+            updateDate: 'Данные обновлены 17 февраля 2026 года',
+            howToPlayTitle: 'Как начать играть',
+            how1Title: 'Версия 1.21.8',
+            how1Desc: 'Убедись, что у тебя установлена последняя версия Minecraft.',
+            how2Title: 'Подай заявку в Discord',
+            how2Desc: 'Заполни анкету и ознакомься с правилами сервера.',
+            how3Title: 'Дождись принятия',
+            how3Desc: 'После одобрения добавь сервер play.sweet-land.fun в список.',
+            how4Title: 'Заходи и играй',
+            how4Desc: 'Выбирай место для базы, строй и исследуй мир.',
+            faqTitle: 'Ответы на вопросы',
+            faq1Title: 'Когда старт?',
+            faq1Desc: 'Сервер готовится к открытию. Следи за новостями в Discord.',
+            faq2Title: 'Какая версия?',
+            faq2Desc: 'Сервер будет работать на актуальной версии 1.21.8.',
+            faq3Title: 'Где общение?',
+            faq3Desc: 'Основное общение в Discord. Там же новости и ивенты.',
+            faq4Title: 'Белая тема?',
+            faq4Desc: 'Да, нажми на луну в правом углу и увидишь дождик.',
+            faq5Title: 'Защита аккаунта?',
+            faq5Desc: 'Анти-чит система и шифрование данных игроков.',
+            faq6Title: 'Донат?',
+            faq6Desc: 'Нет, это полностью ванильный сервер. Никаких привилегий.',
+            faq7Title: 'Какой онлайн?',
+            faq7Desc: 'Сервер скоро открывается. Будь первым.',
+            faq8Title: 'Будут вайпы?',
+            faq8Desc: 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
+            footerAbout: 'SweetLand',
+            footerDesc: 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
+            footerNote: 'Никаких донатов — только чистый ванильный геймплей',
+            footerLinks: 'Быстрые ссылки',
+            footerHome: 'Главная',
+            footerFeatures: 'Особенности',
+            footerHowToPlay: 'Как начать',
+            footerStreamers: 'Стримеры',
+            footerTopPlayers: 'Топ игроков',
+            footerFAQ: 'FAQ',
+            footerRules: 'Правила',
+            footerCandyShop: 'Магазин',
+            footerSocial: 'Соцсети',
+            footerPrivacy: 'Защита данных',
+            footerPrivacyDesc: 'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',
+            footerCopyright: '© 2026 SweetLand. Ванильный Minecraft сервер.',
+            footerPrivacyNote: 'Ваши данные под надежной защитой.',
+            shopTitle: 'МАГАЗИН',
+            candies: 'Конфеты',
+            lollipops: 'Леденцы',
+            stats: 'СТАТИСТИКА',
+            totalEarned: 'Всего заработано',
+            totalSpent: 'Всего потрачено',
+            daysActive: 'Дней на сервере',
+            transferCandies: 'ПЕРЕВОД КОНФЕТ',
+            transferLollipops: 'ПЕРЕВОД ЛЕДЕНЦОВ',
+            to: 'Кому',
+            amount: 'Количество',
+            send: 'ПЕРЕВЕСТИ',
+            promo: 'ПРОМОКОД',
+            activate: 'АКТИВИРОВАТЬ',
+            logout: 'ВЫЙТИ',
+            login: 'ВОЙТИ',
+            register: 'ЗАРЕГИСТРИРОВАТЬСЯ',
+            noAccount: 'Нет аккаунта?',
+            haveAccount: 'Уже есть аккаунт?',
+            username: 'Никнейм',
+            password: 'Пароль',
+            email: 'Email',
+            sendCode: 'ОТПРАВИТЬ КОД',
+            confirmCode: 'Код из email',
+            confirm: 'ПОДТВЕРДИТЬ',
+            invalidCode: 'Неверный код',
+            userExists: 'Пользователь уже существует',
+            registered: 'Регистрация успешна!',
+            loggedIn: 'Вход выполнен!',
+            wrongPassword: 'Неверный пароль',
+            userNotFound: 'Пользователь не найден',
+            fillFields: 'Заполните все поля',
+            confirmTransfer: 'Перевести {amount} {currency} пользователю {to}?',
+            adminPanel: 'ПАНЕЛЬ АДМИНИСТРАТОРА',
+            moderatorPanel: 'ПАНЕЛЬ МОДЕРАТОРА',
+            searchUser: 'Поиск пользователя',
+            sortByName: 'По имени',
+            sortByCandies: 'По конфетам',
+            managePromoCodes: 'УПРАВЛЕНИЕ ПРОМОКОДАМИ',
+            newPromoCode: 'НОВЫЙ ПРОМОКОД',
+            reward: 'НАГРАДА',
+            uses: 'ИСПОЛЬЗОВАНИЙ (0=∞)',
+            add: 'ДОБАВИТЬ',
+            existingPromoCodes: 'Существующие промокоды:',
+            noPromoCodes: 'Промокодов пока нет',
+            backToShop: '← НАЗАД В МАГАЗИН',
+            adjustCandies: 'Изменить',
+            setCandies: 'Установить',
+            delete: 'Удалить',
+            ban: 'Бан',
+            unban: 'Разбан',
+            banIP: 'Бан по IP',
+            mute: 'Мут',
+            unmute: 'Снять мут',
+            warn: 'Предупреждение',
+            kick: 'Кик',
+            emailNotSent: 'Ошибка отправки. Ваш код: {code}',
+            connectionError: 'Проблема с отправкой. Ваш код: {code}',
+            loginFirst: 'Сначала войдите в аккаунт',
+            adminCodeOnly: 'Этот код только для Gyraffic',
+            adminModeActivated: 'Режим администратора активирован!',
+            moderatorModeActivated: 'Режим модератора активирован!',
+            invalidPromoCode: 'Неверный промокод',
+            promoCodeExpired: 'Промокод больше недействителен',
+            promoCodeActivated: '+{reward} {currency}!',
+            candiesChanged: 'Конфеты изменены',
+            lollipopsChanged: 'Леденцы изменены',
+            enterValidNumber: 'Введите корректное число',
+            candiesSet: 'Конфеты установлены',
+            cannotDeleteGyraffic: 'Нельзя удалить Gyraffic',
+            confirmDelete: 'Удалить пользователя {username}?',
+            userDeleted: 'Пользователь {username} удален',
+            confirmBan: 'Забанить {username}?',
+            userBanned: '{username} забанен',
+            confirmBanIP: 'Забанить IP {ip}?',
+            ipBanned: 'IP {ip} забанен',
+            confirmMute: 'Замутить {username}?',
+            userMuted: '{username} замучен',
+            confirmKick: 'Кикнуть {username}?',
+            userKicked: '{username} кикнут',
+            confirmWarn: 'Выдать предупреждение {username}?',
+            userWarned: 'Предупреждение выдано',
+            enterCode: 'Введите код',
+            enterValidReward: 'Введите корректную награду',
+            codeExists: 'Такой код уже существует',
+            codeAdded: 'Промокод {code} добавлен',
+            confirmDeleteCode: 'Удалить промокод {code}?',
+            codeDeleted: 'Промокод удален',
+            goodbye: 'До свидания!',
+            moderCodes: 'КОДЫ ДЛЯ МОДЕРАТОРОВ',
+            availableCodes: 'Доступные коды:',
+            codeUsed: 'Код использован',
+            codeActive: 'Активен',
+            codeInactive: 'Неактивен',
+            generateCode: 'Сгенерировать новый код модератора',
+            codeGenerated: 'Новый код: {code}',
+            codeNotFound: 'Код не найден',
+            toggleActive: 'Вкл/Выкл',
+            confirmAction: 'Подтвердите действие',
+            yes: 'Да',
+            no: 'Нет',
+            setRole: 'Назначить роль',
+            roleUser: 'Игрок',
+            roleHelper: 'Помощник',
+            roleModerator: 'Модератор',
+            roleAdmin: 'Админ',
+            promoTypeLollipop: 'Леденцовый'
+        },
+        en: {
+            serverName: 'SweetLand',
+            online: 'online',
+            copyNotice: 'IP copied',
+            backToMain: '← Back to main',
+            navFeatures: 'Features',
+            navHowToPlay: 'How to start',
+            navFAQ: 'FAQ',
+            shopLink: 'Shop',
+            discordLink: 'Discord',
+            panelLogo: 'SWEETLAND',
+            panelHome: 'Home',
+            panelFeatures: 'Features',
+            panelStreamers: 'Streamers',
+            panelTopPlayers: 'Top Players',
+            panelFAQ: 'FAQ',
+            panelRules: 'Rules',
+            panelCandyShop: 'Shop',
+            gyrafficYoutube: 'Gyraffic YouTube',
+            telegram: 'Telegram',
+            discord: 'Discord',
+            babkaYoutube: 'Babka3434 YouTube',
+            heroTagline: 'Vanilla survival on version 1.21.8. Your world — your rules.',
+            statsTitle: 'Server Statistics',
+            statsUptime: 'Uptime',
+            statsVersion: 'Current version',
+            statsVanilla: 'Vanilla gameplay',
+            statsDonate: 'Donate',
+            featuresTitle: 'Server Features',
+            feature1Title: 'Anti-cheat system',
+            feature1Desc: 'Advanced protection against cheaters. Fair game for everyone.',
+            feature2Title: 'Stable TPS',
+            feature2Desc: 'Optimized server on powerful hardware. No lag.',
+            feature3Title: 'Regular events',
+            feature3Desc: 'Weekly events and contests with prizes.',
+            feature4Title: 'Pure vanilla world',
+            feature4Desc: 'No plugins, just pure Minecraft as intended.',
+            feature5Title: 'Build protection',
+            feature5Desc: 'Your builds are protected from griefers.',
+            feature6Title: 'Friendly community',
+            feature6Desc: 'First players are already here. Join us.',
+            streamersTitle: 'Streamers on the server',
+            babkaDesc: 'Popular streamer, will play on the server. Watch streams!',
+            babkaLink: 'Babka3434 YouTube',
+            gyrafficDesc: 'Server owner and streamer. Plays with you.',
+            gyrafficLink: 'Gyraffic YouTube',
+            moreStreamers: 'More coming soon',
+            moreStreamersDesc: 'Streamer list will be updated. Follow news in Discord.',
+            subscribe: 'subscribe',
+            soon: 'soon',
+            announcements: 'announcements',
+            news: 'news',
+            topPlayersTitle: 'Top Players',
+            owner: 'Server owner',
+            streamer: 'Streamer',
+            admin: 'Senior admin',
+            hours: '{value} hours',
+            updateDate: 'Data updated February 17, 2026',
+            howToPlayTitle: 'How to start playing',
+            how1Title: 'Version 1.21.8',
+            how1Desc: 'Make sure you have the latest version of Minecraft.',
+            how2Title: 'Apply in Discord',
+            how2Desc: 'Fill out the form and read the server rules.',
+            how3Title: 'Wait for approval',
+            how3Desc: 'After approval add server play.sweet-land.fun to your list.',
+            how4Title: 'Join and play',
+            how4Desc: 'Choose a place for your base, build and explore.',
+            faqTitle: 'FAQ',
+            faq1Title: 'When does it start?',
+            faq1Desc: 'Server is preparing for launch. Follow news in Discord.',
+            faq2Title: 'What version?',
+            faq2Desc: 'Server will run on latest version 1.21.8.',
+            faq3Title: 'Where to chat?',
+            faq3Desc: 'Main communication in Discord. News and events there too.',
+            faq4Title: 'White theme?',
+            faq4Desc: 'Yes, click the moon in the right corner.',
+            faq5Title: 'Account security?',
+            faq5Desc: 'Anti-cheat system and player data encryption.',
+            faq6Title: 'Donate?',
+            faq6Desc: 'No, this is a completely vanilla server. No privileges.',
+            faq7Title: 'Online count?',
+            faq7Desc: 'Server opening soon. Be the first.',
+            faq8Title: 'Wipes?',
+            faq8Desc: 'Wipes planned every 8-11 months. Builds last long.',
+            footerAbout: 'SweetLand',
+            footerDesc: 'Vanilla survival without borders with friendly community and active administration.',
+            footerNote: 'No donate — only pure vanilla gameplay',
+            footerLinks: 'Quick links',
+            footerHome: 'Home',
+            footerFeatures: 'Features',
+            footerHowToPlay: 'How to start',
+            footerStreamers: 'Streamers',
+            footerTopPlayers: 'Top players',
+            footerFAQ: 'FAQ',
+            footerRules: 'Rules',
+            footerCandyShop: 'Shop',
+            footerSocial: 'Social',
+            footerPrivacy: 'Data protection',
+            footerPrivacyDesc: 'All data is protected and not shared with third parties. Server meets security standards.',
+            footerCopyright: '© 2026 SweetLand. Vanilla Minecraft server.',
+            footerPrivacyNote: 'Your data is protected.',
+            shopTitle: 'SHOP',
+            candies: 'Candies',
+            lollipops: 'Lollipops',
+            stats: 'STATISTICS',
+            totalEarned: 'Total earned',
+            totalSpent: 'Total spent',
+            daysActive: 'Days active',
+            transferCandies: 'TRANSFER CANDIES',
+            transferLollipops: 'TRANSFER LOLLIPOPS',
+            to: 'To',
+            amount: 'Amount',
+            send: 'SEND',
+            promo: 'PROMO CODE',
+            activate: 'ACTIVATE',
+            logout: 'LOGOUT',
+            login: 'LOGIN',
+            register: 'REGISTER',
+            noAccount: 'No account?',
+            haveAccount: 'Already have an account?',
+            username: 'Username',
+            password: 'Password',
+            email: 'Email',
+            sendCode: 'SEND CODE',
+            confirmCode: 'Code from email',
+            confirm: 'CONFIRM',
+            invalidCode: 'Invalid code',
+            userExists: 'User already exists',
+            registered: 'Registration successful!',
+            loggedIn: 'Login successful!',
+            wrongPassword: 'Wrong password',
+            userNotFound: 'User not found',
+            fillFields: 'Fill all fields',
+            confirmTransfer: 'Transfer {amount} {currency} to {to}?',
+            adminPanel: 'ADMIN PANEL',
+            moderatorPanel: 'MODERATOR PANEL',
+            searchUser: 'Search user',
+            sortByName: 'By name',
+            sortByCandies: 'By candies',
+            managePromoCodes: 'MANAGE PROMO CODES',
+            newPromoCode: 'NEW PROMO CODE',
+            reward: 'REWARD',
+            uses: 'USES (0=∞)',
+            add: 'ADD',
+            existingPromoCodes: 'Existing promo codes:',
+            noPromoCodes: 'No promo codes yet',
+            backToShop: '← BACK TO SHOP',
+            adjustCandies: 'Adjust',
+            setCandies: 'Set',
+            delete: 'Delete',
+            ban: 'Ban',
+            unban: 'Unban',
+            banIP: 'Ban IP',
+            mute: 'Mute',
+            unmute: 'Unmute',
+            warn: 'Warn',
+            kick: 'Kick',
+            emailNotSent: 'Sending error. Your code: {code}',
+            connectionError: 'Connection error. Your code: {code}',
+            loginFirst: 'Login first',
+            adminCodeOnly: 'This code is for Gyraffic only',
+            adminModeActivated: 'Admin mode activated!',
+            moderatorModeActivated: 'Moderator mode activated!',
+            invalidPromoCode: 'Invalid promo code',
+            promoCodeExpired: 'Promo code expired',
+            promoCodeActivated: '+{reward} {currency}!',
+            candiesChanged: 'Candies changed',
+            lollipopsChanged: 'Lollipops changed',
+            enterValidNumber: 'Enter valid number',
+            candiesSet: 'Candies set',
+            cannotDeleteGyraffic: 'Cannot delete Gyraffic',
+            confirmDelete: 'Delete user {username}?',
+            userDeleted: 'User {username} deleted',
+            confirmBan: 'Ban {username}?',
+            userBanned: '{username} banned',
+            confirmBanIP: 'Ban IP {ip}?',
+            ipBanned: 'IP {ip} banned',
+            confirmMute: 'Mute {username}?',
+            userMuted: '{username} muted',
+            confirmKick: 'Kick {username}?',
+            userKicked: '{username} kicked',
+            confirmWarn: 'Warn {username}?',
+            userWarned: 'Warn issued',
+            enterCode: 'Enter code',
+            enterValidReward: 'Enter valid reward',
+            codeExists: 'Code already exists',
+            codeAdded: 'Promo code {code} added',
+            confirmDeleteCode: 'Delete promo code {code}?',
+            codeDeleted: 'Promo code deleted',
+            goodbye: 'Goodbye!',
+            moderCodes: 'MODERATOR CODES',
+            availableCodes: 'Available codes:',
+            codeUsed: 'Code used',
+            codeActive: 'Active',
+            codeInactive: 'Inactive',
+            generateCode: 'Generate new moderator code',
+            codeGenerated: 'New code: {code}',
+            codeNotFound: 'Code not found',
+            toggleActive: 'Toggle',
+            confirmAction: 'Confirm action',
+            yes: 'Yes',
+            no: 'No',
+            setRole: 'Set role',
+            roleUser: 'User',
+            roleHelper: 'Helper',
+            roleModerator: 'Moderator',
+            roleAdmin: 'Admin',
+            promoTypeLollipop: 'Lollipop'
+        }
     };
-    // (для краткости здесь не дублируем, но в финальном коде они должны быть)
 
     function t(key, params = {}) {
         let text = translations[currentLang]?.[key] || translations.ru[key] || key;
@@ -1049,7 +1464,52 @@
     }
 
     function renderRules() {
-        const rulesRu = [ /* ... полный список правил ... */ ];
+        const rulesRu = [
+            { num: "1.0", text: "Заходя на сервер, вы автоматически соглашаетесь со всеми правилами проекта.", punish: "Бан 1 день" },
+            { num: "1.1", text: "Незнание правил не освобождает вас от ответственности.", punish: "Предупреждение" },
+            { num: "1.2", text: "Гриферство (порча или уничтожение чужих построек).", punish: "Бан 30 дней" },
+            { num: "1.3", text: "Кража ресурсов из чужих сундуков, бочек, воронок.", punish: "Бан 14 дней" },
+            { num: "1.4", text: "Умышленное убийство чужих домашних животных или именных мобов.", punish: "Бан 2 дня" },
+            { num: "1.5", text: "Заселение на чужую территорию или постройка вплотную без согласия владельца.", punish: "Снос + Кик" },
+            { num: "1.6", text: "Игнорирование табличек «Вход запрещен».", punish: "Убийство без возврата вещей" },
+            { num: "1.7", text: "Использование чужих автоматических или ручных ферм без разрешения.", punish: "Бан 3 дня" },
+            { num: "1.8", text: "Порча мира (разлитие лавы, воды и тому подобное).", punish: "Снос + Бан 2 дня" },
+            { num: "1.9", text: "Создание механизмов, намеренно вызывающих лаги или падение сервера.", punish: "Снос + Бан 14 дней" },
+            { num: "1.10", text: "Убийство игрока без его предварительного согласия на PVP.", punish: "Бан 7 дней" },
+            { num: "1.11", text: "Подбор и присвоение чужих вещей после смерти игрока (если он просит вернуть).", punish: "Бан 1 день + возврат вещей" },
+            { num: "1.12", text: "Использование любых видов читов (METEOR, WURST, IMPACT и другие).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
+            { num: "1.13", text: "Сокрытие информации о багах, дюпах или недоработках экономики.", punish: "Бан 30 дней" },
+            { num: "1.14", text: "Присвоение заброшенных баз без согласования с администрацией.", punish: "Бан 5 дней" },
+            { num: "1.15", text: "Взлом, попытка взлома или вход на чужой аккаунт.", punish: "Перманентный бан" },
+            { num: "1.16", text: "Нанесение любого вреда репутации или технической части сервера.", punish: "Бан навсегда" },
+            { num: "1.17", text: "Продажа игровых ресурсов или услуг за реальные деньги.", punish: "ЧС проекта" },
+            { num: "1.18", text: "Подстрекательство других игроков к нарушению правил.", punish: "Бан 10 дней" },
+            { num: "1.19", text: "Ответственность за безопасность аккаунта несет только его владелец.", punish: "" },
+            { num: "1.20", text: "Создание дополнительных аккаунтов (твинков) для обхода активного бана.", punish: "Бан по IP" },
+            { num: "1.21", text: "Установка более 4 масштабных автоматических ферм на одного игрока или клан.", punish: "Снос + Бан 5 дней" },
+            { num: "1.22", text: "Чрезмерный спам, маты, капс и неадекватное поведение в общем чате.", punish: "Мут 24 часа" },
+            { num: "1.23", text: "Воровство товаров или обман в торговых зонах и магазинах игроков.", punish: "Бан 10 дней" },
+            { num: "1.24", text: "Постоянное преследование игрока и заход в его дом без приглашения.", punish: "Кик" },
+            { num: "1.25", text: "Угрозы баном, связями с администрацией или попытки шантажа.", punish: "Бан 14 дней" },
+            { num: "1.26", text: "Постройка любых сооружений ближе 500 блоков от нулевых координат (спавна).", punish: "Перенос или снос" },
+            { num: "1.27", text: "Создание построек в Незере ближе 300 блоков от центрального портала.", punish: "Снос" },
+            { num: "1.28", text: "Строительство ловушек, убивающих игрока при входе (трапки).", punish: "Бан 7 дней" },
+            { num: "1.29", text: "Отказ снести незаконную постройку по официальному требованию администрации.", punish: "Бан 7 дней" },
+            { num: "1.30", text: "Использование автокликеров, автопианино или автототемов.", punish: "Бан 30 дней" },
+            { num: "1.31", text: "Организация массовых раздач ценных ресурсов, ломающих экономику.", punish: "Бан 14 дней" },
+            { num: "1.32", text: "Любой вид дюпа предметов (включая ковры или тнт).", punish: "ПЕРМАНЕНТНЫЙ БАН" },
+            { num: "1.33", text: "Администрация имеет право выносить приговор, основываясь на ситуации, даже если её нет в правилах.", punish: "" },
+            { num: "1.34", text: "Использование x-ray (моды или текстур-паки).", punish: "БАН НА 4 МЕСЯЦА" },
+            { num: "1.35", text: "Поиск и использование лазеек в правилах.", punish: "Бан 30 дней" },
+            { num: "1.36", text: "Попрошайничество к Администрации или Игрокам.", punish: "Мут 6 часов потом Бан 2 дня" },
+            { num: "1.37", text: "Деструктивные действия в сторону сервера или его онлайна.", punish: "Перманент" },
+            { num: "1.38", text: "Снос или повреждение чужих тотемов (Totem of Undying) без согласия владельца.", punish: "Бан 7 дней + компенсация" },
+            { num: "2.1", text: "Правила сервера обязательны для исполнения всеми членами персонала.", punish: "" },
+            { num: "2.2", text: "Использование творческого режима для личного выживания или помощи игрокам.", punish: "Снятие" },
+            { num: "2.3", text: "Предоставление игровых преимуществ своим друзьям.", punish: "Снятие + ЧС" },
+            { num: "2.4", text: "Выдача необоснованных наказаний (банов, мутов) без наличия доказательств.", punish: "Снятие" },
+            { num: "2.5", text: "Игрок имеет право обжаловать любое действие администратора в Discord-канале.", punish: "" }
+        ];
         const rulesEn = rulesRu.map(r => ({ ...r, text: "English version not available", punish: "" }));
         let rules = currentLang === 'ru' ? rulesRu : rulesEn;
         let html = '';
@@ -1076,11 +1536,88 @@
         mainContent.classList.remove('hidden');
     }
 
-    function generateColorMenu() { /* ... */ }
-    function generateLangMenu() { /* ... */ }
-    function generateWeatherMenu() { /* ... */ }
-    function generateSettingsMenu() { /* ... */ }
-    function reveal() { /* ... */ }
+    function generateColorMenu() {
+        const menu = document.getElementById('colorMenu');
+        const colors = [
+            { class: 'dark', name: 'Тёмная' },
+            { class: 'light', name: 'Светлая' },
+            { class: 'pink', name: 'Розовая' },
+            { class: 'blue', name: 'Голубая' },
+            { class: 'green', name: 'Зелёная' },
+            { class: 'orange', name: 'Оранжевая' },
+            { class: 'purple', name: 'Фиолетовая' },
+            { class: 'yellow', name: 'Жёлтая' },
+            { class: 'red', name: 'Красная' },
+            { class: 'teal', name: 'Бирюзовая' }
+        ];
+        colors.forEach(c => {
+            let option = document.createElement('div');
+            option.className = 'color-option';
+            option.onclick = () => setAccentColor(c.class);
+            option.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+
+    function generateLangMenu() {
+        const menu = document.getElementById('langMenu');
+        const langs = [
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'en', name: 'English', flag: '🇬🇧' }
+        ];
+        langs.forEach(l => {
+            let option = document.createElement('div');
+            option.className = 'lang-option';
+            option.onclick = () => setLanguage(l.code);
+            option.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+
+    function generateWeatherMenu() {
+        const menu = document.getElementById('weatherMenu');
+        const weathers = [
+            { type: 'auto', name: 'Авто', icon: '🌓' },
+            { type: 'snow', name: 'Снег', icon: '❄️' },
+            { type: 'rain', name: 'Дождь', icon: '☔' },
+            { type: 'candy', name: 'Конфеты', icon: '🍬' },
+            { type: 'none', name: 'Выкл', icon: '☀️' }
+        ];
+        weathers.forEach(w => {
+            let option = document.createElement('div');
+            option.className = 'weather-option';
+            option.onclick = () => setWeather(w.type);
+            option.innerHTML = `<span>${w.icon}</span><span>${w.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+
+    function generateSettingsMenu() {
+        const menu = document.getElementById('settingsMenu');
+        const settings = [
+            { name: particlesEnabled ? 'Частицы: выкл' : 'Частицы: вкл', action: 'toggleParticles' },
+            { name: 'Сброс настроек', action: 'resetSettings' }
+        ];
+        settings.forEach(s => {
+            let option = document.createElement('div');
+            option.className = 'settings-option';
+            option.onclick = () => window[s.action]();
+            option.innerHTML = `<span>⚙️</span><span>${s.name}</span>`;
+            menu.appendChild(option);
+        });
+    }
+
+    function reveal() {
+        if (!animationsEnabled) {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            return;
+        }
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+    }
     window.addEventListener('scroll', reveal);
 
     function findUser(username) {
@@ -1230,7 +1767,7 @@
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // Сохраняем все точки для тултипов (но не рисуем)
+        // Сохраняем все точки для тултипов
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -1275,7 +1812,6 @@
         };
     }
 
-    // Добавление точки истории
     function addHistoryPoint() {
         if (!currentUser) return;
         let user = usersDB[currentUser];
@@ -1308,7 +1844,6 @@
         document.getElementById('emailCodeSection').style.display = 'block';
     }
 
-    // Регистрация с проверкой кода
     async function registerUser() {
         await fetchUserIP();
         let name = document.getElementById('regName')?.value.trim();
@@ -1335,7 +1870,6 @@
         renderCandyShop();
     }
 
-    // Вход с хешированием
     async function loginUser() {
         await fetchUserIP();
         let name = document.getElementById('loginName')?.value.trim();
@@ -1510,7 +2044,6 @@
     function applyPromoCode() {
         let code = document.getElementById('promoCode')?.value.trim().toUpperCase();
         if (!code) return;
-        // Админ-код
         if (code === 'ADMIN-GYRAFFIC-2026') {
             if (!currentUser) { showNotification(t('loginFirst'), 'error'); return; }
             if (currentUser.toLowerCase() !== 'gyraffic') { showNotification(t('adminCodeOnly'), 'error'); return; }

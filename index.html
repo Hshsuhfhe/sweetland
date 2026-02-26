@@ -221,7 +221,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 30px;
+            padding: 16px 30px; /* увеличено с 12px до 16px */
             width: 100%;
             transition: 0.2s;
             gap: 20px;
@@ -372,10 +372,11 @@
             max-width: 1200px;
             margin: 0 auto 40px;
             place-items: center;
-            justify-content: center;
+            justify-content: center; /* добавлено для центрирования колонок */
         }
         .stat-card {
             width: 100%;
+            /* max-width: 280px; закомментировано для равномерного заполнения */
             margin: 0 auto;
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
@@ -682,6 +683,25 @@
         .back-to-shop:hover {
             background: var(--accent);
             color: #fff;
+        }
+
+        /* ========== КНОПКИ АУТЕНТИФИКАЦИИ ========== */
+        .btn-auth {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+        .btn-auth:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--accent);
         }
 
         /* ========== УЛУЧШЕННАЯ АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ ========== */
@@ -1121,7 +1141,11 @@
             roleHelper: 'Помощник',
             roleModerator: 'Модератор',
             roleAdmin: 'Админ',
-            promoTypeLollipop: 'Леденцовый'
+            promoTypeLollipop: 'Леденцовый',
+            // Для магазина
+            shopMain: 'Главная',
+            shopHistory: 'История',
+            shopPromo: 'Промо'
         },
         en: {
             serverName: 'SweetLand',
@@ -1320,7 +1344,10 @@
             roleHelper: 'Helper',
             roleModerator: 'Moderator',
             roleAdmin: 'Admin',
-            promoTypeLollipop: 'Lollipop'
+            promoTypeLollipop: 'Lollipop',
+            shopMain: 'Main',
+            shopHistory: 'History',
+            shopPromo: 'Promo'
         }
     };
 
@@ -1371,6 +1398,7 @@
     window.toggleModerCode = toggleModerCode;
     window.setUserRole = setUserRole;
     window.renderCandyShop = renderCandyShop;
+    window.shopNav = shopNav; // добавим функцию навигации в магазине
 
     function showConfirm(message, onConfirm, onCancel) {
         let overlay = document.createElement('div');
@@ -1600,6 +1628,12 @@
     function showMainContent() {
         candyShopScreen.classList.remove('active');
         mainContent.classList.remove('hidden');
+    }
+
+    // Навигация внутри магазина (заглушки)
+    function shopNav(section) {
+        showNotification(`Раздел "${section}" в разработке`, 'info');
+        // можно реализовать переключение контента позже
     }
 
     function generateColorMenu() {
@@ -1886,7 +1920,7 @@
     }
     setInterval(addHistoryPoint, 60000);
 
-    // ========== РЕГИСТРАЦИЯ БЕЗ ПОДТВЕРЖДЕНИЯ ПОЧТЫ ==========
+    // ========== РЕГИСТРАЦИЯ ==========
     async function registerUser() {
         await fetchUserIP();
         let name = document.getElementById('regName')?.value.trim();
@@ -1898,8 +1932,8 @@
             showNotification('Введите корректный email', 'error');
             return;
         }
-        for (let u in usersDB) { if (usersDB[u].email === email) { showNotification(t('userExists'), 'error'); return; } }
-        if (findUser(name)) { showNotification(t('userExists'), 'error'); return; }
+        for (let u in usersDB) { if (usersDB[u].email === email) { showNotification('Email уже зарегистрирован', 'error'); return; } }
+        if (findUser(name)) { showNotification('Пользователь уже существует', 'error'); return; }
         let passwordHash = CryptoJS.SHA256(pass).toString();
         usersDB[name] = {
             passwordHash: passwordHash,
@@ -1910,7 +1944,7 @@
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         currentUser = name;
         localStorage.setItem('sweetland_current_user', currentUser);
-        showNotification(t('registered'), 'success');
+        showNotification('Регистрация успешна', 'success');
         renderCandyShop();
     }
 
@@ -1920,10 +1954,10 @@
         let pass = document.getElementById('loginPassword')?.value.trim();
         if (!name || !pass) { showNotification(t('fillFields'), 'error'); return; }
         let foundName = findUser(name);
-        if (!foundName) { showNotification(t('userNotFound'), 'error'); return; }
+        if (!foundName) { showNotification('Пользователь не найден', 'error'); return; }
         let user = usersDB[foundName];
         let inputHash = CryptoJS.SHA256(pass).toString();
-        if (user.passwordHash !== inputHash) { showNotification(t('wrongPassword'), 'error'); return; }
+        if (user.passwordHash !== inputHash) { showNotification('Неверный пароль', 'error'); return; }
         currentUser = foundName;
         user.lastLogin = Date.now();
         user.ip = userIP;
@@ -1934,7 +1968,7 @@
         }
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         localStorage.setItem('sweetland_current_user', currentUser);
-        showNotification(t('loggedIn'), 'success');
+        showNotification('Вход выполнен', 'success');
         renderCandyShop();
     }
 
@@ -1952,6 +1986,23 @@
 
     function renderAuth() {
         candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="position: relative; top: 0; transform: none; margin-bottom: 30px; width: 100%; max-width: 100%;">
+                <div class="shop-banner" style="width: 100%;">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Shop</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
             <div class="language-selector">
                 <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -1962,7 +2013,11 @@
                     <input type="text" id="loginName" placeholder="${t('username')}">
                     <input type="password" id="loginPassword" placeholder="${t('password')}">
                     <button onclick="loginUser()">${t('login')}</button>
-                    <div class="auth-toggle" onclick="switchAuthMode('register')">${t('noAccount')} ${t('register')}</div>
+                    <div style="display: flex; justify-content: center; margin-top: 15px;">
+                        <button class="btn-auth" onclick="switchAuthMode('register')">
+                            ${t('noAccount')} ${t('register')}
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -1970,6 +2025,23 @@
 
     function renderRegister() {
         candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="position: relative; top: 0; transform: none; margin-bottom: 30px; width: 100%; max-width: 100%;">
+                <div class="shop-banner" style="width: 100%;">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Shop</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
             <div class="language-selector">
                 <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -1982,7 +2054,11 @@
                     <input type="email" id="regEmail" placeholder="${t('email')} (example@gmail.com)">
                     <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
                     <button onclick="registerUser()">${t('confirm')}</button>
-                    <div class="auth-toggle" onclick="switchAuthMode('login')">${t('haveAccount')} ${t('login')}</div>
+                    <div style="display: flex; justify-content: center; margin-top: 15px;">
+                        <button class="btn-auth" onclick="switchAuthMode('login')">
+                            ${t('haveAccount')} ${t('login')}
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -2002,6 +2078,24 @@
         let history = user.history || Array(168).fill(candies);
 
         let html = `
+            <!-- Верхняя панель в магазине (как на главной) -->
+            <div class="nav-oval-container" style="position: relative; top: 0; transform: none; margin-bottom: 30px; width: 100%; max-width: 100%;">
+                <div class="shop-banner" style="width: 100%;">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Shop</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
             <div class="language-selector">
                 <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
                 <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -2185,6 +2279,20 @@
         }).join('');
 
         candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="position: relative; top: 0; transform: none; margin-bottom: 30px; width: 100%; max-width: 100%;">
+                <div class="shop-banner" style="width: 100%;">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Admin</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="renderAdminPanel()">🏠 Главная</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="adminMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
+                    </div>
+                </div>
+            </div>
             <div class="language-selector"><button class="lang-btn-small ${currentLang==='ru'?'active':''}" onclick="setLanguage('ru')">🇷🇺 Русский</button><button class="lang-btn-small ${currentLang==='en'?'active':''}" onclick="setLanguage('en')">🇬🇧 English</button></div>
             <h2 class="candy-shop-title" style="color:#ff4444;">${t('adminPanel')}</h2>
             <div class="admin-panel">
@@ -2235,6 +2343,20 @@
         }
         userListHtml += '</div>';
         candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="position: relative; top: 0; transform: none; margin-bottom: 30px; width: 100%; max-width: 100%;">
+                <div class="shop-banner" style="width: 100%;">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Moderator</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="renderModeratorPanel()">🏠 Главная</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
+                    </div>
+                </div>
+            </div>
             <div class="language-selector"><button class="lang-btn-small ${currentLang==='ru'?'active':''}" onclick="setLanguage('ru')">🇷🇺 Русский</button><button class="lang-btn-small ${currentLang==='en'?'active':''}" onclick="setLanguage('en')">🇬🇧 English</button></div>
             <h2 class="candy-shop-title" style="color:#ffaa00;">${t('moderatorPanel')}</h2>
             <div class="admin-panel">

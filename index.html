@@ -207,7 +207,7 @@
         .color-dot.teal { background: #008080; }
         .lang-flag { font-size: 18px; }
 
-        /* ========== ВЕРХНИЙ ОВАЛ ========== */
+        /* ========== ВЕРХНИЙ ОВАЛ (НА ГЛАВНОЙ) ========== */
         .nav-oval-container {
             width: 100%;
             max-width: 1800px;
@@ -658,6 +658,160 @@
             box-shadow: 0 4px 10px var(--accent);
         }
 
+        /* ========== ЧАТ ========== */
+        .chat-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin: 20px 0;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .chat-message {
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 18px;
+            border-left: 3px solid var(--accent);
+            word-wrap: break-word;
+        }
+        .chat-message .time {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-right: 8px;
+        }
+        .chat-message .role-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .role-owner { background: gold; color: #000; }
+        .role-admin { background: #ff4444; color: #fff; }
+        .role-moderator { background: #ffaa00; color: #000; }
+        .role-helper { background: #4d9eff; color: #fff; }
+        .role-user { background: #70707a; color: #fff; }
+        .chat-message .username {
+            font-weight: 600;
+            color: var(--accent);
+            margin-right: 8px;
+        }
+        .chat-message .text {
+            color: var(--text);
+        }
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text);
+        }
+        .chat-input-area button {
+            padding: 12px 24px;
+            background: var(--accent);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .chat-input-area button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px var(--accent);
+        }
+        .moderation-controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .moderation-controls button {
+            background: rgba(255,68,68,0.2);
+            border: 1px solid var(--danger);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .moderation-controls button:hover {
+            background: var(--danger);
+        }
+
+        /* ========== ИСТОРИЯ ========== */
+        .history-list {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        .history-item .time {
+            color: var(--accent);
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        /* ========== ПРОМОКОДЫ ========== */
+        .promo-list {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+        .promo-item-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+        }
+        .promo-code {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .promo-reward {
+            background: gold;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .promo-uses {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
         /* ========== АДМИН-ПАНЕЛЬ ========== */
         .admin-panel { width: 100%; min-height: 100vh; background: var(--bg); padding: 20px; }
         .admin-title { color: var(--danger); font-size: 32px; text-align: center; margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; }
@@ -897,6 +1051,10 @@
     let userSort = 'name';
     let userIP = null;
 
+    // Данные чата
+    let chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
+    let historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
+
     // Полная очистка всех пользователей, кроме Gyraffic
     let usersDB = {};
     let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
@@ -918,7 +1076,10 @@
         permissions: ['all'],
         totalEarned: 10000,
         totalSpent: 0,
-        daysActive: 1
+        daysActive: 1,
+        mutedUntil: 0,
+        bannedUntil: 0,
+        warnings: []
     };
     localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
 
@@ -1118,7 +1279,12 @@
             roleAdmin: 'Админ',
             shopMain: 'Главная',
             shopHistory: 'История',
-            shopPromo: 'Промо'
+            shopPromo: 'Промо',
+            shopChat: 'Чат',
+            chatPlaceholder: 'Введите сообщение...',
+            send: 'Отправить',
+            muted: 'Вы замьючены до {time}',
+            banned: 'Вы забанены до {time}'
         },
         en: {
             serverName: 'SweetLand',
@@ -1315,7 +1481,12 @@
             roleAdmin: 'Admin',
             shopMain: 'Main',
             shopHistory: 'History',
-            shopPromo: 'Promo'
+            shopPromo: 'Promo',
+            shopChat: 'Chat',
+            chatPlaceholder: 'Enter message...',
+            send: 'Send',
+            muted: 'You are muted until {time}',
+            banned: 'You are banned until {time}'
         }
     };
 
@@ -1325,6 +1496,18 @@
             text = text.replace(`{${k}}`, v);
         }
         return text;
+    }
+
+    // Добавляем функцию для логирования истории
+    function addHistory(action, username, details = '') {
+        historyLog.unshift({
+            time: Date.now(),
+            action: action,
+            username: username,
+            details: details
+        });
+        if (historyLog.length > 200) historyLog.pop();
+        localStorage.setItem('sweetland_history', JSON.stringify(historyLog));
     }
 
     window.toggleTheme = function() { setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); };
@@ -1367,9 +1550,15 @@
     window.setUserRole = setUserRole;
     window.renderCandyShop = renderCandyShop;
     window.shopNav = shopNav;
+    window.sendChatMessage = sendChatMessage;
+    window.moderateUser = moderateUser;
 
     function shopNav(section) {
-        showNotification(`Раздел "${section}" в разработке`, 'info');
+        if (section === 'main') renderCandyShop();
+        else if (section === 'chat') renderChat();
+        else if (section === 'history') renderHistory();
+        else if (section === 'promo') renderPromoList();
+        else showNotification(`Раздел "${section}" в разработке`, 'info');
     }
 
     function showConfirm(message, onConfirm, onCancel) {
@@ -1759,8 +1948,12 @@
         if (!history || history.length < 2) return;
 
         let maxVal = Math.max(...history, 1);
+        // Округление вверх до ближайшей сотни/тысячи/итд для лучшего масштаба
+        let magnitude = Math.pow(10, Math.floor(Math.log10(maxVal)));
+        let roundedMax = Math.ceil(maxVal / magnitude) * magnitude;
+        if (roundedMax === maxVal) roundedMax += magnitude; // небольшой запас сверху
         let minVal = Math.min(...history, 0);
-        let range = maxVal - minVal || 1;
+        let range = roundedMax - minVal || 1;
 
         ctx.strokeStyle = 'rgba(255,255,255,0.1)';
         ctx.lineWidth = 1;
@@ -1770,7 +1963,7 @@
             ctx.moveTo(50, y);
             ctx.lineTo(w - 30, y);
             ctx.stroke();
-            let val = Math.round(maxVal - (i / 5) * range);
+            let val = Math.round(roundedMax - (i / 5) * range);
             ctx.fillStyle = 'rgba(255,255,255,0.5)';
             ctx.font = '12px Inter';
             ctx.fillText(val.toLocaleString(), 10, y + 4);
@@ -1904,11 +2097,13 @@
             passwordHash: passwordHash,
             email: email, ip: userIP, candies: 100, lollipops: 0,
             history: Array(168).fill(100), regDate: Date.now(), lastLogin: Date.now(),
-            role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1
+            role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1,
+            mutedUntil: 0, bannedUntil: 0, warnings: []
         };
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         currentUser = name;
         localStorage.setItem('sweetland_current_user', currentUser);
+        addHistory('register', name, 'Зарегистрировался');
         showNotification('Регистрация успешна', 'success');
         renderCandyShop();
     }
@@ -1923,6 +2118,10 @@
         let user = usersDB[foundName];
         let inputHash = CryptoJS.SHA256(pass).toString();
         if (user.passwordHash !== inputHash) { showNotification('Неверный пароль', 'error'); return; }
+        if (user.bannedUntil > Date.now()) {
+            showNotification(t('banned', { time: new Date(user.bannedUntil).toLocaleString() }), 'error');
+            return;
+        }
         currentUser = foundName;
         user.lastLogin = Date.now();
         user.ip = userIP;
@@ -1933,11 +2132,13 @@
         }
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         localStorage.setItem('sweetland_current_user', currentUser);
+        addHistory('login', foundName, 'Вошёл в систему');
         showNotification('Вход выполнен', 'success');
         renderCandyShop();
     }
 
     function logoutUser() {
+        addHistory('logout', currentUser, 'Вышел');
         currentUser = null; adminMode = false; moderatorMode = false;
         localStorage.removeItem('sweetland_current_user');
         renderCandyShop();
@@ -1958,8 +2159,9 @@
                         <span class="server-name">SweetLand Shop</span>
                     </div>
                     <div class="banner-center">
-                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
-                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
                         <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
                     </div>
                     <div class="banner-right">
@@ -1997,8 +2199,9 @@
                         <span class="server-name">SweetLand Shop</span>
                     </div>
                     <div class="banner-center">
-                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
-                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
                         <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
                     </div>
                     <div class="banner-right">
@@ -2050,8 +2253,9 @@
                         <span class="server-name">SweetLand Shop</span>
                     </div>
                     <div class="banner-center">
-                        <a href="javascript:void(0)" onclick="renderCandyShop()">🏠 ${t('shopMain')}</a>
-                        <a href="javascript:void(0)" onclick="shopNav('history')">📊 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
                         <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
                     </div>
                     <div class="banner-right">
@@ -2102,6 +2306,246 @@
         setTimeout(() => drawLineGraph(history, 'candyLineGraph', 'graphTooltip'), 100);
     }
 
+    // ========== ЧАТ ==========
+    function renderChat() {
+        if (!currentUser) { renderAuth(); return; }
+        let user = usersDB[currentUser];
+        if (!user) { logoutUser(); return; }
+
+        // Проверка бана
+        if (user.bannedUntil > Date.now()) {
+            showNotification(t('banned', { time: new Date(user.bannedUntil).toLocaleString() }), 'error');
+            renderCandyShop();
+            return;
+        }
+
+        let messagesHtml = chatMessages.slice(-50).map(msg => {
+            let roleClass = '';
+            if (msg.role === 'admin') roleClass = 'role-admin';
+            else if (msg.role === 'moderator') roleClass = 'role-moderator';
+            else if (msg.role === 'helper') roleClass = 'role-helper';
+            else if (msg.role === 'owner') roleClass = 'role-owner';
+            else roleClass = 'role-user';
+            let roleDisplay = msg.role === 'admin' ? 'ADMIN' : (msg.role === 'moderator' ? 'MOD' : (msg.role === 'helper' ? 'HELPER' : (msg.role === 'owner' ? 'OWNER' : 'USER')));
+            return `
+                <div class="chat-message">
+                    <span class="time">${new Date(msg.time).toLocaleTimeString()}</span>
+                    <span class="role-badge ${roleClass}">${roleDisplay}</span>
+                    <span class="username">${msg.username}:</span>
+                    <span class="text">${escapeHtml(msg.text)}</span>
+                </div>
+            `;
+        }).join('');
+
+        let moderationControls = '';
+        if (canModerate(user)) {
+            moderationControls = `
+                <div class="moderation-controls">
+                    <select id="modTarget">
+                        <option value="">Выберите пользователя</option>
+                        ${Object.keys(usersDB).filter(n => n !== currentUser).map(n => `<option value="${n}">${n}</option>`).join('')}
+                    </select>
+                    <button onclick="moderateUser('mute')">Мут (1 час)</button>
+                    <button onclick="moderateUser('kick')">Кик</button>
+                    <button onclick="moderateUser('warn')">Варн</button>
+                    ${user.role === 'admin' || user.role === 'moderator' ? `<button onclick="moderateUser('ban')">Бан (1 день)</button>` : ''}
+                </div>
+            `;
+        }
+
+        candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="margin-top: 20px;">
+                <div class="shop-banner">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Chat</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            <h2 class="candy-shop-title">Чат</h2>
+            ${moderationControls}
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    ${messagesHtml}
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="${t('chatPlaceholder')}" ${user.mutedUntil > Date.now() ? 'disabled' : ''}>
+                    <button onclick="sendChatMessage()" ${user.mutedUntil > Date.now() ? 'disabled' : ''}>${t('send')}</button>
+                </div>
+                ${user.mutedUntil > Date.now() ? `<p style="color: var(--danger); text-align: center;">${t('muted', { time: new Date(user.mutedUntil).toLocaleString() })}</p>` : ''}
+            </div>
+        `;
+        let chatDiv = document.getElementById('chatMessages');
+        if (chatDiv) chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+
+    function escapeHtml(unsafe) {
+        return unsafe.replace(/[&<>"]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            if (m === '"') return '&quot;';
+            return m;
+        });
+    }
+
+    function canModerate(user) {
+        return user.role === 'admin' || user.role === 'moderator' || user.role === 'helper';
+    }
+
+    function sendChatMessage() {
+        let input = document.getElementById('chatInput');
+        let text = input.value.trim();
+        if (!text) return;
+        let user = usersDB[currentUser];
+        if (!user) return;
+        if (user.mutedUntil > Date.now()) {
+            showNotification(t('muted', { time: new Date(user.mutedUntil).toLocaleString() }), 'error');
+            return;
+        }
+        let msg = {
+            username: currentUser,
+            role: user.role,
+            text: text,
+            time: Date.now()
+        };
+        chatMessages.push(msg);
+        if (chatMessages.length > 200) chatMessages.shift();
+        localStorage.setItem('sweetland_chat', JSON.stringify(chatMessages));
+        input.value = '';
+        renderChat();
+    }
+
+    function moderateUser(action) {
+        let target = document.getElementById('modTarget')?.value;
+        if (!target) { showNotification('Выберите пользователя', 'error'); return; }
+        let user = usersDB[currentUser];
+        if (!user) return;
+        let targetUser = usersDB[target];
+        if (!targetUser) return;
+
+        if (action === 'mute' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+            let until = Date.now() + 60 * 60 * 1000; // 1 час
+            targetUser.mutedUntil = until;
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('mute', currentUser, `замутил ${target} до ${new Date(until).toLocaleString()}`);
+            showNotification(`Пользователь ${target} замучен на 1 час`, 'success');
+        } else if (action === 'kick' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+            // кик просто удаляем из чата? пока заглушка
+            addHistory('kick', currentUser, `кикнул ${target} из чата`);
+            showNotification(`Пользователь ${target} кикнут`, 'success');
+        } else if (action === 'warn' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+            targetUser.warnings = targetUser.warnings || [];
+            targetUser.warnings.push({ by: currentUser, time: Date.now() });
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('warn', currentUser, `выдал предупреждение ${target}`);
+            showNotification(`Предупреждение выдано ${target}`, 'success');
+        } else if (action === 'ban' && (user.role === 'admin' || user.role === 'moderator')) {
+            let until = Date.now() + 24 * 60 * 60 * 1000; // 1 день
+            targetUser.bannedUntil = until;
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('ban', currentUser, `забанил ${target} до ${new Date(until).toLocaleString()}`);
+            showNotification(`Пользователь ${target} забанен на 1 день`, 'success');
+        }
+        renderChat();
+    }
+
+    // ========== ИСТОРИЯ ==========
+    function renderHistory() {
+        if (!currentUser) { renderAuth(); return; }
+        let historyItems = historyLog.map(item => {
+            let date = new Date(item.time).toLocaleString();
+            return `<div class="history-item"><span class="time">${date}</span> [${item.username}] ${item.action} — ${item.details}</div>`;
+        }).join('');
+        candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="margin-top: 20px;">
+                <div class="shop-banner">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand History</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            <h2 class="candy-shop-title">История действий</h2>
+            <div class="history-list">
+                ${historyItems || '<p>Пока нет записей</p>'}
+            </div>
+        `;
+    }
+
+    // ========== ПРОМОКОДЫ (СПИСОК) ==========
+    function renderPromoList() {
+        if (!currentUser) { renderAuth(); return; }
+        let promoItems = Object.entries(promoCodes).map(([code, data]) => {
+            let usesText = data.uses === Infinity ? '∞' : data.uses;
+            let typeText = data.type === 'candy' ? 'Конфетный' : (data.type === 'lollipop' ? 'Леденцовый' : 'Другой');
+            return `
+                <div class="promo-item-display">
+                    <span class="promo-code">${code}</span>
+                    <span class="promo-reward">+${data.reward || '?'} ${typeText}</span>
+                    <span class="promo-uses">Осталось: ${usesText}</span>
+                </div>
+            `;
+        }).join('');
+        candyShopContent.innerHTML = `
+            <div class="nav-oval-container" style="margin-top: 20px;">
+                <div class="shop-banner">
+                    <div class="banner-left">
+                        <span class="banner-star">☆</span>
+                        <span class="server-name">SweetLand Promo</span>
+                    </div>
+                    <div class="banner-center">
+                        <a href="javascript:void(0)" onclick="shopNav('main')">🏠 ${t('shopMain')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 ${t('shopChat')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 ${t('shopHistory')}</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 ${t('shopPromo')}</a>
+                    </div>
+                    <div class="banner-right">
+                        <a href="javascript:void(0)" onclick="closeCandyShop()" class="shop-link">${t('backToMain')}</a>
+                        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link">Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="language-selector">
+                <button class="lang-btn-small ${currentLang === 'ru' ? 'active' : ''}" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+                <button class="lang-btn-small ${currentLang === 'en' ? 'active' : ''}" onclick="setLanguage('en')">🇬🇧 English</button>
+            </div>
+            <h2 class="candy-shop-title">Доступные промокоды</h2>
+            <div class="promo-list">
+                ${promoItems || '<p>Промокодов пока нет</p>'}
+            </div>
+        `;
+    }
+
+    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ (без изменений, но добавим управление леденцами в админку) ==========
     function transferCandies() {
         let to = document.getElementById('transferToUserCandies').value;
         let amount = parseInt(document.getElementById('transferAmountCandies').value);
@@ -2118,6 +2562,7 @@
             usersDB[currentUser].totalSpent = (usersDB[currentUser].totalSpent || 0) + amount;
             usersDB[to].totalEarned = (usersDB[to].totalEarned || 0) + amount;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('transfer', currentUser, `перевел ${amount} конфет пользователю ${to}`);
             showNotification(`✅ ${amount.toLocaleString()} → ${to}`, 'success');
             renderCandyShop();
         });
@@ -2133,6 +2578,7 @@
             usersDB[currentUser].lollipops = (usersDB[currentUser].lollipops || 0) - amount;
             usersDB[to].lollipops = (usersDB[to].lollipops || 0) + amount;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('transfer', currentUser, `перевел ${amount} леденцов пользователю ${to}`);
             showNotification(`✅ ${amount.toLocaleString()} → ${to}`, 'success');
             renderCandyShop();
         });
@@ -2168,6 +2614,7 @@
             if (promo.uses !== Infinity) promo.uses--;
             localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('promo', currentUser, `активировал промокод ${code} (+${promo.reward} конфет)`);
             showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString(), currency: t('candies') }), 'success');
             renderCandyShop();
         } else if (promo.type === 'lollipop') {
@@ -2177,6 +2624,7 @@
             if (promo.uses !== Infinity) promo.uses--;
             localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('promo', currentUser, `активировал промокод ${code} (+${promo.reward} леденцов)`);
             showNotification(t('promoCodeActivated', { reward: promo.reward.toLocaleString(), currency: t('lollipops') }), 'success');
             renderCandyShop();
         } else {
@@ -2184,6 +2632,7 @@
         }
     }
 
+    // ========== АДМИН-ПАНЕЛЬ (добавлено управление леденцами) ==========
     function renderAdminPanel() {
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
@@ -2208,8 +2657,12 @@
                     <div class="user-actions">
                         <button onclick="adjustCandies('${name}', 100)">+100</button>
                         <button onclick="adjustCandies('${name}', -100)">-100</button>
-                        <input type="number" id="set-${name}" placeholder="Уст" min="0" style="width:70px;">
+                        <input type="number" id="set-${name}" placeholder="Конфеты" min="0" style="width:70px;">
                         <button onclick="setCandies('${name}')">${t('setCandies')}</button>
+                        <button onclick="adjustLollipops('${name}', 100)">+100 лед</button>
+                        <button onclick="adjustLollipops('${name}', -100)">-100 лед</button>
+                        <input type="number" id="setLolli-${name}" placeholder="Леденцы" min="0" style="width:70px;">
+                        <button onclick="setLollipops('${name}')">Уст. лед</button>
                         <button onclick="banUser('${name}')">${t('ban')}</button>
                         <button onclick="banIP('${name}')">${t('banIP')}</button>
                         <button onclick="muteUser('${name}')">${t('mute')}</button>
@@ -2351,6 +2804,23 @@
         showNotification(t('candiesSet'), 'success');
     }
 
+    function adjustLollipops(username, delta) {
+        usersDB[username].lollipops = Math.max(0, (usersDB[username].lollipops || 0) + delta);
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderAdminPanel();
+        showNotification('Леденцы изменены', 'success');
+    }
+
+    function setLollipops(username) {
+        let inp = document.getElementById(`setLolli-${username}`);
+        let val = parseInt(inp.value);
+        if (isNaN(val) || val < 0) { showNotification(t('enterValidNumber'), 'error'); return; }
+        usersDB[username].lollipops = val;
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        renderAdminPanel();
+        showNotification('Леденцы установлены', 'success');
+    }
+
     function deleteUser(username) {
         if (username === 'Gyraffic') { showNotification(t('cannotDeleteGyraffic'), 'error'); return; }
         showConfirm(t('confirmDelete', { username }), () => {
@@ -2362,17 +2832,60 @@
         });
     }
 
-    function banUser(username) { showConfirm(t('confirmBan', { username }), () => showNotification(t('userBanned', { username }), 'success')); }
-    function banIP(username) { let ip = usersDB[username]?.ip || 'unknown'; showConfirm(t('confirmBanIP', { ip }), () => showNotification(t('ipBanned', { ip }), 'success')); }
-    function muteUser(username) { showConfirm(t('confirmMute', { username }), () => showNotification(t('userMuted', { username }), 'success')); }
-    function warnUser(username) { showConfirm(t('confirmWarn', { username }), () => showNotification(t('userWarned'), 'success')); }
-    function kickUser(username) { showConfirm(t('confirmKick', { username }), () => showNotification(t('userKicked', { username }), 'success')); }
+    function banUser(username) {
+        let user = usersDB[username];
+        if (!user) return;
+        let until = Date.now() + 24 * 60 * 60 * 1000; // 1 день
+        user.bannedUntil = until;
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        addHistory('ban', currentUser, `забанил ${username} до ${new Date(until).toLocaleString()}`);
+        showNotification(t('userBanned', { username }), 'success');
+        renderAdminPanel();
+    }
+
+    function banIP(username) {
+        let ip = usersDB[username]?.ip || 'unknown';
+        showConfirm(t('confirmBanIP', { ip }), () => {
+            // здесь можно добавить бан по IP для всех пользователей с этим IP, но пока просто уведомление
+            addHistory('banIP', currentUser, `забанил IP ${ip} (пользователь ${username})`);
+            showNotification(t('ipBanned', { ip }), 'success');
+        });
+    }
+
+    function muteUser(username) {
+        let user = usersDB[username];
+        if (!user) return;
+        let until = Date.now() + 60 * 60 * 1000; // 1 час
+        user.mutedUntil = until;
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        addHistory('mute', currentUser, `замутил ${username} до ${new Date(until).toLocaleString()}`);
+        showNotification(t('userMuted', { username }), 'success');
+        renderAdminPanel();
+    }
+
+    function warnUser(username) {
+        let user = usersDB[username];
+        if (!user) return;
+        user.warnings = user.warnings || [];
+        user.warnings.push({ by: currentUser, time: Date.now() });
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        addHistory('warn', currentUser, `выдал предупреждение ${username}`);
+        showNotification(t('userWarned'), 'success');
+        renderAdminPanel();
+    }
+
+    function kickUser(username) {
+        // просто лог
+        addHistory('kick', currentUser, `кикнул ${username}`);
+        showNotification(t('userKicked', { username }), 'success');
+    }
 
     function setUserRole(username) {
         let select = document.getElementById(`role-${username}`);
         let newRole = select.value;
         usersDB[username].role = newRole;
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        addHistory('role', currentUser, `изменил роль ${username} на ${newRole}`);
         renderAdminPanel();
         showNotification(`Роль пользователя ${username} изменена на ${newRole}`, 'success');
     }
@@ -2418,6 +2931,8 @@
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
+        chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
+        historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
         currentUser = localStorage.getItem('sweetland_current_user') || null;
         setAccentColor(currentTheme);
         translateAll();

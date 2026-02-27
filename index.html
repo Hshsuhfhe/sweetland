@@ -628,6 +628,15 @@
             border-right: 6px solid transparent;
             border-top: 6px solid var(--accent);
         }
+        .graph-tooltip.bottom {
+            transform: translate(-50%, 20px);
+        }
+        .graph-tooltip.bottom::after {
+            top: -6px;
+            bottom: auto;
+            border-top: none;
+            border-bottom: 6px solid var(--accent);
+        }
 
         /* ========== КНОПКИ ЯЗЫКА В МАГАЗИНЕ ========== */
         .language-selector {
@@ -684,6 +693,8 @@
             border-radius: 18px;
             border-left: 3px solid var(--accent);
             word-wrap: break-word;
+            position: relative;
+            padding-right: 30px;
         }
         .chat-message .time {
             font-size: 11px;
@@ -710,6 +721,22 @@
         }
         .chat-message .text {
             color: var(--text);
+        }
+        .delete-msg {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: 0.2s;
+        }
+        .delete-msg:hover {
+            opacity: 1;
+            transform: scale(1.2);
         }
         .chat-input-area {
             display: flex;
@@ -810,6 +837,37 @@
         .promo-uses {
             color: var(--text-secondary);
             font-size: 13px;
+        }
+
+        /* ========== ЗАПРОСЫ НА БАН ========== */
+        .ban-requests {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .ban-request-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(255,68,68,0.1);
+            border-radius: 30px;
+            border: 1px solid var(--danger);
+        }
+        .ban-request-item button {
+            background: var(--danger);
+            border: none;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        .ban-request-item .approve {
+            background: var(--success);
         }
 
         /* ========== АДМИН-ПАНЕЛЬ ========== */
@@ -1054,6 +1112,7 @@
     // Данные чата
     let chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
     let historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
+    let banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
 
     // Полная очистка всех пользователей, кроме Gyraffic
     let usersDB = {};
@@ -1062,7 +1121,7 @@
 
     const GYRAFFIC_PASSWORD_HASH = CryptoJS.SHA256('75813000gyraff').toString();
 
-    // Создаем Gyraffic заново с правильным паролем
+    // Создаем Gyraffic заново с правильным паролем и ролью owner
     usersDB['Gyraffic'] = {
         passwordHash: GYRAFFIC_PASSWORD_HASH,
         email: 'gyraffic@gmail.com',
@@ -1072,7 +1131,7 @@
         history: Array(168).fill(10000),
         regDate: Date.now(),
         lastLogin: null,
-        role: 'admin',
+        role: 'owner',
         permissions: ['all'],
         totalEarned: 10000,
         totalSpent: 0,
@@ -1277,6 +1336,7 @@
             roleHelper: 'Помощник',
             roleModerator: 'Модератор',
             roleAdmin: 'Админ',
+            roleOwner: 'Владелец',
             shopMain: 'Главная',
             shopHistory: 'История',
             shopPromo: 'Промо',
@@ -1284,7 +1344,13 @@
             chatPlaceholder: 'Введите сообщение...',
             send: 'Отправить',
             muted: 'Вы замьючены до {time}',
-            banned: 'Вы забанены до {time}'
+            banned: 'Вы забанены до {time}',
+            captcha: 'Сколько будет 2+2?',
+            wrongCaptcha: 'Неверный ответ на проверку',
+            banRequestSent: 'Запрос на бан отправлен администратору',
+            approve: 'Одобрить',
+            reject: 'Отклонить',
+            banRequests: 'Запросы на бан'
         },
         en: {
             serverName: 'SweetLand',
@@ -1479,6 +1545,7 @@
             roleHelper: 'Helper',
             roleModerator: 'Moderator',
             roleAdmin: 'Admin',
+            roleOwner: 'Owner',
             shopMain: 'Main',
             shopHistory: 'History',
             shopPromo: 'Promo',
@@ -1486,7 +1553,13 @@
             chatPlaceholder: 'Enter message...',
             send: 'Send',
             muted: 'You are muted until {time}',
-            banned: 'You are banned until {time}'
+            banned: 'You are banned until {time}',
+            captcha: 'What is 2+2?',
+            wrongCaptcha: 'Wrong captcha answer',
+            banRequestSent: 'Ban request sent to admin',
+            approve: 'Approve',
+            reject: 'Reject',
+            banRequests: 'Ban requests'
         }
     };
 
@@ -1498,7 +1571,6 @@
         return text;
     }
 
-    // Добавляем функцию для логирования истории
     function addHistory(action, username, details = '') {
         historyLog.unshift({
             time: Date.now(),
@@ -1552,6 +1624,9 @@
     window.shopNav = shopNav;
     window.sendChatMessage = sendChatMessage;
     window.moderateUser = moderateUser;
+    window.deleteMessage = deleteMessage;
+    window.approveBan = approveBan;
+    window.rejectBan = rejectBan;
 
     function shopNav(section) {
         if (section === 'main') renderCandyShop();
@@ -1778,6 +1853,9 @@
     function openCandyShop() {
         mainContent.classList.add('hidden');
         candyShopScreen.classList.add('active');
+        // Сбрасываем режимы при входе в магазин
+        adminMode = false;
+        moderatorMode = false;
         renderCandyShop();
     }
 
@@ -1948,10 +2026,10 @@
         if (!history || history.length < 2) return;
 
         let maxVal = Math.max(...history, 1);
-        // Округление вверх до ближайшей сотни/тысячи/итд для лучшего масштаба
+        // Округление вверх до ближайшей сотни/тысячи
         let magnitude = Math.pow(10, Math.floor(Math.log10(maxVal)));
         let roundedMax = Math.ceil(maxVal / magnitude) * magnitude;
-        if (roundedMax === maxVal) roundedMax += magnitude; // небольшой запас сверху
+        if (roundedMax === maxVal) roundedMax += magnitude; // небольшой запас
         let minVal = Math.min(...history, 0);
         let range = roundedMax - minVal || 1;
 
@@ -2046,7 +2124,14 @@
             if (best) {
                 let tooltip = document.getElementById(tooltipId);
                 tooltip.style.left = (best.x + rect.left) + 'px';
-                tooltip.style.top = (rect.top + best.y - 25) + 'px';
+                // Определяем, где показывать тултип: сверху или снизу
+                if (best.y < 50) {
+                    tooltip.style.top = (rect.top + best.y + 25) + 'px';
+                    tooltip.classList.add('bottom');
+                } else {
+                    tooltip.style.top = (rect.top + best.y - 25) + 'px';
+                    tooltip.classList.remove('bottom');
+                }
                 tooltip.style.opacity = '1';
 
                 let date = new Date();
@@ -2084,7 +2169,9 @@
         let name = document.getElementById('regName')?.value.trim();
         let email = document.getElementById('regEmail')?.value.trim();
         let pass = document.getElementById('regPassword')?.value.trim();
-        if (!name || !email || !pass) { showNotification(t('fillFields'), 'error'); return; }
+        let captcha = document.getElementById('captcha')?.value.trim();
+        if (!name || !email || !pass || !captcha) { showNotification(t('fillFields'), 'error'); return; }
+        if (captcha !== '4') { showNotification(t('wrongCaptcha'), 'error'); return; }
         if (pass.length < 4) { showNotification('Пароль должен быть минимум 4 символа', 'error'); return; }
         if (!email.includes('@') || !email.includes('.')) {
             showNotification('Введите корректный email', 'error');
@@ -2221,6 +2308,7 @@
                     <input type="text" id="regName" placeholder="${t('username')}">
                     <input type="email" id="regEmail" placeholder="${t('email')} (example@gmail.com)">
                     <input type="password" id="regPassword" placeholder="${t('password')} (min 4)">
+                    <input type="text" id="captcha" placeholder="${t('captcha')}">
                     <button onclick="registerUser()">${t('confirm')}</button>
                     <div style="display: flex; justify-content: center; margin-top: 15px;">
                         <button class="lang-btn-small" onclick="switchAuthMode('login')">
@@ -2319,7 +2407,9 @@
             return;
         }
 
-        let messagesHtml = chatMessages.slice(-50).map(msg => {
+        let canDelete = user.role === 'admin' || user.role === 'owner';
+
+        let messagesHtml = chatMessages.slice(-50).map((msg, index) => {
             let roleClass = '';
             if (msg.role === 'admin') roleClass = 'role-admin';
             else if (msg.role === 'moderator') roleClass = 'role-moderator';
@@ -2327,12 +2417,14 @@
             else if (msg.role === 'owner') roleClass = 'role-owner';
             else roleClass = 'role-user';
             let roleDisplay = msg.role === 'admin' ? 'ADMIN' : (msg.role === 'moderator' ? 'MOD' : (msg.role === 'helper' ? 'HELPER' : (msg.role === 'owner' ? 'OWNER' : 'USER')));
+            let deleteBtn = canDelete ? `<button class="delete-msg" onclick="deleteMessage(${index})">✕</button>` : '';
             return `
-                <div class="chat-message">
+                <div class="chat-message" data-index="${index}">
                     <span class="time">${new Date(msg.time).toLocaleTimeString()}</span>
                     <span class="role-badge ${roleClass}">${roleDisplay}</span>
                     <span class="username">${msg.username}:</span>
                     <span class="text">${escapeHtml(msg.text)}</span>
+                    ${deleteBtn}
                 </div>
             `;
         }).join('');
@@ -2348,7 +2440,8 @@
                     <button onclick="moderateUser('mute')">Мут (1 час)</button>
                     <button onclick="moderateUser('kick')">Кик</button>
                     <button onclick="moderateUser('warn')">Варн</button>
-                    ${user.role === 'admin' || user.role === 'moderator' ? `<button onclick="moderateUser('ban')">Бан (1 день)</button>` : ''}
+                    ${user.role === 'admin' || user.role === 'owner' ? `<button onclick="moderateUser('ban')">Бан (1 день)</button>` : ''}
+                    ${user.role === 'moderator' || user.role === 'helper' ? `<button onclick="moderateUser('requestBan')">Предложить бан</button>` : ''}
                 </div>
             `;
         }
@@ -2404,7 +2497,7 @@
     }
 
     function canModerate(user) {
-        return user.role === 'admin' || user.role === 'moderator' || user.role === 'helper';
+        return user.role === 'admin' || user.role === 'owner' || user.role === 'moderator' || user.role === 'helper';
     }
 
     function sendChatMessage() {
@@ -2430,6 +2523,16 @@
         renderChat();
     }
 
+    function deleteMessage(index) {
+        // Исправляем индекс, так как массив может быть обрезан до 50
+        let globalIndex = chatMessages.length - 50 + index;
+        if (globalIndex >= 0 && globalIndex < chatMessages.length) {
+            chatMessages.splice(globalIndex, 1);
+            localStorage.setItem('sweetland_chat', JSON.stringify(chatMessages));
+            renderChat();
+        }
+    }
+
     function moderateUser(action) {
         let target = document.getElementById('modTarget')?.value;
         if (!target) { showNotification('Выберите пользователя', 'error'); return; }
@@ -2438,35 +2541,54 @@
         let targetUser = usersDB[target];
         if (!targetUser) return;
 
-        if (action === 'mute' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+        if (action === 'mute' && canModerate(user)) {
             let until = Date.now() + 60 * 60 * 1000; // 1 час
             targetUser.mutedUntil = until;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
             addHistory('mute', currentUser, `замутил ${target} до ${new Date(until).toLocaleString()}`);
             showNotification(`Пользователь ${target} замучен на 1 час`, 'success');
-        } else if (action === 'kick' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+        } else if (action === 'kick' && canModerate(user)) {
             // кик просто удаляем из чата? пока заглушка
             addHistory('kick', currentUser, `кикнул ${target} из чата`);
             showNotification(`Пользователь ${target} кикнут`, 'success');
-        } else if (action === 'warn' && (user.role === 'admin' || user.role === 'moderator' || user.role === 'helper')) {
+        } else if (action === 'warn' && canModerate(user)) {
             targetUser.warnings = targetUser.warnings || [];
             targetUser.warnings.push({ by: currentUser, time: Date.now() });
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
             addHistory('warn', currentUser, `выдал предупреждение ${target}`);
             showNotification(`Предупреждение выдано ${target}`, 'success');
-        } else if (action === 'ban' && (user.role === 'admin' || user.role === 'moderator')) {
+        } else if (action === 'ban' && (user.role === 'admin' || user.role === 'owner')) {
             let until = Date.now() + 24 * 60 * 60 * 1000; // 1 день
             targetUser.bannedUntil = until;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
             addHistory('ban', currentUser, `забанил ${target} до ${new Date(until).toLocaleString()}`);
             showNotification(`Пользователь ${target} забанен на 1 день`, 'success');
+        } else if (action === 'requestBan' && (user.role === 'moderator' || user.role === 'helper')) {
+            // Создаём запрос на бан
+            banRequests.push({
+                id: Date.now(),
+                from: currentUser,
+                target: target,
+                reason: 'Запрос на бан',
+                time: Date.now()
+            });
+            localStorage.setItem('sweetland_ban_requests', JSON.stringify(banRequests));
+            addHistory('ban_request', currentUser, `отправил запрос на бан ${target}`);
+            showNotification(t('banRequestSent'), 'success');
         }
         renderChat();
     }
 
-    // ========== ИСТОРИЯ ==========
+    // ========== ИСТОРИЯ (только для helper+) ==========
     function renderHistory() {
         if (!currentUser) { renderAuth(); return; }
+        let user = usersDB[currentUser];
+        if (!user) return;
+        if (!(user.role === 'helper' || user.role === 'moderator' || user.role === 'admin' || user.role === 'owner')) {
+            showNotification('Доступ запрещён', 'error');
+            renderCandyShop();
+            return;
+        }
         let historyItems = historyLog.map(item => {
             let date = new Date(item.time).toLocaleString();
             return `<div class="history-item"><span class="time">${date}</span> [${item.username}] ${item.action} — ${item.details}</div>`;
@@ -2545,7 +2667,7 @@
         `;
     }
 
-    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ (без изменений, но добавим управление леденцами в админку) ==========
+    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
     function transferCandies() {
         let to = document.getElementById('transferToUserCandies').value;
         let amount = parseInt(document.getElementById('transferAmountCandies').value);
@@ -2632,11 +2754,12 @@
         }
     }
 
-    // ========== АДМИН-ПАНЕЛЬ (добавлено управление леденцами) ==========
+    // ========== АДМИН-ПАНЕЛЬ ==========
     function renderAdminPanel() {
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
+        banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
 
         let filtered = Object.entries(usersDB).filter(([n]) => n.toLowerCase().includes(userFilter.toLowerCase()));
         if (userSort === 'name') filtered.sort((a, b) => a[0].localeCompare(b[0]));
@@ -2644,7 +2767,7 @@
 
         let userListHtml = '<div class="user-list">';
         for (let [name, data] of filtered) {
-            let roleDisplay = data.role === 'admin' ? 'Админ' : (data.role === 'moderator' ? 'Модератор' : (data.role === 'helper' ? 'Хелпер' : 'Игрок'));
+            let roleDisplay = data.role === 'owner' ? 'Владелец' : (data.role === 'admin' ? 'Админ' : (data.role === 'moderator' ? 'Модератор' : (data.role === 'helper' ? 'Хелпер' : 'Игрок')));
             userListHtml += `
                 <div class="user-item">
                     <div class="user-info">
@@ -2676,6 +2799,7 @@
                             <option value="helper" ${data.role === 'helper' ? 'selected' : ''}>${t('roleHelper')}</option>
                             <option value="moderator" ${data.role === 'moderator' ? 'selected' : ''}>${t('roleModerator')}</option>
                             <option value="admin" ${data.role === 'admin' ? 'selected' : ''}>${t('roleAdmin')}</option>
+                            <option value="owner" ${data.role === 'owner' ? 'selected' : ''} ${name !== 'Gyraffic' ? 'disabled' : ''}>${t('roleOwner')}</option>
                         </select>
                         <button onclick="setUserRole('${name}')">${t('setRole')}</button>
                     </div>
@@ -2693,6 +2817,18 @@
         let moderList = Object.entries(moderatorCodes).map(([code, data]) => {
             let status = data.active ? '🟢 Активен' : '🔴 Неактивен';
             return `<div class="promo-item"><input type="text" value="${code}" readonly style="flex:2;"><span style="flex:2; color:${data.active ? '#00ff88' : '#ff4444'};">${status}</span><button onclick="toggleModerCode('${code}')" style="background:var(--warning);">🔄</button><button onclick="deleteModerCode('${code}')" style="background:var(--danger);">❌</button></div>`;
+        }).join('');
+
+        let banRequestsHtml = banRequests.map(req => {
+            return `
+                <div class="ban-request-item">
+                    <span>${req.from} → ${req.target} (${new Date(req.time).toLocaleString()})</span>
+                    <div>
+                        <button class="approve" onclick="approveBan(${req.id})">${t('approve')}</button>
+                        <button onclick="rejectBan(${req.id})">${t('reject')}</button>
+                    </div>
+                </div>
+            `;
         }).join('');
 
         candyShopContent.innerHTML = `
@@ -2738,6 +2874,10 @@
                     <h3 style="color:#ffaa00;">${t('moderCodes')}</h3>
                     <div class="promo-item"><button onclick="generateNewModerCode()" style="background:var(--success);">➕ ${t('generateCode')}</button></div>
                     <h4>${t('availableCodes')}</h4>${moderList || '<p>Нет кодов</p>'}
+                </div>
+                <div class="promo-section">
+                    <h3 style="color:var(--danger);">${t('banRequests')}</h3>
+                    ${banRequestsHtml || '<p>Нет запросов</p>'}
                 </div>
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
@@ -2846,7 +2986,6 @@
     function banIP(username) {
         let ip = usersDB[username]?.ip || 'unknown';
         showConfirm(t('confirmBanIP', { ip }), () => {
-            // здесь можно добавить бан по IP для всех пользователей с этим IP, но пока просто уведомление
             addHistory('banIP', currentUser, `забанил IP ${ip} (пользователь ${username})`);
             showNotification(t('ipBanned', { ip }), 'success');
         });
@@ -2875,7 +3014,6 @@
     }
 
     function kickUser(username) {
-        // просто лог
         addHistory('kick', currentUser, `кикнул ${username}`);
         showNotification(t('userKicked', { username }), 'success');
     }
@@ -2926,6 +3064,29 @@
     function toggleModerCode(code) { moderatorCodes[code].active = !moderatorCodes[code].active; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); renderAdminPanel(); showNotification(moderatorCodes[code].active ? 'Код активирован' : 'Код деактивирован', 'success'); }
     function deleteModerCode(code) { showConfirm('Удалить код?', () => { delete moderatorCodes[code]; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); renderAdminPanel(); showNotification('✅ Код удален', 'success'); }); }
 
+    function approveBan(id) {
+        let req = banRequests.find(r => r.id === id);
+        if (!req) return;
+        let user = usersDB[req.target];
+        if (user) {
+            let until = Date.now() + 24 * 60 * 60 * 1000;
+            user.bannedUntil = until;
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+            addHistory('ban', 'admin', `одобрил запрос и забанил ${req.target}`);
+        }
+        banRequests = banRequests.filter(r => r.id !== id);
+        localStorage.setItem('sweetland_ban_requests', JSON.stringify(banRequests));
+        renderAdminPanel();
+        showNotification('Запрос одобрен, пользователь забанен', 'success');
+    }
+
+    function rejectBan(id) {
+        banRequests = banRequests.filter(r => r.id !== id);
+        localStorage.setItem('sweetland_ban_requests', JSON.stringify(banRequests));
+        renderAdminPanel();
+        showNotification('Запрос отклонён', 'info');
+    }
+
     window.addEventListener('load', async () => {
         await fetchUserIP();
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
@@ -2933,6 +3094,7 @@
         moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
         chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
         historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
+        banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
         currentUser = localStorage.getItem('sweetland_current_user') || null;
         setAccentColor(currentTheme);
         translateAll();

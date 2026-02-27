@@ -15,7 +15,7 @@
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
-        input, textarea, [contenteditable] {
+        input, textarea, [contenteditable], select {
             -webkit-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
@@ -365,7 +365,7 @@
         }
         .section-title:hover span::after { transform: scaleX(1); }
 
-        /* ========== СТАТИСТИКА (ПЕРЕДЕЛАНО НА FLEX) ========== */
+        /* ========== СТАТИСТИКА ========== */
         .stats-grid {
             display: flex;
             flex-wrap: wrap;
@@ -588,7 +588,7 @@
             box-shadow: 0 6px 20px rgba(255,68,68,0.5);
         }
 
-        /* ========== ГРАФИК ========== */
+        /* ========== ГРАФИК (УЛУЧШЕННЫЙ) ========== */
         .graph-container {
             position: relative;
             width: 100%;
@@ -599,23 +599,29 @@
             border: 1px solid var(--border);
             overflow: hidden;
         }
-        #candyLineGraph { width: 100%; height: 100%; display: block; cursor: crosshair; }
+        #candyLineGraph {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: crosshair;
+            transition: opacity 0.3s;
+        }
         .graph-tooltip {
             position: absolute;
             background: var(--accent);
             color: white;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.15s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             white-space: nowrap;
             z-index: 20;
             border: 1px solid #fff;
-            transform: translate(-50%, -100%);
+            transform: translate(-50%, -100%) scale(1);
         }
         .graph-tooltip::after {
             content: '';
@@ -624,18 +630,18 @@
             left: 50%;
             transform: translateX(-50%);
             width: 0; height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 6px solid var(--accent);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid var(--accent);
         }
         .graph-tooltip.bottom {
-            transform: translate(-50%, 20px);
+            transform: translate(-50%, 20px) scale(1);
         }
         .graph-tooltip.bottom::after {
             top: -6px;
             bottom: auto;
             border-top: none;
-            border-bottom: 6px solid var(--accent);
+            border-bottom: 8px solid var(--accent);
         }
 
         /* ========== КНОПКИ ЯЗЫКА В МАГАЗИНЕ ========== */
@@ -930,6 +936,29 @@
             color: #fff;
         }
 
+        /* ========== КАСТОМНЫЙ СТИЛЬ ДЛЯ SELECT ========== */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234d9eff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 45px !important;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        select:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        select option {
+            background: var(--bg-secondary);
+            color: var(--text);
+            padding: 8px;
+        }
+
         /* ========== АДАПТАЦИЯ ========== */
         @media (max-width: 768px) {
             .banner-center { display: none; }
@@ -1044,7 +1073,7 @@
     <!-- ГЕРОЙ -->
     <header class="hero" id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23333\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23fff\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E';"></div></div><div id="copyNotice" data-key="copyNotice">IP скопирован</div></header>
 
-    <!-- СТАТИСТИКА (ИСПРАВЛЕНО) -->
+    <!-- СТАТИСТИКА -->
     <section class="section reveal" id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label" data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label" data-key="statsDonate">Доната</div></div></div></section>
 
     <!-- ОСОБЕННОСТИ -->
@@ -1766,6 +1795,8 @@
     window.deleteMessage = deleteMessage;
     window.approveBan = approveBan;
     window.rejectBan = rejectBan;
+    window.renderAdminPanel = renderAdminPanel; // обязательно
+    window.renderModeratorPanel = renderModeratorPanel;
 
     // ================== ОСНОВНЫЕ ФУНКЦИИ ==================
     function setAccentColor(color) {
@@ -2060,7 +2091,7 @@
     }
     window.addEventListener('scroll', reveal);
 
-    // ================== ГРАФИК ==================
+    // ================== ГРАФИК (УЛУЧШЕННЫЙ) ==================
     function drawLineGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -2115,9 +2146,10 @@
             ctx.fillText(timeStr, x - 25, h - 10);
         }
 
-        // Заливка под графиком
+        // Заливка под графиком (градиент)
         let gradient = ctx.createLinearGradient(0, 0, 0, h);
-        gradient.addColorStop(0, 'rgba(77, 158, 255, 0.2)');
+        gradient.addColorStop(0, 'rgba(77, 158, 255, 0.3)');
+        gradient.addColorStop(0.5, 'rgba(77, 158, 255, 0.1)');
         gradient.addColorStop(1, 'rgba(77, 158, 255, 0)');
 
         ctx.beginPath();
@@ -2133,22 +2165,28 @@
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Линия графика
+        // Линия графика (сглаженная)
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 3;
         ctx.shadowColor = '#4d9eff';
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 12;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
             let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
             if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+            else {
+                // Простое сглаживание (можно заменить на bezier, но для простоты оставим)
+                ctx.lineTo(x, y);
+            }
         }
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // Точки для тултипа
+        // Точки (для тултипа)
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -2175,9 +2213,9 @@
             if (!tooltip) return;
             if (best) {
                 let tooltipX = e.clientX;
-                let tooltipY = e.clientY - 40;
-                if (e.clientY < 60) {
-                    tooltipY = e.clientY + 20;
+                let tooltipY = e.clientY - 50;
+                if (e.clientY < 80) {
+                    tooltipY = e.clientY + 30;
                     tooltip.classList.add('bottom');
                 } else {
                     tooltip.classList.remove('bottom');
@@ -2929,6 +2967,9 @@
                     </div>
                     <div class="banner-center">
                         <a href="javascript:void(0)" onclick="renderAdminPanel()">🏠 Главная</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 Чат</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 История</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 Промо</a>
                     </div>
                     <div class="banner-right">
                         <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
@@ -2997,6 +3038,9 @@
                     </div>
                     <div class="banner-center">
                         <a href="javascript:void(0)" onclick="renderModeratorPanel()">🏠 Главная</a>
+                        <a href="javascript:void(0)" onclick="shopNav('chat')">💬 Чат</a>
+                        <a href="javascript:void(0)" onclick="shopNav('history')">📜 История</a>
+                        <a href="javascript:void(0)" onclick="shopNav('promo')">🎁 Промо</a>
                     </div>
                     <div class="banner-right">
                         <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>

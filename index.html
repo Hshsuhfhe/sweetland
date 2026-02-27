@@ -1105,10 +1105,14 @@
 
 <script>
 (function() {
+    "use strict";
+
+    // ================== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==================
     const mainContent = document.getElementById('mainContent');
     const candyShopScreen = document.getElementById('candyShopScreen');
     const candyShopContent = document.getElementById('candyShopContent');
 
+    // Защита от копирования и разработчика
     document.addEventListener('copy', (e) => e.preventDefault());
     document.addEventListener('cut', (e) => e.preventDefault());
     document.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -1117,6 +1121,7 @@
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
     });
 
+    // Состояние
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
@@ -1129,39 +1134,60 @@
     let userSort = 'name';
     let userIP = null;
 
-    // Данные чата
-    let chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
-    let historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
-    let banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
-
-    // Полная очистка всех пользователей, кроме Gyraffic
+    // Данные (загружаются из localStorage)
     let usersDB = {};
-    let promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-    let moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
+    let promoCodes = {};
+    let moderatorCodes = {};
+    let chatMessages = [];
+    let historyLog = [];
+    let banRequests = [];
 
+    // Хэш пароля Gyraffic
     const GYRAFFIC_PASSWORD_HASH = CryptoJS.SHA256('75813000gyraff').toString();
 
-    // Создаем Gyraffic заново с правильным паролем и ролью owner
-    usersDB['Gyraffic'] = {
-        passwordHash: GYRAFFIC_PASSWORD_HASH,
-        email: 'gyraffic@gmail.com',
-        ip: null,
-        candies: 10000,
-        lollipops: 5000,
-        history: Array(168).fill(10000),
-        regDate: Date.now(),
-        lastLogin: null,
-        role: 'owner',
-        permissions: ['all'],
-        totalEarned: 10000,
-        totalSpent: 0,
-        daysActive: 1,
-        mutedUntil: 0,
-        bannedUntil: 0,
-        warnings: []
-    };
-    localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+    // ================== ЗАГРУЗКА ДАННЫХ ==================
+    function loadData() {
+        try {
+            usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
+            promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
+            moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
+            chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
+            historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
+            banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
+        } catch (e) {
+            console.warn('Ошибка загрузки данных из localStorage', e);
+        }
+    }
 
+    // Инициализация Gyraffic (если отсутствует)
+    function initGyraffic() {
+        if (!usersDB['Gyraffic']) {
+            usersDB['Gyraffic'] = {
+                passwordHash: GYRAFFIC_PASSWORD_HASH,
+                email: 'gyraffic@gmail.com',
+                ip: null,
+                candies: 10000,
+                lollipops: 5000,
+                history: Array(168).fill(10000),
+                regDate: Date.now(),
+                lastLogin: null,
+                role: 'owner',
+                permissions: ['all'],
+                totalEarned: 10000,
+                totalSpent: 0,
+                daysActive: 1,
+                mutedUntil: 0,
+                bannedUntil: 0,
+                warnings: []
+            };
+            localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        }
+    }
+
+    loadData();
+    initGyraffic();
+
+    // ================== ПЕРЕВОДЫ ==================
     const translations = {
         ru: {
             serverName: 'SweetLand',
@@ -1583,14 +1609,16 @@
         }
     };
 
+    // Функция перевода
     function t(key, params = {}) {
-        let text = translations[currentLang]?.[key] || translations.ru[key] || key;
-        for (let [k, v] of Object.entries(params)) {
-            text = text.replace(`{${k}}`, v);
+        let text = (translations[currentLang] && translations[currentLang][key]) || translations.ru[key] || key;
+        for (let k in params) {
+            text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), params[k]);
         }
         return text;
     }
 
+    // ================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==================
     function addHistory(action, username, details = '') {
         historyLog.unshift({
             time: Date.now(),
@@ -1602,61 +1630,31 @@
         localStorage.setItem('sweetland_history', JSON.stringify(historyLog));
     }
 
-    window.toggleTheme = function() { setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light'); };
-    window.toggleColorMenu = function() { document.getElementById('colorMenu').classList.toggle('active'); if (!document.getElementById('colorMenu').children.length) generateColorMenu(); };
-    window.toggleLangMenu = function() { document.getElementById('langMenu').classList.toggle('active'); if (!document.getElementById('langMenu').children.length) generateLangMenu(); };
-    window.toggleWeatherMenu = function() { document.getElementById('weatherMenu').classList.toggle('active'); if (!document.getElementById('weatherMenu').children.length) generateWeatherMenu(); };
-    window.toggleSettingsMenu = function() { document.getElementById('settingsMenu').classList.toggle('active'); if (!document.getElementById('settingsMenu').children.length) generateSettingsMenu(); };
-    window.togglePanel = function() { document.getElementById('side-panel').classList.toggle('active'); };
-    window.setAccentColor = setAccentColor;
-    window.setLanguage = setLanguage;
-    window.setWeather = setWeather;
-    window.toggleParticles = toggleParticles;
-    window.resetSettings = resetSettings;
-    window.copyIP = copyIP;
-    window.openRules = openRules;
-    window.closeRules = closeRules;
-    window.openCandyShop = openCandyShop;
-    window.closeCandyShop = closeCandyShop;
-    window.showMainContent = showMainContent;
-    window.transferCandies = transferCandies;
-    window.transferLollipops = transferLollipops;
-    window.applyPromoCode = applyPromoCode;
-    window.registerUser = registerUser;
-    window.loginUser = loginUser;
-    window.logoutUser = logoutUser;
-    window.switchAuthMode = switchAuthMode;
-    window.adjustCandies = adjustCandies;
-    window.setCandies = setCandies;
-    window.deleteUser = deleteUser;
-    window.banUser = banUser;
-    window.banIP = banIP;
-    window.muteUser = muteUser;
-    window.warnUser = warnUser;
-    window.kickUser = kickUser;
-    window.addPromoCode = addPromoCode;
-    window.deletePromoCode = deletePromoCode;
-    window.generateNewModerCode = generateNewModerCode;
-    window.deleteModerCode = deleteModerCode;
-    window.toggleModerCode = toggleModerCode;
-    window.setUserRole = setUserRole;
-    window.renderCandyShop = renderCandyShop;
-    window.shopNav = shopNav;
-    window.sendChatMessage = sendChatMessage;
-    window.moderateUser = moderateUser;
-    window.deleteMessage = deleteMessage;
-    window.approveBan = approveBan;
-    window.rejectBan = rejectBan;
-    // ИСПРАВЛЕНО: добавлены недостающие функции в window
-    window.adjustLollipops = adjustLollipops;
-    window.setLollipops = setLollipops;
+    function showNotification(message, type = 'info', autoClose = true) {
+        // Удаляем старые уведомления
+        document.querySelectorAll('.notification-overlay, .custom-notification').forEach(el => el.remove());
 
-    function shopNav(section) {
-        if (section === 'main') renderCandyShop();
-        else if (section === 'chat') renderChat();
-        else if (section === 'history') renderHistory();
-        else if (section === 'promo') renderPromoList();
-        else showNotification(`Раздел "${section}" в разработке`, 'info');
+        let overlay = document.createElement('div');
+        overlay.className = 'notification-overlay';
+
+        let notif = document.createElement('div');
+        notif.className = `custom-notification ${type}`;
+        notif.innerHTML = `
+            <p>${message}</p>
+            <button onclick="this.parentElement.remove(); document.querySelector('.notification-overlay').remove();">OK</button>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(notif);
+
+        if (autoClose) {
+            setTimeout(() => {
+                if (notif.parentElement) {
+                    notif.remove();
+                    overlay.remove();
+                }
+            }, 3000);
+        }
     }
 
     function showConfirm(message, onConfirm, onCancel) {
@@ -1685,6 +1683,91 @@
         };
     }
 
+    async function fetchUserIP() {
+        try {
+            let response = await fetch('https://api.ipify.org?format=json');
+            let data = await response.json();
+            userIP = data.ip;
+        } catch (e) {
+            userIP = 'unknown-' + Math.random().toString(36).substring(7);
+        }
+    }
+
+    function findUser(username) {
+        if (!username) return null;
+        const lower = username.toLowerCase();
+        for (let name in usersDB) {
+            if (name.toLowerCase() === lower) return name;
+        }
+        return null;
+    }
+
+    // ================== ГЛОБАЛЬНЫЕ ФУНКЦИИ (ВЫЗЫВАЕМЫЕ ИЗ HTML) ==================
+    window.toggleTheme = function() {
+        setAccentColor(document.body.classList.contains('light') ? 'dark' : 'light');
+    };
+    window.toggleColorMenu = function() {
+        document.getElementById('colorMenu').classList.toggle('active');
+        if (!document.getElementById('colorMenu').children.length) generateColorMenu();
+    };
+    window.toggleLangMenu = function() {
+        document.getElementById('langMenu').classList.toggle('active');
+        if (!document.getElementById('langMenu').children.length) generateLangMenu();
+    };
+    window.toggleWeatherMenu = function() {
+        document.getElementById('weatherMenu').classList.toggle('active');
+        if (!document.getElementById('weatherMenu').children.length) generateWeatherMenu();
+    };
+    window.toggleSettingsMenu = function() {
+        document.getElementById('settingsMenu').classList.toggle('active');
+        if (!document.getElementById('settingsMenu').children.length) generateSettingsMenu();
+    };
+    window.togglePanel = function() {
+        document.getElementById('side-panel').classList.toggle('active');
+    };
+    window.setAccentColor = setAccentColor;
+    window.setLanguage = setLanguage;
+    window.setWeather = setWeather;
+    window.toggleParticles = toggleParticles;
+    window.resetSettings = resetSettings;
+    window.copyIP = copyIP;
+    window.openRules = openRules;
+    window.closeRules = closeRules;
+    window.openCandyShop = openCandyShop;
+    window.closeCandyShop = closeCandyShop;
+    window.showMainContent = showMainContent;
+    window.transferCandies = transferCandies;
+    window.transferLollipops = transferLollipops;
+    window.applyPromoCode = applyPromoCode;
+    window.registerUser = registerUser;
+    window.loginUser = loginUser;
+    window.logoutUser = logoutUser;
+    window.switchAuthMode = switchAuthMode;
+    window.adjustCandies = adjustCandies;
+    window.setCandies = setCandies;
+    window.adjustLollipops = adjustLollipops;
+    window.setLollipops = setLollipops;
+    window.deleteUser = deleteUser;
+    window.banUser = banUser;
+    window.banIP = banIP;
+    window.muteUser = muteUser;
+    window.warnUser = warnUser;
+    window.kickUser = kickUser;
+    window.addPromoCode = addPromoCode;
+    window.deletePromoCode = deletePromoCode;
+    window.generateNewModerCode = generateNewModerCode;
+    window.deleteModerCode = deleteModerCode;
+    window.toggleModerCode = toggleModerCode;
+    window.setUserRole = setUserRole;
+    window.renderCandyShop = renderCandyShop;
+    window.shopNav = shopNav;
+    window.sendChatMessage = sendChatMessage;
+    window.moderateUser = moderateUser;
+    window.deleteMessage = deleteMessage;
+    window.approveBan = approveBan;
+    window.rejectBan = rejectBan;
+
+    // ================== ОСНОВНЫЕ ФУНКЦИИ ==================
     function setAccentColor(color) {
         const body = document.body;
         body.className = '';
@@ -1799,8 +1882,10 @@
     function copyIP() {
         navigator.clipboard.writeText('play.sweet-land.fun').then(() => {
             let n = document.getElementById('copyNotice');
-            n.style.opacity = '1';
-            setTimeout(() => n.style.opacity = '0', 2000);
+            if (n) {
+                n.style.opacity = '1';
+                setTimeout(() => n.style.opacity = '0', 2000);
+            }
             showNotification(t('copyNotice'), 'success');
         }).catch(() => showNotification('play.sweet-land.fun', 'info'));
     }
@@ -1876,7 +1961,6 @@
     function openCandyShop() {
         mainContent.classList.add('hidden');
         candyShopScreen.classList.add('active');
-        // Сбрасываем режимы при входе в магазин
         adminMode = false;
         moderatorMode = false;
         renderCandyShop();
@@ -1976,68 +2060,7 @@
     }
     window.addEventListener('scroll', reveal);
 
-    function findUser(username) {
-        if (!username) return null;
-        const lowerUsername = username.toLowerCase();
-        for (let name in usersDB) {
-            if (name.toLowerCase() === lowerUsername) {
-                return name;
-            }
-        }
-        return null;
-    }
-
-    function showNotification(message, type = 'info', autoClose = true) {
-        let oldOverlay = document.querySelector('.notification-overlay');
-        let oldNotif = document.querySelector('.custom-notification');
-        if (oldOverlay) oldOverlay.remove();
-        if (oldNotif) oldNotif.remove();
-
-        let overlay = document.createElement('div');
-        overlay.className = 'notification-overlay';
-
-        let notif = document.createElement('div');
-        notif.className = `custom-notification ${type}`;
-        notif.innerHTML = `
-            <p>${message}</p>
-            <button onclick="this.parentElement.remove(); document.querySelector('.notification-overlay').remove();">OK</button>
-        `;
-
-        document.body.appendChild(overlay);
-        document.body.appendChild(notif);
-
-        if (autoClose) {
-            setTimeout(() => {
-                if (notif.parentElement) {
-                    notif.remove();
-                    overlay.remove();
-                }
-            }, 3000);
-        }
-    }
-
-    async function fetchUserIP() {
-        try {
-            let response = await fetch('https://api.ipify.org?format=json');
-            let data = await response.json();
-            userIP = data.ip;
-        } catch (e) {
-            userIP = 'unknown-' + Math.random().toString(36).substring(7);
-        }
-    }
-
-    function updateClock() {
-        let now = new Date();
-        let hours = now.getHours().toString().padStart(2, '0');
-        let minutes = now.getMinutes().toString().padStart(2, '0');
-        let seconds = now.getSeconds().toString().padStart(2, '0');
-        let el = document.getElementById('currentTime');
-        if (el) el.innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
-    }
-    setInterval(updateClock, 1000);
-    document.getElementById('onlineNumber').innerText = '0';
-
-    // ИСПРАВЛЕНО: функция рисования графика с тултипом под мышкой
+    // ================== ГРАФИК ==================
     function drawLineGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -2056,6 +2079,7 @@
         let minVal = Math.min(...history, 0);
         let range = roundedMax - minVal || 1;
 
+        // Сетка
         ctx.strokeStyle = 'rgba(255,255,255,0.1)';
         ctx.lineWidth = 1;
         for (let i = 0; i <= 5; i++) {
@@ -2091,6 +2115,7 @@
             ctx.fillText(timeStr, x - 25, h - 10);
         }
 
+        // Заливка под графиком
         let gradient = ctx.createLinearGradient(0, 0, 0, h);
         gradient.addColorStop(0, 'rgba(77, 158, 255, 0.2)');
         gradient.addColorStop(1, 'rgba(77, 158, 255, 0)');
@@ -2108,6 +2133,7 @@
         ctx.fillStyle = gradient;
         ctx.fill();
 
+        // Линия графика
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
         ctx.lineWidth = 2;
@@ -2122,6 +2148,7 @@
         ctx.stroke();
         ctx.shadowBlur = 0;
 
+        // Точки для тултипа
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -2129,7 +2156,6 @@
             points.push({ x, y, value: history[i], index: i });
         }
 
-        // ИСПРАВЛЕНО: тултип следует за мышкой
         canvas.onmousemove = (e) => {
             let rect = canvas.getBoundingClientRect();
             let mouseX = e.clientX - rect.left;
@@ -2146,24 +2172,19 @@
             }
 
             let tooltip = document.getElementById(tooltipId);
+            if (!tooltip) return;
             if (best) {
-                // Позиционируем тултип рядом с мышкой, а не на точке
-                let tooltipX = e.clientX; // координаты мыши относительно окна
-                let tooltipY = e.clientY - 40; // немного выше курсора
-
-                // Если курсор близко к верху, показываем ниже
+                let tooltipX = e.clientX;
+                let tooltipY = e.clientY - 40;
                 if (e.clientY < 60) {
                     tooltipY = e.clientY + 20;
                     tooltip.classList.add('bottom');
                 } else {
                     tooltip.classList.remove('bottom');
                 }
-
-                // Не даём уйти за правый край
                 if (tooltipX > window.innerWidth - 150) {
                     tooltipX = window.innerWidth - 160;
                 }
-
                 tooltip.style.left = tooltipX + 'px';
                 tooltip.style.top = tooltipY + 'px';
                 tooltip.style.opacity = '1';
@@ -2180,10 +2201,12 @@
         };
 
         canvas.onmouseleave = () => {
-            document.getElementById(tooltipId).style.opacity = '0';
+            let tooltip = document.getElementById(tooltipId);
+            if (tooltip) tooltip.style.opacity = '0';
         };
     }
 
+    // Обновление истории конфет каждую минуту
     function addHistoryPoint() {
         if (!currentUser) return;
         let user = usersDB[currentUser];
@@ -2198,6 +2221,7 @@
     }
     setInterval(addHistoryPoint, 60000);
 
+    // ================== РЕГИСТРАЦИЯ / ВХОД / ВЫХОД ==================
     async function registerUser() {
         await fetchUserIP();
         let name = document.getElementById('regName')?.value.trim();
@@ -2428,13 +2452,12 @@
         setTimeout(() => drawLineGraph(history, 'candyLineGraph', 'graphTooltip'), 100);
     }
 
-    // ========== ЧАТ ==========
+    // ================== ЧАТ ==================
     function renderChat() {
         if (!currentUser) { renderAuth(); return; }
         let user = usersDB[currentUser];
         if (!user) { logoutUser(); return; }
 
-        // Проверка бана
         if (user.bannedUntil > Date.now()) {
             showNotification(t('banned', { time: new Date(user.bannedUntil).toLocaleString() }), 'error');
             renderCandyShop();
@@ -2543,6 +2566,7 @@
 
     function sendChatMessage() {
         let input = document.getElementById('chatInput');
+        if (!input) return;
         let text = input.value.trim();
         if (!text) return;
         let user = usersDB[currentUser];
@@ -2566,6 +2590,7 @@
 
     function uploadImage() {
         let fileInput = document.getElementById('fileInput');
+        if (!fileInput) return;
         let file = fileInput.files[0];
         if (!file) return;
         let reader = new FileReader();
@@ -2593,7 +2618,6 @@
     }
 
     function deleteMessage(index) {
-        // Исправляем индекс, так как массив может быть обрезан до 50
         let globalIndex = chatMessages.length - 50 + index;
         if (globalIndex >= 0 && globalIndex < chatMessages.length) {
             chatMessages.splice(globalIndex, 1);
@@ -2611,13 +2635,12 @@
         if (!targetUser) return;
 
         if (action === 'mute' && canModerate(user)) {
-            let until = Date.now() + 60 * 60 * 1000; // 1 час
+            let until = Date.now() + 60 * 60 * 1000;
             targetUser.mutedUntil = until;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
             addHistory('mute', currentUser, `замутил ${target} до ${new Date(until).toLocaleString()}`);
             showNotification(`Пользователь ${target} замучен на 1 час`, 'success');
         } else if (action === 'kick' && canModerate(user)) {
-            // кик просто удаляем из чата? пока заглушка
             addHistory('kick', currentUser, `кикнул ${target} из чата`);
             showNotification(`Пользователь ${target} кикнут`, 'success');
         } else if (action === 'warn' && canModerate(user)) {
@@ -2627,13 +2650,12 @@
             addHistory('warn', currentUser, `выдал предупреждение ${target}`);
             showNotification(`Предупреждение выдано ${target}`, 'success');
         } else if (action === 'ban' && (user.role === 'admin' || user.role === 'owner')) {
-            let until = Date.now() + 24 * 60 * 60 * 1000; // 1 день
+            let until = Date.now() + 24 * 60 * 60 * 1000;
             targetUser.bannedUntil = until;
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
             addHistory('ban', currentUser, `забанил ${target} до ${new Date(until).toLocaleString()}`);
             showNotification(`Пользователь ${target} забанен на 1 день`, 'success');
         } else if (action === 'requestBan' && (user.role === 'moderator' || user.role === 'helper')) {
-            // Создаём запрос на бан
             banRequests.push({
                 id: Date.now(),
                 from: currentUser,
@@ -2648,7 +2670,7 @@
         renderChat();
     }
 
-    // ========== ИСТОРИЯ (только для helper+) ==========
+    // ================== ИСТОРИЯ ==================
     function renderHistory() {
         if (!currentUser) { renderAuth(); return; }
         let user = usersDB[currentUser];
@@ -2692,7 +2714,7 @@
         `;
     }
 
-    // ========== ПРОМОКОДЫ (СПИСОК) ==========
+    // ================== ПРОМОКОДЫ (СПИСОК) ==================
     function renderPromoList() {
         if (!currentUser) { renderAuth(); return; }
         let promoItems = Object.entries(promoCodes).map(([code, data]) => {
@@ -2736,10 +2758,10 @@
         `;
     }
 
-    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
+    // ================== ПЕРЕВОДЫ ==================
     function transferCandies() {
-        let to = document.getElementById('transferToUserCandies').value;
-        let amount = parseInt(document.getElementById('transferAmountCandies').value);
+        let to = document.getElementById('transferToUserCandies')?.value;
+        let amount = parseInt(document.getElementById('transferAmountCandies')?.value);
         if (!to || !amount || amount <= 0) { showNotification(t('fillFields'), 'error'); return; }
         if (!usersDB[to]) { showNotification('Пользователь не найден', 'error'); return; }
         if (usersDB[currentUser].candies < amount) { showNotification('Недостаточно конфет', 'error'); return; }
@@ -2760,8 +2782,8 @@
     }
 
     function transferLollipops() {
-        let to = document.getElementById('transferToUserLollipops').value;
-        let amount = parseInt(document.getElementById('transferAmountLollipops').value);
+        let to = document.getElementById('transferToUserLollipops')?.value;
+        let amount = parseInt(document.getElementById('transferAmountLollipops')?.value);
         if (!to || !amount || amount <= 0) { showNotification(t('fillFields'), 'error'); return; }
         if (!usersDB[to]) { showNotification('Пользователь не найден', 'error'); return; }
         if ((usersDB[currentUser].lollipops || 0) < amount) { showNotification('Недостаточно леденцов', 'error'); return; }
@@ -2785,14 +2807,12 @@
         }
         if (code.startsWith('MODER-')) {
             if (!currentUser) { showNotification(t('loginFirst'), 'error'); return; }
-            moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
             if (moderatorCodes[code] && moderatorCodes[code].active) {
                 adminMode = false; moderatorMode = true; renderCandyShop(); showNotification(t('moderatorModeActivated'), 'success'); return;
             } else { showNotification(t('codeNotFound'), 'error'); return; }
         }
         if (!currentUser) { showNotification(t('loginFirst'), 'error'); return; }
 
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         let promo = promoCodes[code];
         if (!promo) { showNotification(t('invalidPromoCode'), 'error'); return; }
 
@@ -2823,7 +2843,7 @@
         }
     }
 
-    // ========== АДМИН-ПАНЕЛЬ ==========
+    // ================== АДМИН-ПАНЕЛЬ ==================
     function renderAdminPanel() {
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
@@ -2911,7 +2931,6 @@
                         <a href="javascript:void(0)" onclick="renderAdminPanel()">🏠 Главная</a>
                     </div>
                     <div class="banner-right">
-                        <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                         <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
                     </div>
                 </div>
@@ -2949,7 +2968,6 @@
                     <h3 style="color:var(--danger);">${t('banRequests')}</h3>
                     ${banRequestsHtml || '<p>Нет запросов</p>'}
                 </div>
-                <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;
@@ -2981,7 +2999,6 @@
                         <a href="javascript:void(0)" onclick="renderModeratorPanel()">🏠 Главная</a>
                     </div>
                     <div class="banner-right">
-                        <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                         <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
                     </div>
                 </div>
@@ -2991,7 +3008,6 @@
             <div class="admin-panel">
                 <div class="admin-controls"><input type="text" placeholder="${t('searchUser')}" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderModeratorPanel();"><select id="sortSelect" onchange="userSort=this.value; renderModeratorPanel();"><option value="name" ${userSort==='name'?'selected':''}>${t('sortByName')}</option><option value="candies" ${userSort==='candies'?'selected':''}>${t('sortByCandies')}</option></select></div>
                 ${userListHtml}
-                <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;
@@ -3008,6 +3024,7 @@
 
     function setCandies(username) {
         let inp = document.getElementById(`set-${username}`);
+        if (!inp) return;
         let val = parseInt(inp.value);
         if (isNaN(val) || val < 0) { showNotification(t('enterValidNumber'), 'error'); return; }
         usersDB[username].candies = val;
@@ -3026,6 +3043,7 @@
 
     function setLollipops(username) {
         let inp = document.getElementById(`setLolli-${username}`);
+        if (!inp) return;
         let val = parseInt(inp.value);
         if (isNaN(val) || val < 0) { showNotification(t('enterValidNumber'), 'error'); return; }
         usersDB[username].lollipops = val;
@@ -3048,7 +3066,7 @@
     function banUser(username) {
         let user = usersDB[username];
         if (!user) return;
-        let until = Date.now() + 24 * 60 * 60 * 1000; // 1 день
+        let until = Date.now() + 24 * 60 * 60 * 1000;
         user.bannedUntil = until;
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         addHistory('ban', currentUser, `забанил ${username} до ${new Date(until).toLocaleString()}`);
@@ -3067,7 +3085,7 @@
     function muteUser(username) {
         let user = usersDB[username];
         if (!user) return;
-        let until = Date.now() + 60 * 60 * 1000; // 1 час
+        let until = Date.now() + 60 * 60 * 1000;
         user.mutedUntil = until;
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         addHistory('mute', currentUser, `замутил ${username} до ${new Date(until).toLocaleString()}`);
@@ -3093,6 +3111,7 @@
 
     function setUserRole(username) {
         let select = document.getElementById(`role-${username}`);
+        if (!select) return;
         let newRole = select.value;
         usersDB[username].role = newRole;
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
@@ -3113,7 +3132,6 @@
             return;
         }
 
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         if (promoCodes[code]) { showNotification(t('codeExists'), 'error'); return; }
 
         if (type === 'candy' || type === 'lollipop') {
@@ -3132,10 +3150,38 @@
         showNotification(t('codeAdded', { code }), 'success');
     }
 
-    function deletePromoCode(code) { showConfirm(t('confirmDeleteCode', { code }), () => { delete promoCodes[code]; localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes)); renderAdminPanel(); showNotification(t('codeDeleted'), 'success'); }); }
-    function generateNewModerCode() { let code = 'MODER-' + Math.floor(1000 + Math.random() * 9000); moderatorCodes[code] = { active: true, createdAt: Date.now() }; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); renderAdminPanel(); showNotification(t('codeGenerated', { code }), 'success'); }
-    function toggleModerCode(code) { moderatorCodes[code].active = !moderatorCodes[code].active; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); renderAdminPanel(); showNotification(moderatorCodes[code].active ? 'Код активирован' : 'Код деактивирован', 'success'); }
-    function deleteModerCode(code) { showConfirm('Удалить код?', () => { delete moderatorCodes[code]; localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes)); renderAdminPanel(); showNotification('✅ Код удален', 'success'); }); }
+    function deletePromoCode(code) {
+        showConfirm(t('confirmDeleteCode', { code }), () => {
+            delete promoCodes[code];
+            localStorage.setItem('sweetland_promocodes', JSON.stringify(promoCodes));
+            renderAdminPanel();
+            showNotification(t('codeDeleted'), 'success');
+        });
+    }
+
+    function generateNewModerCode() {
+        let code = 'MODER-' + Math.floor(1000 + Math.random() * 9000);
+        moderatorCodes[code] = { active: true, createdAt: Date.now() };
+        localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+        renderAdminPanel();
+        showNotification(t('codeGenerated', { code }), 'success');
+    }
+
+    function toggleModerCode(code) {
+        moderatorCodes[code].active = !moderatorCodes[code].active;
+        localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+        renderAdminPanel();
+        showNotification(moderatorCodes[code].active ? 'Код активирован' : 'Код деактивирован', 'success');
+    }
+
+    function deleteModerCode(code) {
+        showConfirm('Удалить код?', () => {
+            delete moderatorCodes[code];
+            localStorage.setItem('sweetland_moder_codes', JSON.stringify(moderatorCodes));
+            renderAdminPanel();
+            showNotification('✅ Код удален', 'success');
+        });
+    }
 
     function approveBan(id) {
         let req = banRequests.find(r => r.id === id);
@@ -3160,15 +3206,31 @@
         showNotification('Запрос отклонён', 'info');
     }
 
+    function shopNav(section) {
+        if (section === 'main') renderCandyShop();
+        else if (section === 'chat') renderChat();
+        else if (section === 'history') renderHistory();
+        else if (section === 'promo') renderPromoList();
+        else showNotification(`Раздел "${section}" в разработке`, 'info');
+    }
+
+    // ================== ЧАСЫ И ОНЛАЙН ==================
+    function updateClock() {
+        let now = new Date();
+        let hours = now.getHours().toString().padStart(2, '0');
+        let minutes = now.getMinutes().toString().padStart(2, '0');
+        let seconds = now.getSeconds().toString().padStart(2, '0');
+        let el = document.getElementById('currentTime');
+        if (el) el.innerHTML = `🕐 ${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    document.getElementById('onlineNumber').innerText = '0';
+
+    // ================== ИНИЦИАЛИЗАЦИЯ ==================
     window.addEventListener('load', async () => {
         await fetchUserIP();
-        usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
-        promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
-        moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
-        chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
-        historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
-        banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
-        currentUser = localStorage.getItem('sweetland_current_user') || null;
+        loadData();
+        initGyraffic();
         setAccentColor(currentTheme);
         translateAll();
         if (particlesEnabled) createWeather(); else document.getElementById('weather').innerHTML = '';
@@ -3178,7 +3240,6 @@
     window.addEventListener('resize', () => {
         clearTimeout(window.weatherTimeout);
         window.weatherTimeout = setTimeout(createWeather, 200);
-        // Перерисовываем график при изменении размера
         if (candyShopScreen.classList.contains('active') && !adminMode && !moderatorMode && currentUser) {
             let user = usersDB[currentUser];
             if (user) {

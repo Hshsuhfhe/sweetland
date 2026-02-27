@@ -722,6 +722,13 @@
         .chat-message .text {
             color: var(--text);
         }
+        .chat-message .image-attach {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 10px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
         .delete-msg {
             position: absolute;
             right: 5px;
@@ -741,16 +748,18 @@
         .chat-input-area {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
-        .chat-input-area input {
+        .chat-input-area input[type="text"] {
             flex: 1;
             padding: 12px 18px;
             background: rgba(0,0,0,0.3);
             border: 1px solid var(--border);
             border-radius: 30px;
             color: var(--text);
+            min-width: 200px;
         }
-        .chat-input-area button {
+        .chat-input-area button, .chat-input-area .file-label {
             padding: 12px 24px;
             background: var(--accent);
             border: none;
@@ -758,10 +767,21 @@
             color: #fff;
             font-weight: 500;
             transition: 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        .chat-input-area button:hover {
+        .chat-input-area .file-label {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+        }
+        .chat-input-area button:hover, .chat-input-area .file-label:hover {
             transform: scale(1.02);
             box-shadow: 0 4px 12px var(--accent);
+        }
+        .chat-input-area input[type="file"] {
+            display: none;
         }
         .moderation-controls {
             display: flex;
@@ -2418,12 +2438,17 @@
             else roleClass = 'role-user';
             let roleDisplay = msg.role === 'admin' ? 'ADMIN' : (msg.role === 'moderator' ? 'MOD' : (msg.role === 'helper' ? 'HELPER' : (msg.role === 'owner' ? 'OWNER' : 'USER')));
             let deleteBtn = canDelete ? `<button class="delete-msg" onclick="deleteMessage(${index})">✕</button>` : '';
+            let imageHtml = '';
+            if (msg.image) {
+                imageHtml = `<div><img src="${msg.image}" class="image-attach" onclick="window.open('${msg.image}', '_blank')"></div>`;
+            }
             return `
                 <div class="chat-message" data-index="${index}">
                     <span class="time">${new Date(msg.time).toLocaleTimeString()}</span>
                     <span class="role-badge ${roleClass}">${roleDisplay}</span>
                     <span class="username">${msg.username}:</span>
                     <span class="text">${escapeHtml(msg.text)}</span>
+                    ${imageHtml}
                     ${deleteBtn}
                 </div>
             `;
@@ -2476,7 +2501,9 @@
                     ${messagesHtml}
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="${t('chatPlaceholder')}" ${user.mutedUntil > Date.now() ? 'disabled' : ''}>
+                    <input type="text" id="chatInput" placeholder="${t('chatPlaceholder')}" ${user.mutedUntil > Date.now() ? 'disabled' : ''} onkeypress="if(event.key==='Enter') sendChatMessage()">
+                    <label for="fileInput" class="file-label">📎</label>
+                    <input type="file" id="fileInput" accept="image/*" onchange="uploadImage()">
                     <button onclick="sendChatMessage()" ${user.mutedUntil > Date.now() ? 'disabled' : ''}>${t('send')}</button>
                 </div>
                 ${user.mutedUntil > Date.now() ? `<p style="color: var(--danger); text-align: center;">${t('muted', { time: new Date(user.mutedUntil).toLocaleString() })}</p>` : ''}
@@ -2521,6 +2548,34 @@
         localStorage.setItem('sweetland_chat', JSON.stringify(chatMessages));
         input.value = '';
         renderChat();
+    }
+
+    function uploadImage() {
+        let fileInput = document.getElementById('fileInput');
+        let file = fileInput.files[0];
+        if (!file) return;
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let user = usersDB[currentUser];
+            if (!user) return;
+            if (user.mutedUntil > Date.now()) {
+                showNotification(t('muted', { time: new Date(user.mutedUntil).toLocaleString() }), 'error');
+                return;
+            }
+            let msg = {
+                username: currentUser,
+                role: user.role,
+                text: '',
+                image: e.target.result,
+                time: Date.now()
+            };
+            chatMessages.push(msg);
+            if (chatMessages.length > 200) chatMessages.shift();
+            localStorage.setItem('sweetland_chat', JSON.stringify(chatMessages));
+            fileInput.value = '';
+            renderChat();
+        };
+        reader.readAsDataURL(file);
     }
 
     function deleteMessage(index) {
@@ -3102,7 +3157,17 @@
         reveal();
     });
 
-    window.addEventListener('resize', () => { clearTimeout(window.weatherTimeout); window.weatherTimeout = setTimeout(createWeather, 200); });
+    window.addEventListener('resize', () => {
+        clearTimeout(window.weatherTimeout);
+        window.weatherTimeout = setTimeout(createWeather, 200);
+        // Перерисовываем график при изменении размера
+        if (candyShopScreen.classList.contains('active') && !adminMode && !moderatorMode && currentUser) {
+            let user = usersDB[currentUser];
+            if (user) {
+                drawLineGraph(user.history, 'candyLineGraph', 'graphTooltip');
+            }
+        }
+    });
 })();
 </script>
 </body>

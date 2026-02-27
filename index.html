@@ -614,8 +614,8 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             white-space: nowrap;
             z-index: 20;
-            transform: translate(-50%, -100%);
             border: 1px solid #fff;
+            transform: translate(-50%, -100%);
         }
         .graph-tooltip::after {
             content: '';
@@ -1647,6 +1647,9 @@
     window.deleteMessage = deleteMessage;
     window.approveBan = approveBan;
     window.rejectBan = rejectBan;
+    // ИСПРАВЛЕНО: добавлены недостающие функции в window
+    window.adjustLollipops = adjustLollipops;
+    window.setLollipops = setLollipops;
 
     function shopNav(section) {
         if (section === 'main') renderCandyShop();
@@ -2034,6 +2037,7 @@
     setInterval(updateClock, 1000);
     document.getElementById('onlineNumber').innerText = '0';
 
+    // ИСПРАВЛЕНО: функция рисования графика с тултипом под мышкой
     function drawLineGraph(history, canvasId, tooltipId) {
         let canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -2046,10 +2050,9 @@
         if (!history || history.length < 2) return;
 
         let maxVal = Math.max(...history, 1);
-        // Округление вверх до ближайшей сотни/тысячи
         let magnitude = Math.pow(10, Math.floor(Math.log10(maxVal)));
         let roundedMax = Math.ceil(maxVal / magnitude) * magnitude;
-        if (roundedMax === maxVal) roundedMax += magnitude; // небольшой запас
+        if (roundedMax === maxVal) roundedMax += magnitude;
         let minVal = Math.min(...history, 0);
         let range = roundedMax - minVal || 1;
 
@@ -2126,6 +2129,7 @@
             points.push({ x, y, value: history[i], index: i });
         }
 
+        // ИСПРАВЛЕНО: тултип следует за мышкой
         canvas.onmousemove = (e) => {
             let rect = canvas.getBoundingClientRect();
             let mouseX = e.clientX - rect.left;
@@ -2141,17 +2145,27 @@
                 }
             }
 
+            let tooltip = document.getElementById(tooltipId);
             if (best) {
-                let tooltip = document.getElementById(tooltipId);
-                tooltip.style.left = (best.x + rect.left) + 'px';
-                // Определяем, где показывать тултип: сверху или снизу
-                if (best.y < 50) {
-                    tooltip.style.top = (rect.top + best.y + 25) + 'px';
+                // Позиционируем тултип рядом с мышкой, а не на точке
+                let tooltipX = e.clientX; // координаты мыши относительно окна
+                let tooltipY = e.clientY - 40; // немного выше курсора
+
+                // Если курсор близко к верху, показываем ниже
+                if (e.clientY < 60) {
+                    tooltipY = e.clientY + 20;
                     tooltip.classList.add('bottom');
                 } else {
-                    tooltip.style.top = (rect.top + best.y - 25) + 'px';
                     tooltip.classList.remove('bottom');
                 }
+
+                // Не даём уйти за правый край
+                if (tooltipX > window.innerWidth - 150) {
+                    tooltipX = window.innerWidth - 160;
+                }
+
+                tooltip.style.left = tooltipX + 'px';
+                tooltip.style.top = tooltipY + 'px';
                 tooltip.style.opacity = '1';
 
                 let date = new Date();
@@ -2161,7 +2175,7 @@
                 });
                 tooltip.innerHTML = `${timeStr}<br>${best.value.toLocaleString()}`;
             } else {
-                document.getElementById(tooltipId).style.opacity = '0';
+                tooltip.style.opacity = '0';
             }
         };
 
@@ -2897,7 +2911,8 @@
                         <a href="javascript:void(0)" onclick="renderAdminPanel()">🏠 Главная</a>
                     </div>
                     <div class="banner-right">
-                        <a href="javascript:void(0)" onclick="adminMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
+                        <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
+                        <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
                     </div>
                 </div>
             </div>
@@ -2934,6 +2949,7 @@
                     <h3 style="color:var(--danger);">${t('banRequests')}</h3>
                     ${banRequestsHtml || '<p>Нет запросов</p>'}
                 </div>
+                <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;
@@ -2965,7 +2981,8 @@
                         <a href="javascript:void(0)" onclick="renderModeratorPanel()">🏠 Главная</a>
                     </div>
                     <div class="banner-right">
-                        <a href="javascript:void(0)" onclick="moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
+                        <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
+                        <a href="javascript:void(0)" onclick="adminMode=false; moderatorMode=false; renderCandyShop();" class="shop-link">${t('backToShop')}</a>
                     </div>
                 </div>
             </div>
@@ -2974,6 +2991,7 @@
             <div class="admin-panel">
                 <div class="admin-controls"><input type="text" placeholder="${t('searchUser')}" id="searchUser" value="${userFilter}" oninput="userFilter=this.value; renderModeratorPanel();"><select id="sortSelect" onchange="userSort=this.value; renderModeratorPanel();"><option value="name" ${userSort==='name'?'selected':''}>${t('sortByName')}</option><option value="candies" ${userSort==='candies'?'selected':''}>${t('sortByCandies')}</option></select></div>
                 ${userListHtml}
+                <!-- ИСПРАВЛЕНО: кнопка возврата сбрасывает оба режима -->
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;

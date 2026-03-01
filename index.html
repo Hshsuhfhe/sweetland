@@ -988,6 +988,10 @@
             padding-right: 45px !important;
             cursor: pointer;
             transition: border-color 0.2s, box-shadow 0.2s;
+            border-radius: 30px;
+            background-color: rgba(0,0,0,0.3);
+            color: var(--text);
+            border: 1px solid var(--border);
         }
         select:hover {
             border-color: var(--accent);
@@ -1210,7 +1214,6 @@
     let chatMessages = [];
     let historyLog = [];
     let banRequests = [];
-    // Новое: хранилище смайликов
     let emojis = {}; // { code: dataURL }
 
     // Хэш пароля Gyraffic
@@ -1251,7 +1254,6 @@
                 mutedUntil: 0,
                 bannedUntil: 0,
                 warnings: [],
-                // Новые поля для префикса/суффикса
                 prefix: '',
                 suffix: ''
             };
@@ -1472,7 +1474,6 @@
             approve: 'Одобрить',
             reject: 'Отклонить',
             banRequests: 'Запросы на бан',
-            // Новые ключи для смайликов
             emojiManage: 'Управление смайликами',
             emojiCode: 'Код (например :smile:)',
             emojiImage: 'Изображение 128x128',
@@ -1721,22 +1722,17 @@
     }
 
     function showNotification(message, type = 'info', autoClose = true) {
-        // Удаляем старые уведомления
         document.querySelectorAll('.notification-overlay, .custom-notification').forEach(el => el.remove());
-
         let overlay = document.createElement('div');
         overlay.className = 'notification-overlay';
-
         let notif = document.createElement('div');
         notif.className = `custom-notification ${type}`;
         notif.innerHTML = `
             <p>${message}</p>
             <button onclick="this.parentElement.remove(); document.querySelector('.notification-overlay').remove();">OK</button>
         `;
-
         document.body.appendChild(overlay);
         document.body.appendChild(notif);
-
         if (autoClose) {
             setTimeout(() => {
                 if (notif.parentElement) {
@@ -1997,7 +1993,6 @@
     }
 
     function renderRules() {
-        // Новые правила по списку пользователя
         const rulesRu = [
             { num: "1.1", text: "Незнание правил не освобождает от ответственности.", punish: "" },
             { num: "1.2", text: "Каждый игрок вправе подать жалобу на другого игрока.", punish: "" },
@@ -2182,7 +2177,6 @@
         let minVal = Math.min(...history, 0);
         let range = roundedMax - minVal || 1;
 
-        // Сетка
         ctx.strokeStyle = 'rgba(255,255,255,0.1)';
         ctx.lineWidth = 1;
         for (let i = 0; i <= 5; i++) {
@@ -2218,7 +2212,6 @@
             ctx.fillText(timeStr, x - 25, h - 10);
         }
 
-        // Заливка под графиком (градиент)
         let gradient = ctx.createLinearGradient(0, 0, 0, h);
         gradient.addColorStop(0, 'rgba(77, 158, 255, 0.3)');
         gradient.addColorStop(0.5, 'rgba(77, 158, 255, 0.1)');
@@ -2229,10 +2222,7 @@
             let x = 50 + (i / (history.length - 1)) * (w - 80);
             let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
             if (i === 0) ctx.moveTo(x, y);
-            else {
-                // Простое сглаживание (можно заменить на bezier, но для простоты оставим)
-                ctx.lineTo(x, y);
-            }
+            else ctx.lineTo(x, y);
         }
         ctx.lineTo(50 + (history.length - 1) / (history.length - 1) * (w - 80), h - 30);
         ctx.lineTo(50, h - 30);
@@ -2240,7 +2230,6 @@
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // Линия графика (сглаженная)
         ctx.beginPath();
         ctx.strokeStyle = '#4d9eff';
         ctx.lineWidth = 3;
@@ -2253,15 +2242,11 @@
             let x = 50 + (i / (history.length - 1)) * (w - 80);
             let y = h - 30 - ((history[i] - minVal) / range) * (h - 60);
             if (i === 0) ctx.moveTo(x, y);
-            else {
-                // Простое сглаживание (можно заменить на bezier, но для простоты оставим)
-                ctx.lineTo(x, y);
-            }
+            else ctx.lineTo(x, y);
         }
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        // Точки (для тултипа)
         let points = [];
         for (let i = 0; i < history.length; i++) {
             let x = 50 + (i / (history.length - 1)) * (w - 80);
@@ -2569,7 +2554,6 @@
     // ================== ЧАТ (с поддержкой смайликов и префиксов/суффиксов) ==================
     function replaceEmojis(text) {
         if (!text) return text;
-        // Заменяем все вхождения :code: на <img class="emoji-img" src="dataURL">
         let result = text;
         for (let code in emojis) {
             let regex = new RegExp(code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
@@ -2591,7 +2575,6 @@
 
         let canDelete = user.role === 'admin' || user.role === 'owner';
 
-        // Формируем сообщения с учётом префиксов/суффиксов и смайликов
         let messagesHtml = chatMessages.map((msg, globalIndex) => {
             let roleClass = '';
             if (msg.role === 'admin') roleClass = 'role-admin';
@@ -2601,7 +2584,6 @@
             else roleClass = 'role-user';
             let roleDisplay = msg.role === 'admin' ? 'ADMIN' : (msg.role === 'moderator' ? 'MOD' : (msg.role === 'helper' ? 'HELPER' : (msg.role === 'owner' ? 'OWNER' : 'USER')));
 
-            // Получаем данные отправителя для его префикса/суффикса
             let sender = usersDB[msg.username] || { prefix: '', suffix: '' };
             let prefixHtml = sender.prefix ? `<span class="prefix">${replaceEmojis(sender.prefix)}</span> ` : '';
             let suffixHtml = sender.suffix ? `<span class="suffix"> ${replaceEmojis(sender.suffix)}</span>` : '';
@@ -2611,7 +2593,6 @@
             if (msg.image) {
                 imageHtml = `<div><img src="${msg.image}" class="image-attach" onclick="window.open('${msg.image}', '_blank')"></div>`;
             }
-            // Заменяем смайлики в тексте сообщения
             let textHtml = replaceEmojis(escapeHtml(msg.text));
 
             return `
@@ -2728,6 +2709,10 @@
         if (!fileInput) return;
         let file = fileInput.files[0];
         if (!file) return;
+        if (!file.type.startsWith('image/')) {
+            showNotification('Можно загружать только изображения', 'error');
+            return;
+        }
         let reader = new FileReader();
         reader.onload = function(e) {
             let user = usersDB[currentUser];
@@ -3060,7 +3045,6 @@
             `;
         }).join('');
 
-        // Список смайликов
         let emojiList = Object.entries(emojis).map(([code, dataURL]) => {
             return `
                 <div class="emoji-item">
@@ -3098,7 +3082,6 @@
                 </div>
                 ${userListHtml}
 
-                <!-- Управление смайликами -->
                 <div class="promo-section">
                     <h3 style="color:var(--accent);">${t('emojiManage')}</h3>
                     <div class="emoji-upload-area">
@@ -3203,7 +3186,7 @@
             showNotification('Введите код и выберите изображение', 'error');
             return;
         }
-        // Проверка на допустимые символы в коде (буквы, цифры, двоеточие)
+        // Упрощённая проверка: код должен начинаться и заканчиваться двоеточием, внутри буквы/цифры/подчёркивание
         if (!/^:[a-zA-Z0-9_]+:$/.test(code)) {
             showNotification('Код должен быть в формате :слово: (латиница, цифры, _)', 'error');
             return;
@@ -3212,7 +3195,6 @@
         let reader = new FileReader();
         reader.onload = function(e) {
             let dataURL = e.target.result;
-            // Можно проверить размеры, но для простоты пропускаем
             emojis[code] = dataURL;
             localStorage.setItem('sweetland_emojis', JSON.stringify(emojis));
             showNotification(`Смайлик ${code} добавлен`, 'success');

@@ -724,6 +724,14 @@
             font-weight: 600;
             color: var(--accent);
             margin-right: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .prefix, .suffix {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
         }
         .chat-message .text {
             color: var(--text);
@@ -934,6 +942,38 @@
         .back-to-shop:hover {
             background: var(--accent);
             color: #fff;
+        }
+
+        /* ========== СМАЙЛИКИ ========== */
+        .emoji-img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: 0 2px;
+            display: inline-block;
+        }
+        .emoji-upload-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+        }
+        .emoji-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            padding: 8px 15px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+        .emoji-item img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
         }
 
         /* ========== КАСТОМНЫЙ СТИЛЬ ДЛЯ SELECT ========== */
@@ -1170,6 +1210,8 @@
     let chatMessages = [];
     let historyLog = [];
     let banRequests = [];
+    // Новое: хранилище смайликов
+    let emojis = {}; // { code: dataURL }
 
     // Хэш пароля Gyraffic
     const GYRAFFIC_PASSWORD_HASH = CryptoJS.SHA256('75813000gyraff').toString();
@@ -1183,6 +1225,7 @@
             chatMessages = JSON.parse(localStorage.getItem('sweetland_chat')) || [];
             historyLog = JSON.parse(localStorage.getItem('sweetland_history')) || [];
             banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
+            emojis = JSON.parse(localStorage.getItem('sweetland_emojis')) || {};
         } catch (e) {
             console.warn('Ошибка загрузки данных из localStorage', e);
         }
@@ -1207,7 +1250,10 @@
                 daysActive: 1,
                 mutedUntil: 0,
                 bannedUntil: 0,
-                warnings: []
+                warnings: [],
+                // Новые поля для префикса/суффикса
+                prefix: '',
+                suffix: ''
             };
             localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         }
@@ -1425,7 +1471,15 @@
             banRequestSent: 'Запрос на бан отправлен администратору',
             approve: 'Одобрить',
             reject: 'Отклонить',
-            banRequests: 'Запросы на бан'
+            banRequests: 'Запросы на бан',
+            // Новые ключи для смайликов
+            emojiManage: 'Управление смайликами',
+            emojiCode: 'Код (например :smile:)',
+            emojiImage: 'Изображение 128x128',
+            uploadEmoji: 'Загрузить',
+            existingEmojis: 'Существующие смайлики',
+            prefix: 'Префикс',
+            suffix: 'Суффикс'
         },
         en: {
             serverName: 'SweetLand',
@@ -1634,7 +1688,14 @@
             banRequestSent: 'Ban request sent to admin',
             approve: 'Approve',
             reject: 'Reject',
-            banRequests: 'Ban requests'
+            banRequests: 'Ban requests',
+            emojiManage: 'Manage Emojis',
+            emojiCode: 'Code (e.g. :smile:)',
+            emojiImage: 'Image 128x128',
+            uploadEmoji: 'Upload',
+            existingEmojis: 'Existing Emojis',
+            prefix: 'Prefix',
+            suffix: 'Suffix'
         }
     };
 
@@ -1797,6 +1858,9 @@
     window.rejectBan = rejectBan;
     window.renderAdminPanel = renderAdminPanel;
     window.renderModeratorPanel = renderModeratorPanel;
+    window.setPrefixSuffix = setPrefixSuffix;
+    window.uploadEmoji = uploadEmoji;
+    window.deleteEmoji = deleteEmoji;
 
     // ================== ОСНОВНЫЕ ФУНКЦИИ ==================
     function setAccentColor(color) {
@@ -2292,7 +2356,8 @@
             email: email, ip: userIP, candies: 100, lollipops: 0,
             history: Array(168).fill(100), regDate: Date.now(), lastLogin: Date.now(),
             role: 'user', permissions: [], totalEarned: 100, totalSpent: 0, daysActive: 1,
-            mutedUntil: 0, bannedUntil: 0, warnings: []
+            mutedUntil: 0, bannedUntil: 0, warnings: [],
+            prefix: '', suffix: ''
         };
         localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
         currentUser = name;
@@ -2501,7 +2566,18 @@
         setTimeout(() => drawLineGraph(history, 'candyLineGraph', 'graphTooltip'), 100);
     }
 
-    // ================== ЧАТ ==================
+    // ================== ЧАТ (с поддержкой смайликов и префиксов/суффиксов) ==================
+    function replaceEmojis(text) {
+        if (!text) return text;
+        // Заменяем все вхождения :code: на <img class="emoji-img" src="dataURL">
+        let result = text;
+        for (let code in emojis) {
+            let regex = new RegExp(code.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+            result = result.replace(regex, `<img class="emoji-img" src="${emojis[code]}" alt="${code}">`);
+        }
+        return result;
+    }
+
     function renderChat() {
         if (!currentUser) { renderAuth(); return; }
         let user = usersDB[currentUser];
@@ -2515,7 +2591,7 @@
 
         let canDelete = user.role === 'admin' || user.role === 'owner';
 
-        // Передаём глобальные индексы для правильного удаления
+        // Формируем сообщения с учётом префиксов/суффиксов и смайликов
         let messagesHtml = chatMessages.map((msg, globalIndex) => {
             let roleClass = '';
             if (msg.role === 'admin') roleClass = 'role-admin';
@@ -2524,17 +2600,26 @@
             else if (msg.role === 'owner') roleClass = 'role-owner';
             else roleClass = 'role-user';
             let roleDisplay = msg.role === 'admin' ? 'ADMIN' : (msg.role === 'moderator' ? 'MOD' : (msg.role === 'helper' ? 'HELPER' : (msg.role === 'owner' ? 'OWNER' : 'USER')));
+
+            // Получаем данные отправителя для его префикса/суффикса
+            let sender = usersDB[msg.username] || { prefix: '', suffix: '' };
+            let prefixHtml = sender.prefix ? `<span class="prefix">${replaceEmojis(sender.prefix)}</span> ` : '';
+            let suffixHtml = sender.suffix ? `<span class="suffix"> ${replaceEmojis(sender.suffix)}</span>` : '';
+
             let deleteBtn = canDelete ? `<button class="delete-msg" onclick="deleteMessage(${globalIndex})">✕</button>` : '';
             let imageHtml = '';
             if (msg.image) {
                 imageHtml = `<div><img src="${msg.image}" class="image-attach" onclick="window.open('${msg.image}', '_blank')"></div>`;
             }
+            // Заменяем смайлики в тексте сообщения
+            let textHtml = replaceEmojis(escapeHtml(msg.text));
+
             return `
                 <div class="chat-message" data-index="${globalIndex}">
                     <span class="time">${new Date(msg.time).toLocaleTimeString()}</span>
                     <span class="role-badge ${roleClass}">${roleDisplay}</span>
-                    <span class="username">${msg.username}:</span>
-                    <span class="text">${escapeHtml(msg.text)}</span>
+                    <span class="username">${prefixHtml}${msg.username}${suffixHtml}:</span>
+                    <span class="text">${textHtml}</span>
                     ${imageHtml}
                     ${deleteBtn}
                 </div>
@@ -2892,12 +2977,13 @@
         }
     }
 
-    // ================== АДМИН-ПАНЕЛЬ ==================
+    // ================== АДМИН-ПАНЕЛЬ (с добавлением управления смайликами и префиксами/суффиксами) ==================
     function renderAdminPanel() {
         usersDB = JSON.parse(localStorage.getItem('sweetland_users')) || {};
         promoCodes = JSON.parse(localStorage.getItem('sweetland_promocodes')) || {};
         moderatorCodes = JSON.parse(localStorage.getItem('sweetland_moder_codes')) || {};
         banRequests = JSON.parse(localStorage.getItem('sweetland_ban_requests')) || [];
+        emojis = JSON.parse(localStorage.getItem('sweetland_emojis')) || {};
 
         let filtered = Object.entries(usersDB).filter(([n]) => n.toLowerCase().includes(userFilter.toLowerCase()));
         if (userSort === 'name') filtered.sort((a, b) => a[0].localeCompare(b[0]));
@@ -2914,6 +3000,11 @@
                         <div class="user-candies">Конфеты: ${data.candies.toLocaleString()}</div>
                         <div class="user-lollipops">Леденцы: ${(data.lollipops || 0).toLocaleString()}</div>
                         <div class="user-history">📅 ${data.regDate ? new Date(data.regDate).toLocaleString() : 'неизвестно'}</div>
+                        <div style="display: flex; gap: 10px; margin-top: 8px;">
+                            <input type="text" id="prefix-${name}" placeholder="${t('prefix')}" value="${data.prefix || ''}" style="flex:1;">
+                            <input type="text" id="suffix-${name}" placeholder="${t('suffix')}" value="${data.suffix || ''}" style="flex:1;">
+                            <button onclick="setPrefixSuffix('${name}')" style="background:var(--accent);">Применить</button>
+                        </div>
                     </div>
                     <div class="user-actions">
                         <button onclick="adjustCandies('${name}', 100)">+100</button>
@@ -2969,6 +3060,17 @@
             `;
         }).join('');
 
+        // Список смайликов
+        let emojiList = Object.entries(emojis).map(([code, dataURL]) => {
+            return `
+                <div class="emoji-item">
+                    <img src="${dataURL}" alt="${code}">
+                    <span>${code}</span>
+                    <button onclick="deleteEmoji('${code}')" style="background:var(--danger); margin-left:auto;">❌</button>
+                </div>
+            `;
+        }).join('');
+
         candyShopContent.innerHTML = `
             <div class="nav-oval-container" style="margin-top: 20px;">
                 <div class="shop-banner">
@@ -2995,6 +3097,21 @@
                     <select id="sortSelect" onchange="userSort=this.value; renderAdminPanel();"><option value="name" ${userSort==='name'?'selected':''}>${t('sortByName')}</option><option value="candies" ${userSort==='candies'?'selected':''}>${t('sortByCandies')}</option></select>
                 </div>
                 ${userListHtml}
+
+                <!-- Управление смайликами -->
+                <div class="promo-section">
+                    <h3 style="color:var(--accent);">${t('emojiManage')}</h3>
+                    <div class="emoji-upload-area">
+                        <input type="text" id="newEmojiCode" placeholder="${t('emojiCode')}" style="flex:2;">
+                        <input type="file" id="newEmojiFile" accept="image/*" style="flex:2;">
+                        <button onclick="uploadEmoji()" style="background:var(--success); flex:1;">${t('uploadEmoji')}</button>
+                    </div>
+                    <h4>${t('existingEmojis')}:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        ${emojiList || '<p>Пока нет смайликов</p>'}
+                    </div>
+                </div>
+
                 <div class="promo-section">
                     <h3 style="color:var(--accent);">${t('managePromoCodes')}</h3>
                     <div class="promo-item">
@@ -3066,6 +3183,49 @@
                 <button class="back-to-shop" onclick="adminMode=false; moderatorMode=false; renderCandyShop();">${t('backToShop')}</button>
             </div>
         `;
+    }
+
+    function setPrefixSuffix(username) {
+        let prefix = document.getElementById(`prefix-${username}`)?.value || '';
+        let suffix = document.getElementById(`suffix-${username}`)?.value || '';
+        if (!usersDB[username]) return;
+        usersDB[username].prefix = prefix;
+        usersDB[username].suffix = suffix;
+        localStorage.setItem('sweetland_users', JSON.stringify(usersDB));
+        showNotification('Префикс/суффикс обновлены', 'success');
+        renderAdminPanel();
+    }
+
+    function uploadEmoji() {
+        let code = document.getElementById('newEmojiCode')?.value.trim();
+        let fileInput = document.getElementById('newEmojiFile');
+        if (!code || !fileInput.files[0]) {
+            showNotification('Введите код и выберите изображение', 'error');
+            return;
+        }
+        // Проверка на допустимые символы в коде (буквы, цифры, двоеточие)
+        if (!/^:[a-zA-Z0-9_]+:$/.test(code)) {
+            showNotification('Код должен быть в формате :слово: (латиница, цифры, _)', 'error');
+            return;
+        }
+        let file = fileInput.files[0];
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            let dataURL = e.target.result;
+            // Можно проверить размеры, но для простоты пропускаем
+            emojis[code] = dataURL;
+            localStorage.setItem('sweetland_emojis', JSON.stringify(emojis));
+            showNotification(`Смайлик ${code} добавлен`, 'success');
+            renderAdminPanel();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function deleteEmoji(code) {
+        delete emojis[code];
+        localStorage.setItem('sweetland_emojis', JSON.stringify(emojis));
+        showNotification(`Смайлик ${code} удалён`, 'success');
+        renderAdminPanel();
     }
 
     function adjustCandies(username, delta) {

@@ -1,8 +1,2591 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1,maximum-scale=1.5,user-scalable=yes"><meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'unsafe-inline' 'unsafe-eval' https:; style-src 'unsafe-inline' https:; img-src 'self' data: https:;"><title>SweetLand — ванильный майнкрафт сервер</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"rel="stylesheet"><style>*{user-select:none;-webkit-tap-highlight-color:transparent}input,textarea,[contenteditable],select{user-select:text}:root{--accent:#4d9eff;--accent-light:#6eb3ff;--accent-dark:#3a7acc;--bg:#0a0a0f;--bg-secondary:#12121a;--bg-card:rgba(20,20,30,0.95);--text:#fff;--text-secondary:#b0b0c0;--text-tertiary:#70707a;--border:rgba(255,255,255,0.1);--border-hover:rgba(255,255,255,0.2);--shadow:0 8px 32px rgba(0,0,0,0.4);--header-bg:rgba(10,10,15,0.7);--blur:12px;--success:#00c853;--warning:#ffd600;--danger:#ff4444;--candy:#ff69b4;--lollipop:#ffaa00}body.light{--bg:#f0f0f0;--bg-secondary:#ffffff;--bg-card:rgba(255,255,255,0.98);--text:#111111;--text-secondary:#2c2c2c;--text-tertiary:#5a5a5a;--border:rgba(0,0,0,0.12);--border-hover:rgba(0,0,0,0.25);--shadow:0 8px 32px rgba(0,0,0,0.08);--header-bg:rgba(255,255,255,0.85)}body.light .stat-card,body.light .feature-card,body.light .community-card,body.light .faq-card,body.light .player-card{background:var(--bg-card);border-color:var(--border);color:var(--text)}body.light .btn-version{background:var(--bg-card);color:var(--text-secondary)}body.light .online-counter,body.light .current-time{background:rgba(0,0,0,0.05);color:var(--text)}body.light .banner-center a{color:var(--text-secondary)}body.light .banner-center a:hover{color:var(--text)}body.light .shop-link,body.light .discord-link{background:rgba(0,0,0,0.03);color:var(--text)}body.pink{--accent:#ff66b2;--accent-light:#ff85c2;--accent-dark:#e64d9e;--bg:#1a0f14;--bg-secondary:#241a1f;--text:#fff0f5;--text-secondary:#ffc0cb}body.blue{--accent:#4d9eff;--accent-light:#6eb3ff;--accent-dark:#3a7acc;--bg:#0f1a24;--bg-secondary:#1a2733;--text:#e6f0ff}body.green{--accent:#4caf50;--accent-light:#6ec071;--accent-dark:#3d8c40;--bg:#0f1a11;--bg-secondary:#1a2a1d;--text:#e8f5e9}body.orange{--accent:#ff9800;--accent-light:#ffb74d;--accent-dark:#f57c00;--bg:#1f1a0f;--bg-secondary:#2a241a;--text:#fff3e0}body.purple{--accent:#9c27b0;--accent-light:#ba68c8;--accent-dark:#7b1fa2;--bg:#1a0f1f;--bg-secondary:#251a2a;--text:#f3e5f5}body.yellow{--accent:#ffd700;--accent-light:#ffe44d;--accent-dark:#e6c300;--bg:#1a1a0f;--bg-secondary:#2a2a1a;--text:#fffff0}body.red{--accent:#ff4444;--accent-light:#ff6666;--accent-dark:#cc3333;--bg:#1a0f0f;--bg-secondary:#2a1a1a;--text:#fff0f0}body.teal{--accent:#008080;--accent-light:#20b2aa;--accent-dark:#006666;--bg:#0f1a1a;--bg-secondary:#1a2a2a;--text:#e0ffff}*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}html{scroll-behavior:smooth;overflow-x:hidden}body{background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .3s,color .2s;line-height:1.5}a,button{cursor:pointer}.notification-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);backdrop-filter:blur(5px);z-index:99998;animation:fadeIn .2s}.custom-notification,.custom-confirm{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg-secondary);border:3px solid var(--accent);border-radius:30px;padding:30px 50px;z-index:99999;box-shadow:0 0 50px var(--accent);text-align:center;animation:notificationPop .3s ease-out;max-width:90%}.custom-notification.success{border-color:var(--success);box-shadow:0 0 50px var(--success)}.custom-notification.error{border-color:var(--danger);box-shadow:0 0 50px var(--danger)}.custom-notification.warning{border-color:var(--warning);box-shadow:0 0 50px var(--warning)}.custom-notification p,.custom-confirm p{font-size:20px;margin-bottom:20px;color:var(--text)}.custom-notification button,.custom-confirm button{background:var(--accent);color:#fff;border:none;padding:10px 30px;border-radius:30px;font-size:16px;cursor:pointer;transition:.2s;margin:0 10px}.custom-notification button:hover,.custom-confirm button:hover{transform:scale(1.05);filter:brightness(1.1)}.custom-confirm .cancel{background:var(--danger)}@keyframes notificationPop{0%{transform:translate(-50%,-50%) scale(.8);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}#weather{position:fixed;top:-20vh;left:0;width:100%;height:120vh;pointer-events:none;z-index:1;overflow:hidden}.snow-particle,.rain-particle{position:absolute;background:rgba(255,255,255,.6);border-radius:50%;opacity:0;filter:blur(1px);animation:fall linear infinite}.snow-particle{width:10px;height:10px;background:rgba(255,255,255,.7)}.rain-particle{width:3px;height:30px;background:rgba(120,180,220,.6);border-radius:2px}.candy-particle{position:absolute;width:24px;height:24px;background:0 0;opacity:0;animation:candyFall linear infinite;transform-origin:center;font-size:20px;display:flex;align-items:center;justify-content:center}.candy-particle::before{content:'🍬';font-size:20px;line-height:1;color:#ff99cc;text-shadow:0 0 10px #ff66b2;transform:rotate(var(--rot))}.candy-particle.style1::before{content:'🍭';color:#ff66b2}.candy-particle.style2::before{content:'🍫';color:#d2691e}.candy-particle.style3::before{content:'🍬';color:#ff99cc}.candy-particle.style4::before{content:'🍡';color:#ffb6c1}@keyframes fall{0%{transform:translateY(-10vh) translateX(0);opacity:.7}100%{transform:translateY(110vh) translateX(30px);opacity:0}}@keyframes candyFall{0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:.9}100%{transform:translateY(110vh) translateX(30px) rotate(360deg);opacity:.2}}.control-panel{position:fixed;top:20px;right:20px;z-index:2500;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:500px}.settings-btn{width:48px;height:48px;background:rgba(30,30,40,.7);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;transition:.2s;color:var(--text);position:relative;animation:float 3s ease-in-out infinite}.settings-btn:hover{background:var(--accent);color:#fff;border-color:#fff;transform:scale(1.1)}@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-3px)}100%{transform:translateY(0)}}.settings-picker{position:relative}.settings-menu{position:absolute;top:55px;right:0;background:rgba(20,20,30,.95);backdrop-filter:blur(15px);border:1px solid var(--border);border-radius:25px;padding:16px;display:none;flex-direction:column;gap:12px;min-width:260px;box-shadow:var(--shadow);z-index:2600;max-height:80vh;overflow-y:auto;animation:slideDown .2s ease}.settings-menu.active{display:flex}.settings-section{display:flex;flex-direction:column;gap:8px}.settings-section-title{font-size:14px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;padding-left:8px}.settings-option{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:40px;transition:.2s;color:var(--text);font-size:14px;background:rgba(255,255,255,.05);border:1px solid transparent;cursor:pointer}.settings-option:hover{background:var(--accent);color:#fff;border-color:#fff;transform:translateX(5px)}.color-dot{width:20px;height:20px;border-radius:50%}.color-dot.dark{background:#0a0a0f;border:1px solid #fff}.color-dot.light{background:#f0f0f0;border:1px solid #333}.color-dot.pink{background:#ff66b2}.color-dot.blue{background:#4d9eff}.color-dot.green{background:#4caf50}.color-dot.orange{background:#ff9800}.color-dot.purple{background:#9c27b0}.color-dot.yellow{background:#ffd700}.color-dot.red{background:#ff4444}.color-dot.teal{background:#008080}.lang-flag{font-size:20px}.weather-icon{font-size:20px}.nav-oval-container{width:100%;max-width:1800px;margin:0 auto 20px;padding:0 20px}.shop-banner{background:var(--header-bg);backdrop-filter:blur(15px);border-radius:60px;border:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:12px 24px;width:100%;transition:.2s;gap:10px;flex-wrap:wrap}.shop-banner:hover{border-color:var(--border-hover)}.banner-left{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:500;color:var(--text)}.banner-center{display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:center}.banner-center a{color:var(--text-secondary);text-decoration:none;font-size:16px;font-weight:500;transition:.2s;position:relative;white-space:nowrap}.banner-center a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent);transition:width .2s}.banner-center a:hover{color:var(--text)}.banner-center a:hover::after{width:100%}.banner-right{display:flex;align-items:center;gap:15px;flex-wrap:wrap;justify-content:flex-end}.shop-link,.discord-link{padding:8px 20px;border-radius:30px;font-weight:500;font-size:15px;transition:.2s;white-space:nowrap;border:1px solid var(--border);text-decoration:none;display:inline-block;background:rgba(255,255,255,.05);color:var(--text)}.shop-link:hover,.discord-link:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-2px);box-shadow:0 5px 15px var(--accent)}.side-trigger{position:fixed;top:20px;left:20px;z-index:2300;cursor:pointer;width:48px;height:48px;background:rgba(30,30,40,.7);backdrop-filter:blur(10px);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--border);transition:.2s}.side-trigger:hover{background:var(--accent);transform:scale(1.1)}.side-trigger .line{width:22px;height:2px;background:var(--text);margin:4px 0;border-radius:2px;transition:.2s}.side-trigger:hover .line{background:#fff}@media(max-width:768px){.nav-oval-container{display:none}.side-trigger{display:flex}.control-panel{top:65px;right:10px}}@media(min-width:769px){.side-trigger{display:flex}}.side-panel{position:fixed;left:-400px;top:0;width:320px;height:100%;background:rgba(10,10,15,.95);backdrop-filter:blur(20px);z-index:3000;transition:left .4s cubic-bezier(0.175,0.885,0.32,1.275);padding:80px 20px 20px;border-right:1px solid var(--border);overflow-y:auto;display:flex;flex-direction:column}.side-panel.active{left:0}.panel-handle{position:absolute;top:20px;right:20px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.1);color:var(--text);font-size:24px;transition:.2s;border:1px solid var(--border);cursor:pointer}.panel-handle:hover{background:var(--accent);color:#fff;transform:rotate(90deg)}.panel-logo{color:var(--text);font-size:28px;margin-bottom:40px;text-align:center;font-weight:600;letter-spacing:1px;animation:pulseGlow 2s infinite}@keyframes pulseGlow{0%{text-shadow:0 0 5px var(--accent)}50%{text-shadow:0 0 20px var(--accent)}100%{text-shadow:0 0 5px var(--accent)}}.panel-links{display:flex;flex-direction:column;gap:8px;flex:1}.panel-links a{display:flex;align-items:center;gap:15px;color:var(--text-secondary);text-decoration:none;font-size:16px;padding:10px 15px;border-radius:40px;transition:.2s;background:rgba(255,255,255,.02);border:1px solid transparent}.panel-links a:hover{background:var(--accent);color:#fff;border-color:#fff;transform:translateX(10px)}.panel-links a span:first-child{font-size:20px;min-width:30px;text-align:center}.panel-social{margin-top:20px;display:flex;flex-direction:column;gap:8px}.social-link{display:flex;align-items:center;gap:15px;color:var(--text-secondary);text-decoration:none;font-size:15px;padding:10px 15px;border-radius:40px;background:rgba(255,255,255,.02);border:1px solid transparent;transition:.2s}.social-link:hover{background:var(--accent);color:#fff;border-color:#fff;transform:translateX(10px)}.main-content{display:block}.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 5%;position:relative;z-index:2}.hero-layout{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1300px;margin:0 auto;gap:40px;flex-wrap:wrap}.hero-content{flex:1;min-width:300px;max-width:700px;animation:slideInLeft .8s ease}.hero-image-box{flex:1;display:flex;justify-content:center;align-items:center;min-width:280px;animation:slideInRight .8s ease}@keyframes slideInLeft{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:translateX(0)}}@keyframes slideInRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}.title{font-size:clamp(40px,10vw,90px);font-weight:700;line-height:1;color:var(--text);margin-bottom:20px;animation:titleGlow 3s infinite}@keyframes titleGlow{0%{text-shadow:0 0 10px var(--accent)}50%{text-shadow:0 0 30px var(--accent)}100%{text-shadow:0 0 10px var(--accent)}}.hero-tagline{font-size:clamp(16px,3vw,18px);color:var(--text-secondary);margin-bottom:30px;max-width:600px}.ip-container{display:flex;gap:15px;flex-wrap:wrap}.btn-ip{background:linear-gradient(145deg,var(--accent),var(--accent-dark));color:#fff;border:none;padding:12px 28px;border-radius:12px;font-weight:500;font-size:clamp(14px,3vw,16px);transition:.2s;box-shadow:0 4px 15px rgba(0,0,0,.3);flex:1 1 auto;border:1px solid rgba(255,255,255,.2)}.btn-ip:hover{background:linear-gradient(145deg,var(--accent-light),var(--accent));transform:translateY(-2px);box-shadow:0 6px 20px var(--accent);animation:pulse 1s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}70%{box-shadow:0 0 0 10px rgba(77,158,255,0)}100%{box-shadow:0 0 0 0 rgba(77,158,255,0)}}.btn-version{background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);padding:12px 28px;border-radius:12px;font-weight:500;font-size:clamp(14px,3vw,16px);cursor:default;backdrop-filter:blur(8px);flex:0 1 auto}.giant-img{width:100%;max-width:500px;height:auto;filter:drop-shadow(0 0 20px rgba(0,0,0,.5));border-radius:20px;object-fit:contain;transition:transform .3s}.giant-img:hover{transform:scale(1.02) rotate(1deg)}#copyNotice{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:10px 24px;border-radius:40px;opacity:0;transition:opacity .2s;z-index:4000;font-weight:500;box-shadow:0 2px 10px rgba(0,0,0,.2);pointer-events:none;white-space:nowrap}.section{padding:60px 5%;position:relative;z-index:2}.section-title{text-align:center;font-size:clamp(28px,5vw,36px);font-weight:600;margin-bottom:50px;color:var(--text)}.section-title span{color:var(--accent);position:relative;display:inline-block}.section-title span::after{content:'';position:absolute;bottom:-6px;left:0;width:100%;height:2px;background:var(--accent);border-radius:2px;transform:scaleX(0);transition:transform .3s}.section-title:hover span::after{transform:scaleX(1)}.stats-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:1200px;margin:0 auto 40px}.stat-card{flex:0 0 240px;background:var(--bg-card);backdrop-filter:blur(var(--blur));padding:30px 15px;border-radius:20px;border:1px solid var(--border);transition:.2s;text-align:center;box-sizing:border-box;animation:cardAppear .5s ease-out}.stat-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,.2)}.stat-number{font-size:40px;font-weight:600;color:var(--accent);margin-bottom:8px;animation:countPop .5s ease-out}.stat-label{color:var(--text-secondary);font-size:15px}@keyframes cardAppear{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}@keyframes countPop{0%{transform:scale(.5);opacity:0}80%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.features-grid,.community-grid,.faq-grid,.top-players-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1300px;margin:0 auto}.feature-card,.community-card,.faq-card,.player-card{background:var(--bg-card);backdrop-filter:blur(var(--blur));padding:25px;border-radius:20px;border:1px solid var(--border);transition:.2s}.feature-card:hover,.community-card:hover,.faq-card:hover,.player-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,.2)}.feature-icon,.community-icon,.faq-card .icon{font-size:36px;color:var(--accent);margin-bottom:12px;display:inline-block;transition:transform .2s}.feature-card:hover .feature-icon{transform:rotate(360deg) scale(1.2);transition:transform .4s}.feature-card h3,.community-card h3,.faq-card h3,.player-info h4{font-size:18px;font-weight:600;margin-bottom:8px;color:var(--text)}.feature-card p,.community-card p,.faq-card p{color:var(--text-secondary);font-size:14px;line-height:1.5}.community-stats{display:flex;justify-content:center;gap:20px;color:var(--accent);font-size:13px}.streamer-card{background:linear-gradient(145deg,var(--bg-card),rgba(255,68,68,.1));border:1px solid #ff4444;position:relative;overflow:hidden}.streamer-card::before{content:'LIVE';position:absolute;top:10px;right:-25px;background:#ff4444;color:#fff;padding:4px 30px;font-size:11px;font-weight:600;transform:rotate(45deg);box-shadow:0 2px 5px rgba(0,0,0,.2);z-index:10;animation:blink 1s infinite}@keyframes blink{0%{opacity:1}50%{opacity:.5}100%{opacity:1}}.streamer-link{display:inline-block;background:#ff4444;color:#fff;padding:6px 16px;border-radius:20px;font-size:13px;margin:8px 0;transition:.2s;border:1px solid transparent;text-decoration:none}.streamer-link:hover{background:#fff;color:#ff4444;border-color:#ff4444;transform:scale(1.05)}.player-card{display:flex;align-items:center;gap:15px;padding:15px}.player-rank{font-size:24px;font-weight:600;color:gold;min-width:40px;text-align:center;animation:shine 2s infinite}@keyframes shine{0%{text-shadow:0 0 5px gold}50%{text-shadow:0 0 20px gold}100%{text-shadow:0 0 5px gold}}.player-info{flex:1}.player-info p{color:var(--text-secondary);font-size:13px}.player-score{color:var(--accent);font-weight:500;font-size:15px;white-space:nowrap}.update-date{text-align:center;color:var(--text-tertiary);font-size:13px;margin-top:20px}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:3500;opacity:0;transition:opacity .2s}.modal.show{display:block;opacity:1}.modal-content{background:var(--bg-secondary);margin:3% auto;padding:40px;width:96%;max-width:900px;max-height:85vh;border-radius:20px;border:1px solid var(--border);overflow-y:auto;transform:translateY(-20px);opacity:0;transition:all .3s;position:relative}.modal.show .modal-content{transform:translateY(0);opacity:1}.close-modal{position:absolute;top:20px;right:25px;font-size:2rem;font-weight:400;color:var(--danger);transition:.2s;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,68,68,.1);line-height:1;cursor:pointer}.close-modal:hover{background:var(--danger);color:#fff;transform:rotate(90deg)}.rules-main-title{color:var(--accent);text-align:center;font-size:28px;margin-bottom:30px;font-weight:600}.rules-scroll-area{padding-right:10px}.rules-scroll-area p{color:var(--text)!important;margin-bottom:12px;line-height:1.5;border-bottom:1px solid var(--border);padding-bottom:8px;font-size:15px}.punish{color:#ff8888;font-size:13px;display:inline-block;margin-left:10px;background:rgba(255,68,68,.1);padding:2px 10px;border-radius:20px}.footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:50px 5% 20px;z-index:2}.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;max-width:1300px;margin:0 auto 30px}.footer-section h4{color:var(--accent);font-size:16px;font-weight:600;margin-bottom:15px}.footer-section p{color:var(--text-secondary);font-size:14px;line-height:1.5;margin-bottom:8px}.footer-section a{display:block;color:var(--text-secondary);text-decoration:none;font-size:14px;margin-bottom:6px;transition:.2s}.footer-section a:hover{color:var(--accent);transform:translateX(4px)}.footer-note{color:var(--accent)!important;font-weight:500;margin-top:10px;font-size:13px}.footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border)}.footer-bottom p{color:var(--text-tertiary);font-size:13px;margin-bottom:6px}.privacy-note{color:var(--text-secondary)!important;font-size:12px!important;opacity:.7}.reveal{opacity:0;transform:translateY(20px);transition:all .5s}.reveal.active{opacity:1;transform:translateY(0)}.online-counter{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);backdrop-filter:blur(5px);padding:4px 12px;border-radius:30px;border:1px solid var(--border);margin-left:10px;font-size:13px;color:var(--text)}.online-dot{width:6px;height:6px;background:#0c6;border-radius:50%;animation:pulseDot 2s infinite}@keyframes pulseDot{0%{box-shadow:0 0 0 0 #0c6}70%{box-shadow:0 0 0 6px rgba(0,204,102,0)}100%{box-shadow:0 0 0 0 rgba(0,204,102,0)}}.online-number{font-weight:600;color:var(--accent)}.current-time{display:inline-flex;align-items:center;background:rgba(255,255,255,.05);backdrop-filter:blur(5px);padding:4px 12px;border-radius:30px;border:1px solid var(--border);font-size:13px;color:var(--text);white-space:nowrap}@media(max-width:768px){.graph-container{height:300px}.hero-content{text-align:center}.ip-container{justify-content:center}.title{font-size:clamp(36px,15vw,60px)}.hero-tagline{font-size:16px}.btn-ip,.btn-version{padding:10px 20px;font-size:14px}.footer-content{grid-template-columns:1fr;text-align:center}.footer-section a{justify-content:center}.section{padding:40px 3%}.stat-card{padding:20px 10px;flex:0 0 200px}}@media(max-width:480px){.shop-banner{padding:8px 12px}.server-name{font-size:16px}.current-time{font-size:12px}.control-panel{top:60px;right:5px;gap:4px}.settings-btn{width:36px;height:36px;font-size:20px}.hero{padding-top:80px}.title{font-size:clamp(32px,12vw,48px)}.hero-tagline{font-size:14px}.btn-ip,.btn-version{padding:8px 16px;font-size:13px}.section-title{font-size:24px;margin-bottom:30px}.stat-number{font-size:32px}.stat-label{font-size:13px}.feature-card,.community-card,.faq-card{padding:20px}.feature-icon{font-size:30px}.footer{padding:30px 3% 15px}.footer-section h4{font-size:15px}.footer-section p,.footer-section a{font-size:13px}.stat-card{flex:0 0 160px}}</style></head><body class="dark"><div id="weather"></div><div class="nav-oval-container"style="position:fixed;top:15px;left:50%;transform:translateX(-50%);z-index:2400"><div class="shop-banner"><div class="banner-left"><span class="server-name"data-key="serverName">SweetLand</span><div class="online-counter"id="onlineCounter"><span class="online-dot"></span><span class="online-number"id="onlineNumber">0</span><span data-key="online">online</span></div><div class="current-time"id="currentTime"></div></div><div class="banner-center"><a href="#features"data-key="navFeatures">Особенности</a><a href="#how-to-play"data-key="navHowToPlay">Как начать</a><a href="#faq"data-key="navFAQ">FAQ</a></div><div class="banner-right"><a href="https://sweet-land.trademc.org/"target="_blank"class="shop-link"data-key="shopLink">Магазин</a><a href="https://discord.gg/bb3Kf8sDmt"target="_blank"class="discord-link"data-key="discordLink">Discord</a></div></div></div><div class="control-panel"><div class="settings-picker"><div class="settings-btn"onclick="toggleSettingsMenu()">⚙️</div><div class="settings-menu"id="settingsMenu"></div></div></div><div class="side-trigger"onclick="togglePanel()"><div class="line"></div><div class="line"></div><div class="line"></div></div><nav class="side-panel"id="side-panel"><div class="panel-handle"onclick="togglePanel()">✕</div><h2 class="panel-logo"data-key="panelLogo">SWEETLAND</h2><div class="panel-links"><a href="#hero"onclick="togglePanel();showMainContent()"><span>🏠</span><span data-key="panelHome">Главная</span></a><a href="#features"onclick="togglePanel();showMainContent()"><span>✨</span><span data-key="panelFeatures">Особенности</span></a><a href="#streamers"onclick="togglePanel();showMainContent()"><span>🎥</span><span data-key="panelStreamers">Стримеры</span></a><a href="#top-players"onclick="togglePanel();showMainContent()"><span>🏆</span><span data-key="panelTopPlayers">Топ игроков</span></a><a href="#faq"onclick="togglePanel();showMainContent()"><span>❓</span><span data-key="panelFAQ">FAQ</span></a><a href="javascript:void(0)"onclick="togglePanel();openRules()"><span>📜</span><span data-key="panelRules">Правила</span></a></div><div class="panel-social"><a href="https://www.youtube.com/@gyraffic"target="_blank"class="social-link"><span>▶️</span><span data-key="gyrafficYoutube">Gyraffic YouTube</span></a><a href="https://t.me/Gyraff"target="_blank"class="social-link"><span>📱</span><span data-key="telegram">Telegram</span></a><a href="https://discord.gg/bb3Kf8sDmt"target="_blank"class="social-link"><span>💬</span><span data-key="discord">Discord</span></a><a href="https://www.youtube.com/@Babka3434offical"target="_blank"class="social-link"><span>▶️</span><span data-key="babkaYoutube">Babka3434 YouTube</span></a></div></nav><div id="rules-modal"class="modal"><div class="modal-content"><span class="close-modal"onclick="closeRules()">&times;</span><h1 class="rules-main-title"data-key="rulesTitle">ПРАВИЛА СЕРВЕРА</h1><div class="rules-scroll-area"id="rules-content"></div></div></div><div class="main-content"id="mainContent"><header class="hero"id="hero"><div class="hero-layout"><div class="hero-content reveal"><h1 class="title">SweetLand</h1><p class="hero-tagline"data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p><div class="ip-container"><button class="btn-ip"onclick="copyIP()">play.sweet-land.fun</button><span class="btn-version">1.21.8</span></div></div><div class="hero-image-box reveal"><img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23333\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23fff\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E'"></div></div><div id="copyNotice"data-key="copyNotice">IP скопирован</div></header><section class="section reveal"id="stats"><h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2><div class="stats-grid"><div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label"data-key="statsUptime">Работа сервера</div></div><div class="stat-card"><div class="stat-number">1.21.8</div><div class="stat-label"data-key="statsVersion">Актуальная версия</div></div><div class="stat-card"><div class="stat-number">100%</div><div class="stat-label"data-key="statsVanilla">Ванильный геймплей</div></div><div class="stat-card"><div class="stat-number">0%</div><div class="stat-label"data-key="statsDonate">Доната</div></div></div></section><section class="section reveal"id="features"><h2 class="section-title"><span data-key="featuresTitle">Особенности сервера</span></h2><div class="features-grid"><div class="feature-card"><div class="feature-icon">🛡️</div><h3 data-key="feature1Title">Анти-чит система</h3><p data-key="feature1Desc">Продвинутая защита от читеров. Честная игра для всех.</p></div><div class="feature-card"><div class="feature-icon">⚡</div><h3 data-key="feature2Title">Стабильный TPS</h3><p data-key="feature2Desc">Оптимизированный сервер на мощном железе. Никаких лагов.</p></div><div class="feature-card"><div class="feature-icon">🎉</div><h3 data-key="feature3Title">Регулярные ивенты</h3><p data-key="feature3Desc">Еженедельные события и конкурсы с призами для игроков.</p></div><div class="feature-card"><div class="feature-icon">🌍</div><h3 data-key="feature4Title">Чистый ванильный мир</h3><p data-key="feature4Desc">Никаких плагинов, только чистый Minecraft как задумано.</p></div><div class="feature-card"><div class="feature-icon">🔨</div><h3 data-key="feature5Title">Защита построек</h3><p data-key="feature5Desc">Ваши постройки под надежной защитой от гриферов.</p></div><div class="feature-card"><div class="feature-icon">👥</div><h3 data-key="feature6Title">Дружное сообщество</h3><p data-key="feature6Desc">Первые игроки уже здесь. Присоединяйся к нам.</p></div></div></section><section class="section reveal"id="streamers"><h2 class="section-title"><span data-key="streamersTitle">Стримеры на сервере</span></h2><div class="community-grid"><div class="community-card streamer-card"><div class="community-icon">🎥</div><h3>Babka3434</h3><p data-key="babkaDesc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p><a href="https://www.youtube.com/@Babka3434offical"target="_blank"class="streamer-link"data-key="babkaLink">Babka3434 YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span data-key="soon">скоро</span></div></div><div class="community-card streamer-card"><div class="community-icon">🎮</div><h3>Gyraffic</h3><p data-key="gyrafficDesc">Владелец сервера и стример. Играет вместе с вами.</p><a href="https://www.youtube.com/@gyraffic"target="_blank"class="streamer-link"data-key="gyrafficLink">Gyraffic YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span>live</span></div></div><div class="community-card"><div class="community-icon">🎮</div><h3 data-key="moreStreamers">Скоро будут другие</h3><p data-key="moreStreamersDesc">Список стримеров будет пополняться. Следи за новостями в Discord.</p><div class="community-stats"><span data-key="announcements">анонсы</span><span data-key="news">новости</span></div></div></div></section><section class="section reveal"id="top-players"><h2 class="section-title"><span data-key="topPlayersTitle">Топ игроков</span></h2><div class="top-players-grid"><div class="player-card"><div class="player-rank">1</div><div class="player-info"><h4>Gyraffic</h4><p data-key="owner">Владелец сервера</p></div><div class="player-score"data-key="hours"data-value="19">19 часов</div></div><div class="player-card"><div class="player-rank">2</div><div class="player-info"><h4>Babka3434</h4><p data-key="streamer">Стримерша</p></div><div class="player-score"data-key="hours"data-value="8">8 часов</div></div><div class="player-card"><div class="player-rank">3</div><div class="player-info"><h4>QLIBRO</h4><p data-key="admin">Старший администратор</p></div><div class="player-score"data-key="hours"data-value="7">7 часов</div></div></div><p class="update-date"data-key="updateDate">Данные обновлены 17 февраля 2026 года</p></section><section class="section reveal"id="how-to-play"><h2 class="section-title"><span data-key="howToPlayTitle">Как начать играть</span></h2><div class="features-grid"><div class="feature-card"><div class="feature-icon">🚀</div><h3 data-key="how1Title">Версия 1.21.8</h3><p data-key="how1Desc">Убедись, что у тебя установлена последняя версия Minecraft.</p></div><div class="feature-card"><div class="feature-icon">📝</div><h3 data-key="how2Title">Подай заявку в Discord</h3><p data-key="how2Desc">Заполни анкету и ознакомься с правилами сервера.</p></div><div class="feature-card"><div class="feature-icon">🔌</div><h3 data-key="how3Title">Дождись принятия</h3><p data-key="how3Desc">После одобрения добавь сервер play.sweet-land.fun в список.</p></div><div class="feature-card"><div class="feature-icon">🎮</div><h3 data-key="how4Title">Заходи и играй</h3><p data-key="how4Desc">Выбирай место для базы, строй и исследуй мир.</p></div></div></section><section class="section reveal"id="faq"><h2 class="section-title"><span data-key="faqTitle">Ответы на вопросы</span></h2><div class="faq-grid"><div class="faq-card"><div class="icon">📅</div><h3 data-key="faq1Title">Когда старт?</h3><p data-key="faq1Desc">Сервер готовится к открытию. Следи за новостями в Discord.</p></div><div class="faq-card"><div class="icon">🎮</div><h3 data-key="faq2Title">Какая версия?</h3><p data-key="faq2Desc">Сервер будет работать на актуальной версии 1.21.8.</p></div><div class="faq-card"><div class="icon">💬</div><h3 data-key="faq3Title">Где общение?</h3><p data-key="faq3Desc">Основное общение в Discord. Там же новости и ивенты.</p></div><div class="faq-card"><div class="icon">🌙</div><h3 data-key="faq4Title">Белая тема?</h3><p data-key="faq4Desc">Да, нажми на луну в правом углу и увидишь дождик.</p></div><div class="faq-card"><div class="icon">🔒</div><h3 data-key="faq5Title">Защита аккаунта?</h3><p data-key="faq5Desc">Анти-чит система и шифрование данных игроков.</p></div><div class="faq-card"><div class="icon">🎁</div><h3 data-key="faq6Title">Донат?</h3><p data-key="faq6Desc">Нет, это полностью ванильный сервер. Никаких привилегий.</p></div><div class="faq-card"><div class="icon">📊</div><h3 data-key="faq7Title">Какой онлайн?</h3><p data-key="faq7Desc">Сервер скоро открывается. Будь первым.</p></div><div class="faq-card"><div class="icon">🔄</div><h3 data-key="faq8Title">Будут вайпы?</h3><p data-key="faq8Desc">Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p></div></div></section><footer class="footer"><div class="footer-content"><div class="footer-section"><h4 data-key="footerAbout">SweetLand</h4><p data-key="footerDesc">Ванильное выживание без границ с дружным сообществом и активной администрацией.</p><p class="footer-note"data-key="footerNote">Никаких донатов — только чистый ванильный геймплей</p></div><div class="footer-section"><h4 data-key="footerLinks">Быстрые ссылки</h4><a href="#hero"onclick="showMainContent()"data-key="footerHome">Главная</a><a href="#features"onclick="showMainContent()"data-key="footerFeatures">Особенности</a><a href="#how-to-play"onclick="showMainContent()"data-key="footerHowToPlay">Как начать</a><a href="#streamers"onclick="showMainContent()"data-key="footerStreamers">Стримеры</a><a href="#top-players"onclick="showMainContent()"data-key="footerTopPlayers">Топ игроков</a><a href="#faq"onclick="showMainContent()"data-key="footerFAQ">FAQ</a><a href="javascript:void(0)"onclick="openRules()"data-key="footerRules">Правила</a></div><div class="footer-section"><h4 data-key="footerSocial">Соцсети</h4><a href="https://www.youtube.com/@gyraffic"target="_blank"data-key="gyrafficYoutube">Gyraffic YouTube</a><a href="https://t.me/Gyraff"target="_blank"data-key="telegram">Telegram</a><a href="https://discord.gg/bb3Kf8sDmt"target="_blank"data-key="discord">Discord</a><a href="https://www.youtube.com/@Babka3434offical"target="_blank"data-key="babkaYoutube">Babka3434 YouTube</a></div><div class="footer-section"><h4 data-key="footerPrivacy">Защита данных</h4><p data-key="footerPrivacyDesc">Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p></div></div><div class="footer-bottom"><p data-key="footerCopyright">© 2026 SweetLand. Ванильный Minecraft сервер.</p><p class="privacy-note"data-key="footerPrivacyNote">Ваши данные под надежной защитой.</p></div></footer></div><script>(function(){'use strict';function escapeHtml(e){return void 0===e||null===e?'':String(e).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}function escapeAttr(e){return void 0===e||null===e?'':String(e).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}function escapeJsString(e){return void 0===e||null===e?'':String(e).replace(/['\\]/g,'\\$&')}const mainContent=document.getElementById('mainContent');document.addEventListener('copy',e=>e.preventDefault());document.addEventListener('cut',e=>e.preventDefault());document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('keydown',e=>{if(e.ctrlKey&&(e.key==='c'||e.key==='x'||e.key==='a'))e.preventDefault();if(e.key==='F12'||e.ctrlKey&&e.shiftKey&&e.key==='I')e.preventDefault()});let currentTheme=localStorage.getItem('sweetland-theme')||'dark',currentLang=localStorage.getItem('sweetland-lang')||'ru',currentWeather=localStorage.getItem('sweetland-weather')||'auto',particlesEnabled='false'!==localStorage.getItem('sweetland-particles'),animationsEnabled='false'!==localStorage.getItem('sweetland-animations');const translations={ru:{serverName:'SweetLand',online:'online',copyNotice:'IP скопирован',navFeatures:'Особенности',navHowToPlay:'Как начать',navFAQ:'FAQ',shopLink:'Магазин',discordLink:'Discord',panelLogo:'SWEETLAND',panelHome:'Главная',panelFeatures:'Особенности',panelStreamers:'Стримеры',panelTopPlayers:'Топ игроков',panelFAQ:'FAQ',panelRules:'Правила',gyrafficYoutube:'Gyraffic YouTube',telegram:'Telegram',discord:'Discord',babkaYoutube:'Babka3434 YouTube',heroTagline:'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',statsTitle:'Статистика сервера',statsUptime:'Работа сервера',statsVersion:'Актуальная версия',statsVanilla:'Ванильный геймплей',statsDonate:'Доната',featuresTitle:'Особенности сервера',feature1Title:'Анти-чит система',feature1Desc:'Продвинутая защита от читеров. Честная игра для всех.',feature2Title:'Стабильный TPS',feature2Desc:'Оптимизированный сервер на мощном железе. Никаких лагов.',feature3Title:'Регулярные ивенты',feature3Desc:'Еженедельные события и конкурсы с призами для игроков.',feature4Title:'Чистый ванильный мир',feature4Desc:'Никаких плагинов, только чистый Minecraft как задумано.',feature5Title:'Защита построек',feature5Desc:'Ваши постройки под надежной защитой от гриферов.',feature6Title:'Дружное сообщество',feature6Desc:'Первые игроки уже здесь. Присоединяйся к нам.',streamersTitle:'Стримеры на сервере',babkaDesc:'Популярная стримерша, будет играть на сервере. Следи за стримами!',babkaLink:'Babka3434 YouTube',gyrafficDesc:'Владелец сервера и стример. Играет вместе с вами.',gyrafficLink:'Gyraffic YouTube',moreStreamers:'Скоро будут другие',moreStreamersDesc:'Список стримеров будет пополняться. Следи за новостями в Discord.',subscribe:'подпишись',soon:'скоро',announcements:'анонсы',news:'новости',topPlayersTitle:'Топ игроков',owner:'Владелец сервера',streamer:'Стримерша',admin:'Старший администратор',hours:'{value} часов',updateDate:'Данные обновлены 17 февраля 2026 года',howToPlayTitle:'Как начать играть',how1Title:'Версия 1.21.8',how1Desc:'Убедись, что у тебя установлена последняя версия Minecraft.',how2Title:'Подай заявку в Discord',how2Desc:'Заполни анкету и ознакомься с правилами сервера.',how3Title:'Дождись принятия',how3Desc:'После одобрения добавь сервер play.sweet-land.fun в список.',how4Title:'Заходи и играй',how4Desc:'Выбирай место для базы, строй и исследуй мир.',faqTitle:'Ответы на вопросы',faq1Title:'Когда старт?',faq1Desc:'Сервер готовится к открытию. Следи за новостями в Discord.',faq2Title:'Какая версия?',faq2Desc:'Сервер будет работать на актуальной версии 1.21.8.',faq3Title:'Где общение?',faq3Desc:'Основное общение в Discord. Там же новости и ивенты.',faq4Title:'Белая тема?',faq4Desc:'Да, нажми на луну в правом углу и увидишь дождик.',faq5Title:'Защита аккаунта?',faq5Desc:'Анти-чит система и шифрование данных игроков.',faq6Title:'Донат?',faq6Desc:'Нет, это полностью ванильный сервер. Никаких привилегий.',faq7Title:'Какой онлайн?',faq7Desc:'Сервер скоро открывается. Будь первым.',faq8Title:'Будут вайпы?',faq8Desc:'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',footerAbout:'SweetLand',footerDesc:'Ванильное выживание без границ с дружным сообществом и активной администрацией.',footerNote:'Никаких донатов — только чистый ванильный геймплей',footerLinks:'Быстрые ссылки',footerHome:'Главная',footerFeatures:'Особенности',footerHowToPlay:'Как начать',footerStreamers:'Стримеры',footerTopPlayers:'Топ игроков',footerFAQ:'FAQ',footerRules:'Правила',footerSocial:'Соцсети',footerPrivacy:'Защита данных',footerPrivacyDesc:'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',footerCopyright:'© 2026 SweetLand. Ванильный Minecraft сервер.',footerPrivacyNote:'Ваши данные под надежной защитой.',yes:'Да',no:'Нет'},en:{serverName:'SweetLand',online:'online',copyNotice:'IP copied',navFeatures:'Features',navHowToPlay:'How to start',navFAQ:'FAQ',shopLink:'Shop',discordLink:'Discord',panelLogo:'SWEETLAND',panelHome:'Home',panelFeatures:'Features',panelStreamers:'Streamers',panelTopPlayers:'Top Players',panelFAQ:'FAQ',panelRules:'Rules',gyrafficYoutube:'Gyraffic YouTube',telegram:'Telegram',discord:'Discord',babkaYoutube:'Babka3434 YouTube',heroTagline:'Vanilla survival on version 1.21.8. Your world — your rules.',statsTitle:'Server Statistics',statsUptime:'Uptime',statsVersion:'Current version',statsVanilla:'Vanilla gameplay',statsDonate:'Donate',featuresTitle:'Server Features',feature1Title:'Anti-cheat system',feature1Desc:'Advanced protection against cheaters. Fair game for everyone.',feature2Title:'Stable TPS',feature2Desc:'Optimized server on powerful hardware. No lag.',feature3Title:'Regular events',feature3Desc:'Weekly events and contests with prizes.',feature4Title:'Pure vanilla world',feature4Desc:'No plugins, just pure Minecraft as intended.',feature5Title:'Build protection',feature5Desc:'Your builds are protected from griefers.',feature6Title:'Friendly community',feature6Desc:'First players are already here. Join us.',streamersTitle:'Streamers on the server',babkaDesc:'Popular streamer, will play on the server. Watch streams!',babkaLink:'Babka3434 YouTube',gyrafficDesc:'Server owner and streamer. Plays with you.',gyrafficLink:'Gyraffic YouTube',moreStreamers:'More coming soon',moreStreamersDesc:'Streamer list will be updated. Follow news in Discord.',subscribe:'subscribe',soon:'soon',announcements:'announcements',news:'news',topPlayersTitle:'Top Players',owner:'Server owner',streamer:'Streamer',admin:'Senior admin',hours:'{value} hours',updateDate:'Data updated February 17, 2026',howToPlayTitle:'How to start playing',how1Title:'Version 1.21.8',how1Desc:'Make sure you have the latest version of Minecraft.',how2Title:'Apply in Discord',how2Desc:'Fill out the form and read the server rules.',how3Title:'Wait for approval',how3Desc:'After approval add server play.sweet-land.fun to your list.',how4Title:'Join and play',how4Desc:'Choose a place for your base, build and explore.',faqTitle:'FAQ',faq1Title:'When does it start?',faq1Desc:'Server is preparing for launch. Follow news in Discord.',faq2Title:'What version?',faq2Desc:'Server will run on latest version 1.21.8.',faq3Title:'Where to chat?',faq3Desc:'Main communication in Discord. News and events there too.',faq4Title:'White theme?',faq4Desc:'Yes, click the moon in the right corner.',faq5Title:'Account security?',faq5Desc:'Anti-cheat system and player data encryption.',faq6Title:'Donate?',faq6Desc:'No, this is a completely vanilla server. No privileges.',faq7Title:'Online count?',faq7Desc:'Server opening soon. Be the first.',faq8Title:'Wipes?',faq8Desc:'Wipes planned every 8-11 months. Builds last long.',footerAbout:'SweetLand',footerDesc:'Vanilla survival without borders with friendly community and active administration.',footerNote:'No donate — only pure vanilla gameplay',footerLinks:'Quick links',footerHome:'Home',footerFeatures:'Features',footerHowToPlay:'How to start',footerStreamers:'Streamers',footerTopPlayers:'Top players',footerFAQ:'FAQ',footerRules:'Rules',footerSocial:'Social',footerPrivacy:'Data protection',footerPrivacyDesc:'All data is protected and not shared with third parties. Server meets security standards.',footerCopyright:'© 2026 SweetLand. Vanilla Minecraft server.',footerPrivacyNote:'Your data is protected.',yes:'Yes',no:'No'}};function t(e,o={}){let r=(translations[currentLang]&&translations[currentLang][e])||translations.ru[e]||e;for(let t in o)r=r.replace(new RegExp(`\\{${t}\\}`,'g'),o[t]);return r}function showNotification(e,o='info',r=!0){document.querySelectorAll('.notification-overlay,.custom-notification').forEach(e=>e.remove());let t=document.createElement('div');t.className='notification-overlay';let n=document.createElement('div');n.className=`custom-notification ${o}`;n.innerHTML=`<p>${e}</p><button onclick="this.parentElement.remove();document.querySelector('.notification-overlay').remove();">OK</button>`;document.body.appendChild(t);document.body.appendChild(n);if(r)setTimeout(()=>{if(n.parentElement){n.remove();t.remove();}},3000);}function showConfirm(e,o,r){let t=document.createElement('div');t.className='notification-overlay';let n=document.createElement('div');n.className='custom-confirm';n.innerHTML=`<p>${e}</p><div style="display:flex;justify-content:center;gap:20px"><button class="confirm">${t('yes')}</button><button class="cancel">${t('no')}</button></div>`;document.body.appendChild(t);document.body.appendChild(n);n.querySelector('.confirm').onclick=()=>{t.remove();n.remove();if(o)o();};n.querySelector('.cancel').onclick=()=>{t.remove();n.remove();if(r)r();};}window.toggleSettingsMenu=function(){let menu=document.getElementById('settingsMenu');menu.classList.toggle('active');if(menu.classList.contains('active')&&menu.children.length===0)generateSettingsMenu();};document.addEventListener('click',function(e){let menu=document.getElementById('settingsMenu');let btn=document.querySelector('.settings-btn');if(menu&&menu.classList.contains('active')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('active');}});window.togglePanel=function(){document.getElementById('side-panel').classList.toggle('active');};function generateSettingsMenu(){const menu=document.getElementById('settingsMenu');menu.innerHTML='';// Цвет темы
-let colorSection=document.createElement('div');colorSection.className='settings-section';colorSection.innerHTML='<div class="settings-section-title">🎨 Цвет темы</div>';const colors=[{class:'dark',name:'Тёмная',icon:'🌙'},{class:'light',name:'Светлая',icon:'☀️'},{class:'pink',name:'Розовая',icon:'🌸'},{class:'blue',name:'Голубая',icon:'💙'},{class:'green',name:'Зелёная',icon:'💚'},{class:'orange',name:'Оранжевая',icon:'🧡'},{class:'purple',name:'Фиолетовая',icon:'💜'},{class:'yellow',name:'Жёлтая',icon:'💛'},{class:'red',name:'Красная',icon:'❤️'},{class:'teal',name:'Бирюзовая',icon:'💙'}];colors.forEach(c=>{let opt=document.createElement('div');opt.className='settings-option';opt.onclick=()=>{setAccentColor(c.class);menu.classList.remove('active');};opt.innerHTML=`<div class="color-dot ${c.class}"></div><span>${c.icon} ${c.name}</span>`;colorSection.appendChild(opt);});menu.appendChild(colorSection);// Язык
-let langSection=document.createElement('div');langSection.className='settings-section';langSection.innerHTML='<div class="settings-section-title">🌐 Язык</div>';const langs=[{code:'ru',name:'Русский',flag:'🇷🇺'},{code:'en',name:'English',flag:'🇬🇧'}];langs.forEach(l=>{let opt=document.createElement('div');opt.className='settings-option';opt.onclick=()=>{setLanguage(l.code);menu.classList.remove('active');};opt.innerHTML=`<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;langSection.appendChild(opt);});menu.appendChild(langSection);// Погода
-let weatherSection=document.createElement('div');weatherSection.className='settings-section';weatherSection.innerHTML='<div class="settings-section-title">☁️ Погода</div>';const weathers=[{type:'auto',name:'Авто',icon:'🌓'},{type:'snow',name:'Снег',icon:'❄️'},{type:'rain',name:'Дождь',icon:'☔'},{type:'candy',name:'Конфеты',icon:'🍬'},{type:'none',name:'Выкл',icon:'☀️'}];weathers.forEach(w=>{let opt=document.createElement('div');opt.className='settings-option';opt.onclick=()=>{setWeather(w.type);menu.classList.remove('active');};opt.innerHTML=`<span class="weather-icon">${w.icon}</span><span>${w.name}</span>`;weatherSection.appendChild(opt);});menu.appendChild(weatherSection);// Частицы и сброс
-let miscSection=document.createElement('div');miscSection.className='settings-section';miscSection.innerHTML='<div class="settings-section-title">⚙️ Прочее</div>';let particlesOpt=document.createElement('div');particlesOpt.className='settings-option';particlesOpt.onclick=()=>{toggleParticles();menu.classList.remove('active');};particlesOpt.innerHTML=`<span>✨</span><span>${particlesEnabled?'Частицы: вкл':'Частицы: выкл'}</span>`;miscSection.appendChild(particlesOpt);let resetOpt=document.createElement('div');resetOpt.className='settings-option';resetOpt.onclick=()=>{resetSettings();menu.classList.remove('active');};resetOpt.innerHTML=`<span>🔄</span><span>Сброс настроек</span>`;miscSection.appendChild(resetOpt);menu.appendChild(miscSection);}function setAccentColor(e){document.body.className='';if(e==='light')document.body.classList.add('light');else if(e==='dark')document.body.classList.add('dark');else document.body.classList.add(e);currentTheme=e;localStorage.setItem('sweetland-theme',e);if(currentWeather==='auto')createWeather();}function setLanguage(e){currentLang=e;localStorage.setItem('sweetland-lang',e);translateAll();}function translateAll(){document.querySelectorAll('[data-key]').forEach(e=>{let key=e.getAttribute('data-key');if(key==='hours')e.innerText=t(key,{value:e.getAttribute('data-value')||'0'});else e.innerText=t(key);});}function setWeather(e){currentWeather=e;localStorage.setItem('sweetland-weather',e);createWeather();}function createWeather(){const w=document.getElementById('weather');if(!particlesEnabled){w.innerHTML='';return;}w.innerHTML='';let type=currentWeather;if(type==='auto')type=document.body.classList.contains('light')?'rain':'snow';if(type==='none')return;if(type==='candy'){let cnt=window.innerWidth<768?60:150;for(let i=0;i<cnt;i++){let p=document.createElement('div');p.className='candy-particle';let style=Math.floor(Math.random()*4)+1;p.classList.add(`style${style}`);let rot=Math.random()*360;p.style.setProperty('--rot',rot+'deg');p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*2+2)+'s'; // быстрее
-p.style.animationDelay=-Math.random()*2+'s';p.style.opacity=Math.random()*0.7+0.3;w.appendChild(p);}}else{let cnt=window.innerWidth<768?80:200;for(let i=0;i<cnt;i++){let p=document.createElement('div');p.className=type==='rain'?'rain-particle':'snow-particle';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*1.5+1.5)+'s'; // быстрее
-p.style.animationDelay=-Math.random()*2+'s';p.style.opacity=Math.random()*0.6+0.4;w.appendChild(p);}}}function toggleParticles(){particlesEnabled=!particlesEnabled;if(particlesEnabled){document.getElementById('weather').style.opacity='1';createWeather();}else{document.getElementById('weather').style.opacity='0';document.getElementById('weather').innerHTML='';}localStorage.setItem('sweetland-particles',particlesEnabled);showNotification(particlesEnabled?'Частицы включены':'Частицы выключены','success');}function resetSettings(){particlesEnabled=true;animationsEnabled=true;currentWeather='auto';localStorage.setItem('sweetland-particles','true');localStorage.setItem('sweetland-animations','true');localStorage.setItem('sweetland-weather','auto');setAccentColor('dark');createWeather();showNotification('Настройки сброшены','success');}window.copyIP=function(){let ip='play.sweet-land.fun';if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(ip).then(()=>{let n=document.getElementById('copyNotice');if(n){n.style.opacity='1';setTimeout(()=>n.style.opacity='0',2000);}showNotification(t('copyNotice'),'success');}).catch(()=>showNotification(ip,'info'));}else{let ta=document.createElement('textarea');ta.value=ip;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showNotification(t('copyNotice'),'success');}};window.openRules=function(){document.getElementById('rules-modal').classList.add('show');document.body.style.overflow='hidden';renderRules();};window.closeRules=function(){document.getElementById('rules-modal').classList.remove('show');document.body.style.overflow='auto';};function renderRules(){const rules=[{num:"1.1",text:"Незнание правил не освобождает от ответственности.",punish:""},{num:"1.2",text:"Каждый игрок вправе подать жалобу на другого игрока.",punish:""},{num:"1.3",text:"Заходя на сервер, вы автоматически соглашаетесь с правилами.",punish:""},{num:"1.4",text:"Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, но вещи не возвращаются.",punish:""},{num:"1.5",text:"Продажа ресурсов за реальные деньги",punish:"Бан по IP"},{num:"1.6",text:"Клевета (распространение ложной информации)",punish:"По усмотрению администрации"},{num:"1.7",text:"Кража построек (домов, магазинов, ферм)",punish:"Бан 5 дней + возврат ресурсов"},{num:"1.8",text:"Убийство игрока (Исключение: вход на частную территорию с запрещающей табличкой)",punish:"Бан 7 дней + штраф + возврат ресурсов по решению судьи"},{num:"1.9",text:"Проход на частную территорию с запрещающей табличкой",punish:"По желанию владельца — убийство с возвратом ресурсов + обязательный штраф 20 аров"},{num:"1.10",text:"Препятствование судебному процессу",punish:"Бан 2 дня + штраф 30 аров"},{num:"1.11",text:"Нанесение урона игроку без причины",punish:"Бан 1 день + штраф в зависимости от тяжести"},{num:"1.12",text:"Размещение ловушек для игроков (трапок)",punish:"Штраф 400 аров"},{num:"1.13",text:"Подбор вещей с умершего игрока",punish:"Возврат ресурсов + штраф по решению судьи"},{num:"1.14",text:"Неадекватное поведение любого вида",punish:"Мут или бан 30 минут"},{num:"1.15",text:"Спам текстом / стикерами / иным способом",punish:"Мут 2 часа"},{num:"1.16",text:"Официальный курс валюты: 1 ар (алмазная руда) = 3 алмаза.",punish:""},{num:"1.17",text:"Взлом аккаунта",punish:"Бан по IP"},{num:"1.18",text:"Создание новых аккаунтов для обхода бана",punish:"Бан по IP"},{num:"1.19",text:"Использование креатива без разрешения владельца",punish:"Перманентный бан"},{num:"1.20",text:"Все правила действуют для всех без исключений.",punish:""},{num:"1.21",text:"Поиск лазеек в правилах для личной выгоды",punish:"Бан 10 дней"},{num:"1.22",text:"Крик в голосовом чате",punish:"Мут 5 часов"},{num:"1.23",text:"Отправка изображений / артов с пропагандой / 18+ / политикой",punish:"Перманентный бан"},{num:"1.24",text:"Убийство или нанесение урона чужим мобам",punish:"Штраф по решению судьи"},{num:"1.25",text:"Подбор вещей на чужой территории",punish:"Возврат вещей + бан 2 дня + штраф"},{num:"1.26",text:"Невыполнение подписанного документа в официальных серверах (Discord / Minecraft)",punish:"Бан 1 день + штраф"},{num:"1.27",text:"Взлом других игроков",punish:"Бан по IP"},{num:"1.28",text:"Вход на чужой аккаунт без разрешения владельца",punish:"Бан 6 месяцев по IP"},{num:"1.29",text:"Создание построек, нагружающих сервер",punish:"Снос постройки + штраф"},{num:"1.30",text:"Снос тотемов других игроков без согласия",punish:"Штраф + возврат ресурсов"},{num:"1.31",text:"Неуплата штрафов в установленный срок",punish:"Бан 1 / 2 / 5 / 7 / 30 дней"},{num:"1.32",text:"Злоупотребление полномочиями",punish:"Бан 30 дней"},{num:"1.33",text:"Администрация имеет право выдать наказание даже за нарушения, не прописанные в правилах, при наличии веской причины.",punish:""},{num:"1.34",text:"Деструктивные или некрасивые постройки",punish:"Предупреждение, при повторе — бан 2 дня"},{num:"1.35",text:"Игнорирование требований администрации",punish:"Бан 1 день + штраф"},{num:"1.36",text:"Выдача некорректных наказаний для администрации",punish:"Предупреждение и понижение, при повторе — бан 5 дней"},{num:"1.37",text:"Порча мира (оставление ям, разрушение ландшафта и т.п.)",punish:"Штраф, при повторе — бан 2 дня"},{num:"1.38",text:"Использование чужих ферм без разрешения",punish:"Штраф, при повторе — бан 1 день"},{num:"1.39",text:"Гриферство",punish:"Бан 2 дня + штраф + откат постройки"},{num:"1.40",text:"Использование читов",punish:"Бан 5 месяцев"},{num:"1.41",text:"Дюп (дублирование предметов)",punish:"Бан 3 месяца"},{num:"1.42",text:"Использование или хранение X-Ray ресурспака или модификации",punish:"Бан 5 месяцев"},{num:"1.43",text:"Использование стороннего ПО",punish:"Бан 3 месяца + штраф по тяжести нарушения"},{num:"1.44",text:"Селение в чужих городах без разрешения",punish:"Выселение + штраф"},{num:"1.45",text:"Любая порча игрового мира",punish:"Штраф или бан по усмотрению администрации"},{num:"1.46",text:"Присвоение чужих построек",punish:"Бан 2 дня + штраф"},{num:"1.47",text:"Подача более 3 заявок в команду проекта при отказе",punish:"ЧС персонала — занесение в «черный список»"},{num:"1.48",text:"Получение вознаграждения за помощь администрации в поиске нарушителя",punish:"Право игрока — разрешено требовать вознаграждение"},{num:"1.49",text:"Строительство на чужих территориях без разрешения",punish:"Снос постройки + штраф"},{num:"1.50",text:"Попытка подкупа судьи или администрации",punish:"Бан + штраф по усмотрению администрации"},{num:"1.51",text:"Заморозка игрока во время разбирательства",punish:"Блокировка действий до завершения процесса, нарушение — дополнительный бан или штраф"}];let html='';rules.forEach(r=>{if(r.punish)html+=`<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`;else html+=`<p><b>${r.num}</b> ${r.text}</p>`;});document.getElementById('rules-content').innerHTML=html;}window.showMainContent=function(){}; // пустая, т.к. нет магазина
-function updateClock(){let d=new Date();let h=d.getHours().toString().padStart(2,'0');let m=d.getMinutes().toString().padStart(2,'0');let s=d.getSeconds().toString().padStart(2,'0');let el=document.getElementById('currentTime');if(el)el.innerHTML=`🕐 ${h}:${m}:${s}`;}setInterval(updateClock,1000);document.getElementById('onlineNumber').innerText='0';window.addEventListener('load',()=>{setAccentColor(currentTheme);translateAll();if(particlesEnabled)createWeather();else document.getElementById('weather').innerHTML='';reveal();});window.addEventListener('resize',()=>{clearTimeout(window.weatherTimeout);window.weatherTimeout=setTimeout(createWeather,200);});function reveal(){if(!animationsEnabled){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('active'));return;}document.querySelectorAll('.reveal').forEach(e=>{if(e.getBoundingClientRect().top<window.innerHeight-100)e.classList.add('active');});}})();</script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.5,user-scalable=yes">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'unsafe-inline' https:; style-src 'unsafe-inline' https:; img-src 'self' data: https:;">
+    <title>SweetLand — ванильный майнкрафт сервер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        input, textarea, [contenteditable], select {
+            user-select: text
+        }
+
+        :root {
+            --accent: #4d9eff;
+            --accent-light: #6eb3ff;
+            --accent-dark: #3a7acc;
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.95);
+            --text: #fff;
+            --text-secondary: #b0b0c0;
+            --text-tertiary: #70707a;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --header-bg: rgba(10, 10, 15, 0.7);
+            --blur: 12px;
+            --success: #00c853;
+            --warning: #ffd600;
+            --danger: #ff4444;
+            --candy: #ff69b4;
+            --lollipop: #ffaa00
+        }
+
+        body.light {
+            --bg: #f0f0f0;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.98);
+            --text: #111111;
+            --text-secondary: #2c2c2c;
+            --text-tertiary: #5a5a5a;
+            --border: rgba(0, 0, 0, 0.12);
+            --border-hover: rgba(0, 0, 0, 0.25);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --header-bg: rgba(255, 255, 255, 0.85)
+        }
+
+        body.light .stat-card, body.light .feature-card, body.light .community-card, body.light .faq-card, body.light .player-card {
+            background: var(--bg-card);
+            border-color: var(--border);
+            color: var(--text)
+        }
+
+        body.light .btn-version {
+            background: var(--bg-card);
+            color: var(--text-secondary)
+        }
+
+        body.light .online-counter, body.light .current-time {
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text)
+        }
+
+        body.light .banner-center a {
+            color: var(--text-secondary)
+        }
+
+        body.light .banner-center a:hover {
+            color: var(--text)
+        }
+
+        body.light .shop-link, body.light .discord-link {
+            background: rgba(0, 0, 0, 0.03);
+            color: var(--text)
+        }
+
+        body.pink {
+            --accent: #ff66b2;
+            --accent-light: #ff85c2;
+            --accent-dark: #e64d9e;
+            --bg: #1a0f14;
+            --bg-secondary: #241a1f;
+            --text: #fff0f5;
+            --text-secondary: #ffc0cb
+        }
+
+        body.blue {
+            --accent: #4d9eff;
+            --accent-light: #6eb3ff;
+            --accent-dark: #3a7acc;
+            --bg: #0f1a24;
+            --bg-secondary: #1a2733;
+            --text: #e6f0ff
+        }
+
+        body.green {
+            --accent: #4caf50;
+            --accent-light: #6ec071;
+            --accent-dark: #3d8c40;
+            --bg: #0f1a11;
+            --bg-secondary: #1a2a1d;
+            --text: #e8f5e9
+        }
+
+        body.orange {
+            --accent: #ff9800;
+            --accent-light: #ffb74d;
+            --accent-dark: #f57c00;
+            --bg: #1f1a0f;
+            --bg-secondary: #2a241a;
+            --text: #fff3e0
+        }
+
+        body.purple {
+            --accent: #9c27b0;
+            --accent-light: #ba68c8;
+            --accent-dark: #7b1fa2;
+            --bg: #1a0f1f;
+            --bg-secondary: #251a2a;
+            --text: #f3e5f5
+        }
+
+        body.yellow {
+            --accent: #ffd700;
+            --accent-light: #ffe44d;
+            --accent-dark: #e6c300;
+            --bg: #1a1a0f;
+            --bg-secondary: #2a2a1a;
+            --text: #fffff0
+        }
+
+        body.red {
+            --accent: #ff4444;
+            --accent-light: #ff6666;
+            --accent-dark: #cc3333;
+            --bg: #1a0f0f;
+            --bg-secondary: #2a1a1a;
+            --text: #fff0f0
+        }
+
+        body.teal {
+            --accent: #008080;
+            --accent-light: #20b2aa;
+            --accent-dark: #006666;
+            --bg: #0f1a1a;
+            --bg-secondary: #1a2a2a;
+            --text: #e0ffff
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background .3s, color .2s;
+            line-height: 1.5
+        }
+
+        a, button {
+            cursor: pointer
+        }
+
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .8);
+            backdrop-filter: blur(5px);
+            z-index: 99998;
+            animation: fadeIn .2s
+        }
+
+        .custom-notification, .custom-confirm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-secondary);
+            border: 3px solid var(--accent);
+            border-radius: 30px;
+            padding: 30px 50px;
+            z-index: 99999;
+            box-shadow: 0 0 50px var(--accent);
+            text-align: center;
+            animation: notificationPop .3s ease-out;
+            max-width: 90%
+        }
+
+        .custom-notification.success {
+            border-color: var(--success);
+            box-shadow: 0 0 50px var(--success)
+        }
+
+        .custom-notification.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 50px var(--danger)
+        }
+
+        .custom-notification.warning {
+            border-color: var(--warning);
+            box-shadow: 0 0 50px var(--warning)
+        }
+
+        .custom-notification p, .custom-confirm p {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text)
+        }
+
+        .custom-notification button, .custom-confirm button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: .2s;
+            margin: 0 10px
+        }
+
+        .custom-notification button:hover, .custom-confirm button:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1)
+        }
+
+        .custom-confirm .cancel {
+            background: var(--danger)
+        }
+
+        @keyframes notificationPop {
+            0% {
+                transform: translate(-50%, -50%) scale(.8);
+                opacity: 0
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        #weather {
+            position: fixed;
+            top: -20vh;
+            left: 0;
+            width: 100%;
+            height: 120vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden
+        }
+
+        .snow-particle, .rain-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, .6);
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(1px);
+            animation: fall linear infinite
+        }
+
+        .snow-particle {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, .7)
+        }
+
+        .rain-particle {
+            width: 3px;
+            height: 30px;
+            background: rgba(120, 180, 220, .6);
+            border-radius: 2px
+        }
+
+        .candy-particle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: 0 0;
+            opacity: 0;
+            animation: candyFall linear infinite;
+            transform-origin: center;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .candy-particle::before {
+            content: '🍬';
+            font-size: 20px;
+            line-height: 1;
+            color: #ff99cc;
+            text-shadow: 0 0 10px #ff66b2;
+            transform: rotate(var(--rot))
+        }
+
+        .candy-particle.style1::before {
+            content: '🍭';
+            color: #ff66b2
+        }
+
+        .candy-particle.style2::before {
+            content: '🍫';
+            color: #d2691e
+        }
+
+        .candy-particle.style3::before {
+            content: '🍬';
+            color: #ff99cc
+        }
+
+        .candy-particle.style4::before {
+            content: '🍡';
+            color: #ffb6c1
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: .7
+            }
+            100% {
+                transform: translateY(110vh) translateX(30px);
+                opacity: 0
+            }
+        }
+
+        @keyframes candyFall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: .9
+            }
+            100% {
+                transform: translateY(110vh) translateX(30px) rotate(360deg);
+                opacity: .2
+            }
+        }
+
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2500;
+        }
+
+        .settings-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(30, 30, 40, .7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: .2s;
+            color: var(--text);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .settings-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: #fff;
+            transform: scale(1.1)
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-3px)
+            }
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        .settings-picker {
+            position: relative;
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background: rgba(20, 20, 30, .95);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            padding: 16px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 280px;
+            box-shadow: var(--shadow);
+            z-index: 2600;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideDown .2s ease
+        }
+
+        .settings-menu.active {
+            display: flex
+        }
+
+        .settings-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .settings-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .settings-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            padding-left: 8px
+        }
+
+        .settings-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 40px;
+            transition: .2s;
+            color: var(--text);
+            font-size: 14px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid transparent;
+            cursor: pointer
+        }
+
+        .settings-option:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: #fff;
+            transform: translateX(5px)
+        }
+
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%
+        }
+
+        .color-dot.dark {
+            background: #0a0a0f;
+            border: 1px solid #fff
+        }
+
+        .color-dot.light {
+            background: #f0f0f0;
+            border: 1px solid #333
+        }
+
+        .color-dot.pink {
+            background: #ff66b2
+        }
+
+        .color-dot.blue {
+            background: #4d9eff
+        }
+
+        .color-dot.green {
+            background: #4caf50
+        }
+
+        .color-dot.orange {
+            background: #ff9800
+        }
+
+        .color-dot.purple {
+            background: #9c27b0
+        }
+
+        .color-dot.yellow {
+            background: #ffd700
+        }
+
+        .color-dot.red {
+            background: #ff4444
+        }
+
+        .color-dot.teal {
+            background: #008080
+        }
+
+        .lang-flag {
+            font-size: 20px
+        }
+
+        .weather-icon {
+            font-size: 20px
+        }
+
+        .nav-oval-container {
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto 20px;
+            padding: 0 20px
+        }
+
+        .shop-banner {
+            background: var(--header-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 60px;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            width: 100%;
+            transition: .2s;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .shop-banner:hover {
+            border-color: var(--border-hover)
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .banner-center {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .banner-center a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: .2s;
+            position: relative;
+            white-space: nowrap
+        }
+
+        .banner-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width .2s
+        }
+
+        .banner-center a:hover {
+            color: var(--text)
+        }
+
+        .banner-center a:hover::after {
+            width: 100%
+        }
+
+        .banner-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .shop-link, .discord-link {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: .2s;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            display: inline-block;
+            background: rgba(255, 255, 255, .05);
+            color: var(--text)
+        }
+
+        .shop-link:hover, .discord-link:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--accent)
+        }
+
+        .side-trigger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2300;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            background: rgba(30, 30, 40, .7);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            transition: .2s
+        }
+
+        .side-trigger:hover {
+            background: var(--accent);
+            transform: scale(1.1)
+        }
+
+        .side-trigger .line {
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: .2s
+        }
+
+        .side-trigger:hover .line {
+            background: #fff
+        }
+
+        @media (max-width: 768px) {
+            .nav-oval-container {
+                display: none
+            }
+            .side-trigger {
+                display: flex
+            }
+            .control-panel {
+                top: 65px;
+                right: 10px
+            }
+        }
+
+        @media (min-width: 769px) {
+            .side-trigger {
+                display: flex
+            }
+        }
+
+        .side-panel {
+            position: fixed;
+            left: -400px;
+            top: 0;
+            width: 320px;
+            height: 100%;
+            background: rgba(10, 10, 15, .95);
+            backdrop-filter: blur(20px);
+            z-index: 3000;
+            transition: left .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 80px 20px 20px;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column
+        }
+
+        .side-panel.active {
+            left: 0
+        }
+
+        .panel-handle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .1);
+            color: var(--text);
+            font-size: 24px;
+            transition: .2s;
+            border: 1px solid var(--border);
+            cursor: pointer
+        }
+
+        .panel-handle:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: rotate(90deg)
+        }
+
+        .panel-logo {
+            color: var(--text);
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: pulseGlow 2s infinite
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 5px var(--accent)
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent)
+            }
+            100% {
+                text-shadow: 0 0 5px var(--accent)
+            }
+        }
+
+        .panel-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1
+        }
+
+        .panel-links a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 40px;
+            transition: .2s;
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid transparent
+        }
+
+        .panel-links a:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: #fff;
+            transform: translateX(10px)
+        }
+
+        .panel-links a span:first-child {
+            font-size: 20px;
+            min-width: 30px;
+            text-align: center
+        }
+
+        .panel-social {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            padding: 10px 15px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid transparent;
+            transition: .2s
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: #fff;
+            transform: translateX(10px)
+        }
+
+        .main-content {
+            display: block
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 5%;
+            position: relative;
+            z-index: 2
+        }
+
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            gap: 40px;
+            flex-wrap: wrap
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 700px;
+            animation: slideInLeft .8s ease
+        }
+
+        .hero-image-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 280px;
+            animation: slideInRight .8s ease
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px)
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px)
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0)
+            }
+        }
+
+        .title {
+            font-size: clamp(40px, 10vw, 90px);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text);
+            margin-bottom: 20px;
+            animation: titleGlow 3s infinite
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 10px var(--accent)
+            }
+            50% {
+                text-shadow: 0 0 30px var(--accent)
+            }
+            100% {
+                text-shadow: 0 0 10px var(--accent)
+            }
+        }
+
+        .hero-tagline {
+            font-size: clamp(16px, 3vw, 18px);
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 600px
+        }
+
+        .ip-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap
+        }
+
+        .btn-ip {
+            background: linear-gradient(145deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: clamp(14px, 3vw, 16px);
+            transition: .2s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
+            flex: 1 1 auto;
+            border: 1px solid rgba(255, 255, 255, .2)
+        }
+
+        .btn-ip:hover {
+            background: linear-gradient(145deg, var(--accent-light), var(--accent));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent);
+            animation: pulse 1s infinite
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 var(--accent)
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(77, 158, 255, 0)
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(77, 158, 255, 0)
+            }
+        }
+
+        .btn-version {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: clamp(14px, 3vw, 16px);
+            cursor: default;
+            backdrop-filter: blur(8px);
+            flex: 0 1 auto
+        }
+
+        .giant-img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 0, 0, .5));
+            border-radius: 20px;
+            object-fit: contain;
+            transition: transform .3s
+        }
+
+        .giant-img:hover {
+            transform: scale(1.02) rotate(1deg)
+        }
+
+        #copyNotice {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 40px;
+            opacity: 0;
+            transition: opacity .2s;
+            z-index: 4000;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+            pointer-events: none;
+            white-space: nowrap
+        }
+
+        .section {
+            padding: 60px 5%;
+            position: relative;
+            z-index: 2
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: var(--text)
+        }
+
+        .section-title span {
+            color: var(--accent);
+            position: relative;
+            display: inline-block
+        }
+
+        .section-title span::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform .3s
+        }
+
+        .section-title:hover span::after {
+            transform: scaleX(1)
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 40px
+        }
+
+        .stat-card {
+            flex: 0 0 240px;
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            padding: 30px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: .2s;
+            text-align: center;
+            box-sizing: border-box;
+            animation: cardAppear .5s ease-out
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2)
+        }
+
+        .stat-number {
+            font-size: 40px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            animation: countPop .5s ease-out
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 15px
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes countPop {
+            0% {
+                transform: scale(.5);
+                opacity: 0
+            }
+            80% {
+                transform: scale(1.1)
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .features-grid, .community-grid, .faq-grid, .top-players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto
+        }
+
+        .feature-card, .community-card, .faq-card, .player-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--blur));
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: .2s
+        }
+
+        .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2)
+        }
+
+        .feature-icon, .community-icon, .faq-card .icon {
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: inline-block;
+            transition: transform .2s
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg) scale(1.2);
+            transition: transform .4s
+        }
+
+        .feature-card h3, .community-card h3, .faq-card h3, .player-info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text)
+        }
+
+        .feature-card p, .community-card p, .faq-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: var(--accent);
+            font-size: 13px
+        }
+
+        .streamer-card {
+            background: linear-gradient(145deg, var(--bg-card), rgba(255, 68, 68, .1));
+            border: 1px solid #ff4444;
+            position: relative;
+            overflow: hidden
+        }
+
+        .streamer-card::before {
+            content: 'LIVE';
+            position: absolute;
+            top: 10px;
+            right: -25px;
+            background: #ff4444;
+            color: #fff;
+            padding: 4px 30px;
+            font-size: 11px;
+            font-weight: 600;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+            z-index: 10;
+            animation: blink 1s infinite
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1
+            }
+            50% {
+                opacity: .5
+            }
+            100% {
+                opacity: 1
+            }
+        }
+
+        .streamer-link {
+            display: inline-block;
+            background: #ff4444;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 8px 0;
+            transition: .2s;
+            border: 1px solid transparent;
+            text-decoration: none
+        }
+
+        .streamer-link:hover {
+            background: #fff;
+            color: #ff4444;
+            border-color: #ff4444;
+            transform: scale(1.05)
+        }
+
+        .player-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px
+        }
+
+        .player-rank {
+            font-size: 24px;
+            font-weight: 600;
+            color: gold;
+            min-width: 40px;
+            text-align: center;
+            animation: shine 2s infinite
+        }
+
+        @keyframes shine {
+            0% {
+                text-shadow: 0 0 5px gold
+            }
+            50% {
+                text-shadow: 0 0 20px gold
+            }
+            100% {
+                text-shadow: 0 0 5px gold
+            }
+        }
+
+        .player-info {
+            flex: 1
+        }
+
+        .player-info p {
+            color: var(--text-secondary);
+            font-size: 13px
+        }
+
+        .player-score {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 15px;
+            white-space: nowrap
+        }
+
+        .update-date {
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 13px;
+            margin-top: 20px
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .95);
+            z-index: 3500;
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            margin: 3% auto;
+            padding: 40px;
+            width: 96%;
+            max-width: 900px;
+            max-height: 85vh;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow-y: auto;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all .3s;
+            position: relative
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--danger);
+            transition: .2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 68, 68, .1);
+            line-height: 1;
+            cursor: pointer
+        }
+
+        .close-modal:hover {
+            background: var(--danger);
+            color: #fff;
+            transform: rotate(90deg)
+        }
+
+        .rules-main-title {
+            color: var(--accent);
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 600
+        }
+
+        .rules-scroll-area {
+            padding-right: 10px
+        }
+
+        .rules-category {
+            margin-bottom: 25px;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .rules-category h2 {
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .rules-scroll-area p {
+            color: var(--text) !important;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            font-size: 15px
+        }
+
+        .punish {
+            color: #ff8888;
+            font-size: 13px;
+            display: inline-block;
+            margin-left: 10px;
+            background: rgba(255, 68, 68, .1);
+            padding: 2px 10px;
+            border-radius: 20px
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 50px 5% 20px;
+            z-index: 2
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto 30px
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 6px;
+            transition: .2s
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+            transform: translateX(4px)
+        }
+
+        .footer-note {
+            color: var(--accent) !important;
+            font-weight: 500;
+            margin-top: 10px;
+            font-size: 13px
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border)
+        }
+
+        .footer-bottom p {
+            color: var(--text-tertiary);
+            font-size: 13px;
+            margin-bottom: 6px
+        }
+
+        .privacy-note {
+            color: var(--text-secondary) !important;
+            font-size: 12px !important;
+            opacity: .7
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .5s
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .online-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(5px);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            margin-left: 10px;
+            font-size: 13px;
+            color: var(--text)
+        }
+
+        .online-dot {
+            width: 6px;
+            height: 6px;
+            background: #0c6;
+            border-radius: 50%;
+            animation: pulseDot 2s infinite
+        }
+
+        @keyframes pulseDot {
+            0% {
+                box-shadow: 0 0 0 0 #0c6
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(0, 204, 102, 0)
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 204, 102, 0)
+            }
+        }
+
+        .online-number {
+            font-weight: 600;
+            color: var(--accent)
+        }
+
+        .current-time {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(5px);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text);
+            white-space: nowrap
+        }
+
+        @media (max-width: 768px) {
+            .graph-container {
+                height: 300px
+            }
+            .hero-content {
+                text-align: center
+            }
+            .ip-container {
+                justify-content: center
+            }
+            .title {
+                font-size: clamp(36px, 15vw, 60px)
+            }
+            .hero-tagline {
+                font-size: 16px
+            }
+            .btn-ip, .btn-version {
+                padding: 10px 20px;
+                font-size: 14px
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center
+            }
+            .footer-section a {
+                justify-content: center
+            }
+            .section {
+                padding: 40px 3%
+            }
+            .stat-card {
+                padding: 20px 10px;
+                flex: 0 0 200px
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shop-banner {
+                padding: 8px 12px
+            }
+            .server-name {
+                font-size: 16px
+            }
+            .current-time {
+                font-size: 12px
+            }
+            .control-panel {
+                top: 60px;
+                right: 5px;
+                gap: 4px
+            }
+            .settings-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 20px
+            }
+            .hero {
+                padding-top: 80px
+            }
+            .title {
+                font-size: clamp(32px, 12vw, 48px)
+            }
+            .hero-tagline {
+                font-size: 14px
+            }
+            .btn-ip, .btn-version {
+                padding: 8px 16px;
+                font-size: 13px
+            }
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 30px
+            }
+            .stat-number {
+                font-size: 32px
+            }
+            .stat-label {
+                font-size: 13px
+            }
+            .feature-card, .community-card, .faq-card {
+                padding: 20px
+            }
+            .feature-icon {
+                font-size: 30px
+            }
+            .footer {
+                padding: 30px 3% 15px
+            }
+            .footer-section h4 {
+                font-size: 15px
+            }
+            .footer-section p, .footer-section a {
+                font-size: 13px
+            }
+            .stat-card {
+                flex: 0 0 160px
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+<div id="weather"></div>
+
+<div class="nav-oval-container" style="position:fixed; top:15px; left:50%; transform:translateX(-50%); z-index:2400">
+    <div class="shop-banner">
+        <div class="banner-left">
+            <span class="server-name" data-key="serverName">SweetLand</span>
+            <div class="online-counter" id="onlineCounter">
+                <span class="online-dot"></span>
+                <span class="online-number" id="onlineNumber">0</span>
+                <span data-key="online">online</span>
+            </div>
+            <div class="current-time" id="currentTime"></div>
+        </div>
+        <div class="banner-center">
+            <a href="#features" data-key="navFeatures">Особенности</a>
+            <a href="#how-to-play" data-key="navHowToPlay">Как начать</a>
+            <a href="#faq" data-key="navFAQ">FAQ</a>
+        </div>
+        <div class="banner-right">
+            <a href="https://sweet-land.trademc.org/" target="_blank" class="shop-link" data-key="shopLink">Магазин</a>
+            <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="discord-link" data-key="discordLink">Discord</a>
+        </div>
+    </div>
+</div>
+
+<div class="control-panel">
+    <div class="settings-picker">
+        <div class="settings-btn" onclick="toggleSettingsMenu()">⚙️</div>
+        <div class="settings-menu" id="settingsMenu"></div>
+    </div>
+</div>
+
+<div class="side-trigger" onclick="togglePanel()">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div>
+
+<nav class="side-panel" id="side-panel">
+    <div class="panel-handle" onclick="togglePanel()">✕</div>
+    <h2 class="panel-logo" data-key="panelLogo">SWEETLAND</h2>
+    <div class="panel-links">
+        <a href="#hero" onclick="togglePanel(); showMainContent()"><span>🏠</span><span data-key="panelHome">Главная</span></a>
+        <a href="#features" onclick="togglePanel(); showMainContent()"><span>✨</span><span data-key="panelFeatures">Особенности</span></a>
+        <a href="#streamers" onclick="togglePanel(); showMainContent()"><span>🎥</span><span data-key="panelStreamers">Стримеры</span></a>
+        <a href="#top-players" onclick="togglePanel(); showMainContent()"><span>🏆</span><span data-key="panelTopPlayers">Топ игроков</span></a>
+        <a href="#faq" onclick="togglePanel(); showMainContent()"><span>❓</span><span data-key="panelFAQ">FAQ</span></a>
+        <a href="javascript:void(0)" onclick="togglePanel(); openRules()"><span>📜</span><span data-key="panelRules">Правила</span></a>
+    </div>
+    <div class="panel-social">
+        <a href="https://www.youtube.com/@gyraffic" target="_blank" class="social-link"><span>▶️</span><span data-key="gyrafficYoutube">Gyraffic YouTube</span></a>
+        <a href="https://t.me/Gyraff" target="_blank" class="social-link"><span>📱</span><span data-key="telegram">Telegram</span></a>
+        <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="social-link"><span>💬</span><span data-key="discord">Discord</span></a>
+        <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="social-link"><span>▶️</span><span data-key="babkaYoutube">Babka3434 YouTube</span></a>
+    </div>
+</nav>
+
+<div id="rules-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeRules()">&times;</span>
+        <h1 class="rules-main-title" data-key="rulesTitle">ПРАВИЛА СЕРВЕРА</h1>
+        <div class="rules-scroll-area" id="rules-content"></div>
+    </div>
+</div>
+
+<div class="main-content" id="mainContent">
+    <header class="hero" id="hero">
+        <div class="hero-layout">
+            <div class="hero-content reveal">
+                <h1 class="title">SweetLand</h1>
+                <p class="hero-tagline" data-key="heroTagline">Ванильное выживание на версии 1.21.8. Твой мир — твои правила.</p>
+                <div class="ip-container">
+                    <button class="btn-ip" onclick="copyIP()">play.sweet-land.fun</button>
+                    <span class="btn-version">1.21.8</span>
+                </div>
+            </div>
+            <div class="hero-image-box reveal">
+                <img src="images/5opka.png" alt="SweetLand" class="giant-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\'%3E%3Crect width=\'600\' height=\'400\' fill=\'%23333\'/%3E%3Ctext x=\'300\' y=\'200\' font-family=\'Inter\' font-size=\'40\' fill=\'%23fff\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3ESweetLand%3C/text%3E%3C/svg%3E'">
+            </div>
+        </div>
+        <div id="copyNotice" data-key="copyNotice">IP скопирован</div>
+    </header>
+
+    <section class="section reveal" id="stats">
+        <h2 class="section-title"><span data-key="statsTitle">Статистика сервера</span></h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label" data-key="statsUptime">Работа сервера</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1.21.8</div>
+                <div class="stat-label" data-key="statsVersion">Актуальная версия</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label" data-key="statsVanilla">Ванильный геймплей</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0%</div>
+                <div class="stat-label" data-key="statsDonate">Доната</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="features">
+        <h2 class="section-title"><span data-key="featuresTitle">Особенности сервера</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 data-key="feature1Title">Анти-чит система</h3>
+                <p data-key="feature1Desc">Продвинутая защита от читеров. Честная игра для всех.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-key="feature2Title">Стабильный TPS</h3>
+                <p data-key="feature2Desc">Оптимизированный сервер на мощном железе. Никаких лагов.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎉</div>
+                <h3 data-key="feature3Title">Регулярные ивенты</h3>
+                <p data-key="feature3Desc">Еженедельные события и конкурсы с призами для игроков.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3 data-key="feature4Title">Чистый ванильный мир</h3>
+                <p data-key="feature4Desc">Никаких плагинов, только чистый Minecraft как задумано.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔨</div>
+                <h3 data-key="feature5Title">Защита построек</h3>
+                <p data-key="feature5Desc">Ваши постройки под надежной защитой от гриферов.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3 data-key="feature6Title">Дружное сообщество</h3>
+                <p data-key="feature6Desc">Первые игроки уже здесь. Присоединяйся к нам.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="streamers">
+        <h2 class="section-title"><span data-key="streamersTitle">Стримеры на сервере</span></h2>
+        <div class="community-grid">
+            <div class="community-card streamer-card">
+                <div class="community-icon">🎥</div>
+                <h3>Babka3434</h3>
+                <p data-key="babkaDesc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p>
+                <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link" data-key="babkaLink">Babka3434 YouTube</a>
+                <div class="community-stats"><span data-key="subscribe">подпишись</span><span data-key="soon">скоро</span></div>
+            </div>
+            <div class="community-card streamer-card">
+                <div class="community-icon">🎮</div>
+                <h3>Gyraffic</h3>
+                <p data-key="gyrafficDesc">Владелец сервера и стример. Играет вместе с вами.</p>
+                <a href="https://www.youtube.com/@gyraffic" target="_blank" class="streamer-link" data-key="gyrafficLink">Gyraffic YouTube</a>
+                <div class="community-stats"><span data-key="subscribe">подпишись</span><span>live</span></div>
+            </div>
+            <div class="community-card">
+                <div class="community-icon">🎮</div>
+                <h3 data-key="moreStreamers">Скоро будут другие</h3>
+                <p data-key="moreStreamersDesc">Список стримеров будет пополняться. Следи за новостями в Discord.</p>
+                <div class="community-stats"><span data-key="announcements">анонсы</span><span data-key="news">новости</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="top-players">
+        <h2 class="section-title"><span data-key="topPlayersTitle">Топ игроков</span></h2>
+        <div class="top-players-grid">
+            <div class="player-card">
+                <div class="player-rank">1</div>
+                <div class="player-info">
+                    <h4>Gyraffic</h4>
+                    <p data-key="owner">Владелец сервера</p>
+                </div>
+                <div class="player-score" data-key="hours" data-value="19">19 часов</div>
+            </div>
+            <div class="player-card">
+                <div class="player-rank">2</div>
+                <div class="player-info">
+                    <h4>Babka3434</h4>
+                    <p data-key="streamer">Стримерша</p>
+                </div>
+                <div class="player-score" data-key="hours" data-value="8">8 часов</div>
+            </div>
+            <div class="player-card">
+                <div class="player-rank">3</div>
+                <div class="player-info">
+                    <h4>QLIBRO</h4>
+                    <p data-key="admin">Старший администратор</p>
+                </div>
+                <div class="player-score" data-key="hours" data-value="7">7 часов</div>
+            </div>
+        </div>
+        <p class="update-date" data-key="updateDate">Данные обновлены 17 февраля 2026 года</p>
+    </section>
+
+    <section class="section reveal" id="how-to-play">
+        <h2 class="section-title"><span data-key="howToPlayTitle">Как начать играть</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 data-key="how1Title">Версия 1.21.8</h3>
+                <p data-key="how1Desc">Убедись, что у тебя установлена последняя версия Minecraft.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 data-key="how2Title">Подай заявку в Discord</h3>
+                <p data-key="how2Desc">Заполни анкету и ознакомься с правилами сервера.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h3 data-key="how3Title">Дождись принятия</h3>
+                <p data-key="how3Desc">После одобрения добавь сервер play.sweet-land.fun в список.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3 data-key="how4Title">Заходи и играй</h3>
+                <p data-key="how4Desc">Выбирай место для базы, строй и исследуй мир.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal" id="faq">
+        <h2 class="section-title"><span data-key="faqTitle">Ответы на вопросы</span></h2>
+        <div class="faq-grid">
+            <div class="faq-card">
+                <div class="icon">📅</div>
+                <h3 data-key="faq1Title">Когда старт?</h3>
+                <p data-key="faq1Desc">Сервер готовится к открытию. Следи за новостями в Discord.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">🎮</div>
+                <h3 data-key="faq2Title">Какая версия?</h3>
+                <p data-key="faq2Desc">Сервер будет работать на актуальной версии 1.21.8.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">💬</div>
+                <h3 data-key="faq3Title">Где общение?</h3>
+                <p data-key="faq3Desc">Основное общение в Discord. Там же новости и ивенты.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">🌙</div>
+                <h3 data-key="faq4Title">Белая тема?</h3>
+                <p data-key="faq4Desc">Да, нажми на луну в правом углу и увидишь дождик.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">🔒</div>
+                <h3 data-key="faq5Title">Защита аккаунта?</h3>
+                <p data-key="faq5Desc">Анти-чит система и шифрование данных игроков.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">🎁</div>
+                <h3 data-key="faq6Title">Донат?</h3>
+                <p data-key="faq6Desc">Нет, это полностью ванильный сервер. Никаких привилегий.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">📊</div>
+                <h3 data-key="faq7Title">Какой онлайн?</h3>
+                <p data-key="faq7Desc">Сервер скоро открывается. Будь первым.</p>
+            </div>
+            <div class="faq-card">
+                <div class="icon">🔄</div>
+                <h3 data-key="faq8Title">Будут вайпы?</h3>
+                <p data-key="faq8Desc">Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-key="footerAbout">SweetLand</h4>
+                <p data-key="footerDesc">Ванильное выживание без границ с дружным сообществом и активной администрацией.</p>
+                <p class="footer-note" data-key="footerNote">Никаких донатов — только чистый ванильный геймплей</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-key="footerLinks">Быстрые ссылки</h4>
+                <a href="#hero" onclick="showMainContent()" data-key="footerHome">Главная</a>
+                <a href="#features" onclick="showMainContent()" data-key="footerFeatures">Особенности</a>
+                <a href="#how-to-play" onclick="showMainContent()" data-key="footerHowToPlay">Как начать</a>
+                <a href="#streamers" onclick="showMainContent()" data-key="footerStreamers">Стримеры</a>
+                <a href="#top-players" onclick="showMainContent()" data-key="footerTopPlayers">Топ игроков</a>
+                <a href="#faq" onclick="showMainContent()" data-key="footerFAQ">FAQ</a>
+                <a href="javascript:void(0)" onclick="openRules()" data-key="footerRules">Правила</a>
+            </div>
+            <div class="footer-section">
+                <h4 data-key="footerSocial">Соцсети</h4>
+                <a href="https://www.youtube.com/@gyraffic" target="_blank" data-key="gyrafficYoutube">Gyraffic YouTube</a>
+                <a href="https://t.me/Gyraff" target="_blank" data-key="telegram">Telegram</a>
+                <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" data-key="discord">Discord</a>
+                <a href="https://www.youtube.com/@Babka3434offical" target="_blank" data-key="babkaYoutube">Babka3434 YouTube</a>
+            </div>
+            <div class="footer-section">
+                <h4 data-key="footerPrivacy">Защита данных</h4>
+                <p data-key="footerPrivacyDesc">Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-key="footerCopyright">© 2026 SweetLand. Ванильный Minecraft сервер.</p>
+            <p class="privacy-note" data-key="footerPrivacyNote">Ваши данные под надежной защитой.</p>
+        </div>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        'use strict';
+
+        // Функции безопасности (без eval)
+        function escapeHtml(text) {
+            if (text === undefined || text === null) return '';
+            return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function escapeAttr(text) {
+            if (text === undefined || text === null) return '';
+            return String(text).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        }
+
+        // Запрет выделения и контекстного меню
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a')) e.preventDefault();
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
+        });
+
+        // Настройки по умолчанию
+        let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
+        let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
+        let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
+        let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
+        let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
+
+        // Переводы
+        const translations = {
+            ru: {
+                serverName: 'SweetLand',
+                online: 'online',
+                copyNotice: 'IP скопирован',
+                navFeatures: 'Особенности',
+                navHowToPlay: 'Как начать',
+                navFAQ: 'FAQ',
+                shopLink: 'Магазин',
+                discordLink: 'Discord',
+                panelLogo: 'SWEETLAND',
+                panelHome: 'Главная',
+                panelFeatures: 'Особенности',
+                panelStreamers: 'Стримеры',
+                panelTopPlayers: 'Топ игроков',
+                panelFAQ: 'FAQ',
+                panelRules: 'Правила',
+                gyrafficYoutube: 'Gyraffic YouTube',
+                telegram: 'Telegram',
+                discord: 'Discord',
+                babkaYoutube: 'Babka3434 YouTube',
+                heroTagline: 'Ванильное выживание на версии 1.21.8. Твой мир — твои правила.',
+                statsTitle: 'Статистика сервера',
+                statsUptime: 'Работа сервера',
+                statsVersion: 'Актуальная версия',
+                statsVanilla: 'Ванильный геймплей',
+                statsDonate: 'Доната',
+                featuresTitle: 'Особенности сервера',
+                feature1Title: 'Анти-чит система',
+                feature1Desc: 'Продвинутая защита от читеров. Честная игра для всех.',
+                feature2Title: 'Стабильный TPS',
+                feature2Desc: 'Оптимизированный сервер на мощном железе. Никаких лагов.',
+                feature3Title: 'Регулярные ивенты',
+                feature3Desc: 'Еженедельные события и конкурсы с призами для игроков.',
+                feature4Title: 'Чистый ванильный мир',
+                feature4Desc: 'Никаких плагинов, только чистый Minecraft как задумано.',
+                feature5Title: 'Защита построек',
+                feature5Desc: 'Ваши постройки под надежной защитой от гриферов.',
+                feature6Title: 'Дружное сообщество',
+                feature6Desc: 'Первые игроки уже здесь. Присоединяйся к нам.',
+                streamersTitle: 'Стримеры на сервере',
+                babkaDesc: 'Популярная стримерша, будет играть на сервере. Следи за стримами!',
+                babkaLink: 'Babka3434 YouTube',
+                gyrafficDesc: 'Владелец сервера и стример. Играет вместе с вами.',
+                gyrafficLink: 'Gyraffic YouTube',
+                moreStreamers: 'Скоро будут другие',
+                moreStreamersDesc: 'Список стримеров будет пополняться. Следи за новостями в Discord.',
+                subscribe: 'подпишись',
+                soon: 'скоро',
+                announcements: 'анонсы',
+                news: 'новости',
+                topPlayersTitle: 'Топ игроков',
+                owner: 'Владелец сервера',
+                streamer: 'Стримерша',
+                admin: 'Старший администратор',
+                hours: '{value} часов',
+                updateDate: 'Данные обновлены 17 февраля 2026 года',
+                howToPlayTitle: 'Как начать играть',
+                how1Title: 'Версия 1.21.8',
+                how1Desc: 'Убедись, что у тебя установлена последняя версия Minecraft.',
+                how2Title: 'Подай заявку в Discord',
+                how2Desc: 'Заполни анкету и ознакомься с правилами сервера.',
+                how3Title: 'Дождись принятия',
+                how3Desc: 'После одобрения добавь сервер play.sweet-land.fun в список.',
+                how4Title: 'Заходи и играй',
+                how4Desc: 'Выбирай место для базы, строй и исследуй мир.',
+                faqTitle: 'Ответы на вопросы',
+                faq1Title: 'Когда старт?',
+                faq1Desc: 'Сервер готовится к открытию. Следи за новостями в Discord.',
+                faq2Title: 'Какая версия?',
+                faq2Desc: 'Сервер будет работать на актуальной версии 1.21.8.',
+                faq3Title: 'Где общение?',
+                faq3Desc: 'Основное общение в Discord. Там же новости и ивенты.',
+                faq4Title: 'Белая тема?',
+                faq4Desc: 'Да, нажми на луну в правом углу и увидишь дождик.',
+                faq5Title: 'Защита аккаунта?',
+                faq5Desc: 'Анти-чит система и шифрование данных игроков.',
+                faq6Title: 'Донат?',
+                faq6Desc: 'Нет, это полностью ванильный сервер. Никаких привилегий.',
+                faq7Title: 'Какой онлайн?',
+                faq7Desc: 'Сервер скоро открывается. Будь первым.',
+                faq8Title: 'Будут вайпы?',
+                faq8Desc: 'Вайпы планируются раз в 8-11 месяцев. Все постройки сохраняются надолго.',
+                footerAbout: 'SweetLand',
+                footerDesc: 'Ванильное выживание без границ с дружным сообществом и активной администрацией.',
+                footerNote: 'Никаких донатов — только чистый ванильный геймплей',
+                footerLinks: 'Быстрые ссылки',
+                footerHome: 'Главная',
+                footerFeatures: 'Особенности',
+                footerHowToPlay: 'Как начать',
+                footerStreamers: 'Стримеры',
+                footerTopPlayers: 'Топ игроков',
+                footerFAQ: 'FAQ',
+                footerRules: 'Правила',
+                footerSocial: 'Соцсети',
+                footerPrivacy: 'Защита данных',
+                footerPrivacyDesc: 'Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.',
+                footerCopyright: '© 2026 SweetLand. Ванильный Minecraft сервер.',
+                footerPrivacyNote: 'Ваши данные под надежной защитой.',
+                yes: 'Да',
+                no: 'Нет',
+                rulesTitle: 'ПРАВИЛА СЕРВЕРА'
+            },
+            en: {
+                serverName: 'SweetLand',
+                online: 'online',
+                copyNotice: 'IP copied',
+                navFeatures: 'Features',
+                navHowToPlay: 'How to start',
+                navFAQ: 'FAQ',
+                shopLink: 'Shop',
+                discordLink: 'Discord',
+                panelLogo: 'SWEETLAND',
+                panelHome: 'Home',
+                panelFeatures: 'Features',
+                panelStreamers: 'Streamers',
+                panelTopPlayers: 'Top Players',
+                panelFAQ: 'FAQ',
+                panelRules: 'Rules',
+                gyrafficYoutube: 'Gyraffic YouTube',
+                telegram: 'Telegram',
+                discord: 'Discord',
+                babkaYoutube: 'Babka3434 YouTube',
+                heroTagline: 'Vanilla survival on version 1.21.8. Your world — your rules.',
+                statsTitle: 'Server Statistics',
+                statsUptime: 'Uptime',
+                statsVersion: 'Current version',
+                statsVanilla: 'Vanilla gameplay',
+                statsDonate: 'Donate',
+                featuresTitle: 'Server Features',
+                feature1Title: 'Anti-cheat system',
+                feature1Desc: 'Advanced protection against cheaters. Fair game for everyone.',
+                feature2Title: 'Stable TPS',
+                feature2Desc: 'Optimized server on powerful hardware. No lag.',
+                feature3Title: 'Regular events',
+                feature3Desc: 'Weekly events and contests with prizes.',
+                feature4Title: 'Pure vanilla world',
+                feature4Desc: 'No plugins, just pure Minecraft as intended.',
+                feature5Title: 'Build protection',
+                feature5Desc: 'Your builds are protected from griefers.',
+                feature6Title: 'Friendly community',
+                feature6Desc: 'First players are already here. Join us.',
+                streamersTitle: 'Streamers on the server',
+                babkaDesc: 'Popular streamer, will play on the server. Watch streams!',
+                babkaLink: 'Babka3434 YouTube',
+                gyrafficDesc: 'Server owner and streamer. Plays with you.',
+                gyrafficLink: 'Gyraffic YouTube',
+                moreStreamers: 'More coming soon',
+                moreStreamersDesc: 'Streamer list will be updated. Follow news in Discord.',
+                subscribe: 'subscribe',
+                soon: 'soon',
+                announcements: 'announcements',
+                news: 'news',
+                topPlayersTitle: 'Top Players',
+                owner: 'Server owner',
+                streamer: 'Streamer',
+                admin: 'Senior admin',
+                hours: '{value} hours',
+                updateDate: 'Data updated February 17, 2026',
+                howToPlayTitle: 'How to start playing',
+                how1Title: 'Version 1.21.8',
+                how1Desc: 'Make sure you have the latest version of Minecraft.',
+                how2Title: 'Apply in Discord',
+                how2Desc: 'Fill out the form and read the server rules.',
+                how3Title: 'Wait for approval',
+                how3Desc: 'After approval add server play.sweet-land.fun to your list.',
+                how4Title: 'Join and play',
+                how4Desc: 'Choose a place for your base, build and explore.',
+                faqTitle: 'FAQ',
+                faq1Title: 'When does it start?',
+                faq1Desc: 'Server is preparing for launch. Follow news in Discord.',
+                faq2Title: 'What version?',
+                faq2Desc: 'Server will run on latest version 1.21.8.',
+                faq3Title: 'Where to chat?',
+                faq3Desc: 'Main communication in Discord. News and events there too.',
+                faq4Title: 'White theme?',
+                faq4Desc: 'Yes, click the moon in the right corner.',
+                faq5Title: 'Account security?',
+                faq5Desc: 'Anti-cheat system and player data encryption.',
+                faq6Title: 'Donate?',
+                faq6Desc: 'No, this is a completely vanilla server. No privileges.',
+                faq7Title: 'Online count?',
+                faq7Desc: 'Server opening soon. Be the first.',
+                faq8Title: 'Wipes?',
+                faq8Desc: 'Wipes planned every 8-11 months. Builds last long.',
+                footerAbout: 'SweetLand',
+                footerDesc: 'Vanilla survival without borders with friendly community and active administration.',
+                footerNote: 'No donate — only pure vanilla gameplay',
+                footerLinks: 'Quick links',
+                footerHome: 'Home',
+                footerFeatures: 'Features',
+                footerHowToPlay: 'How to start',
+                footerStreamers: 'Streamers',
+                footerTopPlayers: 'Top players',
+                footerFAQ: 'FAQ',
+                footerRules: 'Rules',
+                footerSocial: 'Social',
+                footerPrivacy: 'Data protection',
+                footerPrivacyDesc: 'All data is protected and not shared with third parties. Server meets security standards.',
+                footerCopyright: '© 2026 SweetLand. Vanilla Minecraft server.',
+                footerPrivacyNote: 'Your data is protected.',
+                yes: 'Yes',
+                no: 'No',
+                rulesTitle: 'SERVER RULES'
+            }
+        };
+
+        function t(key, params = {}) {
+            let text = (translations[currentLang] && translations[currentLang][key]) || translations.ru[key] || key;
+            for (let p in params) {
+                text = text.replace(new RegExp(`\\{${p}\\}`, 'g'), params[p]);
+            }
+            return text;
+        }
+
+        // Уведомления
+        function showNotification(message, type = 'info', autoClose = true) {
+            // Удаляем старые
+            document.querySelectorAll('.notification-overlay, .custom-notification').forEach(el => el.remove());
+
+            let overlay = document.createElement('div');
+            overlay.className = 'notification-overlay';
+
+            let notif = document.createElement('div');
+            notif.className = `custom-notification ${type}`;
+            notif.innerHTML = `<p>${message}</p><button onclick="this.parentElement.remove();document.querySelector('.notification-overlay').remove();">OK</button>`;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(notif);
+
+            if (autoClose) {
+                setTimeout(() => {
+                    if (notif.parentElement) {
+                        notif.remove();
+                        overlay.remove();
+                    }
+                }, 3000);
+            }
+        }
+
+        function showConfirm(message, onYes, onNo) {
+            let overlay = document.createElement('div');
+            overlay.className = 'notification-overlay';
+
+            let confirmBox = document.createElement('div');
+            confirmBox.className = 'custom-confirm';
+            confirmBox.innerHTML = `<p>${message}</p><div style="display:flex;justify-content:center;gap:20px"><button class="confirm">${t('yes')}</button><button class="cancel">${t('no')}</button></div>`;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(confirmBox);
+
+            confirmBox.querySelector('.confirm').onclick = () => {
+                overlay.remove();
+                confirmBox.remove();
+                if (onYes) onYes();
+            };
+            confirmBox.querySelector('.cancel').onclick = () => {
+                overlay.remove();
+                confirmBox.remove();
+                if (onNo) onNo();
+            };
+        }
+
+        // Управление меню настроек
+        window.toggleSettingsMenu = function() {
+            let menu = document.getElementById('settingsMenu');
+            menu.classList.toggle('active');
+            if (menu.classList.contains('active') && menu.children.length === 0) {
+                generateSettingsMenu();
+            }
+        };
+
+        document.addEventListener('click', function(e) {
+            let menu = document.getElementById('settingsMenu');
+            let btn = document.querySelector('.settings-btn');
+            if (menu && menu.classList.contains('active') && !menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        window.togglePanel = function() {
+            document.getElementById('side-panel').classList.toggle('active');
+        };
+
+        function generateSettingsMenu() {
+            const menu = document.getElementById('settingsMenu');
+            menu.innerHTML = '';
+
+            // Цвет темы
+            let colorSection = document.createElement('div');
+            colorSection.className = 'settings-section';
+            colorSection.innerHTML = '<div class="settings-section-title">🎨 Цвет темы</div>';
+            const colors = [
+                { class: 'dark', name: 'Тёмная', icon: '🌙' },
+                { class: 'light', name: 'Светлая', icon: '☀️' },
+                { class: 'pink', name: 'Розовая', icon: '🌸' },
+                { class: 'blue', name: 'Голубая', icon: '💙' },
+                { class: 'green', name: 'Зелёная', icon: '💚' },
+                { class: 'orange', name: 'Оранжевая', icon: '🧡' },
+                { class: 'purple', name: 'Фиолетовая', icon: '💜' },
+                { class: 'yellow', name: 'Жёлтая', icon: '💛' },
+                { class: 'red', name: 'Красная', icon: '❤️' },
+                { class: 'teal', name: 'Бирюзовая', icon: '💙' }
+            ];
+            colors.forEach(c => {
+                let opt = document.createElement('div');
+                opt.className = 'settings-option';
+                opt.onclick = () => {
+                    setAccentColor(c.class);
+                    menu.classList.remove('active');
+                };
+                opt.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.icon} ${c.name}</span>`;
+                colorSection.appendChild(opt);
+            });
+            menu.appendChild(colorSection);
+
+            // Язык
+            let langSection = document.createElement('div');
+            langSection.className = 'settings-section';
+            langSection.innerHTML = '<div class="settings-section-title">🌐 Язык</div>';
+            const langs = [
+                { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+                { code: 'en', name: 'English', flag: '🇬🇧' }
+            ];
+            langs.forEach(l => {
+                let opt = document.createElement('div');
+                opt.className = 'settings-option';
+                opt.onclick = () => {
+                    setLanguage(l.code);
+                    menu.classList.remove('active');
+                };
+                opt.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
+                langSection.appendChild(opt);
+            });
+            menu.appendChild(langSection);
+
+            // Погода
+            let weatherSection = document.createElement('div');
+            weatherSection.className = 'settings-section';
+            weatherSection.innerHTML = '<div class="settings-section-title">☁️ Погода</div>';
+            const weathers = [
+                { type: 'auto', name: 'Авто', icon: '🌓' },
+                { type: 'snow', name: 'Снег', icon: '❄️' },
+                { type: 'rain', name: 'Дождь', icon: '☔' },
+                { type: 'candy', name: 'Конфеты', icon: '🍬' },
+                { type: 'none', name: 'Выкл', icon: '☀️' }
+            ];
+            weathers.forEach(w => {
+                let opt = document.createElement('div');
+                opt.className = 'settings-option';
+                opt.onclick = () => {
+                    setWeather(w.type);
+                    menu.classList.remove('active');
+                };
+                opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${w.name}</span>`;
+                weatherSection.appendChild(opt);
+            });
+            menu.appendChild(weatherSection);
+
+            // Частицы и сброс
+            let miscSection = document.createElement('div');
+            miscSection.className = 'settings-section';
+            miscSection.innerHTML = '<div class="settings-section-title">⚙️ Прочее</div>';
+
+            let particlesOpt = document.createElement('div');
+            particlesOpt.className = 'settings-option';
+            particlesOpt.onclick = () => {
+                toggleParticles();
+                menu.classList.remove('active');
+            };
+            particlesOpt.innerHTML = `<span>✨</span><span>${particlesEnabled ? 'Частицы: вкл' : 'Частицы: выкл'}</span>`;
+            miscSection.appendChild(particlesOpt);
+
+            let resetOpt = document.createElement('div');
+            resetOpt.className = 'settings-option';
+            resetOpt.onclick = () => {
+                resetSettings();
+                menu.classList.remove('active');
+            };
+            resetOpt.innerHTML = `<span>🔄</span><span>Сброс настроек</span>`;
+            miscSection.appendChild(resetOpt);
+
+            menu.appendChild(miscSection);
+        }
+
+        function setAccentColor(color) {
+            document.body.className = '';
+            if (color === 'light') document.body.classList.add('light');
+            else if (color === 'dark') document.body.classList.add('dark');
+            else document.body.classList.add(color);
+            currentTheme = color;
+            localStorage.setItem('sweetland-theme', color);
+            if (currentWeather === 'auto') createWeather();
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('sweetland-lang', lang);
+            translateAll();
+        }
+
+        function translateAll() {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                let key = el.getAttribute('data-key');
+                if (key === 'hours') {
+                    el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
+                } else {
+                    el.innerText = t(key);
+                }
+            });
+        }
+
+        function setWeather(type) {
+            currentWeather = type;
+            localStorage.setItem('sweetland-weather', type);
+            createWeather();
+        }
+
+        function createWeather() {
+            const w = document.getElementById('weather');
+            if (!particlesEnabled) {
+                w.innerHTML = '';
+                return;
+            }
+            w.innerHTML = '';
+            let type = currentWeather;
+            if (type === 'auto') {
+                type = document.body.classList.contains('light') ? 'rain' : 'snow';
+            }
+            if (type === 'none') return;
+
+            if (type === 'candy') {
+                let cnt = window.innerWidth < 768 ? 60 : 150;
+                for (let i = 0; i < cnt; i++) {
+                    let p = document.createElement('div');
+                    p.className = 'candy-particle';
+                    let style = Math.floor(Math.random() * 4) + 1;
+                    p.classList.add(`style${style}`);
+                    let rot = Math.random() * 360;
+                    p.style.setProperty('--rot', rot + 'deg');
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    p.style.animationDelay = -Math.random() * 2 + 's';
+                    p.style.opacity = Math.random() * 0.7 + 0.3;
+                    w.appendChild(p);
+                }
+            } else {
+                let cnt = window.innerWidth < 768 ? 80 : 200;
+                for (let i = 0; i < cnt; i++) {
+                    let p = document.createElement('div');
+                    p.className = type === 'rain' ? 'rain-particle' : 'snow-particle';
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+                    p.style.animationDelay = -Math.random() * 2 + 's';
+                    p.style.opacity = Math.random() * 0.6 + 0.4;
+                    w.appendChild(p);
+                }
+            }
+        }
+
+        function toggleParticles() {
+            particlesEnabled = !particlesEnabled;
+            if (particlesEnabled) {
+                document.getElementById('weather').style.opacity = '1';
+                createWeather();
+            } else {
+                document.getElementById('weather').style.opacity = '0';
+                document.getElementById('weather').innerHTML = '';
+            }
+            localStorage.setItem('sweetland-particles', particlesEnabled);
+            showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
+        }
+
+        function resetSettings() {
+            particlesEnabled = true;
+            animationsEnabled = true;
+            currentWeather = 'auto';
+            localStorage.setItem('sweetland-particles', 'true');
+            localStorage.setItem('sweetland-animations', 'true');
+            localStorage.setItem('sweetland-weather', 'auto');
+            setAccentColor('dark');
+            createWeather();
+            showNotification('Настройки сброшены', 'success');
+        }
+
+        window.copyIP = function() {
+            let ip = 'play.sweet-land.fun';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(ip).then(() => {
+                    let n = document.getElementById('copyNotice');
+                    if (n) {
+                        n.style.opacity = '1';
+                        setTimeout(() => n.style.opacity = '0', 2000);
+                    }
+                    showNotification(t('copyNotice'), 'success');
+                }).catch(() => showNotification(ip, 'info'));
+            } else {
+                let ta = document.createElement('textarea');
+                ta.value = ip;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showNotification(t('copyNotice'), 'success');
+            }
+        };
+
+        window.openRules = function() {
+            document.getElementById('rules-modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            renderRules();
+        };
+
+        window.closeRules = function() {
+            document.getElementById('rules-modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        };
+
+        function renderRules() {
+            const rulesByCategory = {
+                'Общие положения': [
+                    { num: "1.1", text: "Незнание правил не освобождает от ответственности." },
+                    { num: "1.2", text: "Каждый игрок вправе подать жалобу на другого игрока." },
+                    { num: "1.3", text: "Заходя на сервер, вы автоматически соглашаетесь с правилами." },
+                    { num: "1.4", text: "Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, но вещи не возвращаются." },
+                    { num: "1.20", text: "Все правила действуют для всех без исключений." },
+                    { num: "1.33", text: "Администрация имеет право выдать наказание даже за нарушения, не прописанные в правилах, при наличии веской причины." }
+                ],
+                'Экономика и ресурсы': [
+                    { num: "1.5", text: "Продажа ресурсов за реальные деньги", punish: "Бан по IP" },
+                    { num: "1.16", text: "Официальный курс валюты: 1 ар (алмазная руда) = 3 алмаза." }
+                ],
+                'Поведение и чат': [
+                    { num: "1.14", text: "Неадекватное поведение любого вида", punish: "Мут или бан 30 минут" },
+                    { num: "1.15", text: "Спам текстом / стикерами / иным способом", punish: "Мут 2 часа" },
+                    { num: "1.22", text: "Крик в голосовом чате", punish: "Мут 5 часов" },
+                    { num: "1.23", text: "Отправка изображений / артов с пропагандой / 18+ / политикой", punish: "Перманентный бан" }
+                ],
+                'Взаимодействие с игроками': [
+                    { num: "1.7", text: "Кража построек (домов, магазинов, ферм)", punish: "Бан 5 дней + возврат ресурсов" },
+                    { num: "1.8", text: "Убийство игрока (Исключение: вход на частную территорию с запрещающей табличкой)", punish: "Бан 7 дней + штраф + возврат ресурсов по решению судьи" },
+                    { num: "1.9", text: "Проход на частную территорию с запрещающей табличкой", punish: "По желанию владельца — убийство с возвратом ресурсов + обязательный штраф 20 аров" },
+                    { num: "1.11", text: "Нанесение урона игроку без причины", punish: "Бан 1 день + штраф в зависимости от тяжести" },
+                    { num: "1.12", text: "Размещение ловушек для игроков (трапок)", punish: "Штраф 400 аров" },
+                    { num: "1.13", text: "Подбор вещей с умершего игрока", punish: "Возврат ресурсов + штраф по решению судьи" },
+                    { num: "1.24", text: "Убийство или нанесение урона чужим мобам", punish: "Штраф по решению судьи" },
+                    { num: "1.25", text: "Подбор вещей на чужой территории", punish: "Возврат вещей + бан 2 дня + штраф" },
+                    { num: "1.30", text: "Снос тотемов других игроков без согласия", punish: "Штраф + возврат ресурсов" },
+                    { num: "1.38", text: "Использование чужих ферм без разрешения", punish: "Штраф, при повторе — бан 1 день" },
+                    { num: "1.44", text: "Селение в чужих городах без разрешения", punish: "Выселение + штраф" },
+                    { num: "1.46", text: "Присвоение чужих построек", punish: "Бан 2 дня + штраф" },
+                    { num: "1.49", text: "Строительство на чужих территориях без разрешения", punish: "Снос постройки + штраф" }
+                ],
+                'Судебная система': [
+                    { num: "1.10", text: "Препятствование судебному процессу", punish: "Бан 2 дня + штраф 30 аров" },
+                    { num: "1.50", text: "Попытка подкупа судьи или администрации", punish: "Бан + штраф по усмотрению администрации" },
+                    { num: "1.51", text: "Заморозка игрока во время разбирательства", punish: "Блокировка действий до завершения процесса, нарушение — дополнительный бан или штраф" }
+                ],
+                'Безопасность и читы': [
+                    { num: "1.17", text: "Взлом аккаунта", punish: "Бан по IP" },
+                    { num: "1.18", text: "Создание новых аккаунтов для обхода бана", punish: "Бан по IP" },
+                    { num: "1.19", text: "Использование креатива без разрешения владельца", punish: "Перманентный бан" },
+                    { num: "1.27", text: "Взлом других игроков", punish: "Бан по IP" },
+                    { num: "1.28", text: "Вход на чужой аккаунт без разрешения владельца", punish: "Бан 6 месяцев по IP" },
+                    { num: "1.40", text: "Использование читов", punish: "Бан 5 месяцев" },
+                    { num: "1.41", text: "Дюп (дублирование предметов)", punish: "Бан 3 месяца" },
+                    { num: "1.42", text: "Использование или хранение X-Ray ресурспака или модификации", punish: "Бан 5 месяцев" },
+                    { num: "1.43", text: "Использование стороннего ПО", punish: "Бан 3 месяца + штраф по тяжести нарушения" }
+                ],
+                'Постройки и мир': [
+                    { num: "1.29", text: "Создание построек, нагружающих сервер", punish: "Снос постройки + штраф" },
+                    { num: "1.34", text: "Деструктивные или некрасивые постройки", punish: "Предупреждение, при повторе — бан 2 дня" },
+                    { num: "1.37", text: "Порча мира (оставление ям, разрушение ландшафта и т.п.)", punish: "Штраф, при повторе — бан 2 дня" },
+                    { num: "1.39", text: "Гриферство", punish: "Бан 2 дня + штраф + откат постройки" },
+                    { num: "1.45", text: "Любая порча игрового мира", punish: "Штраф или бан по усмотрению администрации" }
+                ],
+                'Администрация': [
+                    { num: "1.32", text: "Злоупотребление полномочиями", punish: "Бан 30 дней" },
+                    { num: "1.35", text: "Игнорирование требований администрации", punish: "Бан 1 день + штраф" },
+                    { num: "1.36", text: "Выдача некорректных наказаний для администрации", punish: "Предупреждение и понижение, при повторе — бан 5 дней" },
+                    { num: "1.47", text: "Подача более 3 заявок в команду проекта при отказе", punish: "ЧС персонала — занесение в «черный список»" },
+                    { num: "1.48", text: "Получение вознаграждения за помощь администрации в поиске нарушителя", punish: "Право игрока — разрешено требовать вознаграждение" }
+                ],
+                'Прочее': [
+                    { num: "1.6", text: "Клевета (распространение ложной информации)", punish: "По усмотрению администрации" },
+                    { num: "1.21", text: "Поиск лазеек в правилах для личной выгоды", punish: "Бан 10 дней" },
+                    { num: "1.26", text: "Невыполнение подписанного документа в официальных серверах (Discord / Minecraft)", punish: "Бан 1 день + штраф" },
+                    { num: "1.31", text: "Неуплата штрафов в установленный срок", punish: "Бан 1 / 2 / 5 / 7 / 30 дней" }
+                ]
+            };
+
+            let html = '';
+            for (let category in rulesByCategory) {
+                html += `<div class="rules-category"><h2>${category}</h2>`;
+                rulesByCategory[category].forEach(r => {
+                    if (r.punish) {
+                        html += `<p><b>${r.num}</b> ${r.text} <span class="punish">${r.punish}</span></p>`;
+                    } else {
+                        html += `<p><b>${r.num}</b> ${r.text}</p>`;
+                    }
+                });
+                html += '</div>';
+            }
+            document.getElementById('rules-content').innerHTML = html;
+        }
+
+        window.showMainContent = function() {}; // пустая, так как нет отдельного магазина
+
+        function updateClock() {
+            let d = new Date();
+            let h = d.getHours().toString().padStart(2, '0');
+            let m = d.getMinutes().toString().padStart(2, '0');
+            let s = d.getSeconds().toString().padStart(2, '0');
+            let el = document.getElementById('currentTime');
+            if (el) el.innerHTML = `🕐 ${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+
+        document.getElementById('onlineNumber').innerText = '0';
+
+        window.addEventListener('load', () => {
+            setAccentColor(currentTheme);
+            translateAll();
+            if (particlesEnabled) createWeather();
+            else document.getElementById('weather').innerHTML = '';
+            reveal();
+        });
+
+        window.addEventListener('resize', () => {
+            clearTimeout(window.weatherTimeout);
+            window.weatherTimeout = setTimeout(createWeather, 200);
+        });
+
+        function reveal() {
+            if (!animationsEnabled) {
+                document.querySelectorAll('.reveal').forEach(e => e.classList.add('active'));
+                return;
+            }
+            document.querySelectorAll('.reveal').forEach(e => {
+                if (e.getBoundingClientRect().top < window.innerHeight - 100) e.classList.add('active');
+            });
+        }
+    })();
+</script>
+</body>
+</html>

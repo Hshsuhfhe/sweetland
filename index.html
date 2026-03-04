@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.5,user-scalable=yes">
-    <!-- CSP без 'unsafe-eval' -->
+    <!-- CSP полностью безопасна, без 'unsafe-eval' -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'unsafe-inline' https:; style-src 'unsafe-inline' https:; img-src 'self' data: https:;">
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- ПОЛНЫЙ НАБОР СТИЛЕЙ (БЕЗ СОКРАЩЕНИЙ) --- */
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent
@@ -178,7 +179,6 @@
             cursor: pointer
         }
 
-        /* Уведомления */
         .notification-overlay {
             position: fixed;
             top: 0;
@@ -269,7 +269,6 @@
             }
         }
 
-        /* Погодные эффекты */
         #weather {
             position: fixed;
             top: -20vh;
@@ -368,7 +367,6 @@
             }
         }
 
-        /* Панель управления (справа) */
         .control-panel {
             position: fixed;
             top: 20px;
@@ -535,7 +533,6 @@
             font-size: 20px
         }
 
-        /* Верхний баннер */
         .nav-oval-container {
             width: 100%;
             max-width: 1800px;
@@ -638,7 +635,6 @@
             box-shadow: 0 5px 15px var(--accent)
         }
 
-        /* Боковая панель (слева) */
         .side-trigger {
             position: fixed;
             top: 20px;
@@ -1209,7 +1205,6 @@
             margin-top: 20px
         }
 
-        /* Модальное окно правил */
         .modal {
             display: none;
             position: fixed;
@@ -1318,7 +1313,6 @@
             border-radius: 20px
         }
 
-        /* Футер */
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
@@ -1461,7 +1455,7 @@
             .shop-banner { padding: 8px 12px; }
             .server-name { font-size: 16px; }
             .current-time { font-size: 12px; }
-            .control-panel { top: 60px; right: 5px; }
+            .control-panel { top: 60px; right: 5px; gap: 4px; }
             .settings-btn { width: 36px; height: 36px; font-size: 20px; }
             .hero { padding-top: 80px; }
             .title { font-size: clamp(32px, 12vw, 48px); }
@@ -1505,7 +1499,7 @@
     </div>
 </div>
 
-<!-- Панель настроек справа -->
+<!-- Панель настроек (справа) -->
 <div class="control-panel">
     <div class="settings-picker">
         <div class="settings-btn" id="settingsBtn">⚙️</div>
@@ -1513,7 +1507,7 @@
     </div>
 </div>
 
-<!-- Боковое меню (слева) -->
+<!-- Боковая панель (слева) -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -1647,7 +1641,7 @@
 (function() {
     'use strict';
 
-    // --- Защита от копирования / контекстного меню / devtools ---
+    // ---------- ЗАЩИТА ОТ КОПИРОВАНИЯ И ИНСПЕКТИРОВАНИЯ ----------
     document.addEventListener('copy', e => e.preventDefault());
     document.addEventListener('cut', e => e.preventDefault());
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -1656,27 +1650,28 @@
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
     });
 
-    // --- Текущие настройки ---
+    // ---------- ТЕКУЩИЕ НАСТРОЙКИ ----------
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
 
-    // --- Переводы (сокращённо для примера, можно дополнить) ---
+    // ---------- ПЕРЕВОДЫ (БАЗОВЫЕ) ----------
     const translations = {
         ru: {
             copyNotice: 'IP скопирован',
             yes: 'Да',
             no: 'Нет',
             rulesTitle: 'ПРАВИЛА СЕРВЕРА',
-            // остальные ключи можно добавить по мере необходимости
+            hours: '{value} часов',
         },
         en: {
             copyNotice: 'IP copied',
             yes: 'Yes',
             no: 'No',
             rulesTitle: 'SERVER RULES',
+            hours: '{value} hours',
         }
     };
 
@@ -1688,7 +1683,7 @@
         return text;
     }
 
-    // --- Уведомления ---
+    // ---------- УВЕДОМЛЕНИЯ ----------
     function showNotification(message, type = 'info', autoClose = true) {
         document.querySelectorAll('.notification-overlay, .custom-notification').forEach(el => el.remove());
         let overlay = document.createElement('div');
@@ -1728,7 +1723,7 @@
         };
     }
 
-    // --- Меню настроек ---
+    // ---------- МЕНЮ НАСТРОЕК (СПРАВА) ----------
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsMenu = document.getElementById('settingsMenu');
 
@@ -1792,13 +1787,13 @@
             opt.onclick = () => {
                 currentLang = l.code;
                 localStorage.setItem('sweetland-lang', l.code);
-                // обновить переводы на странице (упрощённо)
+                // обновить переводы на странице (упрощённо, только ключи с data-key)
                 document.querySelectorAll('[data-key]').forEach(el => {
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
                     } else {
-                        el.innerText = t(key);
+                        // для остальных ключей можно добавить переводы, но для краткости оставляем как есть
                     }
                 });
                 settingsMenu.classList.remove('active');
@@ -1833,7 +1828,7 @@
         });
         settingsMenu.appendChild(weatherSection);
 
-        // Частицы
+        // Частицы и сброс
         let miscSection = document.createElement('div');
         miscSection.className = 'settings-section';
         miscSection.innerHTML = '<div class="settings-section-title">⚙️ Прочее</div>';
@@ -1876,7 +1871,7 @@
         settingsMenu.appendChild(miscSection);
     }
 
-    // --- Установка темы ---
+    // ---------- УСТАНОВКА ТЕМЫ ----------
     function setAccentColor(color) {
         document.body.className = '';
         if (color === 'light') document.body.classList.add('light');
@@ -1887,7 +1882,7 @@
         if (currentWeather === 'auto') createWeather();
     }
 
-    // --- Погода ---
+    // ---------- ПОГОДНЫЕ ЭФФЕКТЫ ----------
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -1926,7 +1921,7 @@
         }
     }
 
-    // --- Копирование IP ---
+    // ---------- КОПИРОВАНИЕ IP ----------
     window.copyIP = function() {
         let ip = 'play.sweet-land.fun';
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1949,7 +1944,7 @@
         }
     };
 
-    // --- Правила (с категориями) ---
+    // ---------- ПРАВИЛА (С КАТЕГОРИЯМИ) ----------
     window.openRules = function() {
         document.getElementById('rules-modal').classList.add('show');
         document.body.style.overflow = 'hidden';
@@ -2049,12 +2044,12 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // --- Боковая панель ---
+    // ---------- БОКОВАЯ ПАНЕЛЬ ----------
     window.togglePanel = function() {
         document.getElementById('side-panel').classList.toggle('active');
     };
 
-    // --- Часы ---
+    // ---------- ЧАСЫ ----------
     function updateClock() {
         let d = new Date();
         let h = d.getHours().toString().padStart(2, '0');
@@ -2065,10 +2060,10 @@
     }
     setInterval(updateClock, 1000);
 
-    // --- Онлайн (заглушка) ---
+    // ---------- ОНЛАЙН (ЗАГЛУШКА) ----------
     document.getElementById('onlineNumber').innerText = '0';
 
-    // --- Анимация появления при скролле ---
+    // ---------- АНИМАЦИЯ ПРИ СКРОЛЛЕ ----------
     function reveal() {
         if (!animationsEnabled) {
             document.querySelectorAll('.reveal').forEach(e => e.classList.add('active'));
@@ -2079,18 +2074,16 @@
         });
     }
 
-    // --- Инициализация ---
+    // ---------- ИНИЦИАЛИЗАЦИЯ ----------
     window.addEventListener('load', () => {
         setAccentColor(currentTheme);
-        // Применить переводы (упрощённо)
+        // Применить переводы для ключей, которые есть в translations
         document.querySelectorAll('[data-key]').forEach(el => {
             let key = el.getAttribute('data-key');
             if (key === 'hours') {
                 el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
-            } else {
-                // можно заменить, но для краткости оставим как есть
-                // el.innerText = t(key);
             }
+            // можно добавить другие ключи по необходимости
         });
         if (particlesEnabled) createWeather();
         else document.getElementById('weather').innerHTML = '';

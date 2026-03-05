@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.5,user-scalable=yes">
-    <!-- CSP полностью безопасна, без 'unsafe-eval' -->
+    <!-- CSP без 'unsafe-eval' -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'unsafe-inline' https:; style-src 'unsafe-inline' https:; img-src 'self' data: https:;">
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- ПОЛНЫЙ НАБОР СТИЛЕЙ (БЕЗ СОКРАЩЕНИЙ) --- */
+        /* ---------- ПОЛНЫЙ НАБОР СТИЛЕЙ ---------- */
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent
@@ -367,6 +367,7 @@
             }
         }
 
+        /* ---------- ПАНЕЛЬ НАСТРОЕК (СПРАВА) ---------- */
         .control-panel {
             position: fixed;
             top: 20px;
@@ -384,24 +385,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             transition: .2s;
             color: var(--text);
-            position: relative;
             animation: float 3s ease-in-out infinite;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .settings-btn:hover {
             background: var(--accent);
             color: #fff;
+            transform: scale(1.1) rotate(15deg);
             border-color: #fff;
-            transform: scale(1.1)
         }
 
         @keyframes float {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            50% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
         }
 
@@ -411,34 +412,39 @@
 
         .settings-menu {
             position: absolute;
-            top: 55px;
+            top: 60px;
             right: 0;
-            background: rgba(20, 20, 30, .95);
-            backdrop-filter: blur(15px);
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            border-radius: 25px;
-            padding: 16px;
+            border-radius: 30px;
+            padding: 20px;
             display: none;
             flex-direction: column;
-            gap: 12px;
-            min-width: 280px;
+            gap: 20px;
+            min-width: 300px;
             box-shadow: var(--shadow);
             z-index: 2600;
             max-height: 80vh;
             overflow-y: auto;
-            animation: slideDown .2s ease
+            animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .settings-menu.active {
-            display: flex
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .settings-section {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
+            padding-bottom: 20px;
         }
 
         .settings-section:last-child {
@@ -447,92 +453,69 @@
         }
 
         .settings-section-title {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            padding-left: 8px
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-left: 5px;
+        }
+
+        .settings-section-title span {
+            font-size: 20px;
         }
 
         .settings-option {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: 40px;
-            transition: .2s;
+            gap: 15px;
+            padding: 12px 18px;
+            border-radius: 50px;
+            transition: all 0.2s;
             color: var(--text);
-            font-size: 14px;
-            background: rgba(255, 255, 255, .05);
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid transparent;
-            cursor: pointer
+            cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .settings-option:hover {
             background: var(--accent);
             color: #fff;
             border-color: #fff;
-            transform: translateX(5px)
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .color-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .color-dot.dark {
-            background: #0a0a0f;
-            border: 1px solid #fff
+        .color-dot.dark { background: #0a0a0f; border: 2px solid #fff; }
+        .color-dot.light { background: #f0f0f0; border: 2px solid #333; }
+        .color-dot.pink { background: #ff66b2; }
+        .color-dot.blue { background: #4d9eff; }
+        .color-dot.green { background: #4caf50; }
+        .color-dot.orange { background: #ff9800; }
+        .color-dot.purple { background: #9c27b0; }
+        .color-dot.yellow { background: #ffd700; }
+        .color-dot.red { background: #ff4444; }
+        .color-dot.teal { background: #008080; }
+
+        .lang-flag, .weather-icon {
+            font-size: 24px;
+            min-width: 30px;
+            text-align: center;
         }
 
-        .color-dot.light {
-            background: #f0f0f0;
-            border: 1px solid #333
-        }
-
-        .color-dot.pink {
-            background: #ff66b2
-        }
-
-        .color-dot.blue {
-            background: #4d9eff
-        }
-
-        .color-dot.green {
-            background: #4caf50
-        }
-
-        .color-dot.orange {
-            background: #ff9800
-        }
-
-        .color-dot.purple {
-            background: #9c27b0
-        }
-
-        .color-dot.yellow {
-            background: #ffd700
-        }
-
-        .color-dot.red {
-            background: #ff4444
-        }
-
-        .color-dot.teal {
-            background: #008080
-        }
-
-        .lang-flag {
-            font-size: 20px
-        }
-
-        .weather-icon {
-            font-size: 20px
-        }
-
+        /* ---------- ОСТАЛЬНЫЕ СТИЛИ (ВЕРХНИЙ БАННЕР, БОКОВАЯ ПАНЕЛЬ, ГЛАВНЫЙ ЭКРАН, СЕКЦИИ, ФУТЕР) ---------- */
         .nav-oval-container {
             width: 100%;
             max-width: 1800px;
@@ -1527,7 +1510,8 @@
     </div>
     <div class="panel-social">
         <a href="https://www.youtube.com/@gyraffic" target="_blank" class="social-link"><span>▶️</span><span data-key="gyrafficYoutube">Gyraffic YouTube</span></a>
-        <a href="https://t.me/Gyraff" target="_blank" class="social-link"><span>📱</span><span data-key="telegram">Telegram</span></a>
+        <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА TELEGRAM -->
+        <a href="https://t.me/SweetLandXgyraffic" target="_blank" class="social-link"><span>📱</span><span data-key="telegram">Telegram</span></a>
         <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" class="social-link"><span>💬</span><span data-key="discord">Discord</span></a>
         <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="social-link"><span>▶️</span><span data-key="babkaYoutube">Babka3434 YouTube</span></a>
     </div>
@@ -1630,7 +1614,12 @@
         <div class="footer-content">
             <div class="footer-section"><h4 data-key="footerAbout">SweetLand</h4><p data-key="footerDesc">Ванильное выживание без границ с дружным сообществом и активной администрацией.</p><p class="footer-note" data-key="footerNote">Никаких донатов — только чистый ванильный геймплей</p></div>
             <div class="footer-section"><h4 data-key="footerLinks">Быстрые ссылки</h4><a href="#hero" data-key="footerHome">Главная</a><a href="#features" data-key="footerFeatures">Особенности</a><a href="#how-to-play" data-key="footerHowToPlay">Как начать</a><a href="#streamers" data-key="footerStreamers">Стримеры</a><a href="#top-players" data-key="footerTopPlayers">Топ игроков</a><a href="#faq" data-key="footerFAQ">FAQ</a><a href="javascript:void(0)" onclick="openRules()" data-key="footerRules">Правила</a></div>
-            <div class="footer-section"><h4 data-key="footerSocial">Соцсети</h4><a href="https://www.youtube.com/@gyraffic" target="_blank" data-key="gyrafficYoutube">Gyraffic YouTube</a><a href="https://t.me/Gyraff" target="_blank" data-key="telegram">Telegram</a><a href="https://discord.gg/bb3Kf8sDmt" target="_blank" data-key="discord">Discord</a><a href="https://www.youtube.com/@Babka3434offical" target="_blank" data-key="babkaYoutube">Babka3434 YouTube</a></div>
+            <div class="footer-section"><h4 data-key="footerSocial">Соцсети</h4><a href="https://www.youtube.com/@gyraffic" target="_blank" data-key="gyrafficYoutube">Gyraffic YouTube</a>
+                <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА TELEGRAM -->
+                <a href="https://t.me/SweetLandXgyraffic" target="_blank" data-key="telegram">Telegram</a>
+                <a href="https://discord.gg/bb3Kf8sDmt" target="_blank" data-key="discord">Discord</a>
+                <a href="https://www.youtube.com/@Babka3434offical" target="_blank" data-key="babkaYoutube">Babka3434 YouTube</a>
+            </div>
             <div class="footer-section"><h4 data-key="footerPrivacy">Защита данных</h4><p data-key="footerPrivacyDesc">Все данные защищены и не передаются третьим лицам. Сервер соответствует стандартам безопасности.</p></div>
         </div>
         <div class="footer-bottom"><p data-key="footerCopyright">© 2026 SweetLand. Ванильный Minecraft сервер.</p><p class="privacy-note" data-key="footerPrivacyNote">Ваши данные под надежной защитой.</p></div>
@@ -1641,7 +1630,7 @@
 (function() {
     'use strict';
 
-    // ---------- ЗАЩИТА ОТ КОПИРОВАНИЯ И ИНСПЕКТИРОВАНИЯ ----------
+    // ---------- ЗАЩИТА ОТ КОПИРОВАНИЯ ----------
     document.addEventListener('copy', e => e.preventDefault());
     document.addEventListener('cut', e => e.preventDefault());
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -1650,14 +1639,14 @@
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
     });
 
-    // ---------- ТЕКУЩИЕ НАСТРОЙКИ ----------
+    // ---------- НАСТРОЙКИ ----------
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
 
-    // ---------- ПЕРЕВОДЫ (БАЗОВЫЕ) ----------
+    // ---------- ПЕРЕВОДЫ ----------
     const translations = {
         ru: {
             copyNotice: 'IP скопирован',
@@ -1723,7 +1712,7 @@
         };
     }
 
-    // ---------- МЕНЮ НАСТРОЕК (СПРАВА) ----------
+    // ---------- МЕНЮ НАСТРОЕК ----------
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsMenu = document.getElementById('settingsMenu');
 
@@ -1745,10 +1734,10 @@
     function generateSettingsMenu() {
         settingsMenu.innerHTML = '';
 
-        // Цвет темы
+        // Раздел: Цвет темы
         let colorSection = document.createElement('div');
         colorSection.className = 'settings-section';
-        colorSection.innerHTML = '<div class="settings-section-title">🎨 Цвет темы</div>';
+        colorSection.innerHTML = '<div class="settings-section-title"><span>🎨</span> Цвет темы</div>';
         const colors = [
             { class: 'dark', name: 'Тёмная', icon: '🌙' },
             { class: 'light', name: 'Светлая', icon: '☀️' },
@@ -1773,10 +1762,10 @@
         });
         settingsMenu.appendChild(colorSection);
 
-        // Язык
+        // Раздел: Язык
         let langSection = document.createElement('div');
         langSection.className = 'settings-section';
-        langSection.innerHTML = '<div class="settings-section-title">🌐 Язык</div>';
+        langSection.innerHTML = '<div class="settings-section-title"><span>🌐</span> Язык</div>';
         const langs = [
             { code: 'ru', name: 'Русский', flag: '🇷🇺' },
             { code: 'en', name: 'English', flag: '🇬🇧' }
@@ -1787,13 +1776,11 @@
             opt.onclick = () => {
                 currentLang = l.code;
                 localStorage.setItem('sweetland-lang', l.code);
-                // обновить переводы на странице (упрощённо, только ключи с data-key)
+                // Обновить переводы на странице (упрощённо)
                 document.querySelectorAll('[data-key]').forEach(el => {
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
-                    } else {
-                        // для остальных ключей можно добавить переводы, но для краткости оставляем как есть
                     }
                 });
                 settingsMenu.classList.remove('active');
@@ -1803,10 +1790,10 @@
         });
         settingsMenu.appendChild(langSection);
 
-        // Погода
+        // Раздел: Погода
         let weatherSection = document.createElement('div');
         weatherSection.className = 'settings-section';
-        weatherSection.innerHTML = '<div class="settings-section-title">☁️ Погода</div>';
+        weatherSection.innerHTML = '<div class="settings-section-title"><span>☁️</span> Погода</div>';
         const weathers = [
             { type: 'auto', name: 'Авто', icon: '🌓' },
             { type: 'snow', name: 'Снег', icon: '❄️' },
@@ -1828,10 +1815,10 @@
         });
         settingsMenu.appendChild(weatherSection);
 
-        // Частицы и сброс
+        // Раздел: Прочее (частицы, сброс)
         let miscSection = document.createElement('div');
         miscSection.className = 'settings-section';
-        miscSection.innerHTML = '<div class="settings-section-title">⚙️ Прочее</div>';
+        miscSection.innerHTML = '<div class="settings-section-title"><span>⚙️</span> Прочее</div>';
 
         let particlesOpt = document.createElement('div');
         particlesOpt.className = 'settings-option';
@@ -1882,7 +1869,7 @@
         if (currentWeather === 'auto') createWeather();
     }
 
-    // ---------- ПОГОДНЫЕ ЭФФЕКТЫ ----------
+    // ---------- ПОГОДА ----------
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -1944,7 +1931,7 @@
         }
     };
 
-    // ---------- ПРАВИЛА (С КАТЕГОРИЯМИ) ----------
+    // ---------- ПРАВИЛА (ОТДЕЛЬНО, НЕ В НАСТРОЙКАХ) ----------
     window.openRules = function() {
         document.getElementById('rules-modal').classList.add('show');
         document.body.style.overflow = 'hidden';
@@ -2077,13 +2064,11 @@
     // ---------- ИНИЦИАЛИЗАЦИЯ ----------
     window.addEventListener('load', () => {
         setAccentColor(currentTheme);
-        // Применить переводы для ключей, которые есть в translations
         document.querySelectorAll('[data-key]').forEach(el => {
             let key = el.getAttribute('data-key');
             if (key === 'hours') {
                 el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
             }
-            // можно добавить другие ключи по необходимости
         });
         if (particlesEnabled) createWeather();
         else document.getElementById('weather').innerHTML = '';

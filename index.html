@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.5,user-scalable=yes">
-    <!-- CSP только с 'unsafe-inline' (без 'unsafe-eval') -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'unsafe-inline' https:; style-src 'unsafe-inline' https:; img-src 'self' data: https:;">
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ========== ПОЛНЫЙ НАБОР СТИЛЕЙ ========== */
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
-
         input, textarea, [contenteditable], select {
             user-select: text;
         }
-
         :root {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -37,130 +33,130 @@
             --warning: #ffd600;
             --danger: #ff4444;
         }
-
-        /* ПОЛНОСТЬЮ ИСПРАВЛЕННАЯ СВЕТЛАЯ ТЕМА */
-        body.light {
-            --bg: #f0f2f5;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --text: #1a1a1a;
-            --text-secondary: #2c3e50;
-            --text-tertiary: #5a6a7a;
-            --border: rgba(0, 0, 0, 0.15);
-            --border-hover: rgba(0, 0, 0, 0.3);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --header-bg: rgba(255, 255, 255, 0.9);
-        }
-
-        body.light .stat-card,
-        body.light .feature-card,
-        body.light .community-card,
-        body.light .faq-card,
-        body.light .player-card {
-            background: var(--bg-card);
-            border-color: var(--border);
-            color: var(--text);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        body.light .btn-version {
-            background: #e0e0e0;
-            color: #333;
-            border-color: #ccc;
-        }
-
-        body.light .online-counter,
-        body.light .current-time {
-            background: rgba(0, 0, 0, 0.05);
-            color: #222;
-        }
-
-        body.light .banner-center a {
-            color: #2c3e50;
-        }
-
-        body.light .banner-center a:hover {
-            color: #000;
-        }
-
-        body.light .shop-link,
-        body.light .discord-link {
-            background: rgba(0, 0, 0, 0.05);
-            color: #222;
-        }
-
-        /* Предопределённые цветовые темы */
-        body.pink {
-            --accent: #ff66b2;
-            --accent-light: #ff85c2;
-            --accent-dark: #e64d9e;
-            --bg: #1a0f14;
-            --bg-secondary: #241a1f;
-            --text: #fff0f5;
-            --text-secondary: #ffc0cb;
-        }
-
-        body.blue {
+        /* Предопределённые темы с полной цветовой схемой */
+        body.dark {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
             --accent-dark: #3a7acc;
-            --bg: #0f1a24;
-            --bg-secondary: #1a2733;
-            --text: #e6f0ff;
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.95);
+            --text: #fff;
+            --text-secondary: #b0b0c0;
+            --text-tertiary: #70707a;
+            --border: rgba(255, 255, 255, 0.1);
         }
-
+        body.light {
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --accent-dark: #1d4ed8;
+            --bg: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #334155;
+            --text-tertiary: #64748b;
+            --border: rgba(0, 0, 0, 0.1);
+        }
+        body.pink {
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-dark: #db2777;
+            --bg: #1f0f18;
+            --bg-secondary: #2d1a24;
+            --bg-card: rgba(45, 26, 36, 0.95);
+            --text: #fdf2f8;
+            --text-secondary: #fbcfe8;
+            --text-tertiary: #f9a8d4;
+            --border: rgba(236, 72, 153, 0.2);
+        }
+        body.blue {
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-dark: #2563eb;
+            --bg: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.95);
+            --text: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border: rgba(59, 130, 246, 0.2);
+        }
         body.green {
-            --accent: #4caf50;
-            --accent-light: #6ec071;
-            --accent-dark: #3d8c40;
-            --bg: #0f1a11;
-            --bg-secondary: #1a2a1d;
-            --text: #e8f5e9;
+            --accent: #22c55e;
+            --accent-light: #4ade80;
+            --accent-dark: #16a34a;
+            --bg: #0f1720;
+            --bg-secondary: #1e2a1e;
+            --bg-card: rgba(30, 42, 30, 0.95);
+            --text: #f0fdf4;
+            --text-secondary: #bbf7d0;
+            --text-tertiary: #86efac;
+            --border: rgba(34, 197, 94, 0.2);
         }
-
-        body.orange {
-            --accent: #ff9800;
-            --accent-light: #ffb74d;
-            --accent-dark: #f57c00;
-            --bg: #1f1a0f;
-            --bg-secondary: #2a241a;
-            --text: #fff3e0;
-        }
-
         body.purple {
-            --accent: #9c27b0;
-            --accent-light: #ba68c8;
-            --accent-dark: #7b1fa2;
-            --bg: #1a0f1f;
-            --bg-secondary: #251a2a;
-            --text: #f3e5f5;
+            --accent: #a855f7;
+            --accent-light: #c084fc;
+            --accent-dark: #9333ea;
+            --bg: #1a1025;
+            --bg-secondary: #2e1a47;
+            --bg-card: rgba(46, 26, 71, 0.95);
+            --text: #faf5ff;
+            --text-secondary: #e9d5ff;
+            --text-tertiary: #d8b4fe;
+            --border: rgba(168, 85, 247, 0.2);
         }
-
+        body.orange {
+            --accent: #f97316;
+            --accent-light: #fb923c;
+            --accent-dark: #ea580c;
+            --bg: #1f150e;
+            --bg-secondary: #2f241b;
+            --bg-card: rgba(47, 36, 27, 0.95);
+            --text: #fff7ed;
+            --text-secondary: #fed7aa;
+            --text-tertiary: #fdba74;
+            --border: rgba(249, 115, 22, 0.2);
+        }
         body.yellow {
-            --accent: #ffd700;
-            --accent-light: #ffe44d;
-            --accent-dark: #e6c300;
-            --bg: #1a1a0f;
-            --bg-secondary: #2a2a1a;
-            --text: #fffff0;
+            --accent: #eab308;
+            --accent-light: #facc15;
+            --accent-dark: #ca8a04;
+            --bg: #1a1708;
+            --bg-secondary: #2a2412;
+            --bg-card: rgba(42, 36, 18, 0.95);
+            --text: #fefce8;
+            --text-secondary: #fef08a;
+            --text-tertiary: #fde047;
+            --border: rgba(234, 179, 8, 0.2);
         }
-
         body.red {
-            --accent: #ff4444;
-            --accent-light: #ff6666;
-            --accent-dark: #cc3333;
-            --bg: #1a0f0f;
-            --bg-secondary: #2a1a1a;
-            --text: #fff0f0;
+            --accent: #ef4444;
+            --accent-light: #f87171;
+            --accent-dark: #dc2626;
+            --bg: #1f0f0f;
+            --bg-secondary: #2f1a1a;
+            --bg-card: rgba(47, 26, 26, 0.95);
+            --text: #fef2f2;
+            --text-secondary: #fecaca;
+            --text-tertiary: #fca5a5;
+            --border: rgba(239, 68, 68, 0.2);
         }
-
         body.teal {
-            --accent: #008080;
-            --accent-light: #20b2aa;
-            --accent-dark: #006666;
+            --accent: #14b8a6;
+            --accent-light: #2dd4bf;
+            --accent-dark: #0d9488;
             --bg: #0f1a1a;
-            --bg-secondary: #1a2a2a;
-            --text: #e0ffff;
+            --bg-secondary: #1e2a2a;
+            --bg-card: rgba(30, 42, 42, 0.95);
+            --text: #f0fdfa;
+            --text-secondary: #ccfbf1;
+            --text-tertiary: #99f6e4;
+            --border: rgba(20, 184, 166, 0.2);
+        }
+        body.custom {
+            background: var(--bg);
+            color: var(--text);
         }
 
         * {
@@ -169,23 +165,18 @@
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
-
         html {
             scroll-behavior: smooth;
             overflow-x: hidden;
         }
-
         body {
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            transition: background .3s, color .2s;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
             line-height: 1.5;
         }
-
-        a, button {
-            cursor: pointer;
-        }
+        a, button { cursor: pointer; }
 
         /* Уведомления */
         .notification-overlay {
@@ -199,7 +190,6 @@
             z-index: 99998;
             animation: fadeIn .2s;
         }
-
         .custom-notification, .custom-confirm {
             position: fixed;
             top: 50%;
@@ -215,28 +205,10 @@
             animation: notificationPop .3s ease-out;
             max-width: 90%;
         }
-
-        .custom-notification.success {
-            border-color: var(--success);
-            box-shadow: 0 0 50px var(--success);
-        }
-
-        .custom-notification.error {
-            border-color: var(--danger);
-            box-shadow: 0 0 50px var(--danger);
-        }
-
-        .custom-notification.warning {
-            border-color: var(--warning);
-            box-shadow: 0 0 50px var(--warning);
-        }
-
-        .custom-notification p, .custom-confirm p {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
+        .custom-notification.success { border-color: var(--success); box-shadow: 0 0 50px var(--success); }
+        .custom-notification.error { border-color: var(--danger); box-shadow: 0 0 50px var(--danger); }
+        .custom-notification.warning { border-color: var(--warning); box-shadow: 0 0 50px var(--warning); }
+        .custom-notification p, .custom-confirm p { font-size: 20px; margin-bottom: 20px; color: var(--text); }
         .custom-notification button, .custom-confirm button {
             background: var(--accent);
             color: #fff;
@@ -248,27 +220,18 @@
             transition: .2s;
             margin: 0 10px;
         }
-
         .custom-notification button:hover, .custom-confirm button:hover {
             transform: scale(1.05);
             filter: brightness(1.1);
         }
-
-        .custom-confirm .cancel {
-            background: var(--danger);
-        }
-
+        .custom-confirm .cancel { background: var(--danger); }
         @keyframes notificationPop {
             0% { transform: translate(-50%, -50%) scale(.8); opacity: 0; }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Погодные эффекты (град удалён) */
+        /* Погода */
         #weather {
             position: fixed;
             top: -20vh;
@@ -279,13 +242,11 @@
             z-index: 1;
             overflow: hidden;
         }
-
         .snow-particle, .rain-particle, .leaf-particle, .star-particle, .candy-particle, .text-particle {
             position: absolute;
             opacity: 0;
             animation: fall linear infinite;
         }
-
         .snow-particle {
             width: 10px;
             height: 10px;
@@ -293,14 +254,12 @@
             border-radius: 50%;
             filter: blur(1px);
         }
-
         .rain-particle {
             width: 3px;
             height: 30px;
             background: rgba(120, 180, 220, .6);
             border-radius: 2px;
         }
-
         .leaf-particle {
             width: 16px;
             height: 16px;
@@ -312,10 +271,7 @@
             color: #4caf50;
             text-shadow: 0 0 5px #0f0;
         }
-        .leaf-particle::before {
-            content: '🍂';
-        }
-
+        .leaf-particle::before { content: '🍂'; }
         .star-particle {
             width: 12px;
             height: 12px;
@@ -327,10 +283,7 @@
             color: #ffeb3b;
             text-shadow: 0 0 10px #ff0;
         }
-        .star-particle::before {
-            content: '⭐';
-        }
-
+        .star-particle::before { content: '⭐'; }
         .candy-particle {
             width: 24px;
             height: 24px;
@@ -350,8 +303,6 @@
         .candy-particle.style2::before { content: '🍫'; color: #d2691e; }
         .candy-particle.style3::before { content: '🍬'; color: #ff99cc; }
         .candy-particle.style4::before { content: '🍡'; color: #ffb6c1; }
-
-        /* Кастомная текстовая погода */
         .text-particle {
             width: auto;
             height: auto;
@@ -364,20 +315,18 @@
             text-shadow: 0 0 10px currentColor;
             white-space: nowrap;
         }
-
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0); opacity: .7; }
             100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
         }
 
-        /* ---------- ПАНЕЛЬ НАСТРОЕК (СПРАВА) ---------- */
+        /* Панель настроек справа */
         .control-panel {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 2500;
         }
-
         .settings-btn {
             width: 48px;
             height: 48px;
@@ -395,24 +344,18 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-
         .settings-btn:hover {
             background: var(--accent);
             color: #fff;
             transform: scale(1.1) rotate(15deg);
             border-color: #fff;
         }
-
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
         }
-
-        .settings-picker {
-            position: relative;
-        }
-
+        .settings-picker { position: relative; }
         .settings-menu {
             position: absolute;
             top: 60px;
@@ -432,16 +375,11 @@
             overflow-y: auto;
             animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .settings-menu.active {
-            display: flex;
-        }
-
+        .settings-menu.active { display: flex; }
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .settings-item {
             display: flex;
             align-items: center;
@@ -456,7 +394,6 @@
             cursor: pointer;
             backdrop-filter: blur(5px);
         }
-
         .settings-item:hover {
             background: var(--accent);
             color: #fff;
@@ -464,13 +401,11 @@
             transform: translateX(8px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-
         .settings-item .icon {
             font-size: 26px;
             min-width: 36px;
             text-align: center;
         }
-
         .settings-back {
             margin-bottom: 10px;
             background: rgba(255, 255, 255, 0.1);
@@ -484,37 +419,22 @@
             border: 1px solid var(--border);
             font-size: 16px;
         }
-
         .settings-back:hover {
             background: var(--accent);
             color: #fff;
         }
-
         .color-dot {
             width: 28px;
             height: 28px;
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.5);
         }
-
-        .color-dot.dark { background: #0a0a0f; border: 2px solid #fff; }
-        .color-dot.light { background: #f0f0f0; border: 2px solid #333; }
-        .color-dot.pink { background: #ff66b2; }
-        .color-dot.blue { background: #4d9eff; }
-        .color-dot.green { background: #4caf50; }
-        .color-dot.orange { background: #ff9800; }
-        .color-dot.purple { background: #9c27b0; }
-        .color-dot.yellow { background: #ffd700; }
-        .color-dot.red { background: #ff4444; }
-        .color-dot.teal { background: #008080; }
-
         .lang-flag, .weather-icon {
             font-size: 26px;
             min-width: 36px;
             text-align: center;
         }
-
-        /* Кастомный выбор цвета */
         .custom-color-picker {
             display: flex;
             align-items: center;
@@ -536,8 +456,6 @@
             color: var(--text);
             font-size: 16px;
         }
-
-        /* Поле ввода для кастомного текста погоды */
         .custom-text-input {
             display: flex;
             align-items: center;
@@ -575,14 +493,13 @@
             transform: scale(1.05);
         }
 
-        /* ---------- УВЕЛИЧЕННЫЙ ВЕРХНИЙ ОВАЛ ---------- */
+        /* Верхний баннер */
         .nav-oval-container {
             width: 100%;
             max-width: 2000px;
             margin: 0 auto 20px;
             padding: 0 30px;
         }
-
         .shop-banner {
             background: var(--header-bg);
             backdrop-filter: blur(15px);
@@ -598,11 +515,7 @@
             flex-wrap: wrap;
             font-size: 1.1rem;
         }
-
-        .shop-banner:hover {
-            border-color: var(--border-hover);
-        }
-
+        .shop-banner:hover { border-color: var(--border-hover); }
         .banner-left {
             display: flex;
             align-items: center;
@@ -611,7 +524,6 @@
             font-weight: 600;
             color: var(--text);
         }
-
         .banner-center {
             display: flex;
             align-items: center;
@@ -619,7 +531,6 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .banner-center a {
             color: var(--text-secondary);
             text-decoration: none;
@@ -629,7 +540,6 @@
             position: relative;
             white-space: nowrap;
         }
-
         .banner-center a::after {
             content: '';
             position: absolute;
@@ -640,15 +550,12 @@
             background: var(--accent);
             transition: width .2s;
         }
-
         .banner-center a:hover {
             color: var(--text);
         }
-
         .banner-center a:hover::after {
             width: 100%;
         }
-
         .banner-right {
             display: flex;
             align-items: center;
@@ -656,7 +563,6 @@
             flex-wrap: wrap;
             justify-content: flex-end;
         }
-
         .shop-link, .discord-link {
             padding: 10px 28px;
             border-radius: 40px;
@@ -670,7 +576,6 @@
             background: rgba(255, 255, 255, .05);
             color: var(--text);
         }
-
         .shop-link:hover, .discord-link:hover {
             background: var(--accent);
             color: #fff;
@@ -679,7 +584,7 @@
             box-shadow: 0 5px 15px var(--accent);
         }
 
-        /* ---------- БОКОВАЯ ПАНЕЛЬ ---------- */
+        /* Боковая панель */
         .side-trigger {
             position: fixed;
             top: 20px;
@@ -698,12 +603,10 @@
             border: 1px solid var(--border);
             transition: .2s;
         }
-
         .side-trigger:hover {
             background: var(--accent);
             transform: scale(1.1);
         }
-
         .side-trigger .line {
             width: 22px;
             height: 2px;
@@ -712,21 +615,15 @@
             border-radius: 2px;
             transition: .2s;
         }
-
-        .side-trigger:hover .line {
-            background: #fff;
-        }
-
+        .side-trigger:hover .line { background: #fff; }
         @media (max-width: 768px) {
             .nav-oval-container { display: none; }
             .side-trigger { display: flex; }
             .control-panel { top: 65px; right: 10px; }
         }
-
         @media (min-width: 769px) {
             .side-trigger { display: flex; }
         }
-
         .side-panel {
             position: fixed;
             left: -400px;
@@ -743,11 +640,7 @@
             display: flex;
             flex-direction: column;
         }
-
-        .side-panel.active {
-            left: 0;
-        }
-
+        .side-panel.active { left: 0; }
         .panel-handle {
             position: absolute;
             top: 20px;
@@ -765,13 +658,11 @@
             border: 1px solid var(--border);
             cursor: pointer;
         }
-
         .panel-handle:hover {
             background: var(--accent);
             color: #fff;
             transform: rotate(90deg);
         }
-
         .panel-logo {
             color: var(--text);
             font-size: 28px;
@@ -781,20 +672,17 @@
             letter-spacing: 1px;
             animation: pulseGlow 2s infinite;
         }
-
         @keyframes pulseGlow {
             0% { text-shadow: 0 0 5px var(--accent); }
             50% { text-shadow: 0 0 20px var(--accent); }
             100% { text-shadow: 0 0 5px var(--accent); }
         }
-
         .panel-links {
             display: flex;
             flex-direction: column;
             gap: 8px;
             flex: 1;
         }
-
         .panel-links a {
             display: flex;
             align-items: center;
@@ -808,27 +696,23 @@
             background: rgba(255, 255, 255, .02);
             border: 1px solid transparent;
         }
-
         .panel-links a:hover {
             background: var(--accent);
             color: #fff;
             border-color: #fff;
             transform: translateX(10px);
         }
-
         .panel-links a span:first-child {
             font-size: 20px;
             min-width: 30px;
             text-align: center;
         }
-
         .panel-social {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
         .social-link {
             display: flex;
             align-items: center;
@@ -842,7 +726,6 @@
             border: 1px solid transparent;
             transition: .2s;
         }
-
         .social-link:hover {
             background: var(--accent);
             color: #fff;
@@ -850,11 +733,8 @@
             transform: translateX(10px);
         }
 
-        /* ---------- ГЛАВНЫЙ ЭКРАН ---------- */
-        .main-content {
-            display: block;
-        }
-
+        /* Главный экран */
+        .main-content { display: block; }
         .hero {
             min-height: 100vh;
             display: flex;
@@ -864,7 +744,6 @@
             position: relative;
             z-index: 2;
         }
-
         .hero-layout {
             display: flex;
             align-items: center;
@@ -875,14 +754,12 @@
             gap: 40px;
             flex-wrap: wrap;
         }
-
         .hero-content {
             flex: 1;
             min-width: 300px;
             max-width: 700px;
             animation: slideInLeft .8s ease;
         }
-
         .hero-image-box {
             flex: 1;
             display: flex;
@@ -891,17 +768,14 @@
             min-width: 280px;
             animation: slideInRight .8s ease;
         }
-
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-50px); }
             to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes slideInRight {
             from { opacity: 0; transform: translateX(50px); }
             to { opacity: 1; transform: translateX(0); }
         }
-
         .title {
             font-size: clamp(40px, 10vw, 90px);
             font-weight: 700;
@@ -910,26 +784,22 @@
             margin-bottom: 20px;
             animation: titleGlow 3s infinite;
         }
-
         @keyframes titleGlow {
             0% { text-shadow: 0 0 10px var(--accent); }
             50% { text-shadow: 0 0 30px var(--accent); }
             100% { text-shadow: 0 0 10px var(--accent); }
         }
-
         .hero-tagline {
             font-size: clamp(16px, 3vw, 18px);
             color: var(--text-secondary);
             margin-bottom: 30px;
             max-width: 600px;
         }
-
         .ip-container {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
-
         .btn-ip {
             background: linear-gradient(145deg, var(--accent), var(--accent-dark));
             color: #fff;
@@ -943,20 +813,17 @@
             flex: 1 1 auto;
             border: 1px solid rgba(255, 255, 255, .2);
         }
-
         .btn-ip:hover {
             background: linear-gradient(145deg, var(--accent-light), var(--accent));
             transform: translateY(-2px);
             box-shadow: 0 6px 20px var(--accent);
             animation: pulse 1s infinite;
         }
-
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 var(--accent); }
             70% { box-shadow: 0 0 0 10px rgba(77, 158, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(77, 158, 255, 0); }
         }
-
         .btn-version {
             background: var(--bg-card);
             color: var(--text-secondary);
@@ -969,7 +836,6 @@
             backdrop-filter: blur(8px);
             flex: 0 1 auto;
         }
-
         .giant-img {
             width: 100%;
             max-width: 500px;
@@ -979,11 +845,7 @@
             object-fit: contain;
             transition: transform .3s;
         }
-
-        .giant-img:hover {
-            transform: scale(1.02) rotate(1deg);
-        }
-
+        .giant-img:hover { transform: scale(1.02) rotate(1deg); }
         #copyNotice {
             position: fixed;
             bottom: 40px;
@@ -1002,13 +864,12 @@
             white-space: nowrap;
         }
 
-        /* ---------- СЕКЦИИ ---------- */
+        /* Секции */
         .section {
             padding: 60px 5%;
             position: relative;
             z-index: 2;
         }
-
         .section-title {
             text-align: center;
             font-size: clamp(28px, 5vw, 36px);
@@ -1016,13 +877,11 @@
             margin-bottom: 50px;
             color: var(--text);
         }
-
         .section-title span {
             color: var(--accent);
             position: relative;
             display: inline-block;
         }
-
         .section-title span::after {
             content: '';
             position: absolute;
@@ -1035,11 +894,7 @@
             transform: scaleX(0);
             transition: transform .3s;
         }
-
-        .section-title:hover span::after {
-            transform: scaleX(1);
-        }
-
+        .section-title:hover span::after { transform: scaleX(1); }
         .stats-grid {
             display: flex;
             flex-wrap: wrap;
@@ -1048,7 +903,6 @@
             max-width: 1200px;
             margin: 0 auto 40px;
         }
-
         .stat-card {
             flex: 0 0 240px;
             background: var(--bg-card);
@@ -1061,13 +915,11 @@
             box-sizing: border-box;
             animation: cardAppear .5s ease-out;
         }
-
         .stat-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
         }
-
         .stat-number {
             font-size: 40px;
             font-weight: 600;
@@ -1075,23 +927,16 @@
             margin-bottom: 8px;
             animation: countPop .5s ease-out;
         }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 15px;
-        }
-
+        .stat-label { color: var(--text-secondary); font-size: 15px; }
         @keyframes cardAppear {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes countPop {
             0% { transform: scale(.5); opacity: 0; }
             80% { transform: scale(1.1); }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .features-grid, .community-grid, .faq-grid, .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1099,7 +944,6 @@
             max-width: 1300px;
             margin: 0 auto;
         }
-
         .feature-card, .community-card, .faq-card, .player-card {
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
@@ -1108,13 +952,11 @@
             border: 1px solid var(--border);
             transition: .2s;
         }
-
         .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
         }
-
         .feature-icon, .community-icon, .faq-card .icon {
             font-size: 36px;
             color: var(--accent);
@@ -1122,25 +964,21 @@
             display: inline-block;
             transition: transform .2s;
         }
-
         .feature-card:hover .feature-icon {
             transform: rotate(360deg) scale(1.2);
             transition: transform .4s;
         }
-
         .feature-card h3, .community-card h3, .faq-card h3, .player-info h4 {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text);
         }
-
         .feature-card p, .community-card p, .faq-card p {
             color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.5;
         }
-
         .community-stats {
             display: flex;
             justify-content: center;
@@ -1148,14 +986,12 @@
             color: var(--accent);
             font-size: 13px;
         }
-
         .streamer-card {
             background: linear-gradient(145deg, var(--bg-card), rgba(255, 68, 68, .1));
             border: 1px solid #ff4444;
             position: relative;
             overflow: hidden;
         }
-
         .streamer-card::before {
             content: 'LIVE';
             position: absolute;
@@ -1171,13 +1007,11 @@
             z-index: 10;
             animation: blink 1s infinite;
         }
-
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: .5; }
             100% { opacity: 1; }
         }
-
         .streamer-link {
             display: inline-block;
             background: #ff4444;
@@ -1190,21 +1024,18 @@
             border: 1px solid transparent;
             text-decoration: none;
         }
-
         .streamer-link:hover {
             background: #fff;
             color: #ff4444;
             border-color: #ff4444;
             transform: scale(1.05);
         }
-
         .player-card {
             display: flex;
             align-items: center;
             gap: 15px;
             padding: 15px;
         }
-
         .player-rank {
             font-size: 24px;
             font-weight: 600;
@@ -1213,29 +1044,19 @@
             text-align: center;
             animation: shine 2s infinite;
         }
-
         @keyframes shine {
             0% { text-shadow: 0 0 5px gold; }
             50% { text-shadow: 0 0 20px gold; }
             100% { text-shadow: 0 0 5px gold; }
         }
-
-        .player-info {
-            flex: 1;
-        }
-
-        .player-info p {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
+        .player-info { flex: 1; }
+        .player-info p { color: var(--text-secondary); font-size: 13px; }
         .player-score {
             color: var(--accent);
             font-weight: 500;
             font-size: 15px;
             white-space: nowrap;
         }
-
         .update-date {
             text-align: center;
             color: var(--text-tertiary);
@@ -1243,7 +1064,7 @@
             margin-top: 20px;
         }
 
-        /* ---------- МОДАЛЬНОЕ ОКНО ПРАВИЛ ---------- */
+        /* Модальное окно правил */
         .modal {
             display: none;
             position: fixed;
@@ -1256,12 +1077,10 @@
             opacity: 0;
             transition: opacity .2s;
         }
-
         .modal.show {
             display: block;
             opacity: 1;
         }
-
         .modal-content {
             background: var(--bg-secondary);
             margin: 3% auto;
@@ -1277,12 +1096,10 @@
             transition: all .3s;
             position: relative;
         }
-
         .modal.show .modal-content {
             transform: translateY(0);
             opacity: 1;
         }
-
         .close-modal {
             position: absolute;
             top: 20px;
@@ -1301,13 +1118,11 @@
             line-height: 1;
             cursor: pointer;
         }
-
         .close-modal:hover {
             background: var(--danger);
             color: #fff;
             transform: rotate(90deg);
         }
-
         .rules-main-title {
             color: var(--accent);
             text-align: center;
@@ -1315,11 +1130,7 @@
             margin-bottom: 30px;
             font-weight: 600;
         }
-
-        .rules-scroll-area {
-            padding-right: 10px;
-        }
-
+        .rules-scroll-area { padding-right: 10px; }
         .rules-scroll-area p {
             color: var(--text) !important;
             margin-bottom: 10px;
@@ -1329,14 +1140,13 @@
             font-size: 15px;
         }
 
-        /* ---------- ФУТЕР ---------- */
+        /* Футер */
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
             padding: 50px 5% 20px;
             z-index: 2;
         }
-
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1344,21 +1154,18 @@
             max-width: 1300px;
             margin: 0 auto 30px;
         }
-
         .footer-section h4 {
             color: var(--accent);
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 15px;
         }
-
         .footer-section p {
             color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 8px;
         }
-
         .footer-section a {
             display: block;
             color: var(--text-secondary);
@@ -1367,48 +1174,40 @@
             margin-bottom: 6px;
             transition: .2s;
         }
-
         .footer-section a:hover {
             color: var(--accent);
             transform: translateX(4px);
         }
-
         .footer-note {
             color: var(--accent) !important;
             font-weight: 500;
             margin-top: 10px;
             font-size: 13px;
         }
-
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid var(--border);
         }
-
         .footer-bottom p {
             color: var(--text-tertiary);
             font-size: 13px;
             margin-bottom: 6px;
         }
-
         .privacy-note {
             color: var(--text-secondary) !important;
             font-size: 12px !important;
             opacity: .7;
         }
-
         .reveal {
             opacity: 0;
             transform: translateY(20px);
             transition: all .5s;
         }
-
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
         .online-counter {
             display: inline-flex;
             align-items: center;
@@ -1422,7 +1221,6 @@
             font-size: 13px;
             color: var(--text);
         }
-
         .online-dot {
             width: 6px;
             height: 6px;
@@ -1430,18 +1228,15 @@
             border-radius: 50%;
             animation: pulseDot 2s infinite;
         }
-
         @keyframes pulseDot {
             0% { box-shadow: 0 0 0 0 #0c6; }
             70% { box-shadow: 0 0 0 6px rgba(0, 204, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 204, 102, 0); }
         }
-
         .online-number {
             font-weight: 600;
             color: var(--accent);
         }
-
         .current-time {
             display: inline-flex;
             align-items: center;
@@ -1454,7 +1249,6 @@
             color: var(--text);
             white-space: nowrap;
         }
-
         @media (max-width: 768px) {
             .graph-container { height: 300px; }
             .hero-content { text-align: center; }
@@ -1467,7 +1261,6 @@
             .section { padding: 40px 3%; }
             .stat-card { padding: 20px 10px; flex: 0 0 200px; }
         }
-
         @media (max-width: 480px) {
             .shop-banner { padding: 8px 12px; }
             .server-name { font-size: 16px; }
@@ -1493,7 +1286,7 @@
 <body class="dark">
 <div id="weather"></div>
 
-<!-- Увеличенный верхний баннер -->
+<!-- Верхний баннер -->
 <div class="nav-oval-container" style="position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:2400">
     <div class="shop-banner">
         <div class="banner-left">
@@ -1517,7 +1310,7 @@
     </div>
 </div>
 
-<!-- Панель настроек (справа) -->
+<!-- Панель настроек справа -->
 <div class="control-panel">
     <div class="settings-picker">
         <div class="settings-btn" id="settingsBtn">⚙️</div>
@@ -1525,7 +1318,7 @@
     </div>
 </div>
 
-<!-- Боковая панель (слева) -->
+<!-- Боковая панель слева -->
 <div class="side-trigger" onclick="togglePanel()">
     <div class="line"></div>
     <div class="line"></div>
@@ -1671,7 +1464,7 @@
 (function() {
     'use strict';
 
-    // ---------- ЗАЩИТА ОТ КОПИРОВАНИЯ ----------
+    // Защита от копирования
     document.addEventListener('copy', e => e.preventDefault());
     document.addEventListener('cut', e => e.preventDefault());
     document.addEventListener('contextmenu', e => e.preventDefault());
@@ -1680,15 +1473,16 @@
         if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
     });
 
-    // ---------- НАСТРОЙКИ ----------
+    // Настройки
     let currentTheme = localStorage.getItem('sweetland-theme') || 'dark';
     let currentLang = localStorage.getItem('sweetland-lang') || 'ru';
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
     let customText = localStorage.getItem('custom-weather-text') || '🌈';
+    let customColor = localStorage.getItem('custom-color') || '#4d9eff';
 
-    // ---------- ПЕРЕВОДЫ ----------
+    // Переводы
     const translations = {
         ru: {
             copyNotice: 'IP скопирован',
@@ -1734,7 +1528,7 @@
         return text;
     }
 
-    // ---------- УВЕДОМЛЕНИЯ ----------
+    // Уведомления
     function showNotification(message, type = 'info', autoClose = true) {
         document.querySelectorAll('.notification-overlay, .custom-notification').forEach(el => el.remove());
         let overlay = document.createElement('div');
@@ -1754,7 +1548,7 @@
         }
     }
 
-    // ---------- МЕНЮ НАСТРОЕК ----------
+    // Меню настроек
     const settingsBtn = document.getElementById('settingsBtn');
     const settingsMenu = document.getElementById('settingsMenu');
 
@@ -1767,6 +1561,7 @@
 
     settingsBtn.addEventListener('click', toggleSettingsMenu);
 
+    // НЕ закрывать при клике внутри меню, только по кнопке или вне
     document.addEventListener('click', function(e) {
         if (settingsMenu.classList.contains('active') && !settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
             settingsMenu.classList.remove('active');
@@ -1830,6 +1625,7 @@
             opt.className = 'settings-item';
             opt.onclick = () => {
                 setAccentColor(c.class);
+                // не закрываем меню
             };
             opt.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.icon} ${c.name}</span>`;
             settingsMenu.appendChild(opt);
@@ -1839,7 +1635,7 @@
         customDiv.className = 'custom-color-picker';
         customDiv.innerHTML = `
             <span>🎨</span>
-            <input type="color" id="customColorPicker" value="#4d9eff">
+            <input type="color" id="customColorPicker" value="${customColor}">
             <span>${t('customColor')}</span>
         `;
         let colorInput = customDiv.querySelector('#customColorPicker');
@@ -1872,9 +1668,11 @@
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
+                    } else {
+                        // можно обновить другие тексты, но для простоты оставим
                     }
                 });
-                showMainMenu(); // возврат в главное меню, но не закрытие
+                // не закрываем меню
             };
             opt.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
             settingsMenu.appendChild(opt);
@@ -1906,25 +1704,22 @@
                 currentWeather = w.type;
                 localStorage.setItem('sweetland-weather', w.type);
                 createWeather();
-                // Если выбран тип "Текст", показываем поле ввода (после выбора)
                 if (w.type === 'text') {
-                    // Добавим поле ввода в текущее подменю (очистим и покажем заново с полем)
-                    // Но чтобы не усложнять, просто перерисуем подменю с полем ввода
-                    showWeatherTextSubmenu();
+                    showWeatherTextSubmenu(); // переходим в подменю для ввода текста
                 }
+                // не закрываем меню
             };
             opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${w.name}</span>`;
             settingsMenu.appendChild(opt);
         });
     }
 
-    // Подменю для текстовой погоды с полем ввода
     function showWeatherTextSubmenu() {
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
         back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
-        back.onclick = showWeatherSubmenu; // возврат к списку погод
+        back.onclick = showWeatherSubmenu;
         settingsMenu.appendChild(back);
 
         let info = document.createElement('div');
@@ -1966,6 +1761,7 @@
 
         let particlesOpt = document.createElement('div');
         particlesOpt.className = 'settings-item';
+        particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
         particlesOpt.onclick = () => {
             particlesEnabled = !particlesEnabled;
             localStorage.setItem('sweetland-particles', particlesEnabled);
@@ -1976,14 +1772,14 @@
                 document.getElementById('weather').style.opacity = '0';
                 document.getElementById('weather').innerHTML = '';
             }
-            showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
             particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
+            showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
         };
-        particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
         settingsMenu.appendChild(particlesOpt);
 
         let resetOpt = document.createElement('div');
         resetOpt.className = 'settings-item';
+        resetOpt.innerHTML = `<span>🔄</span><span>${t('reset')}</span>`;
         resetOpt.onclick = () => {
             particlesEnabled = true;
             animationsEnabled = true;
@@ -1998,11 +1794,10 @@
             showNotification(t('reset') + ' выполнено', 'success');
             showMainMenu();
         };
-        resetOpt.innerHTML = `<span>🔄</span><span>${t('reset')}</span>`;
         settingsMenu.appendChild(resetOpt);
     }
 
-    // ---------- УСТАНОВКА ТЕМЫ ----------
+    // Установка темы
     function setAccentColor(themeClass) {
         document.body.className = '';
         document.body.classList.add(themeClass);
@@ -2013,14 +1808,32 @@
 
     function setCustomAccentColor(color) {
         document.body.className = '';
+        document.body.classList.add('custom');
+        // Устанавливаем CSS-переменные для кастомной темы
         document.body.style.setProperty('--accent', color);
+        document.body.style.setProperty('--accent-light', adjustBrightness(color, 1.2));
+        document.body.style.setProperty('--accent-dark', adjustBrightness(color, 0.8));
+        document.body.style.setProperty('--bg', '#0a0a0f'); // можно сохранить темный фон
+        document.body.style.setProperty('--bg-secondary', '#12121a');
+        document.body.style.setProperty('--bg-card', 'rgba(20, 20, 30, 0.95)');
+        document.body.style.setProperty('--text', '#fff');
+        document.body.style.setProperty('--text-secondary', '#b0b0c0');
+        document.body.style.setProperty('--text-tertiary', '#70707a');
+        document.body.style.setProperty('--border', 'rgba(255, 255, 255, 0.1)');
+        
         currentTheme = 'custom';
         localStorage.setItem('sweetland-theme', 'custom');
         localStorage.setItem('custom-color', color);
         if (currentWeather === 'auto') createWeather();
     }
 
-    // ---------- ПОГОДА (град удалён) ----------
+    // Вспомогательная функция для осветления/затемнения цвета (упрощенно)
+    function adjustBrightness(hex, factor) {
+        // Простейшая реализация - вернуть тот же цвет (для демо)
+        return hex;
+    }
+
+    // Погода
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -2070,7 +1883,7 @@
         }
     }
 
-    // ---------- КОПИРОВАНИЕ IP ----------
+    // Копирование IP
     window.copyIP = function() {
         let ip = 'play.sweet-land.fun';
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -2093,7 +1906,7 @@
         }
     };
 
-    // ---------- ПРАВИЛА ----------
+    // Правила
     window.openRules = function() {
         document.getElementById('rules-modal').classList.add('show');
         document.body.style.overflow = 'hidden';
@@ -2165,12 +1978,12 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // ---------- БОКОВАЯ ПАНЕЛЬ ----------
+    // Боковая панель
     window.togglePanel = function() {
         document.getElementById('side-panel').classList.toggle('active');
     };
 
-    // ---------- ЧАСЫ ----------
+    // Часы
     function updateClock() {
         let d = new Date();
         let h = d.getHours().toString().padStart(2, '0');
@@ -2181,10 +1994,10 @@
     }
     setInterval(updateClock, 1000);
 
-    // ---------- ОНЛАЙН (ЗАГЛУШКА) ----------
+    // Онлайн (заглушка)
     document.getElementById('onlineNumber').innerText = '0';
 
-    // ---------- АНИМАЦИЯ ПРИ СКРОЛЛЕ ----------
+    // Анимация при скролле
     function reveal() {
         if (!animationsEnabled) {
             document.querySelectorAll('.reveal').forEach(e => e.classList.add('active'));
@@ -2195,12 +2008,12 @@
         });
     }
 
-    // ---------- ИНИЦИАЛИЗАЦИЯ ----------
+    // Инициализация
     window.addEventListener('load', () => {
         let savedTheme = localStorage.getItem('sweetland-theme');
         if (savedTheme === 'custom') {
-            let customColor = localStorage.getItem('custom-color') || '#4d9eff';
-            setCustomAccentColor(customColor);
+            let savedColor = localStorage.getItem('custom-color') || '#4d9eff';
+            setCustomAccentColor(savedColor);
         } else {
             setAccentColor(savedTheme || 'dark');
         }

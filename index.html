@@ -11,11 +11,11 @@
         /* ========== ПОЛНЫЙ НАБОР СТИЛЕЙ ========== */
         * {
             user-select: none;
-            -webkit-tap-highlight-color: transparent
+            -webkit-tap-highlight-color: transparent;
         }
 
         input, textarea, [contenteditable], select {
-            user-select: text
+            user-select: text;
         }
 
         :root {
@@ -36,18 +36,16 @@
             --success: #00c853;
             --warning: #ffd600;
             --danger: #ff4444;
-            --candy: #ff69b4;
-            --lollipop: #ffaa00
         }
 
-        /* Полностью исправленная светлая тема */
+        /* ПОЛНОСТЬЮ ИСПРАВЛЕННАЯ СВЕТЛАЯ ТЕМА */
         body.light {
-            --bg: #f5f5f7;
+            --bg: #f0f2f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.98);
+            --bg-card: #ffffff;
             --text: #1a1a1a;
-            --text-secondary: #4a4a4a;
-            --text-tertiary: #6a6a6a;
+            --text-secondary: #2c3e50;
+            --text-tertiary: #5a6a7a;
             --border: rgba(0, 0, 0, 0.15);
             --border-hover: rgba(0, 0, 0, 0.3);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -62,31 +60,33 @@
             background: var(--bg-card);
             border-color: var(--border);
             color: var(--text);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         body.light .btn-version {
-            background: var(--bg-card);
-            color: var(--text-secondary);
+            background: #e0e0e0;
+            color: #333;
+            border-color: #ccc;
         }
 
         body.light .online-counter,
         body.light .current-time {
             background: rgba(0, 0, 0, 0.05);
-            color: var(--text);
+            color: #222;
         }
 
         body.light .banner-center a {
-            color: var(--text-secondary);
+            color: #2c3e50;
         }
 
         body.light .banner-center a:hover {
-            color: var(--text);
+            color: #000;
         }
 
         body.light .shop-link,
         body.light .discord-link {
             background: rgba(0, 0, 0, 0.05);
-            color: var(--text);
+            color: #222;
         }
 
         /* Предопределённые цветовые темы */
@@ -268,7 +268,7 @@
             to { opacity: 1; }
         }
 
-        /* Погодные эффекты */
+        /* Погодные эффекты (град удалён) */
         #weather {
             position: fixed;
             top: -20vh;
@@ -280,8 +280,7 @@
             overflow: hidden;
         }
 
-        /* Базовые классы для частиц */
-        .snow-particle, .rain-particle, .hail-particle, .leaf-particle, .star-particle, .candy-particle, .text-particle {
+        .snow-particle, .rain-particle, .leaf-particle, .star-particle, .candy-particle, .text-particle {
             position: absolute;
             opacity: 0;
             animation: fall linear infinite;
@@ -300,16 +299,6 @@
             height: 30px;
             background: rgba(120, 180, 220, .6);
             border-radius: 2px;
-        }
-
-        /* Град: маленькие белые кубики с мерцанием */
-        .hail-particle {
-            width: 8px;
-            height: 8px;
-            background: #aaccff;
-            border-radius: 2px;
-            box-shadow: 0 0 6px #fff;
-            opacity: 0.8;
         }
 
         .leaf-particle {
@@ -436,7 +425,7 @@
             display: none;
             flex-direction: column;
             gap: 20px;
-            min-width: 320px;
+            min-width: 340px;
             box-shadow: var(--shadow);
             z-index: 2600;
             max-height: 80vh;
@@ -451,12 +440,6 @@
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .settings-section {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
         }
 
         .settings-item {
@@ -552,6 +535,44 @@
         .custom-color-picker span {
             color: var(--text);
             font-size: 16px;
+        }
+
+        /* Поле ввода для кастомного текста погоды */
+        .custom-text-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 60px;
+            margin-top: 10px;
+        }
+        .custom-text-input input {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 10px 15px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+        }
+        .custom-text-input input:focus {
+            border-color: var(--accent);
+        }
+        .custom-text-input button {
+            background: var(--accent);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .custom-text-input button:hover {
+            filter: brightness(1.1);
+            transform: scale(1.05);
         }
 
         /* ---------- УВЕЛИЧЕННЫЙ ВЕРХНИЙ ОВАЛ ---------- */
@@ -1665,7 +1686,7 @@
     let currentWeather = localStorage.getItem('sweetland-weather') || 'auto';
     let particlesEnabled = localStorage.getItem('sweetland-particles') !== 'false';
     let animationsEnabled = localStorage.getItem('sweetland-animations') !== 'false';
-    let customText = localStorage.getItem('custom-weather-text') || '🌈'; // для кастомной погоды
+    let customText = localStorage.getItem('custom-weather-text') || '🌈';
 
     // ---------- ПЕРЕВОДЫ ----------
     const translations = {
@@ -1684,6 +1705,7 @@
             particles: 'Частицы',
             reset: 'Сброс настроек',
             customWeather: 'Свой текст',
+            apply: 'Применить',
         },
         en: {
             copyNotice: 'IP copied',
@@ -1700,6 +1722,7 @@
             particles: 'Particles',
             reset: 'Reset settings',
             customWeather: 'Custom text',
+            apply: 'Apply',
         }
     };
 
@@ -1851,7 +1874,7 @@
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
                     }
                 });
-                showMainMenu(); // возврат в главное меню, меню не закрывается
+                showMainMenu(); // возврат в главное меню, но не закрытие
             };
             opt.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
             settingsMenu.appendChild(opt);
@@ -1870,7 +1893,6 @@
             { type: 'auto', name: 'Авто', icon: '🌓' },
             { type: 'snow', name: 'Снег', icon: '❄️' },
             { type: 'rain', name: 'Дождь', icon: '☔' },
-            { type: 'hail', name: 'Град', icon: '🧊' },
             { type: 'leaves', name: 'Листопад', icon: '🍂' },
             { type: 'stars', name: 'Звёзды', icon: '⭐' },
             { type: 'candy', name: 'Конфеты', icon: '🍬' },
@@ -1884,18 +1906,53 @@
                 currentWeather = w.type;
                 localStorage.setItem('sweetland-weather', w.type);
                 createWeather();
-                // если выбран тип "Текст", можно предложить ввести свой текст
+                // Если выбран тип "Текст", показываем поле ввода (после выбора)
                 if (w.type === 'text') {
-                    let newText = prompt('Введите текст или смайлик для погоды:', customText);
-                    if (newText !== null && newText.trim() !== '') {
-                        customText = newText.trim();
-                        localStorage.setItem('custom-weather-text', customText);
-                        createWeather(); // обновить с новым текстом
-                    }
+                    // Добавим поле ввода в текущее подменю (очистим и покажем заново с полем)
+                    // Но чтобы не усложнять, просто перерисуем подменю с полем ввода
+                    showWeatherTextSubmenu();
                 }
             };
             opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${w.name}</span>`;
             settingsMenu.appendChild(opt);
+        });
+    }
+
+    // Подменю для текстовой погоды с полем ввода
+    function showWeatherTextSubmenu() {
+        clearMenu();
+        let back = document.createElement('div');
+        back.className = 'settings-back';
+        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.onclick = showWeatherSubmenu; // возврат к списку погод
+        settingsMenu.appendChild(back);
+
+        let info = document.createElement('div');
+        info.style.padding = '10px';
+        info.style.color = 'var(--text-secondary)';
+        info.innerText = t('customWeather') + ':';
+        settingsMenu.appendChild(info);
+
+        let inputDiv = document.createElement('div');
+        inputDiv.className = 'custom-text-input';
+        inputDiv.innerHTML = `
+            <input type="text" id="customWeatherInput" value="${customText}" placeholder="🌈 или текст">
+            <button id="applyWeatherText">${t('apply')}</button>
+        `;
+        settingsMenu.appendChild(inputDiv);
+
+        let applyBtn = inputDiv.querySelector('#applyWeatherText');
+        let inputField = inputDiv.querySelector('#customWeatherInput');
+        applyBtn.addEventListener('click', () => {
+            let newText = inputField.value.trim();
+            if (newText !== '') {
+                customText = newText;
+                localStorage.setItem('custom-weather-text', customText);
+                currentWeather = 'text';
+                localStorage.setItem('sweetland-weather', 'text');
+                createWeather();
+                showNotification('Текст погоды обновлён', 'success');
+            }
         });
     }
 
@@ -1931,9 +1988,11 @@
             particlesEnabled = true;
             animationsEnabled = true;
             currentWeather = 'auto';
+            customText = '🌈';
             localStorage.setItem('sweetland-particles', 'true');
             localStorage.setItem('sweetland-animations', 'true');
             localStorage.setItem('sweetland-weather', 'auto');
+            localStorage.setItem('custom-weather-text', '🌈');
             setAccentColor('dark');
             createWeather();
             showNotification(t('reset') + ' выполнено', 'success');
@@ -1953,7 +2012,7 @@
     }
 
     function setCustomAccentColor(color) {
-        document.body.className = ''; // убираем классы тел
+        document.body.className = '';
         document.body.style.setProperty('--accent', color);
         currentTheme = 'custom';
         localStorage.setItem('sweetland-theme', 'custom');
@@ -1961,7 +2020,7 @@
         if (currentWeather === 'auto') createWeather();
     }
 
-    // ---------- ПОГОДА ----------
+    // ---------- ПОГОДА (град удалён) ----------
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -1981,11 +2040,10 @@
         switch (type) {
             case 'snow': particleClass = 'snow-particle'; break;
             case 'rain': particleClass = 'rain-particle'; break;
-            case 'hail': particleClass = 'hail-particle'; break;
             case 'leaves': particleClass = 'leaf-particle'; count = 80; break;
             case 'stars': particleClass = 'star-particle'; count = 100; break;
             case 'candy': particleClass = 'candy-particle'; count = 120; break;
-            case 'text': isText = true; count = 60; break; // текстовая погода
+            case 'text': isText = true; count = 60; break;
             default: return;
         }
 
@@ -1993,8 +2051,7 @@
             let p = document.createElement('div');
             if (isText) {
                 p.className = 'text-particle';
-                p.innerText = customText; // используем сохранённый текст
-                // случайный цвет
+                p.innerText = customText;
                 p.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
             } else {
                 p.className = particleClass;
@@ -2147,7 +2204,6 @@
         } else {
             setAccentColor(savedTheme || 'dark');
         }
-        // загружаем кастомный текст
         let savedText = localStorage.getItem('custom-weather-text');
         if (savedText) customText = savedText;
 

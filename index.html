@@ -45,6 +45,7 @@
             --text-secondary: #b0b0c0;
             --text-tertiary: #70707a;
             --border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.2);
         }
         body.light {
             --accent: #2563eb;
@@ -57,6 +58,8 @@
             --text-secondary: #334155;
             --text-tertiary: #64748b;
             --border: rgba(0, 0, 0, 0.1);
+            --border-hover: rgba(0, 0, 0, 0.2);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         body.pink {
             --accent: #ec4899;
@@ -69,6 +72,7 @@
             --text-secondary: #fbcfe8;
             --text-tertiary: #f9a8d4;
             --border: rgba(236, 72, 153, 0.2);
+            --border-hover: rgba(236, 72, 153, 0.4);
         }
         body.blue {
             --accent: #3b82f6;
@@ -81,6 +85,7 @@
             --text-secondary: #cbd5e1;
             --text-tertiary: #94a3b8;
             --border: rgba(59, 130, 246, 0.2);
+            --border-hover: rgba(59, 130, 246, 0.4);
         }
         body.green {
             --accent: #22c55e;
@@ -93,6 +98,7 @@
             --text-secondary: #bbf7d0;
             --text-tertiary: #86efac;
             --border: rgba(34, 197, 94, 0.2);
+            --border-hover: rgba(34, 197, 94, 0.4);
         }
         body.purple {
             --accent: #a855f7;
@@ -105,6 +111,7 @@
             --text-secondary: #e9d5ff;
             --text-tertiary: #d8b4fe;
             --border: rgba(168, 85, 247, 0.2);
+            --border-hover: rgba(168, 85, 247, 0.4);
         }
         body.orange {
             --accent: #f97316;
@@ -117,6 +124,7 @@
             --text-secondary: #fed7aa;
             --text-tertiary: #fdba74;
             --border: rgba(249, 115, 22, 0.2);
+            --border-hover: rgba(249, 115, 22, 0.4);
         }
         body.yellow {
             --accent: #eab308;
@@ -129,6 +137,7 @@
             --text-secondary: #fef08a;
             --text-tertiary: #fde047;
             --border: rgba(234, 179, 8, 0.2);
+            --border-hover: rgba(234, 179, 8, 0.4);
         }
         body.red {
             --accent: #ef4444;
@@ -141,6 +150,7 @@
             --text-secondary: #fecaca;
             --text-tertiary: #fca5a5;
             --border: rgba(239, 68, 68, 0.2);
+            --border-hover: rgba(239, 68, 68, 0.4);
         }
         body.teal {
             --accent: #14b8a6;
@@ -153,10 +163,20 @@
             --text-secondary: #ccfbf1;
             --text-tertiary: #99f6e4;
             --border: rgba(20, 184, 166, 0.2);
+            --border-hover: rgba(20, 184, 166, 0.4);
         }
         body.custom {
-            background: var(--bg);
-            color: var(--text);
+            --accent: #4d9eff;
+            --accent-light: #6eb3ff;
+            --accent-dark: #3a7acc;
+            --bg: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.95);
+            --text: #fff;
+            --text-secondary: #b0b0c0;
+            --text-tertiary: #70707a;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -1494,7 +1514,7 @@
             lang: 'Язык',
             weather: 'Погода',
             other: 'Прочее',
-            back: '← Назад',
+            back: 'Назад',
             customColor: 'Свой цвет',
             particles: 'Частицы',
             reset: 'Сброс настроек',
@@ -1511,7 +1531,7 @@
             lang: 'Language',
             weather: 'Weather',
             other: 'Other',
-            back: '← Back',
+            back: 'Back',
             customColor: 'Custom color',
             particles: 'Particles',
             reset: 'Reset settings',
@@ -1604,7 +1624,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.innerText = t('back'); // Только текст, без стрелки
         back.onclick = showMainMenu;
         settingsMenu.appendChild(back);
 
@@ -1650,7 +1670,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.innerText = t('back'); // Только текст
         back.onclick = showMainMenu;
         settingsMenu.appendChild(back);
 
@@ -1664,12 +1684,13 @@
             opt.onclick = () => {
                 currentLang = l.code;
                 localStorage.setItem('sweetland-lang', l.code);
+                // Обновить тексты
                 document.querySelectorAll('[data-key]').forEach(el => {
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
                     } else {
-                        // можно обновить другие тексты, но для простоты оставим
+                        // Другие ключи не обновляем для простоты
                     }
                 });
                 // не закрываем меню
@@ -1683,7 +1704,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.innerText = t('back'); // Только текст
         back.onclick = showMainMenu;
         settingsMenu.appendChild(back);
 
@@ -1718,7 +1739,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.innerText = t('back'); // Только текст
         back.onclick = showWeatherSubmenu;
         settingsMenu.appendChild(back);
 
@@ -1755,7 +1776,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerHTML = '<span>←</span><span>' + t('back') + '</span>';
+        back.innerText = t('back'); // Только текст
         back.onclick = showMainMenu;
         settingsMenu.appendChild(back);
 
@@ -1809,28 +1830,24 @@
     function setCustomAccentColor(color) {
         document.body.className = '';
         document.body.classList.add('custom');
-        // Устанавливаем CSS-переменные для кастомной темы
+        // Устанавливаем CSS-переменные для кастомной темы (тёмная база)
         document.body.style.setProperty('--accent', color);
-        document.body.style.setProperty('--accent-light', adjustBrightness(color, 1.2));
-        document.body.style.setProperty('--accent-dark', adjustBrightness(color, 0.8));
-        document.body.style.setProperty('--bg', '#0a0a0f'); // можно сохранить темный фон
+        // Генерируем светлый и тёмный варианты (упрощённо)
+        document.body.style.setProperty('--accent-light', color + 'cc'); // просто добавляем прозрачность
+        document.body.style.setProperty('--accent-dark', color);
+        document.body.style.setProperty('--bg', '#0a0a0f');
         document.body.style.setProperty('--bg-secondary', '#12121a');
         document.body.style.setProperty('--bg-card', 'rgba(20, 20, 30, 0.95)');
         document.body.style.setProperty('--text', '#fff');
         document.body.style.setProperty('--text-secondary', '#b0b0c0');
         document.body.style.setProperty('--text-tertiary', '#70707a');
         document.body.style.setProperty('--border', 'rgba(255, 255, 255, 0.1)');
+        document.body.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.2)');
         
         currentTheme = 'custom';
         localStorage.setItem('sweetland-theme', 'custom');
         localStorage.setItem('custom-color', color);
         if (currentWeather === 'auto') createWeather();
-    }
-
-    // Вспомогательная функция для осветления/затемнения цвета (упрощенно)
-    function adjustBrightness(hex, factor) {
-        // Простейшая реализация - вернуть тот же цвет (для демо)
-        return hex;
     }
 
     // Погода

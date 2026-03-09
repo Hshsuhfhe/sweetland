@@ -1554,6 +1554,32 @@
             reset: 'Сброс настроек',
             customWeather: 'Свой текст',
             apply: 'Применить',
+            on: 'вкл',
+            off: 'выкл',
+            particles_on: 'Частицы включены',
+            particles_off: 'Частицы выключены',
+            reset_done: 'Сброс выполнен',
+            // Названия погод
+            weather_auto: 'Авто',
+            weather_snow: 'Снег',
+            weather_rain: 'Дождь',
+            weather_leaves: 'Листопад',
+            weather_stars: 'Звёзды',
+            weather_candy: 'Конфеты',
+            weather_text: 'Текст',
+            weather_none: 'Выкл',
+            // Названия цветов
+            theme_dark: 'Тёмная',
+            theme_light: 'Светлая',
+            theme_pink: 'Розовая',
+            theme_blue: 'Голубая',
+            theme_green: 'Зелёная',
+            theme_orange: 'Оранжевая',
+            theme_purple: 'Фиолетовая',
+            theme_yellow: 'Жёлтая',
+            theme_red: 'Красная',
+            theme_teal: 'Бирюзовая',
+            // Основные ключи (уже были, но добавим для полноты)
             serverName: 'SweetLand',
             online: 'online',
             navFeatures: 'Особенности',
@@ -1666,6 +1692,32 @@
             reset: 'Reset settings',
             customWeather: 'Custom text',
             apply: 'Apply',
+            on: 'on',
+            off: 'off',
+            particles_on: 'Particles enabled',
+            particles_off: 'Particles disabled',
+            reset_done: 'Reset completed',
+            // Weather names
+            weather_auto: 'Auto',
+            weather_snow: 'Snow',
+            weather_rain: 'Rain',
+            weather_leaves: 'Leaves',
+            weather_stars: 'Stars',
+            weather_candy: 'Candy',
+            weather_text: 'Text',
+            weather_none: 'Off',
+            // Theme names
+            theme_dark: 'Dark',
+            theme_light: 'Light',
+            theme_pink: 'Pink',
+            theme_blue: 'Blue',
+            theme_green: 'Green',
+            theme_orange: 'Orange',
+            theme_purple: 'Purple',
+            theme_yellow: 'Yellow',
+            theme_red: 'Red',
+            theme_teal: 'Teal',
+            // Main keys
             serverName: 'SweetLand',
             online: 'online',
             navFeatures: 'Features',
@@ -1853,16 +1905,16 @@
         settingsMenu.appendChild(back);
 
         const colors = [
-            { class: 'dark', name: 'Тёмная', icon: '🌙' },
-            { class: 'light', name: 'Светлая', icon: '☀️' },
-            { class: 'pink', name: 'Розовая', icon: '🌸' },
-            { class: 'blue', name: 'Голубая', icon: '💙' },
-            { class: 'green', name: 'Зелёная', icon: '💚' },
-            { class: 'orange', name: 'Оранжевая', icon: '🧡' },
-            { class: 'purple', name: 'Фиолетовая', icon: '💜' },
-            { class: 'yellow', name: 'Жёлтая', icon: '💛' },
-            { class: 'red', name: 'Красная', icon: '❤️' },
-            { class: 'teal', name: 'Бирюзовая', icon: '💙' }
+            { class: 'dark', key: 'theme_dark', icon: '🌙' },
+            { class: 'light', key: 'theme_light', icon: '☀️' },
+            { class: 'pink', key: 'theme_pink', icon: '🌸' },
+            { class: 'blue', key: 'theme_blue', icon: '💙' },
+            { class: 'green', key: 'theme_green', icon: '💚' },
+            { class: 'orange', key: 'theme_orange', icon: '🧡' },
+            { class: 'purple', key: 'theme_purple', icon: '💜' },
+            { class: 'yellow', key: 'theme_yellow', icon: '💛' },
+            { class: 'red', key: 'theme_red', icon: '❤️' },
+            { class: 'teal', key: 'theme_teal', icon: '💙' }
         ];
         colors.forEach(c => {
             let opt = document.createElement('div');
@@ -1872,7 +1924,7 @@
                 setAccentColor(c.class);
                 // не закрываем меню
             };
-            opt.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.icon} ${c.name}</span>`;
+            opt.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.icon} ${t(c.key)}</span>`;
             settingsMenu.appendChild(opt);
         });
 
@@ -1921,7 +1973,8 @@
                         el.innerText = t(key);
                     }
                 });
-                // не закрываем меню
+                // Возвращаемся в главное меню настроек для обновления текста в меню
+                showMainMenu();
             };
             opt.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
             settingsMenu.appendChild(opt);
@@ -1937,14 +1990,14 @@
         settingsMenu.appendChild(back);
 
         const weathers = [
-            { type: 'auto', name: 'Авто', icon: '🌓' },
-            { type: 'snow', name: 'Снег', icon: '❄️' },
-            { type: 'rain', name: 'Дождь', icon: '☔' },
-            { type: 'leaves', name: 'Листопад', icon: '🍂' },
-            { type: 'stars', name: 'Звёзды', icon: '⭐' },
-            { type: 'candy', name: 'Конфеты', icon: '🍬' },
-            { type: 'text', name: 'Текст', icon: '🔤' },
-            { type: 'none', name: 'Выкл', icon: '☀️' }
+            { type: 'auto', key: 'weather_auto', icon: '🌓' },
+            { type: 'snow', key: 'weather_snow', icon: '❄️' },
+            { type: 'rain', key: 'weather_rain', icon: '☔' },
+            { type: 'leaves', key: 'weather_leaves', icon: '🍂' },
+            { type: 'stars', key: 'weather_stars', icon: '⭐' },
+            { type: 'candy', key: 'weather_candy', icon: '🍬' },
+            { type: 'text', key: 'weather_text', icon: '🔤' },
+            { type: 'none', key: 'weather_none', icon: '☀️' }
         ];
         weathers.forEach(w => {
             let opt = document.createElement('div');
@@ -1959,7 +2012,7 @@
                 }
                 // не закрываем меню
             };
-            opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${w.name}</span>`;
+            opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${t(w.key)}</span>`;
             settingsMenu.appendChild(opt);
         });
     }
@@ -1981,7 +2034,7 @@
         let inputDiv = document.createElement('div');
         inputDiv.className = 'custom-text-input';
         inputDiv.innerHTML = `
-            <input type="text" id="customWeatherInput" value="${customText}" placeholder="🌈 или текст">
+            <input type="text" id="customWeatherInput" value="${customText}" placeholder="🌈 or text">
             <button id="applyWeatherText">${t('apply')}</button>
         `;
         settingsMenu.appendChild(inputDiv);
@@ -1997,7 +2050,7 @@
                 currentWeather = 'text';
                 localStorage.setItem('sweetland-weather', 'text');
                 createWeather();
-                showNotification('Текст погоды обновлён', 'success');
+                showNotification('Weather text updated', 'success');
             }
         });
         inputDiv.addEventListener('click', e => e.stopPropagation());
@@ -2013,7 +2066,7 @@
 
         let particlesOpt = document.createElement('div');
         particlesOpt.className = 'settings-item';
-        particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
+        particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? t('on') : t('off')}</span>`;
         particlesOpt.onclick = (e) => {
             e.stopPropagation();
             particlesEnabled = !particlesEnabled;
@@ -2025,8 +2078,8 @@
                 document.getElementById('weather').style.opacity = '0';
                 document.getElementById('weather').innerHTML = '';
             }
-            particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
-            showNotification(particlesEnabled ? 'Частицы включены' : 'Частицы выключены', 'success');
+            particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? t('on') : t('off')}</span>`;
+            showNotification(particlesEnabled ? t('particles_on') : t('particles_off'), 'success');
         };
         settingsMenu.appendChild(particlesOpt);
 
@@ -2045,7 +2098,7 @@
             localStorage.setItem('custom-weather-text', '🌈');
             setAccentColor('dark');
             createWeather();
-            showNotification(t('reset') + ' выполнено', 'success');
+            showNotification(t('reset_done'), 'success');
             showMainMenu();
         };
         settingsMenu.appendChild(resetOpt);
@@ -2202,59 +2255,113 @@
         document.body.style.overflow = 'auto';
     };
 
-    function renderRules() {
-        const rules = [
-            "1.1. Незнание правил не освобождает от ответственности.",
-            "1.2. Каждый игрок вправе подать жалобу на другого игрока.",
-            "1.3. Заходя на сервер, вы автоматически соглашаетесь с правилами.",
-            "1.4. Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, но вещи не возвращаются.",
-            "1.5. Продажа ресурсов за реальные деньги. Наказание: бан по IP.",
-            "1.6. Клевета (распространение ложной информации). Наказание: по усмотрению администрации.",
-            "1.7. Кража построек (домов, магазинов, ферм). Наказание: бан 5 дней + возврат ресурсов.",
-            "1.8. Убийство игрока без причины (исключение: вход на частную территорию без разрешения). Наказание: бан 7 дней + штраф + возврат ресурсов по решению судьи.",
-            "1.9. Проход на частную территорию с запрещающей табличкой. Наказание: по желанию владельца — убийство с возвратом ресурсов + обязательный штраф 20 аров.",
-            "1.10. Препятствование судебному процессу. Наказание: бан 2 дня + штраф 30 аров.",
-            "1.11. Нанесение урона игроку без причины. Наказание: бан 1 день + штраф в зависимости от тяжести.",
-            "1.12. Размещение ловушек для игроков (трапок). Наказание: штраф 400 аров.",
-            "1.13. Подбор вещей с умершего игрока. Наказание: возврат ресурсов + штраф по решению судьи.",
-            "1.14. Неадекватное поведение любого вида. Наказание: мут или бан 30 минут.",
-            "1.15. Спам текстом, стикерами или иным способом. Наказание: мут 2 часа.",
-            "1.16. Взлом аккаунта. Наказание: бан по IP.",
-            "1.17. Создание новых аккаунтов для обхода бана. Наказание: бан по IP.",
-            "1.18. Использование креатива без разрешения владельца. Наказание: перманентный бан.",
-            "1.19. Поиск лазеек в правилах для личной выгоды. Наказание: бан 10 дней.",
-            "1.20. Крик в голосовом чате. Наказание: мут 5 часов.",
-            "1.21. Отправка изображений с пропагандой, 18+ или политикой. Наказание: перманентный бан.",
-            "1.22. Убийство или нанесение урона чужим мобам. Наказание: штраф по решению судьи.",
-            "1.23. Подбор вещей на чужой территории. Наказание: возврат вещей + бан 2 дня + штраф.",
-            "1.24. Невыполнение подписанного документа в официальных серверах (Discord / Minecraft). Наказание: бан 1 день + штраф.",
-            "1.25. Взлом других игроков. Наказание: бан по IP.",
-            "1.26. Вход на чужой аккаунт без разрешения владельца. Наказание: бан 6 месяцев по IP.",
-            "1.27. Создание построек, нагружающих сервер. Наказание: снос постройки + штраф.",
-            "1.28. Снос тотемов других игроков без согласия. Наказание: штраф + возврат ресурсов.",
-            "1.29. Злоупотребление полномочиями. Наказание: бан 30 дней.",
-            "1.30. Администрация имеет право выдать наказание даже за нарушения, не прописанные в правилах, при наличии веской причины.",
-            "1.31. Деструктивные или некрасивые постройки. Наказание: предупреждение, при повторе — бан 2 дня.",
-            "1.32. Игнорирование требований администрации. Наказание: бан 1 день + штраф.",
-            "1.33. Выдача некорректных наказаний для администрации. Наказание: предупреждение и понижение, при повторе — бан 5 дней.",
-            "1.34. Порча мира (ямы, разрушение ландшафта и т.п.). Наказание: штраф, при повторе — бан 2 дня.",
-            "1.35. Использование чужих ферм без разрешения. Наказание: штраф, при повторе — бан 1 день.",
-            "1.36. Гриферство. Наказание: бан 30 дней + штраф + откат постройки.",
-            "1.37. Использование читов. Наказание: бан 5 месяцев.",
-            "1.38. Дюп (дублирование предметов). Наказание: бан 3 месяца.",
-            "1.39. Использование или хранение X-Ray ресурспаков или модификаций. Наказание: бан 5 месяцев.",
-            "1.40. Использование стороннего ПО. Наказание: бан 3 месяца + штраф по тяжести нарушения.",
-            "1.41. Селение в чужих городах без разрешения. Наказание: выселение + штраф.",
-            "1.42. Любая порча игрового мира. Наказание: штраф или бан по усмотрению администрации.",
-            "1.43. Присвоение чужих построек. Наказание: бан 2 дня + штраф.",
-            "1.44. Подача более 3 заявок в команду проекта при отказе. Наказание: занесение в «черный список».",
-            "1.45. Строительство на чужих территориях без разрешения. Наказание: снос постройки + штраф.",
-            "1.46. Попытка подкупа судьи или администрации. Наказание: бан + штраф по усмотрению администрации.",
-            "1.47. Заморозка игрока во время разбирательства. Право администрации: временная заморозка игрока на время проверки или судебного процесса. Запрещено: выходить из игры, использовать команды или пытаться избежать разбирательства. Наказание за нарушение: бан 3–7 дней или штраф по решению администрации.",
-            "1.48. Нанесение урона игроку без причины или на чужой территории. Наказание: бан/штраф по решению судьи.",
-            "1.49. Неоплата штрафов или игнорирование административных решений. Наказание: бан 1–30 дней по усмотрению администрации."
-        ];
+    // Массивы правил на двух языках
+    const rulesRu = [
+        "1.1. Незнание правил не освобождает от ответственности.",
+        "1.2. Каждый игрок вправе подать жалобу на другого игрока.",
+        "1.3. Заходя на сервер, вы автоматически соглашаетесь с правилами.",
+        "1.4. Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, но вещи не возвращаются.",
+        "1.5. Продажа ресурсов за реальные деньги. Наказание: бан по IP.",
+        "1.6. Клевета (распространение ложной информации). Наказание: по усмотрению администрации.",
+        "1.7. Кража построек (домов, магазинов, ферм). Наказание: бан 5 дней + возврат ресурсов.",
+        "1.8. Убийство игрока без причины (исключение: вход на частную территорию без разрешения). Наказание: бан 7 дней + штраф + возврат ресурсов по решению судьи.",
+        "1.9. Проход на частную территорию с запрещающей табличкой. Наказание: по желанию владельца — убийство с возвратом ресурсов + обязательный штраф 20 аров.",
+        "1.10. Препятствование судебному процессу. Наказание: бан 2 дня + штраф 30 аров.",
+        "1.11. Нанесение урона игроку без причины. Наказание: бан 1 день + штраф в зависимости от тяжести.",
+        "1.12. Размещение ловушек для игроков (трапок). Наказание: штраф 400 аров.",
+        "1.13. Подбор вещей с умершего игрока. Наказание: возврат ресурсов + штраф по решению судьи.",
+        "1.14. Неадекватное поведение любого вида. Наказание: мут или бан 30 минут.",
+        "1.15. Спам текстом, стикерами или иным способом. Наказание: мут 2 часа.",
+        "1.16. Взлом аккаунта. Наказание: бан по IP.",
+        "1.17. Создание новых аккаунтов для обхода бана. Наказание: бан по IP.",
+        "1.18. Использование креатива без разрешения владельца. Наказание: перманентный бан.",
+        "1.19. Поиск лазеек в правилах для личной выгоды. Наказание: бан 10 дней.",
+        "1.20. Крик в голосовом чате. Наказание: мут 5 часов.",
+        "1.21. Отправка изображений с пропагандой, 18+ или политикой. Наказание: перманентный бан.",
+        "1.22. Убийство или нанесение урона чужим мобам. Наказание: штраф по решению судьи.",
+        "1.23. Подбор вещей на чужой территории. Наказание: возврат вещей + бан 2 дня + штраф.",
+        "1.24. Невыполнение подписанного документа в официальных серверах (Discord / Minecraft). Наказание: бан 1 день + штраф.",
+        "1.25. Взлом других игроков. Наказание: бан по IP.",
+        "1.26. Вход на чужой аккаунт без разрешения владельца. Наказание: бан 6 месяцев по IP.",
+        "1.27. Создание построек, нагружающих сервер. Наказание: снос постройки + штраф.",
+        "1.28. Снос тотемов других игроков без согласия. Наказание: штраф + возврат ресурсов.",
+        "1.29. Злоупотребление полномочиями. Наказание: бан 30 дней.",
+        "1.30. Администрация имеет право выдать наказание даже за нарушения, не прописанные в правилах, при наличии веской причины.",
+        "1.31. Деструктивные или некрасивые постройки. Наказание: предупреждение, при повторе — бан 2 дня.",
+        "1.32. Игнорирование требований администрации. Наказание: бан 1 день + штраф.",
+        "1.33. Выдача некорректных наказаний для администрации. Наказание: предупреждение и понижение, при повторе — бан 5 дней.",
+        "1.34. Порча мира (ямы, разрушение ландшафта и т.п.). Наказание: штраф, при повторе — бан 2 дня.",
+        "1.35. Использование чужих ферм без разрешения. Наказание: штраф, при повторе — бан 1 день.",
+        "1.36. Гриферство. Наказание: бан 30 дней + штраф + откат постройки.",
+        "1.37. Использование читов. Наказание: бан 5 месяцев.",
+        "1.38. Дюп (дублирование предметов). Наказание: бан 3 месяца.",
+        "1.39. Использование или хранение X-Ray ресурспаков или модификаций. Наказание: бан 5 месяцев.",
+        "1.40. Использование стороннего ПО. Наказание: бан 3 месяца + штраф по тяжести нарушения.",
+        "1.41. Селение в чужих городах без разрешения. Наказание: выселение + штраф.",
+        "1.42. Любая порча игрового мира. Наказание: штраф или бан по усмотрению администрации.",
+        "1.43. Присвоение чужих построек. Наказание: бан 2 дня + штраф.",
+        "1.44. Подача более 3 заявок в команду проекта при отказе. Наказание: занесение в «черный список».",
+        "1.45. Строительство на чужих территориях без разрешения. Наказание: снос постройки + штраф.",
+        "1.46. Попытка подкупа судьи или администрации. Наказание: бан + штраф по усмотрению администрации.",
+        "1.47. Заморозка игрока во время разбирательства. Право администрации: временная заморозка игрока на время проверки или судебного процесса. Запрещено: выходить из игры, использовать команды или пытаться избежать разбирательства. Наказание за нарушение: бан 3–7 дней или штраф по решению администрации.",
+        "1.48. Нанесение урона игроку без причины или на чужой территории. Наказание: бан/штраф по решению судьи.",
+        "1.49. Неоплата штрафов или игнорирование административных решений. Наказание: бан 1–30 дней по усмотрению администрации."
+    ];
 
+    const rulesEn = [
+        "1.1. Ignorance of the rules does not exempt from responsibility.",
+        "1.2. Every player has the right to file a complaint against another player.",
+        "1.3. By entering the server, you automatically agree to the rules.",
+        "1.4. The account owner is fully responsible for it. In case of hacking, the administration will punish the offender, but items will not be returned.",
+        "1.5. Selling resources for real money. Punishment: IP ban.",
+        "1.6. Defamation (spreading false information). Punishment: at the discretion of the administration.",
+        "1.7. Theft of buildings (houses, shops, farms). Punishment: 5-day ban + return of resources.",
+        "1.8. Killing a player without reason (exception: entering private territory without permission). Punishment: 7-day ban + fine + return of resources as decided by the judge.",
+        "1.9. Entering private territory with a prohibiting sign. Punishment: at the owner's discretion — killing with return of resources + mandatory fine of 20 ares.",
+        "1.10. Obstructing the judicial process. Punishment: 2-day ban + fine of 30 ares.",
+        "1.11. Damaging a player without reason. Punishment: 1-day ban + fine depending on severity.",
+        "1.12. Setting traps for players. Punishment: fine of 400 ares.",
+        "1.13. Picking up items from a deceased player. Punishment: return of resources + fine as decided by the judge.",
+        "1.14. Inappropriate behavior of any kind. Punishment: mute or 30-minute ban.",
+        "1.15. Spam with text, stickers, or other means. Punishment: 2-hour mute.",
+        "1.16. Account hacking. Punishment: IP ban.",
+        "1.17. Creating new accounts to bypass a ban. Punishment: IP ban.",
+        "1.18. Using creative mode without the owner's permission. Punishment: permanent ban.",
+        "1.19. Finding loopholes in the rules for personal gain. Punishment: 10-day ban.",
+        "1.20. Screaming in voice chat. Punishment: 5-hour mute.",
+        "1.21. Sending images with propaganda, 18+, or politics. Punishment: permanent ban.",
+        "1.22. Killing or damaging someone else's mobs. Punishment: fine as decided by the judge.",
+        "1.23. Picking up items on someone else's territory. Punishment: return of items + 2-day ban + fine.",
+        "1.24. Failure to comply with a signed document on official servers (Discord / Minecraft). Punishment: 1-day ban + fine.",
+        "1.25. Hacking other players. Punishment: IP ban.",
+        "1.26. Logging into someone else's account without the owner's permission. Punishment: 6-month IP ban.",
+        "1.27. Creating builds that overload the server. Punishment: demolition of the build + fine.",
+        "1.28. Destroying other players' totems without consent. Punishment: fine + return of resources.",
+        "1.29. Abuse of power. Punishment: 30-day ban.",
+        "1.30. The administration has the right to impose punishment even for violations not specified in the rules, if there is a valid reason.",
+        "1.31. Destructive or ugly builds. Punishment: warning, on repeat — 2-day ban.",
+        "1.32. Ignoring administration requirements. Punishment: 1-day ban + fine.",
+        "1.33. Issuing incorrect punishments for the administration. Punishment: warning and demotion, on repeat — 5-day ban.",
+        "1.34. Damaging the world (pits, landscape destruction, etc.). Punishment: fine, on repeat — 2-day ban.",
+        "1.35. Using someone else's farms without permission. Punishment: fine, on repeat — 1-day ban.",
+        "1.36. Griefing. Punishment: 30-day ban + fine + rollback of the build.",
+        "1.37. Using cheats. Punishment: 5-month ban.",
+        "1.38. Duping (duplicating items). Punishment: 3-month ban.",
+        "1.39. Using or storing X-Ray resource packs or modifications. Punishment: 5-month ban.",
+        "1.40. Using third-party software. Punishment: 3-month ban + fine depending on severity.",
+        "1.41. Settling in someone else's cities without permission. Punishment: eviction + fine.",
+        "1.42. Any damage to the game world. Punishment: fine or ban at the discretion of the administration.",
+        "1.43. Appropriating someone else's builds. Punishment: 2-day ban + fine.",
+        "1.44. Submitting more than 3 applications to the project team after refusal. Punishment: blacklisting.",
+        "1.45. Building on someone else's territory without permission. Punishment: demolition of the build + fine.",
+        "1.46. Attempting to bribe a judge or administration. Punishment: ban + fine at the discretion of the administration.",
+        "1.47. Freezing a player during proceedings. Administration's right: temporary freeze of the player during inspection or trial. Prohibited: leaving the game, using commands, or trying to avoid proceedings. Punishment for violation: 3–7 day ban or fine as decided by the administration.",
+        "1.48. Damaging a player without reason or on someone else's territory. Punishment: ban/fine as decided by the judge.",
+        "1.49. Non-payment of fines or ignoring administrative decisions. Punishment: 1–30 day ban at the discretion of the administration."
+    ];
+
+    function renderRules() {
+        const rules = currentLang === 'ru' ? rulesRu : rulesEn;
         let html = '';
         rules.forEach(text => {
             html += `<p>${text}</p>`;

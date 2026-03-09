@@ -7,6 +7,7 @@
     <title>SweetLand — ванильный майнкрафт сервер</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ========== ПОЛНЫЙ НАБОР СТИЛЕЙ ========== */
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -14,6 +15,8 @@
         input, textarea, [contenteditable], select {
             user-select: text;
         }
+
+        /* Базовые переменные (тёмная тема по умолчанию) */
         :root {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -33,6 +36,7 @@
             --warning: #ffd600;
             --danger: #ff4444;
         }
+
         /* Предопределённые темы с полной цветовой схемой */
         body.dark {
             --accent: #4d9eff;
@@ -47,6 +51,7 @@
             --border: rgba(255, 255, 255, 0.1);
             --border-hover: rgba(255, 255, 255, 0.2);
         }
+
         body.light {
             --accent: #2563eb;
             --accent-light: #3b82f6;
@@ -60,7 +65,9 @@
             --border: rgba(0, 0, 0, 0.1);
             --border-hover: rgba(0, 0, 0, 0.2);
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --header-bg: rgba(255, 255, 255, 0.8);
         }
+
         body.pink {
             --accent: #ec4899;
             --accent-light: #f472b6;
@@ -74,6 +81,7 @@
             --border: rgba(236, 72, 153, 0.2);
             --border-hover: rgba(236, 72, 153, 0.4);
         }
+
         body.blue {
             --accent: #3b82f6;
             --accent-light: #60a5fa;
@@ -87,6 +95,7 @@
             --border: rgba(59, 130, 246, 0.2);
             --border-hover: rgba(59, 130, 246, 0.4);
         }
+
         body.green {
             --accent: #22c55e;
             --accent-light: #4ade80;
@@ -100,6 +109,7 @@
             --border: rgba(34, 197, 94, 0.2);
             --border-hover: rgba(34, 197, 94, 0.4);
         }
+
         body.purple {
             --accent: #a855f7;
             --accent-light: #c084fc;
@@ -113,6 +123,7 @@
             --border: rgba(168, 85, 247, 0.2);
             --border-hover: rgba(168, 85, 247, 0.4);
         }
+
         body.orange {
             --accent: #f97316;
             --accent-light: #fb923c;
@@ -126,6 +137,7 @@
             --border: rgba(249, 115, 22, 0.2);
             --border-hover: rgba(249, 115, 22, 0.4);
         }
+
         body.yellow {
             --accent: #eab308;
             --accent-light: #facc15;
@@ -139,6 +151,7 @@
             --border: rgba(234, 179, 8, 0.2);
             --border-hover: rgba(234, 179, 8, 0.4);
         }
+
         body.red {
             --accent: #ef4444;
             --accent-light: #f87171;
@@ -152,6 +165,7 @@
             --border: rgba(239, 68, 68, 0.2);
             --border-hover: rgba(239, 68, 68, 0.4);
         }
+
         body.teal {
             --accent: #14b8a6;
             --accent-light: #2dd4bf;
@@ -165,6 +179,8 @@
             --border: rgba(20, 184, 166, 0.2);
             --border-hover: rgba(20, 184, 166, 0.4);
         }
+
+        /* Кастомная тема — база как тёмная, акцент меняется через JS */
         body.custom {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -1598,25 +1614,25 @@
         let themeItem = document.createElement('div');
         themeItem.className = 'settings-item';
         themeItem.innerHTML = '<span class="icon">🎨</span><span>' + t('theme') + '</span>';
-        themeItem.onclick = () => showThemeSubmenu();
+        themeItem.onclick = (e) => { e.stopPropagation(); showThemeSubmenu(); };
         settingsMenu.appendChild(themeItem);
 
         let langItem = document.createElement('div');
         langItem.className = 'settings-item';
         langItem.innerHTML = '<span class="icon">🌐</span><span>' + t('lang') + '</span>';
-        langItem.onclick = () => showLangSubmenu();
+        langItem.onclick = (e) => { e.stopPropagation(); showLangSubmenu(); };
         settingsMenu.appendChild(langItem);
 
         let weatherItem = document.createElement('div');
         weatherItem.className = 'settings-item';
         weatherItem.innerHTML = '<span class="icon">☁️</span><span>' + t('weather') + '</span>';
-        weatherItem.onclick = () => showWeatherSubmenu();
+        weatherItem.onclick = (e) => { e.stopPropagation(); showWeatherSubmenu(); };
         settingsMenu.appendChild(weatherItem);
 
         let otherItem = document.createElement('div');
         otherItem.className = 'settings-item';
         otherItem.innerHTML = '<span class="icon">⚙️</span><span>' + t('other') + '</span>';
-        otherItem.onclick = () => showOtherSubmenu();
+        otherItem.onclick = (e) => { e.stopPropagation(); showOtherSubmenu(); };
         settingsMenu.appendChild(otherItem);
     }
 
@@ -1625,7 +1641,7 @@
         let back = document.createElement('div');
         back.className = 'settings-back';
         back.innerText = t('back'); // Только текст, без стрелки
-        back.onclick = showMainMenu;
+        back.onclick = (e) => { e.stopPropagation(); showMainMenu(); };
         settingsMenu.appendChild(back);
 
         const colors = [
@@ -1643,7 +1659,8 @@
         colors.forEach(c => {
             let opt = document.createElement('div');
             opt.className = 'settings-item';
-            opt.onclick = () => {
+            opt.onclick = (e) => {
+                e.stopPropagation();
                 setAccentColor(c.class);
                 // не закрываем меню
             };
@@ -1663,6 +1680,8 @@
             let color = e.target.value;
             setCustomAccentColor(color);
         });
+        // Чтобы клик по палитре не закрывал меню
+        customDiv.addEventListener('click', e => e.stopPropagation());
         settingsMenu.appendChild(customDiv);
     }
 
@@ -1670,8 +1689,8 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerText = t('back'); // Только текст
-        back.onclick = showMainMenu;
+        back.innerText = t('back');
+        back.onclick = (e) => { e.stopPropagation(); showMainMenu(); };
         settingsMenu.appendChild(back);
 
         const langs = [
@@ -1681,7 +1700,8 @@
         langs.forEach(l => {
             let opt = document.createElement('div');
             opt.className = 'settings-item';
-            opt.onclick = () => {
+            opt.onclick = (e) => {
+                e.stopPropagation();
                 currentLang = l.code;
                 localStorage.setItem('sweetland-lang', l.code);
                 // Обновить тексты
@@ -1689,9 +1709,8 @@
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
-                    } else {
-                        // Другие ключи не обновляем для простоты
                     }
+                    // остальные ключи не трогаем для простоты
                 });
                 // не закрываем меню
             };
@@ -1704,8 +1723,8 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerText = t('back'); // Только текст
-        back.onclick = showMainMenu;
+        back.innerText = t('back');
+        back.onclick = (e) => { e.stopPropagation(); showMainMenu(); };
         settingsMenu.appendChild(back);
 
         const weathers = [
@@ -1721,7 +1740,8 @@
         weathers.forEach(w => {
             let opt = document.createElement('div');
             opt.className = 'settings-item';
-            opt.onclick = () => {
+            opt.onclick = (e) => {
+                e.stopPropagation();
                 currentWeather = w.type;
                 localStorage.setItem('sweetland-weather', w.type);
                 createWeather();
@@ -1739,8 +1759,8 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerText = t('back'); // Только текст
-        back.onclick = showWeatherSubmenu;
+        back.innerText = t('back');
+        back.onclick = (e) => { e.stopPropagation(); showWeatherSubmenu(); };
         settingsMenu.appendChild(back);
 
         let info = document.createElement('div');
@@ -1759,7 +1779,8 @@
 
         let applyBtn = inputDiv.querySelector('#applyWeatherText');
         let inputField = inputDiv.querySelector('#customWeatherInput');
-        applyBtn.addEventListener('click', () => {
+        applyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             let newText = inputField.value.trim();
             if (newText !== '') {
                 customText = newText;
@@ -1770,20 +1791,22 @@
                 showNotification('Текст погоды обновлён', 'success');
             }
         });
+        inputDiv.addEventListener('click', e => e.stopPropagation());
     }
 
     function showOtherSubmenu() {
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerText = t('back'); // Только текст
-        back.onclick = showMainMenu;
+        back.innerText = t('back');
+        back.onclick = (e) => { e.stopPropagation(); showMainMenu(); };
         settingsMenu.appendChild(back);
 
         let particlesOpt = document.createElement('div');
         particlesOpt.className = 'settings-item';
         particlesOpt.innerHTML = `<span>✨</span><span>${t('particles')}: ${particlesEnabled ? 'вкл' : 'выкл'}</span>`;
-        particlesOpt.onclick = () => {
+        particlesOpt.onclick = (e) => {
+            e.stopPropagation();
             particlesEnabled = !particlesEnabled;
             localStorage.setItem('sweetland-particles', particlesEnabled);
             if (particlesEnabled) {
@@ -1801,7 +1824,8 @@
         let resetOpt = document.createElement('div');
         resetOpt.className = 'settings-item';
         resetOpt.innerHTML = `<span>🔄</span><span>${t('reset')}</span>`;
-        resetOpt.onclick = () => {
+        resetOpt.onclick = (e) => {
+            e.stopPropagation();
             particlesEnabled = true;
             animationsEnabled = true;
             currentWeather = 'auto';
@@ -1833,7 +1857,7 @@
         // Устанавливаем CSS-переменные для кастомной темы (тёмная база)
         document.body.style.setProperty('--accent', color);
         // Генерируем светлый и тёмный варианты (упрощённо)
-        document.body.style.setProperty('--accent-light', color + 'cc'); // просто добавляем прозрачность
+        document.body.style.setProperty('--accent-light', color + 'cc');
         document.body.style.setProperty('--accent-dark', color);
         document.body.style.setProperty('--bg', '#0a0a0f');
         document.body.style.setProperty('--bg-secondary', '#12121a');

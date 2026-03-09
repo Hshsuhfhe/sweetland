@@ -283,43 +283,58 @@
             opacity: 0;
             animation: fall linear infinite;
         }
+
+        /* Снег — случайный размер и прозрачность через style */
         .snow-particle {
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, .7);
+            background: rgba(255, 255, 255, var(--snow-opacity, 0.7));
             border-radius: 50%;
             filter: blur(1px);
+            width: var(--snow-size, 10px);
+            height: var(--snow-size, 10px);
         }
+
+        /* Дождь — случайная длина, наклон, цвет */
         .rain-particle {
-            width: 3px;
-            height: 30px;
-            background: rgba(120, 180, 220, .6);
+            background: rgba(120, 180, 220, var(--rain-opacity, 0.6));
             border-radius: 2px;
+            width: 3px;
+            height: var(--rain-length, 30px);
+            transform: rotate(var(--rain-rotate, 0deg));
         }
+
+        /* Листья — разные символы, цвета */
         .leaf-particle {
-            width: 16px;
-            height: 16px;
             background: transparent;
-            font-size: 16px;
+            font-size: var(--leaf-size, 16px);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4caf50;
-            text-shadow: 0 0 5px #0f0;
+            color: var(--leaf-color, #4caf50);
+            text-shadow: 0 0 5px currentColor;
+            width: auto;
+            height: auto;
         }
-        .leaf-particle::before { content: '🍂'; }
+        .leaf-particle::before {
+            content: var(--leaf-char, '🍂');
+        }
+
+        /* Звёзды — разные символы, цвета */
         .star-particle {
-            width: 12px;
-            height: 12px;
             background: transparent;
-            font-size: 12px;
+            font-size: var(--star-size, 12px);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffeb3b;
-            text-shadow: 0 0 10px #ff0;
+            color: var(--star-color, #ffeb3b);
+            text-shadow: 0 0 10px currentColor;
+            width: auto;
+            height: auto;
         }
-        .star-particle::before { content: '⭐'; }
+        .star-particle::before {
+            content: var(--star-char, '⭐');
+        }
+
+        /* Конфеты — как есть */
         .candy-particle {
             width: 24px;
             height: 24px;
@@ -339,6 +354,8 @@
         .candy-particle.style2::before { content: '🍫'; color: #d2691e; }
         .candy-particle.style3::before { content: '🍬'; color: #ff99cc; }
         .candy-particle.style4::before { content: '🍡'; color: #ffb6c1; }
+
+        /* Текстовая погода */
         .text-particle {
             width: auto;
             height: auto;
@@ -351,8 +368,9 @@
             text-shadow: 0 0 10px currentColor;
             white-space: nowrap;
         }
+
         @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0); opacity: .7; }
+            0% { transform: translateY(-10vh) translateX(0); opacity: var(--start-opacity, 0.7); }
             100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
         }
 
@@ -1710,7 +1728,6 @@
                     if (key === 'hours') {
                         el.innerText = t(key, { value: el.getAttribute('data-value') || '0' });
                     }
-                    // остальные ключи не трогаем для простоты
                 });
                 // не закрываем меню
             };
@@ -1844,6 +1861,8 @@
 
     // Установка темы
     function setAccentColor(themeClass) {
+        // Убираем все возможные инлайн-стили, которые могли быть установлены кастомной темой
+        document.body.style.cssText = '';
         document.body.className = '';
         document.body.classList.add(themeClass);
         currentTheme = themeClass;
@@ -1852,6 +1871,7 @@
     }
 
     function setCustomAccentColor(color) {
+        document.body.style.cssText = ''; // сбрасываем предыдущие инлайн-стили
         document.body.className = '';
         document.body.classList.add('custom');
         // Устанавливаем CSS-переменные для кастомной темы (тёмная база)
@@ -1874,7 +1894,7 @@
         if (currentWeather === 'auto') createWeather();
     }
 
-    // Погода
+    // Погода (хаотичная)
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -1888,38 +1908,60 @@
         }
         if (type === 'none') return;
 
-        let particleClass = '';
         let count = window.innerWidth < 768 ? 60 : 150;
-        let isText = false;
-        switch (type) {
-            case 'snow': particleClass = 'snow-particle'; break;
-            case 'rain': particleClass = 'rain-particle'; break;
-            case 'leaves': particleClass = 'leaf-particle'; count = 80; break;
-            case 'stars': particleClass = 'star-particle'; count = 100; break;
-            case 'candy': particleClass = 'candy-particle'; count = 120; break;
-            case 'text': isText = true; count = 60; break;
-            default: return;
-        }
-
         for (let i = 0; i < count; i++) {
             let p = document.createElement('div');
-            if (isText) {
-                p.className = 'text-particle';
-                p.innerText = customText;
-                p.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
-            } else {
-                p.className = particleClass;
-                if (particleClass === 'candy-particle') {
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            p.style.animationDelay = -Math.random() * 2 + 's';
+            p.style.setProperty('--start-opacity', Math.random() * 0.7 + 0.3);
+
+            switch (type) {
+                case 'snow':
+                    p.className = 'snow-particle';
+                    p.style.setProperty('--snow-size', (Math.random() * 10 + 5) + 'px');
+                    p.style.setProperty('--snow-opacity', Math.random() * 0.5 + 0.3);
+                    break;
+                case 'rain':
+                    p.className = 'rain-particle';
+                    p.style.setProperty('--rain-length', (Math.random() * 30 + 20) + 'px');
+                    p.style.setProperty('--rain-rotate', (Math.random() * 20 - 10) + 'deg');
+                    p.style.setProperty('--rain-opacity', Math.random() * 0.5 + 0.3);
+                    break;
+                case 'leaves': {
+                    p.className = 'leaf-particle';
+                    const leafChars = ['🍂', '🍁', '🌿', '🍃'];
+                    const leafColors = ['#4caf50', '#ff9800', '#8bc34a', '#cddc39', '#ffeb3b'];
+                    p.style.setProperty('--leaf-char', `"${leafChars[Math.floor(Math.random() * leafChars.length)]}"`);
+                    p.style.setProperty('--leaf-color', leafColors[Math.floor(Math.random() * leafColors.length)]);
+                    p.style.setProperty('--leaf-size', (Math.random() * 10 + 14) + 'px');
+                    break;
+                }
+                case 'stars': {
+                    p.className = 'star-particle';
+                    const starChars = ['⭐', '✨', '🌟', '💫'];
+                    const starColors = ['#ffeb3b', '#ffffff', '#ffd700', '#87ceeb'];
+                    p.style.setProperty('--star-char', `"${starChars[Math.floor(Math.random() * starChars.length)]}"`);
+                    p.style.setProperty('--star-color', starColors[Math.floor(Math.random() * starColors.length)]);
+                    p.style.setProperty('--star-size', (Math.random() * 10 + 10) + 'px');
+                    break;
+                }
+                case 'candy': {
+                    p.className = 'candy-particle';
                     let style = Math.floor(Math.random() * 4) + 1;
                     p.classList.add(`style${style}`);
                     let rot = Math.random() * 360;
                     p.style.setProperty('--rot', rot + 'deg');
+                    break;
+                }
+                case 'text': {
+                    p.className = 'text-particle';
+                    p.innerText = customText;
+                    p.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    break;
                 }
             }
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            p.style.animationDelay = -Math.random() * 2 + 's';
-            p.style.opacity = Math.random() * 0.7 + 0.3;
             w.appendChild(p);
         }
     }

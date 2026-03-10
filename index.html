@@ -7,7 +7,6 @@
     <title>SweetLand — vanilla minecraft server</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ========== ПОЛНЫЙ НАБОР СТИЛЕЙ ========== */
         * {
             user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -16,7 +15,6 @@
             user-select: text;
         }
 
-        /* Базовые переменные (тёмная тема по умолчанию) */
         :root {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -37,7 +35,6 @@
             --danger: #ff4444;
         }
 
-        /* Предопределённые темы с полной цветовой схемой */
         body.dark {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -56,16 +53,16 @@
             --accent: #2563eb;
             --accent-light: #3b82f6;
             --accent-dark: #1d4ed8;
-            --bg: #f8fafc;
+            --bg: #f5f7fa;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
-            --text: #0f172a;
-            --text-secondary: #334155;
-            --text-tertiary: #64748b;
-            --border: rgba(0, 0, 0, 0.1);
-            --border-hover: rgba(0, 0, 0, 0.2);
+            --text: #111827;
+            --text-secondary: #374151;
+            --text-tertiary: #6b7280;
+            --border: rgba(0, 0, 0, 0.15);
+            --border-hover: rgba(0, 0, 0, 0.3);
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --header-bg: rgba(255, 255, 255, 0.8);
+            --header-bg: rgba(255, 255, 255, 0.9);
         }
 
         body.pink {
@@ -180,7 +177,6 @@
             --border-hover: rgba(20, 184, 166, 0.4);
         }
 
-        /* Кастомная тема — база как тёмная, акцент меняется через JS */
         body.custom {
             --accent: #4d9eff;
             --accent-light: #6eb3ff;
@@ -283,8 +279,6 @@
             opacity: 0;
             animation: fall linear infinite;
         }
-
-        /* Снег — случайный размер и прозрачность через style */
         .snow-particle {
             background: rgba(255, 255, 255, var(--snow-opacity, 0.7));
             border-radius: 50%;
@@ -292,8 +286,6 @@
             width: var(--snow-size, 10px);
             height: var(--snow-size, 10px);
         }
-
-        /* Дождь — случайная длина, наклон, цвет */
         .rain-particle {
             background: rgba(120, 180, 220, var(--rain-opacity, 0.6));
             border-radius: 2px;
@@ -301,8 +293,6 @@
             height: var(--rain-length, 30px);
             transform: rotate(var(--rain-rotate, 0deg));
         }
-
-        /* Листья — разные символы, цвета */
         .leaf-particle {
             background: transparent;
             font-size: var(--leaf-size, 16px);
@@ -317,8 +307,6 @@
         .leaf-particle::before {
             content: var(--leaf-char, '🍂');
         }
-
-        /* Звёзды — разные символы, цвета */
         .star-particle {
             background: transparent;
             font-size: var(--star-size, 12px);
@@ -333,8 +321,6 @@
         .star-particle::before {
             content: var(--star-char, '⭐');
         }
-
-        /* Конфеты — как есть */
         .candy-particle {
             width: 24px;
             height: 24px;
@@ -354,8 +340,6 @@
         .candy-particle.style2::before { content: '🍫'; color: #d2691e; }
         .candy-particle.style3::before { content: '🍬'; color: #ff99cc; }
         .candy-particle.style4::before { content: '🍡'; color: #ffb6c1; }
-
-        /* Текстовая погода */
         .text-particle {
             width: auto;
             height: auto;
@@ -368,7 +352,6 @@
             text-shadow: 0 0 10px currentColor;
             white-space: nowrap;
         }
-
         @keyframes fall {
             0% { transform: translateY(-10vh) translateX(0); opacity: var(--start-opacity, 0.7); }
             100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
@@ -1559,7 +1542,6 @@
             particles_on: 'Частицы включены',
             particles_off: 'Частицы выключены',
             reset_done: 'Сброс выполнен',
-            // Названия погод
             weather_auto: 'Авто',
             weather_snow: 'Снег',
             weather_rain: 'Дождь',
@@ -1568,7 +1550,6 @@
             weather_candy: 'Конфеты',
             weather_text: 'Текст',
             weather_none: 'Выкл',
-            // Названия цветов
             theme_dark: 'Тёмная',
             theme_light: 'Светлая',
             theme_pink: 'Розовая',
@@ -1579,7 +1560,6 @@
             theme_yellow: 'Жёлтая',
             theme_red: 'Красная',
             theme_teal: 'Бирюзовая',
-            // Основные ключи (уже были, но добавим для полноты)
             serverName: 'SweetLand',
             online: 'online',
             navFeatures: 'Особенности',
@@ -1697,7 +1677,6 @@
             particles_on: 'Particles enabled',
             particles_off: 'Particles disabled',
             reset_done: 'Reset completed',
-            // Weather names
             weather_auto: 'Auto',
             weather_snow: 'Snow',
             weather_rain: 'Rain',
@@ -1706,7 +1685,6 @@
             weather_candy: 'Candy',
             weather_text: 'Text',
             weather_none: 'Off',
-            // Theme names
             theme_dark: 'Dark',
             theme_light: 'Light',
             theme_pink: 'Pink',
@@ -1717,7 +1695,6 @@
             theme_yellow: 'Yellow',
             theme_red: 'Red',
             theme_teal: 'Teal',
-            // Main keys
             serverName: 'SweetLand',
             online: 'online',
             navFeatures: 'Features',
@@ -1857,7 +1834,6 @@
 
     settingsBtn.addEventListener('click', toggleSettingsMenu);
 
-    // НЕ закрывать при клике внутри меню, только по кнопке или вне
     document.addEventListener('click', function(e) {
         if (settingsMenu.classList.contains('active') && !settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
             settingsMenu.classList.remove('active');
@@ -1900,7 +1876,7 @@
         clearMenu();
         let back = document.createElement('div');
         back.className = 'settings-back';
-        back.innerText = t('back'); // Только текст, без стрелки
+        back.innerText = t('back');
         back.onclick = (e) => { e.stopPropagation(); showMainMenu(); };
         settingsMenu.appendChild(back);
 
@@ -1922,7 +1898,6 @@
             opt.onclick = (e) => {
                 e.stopPropagation();
                 setAccentColor(c.class);
-                // не закрываем меню
             };
             opt.innerHTML = `<div class="color-dot ${c.class}"></div><span>${c.icon} ${t(c.key)}</span>`;
             settingsMenu.appendChild(opt);
@@ -1940,7 +1915,6 @@
             let color = e.target.value;
             setCustomAccentColor(color);
         });
-        // Чтобы клик по палитре не закрывал меню
         customDiv.addEventListener('click', e => e.stopPropagation());
         settingsMenu.appendChild(customDiv);
     }
@@ -1964,7 +1938,6 @@
                 e.stopPropagation();
                 currentLang = l.code;
                 localStorage.setItem('sweetland-lang', l.code);
-                // Обновить тексты на странице
                 document.querySelectorAll('[data-key]').forEach(el => {
                     let key = el.getAttribute('data-key');
                     if (key === 'hours') {
@@ -1973,8 +1946,7 @@
                         el.innerText = t(key);
                     }
                 });
-                // Возвращаемся в главное меню настроек для обновления текста в меню
-                showMainMenu();
+                showMainMenu(); // возврат в главное меню для обновления текста
             };
             opt.innerHTML = `<span class="lang-flag">${l.flag}</span><span>${l.name}</span>`;
             settingsMenu.appendChild(opt);
@@ -2008,9 +1980,8 @@
                 localStorage.setItem('sweetland-weather', w.type);
                 createWeather();
                 if (w.type === 'text') {
-                    showWeatherTextSubmenu(); // переходим в подменю для ввода текста
+                    showWeatherTextSubmenu();
                 }
-                // не закрываем меню
             };
             opt.innerHTML = `<span class="weather-icon">${w.icon}</span><span>${t(w.key)}</span>`;
             settingsMenu.appendChild(opt);
@@ -2104,9 +2075,7 @@
         settingsMenu.appendChild(resetOpt);
     }
 
-    // Установка темы
     function setAccentColor(themeClass) {
-        // Убираем все возможные инлайн-стили, которые могли быть установлены кастомной темой
         document.body.style.cssText = '';
         document.body.className = '';
         document.body.classList.add(themeClass);
@@ -2115,31 +2084,49 @@
         if (currentWeather === 'auto') createWeather();
     }
 
+    function getBrightness(hex) {
+        let r = parseInt(hex.substr(1,2), 16);
+        let g = parseInt(hex.substr(3,2), 16);
+        let b = parseInt(hex.substr(5,2), 16);
+        return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    }
+
     function setCustomAccentColor(color) {
-        document.body.style.cssText = ''; // сбрасываем предыдущие инлайн-стили
+        let brightness = getBrightness(color);
+        let isLightAccent = brightness > 0.7;
+        document.body.style.cssText = '';
         document.body.className = '';
         document.body.classList.add('custom');
-        // Устанавливаем CSS-переменные для кастомной темы (тёмная база)
         document.body.style.setProperty('--accent', color);
-        // Генерируем светлый и тёмный варианты (упрощённо)
         document.body.style.setProperty('--accent-light', color + 'cc');
         document.body.style.setProperty('--accent-dark', color);
-        document.body.style.setProperty('--bg', '#0a0a0f');
-        document.body.style.setProperty('--bg-secondary', '#12121a');
-        document.body.style.setProperty('--bg-card', 'rgba(20, 20, 30, 0.95)');
-        document.body.style.setProperty('--text', '#fff');
-        document.body.style.setProperty('--text-secondary', '#b0b0c0');
-        document.body.style.setProperty('--text-tertiary', '#70707a');
-        document.body.style.setProperty('--border', 'rgba(255, 255, 255, 0.1)');
-        document.body.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.2)');
-        
+
+        if (isLightAccent) {
+            document.body.style.setProperty('--bg', '#0a0a0f');
+            document.body.style.setProperty('--bg-secondary', '#12121a');
+            document.body.style.setProperty('--bg-card', 'rgba(20, 20, 30, 0.95)');
+            document.body.style.setProperty('--text', '#fff');
+            document.body.style.setProperty('--text-secondary', '#b0b0c0');
+            document.body.style.setProperty('--text-tertiary', '#70707a');
+            document.body.style.setProperty('--border', 'rgba(255, 255, 255, 0.1)');
+            document.body.style.setProperty('--border-hover', 'rgba(255, 255, 255, 0.2)');
+        } else {
+            document.body.style.setProperty('--bg', '#f5f7fa');
+            document.body.style.setProperty('--bg-secondary', '#ffffff');
+            document.body.style.setProperty('--bg-card', '#ffffff');
+            document.body.style.setProperty('--text', '#111827');
+            document.body.style.setProperty('--text-secondary', '#374151');
+            document.body.style.setProperty('--text-tertiary', '#6b7280');
+            document.body.style.setProperty('--border', 'rgba(0, 0, 0, 0.15)');
+            document.body.style.setProperty('--border-hover', 'rgba(0, 0, 0, 0.3)');
+        }
+
         currentTheme = 'custom';
         localStorage.setItem('sweetland-theme', 'custom');
         localStorage.setItem('custom-color', color);
         if (currentWeather === 'auto') createWeather();
     }
 
-    // Погода (хаотичная, дождь быстрее)
     function createWeather() {
         const w = document.getElementById('weather');
         if (!particlesEnabled) {
@@ -2158,15 +2145,13 @@
             let p = document.createElement('div');
             p.style.left = Math.random() * 100 + '%';
             
-            // Устанавливаем длительность анимации в зависимости от типа
             let duration;
             if (type === 'rain') {
-                duration = Math.random() * 1 + 1; // 1-2 секунды (быстрый дождь)
+                duration = Math.random() * 1 + 1;
             } else {
-                duration = Math.random() * 2 + 2; // 2-4 секунды для остальных
+                duration = Math.random() * 2 + 2;
             }
             p.style.animationDuration = duration + 's';
-            
             p.style.animationDelay = -Math.random() * 2 + 's';
             p.style.setProperty('--start-opacity', Math.random() * 0.7 + 0.3);
 
@@ -2220,7 +2205,6 @@
         }
     }
 
-    // Копирование IP
     window.copyIP = function() {
         let ip = 'play.sweet-land.fun';
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -2243,7 +2227,6 @@
         }
     };
 
-    // Правила
     window.openRules = function() {
         document.getElementById('rules-modal').classList.add('show');
         document.body.style.overflow = 'hidden';
@@ -2255,7 +2238,6 @@
         document.body.style.overflow = 'auto';
     };
 
-    // Массивы правил на двух языках
     const rulesRu = [
         "1.1. Незнание правил не освобождает от ответственности.",
         "1.2. Каждый игрок вправе подать жалобу на другого игрока.",
@@ -2369,12 +2351,10 @@
         document.getElementById('rules-content').innerHTML = html;
     }
 
-    // Боковая панель
     window.togglePanel = function() {
         document.getElementById('side-panel').classList.toggle('active');
     };
 
-    // Часы
     function updateClock() {
         let d = new Date();
         let h = d.getHours().toString().padStart(2, '0');
@@ -2385,10 +2365,8 @@
     }
     setInterval(updateClock, 1000);
 
-    // Онлайн (заглушка)
     document.getElementById('onlineNumber').innerText = '0';
 
-    // Анимация при скролле
     function reveal() {
         if (!animationsEnabled) {
             document.querySelectorAll('.reveal').forEach(e => e.classList.add('active'));
@@ -2399,7 +2377,6 @@
         });
     }
 
-    // Инициализация
     window.addEventListener('load', () => {
         let savedTheme = localStorage.getItem('sweetland-theme');
         if (savedTheme === 'custom') {

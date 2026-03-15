@@ -65,6 +65,41 @@
             --header-bg: rgba(255, 255, 255, 0.9);
         }
 
+        /* Улучшенная светлая тема: фон кнопок и панелей светлый, линии чёткие */
+        body.light .side-trigger {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light .side-trigger .line {
+            background: #111827;
+        }
+        body.light .settings-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light .panel-handle {
+            background: rgba(0, 0, 0, 0.05);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        body.light .shop-banner {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light .banner-center a {
+            color: #374151;
+        }
+        body.light .banner-center a:hover {
+            color: #111827;
+        }
+        body.light .online-counter,
+        body.light .current-time {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #111827;
+        }
+
         body.pink {
             --accent: #ec4899;
             --accent-light: #f472b6;
@@ -1434,12 +1469,20 @@
         </div>
     </section>
 
-    <!-- Стримеры -->
+    <!-- Стримеры на сервере (обновлено: удалён zmey) -->
     <section class="section reveal" id="streamers">
         <h2 class="section-title"><span data-key="streamersTitle">Стримеры на сервере</span></h2>
         <div class="community-grid">
+            <!-- Существующие стримеры -->
             <div class="community-card streamer-card"><div class="community-icon">🎥</div><h3>Babka3434</h3><p data-key="babkaDesc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p><a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link" data-key="babkaLink">Babka3434 YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span data-key="soon">скоро</span></div></div>
             <div class="community-card streamer-card"><div class="community-icon">🎮</div><h3>Gyraffic</h3><p data-key="gyrafficDesc">Владелец сервера и стример. Играет вместе с вами.</p><a href="https://www.youtube.com/@gyraffic" target="_blank" class="streamer-link" data-key="gyrafficLink">Gyraffic YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span>live</span></div></div>
+            <!-- Добавленные стримеры (без LIVE, обычные карточки) -->
+            <div class="community-card"><div class="community-icon">🎥</div><h3>U-Kaizen▶Play</h3><p>Активный стример, присоединился к сообществу. Смотри его трансляции!</p><div class="community-stats"><span>🔥</span><span>новый</span></div></div>
+            <div class="community-card"><div class="community-icon">🎮</div><h3>МИСТЕР КЮВИ</h3><p>Известный летсплеер, скоро начнёт играть на SweetLand.</p><div class="community-stats"><span>📺</span><span>скоро</span></div></div>
+            <div class="community-card"><div class="community-icon">🎲</div><h3>Dreadlight_RbxPlayer</h3><p>Стример и ютубер, уже на сервере. Заходи посмотреть!</p><div class="community-stats"><span>▶️</span><span>live</span></div></div>
+            <div class="community-card"><div class="community-icon">🍫</div><h3>Moloco</h3><p>Популярный контент-мейкер, играет вместе с нами.</p><div class="community-stats"><span>🎬</span><span>активен</span></div></div>
+            <!-- UPDATED: карточка zmey удалена -->
+            <!-- Карточка "Скоро будут другие" оставляем для анонсов -->
             <div class="community-card"><div class="community-icon">🎮</div><h3 data-key="moreStreamers">Скоро будут другие</h3><p data-key="moreStreamersDesc">Список стримеров будет пополняться. Следи за новостями в Discord.</p><div class="community-stats"><span data-key="announcements">анонсы</span><span data-key="news">новости</span></div></div>
         </div>
     </section>
@@ -2238,11 +2281,12 @@
         document.body.style.overflow = 'auto';
     };
 
+    // UPDATED: Полные правила 1.1–1.64 на русском
     const rulesRu = [
         "1.1. Незнание правил не освобождает от ответственности.",
-        "1.2. Каждый игрок вправе подать жалобу на другого игрока.",
+        "1.2. Каждый игрок имеет право подать жалобу на другого игрока.",
         "1.3. Заходя на сервер, вы автоматически соглашаетесь с правилами.",
-        "1.4. Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, но вещи не возвращаются.",
+        "1.4. Владелец аккаунта несёт полную ответственность за него. В случае взлома администрация накажет нарушителя, однако утраченные вещи не возвращаются.",
         "1.5. Продажа ресурсов за реальные деньги. Наказание: бан по IP.",
         "1.6. Клевета (распространение ложной информации). Наказание: по усмотрению администрации.",
         "1.7. Кража построек (домов, магазинов, ферм). Наказание: бан 5 дней + возврат ресурсов.",
@@ -2271,25 +2315,41 @@
         "1.30. Администрация имеет право выдать наказание даже за нарушения, не прописанные в правилах, при наличии веской причины.",
         "1.31. Деструктивные или некрасивые постройки. Наказание: предупреждение, при повторе — бан 2 дня.",
         "1.32. Игнорирование требований администрации. Наказание: бан 1 день + штраф.",
-        "1.33. Выдача некорректных наказаний для администрации. Наказание: предупреждение и понижение, при повторе — бан 5 дней.",
+        "1.33. Выдача некорректных наказаний администрацией. Наказание: предупреждение и понижение, при повторе — бан 5 дней.",
         "1.34. Порча мира (ямы, разрушение ландшафта и т.п.). Наказание: штраф, при повторе — бан 2 дня.",
         "1.35. Использование чужих ферм без разрешения. Наказание: штраф, при повторе — бан 1 день.",
         "1.36. Гриферство. Наказание: бан 30 дней + штраф + откат постройки.",
-        "1.37. Использование читов. Наказание: бан 5 месяцев.",
+        "1.37. Использование чит/ИИ - клиентов. Наказание: бан 5 месяцев.",
         "1.38. Дюп (дублирование предметов). Наказание: бан 3 месяца.",
         "1.39. Использование или хранение X-Ray ресурспаков или модификаций. Наказание: бан 5 месяцев.",
         "1.40. Использование стороннего ПО. Наказание: бан 3 месяца + штраф по тяжести нарушения.",
-        "1.41. Селение в чужих городах без разрешения. Наказание: выселение + штраф.",
+        "1.41. Заселение в чужие города без разрешения. Наказание: выселение + штраф.",
         "1.42. Любая порча игрового мира. Наказание: штраф или бан по усмотрению администрации.",
         "1.43. Присвоение чужих построек. Наказание: бан 2 дня + штраф.",
-        "1.44. Подача более 3 заявок в команду проекта при отказе. Наказание: занесение в «черный список».",
+        "1.44. Подача более 3 заявок в команду проекта после отказа. Наказание: занесение в чёрный список.",
         "1.45. Строительство на чужих территориях без разрешения. Наказание: снос постройки + штраф.",
-        "1.46. Попытка подкупа судьи или администрации. Наказание: бан + штраф по усмотрению администрации.",
-        "1.47. Заморозка игрока во время разбирательства. Право администрации: временная заморозка игрока на время проверки или судебного процесса. Запрещено: выходить из игры, использовать команды или пытаться избежать разбирательства. Наказание за нарушение: бан 3–7 дней или штраф по решению администрации.",
-        "1.48. Нанесение урона игроку без причины или на чужой территории. Наказание: бан/штраф по решению судьи.",
-        "1.49. Неоплата штрафов или игнорирование административных решений. Наказание: бан 1–30 дней по усмотрению администрации."
+        "1.46. Попытка подкупа судьи или администрации. Наказание: бан 3 дня + штраф по усмотрению администрации.",
+        "1.47. Заморозка игрока во время разбирательства. Если игрок подозревается в краже, гриферстве или другом серьёзном нарушении, администрация может временно заморозить игрока или выдать временный бан до окончания проверки. Игроку запрещено выходить из игры, использовать команды или пытаться избежать разбирательства.",
+        "1.48. Нанесение урона игроку без причины. Наказание: бан или штраф по решению судьи.",
+        "1.49. Неоплата штрафов или игнорирование решений администрации. Наказание: бан 1–30 дней по усмотрению администрации.",
+        "1.50. Объявление войны игроку, который играет на сервере менее 1 часа. Наказание: бан или штраф по решению судьи.",
+        "1.51. Объявление войны игроку без клана (возможно только с обоюдного согласия). Наказание: штраф по решению судьи.",
+        "1.52. Убийство игроков во время войны, если игрок не принадлежит к воюющим сторонам. Наказание: рассматривается как обычное убийство игрока.",
+        "1.53. Похищение игроков. Наказание: штраф по решению судьи.",
+        "1.54. Игроки без клана имеют право участвовать в войне на стороне одной из сторон.",
+        "1.55. Игроки, не участвующие в войне, не считаются противниками. Разрушение их построек под предлогом войны запрещено. Наказание: бан или штраф по тяжести нарушения.",
+        "1.56. Проход на чужую территорию, убийства, похищения и другие действия разрешены только если они относятся к RP-действиям.",
+        "1.57. Кража ресурсов из магазинов, построек или домов. Наказание: бан или штраф по тяжести нарушения.",
+        "1.58. Запрещено использовать баги сервера для получения преимущества. Наказание: бан 7–30 дней.",
+        "1.59. Запрещено выдавать себя за администрацию или других игроков. Наказание: бан 7 дней + штраф.",
+        "1.60. Намеренное мешание игре других игроков (троллинг, провокации, постоянные помехи). Наказание: мут, штраф или бан по решению администрации.",
+        "1.61. Распространение личной информации других игроков/сервера без их согласия запрещено. Наказание: бан 7 дней.",
+        "1.62. Создание механизмов или ферм, вызывающих сильные лаги на сервере. Наказание: снос постройки + штраф.",
+        "1.63. Использование торговых систем или магазинов для обмана игроков. Наказание: штраф + возврат ресурсов.",
+        "1.64. Намеренная порча общественных территорий сервера. Наказание: штраф или бан по решению администрации."
     ];
 
+    // UPDATED: Полные правила 1.1–1.64 на английском (переведены)
     const rulesEn = [
         "1.1. Ignorance of the rules does not exempt from responsibility.",
         "1.2. Every player has the right to file a complaint against another player.",
@@ -2327,7 +2387,7 @@
         "1.34. Damaging the world (pits, landscape destruction, etc.). Punishment: fine, on repeat — 2-day ban.",
         "1.35. Using someone else's farms without permission. Punishment: fine, on repeat — 1-day ban.",
         "1.36. Griefing. Punishment: 30-day ban + fine + rollback of the build.",
-        "1.37. Using cheats. Punishment: 5-month ban.",
+        "1.37. Using cheat/AI clients. Punishment: 5-month ban.",
         "1.38. Duping (duplicating items). Punishment: 3-month ban.",
         "1.39. Using or storing X-Ray resource packs or modifications. Punishment: 5-month ban.",
         "1.40. Using third-party software. Punishment: 3-month ban + fine depending on severity.",
@@ -2336,10 +2396,25 @@
         "1.43. Appropriating someone else's builds. Punishment: 2-day ban + fine.",
         "1.44. Submitting more than 3 applications to the project team after refusal. Punishment: blacklisting.",
         "1.45. Building on someone else's territory without permission. Punishment: demolition of the build + fine.",
-        "1.46. Attempting to bribe a judge or administration. Punishment: ban + fine at the discretion of the administration.",
-        "1.47. Freezing a player during proceedings. Administration's right: temporary freeze of the player during inspection or trial. Prohibited: leaving the game, using commands, or trying to avoid proceedings. Punishment for violation: 3–7 day ban or fine as decided by the administration.",
-        "1.48. Damaging a player without reason or on someone else's territory. Punishment: ban/fine as decided by the judge.",
-        "1.49. Non-payment of fines or ignoring administrative decisions. Punishment: 1–30 day ban at the discretion of the administration."
+        "1.46. Attempting to bribe a judge or administration. Punishment: 3-day ban + fine at the discretion of the administration.",
+        "1.47. Freezing a player during proceedings. If a player is suspected of theft, griefing or other serious violation, the administration may temporarily freeze the player or issue a temporary ban until the investigation is complete. The player is prohibited from leaving the game, using commands or trying to avoid proceedings.",
+        "1.48. Damaging a player without reason. Punishment: ban or fine as decided by the judge.",
+        "1.49. Non-payment of fines or ignoring administrative decisions. Punishment: 1–30 day ban at the discretion of the administration.",
+        "1.50. Declaring war on a player who has been playing on the server for less than 1 hour. Punishment: ban or fine as decided by the judge.",
+        "1.51. Declaring war on a player without a clan (only possible with mutual consent). Punishment: fine as decided by the judge.",
+        "1.52. Killing players during a war if the player does not belong to the warring parties. Punishment: treated as ordinary player killing.",
+        "1.53. Kidnapping players. Punishment: fine as decided by the judge.",
+        "1.54. Players without a clan have the right to participate in a war on the side of one of the parties.",
+        "1.55. Players not participating in the war are not considered opponents. Destroying their builds under the pretext of war is prohibited. Punishment: ban or fine depending on severity.",
+        "1.56. Entering someone else's territory, killings, kidnappings and other actions are allowed only if they relate to RP actions.",
+        "1.57. Stealing resources from shops, buildings or houses. Punishment: ban or fine depending on severity.",
+        "1.58. It is forbidden to use server bugs to gain an advantage. Punishment: 7–30 day ban.",
+        "1.59. It is forbidden to impersonate the administration or other players. Punishment: 7-day ban + fine.",
+        "1.60. Intentional interference with other players' game (trolling, provocations, constant interference). Punishment: mute, fine or ban as decided by the administration.",
+        "1.61. Dissemination of personal information of other players/server without their consent is prohibited. Punishment: 7-day ban.",
+        "1.62. Creation of mechanisms or farms that cause severe lag on the server. Punishment: demolition of the build + fine.",
+        "1.63. Using trading systems or shops to deceive players. Punishment: fine + return of resources.",
+        "1.64. Intentional damage to public server territories. Punishment: fine or ban as decided by the administration."
     ];
 
     function renderRules() {

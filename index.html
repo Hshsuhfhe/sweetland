@@ -65,7 +65,55 @@
             --header-bg: rgba(255, 255, 255, 0.9);
         }
 
-        /* Улучшенная светлая тема: фон кнопок и панелей светлый, линии чёткие */
+        /* Полностью светлая тема для всех элементов интерфейса */
+        body.light .side-panel {
+            background: #ffffff;
+            border-right-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light .side-panel .panel-logo,
+        body.light .side-panel a,
+        body.light .side-panel .social-link {
+            color: #111827;
+        }
+        body.light .side-panel a:hover,
+        body.light .side-panel .social-link:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        body.light .panel-handle {
+            background: rgba(0, 0, 0, 0.05);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        body.light .settings-menu {
+            background: #ffffff;
+            border-color: rgba(0, 0, 0, 0.15);
+        }
+        body.light .settings-item {
+            color: #111827;
+            background: rgba(0, 0, 0, 0.02);
+        }
+        body.light .settings-item:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        body.light .settings-back {
+            background: rgba(0, 0, 0, 0.05);
+            color: #111827;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        body.light .settings-back:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        body.light .modal-content {
+            background: #ffffff;
+            color: #111827;
+        }
+        body.light .rules-scroll-area p {
+            color: #111827 !important;
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
         body.light .side-trigger {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(0, 0, 0, 0.15);
@@ -77,11 +125,6 @@
             background: rgba(255, 255, 255, 0.9);
             color: #111827;
             border-color: rgba(0, 0, 0, 0.15);
-        }
-        body.light .panel-handle {
-            background: rgba(0, 0, 0, 0.05);
-            color: #111827;
-            border-color: rgba(0, 0, 0, 0.1);
         }
         body.light .shop-banner {
             background: rgba(255, 255, 255, 0.9);
@@ -1469,20 +1512,23 @@
         </div>
     </section>
 
-    <!-- Стримеры на сервере (обновлено: удалён zmey) -->
+    <!-- Стримеры на сервере (обновлено: добавлен Romchik, исправлены описания) -->
     <section class="section reveal" id="streamers">
         <h2 class="section-title"><span data-key="streamersTitle">Стримеры на сервере</span></h2>
         <div class="community-grid">
-            <!-- Существующие стримеры -->
+            <!-- Существующие стримеры (с описаниями) -->
             <div class="community-card streamer-card"><div class="community-icon">🎥</div><h3>Babka3434</h3><p data-key="babkaDesc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p><a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link" data-key="babkaLink">Babka3434 YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span data-key="soon">скоро</span></div></div>
             <div class="community-card streamer-card"><div class="community-icon">🎮</div><h3>Gyraffic</h3><p data-key="gyrafficDesc">Владелец сервера и стример. Играет вместе с вами.</p><a href="https://www.youtube.com/@gyraffic" target="_blank" class="streamer-link" data-key="gyrafficLink">Gyraffic YouTube</a><div class="community-stats"><span data-key="subscribe">подпишись</span><span>live</span></div></div>
-            <!-- Добавленные стримеры (без LIVE, обычные карточки) -->
-            <div class="community-card"><div class="community-icon">🎥</div><h3>U-Kaizen▶Play</h3><p>Активный стример, присоединился к сообществу. Смотри его трансляции!</p><div class="community-stats"><span>🔥</span><span>новый</span></div></div>
-            <div class="community-card"><div class="community-icon">🎮</div><h3>МИСТЕР КЮВИ</h3><p>Известный летсплеер, скоро начнёт играть на SweetLand.</p><div class="community-stats"><span>📺</span><span>скоро</span></div></div>
-            <div class="community-card"><div class="community-icon">🎲</div><h3>Dreadlight_RbxPlayer</h3><p>Стример и ютубер, уже на сервере. Заходи посмотреть!</p><div class="community-stats"><span>▶️</span><span>live</span></div></div>
-            <div class="community-card"><div class="community-icon">🍫</div><h3>Moloco</h3><p>Популярный контент-мейкер, играет вместе с нами.</p><div class="community-stats"><span>🎬</span><span>активен</span></div></div>
-            <!-- UPDATED: карточка zmey удалена -->
-            <!-- Карточка "Скоро будут другие" оставляем для анонсов -->
+
+            <!-- Добавленные стримеры (без описаний, только имена и статусы) -->
+            <div class="community-card"><div class="community-icon">🎥</div><h3>U-Kaizen▶Play</h3><div class="community-stats"><span>🔥</span><span>стримерша</span></div></div>
+            <div class="community-card"><div class="community-icon">🎮</div><h3>МИСТЕР КЮВИ</h3><div class="community-stats"><span>📺</span><span>скоро</span></div></div>
+            <div class="community-card"><div class="community-icon">🎲</div><h3>Dreadlight_RbxPlayer</h3><div class="community-stats"><span>▶️</span><span>live</span></div></div>
+            <div class="community-card"><div class="community-icon">🍫</div><h3>Moloco</h3><div class="community-stats"><span>🎬</span><span>активен</span></div></div>
+            <!-- NEW: Romchik с 6000 подписчиков -->
+            <div class="community-card"><div class="community-icon">⭐</div><h3>Romchik</h3><div class="community-stats"><span>6000</span><span>подписчиков</span></div></div>
+
+            <!-- Карточка "Скоро будут другие" -->
             <div class="community-card"><div class="community-icon">🎮</div><h3 data-key="moreStreamers">Скоро будут другие</h3><p data-key="moreStreamersDesc">Список стримеров будет пополняться. Следи за новостями в Discord.</p><div class="community-stats"><span data-key="announcements">анонсы</span><span data-key="news">новости</span></div></div>
         </div>
     </section>
@@ -2281,7 +2327,7 @@
         document.body.style.overflow = 'auto';
     };
 
-    // UPDATED: Полные правила 1.1–1.64 на русском
+    // Полные правила 1.1–1.64 на русском
     const rulesRu = [
         "1.1. Незнание правил не освобождает от ответственности.",
         "1.2. Каждый игрок имеет право подать жалобу на другого игрока.",
@@ -2349,7 +2395,7 @@
         "1.64. Намеренная порча общественных территорий сервера. Наказание: штраф или бан по решению администрации."
     ];
 
-    // UPDATED: Полные правила 1.1–1.64 на английском (переведены)
+    // Полные правила 1.1–1.64 на английском
     const rulesEn = [
         "1.1. Ignorance of the rules does not exempt from responsibility.",
         "1.2. Every player has the right to file a complaint against another player.",

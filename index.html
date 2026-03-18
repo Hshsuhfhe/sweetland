@@ -1052,14 +1052,14 @@
             80% { transform: scale(1.1); }
             100% { transform: scale(1); opacity: 1; }
         }
-        .features-grid, .community-grid, .faq-grid, .top-players-grid {
+        .features-grid, .faq-grid, .top-players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             max-width: 1300px;
             margin: 0 auto;
         }
-        .feature-card, .community-card, .faq-card, .player-card {
+        .feature-card, .faq-card, .player-card {
             background: var(--bg-card);
             backdrop-filter: blur(var(--blur));
             padding: 25px;
@@ -1067,12 +1067,12 @@
             border: 1px solid var(--border);
             transition: .2s;
         }
-        .feature-card:hover, .community-card:hover, .faq-card:hover, .player-card:hover {
+        .feature-card:hover, .faq-card:hover, .player-card:hover {
             border-color: var(--accent);
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
         }
-        .feature-icon, .community-icon, .faq-card .icon {
+        .feature-icon, .faq-card .icon {
             font-size: 36px;
             color: var(--accent);
             margin-bottom: 12px;
@@ -1083,17 +1083,113 @@
             transform: rotate(360deg) scale(1.2);
             transition: transform .4s;
         }
-        .feature-card h3, .community-card h3, .faq-card h3, .player-info h4 {
+        .feature-card h3, .faq-card h3, .player-info h4 {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--text);
         }
-        .feature-card p, .community-card p, .faq-card p {
+        .feature-card p, .faq-card p {
             color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.5;
         }
+
+        /* Новый стиль для карточек стримеров */
+        .streamers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .streamer-card {
+            background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .streamer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-light) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+        .streamer-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent-light);
+        }
+        .streamer-card:hover::before {
+            opacity: 0.15;
+        }
+        .streamer-card .community-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid var(--border);
+        }
+        .streamer-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            color: var(--text);
+        }
+        .streamer-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .streamer-card .streamer-link {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            position: relative;
+            z-index: 1;
+            border: 1px solid transparent;
+        }
+        .streamer-card .streamer-link:hover {
+            background: #fff;
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        /* Адаптация для светлой темы */
+        body.light .streamer-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-color: var(--accent);
+        }
+        body.light .streamer-card .community-icon {
+            background: rgba(0,0,0,0.05);
+        }
+
         .player-card {
             display: flex;
             align-items: center;
@@ -1126,26 +1222,6 @@
             color: var(--text-tertiary);
             font-size: 13px;
             margin-top: 20px;
-        }
-
-        /* Ссылка на YouTube внутри карточек стримеров */
-        .streamer-link {
-            display: inline-block;
-            background: #ff4444;
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin: 8px 0;
-            transition: .2s;
-            border: 1px solid transparent;
-            text-decoration: none;
-        }
-        .streamer-link:hover {
-            background: #fff;
-            color: #ff4444;
-            border-color: #ff4444;
-            transform: scale(1.05);
         }
 
         /* Модальное окно правил */
@@ -1358,7 +1434,7 @@
             .section-title { font-size: 24px; margin-bottom: 30px; }
             .stat-number { font-size: 32px; }
             .stat-label { font-size: 13px; }
-            .feature-card, .community-card, .faq-card { padding: 20px; }
+            .feature-card, .faq-card { padding: 20px; }
             .feature-icon { font-size: 30px; }
             .footer { padding: 30px 3% 15px; }
             .footer-section h4 { font-size: 15px; }
@@ -1481,58 +1557,58 @@
         </div>
     </section>
 
-    <!-- Стримеры на сервере (новый порядок: Gyraffic первый, Babka3434 вторая, остальные без статусов) -->
+    <!-- Стримеры на сервере (новый стиль карточек) -->
     <section class="section reveal" id="streamers">
         <h2 class="section-title"><span data-key="streamersTitle">Стримеры на сервере</span></h2>
-        <div class="community-grid">
-            <!-- 1. Gyraffic -->
-            <div class="community-card">
+        <div class="streamers-grid">
+            <!-- Gyraffic -->
+            <div class="streamer-card">
                 <div class="community-icon">🎮</div>
                 <h3>Gyraffic</h3>
                 <p data-key="gyrafficDesc">Владелец сервера и стример. Играет вместе с вами.</p>
                 <a href="https://www.youtube.com/@gyraffic" target="_blank" class="streamer-link" data-key="gyrafficLink">Gyraffic YouTube</a>
             </div>
 
-            <!-- 2. Babka3434 -->
-            <div class="community-card">
+            <!-- Babka3434 -->
+            <div class="streamer-card">
                 <div class="community-icon">🎥</div>
                 <h3>Babka3434</h3>
                 <p data-key="babkaDesc">Популярная стримерша, будет играть на сервере. Следи за стримами!</p>
                 <a href="https://www.youtube.com/@Babka3434offical" target="_blank" class="streamer-link" data-key="babkaLink">Babka3434 YouTube</a>
             </div>
 
-            <!-- Остальные стримеры (без дополнительных описаний) -->
-            <div class="community-card">
+            <!-- Остальные стримеры (без дополнительного текста) -->
+            <div class="streamer-card">
                 <div class="community-icon">🎥</div>
                 <h3>U-Kaizen▶Play</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🎮</div>
                 <h3>МИСТЕР КЮВИ</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🎲</div>
                 <h3>Dreadlight_RbxPlayer</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🍫</div>
                 <h3>Moloco</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">⭐</div>
                 <h3>Romchik</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🤖</div>
                 <h3>Kiborg Play</h3>
             </div>
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🐍</div>
                 <h3>Zmey</h3>
             </div>
 
             <!-- Карточка "Скоро будут другие" -->
-            <div class="community-card">
+            <div class="streamer-card">
                 <div class="community-icon">🎮</div>
                 <h3 data-key="moreStreamers">Скоро будут другие</h3>
                 <p data-key="moreStreamersDesc">Список стримеров будет пополняться. Следи за новостями в Discord.</p>
